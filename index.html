@@ -568,6 +568,35 @@
         margin-top: 3px;
       }
 
+      /* ---- Platform / deployment chips ---- */
+      .plats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        justify-content: center;
+        max-width: 560px;
+        margin: 28px auto 0;
+      }
+
+      .plats span {
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 6px 13px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .plats .sep {
+        border: 0;
+        background: none;
+        color: var(--muted);
+        font-weight: 400;
+        padding: 6px 2px;
+        align-self: center;
+      }
+
       .divider {
         border: 0;
         border-top: 1px solid var(--line);
@@ -770,11 +799,13 @@
         <hr class="divider" />
 
         <section>
-          <h2>Light footprint</h2>
+          <h2>Light footprint, runs anywhere</h2>
           <p>
-            One static Go binary — no JVM, no Python, no agent framework to
-            install. It replaces a stack of per-tool agents with a single
-            low-overhead process you can drop onto any host.
+            One static Go binary for Linux, Windows and macOS (amd64 and
+            arm64) — no JVM, no Python, no agent framework. Drop it onto bare
+            metal, a VM, a container or a Kubernetes node: it collects locally
+            and pushes OTLP out, replacing a stack of per-tool agents with a
+            single low-overhead process.
           </p>
           <div class="stats">
             <div class="stat">
@@ -793,6 +824,17 @@
               <div class="num">5</div>
               <div class="lbl">OS / arch targets</div>
             </div>
+          </div>
+          <div class="plats">
+            <span>Linux</span>
+            <span>Windows</span>
+            <span>macOS</span>
+            <span class="sep">·</span>
+            <span>amd64</span>
+            <span>arm64</span>
+            <span class="sep">·</span>
+            <span>Docker</span>
+            <span>Kubernetes</span>
           </div>
         </section>
 
