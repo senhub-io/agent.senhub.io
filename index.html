@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SenHub Agent — One agent for every monitoring tool</title>
+    <meta
+      name="description"
+      content="SenHub Agent is an open-core infrastructure monitoring agent: a single Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or the SenHub cloud."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://agent.senhub.io/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SenHub Agent — One agent for every monitoring tool" />
+    <meta
+      property="og:description"
+      content="A single Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or SenHub cloud. Open-core, OpenTelemetry-native."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SenHub Agent" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://agent.senhub.io" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=1" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="SenHub Agent — one agent for every monitoring tool. A single Go binary feeding PRTG, Nagios, Prometheus, OpenTelemetry and SenHub cloud."
+    />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SenHub Agent — One agent for every monitoring tool" />
+    <meta
+      name="twitter:description"
+      content="A single Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or SenHub cloud. Open-core, OpenTelemetry-native."
+    />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=1" />
+
+    <style>
+      /* ---- Palette: SenHub — clean light surface, anthracite ink, orange accent, cyan secondary ---- */
+      :root {
+        --bg: #fbfbfd;          /* near-white surface */
+        --panel: #ffffff;       /* raised panels */
+        --ink: #1f2430;         /* anthracite body text */
+        --muted: #5b6472;       /* secondary text */
+        --accent: #ff9500;      /* SenHub orange */
+        --accent-dark: #e68900; /* hover state */
+        --cyan: #00bcd4;        /* SenHub cyan secondary */
+        --cyan-dark: #00acc1;
+        --line: #e7e9ef;        /* hairline borders */
+        --robot: #4a4a4a;       /* robot body / strong ink */
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      a {
+        color: var(--accent-dark);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      a:focus-visible,
+      .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 4px;
+        text-decoration: none;
+      }
+
+      /* ---- Header ---- */
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 26px 0;
+      }
+
+      .logo {
+        display: block;
+        height: 38px;
+        width: auto;
+      }
+
+      nav a {
+        color: var(--muted);
+        margin-left: 22px;
+        font-size: 0.95rem;
+      }
+
+      nav a:hover {
+        color: var(--accent-dark);
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 16px;
+      }
+
+      p {
+        margin: 0 0 16px;
+      }
+
+      /* ---- Hero ---- */
+      .hero {
+        text-align: center;
+        padding: 64px 0 52px;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        line-height: 1.08;
+        font-weight: 800;
+        letter-spacing: -0.015em;
+        margin: 0 0 20px;
+      }
+
+      .hero h1 .hl {
+        color: var(--accent);
+      }
+
+      .hero .subtagline {
+        font-size: 1.15rem;
+        color: var(--muted);
+        max-width: 44ch;
+        margin: 0 auto 34px;
+      }
+
+      /* ---- Buttons ---- */
+      .buttons {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 22px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: 1px solid var(--accent);
+        transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-dark);
+        border-color: var(--accent-dark);
+        text-decoration: none;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--accent-dark);
+      }
+
+      .btn-secondary:hover {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* ---- Badges ---- */
+      .badges {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: 20px;
+        margin: 26px 0 0;
+      }
+
+      .badges img {
+        display: block;
+        height: 20px;
+        width: auto;
+      }
+
+      /* ---- Fan-out demo: one source, every sink ---- */
+      .demo {
+        padding-top: 8px;
+      }
+
+      .fanout {
+        margin: 0 auto;
+        max-width: 640px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(31, 36, 48, 0.05);
+        overflow: hidden;
+      }
+
+      .fanout-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--line);
+        background: #fcfcfe;
+      }
+
+      .fanout-head img {
+        height: 34px;
+        width: auto;
+      }
+
+      .fanout-head .ft {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .fanout-head .fs {
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+
+      .fanout-body {
+        padding: 20px 22px;
+      }
+
+      .src-line {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        font-size: 0.84rem;
+        color: var(--robot);
+        background: #f5f6f9;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 14px;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .src-line .c {
+        color: var(--muted);
+      }
+
+      .arrow {
+        text-align: center;
+        color: var(--cyan-dark);
+        font-size: 0.9rem;
+        margin: 12px 0;
+        letter-spacing: 0.04em;
+      }
+
+      .sinks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        justify-content: center;
+      }
+
+      .sink {
+        font-size: 0.86rem;
+        font-weight: 600;
+        padding: 7px 13px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .sink b {
+        color: var(--accent-dark);
+        font-weight: 700;
+      }
+
+      .sink-soon {
+        color: var(--muted);
+        border-style: dashed;
+      }
+
+      .demo-caption {
+        text-align: center;
+        font-size: 0.92rem;
+        color: var(--muted);
+        max-width: 52ch;
+        margin: 20px auto 0;
+      }
+
+      /* ---- Three columns ---- */
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+
+      .cols h3 {
+        font-size: 1.05rem;
+        margin: 0 0 8px;
+      }
+
+      .cols p {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      /* ---- Platform callout ---- */
+      .platform {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--cyan);
+        border-radius: 12px;
+        padding: 26px 28px;
+      }
+
+      .platform h2 {
+        margin-top: 0;
+      }
+
+      .platform p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ---- Free tier chip list ---- */
+      .tier {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 4px 0 0;
+      }
+
+      .tier code {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        font-size: 0.82rem;
+        background: rgba(0, 188, 212, 0.08);
+        color: var(--cyan-dark);
+        padding: 3px 9px;
+        border-radius: 6px;
+      }
+
+      .divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 0;
+      }
+
+      /* ---- Footer ---- */
+      footer {
+        padding: 40px 0 56px;
+        font-size: 0.9rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      footer a {
+        color: var(--muted);
+        margin: 0 10px;
+      }
+
+      footer a:hover {
+        color: var(--accent-dark);
+      }
+
+      footer .copy {
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: 760px) {
+        .cols {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .hero h1 {
+          font-size: 2.25rem;
+        }
+
+        .hero {
+          padding: 44px 0 36px;
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "SenHub Agent",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux, Windows, macOS",
+        "description": "Open-core infrastructure monitoring agent: a single Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or the SenHub cloud.",
+        "url": "https://agent.senhub.io/",
+        "codeRepository": "https://github.com/senhub-io/senhub-agent",
+        "programmingLanguage": "Go",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "SenHub",
+          "url": "https://senhub.io"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Sensor Factory",
+          "url": "https://sensorfactory.fr"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header>
+        <a href="/" aria-label="SenHub Agent home"><img class="logo" src="/logo-full.svg" alt="SenHub Agent" /></a>
+        <nav aria-label="Primary">
+          <a href="https://docs.senhub.io">Docs</a>
+          <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
+          <a href="https://senhub.io">SenHub</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <h1>One agent.<br /><span class="hl">Every</span> monitoring tool.</h1>
+          <p class="subtagline">
+            A single Go binary that collects your host and infrastructure
+            metrics — and ships them to PRTG, Nagios, Prometheus,
+            OpenTelemetry, or the SenHub cloud.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://docs.senhub.io">Get started</a>
+            <a class="btn btn-secondary" href="https://github.com/senhub-io/senhub-agent"
+              >★ Star on GitHub</a
+            >
+          </div>
+          <div class="badges">
+            <a href="https://github.com/senhub-io/senhub-agent/stargazers" aria-label="Star SenHub Agent on GitHub">
+              <img src="/assets/badges/github-star.svg" alt="GitHub: star" width="102" height="20" />
+            </a>
+            <img src="/assets/badges/license-apache.svg" alt="License: Apache 2.0" width="124" height="20" />
+            <img src="/assets/badges/open-core.svg" alt="Model: open core" width="118" height="20" />
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section class="demo" aria-label="Collect once, ship everywhere">
+          <div class="fanout">
+            <div class="fanout-head">
+              <img src="/logo-mark.svg" alt="" aria-hidden="true" />
+              <div>
+                <div class="ft">SenHub Agent</div>
+                <div class="fs">one collector running on every host</div>
+              </div>
+            </div>
+            <div class="fanout-body">
+              <div class="src-line">
+                <span class="c"># collect host &amp; infrastructure metrics</span><br />
+                cpu · memory · disk · network · logs · 40+ infra probes
+              </div>
+              <div class="arrow">▼ &nbsp; one OpenTelemetry-native pipeline &nbsp; ▼</div>
+              <div class="sinks">
+                <span class="sink"><b>PRTG</b></span>
+                <span class="sink"><b>Nagios</b></span>
+                <span class="sink"><b>Prometheus</b></span>
+                <span class="sink"><b>OTLP</b></span>
+                <span class="sink"><b>SenHub cloud</b></span>
+                <span class="sink sink-soon">Zabbix · soon</span>
+              </div>
+            </div>
+          </div>
+          <p class="demo-caption">
+            Collect once, ship everywhere. The same metrics feed your existing
+            monitoring stack and the SenHub cloud — no per-tool agents to
+            deploy and maintain.
+          </p>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>Why SenHub Agent</h2>
+          <p>
+            Most teams already run a monitoring tool — PRTG, Nagios, a
+            Prometheus stack — and each one wants its own agent on every host.
+            SenHub Agent collapses that into a single, lightweight Go binary.
+            It speaks every format natively, so you instrument a host once and
+            point it at whatever your team already uses, today or tomorrow.
+          </p>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>What it does</h2>
+          <div class="cols">
+            <div>
+              <h3>One binary, every sink</h3>
+              <p>
+                A single self-contained agent for Linux, Windows and macOS.
+                Push to PRTG, Nagios, Prometheus, OTLP or SenHub cloud — or
+                let any of them pull. No plugins to compile.
+              </p>
+            </div>
+            <div>
+              <h3>OpenTelemetry-native</h3>
+              <p>
+                Every metric follows OpenTelemetry semantic conventions
+                internally. PRTG, Nagios and Prometheus shapes are derived
+                from that single neutral model — never bolted on per tool.
+              </p>
+            </div>
+            <div>
+              <h3>Open-core, batteries included</h3>
+              <p>
+                Host self-observability and universal collection are free and
+                Apache-2.0. Deep vendor-specific infrastructure probes are the
+                paid layer. Start free, scale when you need to.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <div class="platform">
+            <h2>Part of the SenHub platform</h2>
+            <p>
+              SenHub Agent is the edge collector of
+              <a href="https://senhub.io">SenHub</a> — the observability
+              platform by Sensor Factory. On its own it feeds any monitoring
+              tool you already run. Paired with the SenHub cloud, the same
+              agent streams into dashboards, alerting and long-term storage
+              with nothing extra to install.
+            </p>
+            <p>
+              New here? The full install guide, probe catalog and configuration
+              reference live at
+              <a href="https://docs.senhub.io">docs.senhub.io</a>.
+            </p>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>Free to start</h2>
+          <p>
+            The free tier covers host self-observability and universal
+            collection — enough to monitor a fleet without a license:
+          </p>
+          <div class="tier">
+            <code>cpu</code>
+            <code>memory</code>
+            <code>logicaldisk</code>
+            <code>network</code>
+            <code>linux_logs</code>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>Follow along</h2>
+          <p>
+            SenHub Agent is built in the open. The fastest way to support it is
+            to star the repository — it tells us the direction resonates. Read
+            the docs to get running in minutes, or open an issue to shape
+            what's next.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://github.com/senhub-io/senhub-agent"
+              >★ Star on GitHub</a
+            >
+            <a class="btn btn-secondary" href="https://docs.senhub.io">Read the docs</a>
+          </div>
+        </section>
+      </main>
+
+      <hr class="divider" />
+
+      <footer>
+        <div class="copy">
+          © 2026 SenHub Agent contributors. Released under the Apache License 2.0.
+          Built by <a href="https://sensorfactory.fr">Sensor Factory</a>.
+        </div>
+        <nav aria-label="Footer">
+          <a href="https://senhub.io">SenHub</a>
+          <a href="https://docs.senhub.io">Docs</a>
+          <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
+          <a href="https://sensorfactory.fr">Sensor Factory</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
