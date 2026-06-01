@@ -7,7 +7,7 @@
     <title>SenHub Agent — One agent for every monitoring tool</title>
     <meta
       name="description"
-      content="SenHub Agent is an open-core infrastructure monitoring agent: a single Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or the SenHub cloud."
+      content="SenHub Agent is an open-core infrastructure monitoring agent: a single, lightweight Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/" />
@@ -16,19 +16,19 @@
     <meta property="og:title" content="SenHub Agent — One agent for every monitoring tool" />
     <meta
       property="og:description"
-      content="A single Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or SenHub cloud. Open-core, OpenTelemetry-native."
+      content="A single, lightweight Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry. Open-core, OpenTelemetry-native."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://agent.senhub.io" />
-    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=1" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=2" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="SenHub Agent — one agent for every monitoring tool. A single Go binary feeding PRTG, Nagios, Prometheus, OpenTelemetry and SenHub cloud."
+      content="SenHub Agent — one agent for every monitoring tool. A single lightweight Go binary feeding PRTG, Nagios, Prometheus and OpenTelemetry."
     />
 
     <!-- Twitter card -->
@@ -36,9 +36,9 @@
     <meta name="twitter:title" content="SenHub Agent — One agent for every monitoring tool" />
     <meta
       name="twitter:description"
-      content="A single Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or SenHub cloud. Open-core, OpenTelemetry-native."
+      content="A single, lightweight Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry. Open-core, OpenTelemetry-native."
     />
-    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=1" />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=2" />
 
     <style>
       /* ---- Palette: SenHub brand (senhub.io) — amber fill, cyan accent ---- */
@@ -538,6 +538,36 @@
       .st-primary { background: rgba(252, 190, 54, 0.22); color: #946800; }
       .st-ok { background: rgba(0, 202, 246, 0.14); color: var(--cyan-dark); }
 
+      /* ---- Footprint stats band ---- */
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 26px 52px;
+        margin: 8px 0 0;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat .num {
+        font-size: 2.1rem;
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      }
+
+      .stat .num .u {
+        color: var(--cyan-dark);
+      }
+
+      .stat .lbl {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
       .divider {
         border: 0;
         border-top: 1px solid var(--line);
@@ -605,7 +635,7 @@
         "name": "SenHub Agent",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Linux, Windows, macOS",
-        "description": "Open-core infrastructure monitoring agent: a single Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus, OpenTelemetry, or the SenHub cloud.",
+        "description": "Open-core infrastructure monitoring agent: a single, lightweight Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry.",
         "url": "https://agent.senhub.io/",
         "codeRepository": "https://github.com/senhub-io/senhub-agent",
         "programmingLanguage": "Go",
@@ -639,9 +669,9 @@
         <section class="hero">
           <h1>One agent.<br /><span class="hl">Every</span> monitoring tool.</h1>
           <p class="subtagline">
-            A single Go binary that collects your host and infrastructure
-            metrics — and ships them to PRTG, Nagios, Prometheus,
-            OpenTelemetry, or the SenHub cloud.
+            A single, lightweight Go binary that collects your host and
+            infrastructure metrics — and ships them to PRTG, Nagios,
+            Prometheus or OpenTelemetry.
           </p>
           <div class="buttons">
             <a class="btn btn-primary" href="https://docs.senhub.io">Get started</a>
@@ -680,14 +710,12 @@
                 <span class="sink"><b>Nagios</b></span>
                 <span class="sink"><b>Prometheus</b></span>
                 <span class="sink"><b>OTLP</b></span>
-                <span class="sink"><b>SenHub cloud</b></span>
               </div>
             </div>
           </div>
           <p class="demo-caption">
             Collect once, ship everywhere. The same metrics feed your existing
-            monitoring stack and the SenHub cloud — no per-tool agents to
-            deploy and maintain.
+            monitoring stack — no per-tool agents to deploy and maintain.
           </p>
         </section>
 
@@ -713,8 +741,8 @@
               <h3>One binary, every sink</h3>
               <p>
                 A single self-contained agent for Linux, Windows and macOS.
-                Push to PRTG, Nagios, Prometheus, OTLP or SenHub cloud — or
-                let any of them pull. No plugins to compile.
+                Push to PRTG, Nagios, Prometheus or OTLP — or let any of them
+                pull. No plugins to compile.
               </p>
             </div>
             <div>
@@ -732,6 +760,35 @@
                 Apache-2.0. Deep vendor-specific infrastructure probes are the
                 paid layer. Start free, scale when you need to.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>Light footprint</h2>
+          <p>
+            One static Go binary — no JVM, no Python, no agent framework to
+            install. It replaces a stack of per-tool agents with a single
+            low-overhead process you can drop onto any host.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <div class="num">1</div>
+              <div class="lbl">static binary</div>
+            </div>
+            <div class="stat">
+              <div class="num">≈9<span class="u"> MB</span></div>
+              <div class="lbl">compressed download</div>
+            </div>
+            <div class="stat">
+              <div class="num">0</div>
+              <div class="lbl">runtimes or dependencies</div>
+            </div>
+            <div class="stat">
+              <div class="num">5</div>
+              <div class="lbl">OS / arch targets</div>
             </div>
           </div>
         </section>
@@ -870,10 +927,6 @@
                   <td>OpenTelemetry</td><td>Push</td><td>OTLP / gRPC</td>
                   <td><span class="st st-ok">Supported</span></td>
                 </tr>
-                <tr>
-                  <td>SenHub cloud</td><td>Push</td><td>HTTPS intake</td>
-                  <td><span class="st st-ok">Supported</span></td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -925,18 +978,17 @@
 
         <section>
           <div class="platform">
-            <h2>Part of the SenHub platform</h2>
+            <h2>Part of SenHub</h2>
             <p>
-              SenHub Agent is the edge collector of
-              <a href="https://senhub.io">SenHub</a> — the observability
-              platform by Sensor Factory. On its own it feeds any monitoring
-              tool you already run. Paired with the SenHub cloud, the same
-              agent streams into dashboards, alerting and long-term storage
-              with nothing extra to install.
+              SenHub Agent is open source and built by the team behind
+              <a href="https://senhub.io">SenHub</a> (Sensor Factory). It stays
+              deliberately vendor-neutral — it speaks open standards and feeds
+              whatever you already run, with no lock-in and no mandatory
+              backend.
             </p>
             <p>
-              New here? The full install guide, probe catalog and configuration
-              reference live at
+              New here? The full install guide, probe catalogue and
+              configuration reference live at
               <a href="https://docs.senhub.io">docs.senhub.io</a>.
             </p>
           </div>
