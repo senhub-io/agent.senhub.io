@@ -4,41 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SenHub Agent — One agent for every monitoring tool</title>
+    <title>SenHub Agent — The OpenTelemetry-native infrastructure agent</title>
     <meta
       name="description"
-      content="SenHub Agent is an open-core infrastructure monitoring agent: a single, lightweight Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry."
+      content="SenHub Agent is an open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits OTLP into your modern stack (Prometheus, VictoriaMetrics, Grafana) — and still feeds PRTG or Nagios during the transition."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="SenHub Agent — One agent for every monitoring tool" />
+    <meta property="og:title" content="SenHub Agent — The OpenTelemetry-native infrastructure agent" />
     <meta
       property="og:description"
-      content="A single, lightweight Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry. Open-core, OpenTelemetry-native."
+      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with PRTG and Nagios still supported. Open-core."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://agent.senhub.io" />
-    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=2" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=3" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="SenHub Agent — one agent for every monitoring tool. A single lightweight Go binary feeding PRTG, Nagios, Prometheus and OpenTelemetry."
+      content="SenHub Agent — the OpenTelemetry-native infrastructure agent. A single lightweight Go binary emitting OTLP into Prometheus, Grafana and your existing PRTG / Nagios tooling."
     />
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SenHub Agent — One agent for every monitoring tool" />
+    <meta name="twitter:title" content="SenHub Agent — The OpenTelemetry-native infrastructure agent" />
     <meta
       name="twitter:description"
-      content="A single, lightweight Go binary that collects your host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry. Open-core, OpenTelemetry-native."
+      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with PRTG and Nagios still supported. Open-core."
     />
-    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=2" />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=3" />
 
     <style>
       /* ---- Palette: SenHub brand (senhub.io) — amber fill, cyan accent ---- */
@@ -635,7 +635,7 @@
         "name": "SenHub Agent",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Linux, Windows, macOS",
-        "description": "Open-core infrastructure monitoring agent: a single, lightweight Go binary that collects host and infrastructure metrics and ships them to PRTG, Nagios, Prometheus or OpenTelemetry.",
+        "description": "Open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits host and infrastructure metrics as OTLP into Prometheus, VictoriaMetrics or Grafana, and still feeds PRTG or Nagios.",
         "url": "https://agent.senhub.io/",
         "codeRepository": "https://github.com/senhub-io/senhub-agent",
         "programmingLanguage": "Go",
@@ -667,11 +667,11 @@
 
       <main>
         <section class="hero">
-          <h1>One agent.<br /><span class="hl">Every</span> monitoring tool.</h1>
+          <h1>The <span class="hl">OpenTelemetry-native</span><br />infrastructure agent.</h1>
           <p class="subtagline">
-            A single, lightweight Go binary that collects your host and
-            infrastructure metrics — and ships them to PRTG, Nagios,
-            Prometheus or OpenTelemetry.
+            Collect host and infrastructure metrics as OpenTelemetry — push
+            via OTLP to Prometheus, VictoriaMetrics or Grafana. Still on PRTG
+            or Nagios? It feeds those too.
           </p>
           <div class="buttons">
             <a class="btn btn-primary" href="https://docs.senhub.io">Get started</a>
@@ -706,16 +706,17 @@
               </div>
               <div class="arrow">▼ &nbsp; one OpenTelemetry-native pipeline &nbsp; ▼</div>
               <div class="sinks">
-                <span class="sink"><b>PRTG</b></span>
-                <span class="sink"><b>Nagios</b></span>
-                <span class="sink"><b>Prometheus</b></span>
                 <span class="sink"><b>OTLP</b></span>
+                <span class="sink"><b>Prometheus</b></span>
+                <span class="sink">PRTG</span>
+                <span class="sink">Nagios</span>
               </div>
             </div>
           </div>
           <p class="demo-caption">
-            Collect once, ship everywhere. The same metrics feed your existing
-            monitoring stack — no per-tool agents to deploy and maintain.
+            One OpenTelemetry pipeline. Push OTLP or scrape Prometheus into
+            your modern stack — and keep feeding PRTG or Nagios while you
+            transition. No per-tool agents to deploy.
           </p>
         </section>
 
@@ -724,11 +725,12 @@
         <section>
           <h2>Why SenHub Agent</h2>
           <p>
-            Most teams already run a monitoring tool — PRTG, Nagios, a
-            Prometheus stack — and each one wants its own agent on every host.
-            SenHub Agent collapses that into a single, lightweight Go binary.
-            It speaks every format natively, so you instrument a host once and
-            point it at whatever your team already uses, today or tomorrow.
+            Observability has standardized on OpenTelemetry — everywhere except
+            the infrastructure edge, where each tool still ships its own agent.
+            SenHub Agent closes that gap: a single OTel-native collector for
+            hosts, databases and infrastructure. Emit OTLP into your modern
+            stack today, and keep feeding PRTG or Nagios while you transition —
+            one agent, no rip-and-replace.
           </p>
         </section>
 
@@ -738,27 +740,27 @@
           <h2>What it does</h2>
           <div class="cols">
             <div>
-              <h3>One binary, every sink</h3>
-              <p>
-                A single self-contained agent for Linux, Windows and macOS.
-                Push to PRTG, Nagios, Prometheus or OTLP — or let any of them
-                pull. No plugins to compile.
-              </p>
-            </div>
-            <div>
               <h3>OpenTelemetry-native</h3>
               <p>
-                Every metric follows OpenTelemetry semantic conventions
-                internally. PRTG, Nagios and Prometheus shapes are derived
-                from that single neutral model — never bolted on per tool.
+                Every metric is modelled on OpenTelemetry semantic conventions
+                from the start, then emitted straight out as OTLP — no
+                proprietary protocol, no translation layer, no lock-in.
               </p>
             </div>
             <div>
-              <h3>Open-core, batteries included</h3>
+              <h3>Plugs into what you run</h3>
+              <p>
+                OTLP and Prometheus feed your modern stack — VictoriaMetrics,
+                Grafana, any OTel backend. Still on PRTG or Nagios? The same
+                agent serves them too, so you migrate at your own pace.
+              </p>
+            </div>
+            <div>
+              <h3>Open-core &amp; lightweight</h3>
               <p>
                 Host self-observability and universal collection are free and
-                Apache-2.0. Deep vendor-specific infrastructure probes are the
-                paid layer. Start free, scale when you need to.
+                Apache-2.0; deep vendor probes are the paid layer. One ~9 MB
+                binary, no runtime, no dependencies.
               </p>
             </div>
           </div>
@@ -823,15 +825,19 @@
   - { name: logicaldisk, type: logicaldisk, params: { interval: <span class="s">30</span> } }
 
 <span class="k">storage</span>:
+  <span class="cmt"># push OpenTelemetry to your collector / backend</span>
+  - name: otlp
+    params: { protocol: grpc, endpoint: <span class="s">"otel-collector:4317"</span> }
+  <span class="cmt"># …and/or expose pull endpoints (Prometheus, PRTG, Nagios)</span>
   - name: http
-    params: { port: <span class="s">8080</span>, endpoints: [<span class="s">"prtg"</span>, <span class="s">"prometheus"</span>, <span class="s">"nagios"</span>] }</pre>
+    params: { port: <span class="s">8080</span>, endpoints: [<span class="s">"prometheus"</span>, <span class="s">"prtg"</span>, <span class="s">"nagios"</span>] }</pre>
             </div>
             <div class="step">
               <div class="step-head">
                 <span class="step-num">3</span>
-                <h3>Point your tool at the endpoint</h3>
+                <h3>It's already shipping</h3>
               </div>
-<pre class="code"><span class="cmt"># Prometheus scrape, PRTG sensor or Nagios check — same agent</span>
+<pre class="code"><span class="cmt"># OTLP is already pushing — scrape Prometheus or check from Nagios too</span>
 <span class="p">$</span> curl -s localhost:<span class="s">8080</span>/api/&lt;agentkey&gt;/prometheus/metrics
 <span class="p">$</span> curl -s localhost:<span class="s">8080</span>/api/&lt;agentkey&gt;/prtg/metrics/cpu</pre>
             </div>
@@ -912,24 +918,29 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>PRTG</td><td>Pull</td><td>Native PRTG JSON</td>
-                  <td><span class="st st-primary">Primary</span></td>
-                </tr>
-                <tr>
-                  <td>Nagios</td><td>Pull</td><td>Plugin text + perfdata</td>
-                  <td><span class="st st-primary">Primary</span></td>
+                  <td>OpenTelemetry</td><td>Push</td><td>OTLP / gRPC</td>
+                  <td><span class="st st-ok">Stable</span></td>
                 </tr>
                 <tr>
                   <td>Prometheus</td><td>Pull</td><td><code>/metrics</code> (text 0.0.4)</td>
-                  <td><span class="st st-ok">Supported</span></td>
+                  <td><span class="st st-ok">Stable</span></td>
                 </tr>
                 <tr>
-                  <td>OpenTelemetry</td><td>Push</td><td>OTLP / gRPC</td>
-                  <td><span class="st st-ok">Supported</span></td>
+                  <td>PRTG</td><td>Pull</td><td>Native PRTG JSON</td>
+                  <td><span class="st st-ok">Stable</span></td>
+                </tr>
+                <tr>
+                  <td>Nagios</td><td>Pull</td><td>Plugin text + perfdata</td>
+                  <td><span class="st st-ok">Stable</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <p class="section-note">
+            OTLP and Prometheus drop straight into any OpenTelemetry backend —
+            VictoriaMetrics, Grafana, and the rest. PRTG and Nagios keep your
+            current tooling working through the move.
+          </p>
         </section>
 
         <hr class="divider" />
