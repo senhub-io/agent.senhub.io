@@ -41,18 +41,19 @@
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=1" />
 
     <style>
-      /* ---- Palette: SenHub — clean light surface, anthracite ink, orange accent, cyan secondary ---- */
+      /* ---- Palette: SenHub brand (senhub.io) — amber fill, cyan accent ---- */
       :root {
         --bg: #fbfbfd;          /* near-white surface */
         --panel: #ffffff;       /* raised panels */
-        --ink: #1f2430;         /* anthracite body text */
+        --ink: #212529;         /* anthracite body text */
         --muted: #5b6472;       /* secondary text */
-        --accent: #ff9500;      /* SenHub orange */
-        --accent-dark: #e68900; /* hover state */
-        --cyan: #00bcd4;        /* SenHub cyan secondary */
-        --cyan-dark: #00acc1;
+        --accent: #fcbe36;      /* SenHub amber — buttons / highlights */
+        --accent-dark: #f0ad17; /* hover state */
+        --accent-ink: #212529;  /* dark text on amber */
+        --cyan: #00caf6;        /* SenHub cyan — links / accents */
+        --cyan-dark: #0091bd;   /* legible cyan for text */
         --line: #e7e9ef;        /* hairline borders */
-        --robot: #4a4a4a;       /* robot body / strong ink */
+        --robot: #4c4949;       /* robot body / strong ink */
       }
 
       *,
@@ -82,7 +83,7 @@
       }
 
       a {
-        color: var(--accent-dark);
+        color: var(--cyan-dark);
         text-decoration: none;
       }
 
@@ -119,7 +120,7 @@
       }
 
       nav a:hover {
-        color: var(--accent-dark);
+        color: var(--cyan-dark);
       }
 
       section {
@@ -151,7 +152,9 @@
       }
 
       .hero h1 .hl {
-        color: var(--accent);
+        background: linear-gradient(transparent 56%, rgba(252, 190, 54, 0.55) 56%);
+        padding: 0 0.06em;
+        border-radius: 2px;
       }
 
       .hero .subtagline {
@@ -181,7 +184,8 @@
 
       .btn-primary {
         background: var(--accent);
-        color: #fff;
+        color: var(--accent-ink);
+        border-color: var(--accent);
       }
 
       .btn-primary:hover {
@@ -192,13 +196,14 @@
 
       .btn-secondary {
         background: transparent;
-        color: var(--accent-dark);
+        color: var(--cyan-dark);
+        border-color: var(--cyan);
       }
 
       .btn-secondary:hover {
-        background: var(--accent);
-        color: #fff;
-        border-color: var(--accent);
+        background: var(--cyan);
+        color: #062d38;
+        border-color: var(--cyan);
         text-decoration: none;
       }
 
@@ -304,7 +309,7 @@
       }
 
       .sink b {
-        color: var(--accent-dark);
+        color: var(--cyan-dark);
         font-weight: 700;
       }
 
@@ -367,7 +372,7 @@
       .tier code {
         font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
         font-size: 0.82rem;
-        background: rgba(0, 188, 212, 0.08);
+        background: rgba(0, 202, 246, 0.10);
         color: var(--cyan-dark);
         padding: 3px 9px;
         border-radius: 6px;
@@ -393,7 +398,7 @@
       }
 
       footer a:hover {
-        color: var(--accent-dark);
+        color: var(--cyan-dark);
       }
 
       footer .copy {
