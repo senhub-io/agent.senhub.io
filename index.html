@@ -378,6 +378,166 @@
         border-radius: 6px;
       }
 
+      /* ---- Inline code in prose ---- */
+      p code,
+      li code {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        font-size: 0.84em;
+        background: rgba(0, 202, 246, 0.10);
+        color: var(--cyan-dark);
+        padding: 1px 6px;
+        border-radius: 5px;
+      }
+
+      /* ---- Quick start: numbered steps + dark code blocks ---- */
+      .steps {
+        display: grid;
+        gap: 24px;
+      }
+
+      .step-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 12px;
+      }
+
+      .step-num {
+        flex: 0 0 auto;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 800;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .step-head h3 {
+        font-size: 1.05rem;
+        margin: 0;
+      }
+
+      pre.code {
+        margin: 0 0 0 40px;
+        background: #1e232b;
+        color: #e6e9ef;
+        border-radius: 10px;
+        padding: 15px 18px;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        font-size: 0.84rem;
+        line-height: 1.6;
+      }
+
+      pre.code .cmt { color: #7c8694; }
+      pre.code .k { color: var(--cyan); }
+      pre.code .s { color: var(--accent); }
+      pre.code .p { color: #9aa4b2; }
+
+      /* ---- Probe catalog grid ---- */
+      .pgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .pcat {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px 18px;
+      }
+
+      .pcat h3 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.96rem;
+        margin: 0 0 7px;
+      }
+
+      .pcat p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .tag {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      .tag-free { background: rgba(0, 202, 246, 0.14); color: var(--cyan-dark); }
+      .tag-pro { background: rgba(252, 190, 54, 0.22); color: #946800; }
+
+      .section-note {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin: 18px 0 0;
+      }
+
+      /* ---- Tables (integrations + tiers) ---- */
+      .tbl-wrap {
+        overflow-x: auto;
+      }
+
+      table.tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+        min-width: 460px;
+      }
+
+      table.tbl th,
+      table.tbl td {
+        text-align: left;
+        padding: 11px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      table.tbl th {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      table.tbl td:first-child {
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      table.tbl code {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+        font-size: 0.82rem;
+        color: var(--cyan-dark);
+      }
+
+      .st {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        padding: 2px 8px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      .st-primary { background: rgba(252, 190, 54, 0.22); color: #946800; }
+      .st-ok { background: rgba(0, 202, 246, 0.14); color: var(--cyan-dark); }
+
       .divider {
         border: 0;
         border-top: 1px solid var(--line);
@@ -409,6 +569,14 @@
         .cols {
           grid-template-columns: 1fr;
           gap: 28px;
+        }
+
+        .pgrid {
+          grid-template-columns: 1fr;
+        }
+
+        pre.code {
+          margin-left: 0;
         }
 
         .hero h1 {
@@ -495,7 +663,7 @@
             <div class="fanout-body">
               <div class="src-line">
                 <span class="c"># collect host &amp; infrastructure metrics</span><br />
-                cpu · memory · disk · network · logs · 40+ infra probes
+                cpu · memory · disk · network · logs · databases · Citrix · NetScaler · Veeam …
               </div>
               <div class="arrow">▼ &nbsp; one OpenTelemetry-native pipeline &nbsp; ▼</div>
               <div class="sinks">
@@ -504,7 +672,6 @@
                 <span class="sink"><b>Prometheus</b></span>
                 <span class="sink"><b>OTLP</b></span>
                 <span class="sink"><b>SenHub cloud</b></span>
-                <span class="sink sink-soon">Zabbix · soon</span>
               </div>
             </div>
           </div>
@@ -563,6 +730,191 @@
         <hr class="divider" />
 
         <section>
+          <h2>Quick start</h2>
+          <p>
+            Three steps, no agent-per-tool sprawl. The example is Linux;
+            Windows and macOS follow the same flow with their own archive.
+          </p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-head">
+                <span class="step-num">1</span>
+                <h3>Install the binary as a service</h3>
+              </div>
+<pre class="code"><span class="p">$</span> unzip senhub-agent-linux-amd64.zip -d /opt/senhub/bin/
+<span class="p">$</span> /opt/senhub/bin/senhub-agent <span class="k">install</span>
+<span class="p">$</span> /opt/senhub/bin/senhub-agent <span class="k">start</span></pre>
+            </div>
+            <div class="step">
+              <div class="step-head">
+                <span class="step-num">2</span>
+                <h3>Declare probes and an output in YAML</h3>
+              </div>
+<pre class="code"><span class="cmt"># agent-config.yaml</span>
+<span class="k">probes</span>:
+  - { name: cpu,         type: cpu,         params: { interval: <span class="s">30</span> } }
+  - { name: memory,      type: memory,      params: { interval: <span class="s">30</span> } }
+  - { name: logicaldisk, type: logicaldisk, params: { interval: <span class="s">30</span> } }
+
+<span class="k">storage</span>:
+  - name: http
+    params: { port: <span class="s">8080</span>, endpoints: [<span class="s">"prtg"</span>, <span class="s">"prometheus"</span>, <span class="s">"nagios"</span>] }</pre>
+            </div>
+            <div class="step">
+              <div class="step-head">
+                <span class="step-num">3</span>
+                <h3>Point your tool at the endpoint</h3>
+              </div>
+<pre class="code"><span class="cmt"># Prometheus scrape, PRTG sensor or Nagios check — same agent</span>
+<span class="p">$</span> curl -s localhost:<span class="s">8080</span>/api/&lt;agentkey&gt;/prometheus/metrics
+<span class="p">$</span> curl -s localhost:<span class="s">8080</span>/api/&lt;agentkey&gt;/prtg/metrics/cpu</pre>
+            </div>
+          </div>
+          <p class="section-note">
+            Validate any config with <code>agent config check</code> and inspect
+            the live pipeline with <code>agent status --otlp</code>. Pro probes
+            unlock via <code>agent license activate &lt;token&gt;</code>. Full
+            reference at <a href="https://docs.senhub.io">docs.senhub.io</a>.
+          </p>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>What it monitors</h2>
+          <p>
+            From host self-observability to deep vendor infrastructure — one
+            agent, one config format, OpenTelemetry-native throughout.
+          </p>
+          <div class="pgrid">
+            <div class="pcat">
+              <h3>Host &amp; OS <span class="tag tag-free">Free</span></h3>
+              <p>CPU, memory, logical disk, network interfaces.</p>
+            </div>
+            <div class="pcat">
+              <h3>Host logs <span class="tag tag-free">Free</span></h3>
+              <p>Linux journald shipping (<code>linux_logs</code>).</p>
+            </div>
+            <div class="pcat">
+              <h3>Databases <span class="tag tag-pro">Pro</span></h3>
+              <p>MySQL, PostgreSQL — OTel-first metric mappings.</p>
+            </div>
+            <div class="pcat">
+              <h3>Virtualization / VDI <span class="tag tag-pro">Pro</span></h3>
+              <p>Citrix Virtual Apps &amp; Desktops sessions and machines.</p>
+            </div>
+            <div class="pcat">
+              <h3>Application delivery <span class="tag tag-pro">Pro</span></h3>
+              <p>Citrix NetScaler ADC — vServers, services, load balancing.</p>
+            </div>
+            <div class="pcat">
+              <h3>Server hardware <span class="tag tag-pro">Pro</span></h3>
+              <p>Redfish — iDRAC, iLO and other BMCs.</p>
+            </div>
+            <div class="pcat">
+              <h3>Data protection <span class="tag tag-pro">Pro</span></h3>
+              <p>Veeam Backup &amp; Replication jobs and sessions.</p>
+            </div>
+            <div class="pcat">
+              <h3>Synthetic &amp; wireless <span class="tag tag-pro">Pro</span></h3>
+              <p>Gateway ping, web-app reachability and load, Wi-Fi signal.</p>
+            </div>
+            <div class="pcat">
+              <h3>Syslog &amp; events <span class="tag tag-pro">Pro</span></h3>
+              <p>Syslog relay (RFC 3164 / 5424) and custom HTTP events.</p>
+            </div>
+          </div>
+          <p class="section-note">
+            Free probes ship in the Apache-2.0 build and need no licence. The
+            full, growing catalogue lives at
+            <a href="https://docs.senhub.io">docs.senhub.io</a>.
+          </p>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>Integrations</h2>
+          <p>
+            One neutral, OpenTelemetry-mapped data store; each output is a
+            serialization of the same metrics — pull or push, your choice.
+          </p>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead>
+                <tr><th>Output</th><th>Mode</th><th>Format</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>PRTG</td><td>Pull</td><td>Native PRTG JSON</td>
+                  <td><span class="st st-primary">Primary</span></td>
+                </tr>
+                <tr>
+                  <td>Nagios</td><td>Pull</td><td>Plugin text + perfdata</td>
+                  <td><span class="st st-primary">Primary</span></td>
+                </tr>
+                <tr>
+                  <td>Prometheus</td><td>Pull</td><td><code>/metrics</code> (text 0.0.4)</td>
+                  <td><span class="st st-ok">Supported</span></td>
+                </tr>
+                <tr>
+                  <td>OpenTelemetry</td><td>Push</td><td>OTLP / gRPC</td>
+                  <td><span class="st st-ok">Supported</span></td>
+                </tr>
+                <tr>
+                  <td>SenHub cloud</td><td>Push</td><td>HTTPS intake</td>
+                  <td><span class="st st-ok">Supported</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+          <h2>Open-core</h2>
+          <p>
+            The free tier is enough to monitor a whole fleet. Paid tiers add
+            vendor and infrastructure probes — and the licence validates fully
+            offline, with no call home.
+          </p>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead>
+                <tr><th>Tier</th><th>What you get</th><th>Activation</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Free</td>
+                  <td>Host self-observability — CPU, memory, disk, network,
+                    journald logs. Unlimited hosts.</td>
+                  <td>None — Apache-2.0 build</td>
+                </tr>
+                <tr>
+                  <td>Pro</td>
+                  <td>Vendor &amp; infra probes — databases, Citrix, NetScaler,
+                    Redfish, Veeam, syslog, synthetic checks.</td>
+                  <td><code>agent license activate</code></td>
+                </tr>
+                <tr>
+                  <td>Enterprise</td>
+                  <td>Every probe, including future ones (wildcard) — e.g.
+                    IBM&nbsp;i.</td>
+                  <td><code>agent license activate</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="section-note">
+            Licences are signed JWTs verified locally — offline by design, with
+            a 7-day grace period after expiry.
+          </p>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
           <div class="platform">
             <h2>Part of the SenHub platform</h2>
             <p>
@@ -578,23 +930,6 @@
               reference live at
               <a href="https://docs.senhub.io">docs.senhub.io</a>.
             </p>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Free to start</h2>
-          <p>
-            The free tier covers host self-observability and universal
-            collection — enough to monitor a fleet without a license:
-          </p>
-          <div class="tier">
-            <code>cpu</code>
-            <code>memory</code>
-            <code>logicaldisk</code>
-            <code>network</code>
-            <code>linux_logs</code>
           </div>
         </section>
 
