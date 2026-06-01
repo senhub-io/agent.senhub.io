@@ -7,7 +7,7 @@
     <title>SenHub Agent — The OpenTelemetry-native infrastructure agent</title>
     <meta
       name="description"
-      content="SenHub Agent is an open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits OTLP into your modern stack (Prometheus, VictoriaMetrics, Grafana) — and still feeds PRTG or Nagios during the transition."
+      content="SenHub Agent is an open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits OTLP into your stack (Prometheus, VictoriaMetrics, Grafana), with first-class native PRTG and Nagios outputs."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/" />
@@ -16,19 +16,19 @@
     <meta property="og:title" content="SenHub Agent — The OpenTelemetry-native infrastructure agent" />
     <meta
       property="og:description"
-      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with PRTG and Nagios still supported. Open-core."
+      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs. Open-core."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://agent.senhub.io" />
-    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=3" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="SenHub Agent — the OpenTelemetry-native infrastructure agent. A single lightweight Go binary emitting OTLP into Prometheus, Grafana and your existing PRTG / Nagios tooling."
+      content="SenHub Agent — the OpenTelemetry-native infrastructure agent. A single lightweight Go binary emitting OTLP into Prometheus and Grafana, with first-class native PRTG and Nagios outputs."
     />
 
     <!-- Twitter card -->
@@ -36,9 +36,9 @@
     <meta name="twitter:title" content="SenHub Agent — The OpenTelemetry-native infrastructure agent" />
     <meta
       name="twitter:description"
-      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with PRTG and Nagios still supported. Open-core."
+      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs. Open-core."
     />
-    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=3" />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
 
     <style>
       /* ---- Palette: SenHub brand (senhub.io) — amber fill, cyan accent ---- */
@@ -635,7 +635,7 @@
         "name": "SenHub Agent",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Linux, Windows, macOS",
-        "description": "Open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits host and infrastructure metrics as OTLP into Prometheus, VictoriaMetrics or Grafana, and still feeds PRTG or Nagios.",
+        "description": "Open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits host and infrastructure metrics as OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs.",
         "url": "https://agent.senhub.io/",
         "codeRepository": "https://github.com/senhub-io/senhub-agent",
         "programmingLanguage": "Go",
@@ -670,8 +670,8 @@
           <h1>The <span class="hl">OpenTelemetry-native</span><br />infrastructure agent.</h1>
           <p class="subtagline">
             Collect host and infrastructure metrics as OpenTelemetry — push
-            via OTLP to Prometheus, VictoriaMetrics or Grafana. Still on PRTG
-            or Nagios? It feeds those too.
+            via OTLP to Prometheus, VictoriaMetrics or Grafana, or serve PRTG
+            and Nagios natively. Your stack, your choice.
           </p>
           <div class="buttons">
             <a class="btn btn-primary" href="https://docs.senhub.io">Get started</a>
@@ -708,15 +708,15 @@
               <div class="sinks">
                 <span class="sink"><b>OTLP</b></span>
                 <span class="sink"><b>Prometheus</b></span>
-                <span class="sink">PRTG</span>
-                <span class="sink">Nagios</span>
+                <span class="sink"><b>PRTG</b></span>
+                <span class="sink"><b>Nagios</b></span>
               </div>
             </div>
           </div>
           <p class="demo-caption">
-            One OpenTelemetry pipeline. Push OTLP or scrape Prometheus into
-            your modern stack — and keep feeding PRTG or Nagios while you
-            transition. No per-tool agents to deploy.
+            One OpenTelemetry pipeline, every output. Push OTLP, scrape
+            Prometheus, or serve PRTG and Nagios — all first-class, all from the
+            same agent. No per-tool agents to deploy.
           </p>
         </section>
 
@@ -728,9 +728,10 @@
             Observability has standardized on OpenTelemetry — everywhere except
             the infrastructure edge, where each tool still ships its own agent.
             SenHub Agent closes that gap: a single OTel-native collector for
-            hosts, databases and infrastructure. Emit OTLP into your modern
-            stack today, and keep feeding PRTG or Nagios while you transition —
-            one agent, no rip-and-replace.
+            hosts, databases and infrastructure. Emit OTLP into a modern stack,
+            or serve PRTG, Nagios and Prometheus natively — every output is
+            first-class and fully supported. Adopt OpenTelemetry at your own
+            pace, without leaving the tools you rely on.
           </p>
         </section>
 
@@ -750,9 +751,9 @@
             <div>
               <h3>Plugs into what you run</h3>
               <p>
-                OTLP and Prometheus feed your modern stack — VictoriaMetrics,
-                Grafana, any OTel backend. Still on PRTG or Nagios? The same
-                agent serves them too, so you migrate at your own pace.
+                OTLP and Prometheus feed a modern stack — VictoriaMetrics,
+                Grafana, any OTel backend. PRTG, Nagios and Prometheus are
+                first-class outputs too — natively supported, your choice.
               </p>
             </div>
             <div>
@@ -938,8 +939,8 @@
           </div>
           <p class="section-note">
             OTLP and Prometheus drop straight into any OpenTelemetry backend —
-            VictoriaMetrics, Grafana, and the rest. PRTG and Nagios keep your
-            current tooling working through the move.
+            VictoriaMetrics, Grafana, and the rest. PRTG and Nagios are
+            first-class, fully-supported outputs — use whichever fits your team.
           </p>
         </section>
 
