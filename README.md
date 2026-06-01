@@ -10,7 +10,7 @@ The custom domain is set through the `CNAME` file (`agent.senhub.io`).
 ## Related
 
 - Agent source code — [github.com/senhub-io/senhub-agent](https://github.com/senhub-io/senhub-agent)
-- Documentation — [docs.senhub.io](https://docs.senhub.io)
+- Documentation — [agent.senhub.io/docs](https://agent.senhub.io/docs/)
 - Platform — [senhub.io](https://senhub.io)
 
 ## Updating the social preview image
