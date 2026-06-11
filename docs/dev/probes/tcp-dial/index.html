@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/tcp-dial/">
       
+      
+        <link rel="prev" href="../http-check/">
+      
+      
+        <link rel="next" href="../dns-latency/">
       
       
         
       
       
-      <link rel="icon" href="/docs/dev/assets/favicon.svg">
+      <link rel="icon" href="../../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>SenHub Agent</title>
+        <title>TCP dial - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="/docs/dev/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/docs/dev/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/docs/dev/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/docs/dev",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#tcp_dial-tcp-connect-latency" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +102,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="/docs/dev/assets/logo.svg" alt="logo">
+  <img src="../../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -108,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              TCP dial
             
           </span>
         </div>
@@ -228,7 +239,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="/docs/dev/assets/logo.svg" alt="logo">
+  <img src="../../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -255,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -282,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/presentation/" class="md-nav__link">
+      <a href="../../presentation/" class="md-nav__link">
         
   
   
@@ -309,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -336,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/configuration/" class="md-nav__link">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   
@@ -363,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/http-https/" class="md-nav__link">
+      <a href="../../http-https/" class="md-nav__link">
         
   
   
@@ -390,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/web-interface/" class="md-nav__link">
+      <a href="../../web-interface/" class="md-nav__link">
         
   
   
@@ -469,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/prometheus/" class="md-nav__link">
+      <a href="../../prometheus/" class="md-nav__link">
         
   
   
@@ -497,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -532,7 +543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/cli/" class="md-nav__link">
+      <a href="../../cli/" class="md-nav__link">
         
   
   
@@ -559,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/otlp/" class="md-nav__link">
+      <a href="../../otlp/" class="md-nav__link">
         
   
   
@@ -583,8 +594,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -595,11 +608,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
@@ -620,7 +633,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -638,7 +651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -666,7 +679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/cpu/" class="md-nav__link">
+      <a href="../cpu/" class="md-nav__link">
         
   
   
@@ -694,7 +707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/memory/" class="md-nav__link">
+      <a href="../memory/" class="md-nav__link">
         
   
   
@@ -722,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/network/" class="md-nav__link">
+      <a href="../network/" class="md-nav__link">
         
   
   
@@ -750,7 +763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/logicaldisk/" class="md-nav__link">
+      <a href="../logicaldisk/" class="md-nav__link">
         
   
   
@@ -778,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/linux-logs/" class="md-nav__link">
+      <a href="../linux-logs/" class="md-nav__link">
         
   
   
@@ -806,7 +819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/icmp-check/" class="md-nav__link">
+      <a href="../icmp-check/" class="md-nav__link">
         
   
   
@@ -834,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/http-check/" class="md-nav__link">
+      <a href="../http-check/" class="md-nav__link">
         
   
   
@@ -859,10 +872,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/docs/dev/probes/tcp-dial/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCP dial
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -878,6 +918,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -890,7 +983,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/dns-latency/" class="md-nav__link">
+      <a href="../dns-latency/" class="md-nav__link">
         
   
   
@@ -918,7 +1011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/citrix/" class="md-nav__link">
+      <a href="../citrix/" class="md-nav__link">
         
   
   
@@ -946,7 +1039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/netscaler/" class="md-nav__link">
+      <a href="../netscaler/" class="md-nav__link">
         
   
   
@@ -974,7 +1067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/redfish/" class="md-nav__link">
+      <a href="../redfish/" class="md-nav__link">
         
   
   
@@ -1002,7 +1095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/syslog/" class="md-nav__link">
+      <a href="../syslog/" class="md-nav__link">
         
   
   
@@ -1030,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/event/" class="md-nav__link">
+      <a href="../event/" class="md-nav__link">
         
   
   
@@ -1058,7 +1151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/ping-webapp/" class="md-nav__link">
+      <a href="../ping-webapp/" class="md-nav__link">
         
   
   
@@ -1086,7 +1179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/load-webapp/" class="md-nav__link">
+      <a href="../load-webapp/" class="md-nav__link">
         
   
   
@@ -1114,7 +1207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/ping-gateway/" class="md-nav__link">
+      <a href="../ping-gateway/" class="md-nav__link">
         
   
   
@@ -1142,7 +1235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/wifi-signal-strength/" class="md-nav__link">
+      <a href="../wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -1170,7 +1263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/veeam/" class="md-nav__link">
+      <a href="../veeam/" class="md-nav__link">
         
   
   
@@ -1198,7 +1291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/mysql/" class="md-nav__link">
+      <a href="../mysql/" class="md-nav__link">
         
   
   
@@ -1226,7 +1319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/probes/postgresql/" class="md-nav__link">
+      <a href="../postgresql/" class="md-nav__link">
         
   
   
@@ -1261,7 +1354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   
@@ -1340,7 +1433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/whats-new/" class="md-nav__link">
+      <a href="../../whats-new/" class="md-nav__link">
         
   
   
@@ -1368,7 +1461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/whats-new/next/" class="md-nav__link">
+      <a href="../../whats-new/next/" class="md-nav__link">
         
   
   
@@ -1396,7 +1489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/docs/dev/whats-new/0.2.0/" class="md-nav__link">
+      <a href="../../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -1441,6 +1534,49 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1453,8 +1589,95 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/tcp-dial.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="tcp_dial-tcp-connect-latency">tcp_dial — TCP connect latency<a class="headerlink" href="#tcp_dial-tcp-connect-latency" title="Permanent link">&para;</a></h1>
+<p>Free tier. Measures the time for a raw TCP <code>connect()</code> to complete
+against <code>host:port</code> targets. For a load-balancer VIP, a Citrix broker,
+a domain controller or a fileserver, a measured dial is faster and more
+dependable than an HTTP round trip.</p>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/40-dial.yaml</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dial-core</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp_dial</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;10.0.0.10:443&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;dc01.lan:389&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;files.lan:445&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+</code></pre></div>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>targets</code></td>
+<td>required</td>
+<td>List of <code>host:port</code></td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>5</td>
+<td>Connect budget in seconds</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>60</td>
+<td>Seconds between cycles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.tcpdial.up</code></td>
+<td>bool</td>
+<td>Connect completed within the timeout</td>
+</tr>
+<tr>
+<td><code>senhub.tcpdial.duration</code></td>
+<td>ms</td>
+<td>Three-way-handshake time (emitted only when up)</td>
+</tr>
+</tbody>
+</table>
+<p>A refused or timed out target is a measurement (<code>up = 0</code>), never a
+probe failure.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1472,6 +1695,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../http-check/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HTTP check">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                HTTP check
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../dns-latency/" class="md-footer__link md-footer__link--next" aria-label="Next: DNS latency">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                DNS latency
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -1530,14 +1791,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/docs/dev", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "/docs/dev/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="/docs/dev/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="/docs/dev/javascripts/rn-filter.js"></script>
+        <script src="../../javascripts/rn-filter.js"></script>
       
-        <script src="/docs/dev/javascripts/dev-banner.js"></script>
+        <script src="../../javascripts/dev-banner.js"></script>
       
     
   </body>
