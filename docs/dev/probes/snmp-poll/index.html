@@ -2036,6 +2036,11 @@ one series per interface (<code>if_index</code> tag).</p>
 <td>Built-in MIB modules to poll: <code>mib-2</code>, <code>if-mib</code></td>
 </tr>
 <tr>
+<td><code>mib_paths</code></td>
+<td><code>[]</code></td>
+<td>Local directories or files of MIB modules used to name custom mappings (never fetched over the network)</td>
+</tr>
+<tr>
 <td><code>custom_mappings</code></td>
 <td><code>[]</code></td>
 <td>Operator-supplied OID-to-metric mappings (see below)</td>
@@ -2079,8 +2084,8 @@ startup, not one at a time.</p>
 </tr>
 <tr>
 <td><code>metric</code></td>
-<td>required</td>
-<td>Metric name to emit</td>
+<td>required unless <code>mib_paths</code> is set</td>
+<td>Metric name to emit. When omitted and <code>mib_paths</code> is configured, the name is resolved from your MIB files at startup (e.g. <code>upsAdvBatteryCapacity</code>); an unresolvable OID is a startup error, never a silent gap</td>
 </tr>
 <tr>
 <td><code>type</code></td>
