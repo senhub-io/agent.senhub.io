@@ -2441,7 +2441,7 @@ per possible state with value <code>1</code> (active) or <code>0</code> (inactiv
 <p>This matches the OTel spec for <code>hw.status</code> and lets you alert on
 <code>hw_state="failed"</code> directly without numeric-enum gymnastics.</p>
 <h2 id="agent-self-observability">Agent self-observability<a class="headerlink" href="#agent-self-observability" title="Permanent link">&para;</a></h2>
-<p>Eight metrics describe the agent's own state — always emitted when the
+<p>Nine metrics describe the agent's own state — always emitted when the
 endpoint is enabled:</p>
 <table>
 <thead>
@@ -2481,6 +2481,11 @@ endpoint is enabled:</p>
 <td><code>senhub_agent_collect_errors_total</code></td>
 <td>counter</td>
 <td>Lifetime probe collection errors</td>
+</tr>
+<tr>
+<td><code>senhub_agent_transformer_fallback_total</code></td>
+<td>counter</td>
+<td>Datapoints processed without a transformer definition (no unit injection or corrections)</td>
 </tr>
 <tr>
 <td><code>senhub_agent_http_requests_total</code></td>
