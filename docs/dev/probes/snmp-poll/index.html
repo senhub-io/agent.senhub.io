@@ -2067,10 +2067,20 @@ startup, not one at a time.</p>
 </tbody>
 </table>
 <h3 id="discovery">Discovery<a class="headerlink" href="#discovery" title="Permanent link">&para;</a></h3>
-<p>When a <code>discovery</code> block is present the probe crawls outward from
-seed devices using LLDP neighbor tables, bounded by CIDR ranges and
-depth/device caps, and reports discovered devices and links on the
-entity rail:</p>
+<div class="admonition warning">
+<p class="admonition-title">Not active yet</p>
+<p>The <code>discovery</code> block is parsed and validated but <strong>not wired to
+the poll lifecycle yet</strong> — configuring it does nothing today
+beyond a startup warning. It is documented here because the
+configuration shape is final. Per-device topology (LLDP
+neighbors, routes, bridge tables of the polled <code>target</code>) is
+active and independent of this block. Tracking:
+<a href="https://github.com/senhub-io/senhub-agent/issues/156">#156</a>.</p>
+</div>
+<p>When the crawl ships, a <code>discovery</code> block will make the probe crawl
+outward from seed devices using LLDP neighbor tables, bounded by
+CIDR ranges and depth/device caps, and report discovered devices and
+links on the entity rail:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>

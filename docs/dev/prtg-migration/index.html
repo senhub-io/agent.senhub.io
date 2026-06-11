@@ -2313,13 +2313,14 @@ example.</p>
   If you depend on flow analysis, keep that tooling.</li>
 <li><strong>Maps.</strong> No equivalent of PRTG Maps. Grafana dashboards cover
   the visualization need differently; auto-generated network
-  topology views are on the roadmap (topology discovery already
-  ships in <code>snmp_poll</code>).</li>
+  topology views are on the roadmap (per-device topology — LLDP
+  neighbors, routes, bridge tables — already ships in <code>snmp_poll</code>).</li>
 <li><strong>Reports.</strong> No built-in PDF reporting. Grafana's reporting
   (Enterprise) or grafana-image-renderer fills this gap.</li>
 <li><strong>Auto-discovery breadth.</strong> PRTG's device auto-discovery
-  proposes sensors automatically. The agent's discovery is
-  narrower today: LLDP topology crawl in <code>snmp_poll</code>.</li>
+  proposes sensors automatically. The agent has no equivalent
+  today; the seed-based network crawl is designed but not yet
+  active (#156).</li>
 <li><strong>Remote-only polling.</strong> WMI/SSH-style agentless host monitoring
   is intentionally out of scope: the agent runs on the host. For
   unreachable boxes (appliances, locked-down systems), SNMP and the
