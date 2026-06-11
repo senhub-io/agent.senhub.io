@@ -16,7 +16,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../0.2.0/">
+        <link rel="next" href="../0.2.1/">
       
       
         
@@ -1675,10 +1675,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#improved" class="md-nav__link">
+  <a href="#changed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Improved
+        Changed
       
     </span>
   </a>
@@ -1686,10 +1686,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#changed" class="md-nav__link">
+  <a href="#improved" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Changed
+        Improved
       
     </span>
   </a>
@@ -1707,32 +1707,38 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#security" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Security
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#internal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Internal
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1811,17 +1817,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#improved" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Improved
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#changed" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1833,32 +1828,21 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#improved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improved
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fixed" class="md-nav__link">
     <span class="md-ellipsis">
       
         Fixed
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Security
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#internal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Internal
       
     </span>
   </a>
@@ -1892,82 +1876,50 @@
 
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2.03v2.02c4.39.54 7.5 4.53 6.96 8.92-.46 3.64-3.32 6.53-6.96 6.96v2c5.5-.55 9.5-5.43 8.95-10.93-.45-4.75-4.22-8.5-8.95-8.97m-2 .03c-1.95.19-3.81.94-5.33 2.2L7.1 5.74c1.12-.9 2.47-1.48 3.9-1.68zM4.26 5.67A9.9 9.9 0 0 0 2.05 11h2c.19-1.42.75-2.77 1.64-3.9zM2.06 13c.2 1.96.97 3.81 2.21 5.33l1.42-1.43A8 8 0 0 1 4.06 13zm5.04 5.37-1.43 1.37A10 10 0 0 0 11 22v-2a8 8 0 0 1-3.9-1.63M12.5 7v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg></span> In progress — these changes will ship as the next stable release.</p>
-<div class="admonition warning">
-<p class="admonition-title">DRAFT — needs product review</p>
-<p>The running list of changes landed since 0.2.0, accumulated here until the
-next stable release is cut (then it becomes that version's notes). Curated
-from the real commits — before release, please:</p>
-<ul>
-<li>Confirm what is <strong>shipping vs still maturing</strong> (some network-topology work
-  is recent and may be partial in a first cut).</li>
-<li>Decide whether the <strong>open-source flip</strong> is public yet — don't announce a
-  public repo before it actually is.</li>
-<li>Adjust the highlights to your own voice.</li>
-</ul>
-</div>
 <div class="admonition highlight">
 <p class="admonition-title">Highlights</p>
 <ul>
-<li><strong>Five new collectors — all free.</strong> Poll SNMP devices, receive SNMP
-  traps, ingest OpenTelemetry from other agents, tail flat-file logs, and
-  read the Windows Event Log.</li>
-<li><strong>Network topology discovery.</strong> The agent now maps how your devices
-  connect — from SNMP (LLDP, routing, bridge tables) and host routing/ARP.</li>
-<li><strong>Native packages.</strong> Install from Linux <code>.deb</code> / <code>.rpm</code> or a signed
-  Windows MSI.</li>
-<li><strong>Runs without root.</strong> The Linux daemon no longer needs root — only
-  installing/removing the service does.</li>
-<li><strong>Tag everything.</strong> Add your own tags agent-wide or per probe.</li>
+<li><strong>Six new active and custom checks — all free.</strong> Ping, HTTP(S) with
+  TLS-expiry tracking, TCP connect, DNS resolution, Prometheus
+  endpoint scraping, and an exec probe that runs your existing Nagios
+  plugins unchanged.</li>
+<li><strong>A real PRTG migration path.</strong> A sensor-to-probe
+  <a href="../../prtg-migration/">migration guide</a> and ready-to-import
+  <a href="https://github.com/senhub-io/senhub-agent/tree/dev/packs/alerts">alerting starter packs</a>
+  (vmalert + Grafana) covering every free probe.</li>
+<li><strong>Syslog goes free.</strong> The syslog receiver joins the universal
+  collection tier.</li>
 </ul>
 </div>
 <div class="rn-filter"></div>
 
 <h2 id="new">New<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
 <ul class="rn">
-<li><span class="tag t-new">New</span> <span class="tag t-area">SNMP</span> <code>snmp_poll</code> probe — collect metrics from SNMP MIB modules, with dynamic per-OID typed metrics and resolution from operator-supplied local MIB files. <em>(Free tier.)</em> (#156)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">SNMP</span> <code>snmp_trap</code> probe — receive SNMP v2c / v3 traps (and acknowledge v2c informs) and forward them as OpenTelemetry logs. <em>(Free tier.)</em> (#161)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">OTLP</span> <code>otlp_receiver</code> probe — embed an OTLP receiver so the agent can act as an edge collector: OpenTelemetry in (gRPC/HTTP) → out to all sinks. <em>(Free tier.)</em> (#173)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">Windows</span> <code>windows_eventlog</code> probe — stream the Windows Event Log as OpenTelemetry logs. <em>(Free tier.)</em> (#154)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">logs</span> <code>filetail</code> probe — tail any flat-file log and forward it as OpenTelemetry logs. <em>(Free tier.)</em> (#155)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">topology</span> Network topology discovery — the agent emits devices and how they connect: <code>adjacent_to</code> (LLDP), <code>routes_via</code> (routing table + ARP) and <code>forwards_to</code> (bridge forwarding table), from both SNMP and host routing.</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">topology</span> Entity rail — probes declare the systems they monitor; the agent tracks their lifecycle and emits them as OpenTelemetry entities.</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">config</span> Universal tags — agent-wide <code>global_tags</code> and per-probe <code>custom_tags</code> on every probe.</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">OTLP</span> OTLP/HTTP transport, alongside the existing gRPC.</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">packaging</span> Linux <code>.deb</code> and <code>.rpm</code> packages.</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">packaging</span> Signed Windows MSI installer (WiX).</li>
-</ul>
-
-<h2 id="improved">Improved<a class="headerlink" href="#improved" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-improved">Improved</span> <span class="tag t-area">config</span> Multi-file configuration is complete end-to-end (install / migrate / watch / check).</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">checks</span> <code>icmp_check</code> probe — multi-target ping: reachability, packet loss, RTT statistics. <em>(Free tier.)</em> (#299)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">checks</span> <code>http_check</code> probe — HTTP(S) checks: status, latency phases (DNS / connect / TLS / TTFB), content match, and TLS certificate expiry in days as a first-class metric. <em>(Free tier.)</em> (#300)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">checks</span> <code>tcp_dial</code> probe — raw TCP connect latency to any host:port. <em>(Free tier.)</em> (#159)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">checks</span> <code>dns_latency</code> probe — resolution latency per name, per resolver (system or explicit). <em>(Free tier.)</em> (#158)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">checks</span> <code>exec</code> probe — run any Nagios plugin or JSON-emitting script on interval: hard timeout with process-tree kill, overlap protection, perfdata parsing. <em>(Free tier.)</em> (#305)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">Prometheus</span> <code>prometheus_scrape</code> probe — scrape /metrics endpoints (node_exporter, appliance exporters) into the agent pipeline, counter/gauge semantics preserved. <em>(Free tier.)</em> (#304)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">alerting</span> Alerting starter packs — vmalert rule files (host, active checks incl. TLS expiry, SNMP, agent self-health) plus a Grafana provisioning example, under <code>packs/alerts/</code>. (#301)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">docs</span> "Migrating from PRTG" guide — sensor-to-probe mapping, progressive vs direct path, alerting equivalents, honest gaps — plus documentation pages for all five 0.2.1 collectors. (#302)</li>
 </ul>
 
 <h2 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h2>
 <ul class="rn">
-<li><span class="tag t-removed">Changed</span> <span class="tag t-area">license</span> The compact licence format was dropped — licences are JWT-only now (open-source preparation).</li>
+<li><span class="tag t-removed">Changed</span> <span class="tag t-area">license</span> The <code>syslog</code> receiver moved from Pro to the <strong>free tier</strong> — it completes the universal log-collection set alongside <code>filetail</code> and <code>windows_eventlog</code>. (#298)</li>
+<li><span class="tag t-removed">Changed</span> <span class="tag t-area">Prometheus</span> <code>senhub_httpcheck_status_code</code> and <code>senhub_snmp_interface_{admin,oper}_status</code> no longer carry a misleading <code>_ratio</code> suffix on the Prometheus output (annotation units). Names had not shipped in any stable release. (#344)</li>
+</ul>
+
+<h2 id="improved">Improved<a class="headerlink" href="#improved" title="Permanent link">&para;</a></h2>
+<ul class="rn">
+<li><span class="tag t-improved">Improved</span> <span class="tag t-area">CI</span> The full macOS + Windows test matrix runs on every pull request (public repository, free runners). (#334)</li>
 </ul>
 
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
 <ul class="rn">
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">security</span> <span class="tag t-area">CLI</span> The Linux daemon now runs without root — only installing/removing the service needs elevated rights. (#223)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">CLI</span> Correct <code>--version</code> handling and rejection of unknown top-level arguments. (#134)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">memory</span> <code>swap_*</code> metrics now map to OpenTelemetry paging semantics. (#137)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">config</span> Tolerant numeric parameter decoding for YAML and JSON. (#136)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">syslog</span> Fall back to RFC 5424 keys when RFC 3164 ones are empty. (#135)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">SNMP</span> <code>snmp_trap</code> owns its UDP listener so traps arrive on Windows.</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">Windows</span> <code>windows_eventlog</code> drives the wevtapi pull subscription correctly (it was draining nothing).</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">filetail</span> Strip the trailing carriage return from Windows CRLF log lines.</li>
-</ul>
-
-<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-security">Security</span> <span class="tag t-area">deps</span> Go toolchain bumped to 1.26.4 (standard-library CVE fixes).</li>
-</ul>
-
-<h2 id="internal">Internal<a class="headerlink" href="#internal" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-internal">Internal</span> Open-source split — Apache-2.0 <code>LICENSE</code> + <code>NOTICE</code>, paid probes and enterprise tooling moved to a separate repository, customer/infra references anonymized, probes self-register. <em>(Confirm the public repo is live before announcing.)</em></li>
-<li><span class="tag t-internal">Internal</span> <code>probesdk</code> — a public mirror of the probe API plus an entity-detection API, so out-of-tree probes can emit metrics and entities.</li>
+<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">docs</span> Unresolved merge-conflict markers committed to the docs navigation broke the MkDocs build; a CI guard is tracked in #343.</li>
+<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">tests</span> Flaky data-store mock race under the race detector (test-only). (#341)</li>
 </ul>
 
 
@@ -2021,13 +1973,13 @@ from the real commits — before release, please:</p>
         
         
           
-          <a href="../0.2.0/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.2.0">
+          <a href="../0.2.1/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.2.1">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                0.2.0
+                0.2.1
               </div>
             </div>
             <div class="md-footer__button md-icon">
