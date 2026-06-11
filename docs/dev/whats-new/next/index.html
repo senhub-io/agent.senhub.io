@@ -1697,6 +1697,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#changed-metric-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed (metric names)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#internal" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1867,6 +1878,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#changed-metric-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed (metric names)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#internal" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1925,6 +1947,64 @@
 <li><span class="tag t-removed">Changed</span> <span class="tag t-area">outputs</span> The never-implemented Zabbix HTTP endpoint (always 501) is removed; <code>endpoints: [zabbix]</code> now fails fast at startup. The Zabbix integration is redesigned as a native active agent, deferred (#169).</li>
 </ul>
 
+<h2 id="changed-metric-names">Changed (metric names)<a class="headerlink" href="#changed-metric-names" title="Permanent link">&para;</a></h2>
+<p>The OTel names of eight Windows/hardware rate metrics carried a
+<code>per_second</code> suffix in the NAME, which the Prometheus-compatibility
+layers then doubled with the unit-derived suffix
+(<code>senhub_system_disk_io_per_second_bytes_per_second</code> through an OTel
+collector). The unit now drives the suffix alone; the resulting
+Prometheus names are the ones the metrics reference always documented.</p>
+<table>
+<thead>
+<tr>
+<th>Before (OTel name)</th>
+<th>After (OTel name)</th>
+<th>Prometheus name (both ingestion paths)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.system.cpu.dpcs_per_second</code></td>
+<td><code>senhub.system.cpu.dpcs</code></td>
+<td><code>senhub_system_cpu_dpcs_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.system.cpu.dpcs_queued_per_second</code></td>
+<td><code>senhub.system.cpu.dpcs_queued</code></td>
+<td><code>senhub_system_cpu_dpcs_queued_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.system.cpu.interrupts_per_second</code></td>
+<td><code>senhub.system.cpu.interrupts</code></td>
+<td><code>senhub_system_cpu_interrupts_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.system.paging.faults_per_second</code></td>
+<td><code>senhub.system.paging.faults</code></td>
+<td><code>senhub_system_paging_faults_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.system.paging.operations_per_second</code></td>
+<td><code>senhub.system.paging.operations</code></td>
+<td><code>senhub_system_paging_operations_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.system.disk.operations_per_second</code></td>
+<td><code>senhub.system.disk.operations</code></td>
+<td><code>senhub_system_disk_operations_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.system.disk.io_per_second</code></td>
+<td><code>senhub.system.disk.io</code></td>
+<td><code>senhub_system_disk_io_bytes_per_second</code></td>
+</tr>
+<tr>
+<td><code>senhub.hardware.physical_disk.link_speed_bits_per_second</code></td>
+<td><code>senhub.hardware.physical_disk.link_speed</code></td>
+<td><code>senhub_hardware_physical_disk_link_speed_bits_per_second</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="internal">Internal<a class="headerlink" href="#internal" title="Permanent link">&para;</a></h2>
 <ul class="rn">
 <li><span class="tag t-internal">Internal</span> Shared <code>snmpcore</code> package — one printability semantics, value rendering, version mapping and v3 USM tables consumed by both SNMP probes. (#291)</li>
