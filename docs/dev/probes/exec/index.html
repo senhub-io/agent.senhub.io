@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/veeam/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/exec/">
       
       
-        <link rel="prev" href="../wifi-signal-strength/">
+        <link rel="prev" href="../prometheus-scrape/">
       
       
-        <link rel="next" href="../mysql/">
+        <link rel="next" href="../citrix/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Veeam Backup & Replication - SenHub Agent</title>
+        <title>Exec - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#veeam-backup-replication" class="md-skip">
+        <a href="#exec-probe" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Veeam Backup & Replication
+              Exec
             
           </span>
         </div>
@@ -1096,10 +1096,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../exec/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exec
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1115,6 +1142,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nagios-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nagios contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1376,37 +1500,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Veeam Backup & Replication
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../veeam/" class="md-nav__link">
         
   
   
@@ -1422,220 +1519,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#collected-metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Collected Metrics
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Collected Metrics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#job-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Job Overview
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#job-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Job Details
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repositories" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Repositories
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        License
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#proxies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Proxies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#protected-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Protected Objects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#infrastructure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Infrastructure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prtg-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PRTG Integration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#http-403-on-startup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HTTP 403 on startup
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#http-500-on-job-collection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HTTP 500 on job collection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#no-job-metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No job metrics
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1928,10 +1811,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Quick start
       
     </span>
   </a>
@@ -1939,18 +1822,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1960,111 +1831,12 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#collected-metrics" class="md-nav__link">
+  <a href="#nagios-contract" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Collected Metrics
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Collected Metrics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#job-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Job Overview
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#job-details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Job Details
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repositories" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Repositories
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        License
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#proxies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Proxies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#protected-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Protected Objects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#infrastructure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Infrastructure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prtg-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PRTG Integration
+        Nagios contract
       
     </span>
   </a>
@@ -2072,52 +1844,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#json-contract" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#http-403-on-startup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HTTP 403 on startup
+        JSON contract
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#http-500-on-job-collection" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#self-metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        HTTP 500 on job collection
+        Self-metrics
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#no-job-metrics" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#security-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        No job metrics
+        Security notes
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
   
 </li>
       
@@ -2138,7 +1904,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/veeam.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/exec.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2146,355 +1912,176 @@
   
 
 
-<h1 id="veeam-backup-replication">Veeam Backup &amp; Replication<a class="headerlink" href="#veeam-backup-replication" title="Permanent link">&para;</a></h1>
-<p>Monitors Veeam Backup &amp; Replication v13 via the REST API. Collects job status, repository capacity, license usage, proxy health, protected objects, and infrastructure server availability.</p>
-<p><strong>License</strong>: Pro</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>License: Free</strong> — part of the universal collection tier.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The configured program runs <strong>as the agent user</strong> (root on Linux,
+LocalSystem on Windows). Read the security notes below before
+enabling this probe.</p>
+</div>
+<h1 id="exec-probe">Exec Probe<a class="headerlink" href="#exec-probe" title="Permanent link">&para;</a></h1>
+<p>The <code>exec</code> probe runs an operator-supplied program on interval and
+turns its output into metrics — the custom-check long tail. Two
+output contracts are supported:</p>
 <ul>
-<li>Veeam Backup &amp; Replication v13 or later</li>
-<li>A Veeam account with <strong>Backup Administrator</strong> role (Backup Viewer is not sufficient for the REST API)</li>
-<li>Network access from the agent to the Veeam server on port <strong>9419</strong> (REST API)</li>
+<li><strong>Nagios plugin convention</strong> (default): exit code carries the
+  status, perfdata after the <code>|</code> carries the measurements. Existing
+  <code>check_*</code> plugins work unchanged.</li>
+<li><strong>JSON contract</strong>: a structured document for new scripts.</li>
 </ul>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam-prod</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">raid-status</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exec</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://veeam-server&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9419</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;DOMAIN\svc_monitoring&#39;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;password&#39;</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="nt">hours_to_check</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/lib/nagios/plugins/check_raid</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;-p&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 </code></pre></div>
-<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Required</th>
 <th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>endpoint</code></td>
-<td>Yes</td>
-<td>-</td>
-<td>Veeam server hostname or IP (without port)</td>
+<td><code>command</code></td>
+<td>required</td>
+<td>Absolute path to the program. Relative paths and PATH lookup are refused</td>
 </tr>
 <tr>
-<td><code>port</code></td>
-<td>No</td>
-<td><code>9419</code></td>
-<td>REST API port</td>
+<td><code>args</code></td>
+<td><code>[]</code></td>
+<td>Arguments, passed verbatim — no shell is involved</td>
 </tr>
 <tr>
-<td><code>username</code></td>
-<td>Yes</td>
-<td>-</td>
-<td>Veeam account with Backup Administrator role</td>
-</tr>
-<tr>
-<td><code>password</code></td>
-<td>Yes</td>
-<td>-</td>
-<td>Account password</td>
+<td><code>format</code></td>
+<td><code>nagios</code></td>
+<td><code>nagios</code> or <code>json</code></td>
 </tr>
 <tr>
 <td><code>interval</code></td>
-<td>No</td>
-<td><code>300</code></td>
-<td>Collection interval in seconds</td>
+<td><code>60</code></td>
+<td>Seconds between runs</td>
 </tr>
 <tr>
-<td><code>verify_ssl</code></td>
-<td>No</td>
-<td><code>true</code></td>
-<td>Verify TLS certificate</td>
+<td><code>timeout</code></td>
+<td><code>10</code></td>
+<td>Hard deadline in seconds; on expiry the whole process group is killed</td>
 </tr>
 <tr>
-<td><code>hours_to_check</code></td>
-<td>No</td>
-<td><code>24</code></td>
-<td>Time window for job history (hours)</td>
+<td><code>env</code></td>
+<td>none</td>
+<td>Extra environment variables (the agent's environment is inherited)</td>
+</tr>
+<tr>
+<td><code>workdir</code></td>
+<td>agent's</td>
+<td>Working directory for the run</td>
 </tr>
 </tbody>
 </table>
-<h2 id="collected-metrics">Collected Metrics<a class="headerlink" href="#collected-metrics" title="Permanent link">&para;</a></h2>
-<h3 id="job-overview">Job Overview<a class="headerlink" href="#job-overview" title="Permanent link">&para;</a></h3>
-<p>Aggregated job counts by type (VSphereBackup, WindowsAgentBackup, BackupCopy, etc.):</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_jobs_total</code></td>
-<td>Count</td>
-<td>Total enabled jobs with activity in the time window</td>
-</tr>
-<tr>
-<td><code>veeam_jobs_success</code></td>
-<td>Count</td>
-<td>Jobs with last run successful</td>
-</tr>
-<tr>
-<td><code>veeam_jobs_warning</code></td>
-<td>Count</td>
-<td>Jobs with last run warnings</td>
-</tr>
-<tr>
-<td><code>veeam_jobs_failed</code></td>
-<td>Count</td>
-<td>Jobs with last run failed</td>
-</tr>
-<tr>
-<td><code>veeam_jobs_running</code></td>
-<td>Count</td>
-<td>Jobs currently running</td>
-</tr>
-</tbody>
-</table>
-<h3 id="job-details">Job Details<a class="headerlink" href="#job-details" title="Permanent link">&para;</a></h3>
-<p>Per-job metrics for each active backup job:</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_job_status</code></td>
-<td>Lookup</td>
-<td>Last run result (None/Success/Warning/Failed/Running)</td>
-</tr>
-<tr>
-<td><code>veeam_job_seconds_since</code></td>
-<td>Seconds</td>
-<td>Time since last run</td>
-</tr>
-<tr>
-<td><code>veeam_job_objects_count</code></td>
-<td>Count</td>
-<td>Number of objects processed</td>
-</tr>
-<tr>
-<td><code>veeam_job_bottleneck</code></td>
-<td>Lookup</td>
-<td>Bottleneck type (None/Source/Proxy/Network/Target)</td>
-</tr>
-<tr>
-<td><code>veeam_job_processed_bytes</code></td>
-<td>Bytes</td>
-<td>Total disk size processed</td>
-</tr>
-<tr>
-<td><code>veeam_job_read_bytes</code></td>
-<td>Bytes</td>
-<td>Data read from source</td>
-</tr>
-<tr>
-<td><code>veeam_job_transferred_bytes</code></td>
-<td>Bytes</td>
-<td>Data transferred after dedup/compression</td>
-</tr>
-</tbody>
-</table>
-<h3 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h3>
-<p>Per-repository capacity metrics:</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_repo_capacity</code></td>
-<td>Bytes</td>
-<td>Total repository capacity</td>
-</tr>
-<tr>
-<td><code>veeam_repo_used</code></td>
-<td>Bytes</td>
-<td>Used space</td>
-</tr>
-<tr>
-<td><code>veeam_repo_free</code></td>
-<td>Bytes</td>
-<td>Free space</td>
-</tr>
-<tr>
-<td><code>veeam_repo_free_pct</code></td>
-<td>Percent</td>
-<td>Free space percentage</td>
-</tr>
-</tbody>
-</table>
-<h3 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_license_status</code></td>
-<td>Lookup</td>
-<td>Valid / Expired / Invalid</td>
-</tr>
-<tr>
-<td><code>veeam_license_days_left</code></td>
-<td>Days</td>
-<td>Days until license expiration</td>
-</tr>
-<tr>
-<td><code>veeam_license_instances_total</code></td>
-<td>Count</td>
-<td>Licensed instances</td>
-</tr>
-<tr>
-<td><code>veeam_license_instances_used</code></td>
-<td>Count</td>
-<td>Used instances</td>
-</tr>
-<tr>
-<td><code>veeam_license_instances_remaining</code></td>
-<td>Count</td>
-<td>Available instances</td>
-</tr>
-</tbody>
-</table>
-<h3 id="proxies">Proxies<a class="headerlink" href="#proxies" title="Permanent link">&para;</a></h3>
-<p>Per-proxy status:</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_proxy_status</code></td>
-<td>Lookup</td>
-<td>Disabled / Offline / Online</td>
-</tr>
-<tr>
-<td><code>veeam_proxies_total</code></td>
-<td>Count</td>
-<td>Total proxies</td>
-</tr>
-<tr>
-<td><code>veeam_proxies_enabled</code></td>
-<td>Count</td>
-<td>Enabled proxies</td>
-</tr>
-<tr>
-<td><code>veeam_proxies_disabled</code></td>
-<td>Count</td>
-<td>Disabled proxies</td>
-</tr>
-</tbody>
-</table>
-<h3 id="protected-objects">Protected Objects<a class="headerlink" href="#protected-objects" title="Permanent link">&para;</a></h3>
-<p>Per-object backup status:</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_object_restore_points</code></td>
-<td>Count</td>
-<td>Number of restore points</td>
-</tr>
-<tr>
-<td><code>veeam_object_last_run_failed</code></td>
-<td>Count</td>
-<td>1 if last backup failed, 0 otherwise</td>
-</tr>
-<tr>
-<td><code>veeam_objects_total</code></td>
-<td>Count</td>
-<td>Total protected objects</td>
-</tr>
-<tr>
-<td><code>veeam_objects_failed</code></td>
-<td>Count</td>
-<td>Objects whose last backup failed</td>
-</tr>
-</tbody>
-</table>
-<h3 id="infrastructure">Infrastructure<a class="headerlink" href="#infrastructure" title="Permanent link">&para;</a></h3>
-<p>Managed server availability:</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>veeam_server_status</code></td>
-<td>Lookup</td>
-<td>Available / Unavailable</td>
-</tr>
-<tr>
-<td><code>veeam_servers_total</code></td>
-<td>Count</td>
-<td>Total managed servers</td>
-</tr>
-<tr>
-<td><code>veeam_servers_available</code></td>
-<td>Count</td>
-<td>Available servers</td>
-</tr>
-<tr>
-<td><code>veeam_servers_unavailable</code></td>
-<td>Count</td>
-<td>Unavailable servers</td>
-</tr>
-</tbody>
-</table>
-<h2 id="prtg-integration">PRTG Integration<a class="headerlink" href="#prtg-integration" title="Permanent link">&para;</a></h2>
-<p>The probe includes PRTG lookups for status fields. When creating PRTG sensors, use the <strong>REST Custom</strong> sensor type pointing to:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://&lt;agent-ip&gt;:&lt;port&gt;/api/&lt;agent-key&gt;/prtg/metrics/&lt;probe-name&gt;?tags=metric_type:&lt;category&gt;
+<h2 id="nagios-contract">Nagios contract<a class="headerlink" href="#nagios-contract" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ ./check_queue
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>WARN - queue depth high | depth=42;10;50 &#39;wait time&#39;=230ms
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$ echo $?
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>1
 </code></pre></div>
-<p>Available categories: <code>overview</code>, <code>jobs</code>, <code>repositories</code>, <code>license</code>, <code>proxies</code>, <code>protected_objects</code>, <code>infrastructure</code>.</p>
-<p>Example for job details:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>http://192.168.1.100:8056/api/17b3cf0a-.../prtg/metrics/veeam-prod?tags=metric_type:jobs
-</code></pre></div></p>
-<p>Download the PRTG lookup files from the web interface (button "PRTG Lookups" in the Sensor Builder).</p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="http-403-on-startup">HTTP 403 on startup<a class="headerlink" href="#http-403-on-startup" title="Permanent link">&para;</a></h3>
-<p>The Veeam account must have the <strong>Backup Administrator</strong> role. The REST API does not work with Backup Viewer.</p>
-<h3 id="http-500-on-job-collection">HTTP 500 on job collection<a class="headerlink" href="#http-500-on-job-collection" title="Permanent link">&para;</a></h3>
-<p>Some Veeam installations have job types (e.g., HyperVBackup) that cause server-side errors. The agent handles this automatically by querying jobs per type.</p>
-<h3 id="no-job-metrics">No job metrics<a class="headerlink" href="#no-job-metrics" title="Permanent link">&para;</a></h3>
-<p>If <code>hours_to_check</code> is too short, jobs that ran outside the time window are excluded. Increase the value (default: 24 hours).</p>
+<ul>
+<li>Exit code 0/1/2 maps to ok/warning/critical; anything else (and a
+  timeout kill) is unknown (3). Reported as <code>senhub.exec.status</code>.</li>
+<li>Each perfdata token becomes a metric named
+  <code>senhub.exec.&lt;label&gt;</code> (label lowercased and sanitized). Time units
+  are normalized to seconds (<code>230ms</code> becomes 0.23), byte units to
+  bytes, and the <code>c</code> UOM marks the value as a counter. Warn/crit/min/
+  max thresholds are accepted and ignored — thresholds belong in your
+  alerting layer.</li>
+<li>Malformed perfdata tokens are skipped; one bad token never voids
+  the check.</li>
+</ul>
+<h2 id="json-contract">JSON contract<a class="headerlink" href="#json-contract" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;metrics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue.depth&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;queue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;orders&quot;</span><span class="p">}},</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;processed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4012</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;counter&quot;</span><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>status</code> (0..3) is optional; without it the exit code is mapped
+  exactly like the Nagios contract.</li>
+<li><code>type</code> is <code>gauge</code> (default) or <code>counter</code>. <code>tags</code> become metric
+  tags. Names are namespaced under <code>senhub.exec.*</code> and sanitized.</li>
+</ul>
+<h2 id="self-metrics">Self-metrics<a class="headerlink" href="#self-metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.exec.status</code></td>
+<td>0 ok, 1 warning, 2 critical, 3 unknown</td>
+</tr>
+<tr>
+<td><code>senhub.exec.duration</code></td>
+<td>Wall-clock run time</td>
+</tr>
+<tr>
+<td><code>senhub.exec.timeout</code></td>
+<td>1 when the run was killed on the deadline</td>
+</tr>
+<tr>
+<td><code>senhub.exec.skipped</code></td>
+<td>1 when a cycle was skipped because the previous run was still going</td>
+</tr>
+</tbody>
+</table>
+<h2 id="security-notes">Security notes<a class="headerlink" href="#security-notes" title="Permanent link">&para;</a></h2>
+<p>This probe executes whatever the configuration points at, with the
+agent's privileges. The probe enforces what it can:</p>
+<ul>
+<li><strong>Absolute paths only.</strong> PATH lookup is refused, so a writable
+  directory earlier in PATH cannot shadow your check.</li>
+<li><strong>World-writable executables are refused</strong> on Linux/macOS at probe
+  start: a script any local user can rewrite is a privilege
+  escalation, not a check.</li>
+<li><strong>No shell.</strong> <code>command</code> + <code>args</code> go straight to the OS. Pipelines
+  and redirections belong inside a script file that you own.</li>
+</ul>
+<p>What remains your responsibility:</p>
+<ul>
+<li>Keep check scripts owned by root (or an admin account on Windows)
+  and not group-writable; treat their directory the same way.</li>
+<li>Review what the script itself calls — the probe cannot audit
+  transitive trust.</li>
+<li>Prefer read-only checks. A "check" that mutates state will run
+  every cycle, forever.</li>
+<li>On Windows, lock down ACLs on the script; the world-writable test
+  is Unix-only.</li>
+</ul>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Overlap protection.</strong> If a run outlives the interval, the next
+  cycle is skipped and reported via <code>senhub.exec.skipped</code> — processes
+  never pile up.</li>
+<li><strong>Output caps.</strong> stdout/stderr are captured up to 1 MiB each.</li>
+<li><strong>One probe instance per check.</strong> Each check gets its own probe
+  block with its own interval and timeout, and shows up under its own
+  probe name.</li>
+</ul>
 
 
 
@@ -2530,7 +2117,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../wifi-signal-strength/" class="md-footer__link md-footer__link--prev" aria-label="Previous: WiFi signal">
+          <a href="../prometheus-scrape/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Prometheus scrape">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2540,20 +2127,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                WiFi signal
+                Prometheus scrape
               </div>
             </div>
           </a>
         
         
           
-          <a href="../mysql/" class="md-footer__link md-footer__link--next" aria-label="Next: MySQL / MariaDB">
+          <a href="../citrix/" class="md-footer__link md-footer__link--next" aria-label="Next: Citrix">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                MySQL / MariaDB
+                Citrix
               </div>
             </div>
             <div class="md-footer__button md-icon">
