@@ -1953,7 +1953,7 @@ single probe instance.</p>
 <tr>
 <td><code>privileged</code></td>
 <td>OS-dependent</td>
-<td>Raw ICMP sockets (<code>true</code>) vs ICMP datagram sockets (<code>false</code>). Defaults to <code>true</code> on Windows, <code>false</code> elsewhere</td>
+<td>Raw ICMP sockets (<code>true</code>) vs ICMP datagram sockets (<code>false</code>). Defaults to <code>true</code> on Windows and on Linux when running as root, <code>false</code> elsewhere</td>
 </tr>
 </tbody>
 </table>
@@ -1997,10 +1997,14 @@ resolved <code>ip</code> rides along).</p>
 probe failure: the probe stays healthy and keeps reporting.</p>
 <h2 id="privileges">Privileges<a class="headerlink" href="#privileges" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Linux</strong>: the default unprivileged mode uses ICMP datagram sockets,
-  gated by the <code>net.ipv4.ping_group_range</code> sysctl. If pings fail with a
-  permission error, either widen that range to include the agent's
-  group or set <code>privileged: true</code> (requires root or <code>CAP_NET_RAW</code>).</li>
+<li><strong>Linux</strong>: running as root (the current agent requirement), the
+  probe defaults to privileged raw sockets — unprivileged ICMP
+  datagram sockets are gated by <code>net.ipv4.ping_group_range</code>, which
+  stock Ubuntu/Debian servers ship disabled, and root does not bypass
+  that sysctl. As a non-root process the default is unprivileged: if
+  pings fail with a permission error, widen the range to include the
+  agent's group or set <code>privileged: true</code> (requires <code>CAP_NET_RAW</code>).
+  The permission error now carries this hint in the log.</li>
 <li><strong>Windows</strong>: raw sockets only — the probe defaults to
   <code>privileged: true</code> and the agent service runs elevated.</li>
 <li><strong>macOS</strong>: unprivileged mode works out of the box.</li>
