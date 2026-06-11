@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/redfish/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/prometheus-scrape/">
       
       
-        <link rel="prev" href="../netscaler/">
+        <link rel="prev" href="../otlp-receiver/">
       
       
-        <link rel="next" href="../syslog/">
+        <link rel="next" href="../citrix/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Redfish - SenHub Agent</title>
+        <title>Prometheus scrape - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#prometheus-scrape-probe" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Redfish
+              Prometheus scrape
             
           </span>
         </div>
@@ -1068,10 +1068,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../prometheus-scrape/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus scrape
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1087,6 +1114,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1152,19 +1254,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../redfish/" class="md-nav__link">
         
   
   
@@ -1180,7 +1273,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1662,6 +1754,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1677,7 +1832,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/redfish.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/prometheus-scrape.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1685,824 +1840,123 @@
   
 
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><strong>License: Pro</strong> - Requires a Pro or Enterprise license.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>License: Free</strong> — part of the universal collection tier.</p>
 </div>
-<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p>The Redfish probe monitors server and storage hardware through the DMTF Redfish API, providing comprehensive health, capacity, and performance metrics. It supports a wide range of hardware platforms including Dell iDRAC, Dell PowerVault ME series, HPE iLO, Lenovo XClarity, and Cisco UCS.</p>
-<p>The probe automatically detects the hardware vendor via the Redfish API and adapts its metric collection accordingly. No vendor-specific configuration is required.</p>
-<p><strong>Collected Data:</strong>
-- Controller, drive, pool, and volume health status
-- Storage capacity (total, allocated, used, free) for pools and volumes
-- I/O performance metrics (reads, writes, latency, throughput)
-- Hardware event logs (critical, warning, informational entries)
-- Drive failure predictions and hotspare status
-- Encryption status for volumes and drives</p>
-<p><strong>Supported Hardware:</strong>
-- Dell iDRAC (PowerEdge servers)
-- Dell PowerVault ME series (ME5024, etc.)
-- HPE iLO (ProLiant servers)
-- Lenovo XClarity (ThinkSystem servers)
-- Cisco UCS (Unified Computing System)
-- Any hardware implementing the DMTF Redfish standard</p>
-<h1 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h1>
-<h2 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">&para;</a></h2>
+<h1 id="prometheus-scrape-probe">Prometheus Scrape Probe<a class="headerlink" href="#prometheus-scrape-probe" title="Permanent link">&para;</a></h1>
+<p>The <code>prometheus_scrape</code> probe pulls Prometheus <code>/metrics</code> endpoints —
+node_exporter, appliance exporters, any application exposing the text
+format — and ingests the samples through the agent pipeline, out to
+every configured output. It is the pull-side twin of the
+<a href="../otlp-receiver/">OTLP receiver</a>: one agent per site collects both
+push (OTLP) and pull (Prometheus) sources.</p>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hardware</span><span class="nv"> </span><span class="s">Server01&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exporters</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prometheus_scrape</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://idrac-server01.company.com&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;monitoring&quot;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SecurePassword123&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">targets</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;http://localhost:9100/metrics&quot;</span><span class="w">      </span><span class="c1"># node_exporter</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;http://10.0.0.5:9117/metrics&quot;</span><span class="w">       </span><span class="c1"># appliance exporter</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 </code></pre></div>
-<p><strong>Important notes:</strong>
-- <code>base_url</code>: The Redfish API endpoint (iDRAC, iLO, or BMC management address)
-- <code>interval</code>: 300 seconds (5 minutes) is recommended for hardware monitoring
-- <code>verify_ssl</code>: Set to <code>false</code> for self-signed certificates commonly used on BMC interfaces</p>
-<h2 id="multiple-servers">Multiple Servers<a class="headerlink" href="#multiple-servers" title="Permanent link">&para;</a></h2>
-<p>Monitor multiple hardware targets with separate probe instances:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dell</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">ME5024&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://dell-me5024.company.com&quot;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;StoragePassword&quot;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;HPE</span><span class="nv"> </span><span class="s">ProLiant</span><span class="nv"> </span><span class="s">DL380&quot;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://ilo-dl380.company.com&quot;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;monitoring&quot;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ServerPassword&quot;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</code></pre></div>
-<h1 id="metrics-collected">Metrics Collected<a class="headerlink" href="#metrics-collected" title="Permanent link">&para;</a></h1>
-<h2 id="health-metrics">Health Metrics<a class="headerlink" href="#health-metrics" title="Permanent link">&para;</a></h2>
-<p>Monitor the health status of hardware components. Health values use a standard scale: 0=OK, 1=Warning, 2=Critical, 3=Unknown.</p>
-<h3 id="storage-controllers">Storage Controllers<a class="headerlink" href="#storage-controllers" title="Permanent link">&para;</a></h3>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Metric Name</th>
+<th>Parameter</th>
+<th>Default</th>
 <th>Description</th>
-<th>Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>hardware.storage.controller.health</code></td>
-<td>Controller health status</td>
-<td>Gauge</td>
+<td><code>targets</code></td>
+<td>required</td>
+<td>List of exposition URLs</td>
 </tr>
 <tr>
-<td><code>hardware.storage.redundancy.health</code></td>
-<td>Controller redundancy health</td>
-<td>Gauge</td>
+<td><code>interval</code></td>
+<td><code>60</code></td>
+<td>Seconds between scrape cycles</td>
 </tr>
 <tr>
-<td><code>hardware.storage.redundancy.controllers_active</code></td>
-<td>Number of active controllers</td>
-<td>Gauge</td>
+<td><code>timeout</code></td>
+<td><code>10</code></td>
+<td>Per-target budget in seconds</td>
 </tr>
 <tr>
-<td><code>hardware.storage.redundancy.controllers_min</code></td>
-<td>Minimum controllers required</td>
-<td>Gauge</td>
+<td><code>metric_match</code></td>
+<td>none</td>
+<td>Regexp filter on metric family names; non-matching families are skipped</td>
 </tr>
 <tr>
-<td><code>hardware.storage.redundancy.controllers_max</code></td>
-<td>Maximum controllers supported</td>
-<td>Gauge</td>
-</tr>
-</tbody>
-</table>
-<h3 id="drives">Drives<a class="headerlink" href="#drives" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.drive.health</code></td>
-<td>Drive health status</td>
-<td>Gauge</td>
+<td><code>bearer_token</code></td>
+<td>none</td>
+<td>Sent as <code>Authorization: Bearer ...</code>; use <code>${env:...}</code> substitution</td>
 </tr>
 <tr>
-<td><code>hardware.storage.drive.failure_predicted</code></td>
-<td>Failure prediction (1=failure predicted)</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.storage.drive.hotspare</code></td>
-<td>Hotspare status (1=active hotspare)</td>
-<td>Gauge</td>
+<td><code>insecure_skip_verify</code></td>
+<td><code>false</code></td>
+<td>Accept self-signed exporter certificates</td>
 </tr>
 </tbody>
 </table>
-<h3 id="storage-pools">Storage Pools<a class="headerlink" href="#storage-pools" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.pool.health</code></td>
-<td>Pool health status</td>
-<td>Gauge</td>
-</tr>
-</tbody>
-</table>
-<h3 id="volumes">Volumes<a class="headerlink" href="#volumes" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.volume.health</code></td>
-<td>Volume health status</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.encrypted</code></td>
-<td>Encryption status (1=encrypted)</td>
-<td>Gauge</td>
-</tr>
-</tbody>
-</table>
-<h3 id="events-and-logs">Events and Logs<a class="headerlink" href="#events-and-logs" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.logs.entries.total</code></td>
-<td>Total log entries</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.logs.entries.critical</code></td>
-<td>Critical log entries</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.logs.entries.warning</code></td>
-<td>Warning log entries</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.logs.entries.info</code></td>
-<td>Informational log entries</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.logs.entries.last_24h</code></td>
-<td>Events in the last 24 hours</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.logs.entries.last_7d</code></td>
-<td>Events in the last 7 days</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.eventservice.health</code></td>
-<td>Event service health status</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.eventservice.subscriptions</code></td>
-<td>Number of event subscriptions</td>
-<td>Gauge</td>
-</tr>
-</tbody>
-</table>
-<h2 id="capacity-metrics">Capacity Metrics<a class="headerlink" href="#capacity-metrics" title="Permanent link">&para;</a></h2>
-<h3 id="storage-pools_1">Storage Pools<a class="headerlink" href="#storage-pools_1" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.pool.capacity.total</code></td>
-<td>Total pool capacity</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.allocated</code></td>
-<td>Allocated space in pool</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.allocated_percent</code></td>
-<td>Allocated space percentage</td>
-<td>%</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.used</code></td>
-<td>Actually consumed space</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.used_percent</code></td>
-<td>Consumed space percentage</td>
-<td>%</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.free</code></td>
-<td>Free space</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.free_percent</code></td>
-<td>Free space percentage</td>
-<td>%</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.volumes</code></td>
-<td>Space allocated to volumes</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.snapshots</code></td>
-<td>Space allocated to snapshots</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.committed</code></td>
-<td>Total committed space</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.capacity.overcommit</code></td>
-<td>Over-allocated space (thin provisioning)</td>
-<td>bytes</td>
-</tr>
-</tbody>
-</table>
-<h3 id="volumes_1">Volumes<a class="headerlink" href="#volumes_1" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.volume.capacity.total</code></td>
-<td>Total volume capacity</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.capacity.allocated</code></td>
-<td>Allocated space</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.capacity.allocated_percent</code></td>
-<td>Allocated space percentage</td>
-<td>%</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.capacity.used</code></td>
-<td>Actually used space</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.capacity.used_percent</code></td>
-<td>Used space percentage</td>
-<td>%</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.capacity.free</code></td>
-<td>Free space</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.capacity.free_percent</code></td>
-<td>Free space percentage</td>
-<td>%</td>
-</tr>
-</tbody>
-</table>
-<h3 id="drives_1">Drives<a class="headerlink" href="#drives_1" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.drive.capacity.total</code></td>
-<td>Total drive capacity</td>
-<td>bytes</td>
-</tr>
-</tbody>
-</table>
-<h2 id="performance-metrics">Performance Metrics<a class="headerlink" href="#performance-metrics" title="Permanent link">&para;</a></h2>
-<h3 id="volume-io">Volume I/O<a class="headerlink" href="#volume-io" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.volume.io.total_ops</code></td>
-<td>Total I/O operations</td>
-<td>count</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.reads</code></td>
-<td>Read operations</td>
-<td>count</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.writes</code></td>
-<td>Write operations</td>
-<td>count</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.total_bytes</code></td>
-<td>Total data transferred</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.read.bytes</code></td>
-<td>Data read</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.write.bytes</code></td>
-<td>Data written</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.read.latency</code></td>
-<td>Read latency</td>
-<td>ms</td>
-</tr>
-<tr>
-<td><code>hardware.storage.volume.io.write.latency</code></td>
-<td>Write latency</td>
-<td>ms</td>
-</tr>
-</tbody>
-</table>
-<h3 id="pool-io">Pool I/O<a class="headerlink" href="#pool-io" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.pool.io.reads</code></td>
-<td>Read operations</td>
-<td>count</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.io.writes</code></td>
-<td>Write operations</td>
-<td>count</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.io.read.bytes</code></td>
-<td>Data read</td>
-<td>bytes</td>
-</tr>
-<tr>
-<td><code>hardware.storage.pool.io.write.bytes</code></td>
-<td>Data written</td>
-<td>bytes</td>
-</tr>
-</tbody>
-</table>
-<h2 id="operations-metrics">Operations Metrics<a class="headerlink" href="#operations-metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric Name</th>
-<th>Description</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>hardware.storage.drive.has_operations</code></td>
-<td>Operations in progress (1=yes)</td>
-<td>Gauge</td>
-</tr>
-<tr>
-<td><code>hardware.storage.drive.operation.progress</code></td>
-<td>Operation progress</td>
-<td>%</td>
-</tr>
-</tbody>
-</table>
-<h1 id="tags">Tags<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h1>
-<p>All metrics include contextual tags for filtering and grouping.</p>
-<h2 id="controller-tags">Controller Tags<a class="headerlink" href="#controller-tags" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Tag</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>controller_id</code></td>
-<td>Controller identifier</td>
-<td><code>A</code></td>
-</tr>
-<tr>
-<td><code>controller_name</code></td>
-<td>Controller name</td>
-<td><code>Controller A</code></td>
-</tr>
-<tr>
-<td><code>controller</code></td>
-<td>Controller letter</td>
-<td><code>A</code>, <code>B</code></td>
-</tr>
-<tr>
-<td><code>controller_type</code></td>
-<td>Controller type</td>
-<td><code>storage</code></td>
-</tr>
-<tr>
-<td><code>host</code></td>
-<td>Host system name</td>
-<td><code>me5024-prod</code></td>
-</tr>
-<tr>
-<td><code>manufacturer</code></td>
-<td>Controller manufacturer</td>
-<td><code>Dell</code></td>
-</tr>
-<tr>
-<td><code>model</code></td>
-<td>Controller model</td>
-<td><code>PERC H740P</code></td>
-</tr>
-<tr>
-<td><code>serial_number</code></td>
-<td>Controller serial number</td>
-<td><code>ABC123</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="drive-tags">Drive Tags<a class="headerlink" href="#drive-tags" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Tag</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>drive_id</code></td>
-<td>Drive identifier</td>
-<td><code>Disk.Bay.0:Enclosure.Internal.0-1</code></td>
-</tr>
-<tr>
-<td><code>drive_name</code></td>
-<td>Drive name</td>
-<td><code>Disk 0</code></td>
-</tr>
-<tr>
-<td><code>model</code></td>
-<td>Drive model</td>
-<td><code>ST1200MM0009</code></td>
-</tr>
-<tr>
-<td><code>drive_manufacturer</code></td>
-<td>Drive manufacturer</td>
-<td><code>Seagate</code></td>
-</tr>
-<tr>
-<td><code>serial_number</code></td>
-<td>Drive serial number</td>
-<td><code>WFK12345</code></td>
-</tr>
-<tr>
-<td><code>media_type</code></td>
-<td>Media type</td>
-<td><code>SSD</code>, <code>HDD</code></td>
-</tr>
-<tr>
-<td><code>protocol</code></td>
-<td>Communication protocol</td>
-<td><code>SAS</code>, <code>SATA</code></td>
-</tr>
-<tr>
-<td><code>hotspare_type</code></td>
-<td>Hotspare type</td>
-<td><code>Global</code>, <code>Dedicated</code></td>
-</tr>
-<tr>
-<td><code>encryption_ability</code></td>
-<td>Encryption capability</td>
-<td><code>SelfEncryptingDrive</code></td>
-</tr>
-<tr>
-<td><code>encryption_status</code></td>
-<td>Encryption status</td>
-<td><code>Unlocked</code></td>
-</tr>
-<tr>
-<td><code>service_label</code></td>
-<td>Service label</td>
-<td><code>Bay 0</code></td>
-</tr>
-<tr>
-<td><code>location_type</code></td>
-<td>Location type</td>
-<td><code>Slot</code></td>
-</tr>
-<tr>
-<td><code>location_ordinal</code></td>
-<td>Location ordinal value</td>
-<td><code>0</code></td>
-</tr>
-<tr>
-<td><code>operation_name</code></td>
-<td>Current operation name</td>
-<td><code>Rebuild</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="pool-tags">Pool Tags<a class="headerlink" href="#pool-tags" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Tag</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>pool_id</code></td>
-<td>Pool identifier</td>
-<td><code>A</code></td>
-</tr>
-<tr>
-<td><code>pool_name</code></td>
-<td>Pool name</td>
-<td><code>Pool A</code></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>Pool description</td>
-<td><code>Virtual storage pool</code></td>
-</tr>
-<tr>
-<td><code>supported_raid_types</code></td>
-<td>Supported RAID types</td>
-<td><code>RAID1, RAID5, RAID6</code></td>
-</tr>
-<tr>
-<td><code>max_block_size_bytes</code></td>
-<td>Maximum block size</td>
-<td><code>512</code></td>
-</tr>
-<tr>
-<td><code>thin_provisioned</code></td>
-<td>Thin provisioning indicator</td>
-<td><code>true</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="volume-tags">Volume Tags<a class="headerlink" href="#volume-tags" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Tag</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>volume_id</code></td>
-<td>Volume identifier</td>
-<td><code>VD1</code></td>
-</tr>
-<tr>
-<td><code>volume_name</code></td>
-<td>Volume name</td>
-<td><code>Production-Vol1</code></td>
-</tr>
-<tr>
-<td><code>pool_id</code></td>
-<td>Associated pool identifier</td>
-<td><code>A</code></td>
-</tr>
-<tr>
-<td><code>raid_type</code></td>
-<td>RAID type</td>
-<td><code>RAID5</code></td>
-</tr>
-<tr>
-<td><code>write_cache_policy</code></td>
-<td>Write cache policy</td>
-<td><code>WriteBack</code></td>
-</tr>
-<tr>
-<td><code>block_size_bytes</code></td>
-<td>Block size</td>
-<td><code>512</code></td>
-</tr>
-<tr>
-<td><code>access_capabilities</code></td>
-<td>Access capabilities</td>
-<td><code>Read, Write</code></td>
-</tr>
-<tr>
-<td><code>encryption_type</code></td>
-<td>Encryption type</td>
-<td><code>NativeDriveEncryption</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="event-and-log-tags">Event and Log Tags<a class="headerlink" href="#event-and-log-tags" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Tag</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>host</code></td>
-<td>Host system name</td>
-<td><code>me5024-prod</code></td>
-</tr>
-<tr>
-<td><code>manager_id</code></td>
-<td>Manager identifier</td>
-<td><code>BMC</code></td>
-</tr>
-<tr>
-<td><code>manager_name</code></td>
-<td>Manager name</td>
-<td><code>iDRAC</code></td>
-</tr>
-<tr>
-<td><code>model</code></td>
-<td>Manager model</td>
-<td><code>iDRAC9</code></td>
-</tr>
-<tr>
-<td><code>log_service_id</code></td>
-<td>Log service identifier</td>
-<td><code>Sel</code></td>
-</tr>
-<tr>
-<td><code>log_service_name</code></td>
-<td>Log service name</td>
-<td><code>System Event Log</code></td>
-</tr>
-</tbody>
-</table>
-<h1 id="recommended-alerting">Recommended Alerting<a class="headerlink" href="#recommended-alerting" title="Permanent link">&para;</a></h1>
-<h2 id="essential-health-alerts">Essential Health Alerts<a class="headerlink" href="#essential-health-alerts" title="Permanent link">&para;</a></h2>
+<p>Targets are scraped in parallel (bounded). An unreachable exporter is
+a measurement (<code>senhub.promscrape.up = 0</code>), never a probe failure.</p>
+<h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Monitor <code>hardware.storage.controller.health</code> for controller failures</li>
-<li>Monitor <code>hardware.storage.redundancy.health</code> for redundancy issues</li>
-<li>Monitor <code>hardware.storage.drive.failure_predicted</code> for drives with predicted failures</li>
-<li>Monitor <code>hardware.storage.drive.has_operations</code> for ongoing maintenance operations</li>
-<li>Monitor <code>hardware.logs.entries.critical</code> for critical system events</li>
+<li><strong>Pass-through naming.</strong> Scraped metric names and labels are
+  forwarded unchanged; counter/gauge semantics are preserved.
+  Untyped samples are treated as gauges.</li>
+<li><strong>Scalars only.</strong> Counter, gauge and untyped series are ingested.
+  Histogram and summary series are dropped and counted in
+  <code>senhub.promscrape.dropped</code> — the same contract as the OTLP
+  receiver.</li>
+<li><strong>Size cap.</strong> A scrape response is read up to 32 MiB; a runaway
+  exporter cannot exhaust the agent's memory.</li>
 </ul>
-<h2 id="capacity-alerts">Capacity Alerts<a class="headerlink" href="#capacity-alerts" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Monitor <code>hardware.storage.pool.capacity.free_percent</code> for available space</li>
-<li>Monitor <code>hardware.storage.volume.capacity.used_percent</code> for volume utilization</li>
-</ul>
-<h2 id="performance-alerts">Performance Alerts<a class="headerlink" href="#performance-alerts" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Monitor <code>hardware.storage.volume.io.total_ops</code> for general I/O activity</li>
-<li>Monitor <code>hardware.storage.volume.io.read.latency</code> and <code>hardware.storage.volume.io.write.latency</code> for performance issues</li>
-</ul>
-<h2 id="event-monitoring">Event Monitoring<a class="headerlink" href="#event-monitoring" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Monitor <code>hardware.logs.entries.critical</code> and <code>hardware.logs.entries.warning</code> for system issues</li>
-<li>Use <code>hardware.logs.entries.last_24h</code> to track recent system activity</li>
-<li>Compare trends between <code>hardware.logs.entries.last_24h</code> and <code>hardware.logs.entries.last_7d</code> to identify event spikes</li>
-<li>Use <code>hardware.eventservice.health</code> to verify the event service is operating correctly</li>
-</ul>
-<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
-<h2 id="connection-issues">Connection Issues<a class="headerlink" href="#connection-issues" title="Permanent link">&para;</a></h2>
-<p><strong>Symptom:</strong> Cannot connect to the Redfish endpoint</p>
-<p><strong>Diagnosis:</strong>
-1. Verify the BMC/iDRAC/iLO management interface is reachable from the agent host:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://idrac-server01.company.com/redfish/v1/
-</code></pre></div>
-2. Verify the management interface is powered on and network-connected
-3. Check for firewall rules blocking HTTPS (port 443) between the agent and the BMC</p>
-<h2 id="tlsssl-errors">TLS/SSL Errors<a class="headerlink" href="#tlsssl-errors" title="Permanent link">&para;</a></h2>
-<p><strong>Symptom:</strong> TLS handshake failures or certificate errors</p>
-<p><strong>Resolution:</strong>
-BMC management interfaces typically use self-signed certificates. Set <code>verify_ssl: false</code> in the probe configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</code></pre></div>
-<p>If your environment uses properly signed certificates, ensure the CA chain is trusted by the system running the agent.</p>
-<h2 id="authentication-failures">Authentication Failures<a class="headerlink" href="#authentication-failures" title="Permanent link">&para;</a></h2>
-<p><strong>Symptom:</strong> 401 Unauthorized or login failures</p>
-<p><strong>Diagnosis:</strong>
-1. Verify credentials by logging in to the BMC web interface manually
-2. Check that the account is not locked out due to failed login attempts
-3. Verify the account has sufficient privileges for Redfish API access (read-only access is sufficient)
-4. Some BMCs limit concurrent sessions -- ensure the session limit is not reached</p>
-<h2 id="dell-me-capacity-shows-zero">Dell ME Capacity Shows Zero<a class="headerlink" href="#dell-me-capacity-shows-zero" title="Permanent link">&para;</a></h2>
-<p><strong>Symptom:</strong> Pool or volume capacity metrics return 0</p>
-<p><strong>Explanation:</strong> Dell PowerVault ME series systems may return <code>CapacityBytes=0</code> in the standard Redfish response. The agent automatically detects this and uses <code>Capacity.Data.AllocatedBytes</code> as the effective capacity. Ensure you are running a recent version of the agent for this workaround to be active.</p>
-<h2 id="debug-logging">Debug Logging<a class="headerlink" href="#debug-logging" title="Permanent link">&para;</a></h2>
-<p>Enable debug logging for the Redfish probe:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Runtime log level change</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;module_levels&quot;: [{&quot;module&quot;: &quot;probe.redfish&quot;, &quot;level&quot;: &quot;debug&quot;}]}&#39;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Or start agent with verbose logging</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>./senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose<span class="w"> </span>--debug-modules<span class="w"> </span>probe.redfish
-</code></pre></div>
-<h2 id="license-requirements">License Requirements<a class="headerlink" href="#license-requirements" title="Permanent link">&para;</a></h2>
-<p>The Redfish probe requires a <strong>Pro</strong> or <strong>Enterprise</strong> license.</p>
+<h2 id="self-metrics">Self-metrics<a class="headerlink" href="#self-metrics" title="Permanent link">&para;</a></h2>
+<p>One series per target (<code>target</code> tag).</p>
 <table>
 <thead>
 <tr>
-<th>Tier</th>
-<th>Redfish Probe</th>
+<th>Metric</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Free</td>
-<td>Not available</td>
+<td><code>senhub.promscrape.up</code></td>
+<td>1 when the target answered with a parseable exposition</td>
 </tr>
 <tr>
-<td>Pro</td>
-<td>Included</td>
+<td><code>senhub.promscrape.scrape.duration</code></td>
+<td>Scrape wall-clock time</td>
 </tr>
 <tr>
-<td>Enterprise</td>
-<td>Included</td>
+<td><code>senhub.promscrape.samples</code></td>
+<td>Scalar series ingested in the last scrape</td>
+</tr>
+<tr>
+<td><code>senhub.promscrape.dropped</code></td>
+<td>Histogram/summary series dropped in the last scrape</td>
 </tr>
 </tbody>
 </table>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Use <code>metric_match</code> on big exporters.</strong> A full node_exporter
+  exposes 1000+ series; <code>metric_match: "^node_(cpu|memory|filesystem|network)"</code>
+  keeps cardinality under control.</li>
+<li><strong>Re-exporting to Prometheus.</strong> Scraped series flowing back out the
+  agent's own Prometheus endpoint are prefixed <code>senhub_</code>, so they
+  never collide with a direct scrape of the same exporter.</li>
+<li><strong>PRTG / Nagios outputs.</strong> These sinks key series per target;
+  finer per-label splits are carried on the Prometheus and OTLP
+  outputs.</li>
+</ul>
 
 
 
@@ -2538,7 +1992,7 @@ BMC management interfaces typically use self-signed certificates. Set <code>veri
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../netscaler/" class="md-footer__link md-footer__link--prev" aria-label="Previous: NetScaler">
+          <a href="../otlp-receiver/" class="md-footer__link md-footer__link--prev" aria-label="Previous: OTLP receiver">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2548,20 +2002,20 @@ BMC management interfaces typically use self-signed certificates. Set <code>veri
                 Previous
               </span>
               <div class="md-ellipsis">
-                NetScaler
+                OTLP receiver
               </div>
             </div>
           </a>
         
         
           
-          <a href="../syslog/" class="md-footer__link md-footer__link--next" aria-label="Next: Syslog">
+          <a href="../citrix/" class="md-footer__link md-footer__link--next" aria-label="Next: Citrix">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Syslog
+                Citrix
               </div>
             </div>
             <div class="md-footer__button md-icon">
