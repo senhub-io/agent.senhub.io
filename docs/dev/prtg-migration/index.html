@@ -2216,9 +2216,12 @@ rules. Examples:</p>
 <p>Metric names above are the Prometheus exposition names; the
 <a href="../prometheus/metrics-reference/">metrics reference</a> maps every
 probe metric to its exported name.</p>
-<p>A ready-to-import rule pack covering the free probes is in
-progress; until it ships, the examples above plus the per-probe
-metric tables are the reference.</p>
+<p>A ready-to-import starter pack covering all free probes — host
+thresholds, the four active checks, SNMP health, agent self-health —
+ships in the repository under
+<a href="https://github.com/senhub-io/senhub-agent/tree/dev/packs/alerts"><code>packs/alerts/</code></a>,
+with one-command vmalert provisioning and a Grafana contact-point
+example.</p>
 <h2 id="what-the-agent-does-not-replace">What the agent does not replace<a class="headerlink" href="#what-the-agent-does-not-replace" title="Permanent link">&para;</a></h2>
 <p>Stated honestly, so you can plan around it:</p>
 <ul>
