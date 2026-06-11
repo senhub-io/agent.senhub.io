@@ -2186,8 +2186,8 @@ targets, where PRTG needs one sensor per target.</p>
 <p>One <code>snmp_poll</code> instance covers a whole device — every interface,
 uptime, plus any custom OIDs — where PRTG typically burns one sensor
 per interface.</p>
-<p>Current limits stated plainly: polling is SNMPv2c only (the trap
-receiver does v2c and v3); built-in modules cover MIB-2 and IF-MIB,
+<p>Current limits stated plainly: polling supports SNMPv2c and v3 (USM,
+like the trap receiver); built-in modules cover MIB-2 and IF-MIB,
 everything else goes through <code>custom_mappings</code> — with <code>mib_paths</code>
 configured, metric names resolve from your local MIB files, so a
 mapping is one OID per line.</p>
