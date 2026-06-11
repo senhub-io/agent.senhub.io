@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/icmp-check/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/otlp-receiver/">
       
       
-        <link rel="prev" href="../filetail/">
+        <link rel="prev" href="../snmp-trap/">
       
       
-        <link rel="next" href="../http-check/">
+        <link rel="next" href="../citrix/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>ICMP check - SenHub Agent</title>
+        <title>OTLP receiver - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#icmp_check-multi-target-ping" class="md-skip">
+        <a href="#otlp-receiver-probe" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ICMP check
+              OTLP receiver
             
           </span>
         </div>
@@ -872,37 +872,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ICMP check
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../icmp-check/" class="md-nav__link">
         
   
   
@@ -918,70 +891,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#privileges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Privileges
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1131,10 +1040,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../otlp-receiver/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP receiver
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1150,6 +1086,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1744,10 +1744,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#behavior" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        Behavior
       
     </span>
   </a>
@@ -1755,10 +1755,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#privileges" class="md-nav__link">
+  <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Privileges
+        Operational notes
       
     </span>
   </a>
@@ -1782,7 +1782,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/icmp-check.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/otlp-receiver.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1790,18 +1790,29 @@
   
 
 
-<h1 id="icmp_check-multi-target-ping">icmp_check — multi-target ping<a class="headerlink" href="#icmp_check-multi-target-ping" title="Permanent link">&para;</a></h1>
-<p>Free tier. Pings a list of targets every cycle and reports reachability,
-packet loss and round-trip-time statistics per target. This is the
-agent's equivalent of the classic PRTG ping sensor, multi-target in a
-single probe instance.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>License: Free</strong> — part of the universal collection tier.</p>
+</div>
+<h1 id="otlp-receiver-probe">OTLP Receiver Probe<a class="headerlink" href="#otlp-receiver-probe" title="Permanent link">&para;</a></h1>
+<p>The <code>otlp_receiver</code> probe turns the agent into an edge OTLP
+collector: applications and SDKs push OTLP metrics to it (gRPC or
+HTTP), and the ingested datapoints flow through the agent exactly
+like locally collected metrics — out to PRTG, Nagios, Prometheus,
+OTLP or the SenHub cloud, whichever storages are configured.</p>
+<p>Use it when instrumented applications run next to the agent and you
+want one egress point per host instead of a separate collector
+deployment.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/20-ping.yaml</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ping-core</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp_check</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;10.0.0.1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;core-switch.lan&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;8.8.8.8&quot;</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp-in</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp_receiver</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span><span class="w">          </span><span class="c1"># listens on 0.0.0.0:4317</span>
+</code></pre></div>
+<p>Point any OTel SDK or collector at the agent:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OTEL_EXPORTER_OTLP_ENDPOINT</span><span class="o">=</span>http://localhost:4317
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OTEL_EXPORTER_OTLP_PROTOCOL</span><span class="o">=</span>grpc
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -1814,84 +1825,61 @@ single probe instance.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>targets</code></td>
-<td>required</td>
-<td>List of hostnames or IPs to ping</td>
+<td><code>protocol</code></td>
+<td><code>grpc</code></td>
+<td><code>grpc</code> (OTLP/gRPC) or <code>http</code> (OTLP/HTTP protobuf)</td>
 </tr>
 <tr>
-<td><code>count</code></td>
-<td>4</td>
-<td>Echo requests per target per cycle</td>
+<td><code>address</code></td>
+<td><code>0.0.0.0:4317</code> (grpc), <code>0.0.0.0:4318</code> (http)</td>
+<td>Listen address</td>
 </tr>
 <tr>
-<td><code>timeout</code></td>
-<td>5</td>
-<td>Per-target budget in seconds for the whole round</td>
+<td><code>port</code></td>
+<td>from <code>address</code></td>
+<td>Convenience override: replaces only the port part of the address</td>
 </tr>
 <tr>
-<td><code>interval</code></td>
-<td>60</td>
-<td>Seconds between collection cycles</td>
-</tr>
-<tr>
-<td><code>packet_size</code></td>
-<td>56</td>
-<td>ICMP payload size in bytes</td>
-</tr>
-<tr>
-<td><code>privileged</code></td>
-<td>OS-dependent</td>
-<td>Raw ICMP sockets (<code>true</code>) vs ICMP datagram sockets (<code>false</code>). Defaults to <code>true</code> on Windows, <code>false</code> elsewhere</td>
+<td><code>http_path</code></td>
+<td><code>/v1/metrics</code></td>
+<td>Route served by the HTTP receiver (ignored for gRPC)</td>
 </tr>
 </tbody>
 </table>
-<p>Targets are pinged in parallel (bounded), so a large list does not
-stretch the cycle by the sum of timeouts.</p>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<p>One series per metric per target (the <code>target</code> tag discriminates; the
-resolved <code>ip</code> rides along).</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.icmp.up</code></td>
-<td>bool</td>
-<td>1 when at least one reply came back this cycle</td>
-</tr>
-<tr>
-<td><code>senhub.icmp.packet_loss</code></td>
-<td>%</td>
-<td>Lost echo requests over the cycle</td>
-</tr>
-<tr>
-<td><code>senhub.icmp.packets.sent</code> / <code>.received</code></td>
-<td>count</td>
-<td>Requests/replies this cycle</td>
-</tr>
-<tr>
-<td><code>senhub.icmp.rtt.min</code> / <code>.avg</code> / <code>.max</code> / <code>.stddev</code></td>
-<td>ms</td>
-<td>Round-trip statistics (emitted only when at least one reply arrived)</td>
-</tr>
-</tbody>
-</table>
-<p>An unreachable target is a measurement (<code>up = 0</code>, loss 100%), not a
-probe failure: the probe stays healthy and keeps reporting.</p>
-<h2 id="privileges">Privileges<a class="headerlink" href="#privileges" title="Permanent link">&para;</a></h2>
+<p>Run two instances to serve both protocols at once:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp-grpc</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp_receiver</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp-http</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp_receiver</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+</code></pre></div>
+<h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Linux</strong>: the default unprivileged mode uses ICMP datagram sockets,
-  gated by the <code>net.ipv4.ping_group_range</code> sysctl. If pings fail with a
-  permission error, either widen that range to include the agent's
-  group or set <code>privileged: true</code> (requires root or <code>CAP_NET_RAW</code>).</li>
-<li><strong>Windows</strong>: raw sockets only — the probe defaults to
-  <code>privileged: true</code> and the agent service runs elevated.</li>
-<li><strong>macOS</strong>: unprivileged mode works out of the box.</li>
+<li><strong>Resource attributes become tags.</strong> <code>host.name</code>, <code>service.name</code>
+  and every other resource attribute is folded onto each datapoint,
+  so downstream sinks can group by origin. Per-datapoint attributes
+  win on key collisions.</li>
+<li><strong>Scalar metrics only.</strong> Gauges and Sums are ingested. Histograms,
+  exponential histograms and summaries are dropped and reported in
+  the OTLP partial-success response — the sender's SDK logs it.</li>
+<li><strong>Pass-through naming.</strong> Ingested metric names are forwarded
+  unchanged; nothing is renamed or prefixed.</li>
+<li><strong>Limits.</strong> gRPC accepts payloads up to 4 MiB (the OTel SDK
+  default); the HTTP server applies a 30-second read timeout.</li>
+</ul>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A bind failure (port already taken) surfaces at probe start, not
+  silently at runtime.</li>
+<li>The listener accepts plaintext OTLP. Keep it on localhost or a
+  trusted network segment; for cross-network ingestion put a TLS
+  terminator or an OTel collector in front.</li>
+<li>Shutdown is graceful on both protocols: in-flight requests finish
+  before the agent exits.</li>
 </ul>
 
 
@@ -1928,7 +1916,7 @@ probe failure: the probe stays healthy and keeps reporting.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../filetail/" class="md-footer__link md-footer__link--prev" aria-label="Previous: File tail">
+          <a href="../snmp-trap/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SNMP trap">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1938,20 +1926,20 @@ probe failure: the probe stays healthy and keeps reporting.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                File tail
+                SNMP trap
               </div>
             </div>
           </a>
         
         
           
-          <a href="../http-check/" class="md-footer__link md-footer__link--next" aria-label="Next: HTTP check">
+          <a href="../citrix/" class="md-footer__link md-footer__link--next" aria-label="Next: Citrix">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                HTTP check
+                Citrix
               </div>
             </div>
             <div class="md-footer__button md-icon">

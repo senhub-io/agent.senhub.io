@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/cli/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/prtg-migration/">
       
       
-        <link rel="prev" href="../prometheus/metrics-reference/">
+        <link rel="prev" href="../probes/postgresql/">
       
       
-        <link rel="next" href="../otlp/">
+        <link rel="next" href="../troubleshooting/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>CLI reference - SenHub Agent</title>
+        <title>Migrating from PRTG - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli-reference" class="md-skip">
+        <a href="#migrating-from-prtg" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CLI reference
+              Migrating from PRTG
             
           </span>
         </div>
@@ -540,37 +540,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CLI reference
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -586,226 +559,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#service-management" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Service Management
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Service Management">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Status
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-console-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run (Console Mode)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug-filter-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Debug Filter Examples
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#config-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        config check
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug-modules-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        debug-modules-list
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Update
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Update">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#check-for-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Check for updates
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#list-available-versions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        List available versions
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-a-specific-version" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install a specific version
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        License
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="License">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#show-license-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Show license status
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#activate-a-license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Activate a license
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Remove license
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Other
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1656,10 +1409,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../prtg-migration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating from PRTG
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1675,6 +1455,164 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-teams-migrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why teams migrate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-migration-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two migration paths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensor mapping
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensor mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-and-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs and events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alerting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-agent-does-not-replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the agent does not replace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1876,22 +1814,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#service-management" class="md-nav__link">
+  <a href="#why-teams-migrate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Service Management
+        Why teams migrate
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Service Management">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-migration-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two migration paths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sensor-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensor mapping
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensor mapping">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#status" class="md-nav__link">
+  <a href="#network-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Status
+        Network checks
       
     </span>
   </a>
@@ -1899,10 +1859,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-console-mode" class="md-nav__link">
+  <a href="#snmp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run (Console Mode)
+        SNMP
       
     </span>
   </a>
@@ -1910,10 +1870,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#debug-filter-examples" class="md-nav__link">
+  <a href="#host-metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Debug Filter Examples
+        Host metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-and-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs and events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vendor-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vendor infrastructure
       
     </span>
   </a>
@@ -1926,149 +1908,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#alerting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Alerting
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#config-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        config check
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug-modules-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        debug-modules-list
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
+  <a href="#what-the-agent-does-not-replace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update
+        What the agent does not replace
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Update">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#check-for-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Check for updates
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#list-available-versions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        List available versions
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-a-specific-version" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install a specific version
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
+  <a href="#worked-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        License
+        Worked example
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="License">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#show-license-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Show license status
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#activate-a-license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Activate a license
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Remove license
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#other" class="md-nav__link">
+  <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Other
+        See also
       
     </span>
   </a>
@@ -2092,7 +1968,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/cli.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/prtg-migration.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2100,177 +1976,328 @@
   
 
 
-<h1 id="cli-reference">CLI Reference<a class="headerlink" href="#cli-reference" title="Permanent link">&para;</a></h1>
-<p>All commands are run from the agent binary. Release artifacts are ZIP archives named <code>senhub-agent-&lt;os&gt;-&lt;arch&gt;.zip</code> (e.g. <code>senhub-agent-linux-amd64.zip</code>, <code>senhub-agent-windows-amd64.zip</code>). Each ZIP contains a binary already named <code>senhub-agent</code> (Linux/macOS) or <code>senhub-agent.exe</code> (Windows) — no renaming needed after extraction. See the <a href="../installation/">Installation guide</a> for details.</p>
-<h2 id="service-management">Service Management<a class="headerlink" href="#service-management" title="Permanent link">&para;</a></h2>
+<h1 id="migrating-from-prtg">Migrating from PRTG<a class="headerlink" href="#migrating-from-prtg" title="Permanent link">&para;</a></h1>
+<p>This guide maps PRTG sensor types to SenHub agent probes, shows the
+two migration paths (progressive and direct), and states plainly
+what the agent does not replace today.</p>
+<h2 id="why-teams-migrate">Why teams migrate<a class="headerlink" href="#why-teams-migrate" title="Permanent link">&para;</a></h2>
+<p>PRTG licenses by sensor count; a single device easily consumes 10+
+sensors. The SenHub agent's collection tier is free — host metrics,
+SNMP polling and traps, ICMP/HTTP/TCP/DNS checks, log shipping —
+with per-device licensing only for the deep vendor probes
+(NetScaler, Citrix, Veeam, databases). Data lands in open backends
+(Prometheus / VictoriaMetrics, any OTLP collector) instead of a
+proprietary store.</p>
+<h2 id="two-migration-paths">Two migration paths<a class="headerlink" href="#two-migration-paths" title="Permanent link">&para;</a></h2>
+<p><strong>Progressive (recommended).</strong> The agent speaks PRTG natively: its
+HTTP output serves a JSON format that PRTG's HTTP Data Advanced
+sensor consumes directly. Deploy agents next to your existing
+install, replace expensive sensor groups with one HTTP Data Advanced
+sensor per agent, and keep the PRTG console your team knows. Sensor
+count drops immediately; nothing else changes. Move the console to
+Grafana later, at your pace.</p>
+<p><strong>Direct.</strong> Deploy agents, point them at Prometheus /
+VictoriaMetrics or an OTLP collector, build dashboards in Grafana,
+alert with vmalert or Grafana alerting, then decommission PRTG.</p>
+<h2 id="sensor-mapping">Sensor mapping<a class="headerlink" href="#sensor-mapping" title="Permanent link">&para;</a></h2>
+<h3 id="network-checks">Network checks<a class="headerlink" href="#network-checks" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Command</th>
-<th>Description</th>
+<th>PRTG sensor</th>
+<th>Agent probe</th>
+<th>License</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>install</code></td>
-<td>Install as system service</td>
+<td>Ping</td>
+<td><a href="../probes/icmp-check/">ICMP check</a></td>
+<td>Free</td>
 </tr>
 <tr>
-<td><code>uninstall</code></td>
-<td>Remove the system service</td>
+<td>HTTP / HTTP Advanced</td>
+<td><a href="../probes/http-check/">HTTP check</a></td>
+<td>Free</td>
 </tr>
 <tr>
-<td><code>start</code></td>
-<td>Start the service</td>
+<td>SSL Certificate</td>
+<td><a href="../probes/http-check/">HTTP check</a> — <code>tls.expiry</code> metric</td>
+<td>Free</td>
 </tr>
 <tr>
-<td><code>stop</code></td>
-<td>Stop the service</td>
+<td>Port</td>
+<td><a href="../probes/tcp-dial/">TCP dial</a></td>
+<td>Free</td>
 </tr>
 <tr>
-<td><code>restart</code></td>
-<td>Restart the service</td>
-</tr>
-<tr>
-<td><code>status</code></td>
-<td>Show service status and health</td>
-</tr>
-<tr>
-<td><code>status --otlp</code></td>
-<td>Same as <code>status</code>, plus an OTLP pipeline self-metrics block</td>
-</tr>
-<tr>
-<td><code>run</code></td>
-<td>Run interactively in console mode</td>
+<td>DNS</td>
+<td><a href="../probes/dns-latency/">DNS latency</a></td>
+<td>Free</td>
 </tr>
 </tbody>
 </table>
-<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>senhub-agent<span class="w"> </span>status
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>senhub-agent<span class="w"> </span>status<span class="w"> </span>--otlp
-</code></pre></div>
-<p>The default <code>status</code> view prints service state, version, health, probes summary and resource usage. <code>--otlp</code> appends a four-section block summarising the OTLP push pipeline:</p>
+<p>All four are multi-target: one probe instance checks a list of
+targets, where PRTG needs one sensor per target.</p>
+<h3 id="snmp">SNMP<a class="headerlink" href="#snmp" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Section</th>
-<th>What it shows</th>
+<th>PRTG sensor</th>
+<th>Agent probe</th>
+<th>License</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pipeline</td>
-<td>Metrics / logs pushed totals, export errors, drops by reason</td>
+<td>SNMP Traffic</td>
+<td><a href="../probes/snmp-poll/">SNMP poll</a> — IF-MIB module</td>
+<td>Free</td>
 </tr>
 <tr>
-<td>Store &amp; Export</td>
-<td>Store size, log buffer fill, last and mean export duration</td>
+<td>SNMP System Uptime</td>
+<td><a href="../probes/snmp-poll/">SNMP poll</a> — MIB-2 module</td>
+<td>Free</td>
 </tr>
 <tr>
-<td>Checkpoint</td>
-<td>On-disk checkpoint size, age, restored-at-boot count, errors by stage</td>
+<td>SNMP Custom / SNMP Custom Advanced</td>
+<td><a href="../probes/snmp-poll/">SNMP poll</a> — <code>custom_mappings</code></td>
+<td>Free</td>
 </tr>
 <tr>
-<td>Parallel export</td>
-<td>Number of sub-batches in the last push (1 = single-batch, &gt;1 = fan-out by probe)</td>
+<td>SNMP Trap Receiver</td>
+<td><a href="../probes/snmp-trap/">SNMP trap</a></td>
+<td>Free</td>
 </tr>
 </tbody>
 </table>
-<p>Drops with <code>reason=probe_cardinality</code> indicate the per-probe cardinality budget was hit; <code>store_cap</code>, <code>memory_soft_limit</code> and <code>memory_hard_limit</code> flag other backpressure paths. See the <a href="../otlp/#monitoring-the-otlp-pipeline">OTLP guide</a> for how to interpret each field.</p>
-<p><code>--otlp</code> calls the local HTTP strategy on port 8080 — the agent must have the <code>web</code> (or any other HTTP) endpoint enabled for the flag to return data. If the call fails, the standard <code>status</code> output still prints; a single-line note explains what went wrong.</p>
-<h3 id="run-console-mode">Run (Console Mode)<a class="headerlink" href="#run-console-mode" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>senhub-agent<span class="w"> </span>run
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam
-</code></pre></div>
-<p>The agent reads its configuration from the YAML file pointed at by <code>--config-path</code>. The default path is OS-specific: <code>/etc/senhub-agent/agent.yaml</code> (Linux), <code>%ProgramData%\SenHub\agent.yaml</code> (Windows), <code>/usr/local/etc/senhub-agent/agent.yaml</code> (macOS).</p>
+<p>One <code>snmp_poll</code> instance covers a whole device — every interface,
+uptime, plus any custom OIDs — where PRTG typically burns one sensor
+per interface.</p>
+<p>Current limits stated plainly: polling is SNMPv2c only (the trap
+receiver does v2c and v3); built-in modules cover MIB-2 and IF-MIB,
+everything else goes through <code>custom_mappings</code> (one OID per line —
+there is no MIB-file compiler for polling yet).</p>
+<h3 id="host-metrics">Host metrics<a class="headerlink" href="#host-metrics" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Flag</th>
-<th>Description</th>
+<th>PRTG sensor</th>
+<th>Agent probe</th>
+<th>License</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>--verbose</code>, <code>-v</code></td>
-<td>Enable debug logging for all modules</td>
+<td>CPU Load (WMI / SSH)</td>
+<td><a href="../probes/cpu/">CPU</a></td>
+<td>Free</td>
 </tr>
 <tr>
-<td><code>--filter MODULES</code></td>
-<td>Filter debug logs by module prefix (implies verbose)</td>
+<td>Memory (WMI / SSH)</td>
+<td><a href="../probes/memory/">Memory</a></td>
+<td>Free</td>
 </tr>
 <tr>
-<td><code>--config-path PATH</code></td>
-<td>Configuration file path (default: OS canonical path)</td>
+<td>Disk Free (WMI / SSH)</td>
+<td><a href="../probes/logicaldisk/">Logical disk</a></td>
+<td>Free</td>
+</tr>
+<tr>
+<td>Network traffic (WMI / SSH)</td>
+<td><a href="../probes/network/">Network</a></td>
+<td>Free</td>
 </tr>
 </tbody>
 </table>
-<h3 id="debug-filter-examples">Debug Filter Examples<a class="headerlink" href="#debug-filter-examples" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam<span class="w">           </span><span class="c1"># Veeam probe only</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe<span class="w">                  </span><span class="c1"># All probes</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>strategy.http,sensor<span class="w">   </span><span class="c1"># HTTP API + probe management</span>
-</code></pre></div>
-<p>Use <code>debug-modules-list</code> to see all available filters.</p>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<h3 id="config-check">config check<a class="headerlink" href="#config-check" title="Permanent link">&para;</a></h3>
-<p>Validates a configuration file and reports errors and warnings.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check<span class="w"> </span>/path/to/agent-config.yaml
-</code></pre></div>
-<p>Checks performed:
-- YAML syntax (with line-level error context)
-- Required fields (<code>config_version</code>, <code>agent.key</code>, <code>agent.mode</code>)
-- License validity and agent binding
-- Probe types against the registry
-- Required probe parameters (endpoint, credentials)
-- Storage strategy names</p>
-<p><img alt="senhub-agent config check output" src="../images/cli/config-check.webp" title="Terminal output of senhub-agent config check on a valid configuration" /></p>
-<h3 id="debug-modules-list">debug-modules-list<a class="headerlink" href="#debug-modules-list" title="Permanent link">&para;</a></h3>
-<p>Lists all available debug filter names.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>senhub-agent<span class="w"> </span>debug-modules-list
-</code></pre></div>
-<h2 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h2>
-<h3 id="check-for-updates">Check for updates<a class="headerlink" href="#check-for-updates" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>senhub-agent<span class="w"> </span>update
-</code></pre></div>
-<p>Checks if a newer version is available and displays it.</p>
-<h3 id="list-available-versions">List available versions<a class="headerlink" href="#list-available-versions" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>senhub-agent<span class="w"> </span>update<span class="w"> </span>--list
-</code></pre></div>
-<p>Lists all stable versions. If <code>auto_update.include_beta: true</code> is set in the configuration, beta versions are also listed.</p>
-<p><img alt="senhub-agent update --list output" src="../images/cli/update-list.webp" title="Terminal output of senhub-agent update --list showing available versions" /></p>
-<h3 id="install-a-specific-version">Install a specific version<a class="headerlink" href="#install-a-specific-version" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.1.87
-</code></pre></div>
-<p>Downloads and installs the specified version. Restart the service to apply.</p>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<h3 id="show-license-status">Show license status<a class="headerlink" href="#show-license-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
-</code></pre></div>
-<h3 id="activate-a-license">Activate a license<a class="headerlink" href="#activate-a-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>SH-040GMS-000100-02S3S2-HC3HMV-7RBZ4Y-PY
-</code></pre></div>
-<p>Validates the license and saves it in the configuration file.</p>
-<h3 id="remove-license">Remove license<a class="headerlink" href="#remove-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
-</code></pre></div>
-<p>Reverts to free tier (cpu, memory, logicaldisk, network only).</p>
-<h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
+<p>Architectural difference: PRTG polls hosts remotely over WMI or SSH
+(credentials on the wire, firewall rules, WMI fragility). The agent
+runs on the host and reads the OS directly — no remote credentials,
+and the metrics keep flowing during network partitions.</p>
+<h3 id="logs-and-events">Logs and events<a class="headerlink" href="#logs-and-events" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Command</th>
-<th>Description</th>
+<th>PRTG sensor</th>
+<th>Agent probe</th>
+<th>License</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>version</code></td>
-<td>Show agent version and build information</td>
+<td>Windows Event Log (WMI)</td>
+<td><a href="../probes/windows-eventlog/">Windows Event Log</a></td>
+<td>Free</td>
+</tr>
+<tr>
+<td>Syslog Receiver</td>
+<td><a href="../probes/syslog/">Syslog</a></td>
+<td>Pro</td>
+</tr>
+<tr>
+<td>File / Log (content)</td>
+<td><a href="../probes/filetail/">File tail</a></td>
+<td>Free</td>
+</tr>
+<tr>
+<td>HTTP Push Data</td>
+<td><a href="../probes/event/">Event</a> or <a href="../probes/otlp-receiver/">OTLP receiver</a></td>
+<td>Pro / Free</td>
 </tr>
 </tbody>
 </table>
+<p>Log-flow probes ship full structured records to a log backend
+(VictoriaLogs, Loki, any OTLP collector) — richer than PRTG's
+match-count model, and queryable after the fact.</p>
+<h3 id="vendor-infrastructure">Vendor infrastructure<a class="headerlink" href="#vendor-infrastructure" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>PRTG sensor</th>
+<th>Agent probe</th>
+<th>License</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Citrix XenDesktop family</td>
+<td><a href="../probes/citrix/">Citrix</a></td>
+<td>Pro</td>
+</tr>
+<tr>
+<td>NetScaler family</td>
+<td><a href="../probes/netscaler/">NetScaler</a></td>
+<td>Pro</td>
+</tr>
+<tr>
+<td>Veeam Backup family</td>
+<td><a href="../probes/veeam/">Veeam</a></td>
+<td>Pro</td>
+</tr>
+<tr>
+<td>Dell / HPE / Lenovo hardware</td>
+<td><a href="../probes/redfish/">Redfish</a></td>
+<td>Pro</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td><a href="../probes/mysql/">MySQL / MariaDB</a></td>
+<td>Pro</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><a href="../probes/postgresql/">PostgreSQL</a></td>
+<td>Pro</td>
+</tr>
+</tbody>
+</table>
+<h2 id="alerting">Alerting<a class="headerlink" href="#alerting" title="Permanent link">&para;</a></h2>
+<p>PRTG bundles thresholds and notifications per sensor. In the agent
+model, collection and alerting are separate: the agent ships
+metrics, and alert rules live in the backend — vmalert
+(VictoriaMetrics) or Grafana alerting, both of which route to email,
+Slack, Teams, PagerDuty and webhooks.</p>
+<p>The equivalents of PRTG's stock thresholds are one-line PromQL
+rules. Examples:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">groups</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub-availability</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">rules</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TargetDown</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub_icmp_up_ratio == 0</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3m</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TLSCertExpiringSoon</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub_httpcheck_tls_expiry &lt; 30</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DiskAlmostFull</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub_system_filesystem_utilization_ratio{system_filesystem_state=&quot;used&quot;} &gt; 0.9</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">InterfaceDown</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub_snmp_interface_oper_status == 2 and senhub_snmp_interface_admin_status == 1</span>
+</code></pre></div>
+<p>Metric names above are the Prometheus exposition names; the
+<a href="../prometheus/metrics-reference/">metrics reference</a> maps every
+probe metric to its exported name.</p>
+<p>A ready-to-import rule pack covering the free probes is in
+progress; until it ships, the examples above plus the per-probe
+metric tables are the reference.</p>
+<h2 id="what-the-agent-does-not-replace">What the agent does not replace<a class="headerlink" href="#what-the-agent-does-not-replace" title="Permanent link">&para;</a></h2>
+<p>Stated honestly, so you can plan around it:</p>
+<ul>
+<li><strong>Flow protocols.</strong> No NetFlow / sFlow / jFlow / IPFIX sensors.
+  If you depend on flow analysis, keep that tooling.</li>
+<li><strong>Maps.</strong> No equivalent of PRTG Maps. Grafana dashboards cover
+  the visualization need differently; auto-generated network
+  topology views are on the roadmap (topology discovery already
+  ships in <code>snmp_poll</code>).</li>
+<li><strong>Reports.</strong> No built-in PDF reporting. Grafana's reporting
+  (Enterprise) or grafana-image-renderer fills this gap.</li>
+<li><strong>Auto-discovery breadth.</strong> PRTG's device auto-discovery
+  proposes sensors automatically. The agent's discovery is
+  narrower today: LLDP topology crawl in <code>snmp_poll</code>.</li>
+<li><strong>Remote-only polling.</strong> WMI/SSH-style agentless host monitoring
+  is intentionally out of scope: the agent runs on the host. For
+  unreachable boxes (appliances, locked-down systems), SNMP and the
+  active checks are the coverage.</li>
+</ul>
+<h2 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h2>
+<p>A typical PRTG branch-office setup — 1 firewall, 2 switches, 3
+Windows servers, 1 web app — commonly uses 40-60 sensors. The agent
+equivalent:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># probes.d/10-host.yaml  (on each Windows server)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memory</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memory</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disk</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logicaldisk</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">net</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">network</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">events</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows_eventlog</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">channels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">System</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Application</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">levels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Critical</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Error</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Warning</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># probes.d/20-network.yaml  (on one collector host)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fw</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_poll</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.1</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sw1</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_poll</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.2</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sw2</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_poll</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.3</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traps</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_trap</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http_check</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;https://app.example.com/healthz&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reachability</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp_check</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.1.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">192.168.1.2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">192.168.1.3</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>Everything above is in the free tier.</p>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../installation/">Installation</a></li>
+<li><a href="../configuration/">Configuration</a></li>
+<li><a href="../probes/">Probe catalog</a></li>
+<li><a href="../prometheus/">Prometheus / VictoriaMetrics output</a></li>
+<li><a href="../otlp/">OTLP output</a></li>
+</ul>
 
 
 
@@ -2306,7 +2333,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../prometheus/metrics-reference/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Metrics reference">
+          <a href="../probes/postgresql/" class="md-footer__link md-footer__link--prev" aria-label="Previous: PostgreSQL">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2316,20 +2343,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Metrics reference
+                PostgreSQL
               </div>
             </div>
           </a>
         
         
           
-          <a href="../otlp/" class="md-footer__link md-footer__link--next" aria-label="Next: OTLP / OpenTelemetry">
+          <a href="../troubleshooting/" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                OTLP / OpenTelemetry
+                Troubleshooting
               </div>
             </div>
             <div class="md-footer__button md-icon">

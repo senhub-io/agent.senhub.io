@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/icmp-check/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/filetail/">
       
       
-        <link rel="prev" href="../filetail/">
+        <link rel="prev" href="../windows-eventlog/">
       
       
-        <link rel="next" href="../http-check/">
+        <link rel="next" href="../icmp-check/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>ICMP check - SenHub Agent</title>
+        <title>File tail - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#icmp_check-multi-target-ping" class="md-skip">
+        <a href="#file-tail-probe" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ICMP check
+              File tail
             
           </span>
         </div>
@@ -844,34 +844,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../filetail/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    File tail
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -891,7 +863,7 @@
   <span class="md-ellipsis">
     
   
-    ICMP check
+    File tail
   
 
     
@@ -909,7 +881,7 @@
   <span class="md-ellipsis">
     
   
-    ICMP check
+    File tail
   
 
     
@@ -954,24 +926,41 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiline-folding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        Multiline folding
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#privileges" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#structured-parsing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Privileges
+        Structured parsing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
       
     </span>
   </a>
@@ -982,6 +971,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icmp-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICMP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1741,24 +1758,41 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiline-folding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        Multiline folding
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#privileges" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#structured-parsing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Privileges
+        Structured parsing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
       
     </span>
   </a>
@@ -1782,7 +1816,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/icmp-check.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/filetail.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1790,18 +1824,27 @@
   
 
 
-<h1 id="icmp_check-multi-target-ping">icmp_check — multi-target ping<a class="headerlink" href="#icmp_check-multi-target-ping" title="Permanent link">&para;</a></h1>
-<p>Free tier. Pings a list of targets every cycle and reports reachability,
-packet loss and round-trip-time statistics per target. This is the
-agent's equivalent of the classic PRTG ping sensor, multi-target in a
-single probe instance.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>License: Free</strong> — part of the universal collection tier.</p>
+</div>
+<h1 id="file-tail-probe">File Tail Probe<a class="headerlink" href="#file-tail-probe" title="Permanent link">&para;</a></h1>
+<p>The <code>filetail</code> probe tails flat log files — application logs, web
+server access logs, anything line-oriented — and ships each record
+as a structured OTel log record through the
+<a href="../../otlp/">OTLP storage</a>. It handles glob patterns, log rotation,
+multiline records (stacktraces), and optional structured parsing
+(regex, JSON, logfmt) with timestamp extraction.</p>
+<p>Works on Linux, Windows and macOS; files are opened in shared-read
+mode so the producing application is never blocked.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/20-ping.yaml</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ping-core</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp_check</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;10.0.0.1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;core-switch.lan&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;8.8.8.8&quot;</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-logs</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filetail</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/log/myapp/*.log</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">bookmark_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/senhub-agent/filetail.bookmark</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -1814,84 +1857,131 @@ single probe instance.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>targets</code></td>
+<td><code>paths</code></td>
 <td>required</td>
-<td>List of hostnames or IPs to ping</td>
+<td>File paths or glob patterns. Globs are re-evaluated every 15 seconds, so new files are picked up without a restart</td>
 </tr>
 <tr>
-<td><code>count</code></td>
-<td>4</td>
-<td>Echo requests per target per cycle</td>
+<td><code>bookmark_path</code></td>
+<td>none</td>
+<td>JSON file persisting per-file read offsets across restarts. Without it the probe tails from end-of-file on every start</td>
 </tr>
 <tr>
-<td><code>timeout</code></td>
-<td>5</td>
-<td>Per-target budget in seconds for the whole round</td>
+<td><code>from_beginning</code></td>
+<td><code>false</code></td>
+<td>Read existing content from offset 0 the first time a file is seen (when no bookmark exists)</td>
 </tr>
 <tr>
-<td><code>interval</code></td>
-<td>60</td>
-<td>Seconds between collection cycles</td>
+<td><code>max_bytes_per_line</code></td>
+<td><code>1048576</code></td>
+<td>Cap on a single logical record after multiline folding (protects memory against runaway lines)</td>
 </tr>
 <tr>
-<td><code>packet_size</code></td>
-<td>56</td>
-<td>ICMP payload size in bytes</td>
+<td><code>multiline</code></td>
+<td>none</td>
+<td>Fold continuation lines into one record (see below)</td>
 </tr>
 <tr>
-<td><code>privileged</code></td>
-<td>OS-dependent</td>
-<td>Raw ICMP sockets (<code>true</code>) vs ICMP datagram sockets (<code>false</code>). Defaults to <code>true</code> on Windows, <code>false</code> elsewhere</td>
+<td><code>parser</code></td>
+<td><code>raw</code></td>
+<td>Structured parsing of each record (see below)</td>
 </tr>
 </tbody>
 </table>
-<p>Targets are pinged in parallel (bounded), so a large list does not
-stretch the cycle by the sum of timeouts.</p>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<p>One series per metric per target (the <code>target</code> tag discriminates; the
-resolved <code>ip</code> rides along).</p>
+<h3 id="multiline-folding">Multiline folding<a class="headerlink" href="#multiline-folding" title="Permanent link">&para;</a></h3>
+<p>Java stacktraces, Python tracebacks and pretty-printed payloads span
+several physical lines. The <code>multiline</code> block folds them into one
+record:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/myapp/server.log</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">multiline</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^\d{4}-\d{2}-\d{2}&#39;</span><span class="w">   </span><span class="c1"># a timestamp starts a new record</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">negate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Unit</th>
+<th>Field</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub.icmp.up</code></td>
-<td>bool</td>
-<td>1 when at least one reply came back this cycle</td>
+<td><code>pattern</code></td>
+<td>none</td>
+<td>Regex tested against each physical line</td>
 </tr>
 <tr>
-<td><code>senhub.icmp.packet_loss</code></td>
-<td>%</td>
-<td>Lost echo requests over the cycle</td>
+<td><code>negate</code></td>
+<td><code>false</code></td>
+<td>Invert the pattern match</td>
 </tr>
 <tr>
-<td><code>senhub.icmp.packets.sent</code> / <code>.received</code></td>
-<td>count</td>
-<td>Requests/replies this cycle</td>
-</tr>
-<tr>
-<td><code>senhub.icmp.rtt.min</code> / <code>.avg</code> / <code>.max</code> / <code>.stddev</code></td>
-<td>ms</td>
-<td>Round-trip statistics (emitted only when at least one reply arrived)</td>
+<td><code>match</code></td>
+<td><code>after</code></td>
+<td><code>after</code>: a matching line starts a new record, non-matching lines are continuations. <code>before</code>: a matching line flushes the accumulated record first</td>
 </tr>
 </tbody>
 </table>
-<p>An unreachable target is a measurement (<code>up = 0</code>, loss 100%), not a
-probe failure: the probe stays healthy and keeps reporting.</p>
-<h2 id="privileges">Privileges<a class="headerlink" href="#privileges" title="Permanent link">&para;</a></h2>
+<h3 id="structured-parsing">Structured parsing<a class="headerlink" href="#structured-parsing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">&quot;(?P&lt;request&gt;[^&quot;]*)&quot;</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)&#39;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700&quot;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>raw</code></td>
+<td><code>raw</code>, <code>regex</code>, <code>json</code>, or <code>logfmt</code></td>
+</tr>
+<tr>
+<td><code>pattern</code></td>
+<td>none</td>
+<td>Required for <code>regex</code>; must contain named capture groups — each group becomes a log attribute</td>
+</tr>
+<tr>
+<td><code>timestamp_field</code></td>
+<td>none</td>
+<td>Field (capture group or JSON/logfmt key) carrying the record timestamp</td>
+</tr>
+<tr>
+<td><code>timestamp_format</code></td>
+<td>none</td>
+<td>Go reference-time layout for parsing <code>timestamp_field</code></td>
+</tr>
+</tbody>
+</table>
+<p>With <code>json</code> and <code>logfmt</code>, every key becomes a log attribute. With
+<code>raw</code>, the line is the record body, unparsed.</p>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Linux</strong>: the default unprivileged mode uses ICMP datagram sockets,
-  gated by the <code>net.ipv4.ping_group_range</code> sysctl. If pings fail with a
-  permission error, either widen that range to include the agent's
-  group or set <code>privileged: true</code> (requires root or <code>CAP_NET_RAW</code>).</li>
-<li><strong>Windows</strong>: raw sockets only — the probe defaults to
-  <code>privileged: true</code> and the agent service runs elevated.</li>
-<li><strong>macOS</strong>: unprivileged mode works out of the box.</li>
+<li><strong>Rotation-safe.</strong> Each file is fingerprinted (hash of its first
+  bytes), so copytruncate, daily rotation and file replacement are
+  detected and the probe restarts from offset 0 of the new file —
+  no silent gaps, no duplicates.</li>
+<li><strong>At-least-once delivery.</strong> Bookmarks are flushed every 2 seconds;
+  after a crash, up to 2 seconds of records may be re-read. Plan
+  deduplication downstream if exact-once matters.</li>
+<li><strong>Event-driven.</strong> No polling cycle: records ship as lines are
+  written.</li>
+<li><strong>Start position.</strong> Default is tail-from-now. Set
+  <code>from_beginning: true</code> for files whose full history matters on
+  first ingestion (combine with <code>bookmark_path</code> so it only happens
+  once).</li>
 </ul>
 
 
@@ -1928,7 +2018,7 @@ probe failure: the probe stays healthy and keeps reporting.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../filetail/" class="md-footer__link md-footer__link--prev" aria-label="Previous: File tail">
+          <a href="../windows-eventlog/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Windows Event Log">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1938,20 +2028,20 @@ probe failure: the probe stays healthy and keeps reporting.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                File tail
+                Windows Event Log
               </div>
             </div>
           </a>
         
         
           
-          <a href="../http-check/" class="md-footer__link md-footer__link--next" aria-label="Next: HTTP check">
+          <a href="../icmp-check/" class="md-footer__link md-footer__link--next" aria-label="Next: ICMP check">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                HTTP check
+                ICMP check
               </div>
             </div>
             <div class="md-footer__button md-icon">

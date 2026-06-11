@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/icmp-check/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/snmp-poll/">
       
       
-        <link rel="prev" href="../filetail/">
+        <link rel="prev" href="../dns-latency/">
       
       
-        <link rel="next" href="../http-check/">
+        <link rel="next" href="../snmp-trap/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>ICMP check - SenHub Agent</title>
+        <title>SNMP poll - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#icmp_check-multi-target-ping" class="md-skip">
+        <a href="#snmp-poll-probe" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ICMP check
+              SNMP poll
             
           </span>
         </div>
@@ -872,37 +872,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    ICMP check
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../icmp-check/" class="md-nav__link">
         
   
   
@@ -918,70 +891,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#privileges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Privileges
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1075,10 +984,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../snmp-poll/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP poll
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1094,6 +1030,98 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom mappings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1741,6 +1769,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom mappings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1755,10 +1811,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#privileges" class="md-nav__link">
+  <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Privileges
+        Operational notes
       
     </span>
   </a>
@@ -1782,7 +1838,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/icmp-check.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/snmp-poll.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1790,19 +1846,33 @@
   
 
 
-<h1 id="icmp_check-multi-target-ping">icmp_check — multi-target ping<a class="headerlink" href="#icmp_check-multi-target-ping" title="Permanent link">&para;</a></h1>
-<p>Free tier. Pings a list of targets every cycle and reports reachability,
-packet loss and round-trip-time statistics per target. This is the
-agent's equivalent of the classic PRTG ping sensor, multi-target in a
-single probe instance.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>License: Free</strong> — part of the universal collection tier. SNMP
+polling is the backbone of network monitoring and the agent ships
+it without a license key.</p>
+</div>
+<h1 id="snmp-poll-probe">SNMP Poll Probe<a class="headerlink" href="#snmp-poll-probe" title="Permanent link">&para;</a></h1>
+<p>The <code>snmp_poll</code> probe polls a network device over SNMPv2c and turns
+standard MIB objects into typed metrics: system uptime, per-interface
+traffic, errors, discards, speed and status. Custom OID mappings
+cover the vendor-specific long tail. An optional discovery mode
+crawls the network topology from seed devices (LLDP) and reports
+devices and links as entities.</p>
+<p>One probe instance polls one device; declare one instance per device
+(or use discovery to enumerate them).</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/20-ping.yaml</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ping-core</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icmp_check</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;10.0.0.1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;core-switch.lan&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;8.8.8.8&quot;</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core-switch</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_poll</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 </code></pre></div>
+<p>This polls system and interface tables every 60 seconds and emits
+one series per interface (<code>if_index</code> tag).</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1814,84 +1884,232 @@ single probe instance.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>targets</code></td>
+<td><code>target</code></td>
 <td>required</td>
-<td>List of hostnames or IPs to ping</td>
+<td>Device IP or hostname</td>
 </tr>
 <tr>
-<td><code>count</code></td>
-<td>4</td>
-<td>Echo requests per target per cycle</td>
+<td><code>port</code></td>
+<td><code>161</code></td>
+<td>SNMP UDP port</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td><code>2c</code></td>
+<td>SNMP version. Only <code>2c</code> is supported; v1 and v3 are rejected with a clear error</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td><code>public</code></td>
+<td>Community string. Use <code>${env:...}</code> or <code>${file:...}</code> substitution rather than a literal</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
-<td>5</td>
-<td>Per-target budget in seconds for the whole round</td>
+<td><code>5s</code></td>
+<td>Per-request timeout (duration string or seconds)</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
-<td>60</td>
-<td>Seconds between collection cycles</td>
+<td><code>60s</code></td>
+<td>Metric polling cadence</td>
 </tr>
 <tr>
-<td><code>packet_size</code></td>
-<td>56</td>
-<td>ICMP payload size in bytes</td>
+<td><code>topology_interval</code></td>
+<td><code>10m</code></td>
+<td>Entity/topology sweep cadence (slower rail, independent of metrics)</td>
 </tr>
 <tr>
-<td><code>privileged</code></td>
-<td>OS-dependent</td>
-<td>Raw ICMP sockets (<code>true</code>) vs ICMP datagram sockets (<code>false</code>). Defaults to <code>true</code> on Windows, <code>false</code> elsewhere</td>
+<td><code>mibs</code></td>
+<td><code>[]</code></td>
+<td>Built-in MIB modules to poll: <code>mib-2</code>, <code>if-mib</code></td>
+</tr>
+<tr>
+<td><code>custom_mappings</code></td>
+<td><code>[]</code></td>
+<td>Operator-supplied OID-to-metric mappings (see below)</td>
+</tr>
+<tr>
+<td><code>discovery</code></td>
+<td>none</td>
+<td>Topology crawl from seed devices (see below)</td>
 </tr>
 </tbody>
 </table>
-<p>Targets are pinged in parallel (bounded), so a large list does not
-stretch the cycle by the sum of timeouts.</p>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<p>One series per metric per target (the <code>target</code> tag discriminates; the
-resolved <code>ip</code> rides along).</p>
+<p>At least one entry under <code>mibs</code> or <code>custom_mappings</code> is required.
+Configuration errors are accumulated and reported together at
+startup, not one at a time.</p>
+<h3 id="custom-mappings">Custom mappings<a class="headerlink" href="#custom-mappings" title="Permanent link">&para;</a></h3>
+<p>Map any OID — scalar or table column — to a named metric:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.20</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">custom_mappings</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">oid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.1.3.6.1.4.1.318.1.1.1.2.2.1</span><span class="w">     </span><span class="c1"># APC UPS battery capacity</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp.ups.battery_capacity</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gauge</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">oid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.1.3.6.1.2.1.2.2.1.10</span><span class="w">            </span><span class="c1"># ifInOctets (table walk)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp.interface.in_octets</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">counter</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="nt">index_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">if_index</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Unit</th>
+<th>Field</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub.icmp.up</code></td>
-<td>bool</td>
-<td>1 when at least one reply came back this cycle</td>
+<td><code>oid</code></td>
+<td>required</td>
+<td>OID, leading dot optional</td>
 </tr>
 <tr>
-<td><code>senhub.icmp.packet_loss</code></td>
-<td>%</td>
-<td>Lost echo requests over the cycle</td>
+<td><code>metric</code></td>
+<td>required</td>
+<td>Metric name to emit</td>
 </tr>
 <tr>
-<td><code>senhub.icmp.packets.sent</code> / <code>.received</code></td>
-<td>count</td>
-<td>Requests/replies this cycle</td>
+<td><code>type</code></td>
+<td><code>gauge</code></td>
+<td><code>gauge</code> or <code>counter</code></td>
 </tr>
 <tr>
-<td><code>senhub.icmp.rtt.min</code> / <code>.avg</code> / <code>.max</code> / <code>.stddev</code></td>
-<td>ms</td>
-<td>Round-trip statistics (emitted only when at least one reply arrived)</td>
+<td><code>index_label</code></td>
+<td>none</td>
+<td>When set, the OID is walked as a table and the row index becomes this tag</td>
 </tr>
 </tbody>
 </table>
-<p>An unreachable target is a measurement (<code>up = 0</code>, loss 100%), not a
-probe failure: the probe stays healthy and keeps reporting.</p>
-<h2 id="privileges">Privileges<a class="headerlink" href="#privileges" title="Permanent link">&para;</a></h2>
+<h3 id="discovery">Discovery<a class="headerlink" href="#discovery" title="Permanent link">&para;</a></h3>
+<p>When a <code>discovery</code> block is present the probe crawls outward from
+seed devices using LLDP neighbor tables, bounded by CIDR ranges and
+depth/device caps, and reports discovered devices and links on the
+entity rail:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">discovery</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">seeds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.1.10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">192.168.1.11</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">profile</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2c</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.0.0/16</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">max_devices</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">max_hops</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seeds</code></td>
+<td>required</td>
+<td>Entry-point device IPs</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td>required</td>
+<td>Credentials used for crawled devices (<code>version</code>, <code>community</code>)</td>
+</tr>
+<tr>
+<td><code>allowed_cidrs</code></td>
+<td>required</td>
+<td>The crawl never leaves these ranges</td>
+</tr>
+<tr>
+<td><code>max_devices</code></td>
+<td><code>200</code></td>
+<td>Hard cap on discovered devices</td>
+</tr>
+<tr>
+<td><code>max_hops</code></td>
+<td><code>4</code></td>
+<td>BFS depth bound from the seeds</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td><code>topology_interval</code></td>
+<td>Crawl cadence</td>
+</tr>
+</tbody>
+</table>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<p>One series per device (<code>instance</code> tag); interface metrics add
+<code>if_index</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.snmp.up</code></td>
+<td>gauge</td>
+<td>1 when the device answered this cycle, 0 when not</td>
+</tr>
+<tr>
+<td><code>senhub.snmp.poll.duration</code></td>
+<td>gauge</td>
+<td>Wall-clock poll time</td>
+</tr>
+<tr>
+<td><code>snmp.sys.uptime</code></td>
+<td>gauge</td>
+<td>Device uptime</td>
+</tr>
+<tr>
+<td><code>snmp.interface.in_octets</code> / <code>out_octets</code></td>
+<td>counter</td>
+<td>Interface traffic</td>
+</tr>
+<tr>
+<td><code>snmp.interface.in_errors</code> / <code>out_errors</code></td>
+<td>counter</td>
+<td>Interface errors</td>
+</tr>
+<tr>
+<td><code>snmp.interface.in_discards</code> / <code>out_discards</code></td>
+<td>counter</td>
+<td>Interface discards</td>
+</tr>
+<tr>
+<td><code>snmp.interface.speed</code></td>
+<td>gauge</td>
+<td>Negotiated interface speed</td>
+</tr>
+<tr>
+<td><code>snmp.interface.admin_status</code> / <code>oper_status</code></td>
+<td>gauge</td>
+<td>Interface status (up=1)</td>
+</tr>
+</tbody>
+</table>
+<p>An unreachable device is a measurement (<code>senhub.snmp.up = 0</code>), never
+a probe failure — the agent keeps polling.</p>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Linux</strong>: the default unprivileged mode uses ICMP datagram sockets,
-  gated by the <code>net.ipv4.ping_group_range</code> sysctl. If pings fail with a
-  permission error, either widen that range to include the agent's
-  group or set <code>privileged: true</code> (requires root or <code>CAP_NET_RAW</code>).</li>
-<li><strong>Windows</strong>: raw sockets only — the probe defaults to
-  <code>privileged: true</code> and the agent service runs elevated.</li>
-<li><strong>macOS</strong>: unprivileged mode works out of the box.</li>
+<li><strong>SNMPv2c only.</strong> v1 and v3 are rejected at startup. v3 polling is
+  on the roadmap; the <a href="../snmp-trap/">SNMP trap receiver</a> already
+  supports v3.</li>
+<li><strong>No network MIB fetching.</strong> The probe never downloads MIB files
+  at runtime. Built-in modules cover MIB-2 and IF-MIB; everything
+  else goes through <code>custom_mappings</code>.</li>
+<li><strong>Two rails, two cadences.</strong> Metrics poll at <code>interval</code>; topology
+  and entity sweeps run at the slower <code>topology_interval</code> so a dense
+  crawl never delays traffic counters.</li>
+<li><strong>Counters are raw.</strong> <code>in_octets</code> and friends are emitted as
+  counters; compute rates in the backend
+  (<code>rate(snmp_interface_in_octets[5m])</code> in VictoriaMetrics).</li>
 </ul>
 
 
@@ -1928,7 +2146,7 @@ probe failure: the probe stays healthy and keeps reporting.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../filetail/" class="md-footer__link md-footer__link--prev" aria-label="Previous: File tail">
+          <a href="../dns-latency/" class="md-footer__link md-footer__link--prev" aria-label="Previous: DNS latency">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1938,20 +2156,20 @@ probe failure: the probe stays healthy and keeps reporting.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                File tail
+                DNS latency
               </div>
             </div>
           </a>
         
         
           
-          <a href="../http-check/" class="md-footer__link md-footer__link--next" aria-label="Next: HTTP check">
+          <a href="../snmp-trap/" class="md-footer__link md-footer__link--next" aria-label="Next: SNMP trap">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                HTTP check
+                SNMP trap
               </div>
             </div>
             <div class="md-footer__button md-icon">
