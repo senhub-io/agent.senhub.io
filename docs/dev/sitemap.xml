@@ -29,6 +29,10 @@
          <lastmod>2026-06-11</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/prtg-migration/</loc>
+         <lastmod>2026-06-11</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/troubleshooting/</loc>
          <lastmod>2026-06-11</lastmod>
     </url>
@@ -54,6 +58,10 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/event/</loc>
+         <lastmod>2026-06-11</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/filetail/</loc>
          <lastmod>2026-06-11</lastmod>
     </url>
     <url>
@@ -93,6 +101,10 @@
          <lastmod>2026-06-11</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/otlp-receiver/</loc>
+         <lastmod>2026-06-11</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/ping-gateway/</loc>
          <lastmod>2026-06-11</lastmod>
     </url>
@@ -109,6 +121,14 @@
          <lastmod>2026-06-11</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/snmp-poll/</loc>
+         <lastmod>2026-06-11</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/snmp-trap/</loc>
+         <lastmod>2026-06-11</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/syslog/</loc>
          <lastmod>2026-06-11</lastmod>
     </url>
@@ -122,6 +142,10 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/wifi-signal-strength/</loc>
+         <lastmod>2026-06-11</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/windows-eventlog/</loc>
          <lastmod>2026-06-11</lastmod>
     </url>
     <url>
