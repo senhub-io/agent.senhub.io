@@ -1920,7 +1920,8 @@ deployment.</p>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp-in</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp_receiver</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span><span class="w">          </span><span class="c1"># listens on 0.0.0.0:4317</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span><span class="w">          </span><span class="c1"># listens on 127.0.0.1:4317</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="c1"># address: &quot;0.0.0.0:4317&quot;  # required to accept remote senders</span>
 </code></pre></div>
 <p>Point any OTel SDK or collector at the agent:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OTEL_EXPORTER_OTLP_ENDPOINT</span><span class="o">=</span>http://localhost:4317
@@ -1943,8 +1944,8 @@ deployment.</p>
 </tr>
 <tr>
 <td><code>address</code></td>
-<td><code>0.0.0.0:4317</code> (grpc), <code>0.0.0.0:4318</code> (http)</td>
-<td>Listen address</td>
+<td><code>127.0.0.1:4317</code> (grpc), <code>127.0.0.1:4318</code> (http)</td>
+<td>Listen address. Loopback by default — the receiver is unauthenticated, so accepting remote OTLP requires an explicit address (e.g. <code>"0.0.0.0:4317"</code>) and should be paired with a firewall rule</td>
 </tr>
 <tr>
 <td><code>port</code></td>

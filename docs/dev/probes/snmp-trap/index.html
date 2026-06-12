@@ -1971,8 +1971,8 @@ traps (coldStart, linkDown, linkUp, ...) resolve out of the box.</p>
 <tbody>
 <tr>
 <td><code>bind_address</code></td>
-<td><code>0.0.0.0:162</code></td>
-<td>UDP listen address. Port 162 is privileged: run as root or grant <code>CAP_NET_BIND_SERVICE</code>, or move to a port above 1024</td>
+<td><code>127.0.0.1:162</code></td>
+<td>UDP listen address. Loopback by default — receiving traps from network devices requires an explicit address (e.g. <code>"0.0.0.0:162"</code>). Port 162 is privileged: run as root or grant <code>CAP_NET_BIND_SERVICE</code>, or move to a port above 1024</td>
 </tr>
 <tr>
 <td><code>version</code></td>
