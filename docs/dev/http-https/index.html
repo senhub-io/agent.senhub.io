@@ -2441,8 +2441,8 @@
 </tr>
 <tr>
 <td><code>bind_address</code></td>
-<td><code>0.0.0.0</code></td>
-<td>Network interface to bind to (use <code>127.0.0.1</code> for local access only)</td>
+<td><code>127.0.0.1</code></td>
+<td>Network interface to bind to. Loopback by default — remote pollers (PRTG, Prometheus) require an explicit <code>"0.0.0.0"</code> or interface IP</td>
 </tr>
 <tr>
 <td><code>endpoints</code></td>
