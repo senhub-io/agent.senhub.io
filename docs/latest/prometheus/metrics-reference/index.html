@@ -2184,6 +2184,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.2.2/" class="md-nav__link">
         
   
@@ -2888,6 +2916,12 @@ configured probes.</p>
 <td>–</td>
 </tr>
 <tr>
+<td><code>senhub_agent_transformer_fallback_total</code></td>
+<td>counter</td>
+<td>Datapoints processed without a transformer definition (no unit injection or corrections)</td>
+<td>–</td>
+</tr>
+<tr>
 <td><code>senhub_agent_http_requests_total</code></td>
 <td>counter</td>
 <td>HTTP requests served per route template</td>
@@ -3137,7 +3171,7 @@ but the metrics it emits use the OTel <code>system.filesystem.*</code> conventio
 <td><code>disk_io_direction</code> ∈ {read, write} (Windows)</td>
 </tr>
 <tr>
-<td><code>senhub_system_disk_io_per_second</code></td>
+<td><code>senhub_system_disk_io_bytes_per_second</code></td>
 <td>gauge</td>
 <td>By/s</td>
 <td><code>disk_io_direction</code> (Windows)</td>

@@ -2273,6 +2273,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.2.2/" class="md-nav__link">
         
   
@@ -3014,8 +3042,9 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">syslog</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">syslog</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">514</span><span class="w">          </span><span class="c1"># Syslog port (default: 514)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">udp</span><span class="w">      </span><span class="c1"># Protocol: udp or tcp (default: udp)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">514</span><span class="w">               </span><span class="c1"># Syslog port (default: 514)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">udp</span><span class="w">           </span><span class="c1"># Protocol: udp or tcp (default: udp)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.0.0.0&quot;</span><span class="w"> </span><span class="c1"># Required to receive from remote senders (default: 127.0.0.1)</span>
 </code></pre></div>
 <h3 id="minimal-configuration">Minimal Configuration<a class="headerlink" href="#minimal-configuration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">probes</span><span class="p">:</span>
@@ -3031,7 +3060,7 @@
 <li><strong>macOS</strong>: macOS 10.13+</li>
 <li><strong>BSD</strong>: FreeBSD, OpenBSD, NetBSD</li>
 </ul>
-<p>The Syslog probe is platform-independent and listens on all network interfaces (0.0.0.0).</p>
+<p>The Syslog probe is platform-independent. It listens on the loopback interface by default; receiving from remote senders requires setting <code>bind_address</code> explicitly (e.g. <code>"0.0.0.0"</code> or a specific interface IP).</p>
 <h2 id="key-features-summary">Key Features Summary<a class="headerlink" href="#key-features-summary" title="Permanent link">&para;</a></h2>
 <h3 id="event-collection">Event Collection<a class="headerlink" href="#event-collection" title="Permanent link">&para;</a></h3>
 <table>
@@ -3147,6 +3176,13 @@
 <td><code>udp</code></td>
 <td><code>udp</code>, <code>tcp</code></td>
 <td>Transport protocol</td>
+</tr>
+<tr>
+<td><code>bind_address</code></td>
+<td>string</td>
+<td><code>127.0.0.1</code></td>
+<td>IP address</td>
+<td>Listen interface. Loopback by default; set <code>"0.0.0.0"</code> (or an interface IP) to accept remote senders</td>
 </tr>
 </tbody>
 </table>
