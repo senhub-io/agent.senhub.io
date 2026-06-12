@@ -16,7 +16,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../0.2.2/">
+        <link rel="next" href="../0.2.3/">
       
       
         
@@ -1613,24 +1613,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Next (unreleased)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1648,80 +1630,34 @@
 
       </a>
       
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="../0.2.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
   
+    0.2.3
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#new" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New
-      
-    </span>
-  </a>
+
+    
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fixed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fixed
-      
-    </span>
-  </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changed
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changed-metric-names" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changed (metric names)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#internal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Internal
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -1838,69 +1774,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#new" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fixed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fixed
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changed
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changed-metric-names" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changed (metric names)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#internal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Internal
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1928,95 +1801,7 @@
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2.03v2.02c4.39.54 7.5 4.53 6.96 8.92-.46 3.64-3.32 6.53-6.96 6.96v2c5.5-.55 9.5-5.43 8.95-10.93-.45-4.75-4.22-8.5-8.95-8.97m-2 .03c-1.95.19-3.81.94-5.33 2.2L7.1 5.74c1.12-.9 2.47-1.48 3.9-1.68zM4.26 5.67A9.9 9.9 0 0 0 2.05 11h2c.19-1.42.75-2.77 1.64-3.9zM2.06 13c.2 1.96.97 3.81 2.21 5.33l1.42-1.43A8 8 0 0 1 4.06 13zm5.04 5.37-1.43 1.37A10 10 0 0 0 11 22v-2a8 8 0 0 1-3.9-1.63M12.5 7v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg></span> In progress — these changes will ship as the next stable release.</p>
 <div class="rn-filter"></div>
 
-<h2 id="new">New<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-new">New</span> <span class="tag t-area">security</span> Self-updates are now <strong>signature-verified</strong>: the agent checks a detached minisign signature over each release archive against a public key embedded at build time, and refuses unsigned or tampered artifacts (fail-closed; rejections surface as <code>senhub.agent.update.rejected</code>). (#266)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">security</span> The OTLP receiver gains optional ingress protections: <code>bearer_token</code> auth (HTTP header or gRPC metadata), <code>allowed_cidrs</code> source allow-list and a <code>rate_limit_rps</code> token-bucket limiter — recommended whenever the receiver is opened beyond loopback. (#278)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">SNMP</span> <code>snmp_poll</code> supports <strong>SNMPv3</strong> (USM auth + privacy, security level derived from the configured protocols). (#156)</li>
-<li><span class="tag t-new">New</span> <span class="tag t-area">SNMP</span> <code>snmp_poll</code> gains <code>mib_paths</code>: a custom mapping may omit <code>metric</code> and have its name resolved from operator-supplied MIB files at startup. (#291)</li>
-</ul>
-
-<h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">OTLP</span> Stale series eviction (<code>staleness_ttl</code>, default 10m) — series whose probe was removed or denied no longer re-export forever with fresh timestamps from the persisted store (zombie metrics seen twice in production recettes). (#308)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">topology</span> A transient sweep failure no longer deletes the device tree in the consumer; sources are unregistered on probe shutdown; unchanged entity heartbeats are suppressed between refreshes. (#272)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">SNMP</span> <code>senhub.snmp.up</code> now reflects whether the device answered, not whether a UDP socket opened — a powered-off switch finally reports down. (#156)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">security</span> SNMPv3 passphrases and community strings are masked in logs. (#156)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">security</span> <code>agent config show</code> masks secrets by default; cleartext output now requires the explicit <code>--resolved</code> flag. (#279)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">security</span> <code>agent install</code> on Linux now writes the hardened systemd unit the packages ship — daemon runs as the dedicated <code>senhub</code> user (created at install) with all capabilities dropped, instead of an implicit root unit. <code>install --user root</code> keeps the legacy behavior; existing units are never rewritten on upgrade. (#280)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">security</span> The Windows administrator check uses the process token elevation API instead of probing <code>\\.\PHYSICALDRIVE0</code>, which broke on hosts without that device. (#280)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">PRTG</span> The PRTG push closes its HTTP response — it leaked one connection per sync cycle. (#277)</li>
-<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">checks</span> <code>icmp_check</code> defaults to privileged raw sockets on Linux when running as root — unprivileged datagram ICMP is disabled by default on Ubuntu/Debian (<code>ping_group_range</code>) and silently reported every target down; the permission error now carries an actionable hint. (#357)</li>
-</ul>
-
-<h2 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-removed">Changed</span> <span class="tag t-area">security</span> <strong>All network listeners now default to loopback (127.0.0.1)</strong> instead of all interfaces: the HTTP API (<code>bind_address</code>), the OTLP receiver probe (<code>address</code>), the SNMP trap receiver (<code>bind_address</code>) and the syslog probe — whose bind address was previously hardcoded to 0.0.0.0 and is now configurable (<code>bind_address</code>). Accepting remote senders/pollers requires an explicit opt-in, and binding all interfaces logs a startup warning. <strong>Action required</strong> only for hand-written configs that omitted the bind parameter while relying on remote access — add <code>bind_address: "0.0.0.0"</code> (or a specific interface IP) to the relevant section; configs generated by <code>agent install</code> always wrote it explicitly. (#278)</li>
-<li><span class="tag t-removed">Changed</span> <span class="tag t-area">outputs</span> The never-implemented Zabbix HTTP endpoint (always 501) is removed; <code>endpoints: [zabbix]</code> now fails fast at startup. The Zabbix integration is redesigned as a native active agent, deferred (#169).</li>
-</ul>
-
-<h2 id="changed-metric-names">Changed (metric names)<a class="headerlink" href="#changed-metric-names" title="Permanent link">&para;</a></h2>
-<p>The OTel names of eight Windows/hardware rate metrics carried a
-<code>per_second</code> suffix in the NAME, which the Prometheus-compatibility
-layers then doubled with the unit-derived suffix
-(<code>senhub_system_disk_io_per_second_bytes_per_second</code> through an OTel
-collector). The unit now drives the suffix alone; the resulting
-Prometheus names are the ones the metrics reference always documented.</p>
-<table>
-<thead>
-<tr>
-<th>Before (OTel name)</th>
-<th>After (OTel name)</th>
-<th>Prometheus name (both ingestion paths)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.system.cpu.dpcs_per_second</code></td>
-<td><code>senhub.system.cpu.dpcs</code></td>
-<td><code>senhub_system_cpu_dpcs_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.system.cpu.dpcs_queued_per_second</code></td>
-<td><code>senhub.system.cpu.dpcs_queued</code></td>
-<td><code>senhub_system_cpu_dpcs_queued_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.system.cpu.interrupts_per_second</code></td>
-<td><code>senhub.system.cpu.interrupts</code></td>
-<td><code>senhub_system_cpu_interrupts_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.system.paging.faults_per_second</code></td>
-<td><code>senhub.system.paging.faults</code></td>
-<td><code>senhub_system_paging_faults_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.system.paging.operations_per_second</code></td>
-<td><code>senhub.system.paging.operations</code></td>
-<td><code>senhub_system_paging_operations_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.system.disk.operations_per_second</code></td>
-<td><code>senhub.system.disk.operations</code></td>
-<td><code>senhub_system_disk_operations_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.system.disk.io_per_second</code></td>
-<td><code>senhub.system.disk.io</code></td>
-<td><code>senhub_system_disk_io_bytes_per_second</code></td>
-</tr>
-<tr>
-<td><code>senhub.hardware.physical_disk.link_speed_bits_per_second</code></td>
-<td><code>senhub.hardware.physical_disk.link_speed</code></td>
-<td><code>senhub_hardware_physical_disk_link_speed_bits_per_second</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="internal">Internal<a class="headerlink" href="#internal" title="Permanent link">&para;</a></h2>
-<ul class="rn">
-<li><span class="tag t-internal">Internal</span> Shared <code>snmpcore</code> package — one printability semantics, value rendering, version mapping and v3 USM tables consumed by both SNMP probes. (#291)</li>
-</ul>
+<p><em>Nothing here yet — 0.2.3 just shipped.</em></p>
 
 
 
@@ -2069,13 +1854,13 @@ Prometheus names are the ones the metrics reference always documented.</p>
         
         
           
-          <a href="../0.2.2/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.2.2">
+          <a href="../0.2.3/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.2.3">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                0.2.2
+                0.2.3
               </div>
             </div>
             <div class="md-footer__button md-icon">
