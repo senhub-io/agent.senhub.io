@@ -429,6 +429,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#config-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config versions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agent-section" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3358,7 +3369,119 @@
   <span class="md-ellipsis">
     
   
-    Next (unreleased)
+    Next (0.5.0, unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3.2
   
 
     
@@ -3533,6 +3656,17 @@
     <span class="md-ellipsis">
       
         Configuration Structure Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#config-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config versions
       
     </span>
   </a>
@@ -4124,6 +4258,50 @@
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 </code></pre></div>
+<h2 id="config-versions">Config versions<a class="headerlink" href="#config-versions" title="Permanent link">&para;</a></h2>
+<p><code>config_version</code> is the top-level schema version of the configuration. The
+agent migrates an older configuration forward automatically when it loads it,
+and stamps the new version on disk.</p>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Introduced</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td>0.1.x</td>
+<td>Legacy baseline.</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>—</td>
+<td>Current baseline: multi-file layout and <code>${env:}</code> / <code>${file:}</code> substitution.</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>0.5.0</td>
+<td>Secret references: inline plaintext secrets are sealed into the <a href="../secret-store/">secret store</a> and rewritten as <code>${secret:...}</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>On first boot under version 3, the agent seals any inline plaintext secret
+into the store, replaces it with a <code>${secret:...}</code> reference, and stamps the
+file <code>config_version: 3</code>. The bump to 3 happens <strong>only when a secret is
+actually sealed</strong> — a secret-free version 2 configuration stays at version 2
+and is left untouched.</p>
+<div class="admonition warning">
+<p class="admonition-title">Do not downgrade under a sealed config</p>
+<p>An older agent only supports up to the <code>config_version</code> it shipped with
+(0.4.x and earlier: version 2). Loading a configuration whose version is
+newer than the agent supports is <strong>refused</strong> with
+<code>configuration version N is too new for this agent</code>, rather than passing
+an unresolved <code>${secret:}</code> literal to a probe. Upgrade every agent before
+distributing a version 3 (sealed) configuration.</p>
+</div>
 <h2 id="agent-section">Agent Section<a class="headerlink" href="#agent-section" title="Permanent link">&para;</a></h2>
 <p>The <code>agent</code> section defines the agent identity.</p>
 <table>
@@ -4753,16 +4931,16 @@
 <td><code>/opt/senhub/bin/strategies.d/</code></td>
 </tr>
 <tr>
-<td><strong>Windows</strong></td>
-<td><code>C:\SenHub\agent.yaml</code></td>
-<td><code>C:\SenHub\probes.d\</code></td>
-<td><code>C:\SenHub\strategies.d\</code></td>
+<td><strong>Windows (MSI)</strong></td>
+<td><code>%ProgramData%\SenHub\agent.yaml</code></td>
+<td><code>%ProgramData%\SenHub\probes.d\</code></td>
+<td><code>%ProgramData%\SenHub\strategies.d\</code></td>
 </tr>
 <tr>
 <td><strong>macOS</strong></td>
-<td><code>/usr/local/senhub/agent.yaml</code></td>
-<td><code>/usr/local/senhub/probes.d/</code></td>
-<td><code>/usr/local/senhub/strategies.d/</code></td>
+<td><code>/usr/local/etc/senhub-agent/agent.yaml</code></td>
+<td><code>/usr/local/etc/senhub-agent/probes.d/</code></td>
+<td><code>/usr/local/etc/senhub-agent/strategies.d/</code></td>
 </tr>
 </tbody>
 </table>
