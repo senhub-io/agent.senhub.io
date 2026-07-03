@@ -2893,7 +2893,119 @@
   <span class="md-ellipsis">
     
   
-    Next (unreleased)
+    Next (0.5.0, unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3.2
   
 
     
@@ -3272,6 +3384,18 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>senhub-agent<span class="w"> </span>key<span class="w"> </span>show
 </code></pre></div>
 <h2 id="sealing-inline-secrets-into-the-store">Sealing inline secrets into the store<a class="headerlink" href="#sealing-inline-secrets-into-the-store" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Sealing also happens automatically on first boot</p>
+<p>From <code>config_version 3</code>, the agent seals inline plaintext secrets into
+the store automatically the first time it starts: it moves each value
+into the store, rewrites the field to a <code>${secret:...}</code> reference, and
+stamps the file <code>config_version: 3</code>. The bump to version 3 happens only
+when a secret is actually sealed — a secret-free configuration stays at
+version 2 and is untouched. <code>agent secret migrate</code> is the explicit,
+on-demand equivalent of that boot-time step (for example to seal a
+configuration before distributing it). See
+<a href="../configuration/#config-versions">Configuration → Config versions</a>.</p>
+</div>
 <p><code>agent secret migrate</code> scans the configuration for fields whose NAME denotes a secret (<code>password</code>, <code>passphrase</code>, <code>secret</code>, <code>token</code>, <code>api_key</code>, <code>community</code>, <code>credential</code>, <code>dsn</code>, <code>uri</code>, <code>private_key</code>) and whose value is still an inline plaintext (not already a <code>${...}</code> reference). It moves each value into the store and rewrites the field to a <code>${secret:}</code> reference. Identifier-style fields such as <code>user</code>, <code>login</code> and <code>email</code> are deliberately left alone.</p>
 <p>Before:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">probes</span><span class="p">:</span>
