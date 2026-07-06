@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/latest/probes/elasticsearch/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/latest/secret-store/">
       
       
-        <link rel="prev" href="../clickhouse/">
+        <link rel="prev" href="../configuration/">
       
       
-        <link rel="next" href="../opensearch/">
+        <link rel="next" href="../http-https/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/favicon.svg">
+      <link rel="icon" href="../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Elasticsearch - SenHub Agent</title>
+        <title>Secret store - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#elasticsearch" class="md-skip">
+        <a href="#secret-store" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Elasticsearch
+              Secret store
             
           </span>
         </div>
@@ -239,7 +239,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -266,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../presentation/" class="md-nav__link">
+      <a href="../presentation/" class="md-nav__link">
         
   
   
@@ -320,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -347,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -371,10 +371,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../secret-store/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secret store
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -390,6 +417,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-secret-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The ${secret:} reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backends-per-os" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backends per OS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-agent-secret-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent secret command
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The agent secret command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-key-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        agent key show
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sealing-inline-secrets-into-the-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sealing inline secrets into the store
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -401,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http-https/" class="md-nav__link">
+      <a href="../http-https/" class="md-nav__link">
         
   
   
@@ -428,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web-interface/" class="md-nav__link">
+      <a href="../web-interface/" class="md-nav__link">
         
   
   
@@ -507,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/" class="md-nav__link">
+      <a href="../prometheus/" class="md-nav__link">
         
   
   
@@ -535,7 +643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -570,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -597,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../otlp/" class="md-nav__link">
+      <a href="../otlp/" class="md-nav__link">
         
   
   
@@ -621,8 +729,6 @@
       
   
   
-    
-  
   
   
     
@@ -635,11 +741,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
           <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
@@ -660,7 +766,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -678,7 +784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../probes/" class="md-nav__link">
         
   
   
@@ -706,7 +812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cpu/" class="md-nav__link">
+      <a href="../probes/cpu/" class="md-nav__link">
         
   
   
@@ -734,7 +840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory/" class="md-nav__link">
+      <a href="../probes/memory/" class="md-nav__link">
         
   
   
@@ -762,7 +868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../network/" class="md-nav__link">
+      <a href="../probes/network/" class="md-nav__link">
         
   
   
@@ -790,7 +896,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logicaldisk/" class="md-nav__link">
+      <a href="../probes/logicaldisk/" class="md-nav__link">
         
   
   
@@ -818,7 +924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linux-logs/" class="md-nav__link">
+      <a href="../probes/linux-logs/" class="md-nav__link">
         
   
   
@@ -846,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-eventlog/" class="md-nav__link">
+      <a href="../probes/windows-eventlog/" class="md-nav__link">
         
   
   
@@ -874,7 +980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../filetail/" class="md-nav__link">
+      <a href="../probes/filetail/" class="md-nav__link">
         
   
   
@@ -902,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process/" class="md-nav__link">
+      <a href="../probes/process/" class="md-nav__link">
         
   
   
@@ -930,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../systemd/" class="md-nav__link">
+      <a href="../probes/systemd/" class="md-nav__link">
         
   
   
@@ -958,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-services/" class="md-nav__link">
+      <a href="../probes/windows-services/" class="md-nav__link">
         
   
   
@@ -986,7 +1092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../chrony/" class="md-nav__link">
+      <a href="../probes/chrony/" class="md-nav__link">
         
   
   
@@ -1014,7 +1120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smart/" class="md-nav__link">
+      <a href="../probes/smart/" class="md-nav__link">
         
   
   
@@ -1042,7 +1148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ipmi/" class="md-nav__link">
+      <a href="../probes/ipmi/" class="md-nav__link">
         
   
   
@@ -1070,7 +1176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nvidia/" class="md-nav__link">
+      <a href="../probes/nvidia/" class="md-nav__link">
         
   
   
@@ -1098,7 +1204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../modbus/" class="md-nav__link">
+      <a href="../probes/modbus/" class="md-nav__link">
         
   
   
@@ -1126,7 +1232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../icmp-check/" class="md-nav__link">
+      <a href="../probes/icmp-check/" class="md-nav__link">
         
   
   
@@ -1154,7 +1260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http-check/" class="md-nav__link">
+      <a href="../probes/http-check/" class="md-nav__link">
         
   
   
@@ -1182,7 +1288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tcp-dial/" class="md-nav__link">
+      <a href="../probes/tcp-dial/" class="md-nav__link">
         
   
   
@@ -1210,7 +1316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dns-latency/" class="md-nav__link">
+      <a href="../probes/dns-latency/" class="md-nav__link">
         
   
   
@@ -1238,7 +1344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-poll/" class="md-nav__link">
+      <a href="../probes/snmp-poll/" class="md-nav__link">
         
   
   
@@ -1266,7 +1372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-trap/" class="md-nav__link">
+      <a href="../probes/snmp-trap/" class="md-nav__link">
         
   
   
@@ -1294,7 +1400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../otlp-receiver/" class="md-nav__link">
+      <a href="../probes/otlp-receiver/" class="md-nav__link">
         
   
   
@@ -1322,7 +1428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus-scrape/" class="md-nav__link">
+      <a href="../probes/prometheus-scrape/" class="md-nav__link">
         
   
   
@@ -1350,7 +1456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exec/" class="md-nav__link">
+      <a href="../probes/exec/" class="md-nav__link">
         
   
   
@@ -1378,7 +1484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../citrix/" class="md-nav__link">
+      <a href="../probes/citrix/" class="md-nav__link">
         
   
   
@@ -1406,7 +1512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netscaler/" class="md-nav__link">
+      <a href="../probes/netscaler/" class="md-nav__link">
         
   
   
@@ -1434,7 +1540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redfish/" class="md-nav__link">
+      <a href="../probes/redfish/" class="md-nav__link">
         
   
   
@@ -1462,7 +1568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../syslog/" class="md-nav__link">
+      <a href="../probes/syslog/" class="md-nav__link">
         
   
   
@@ -1490,7 +1596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../event/" class="md-nav__link">
+      <a href="../probes/event/" class="md-nav__link">
         
   
   
@@ -1518,7 +1624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-webapp/" class="md-nav__link">
+      <a href="../probes/ping-webapp/" class="md-nav__link">
         
   
   
@@ -1546,7 +1652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../load-webapp/" class="md-nav__link">
+      <a href="../probes/load-webapp/" class="md-nav__link">
         
   
   
@@ -1574,7 +1680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-gateway/" class="md-nav__link">
+      <a href="../probes/ping-gateway/" class="md-nav__link">
         
   
   
@@ -1602,7 +1708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wifi-signal-strength/" class="md-nav__link">
+      <a href="../probes/wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -1630,7 +1736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../veeam/" class="md-nav__link">
+      <a href="../probes/veeam/" class="md-nav__link">
         
   
   
@@ -1658,7 +1764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../probes/mysql/" class="md-nav__link">
         
   
   
@@ -1686,7 +1792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../postgresql/" class="md-nav__link">
+      <a href="../probes/postgresql/" class="md-nav__link">
         
   
   
@@ -1714,7 +1820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql/" class="md-nav__link">
+      <a href="../probes/mssql/" class="md-nav__link">
         
   
   
@@ -1742,7 +1848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mongodb/" class="md-nav__link">
+      <a href="../probes/mongodb/" class="md-nav__link">
         
   
   
@@ -1770,7 +1876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle/" class="md-nav__link">
+      <a href="../probes/oracle/" class="md-nav__link">
         
   
   
@@ -1798,7 +1904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redis/" class="md-nav__link">
+      <a href="../probes/redis/" class="md-nav__link">
         
   
   
@@ -1826,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cassandra/" class="md-nav__link">
+      <a href="../probes/cassandra/" class="md-nav__link">
         
   
   
@@ -1854,7 +1960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../couchdb/" class="md-nav__link">
+      <a href="../probes/couchdb/" class="md-nav__link">
         
   
   
@@ -1882,7 +1988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clickhouse/" class="md-nav__link">
+      <a href="../probes/clickhouse/" class="md-nav__link">
         
   
   
@@ -1907,37 +2013,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Elasticsearch
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../probes/elasticsearch/" class="md-nav__link">
         
   
   
@@ -1953,70 +2032,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2029,7 +2044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../opensearch/" class="md-nav__link">
+      <a href="../probes/opensearch/" class="md-nav__link">
         
   
   
@@ -2057,7 +2072,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../solr/" class="md-nav__link">
+      <a href="../probes/solr/" class="md-nav__link">
         
   
   
@@ -2085,7 +2100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../influxdb/" class="md-nav__link">
+      <a href="../probes/influxdb/" class="md-nav__link">
         
   
   
@@ -2113,7 +2128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memcached/" class="md-nav__link">
+      <a href="../probes/memcached/" class="md-nav__link">
         
   
   
@@ -2141,7 +2156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../apache/" class="md-nav__link">
+      <a href="../probes/apache/" class="md-nav__link">
         
   
   
@@ -2169,7 +2184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx/" class="md-nav__link">
+      <a href="../probes/nginx/" class="md-nav__link">
         
   
   
@@ -2197,7 +2212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../haproxy/" class="md-nav__link">
+      <a href="../probes/haproxy/" class="md-nav__link">
         
   
   
@@ -2225,7 +2240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy/" class="md-nav__link">
+      <a href="../probes/envoy/" class="md-nav__link">
         
   
   
@@ -2253,7 +2268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../php-fpm/" class="md-nav__link">
+      <a href="../probes/php-fpm/" class="md-nav__link">
         
   
   
@@ -2281,7 +2296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../varnish/" class="md-nav__link">
+      <a href="../probes/varnish/" class="md-nav__link">
         
   
   
@@ -2309,7 +2324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tomcat/" class="md-nav__link">
+      <a href="../probes/tomcat/" class="md-nav__link">
         
   
   
@@ -2337,7 +2352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wildfly/" class="md-nav__link">
+      <a href="../probes/wildfly/" class="md-nav__link">
         
   
   
@@ -2365,7 +2380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kafka/" class="md-nav__link">
+      <a href="../probes/kafka/" class="md-nav__link">
         
   
   
@@ -2393,7 +2408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
+      <a href="../probes/rabbitmq/" class="md-nav__link">
         
   
   
@@ -2421,7 +2436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../activemq/" class="md-nav__link">
+      <a href="../probes/activemq/" class="md-nav__link">
         
   
   
@@ -2449,7 +2464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nats/" class="md-nav__link">
+      <a href="../probes/nats/" class="md-nav__link">
         
   
   
@@ -2477,7 +2492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pulsar/" class="md-nav__link">
+      <a href="../probes/pulsar/" class="md-nav__link">
         
   
   
@@ -2505,7 +2520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker/" class="md-nav__link">
+      <a href="../probes/docker/" class="md-nav__link">
         
   
   
@@ -2533,7 +2548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/" class="md-nav__link">
+      <a href="../probes/kubernetes/" class="md-nav__link">
         
   
   
@@ -2561,7 +2576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../proxmox/" class="md-nav__link">
+      <a href="../probes/proxmox/" class="md-nav__link">
         
   
   
@@ -2589,7 +2604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv/" class="md-nav__link">
+      <a href="../probes/hyperv/" class="md-nav__link">
         
   
   
@@ -2617,7 +2632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ceph/" class="md-nav__link">
+      <a href="../probes/ceph/" class="md-nav__link">
         
   
   
@@ -2645,7 +2660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../consul/" class="md-nav__link">
+      <a href="../probes/consul/" class="md-nav__link">
         
   
   
@@ -2673,7 +2688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zookeeper/" class="md-nav__link">
+      <a href="../probes/zookeeper/" class="md-nav__link">
         
   
   
@@ -2701,7 +2716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jenkins/" class="md-nav__link">
+      <a href="../probes/jenkins/" class="md-nav__link">
         
   
   
@@ -2729,7 +2744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unifi/" class="md-nav__link">
+      <a href="../probes/unifi/" class="md-nav__link">
         
   
   
@@ -2764,7 +2779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/" class="md-nav__link">
+      <a href="../troubleshooting/" class="md-nav__link">
         
   
   
@@ -2843,7 +2858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/" class="md-nav__link">
+      <a href="../whats-new/" class="md-nav__link">
         
   
   
@@ -2871,7 +2886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/next/" class="md-nav__link">
+      <a href="../whats-new/next/" class="md-nav__link">
         
   
   
@@ -2899,7 +2914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.2/" class="md-nav__link">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
         
   
   
@@ -2927,7 +2942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.1/" class="md-nav__link">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
         
   
   
@@ -2955,7 +2970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.0/" class="md-nav__link">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
         
   
   
@@ -2983,7 +2998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.3.2/" class="md-nav__link">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
         
   
   
@@ -3011,7 +3026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+      <a href="../whats-new/0.2.3/" class="md-nav__link">
         
   
   
@@ -3039,7 +3054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.2/" class="md-nav__link">
+      <a href="../whats-new/0.2.2/" class="md-nav__link">
         
   
   
@@ -3067,7 +3082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.1/" class="md-nav__link">
+      <a href="../whats-new/0.2.1/" class="md-nav__link">
         
   
   
@@ -3095,7 +3110,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.0/" class="md-nav__link">
+      <a href="../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -3150,10 +3165,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#the-secret-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick start
+        The ${secret:} reference
       
     </span>
   </a>
@@ -3161,10 +3176,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#backends-per-os" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        Backends per OS
       
     </span>
   </a>
@@ -3172,21 +3187,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#the-agent-secret-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        The agent secret command
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The agent secret command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-key-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        agent key show
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
+  <a href="#sealing-inline-secrets-into-the-store" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operational notes
+        Sealing inline secrets into the store
       
     </span>
   </a>
@@ -3210,7 +3242,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/elasticsearch.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/secret-store.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3218,127 +3250,176 @@
   
 
 
-<p><img src="https://cdn.simpleicons.org/elasticsearch" alt="" class="probe-page-logo probe-page-logo-si"></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p><strong>License: Free</strong> — part of the universal collection tier.</p>
-</div>
-<h1 id="elasticsearch">Elasticsearch<a class="headerlink" href="#elasticsearch" title="Permanent link">&para;</a></h1>
-<p>The <code>elasticsearch</code> probe monitors an Elasticsearch cluster via the REST JSON
-API, collecting cluster health, JVM memory, indexing and search throughput,
-and thread pool queue depths.</p>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<h1 id="secret-store">Secret Store<a class="headerlink" href="#secret-store" title="Permanent link">&para;</a></h1>
+<p>The agent can resolve <code>${secret:NAME}</code> references in its configuration from an OS-native, on-disk secret store, so that passwords, tokens and connection strings never sit in plaintext in <code>agent.yaml</code>, <code>probes.d/*.yaml</code> or <code>strategies.d/*.yaml</code>.</p>
+<p><code>${secret:NAME}</code> sits alongside the <code>${env:}</code> and <code>${file:}</code> substitutions documented in <a href="../configuration/#environment-and-file-substitution">Configuration → Environment and File Substitution</a>. It is resolved at <strong>config load time</strong>, before any probe or strategy starts.</p>
+<h2 id="the-secret-reference">The <code>${secret:}</code> reference<a class="headerlink" href="#the-secret-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Resolves to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${secret:NAME}</code></td>
+<td>The value stored under <code>NAME</code> in the secret store. Aborts boot if the name is unknown or no backend is available.</td>
+</tr>
+<tr>
+<td><code>${secret:NAME:-fallback}</code></td>
+<td>The stored value, or <code>fallback</code> if the name is unknown.</td>
+</tr>
+</tbody>
+</table>
+<p>A missing required <code>${secret:}</code> reference (no default) <strong>aborts agent boot</strong> with the offending name in the error message — a referenced secret that has gone missing must never silently resolve to an empty string. The error carries only the secret NAME, never its value.</p>
+<p>The store is only touched when a <code>${secret:}</code> reference actually exists: a configuration that uses no <code>${secret:}</code> never creates a key file or store on disk.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam-prod</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:9200</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://veeam.example.com:9419&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${secret:veeam-prod.password}&quot;</span>
 </code></pre></div>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<h2 id="backends-per-os">Backends per OS<a class="headerlink" href="#backends-per-os" title="Permanent link">&para;</a></h2>
+<p>The active backend is selected automatically per platform. Each stores its data next to the agent configuration file.</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th>Platform</th>
+<th>Backend</th>
+<th>Store files (in the config directory)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>endpoint</code></td>
-<td><code>http://localhost:9200</code></td>
-<td>Elasticsearch base URL</td>
+<td>Linux (default)</td>
+<td><code>age-keyfile</code></td>
+<td><code>agent-secret.key</code> (X25519 identity, <code>0600</code>), <code>secrets.age</code> (ciphertext)</td>
 </tr>
 <tr>
-<td><code>username</code></td>
-<td>—</td>
-<td>Basic-auth username (for clusters with security enabled)</td>
+<td>Linux (systemd, hardened)</td>
+<td><code>systemd-creds</code></td>
+<td><code>creds.d/*.cred</code> (one encrypted credential per secret)</td>
 </tr>
 <tr>
-<td><code>password</code></td>
-<td>—</td>
-<td>Basic-auth password</td>
+<td>Windows</td>
+<td><code>dpapi</code></td>
+<td><code>entropy.bin</code> (per-install entropy), <code>secrets.dpapi</code> (ciphertext, sealed with Windows DPAPI machine-local scope)</td>
+</tr>
+<tr>
+<td>macOS / other (dev)</td>
+<td><code>age-keyfile</code></td>
+<td><code>agent-secret.key</code>, <code>secrets.age</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.elasticsearch.up</code></td>
-<td>1</td>
-<td>1 when the cluster health endpoint is reachable</td>
-</tr>
-<tr>
-<td><code>elasticsearch.cluster.health</code></td>
-<td>1</td>
-<td>Cluster health: 2 = green, 1 = yellow, 0 = red</td>
-</tr>
-<tr>
-<td><code>elasticsearch.cluster.nodes</code></td>
-<td>{node}</td>
-<td>Total nodes in the cluster</td>
-</tr>
-<tr>
-<td><code>elasticsearch.cluster.data_nodes</code></td>
-<td>{node}</td>
-<td>Data nodes in the cluster</td>
-</tr>
-<tr>
-<td><code>elasticsearch.cluster.shards.active</code></td>
-<td>{shard}</td>
-<td>Active primary and replica shards</td>
-</tr>
-<tr>
-<td><code>elasticsearch.cluster.shards.unassigned</code></td>
-<td>{shard}</td>
-<td>Unassigned shards</td>
-</tr>
-<tr>
-<td><code>elasticsearch.jvm.memory.heap.used</code></td>
-<td>By</td>
-<td>JVM heap in use on the local node</td>
-</tr>
-<tr>
-<td><code>elasticsearch.indexing.document.merges.count</code></td>
-<td>{merge}</td>
-<td>Segment merges by type, tagged with <code>collector</code></td>
-</tr>
-<tr>
-<td><code>elasticsearch.indexing.request.operations.count</code></td>
-<td>{operation}</td>
-<td>Indexing operations (index/delete/…), tagged with <code>operation</code></td>
-</tr>
-<tr>
-<td><code>elasticsearch.search.query.count</code></td>
-<td>{query}</td>
-<td>Completed search queries</td>
-</tr>
-<tr>
-<td><code>elasticsearch.search.fetch.count</code></td>
-<td>{fetch}</td>
-<td>Completed fetch phases</td>
-</tr>
-<tr>
-<td><code>elasticsearch.thread_pool.tasks.queued</code></td>
-<td>{task}</td>
-<td>Tasks queued per thread pool, tagged with <code>thread_pool</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<p>On Linux, the <code>age-keyfile</code> backend is the default because it works unprivileged from any context and needs no systemd wiring. The <code>systemd-creds</code> backend is the hardened opt-in and is selected when any of the following holds:</p>
 <ul>
-<li>The probe queries <code>/_cluster/health</code> (cluster-level) and <code>/_nodes/_local/stats</code> (node-level).</li>
-<li>For TLS-secured clusters, prefix the endpoint with <code>https://</code> and ensure the certificate is valid or configure system trust.</li>
-<li>Metrics align with the OpenTelemetry Collector contrib <code>elasticsearchreceiver</code> where naming equivalents exist.</li>
+<li><code>$CREDENTIALS_DIRECTORY</code> is set (the daemon runs under a unit that wired <code>LoadCredentialEncrypted=</code>);</li>
+<li><code>SENHUB_SECRET_BACKEND=systemd-creds</code> is set (explicit admin opt-in, e.g. for the seal step outside the unit);</li>
+<li>a populated <code>creds.d/</code> store already exists.</li>
 </ul>
+<p>The store files are owned by the account the agent runs as and readable only by it (age key file <code>0600</code>, DPAPI files restricted to SYSTEM + Administrators). Because the store is root-/service-owned, resolving a sealed secret requires the same privilege as the agent itself — see the privilege note under <a href="#agent-key-show"><code>agent key show</code></a>.</p>
+<h2 id="the-agent-secret-command">The <code>agent secret</code> command<a class="headerlink" href="#the-agent-secret-command" title="Permanent link">&para;</a></h2>
+<p><code>agent secret</code> manages the store. A secret VALUE is never accepted on the command line (it would leak via <code>ps</code> or shell history); <code>set</code> reads it from a hidden prompt, from standard input, or from a file. The command reads and writes the root-/service-owned store, so it runs behind the agent's privilege gate.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>secret set &lt;name&gt;</code></td>
+<td>Store or replace a secret. The value comes from a hidden prompt (interactive), a line of stdin (piped), or <code>--from-file &lt;path&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>secret get &lt;name&gt;</code></td>
+<td>Print a secret value to stdout — a deliberate reveal. Warns when the output is not a terminal.</td>
+</tr>
+<tr>
+<td><code>secret list</code></td>
+<td>List secret NAMES only (never values).</td>
+</tr>
+<tr>
+<td><code>secret rm &lt;name&gt;</code></td>
+<td>Delete a secret.</td>
+</tr>
+<tr>
+<td><code>secret migrate</code></td>
+<td>Move inline plaintext secrets out of the config into the store and rewrite them as <code>${secret:}</code> references (see <a href="#sealing-inline-secrets-into-the-store">Sealing inline secrets</a>).</td>
+</tr>
+<tr>
+<td><code>secret status</code></td>
+<td>Show the active backend and store location and the number of stored secrets.</td>
+</tr>
+<tr>
+<td><code>secret wire-unit</code></td>
+<td>(Linux/systemd-creds) Regenerate the unit credential drop-in.</td>
+</tr>
+</tbody>
+</table>
+<p>All subcommands honour <code>--config-path &lt;path&gt;</code> to locate a non-default configuration directory.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Store a secret from a hidden prompt</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam-prod.password
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Secret value (hidden): ********</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># stored secret &quot;veeam-prod.password&quot; in age-keyfile; reference it as ${secret:veeam-prod.password}</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Store from a file (no value on the command line)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>db.password<span class="w"> </span>--from-file<span class="w"> </span>/root/db-pass.txt
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Store from stdin (piping)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DB_PASS</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>db.password
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># List names and show backend status</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span>list
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span>status
+</code></pre></div>
+<h3 id="agent-key-show"><code>agent key show</code><a class="headerlink" href="#agent-key-show" title="Permanent link">&para;</a></h3>
+<p><code>agent key show</code> prints the agent key — the bearer token an operator needs to reach the web UI and to configure PRTG/Nagios scrapers. It loads the configuration and prints the <strong>resolved</strong> key, so it works whether the key is still inline or has been sealed into the store as <code>${secret:agent.key}</code>.</p>
+<p>Resolving a sealed key reads the root-/service-owned store, so <code>key show</code> runs behind the same privilege gate as <code>agent secret</code> — it is not a read-only command.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>senhub-agent<span class="w"> </span>key<span class="w"> </span>show
+</code></pre></div>
+<h2 id="sealing-inline-secrets-into-the-store">Sealing inline secrets into the store<a class="headerlink" href="#sealing-inline-secrets-into-the-store" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Sealing also happens automatically on first boot</p>
+<p>From <code>config_version 3</code>, the agent seals inline plaintext secrets into
+the store automatically the first time it starts: it moves each value
+into the store, rewrites the field to a <code>${secret:...}</code> reference, and
+stamps the file <code>config_version: 3</code>. The bump to version 3 happens only
+when a secret is actually sealed — a secret-free configuration stays at
+version 2 and is untouched. <code>agent secret migrate</code> is the explicit,
+on-demand equivalent of that boot-time step (for example to seal a
+configuration before distributing it). See
+<a href="../configuration/#config-versions">Configuration → Config versions</a>.</p>
+</div>
+<p><code>agent secret migrate</code> scans the configuration for fields whose NAME denotes a secret (<code>password</code>, <code>passphrase</code>, <code>secret</code>, <code>token</code>, <code>api_key</code>, <code>community</code>, <code>credential</code>, <code>dsn</code>, <code>uri</code>, <code>private_key</code>) and whose value is still an inline plaintext (not already a <code>${...}</code> reference). It moves each value into the store and rewrites the field to a <code>${secret:}</code> reference. Identifier-style fields such as <code>user</code>, <code>login</code> and <code>email</code> are deliberately left alone.</p>
+<p>Before:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam-prod</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://veeam.example.com:9419&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S3cr3t!&quot;</span>
+</code></pre></div>
+<p>Run the migration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span>migrate
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># sealed inline secrets into the store and rewrote them to ${secret:} references</span>
+</code></pre></div>
+<p>After — the plaintext is gone from the config and lives only in the encrypted store:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam-prod</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">veeam</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://veeam.example.com:9419&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${secret:veeam-prod.password}&quot;</span>
+</code></pre></div>
+<p>The store key is derived from the owning instance name and the field path (for example <code>veeam-prod.password</code>, or <code>citrix-01.director.auth.password</code> for nested fields), so every sealed value has a stable, human-readable reference.</p>
 
 
 
@@ -3374,7 +3455,7 @@ and thread pool queue depths.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../clickhouse/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ClickHouse">
+          <a href="../configuration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3384,20 +3465,20 @@ and thread pool queue depths.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                ClickHouse
+                Configuration
               </div>
             </div>
           </a>
         
         
           
-          <a href="../opensearch/" class="md-footer__link md-footer__link--next" aria-label="Next: OpenSearch">
+          <a href="../http-https/" class="md-footer__link md-footer__link--next" aria-label="Next: HTTP / HTTPS">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                OpenSearch
+                HTTP / HTTPS
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -3465,14 +3546,14 @@ and thread pool queue depths.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/rn-filter.js"></script>
+        <script src="../javascripts/rn-filter.js"></script>
       
-        <script src="../../javascripts/dev-banner.js"></script>
+        <script src="../javascripts/dev-banner.js"></script>
       
     
   </body>
