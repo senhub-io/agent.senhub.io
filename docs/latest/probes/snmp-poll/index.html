@@ -1592,6 +1592,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../powerstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../syslog/" class="md-nav__link">
         
   
@@ -2917,7 +2945,63 @@
   <span class="md-ellipsis">
     
   
-    Next (0.5.0, unreleased)
+    Next (0.6.0, unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.0
   
 
     
@@ -3313,14 +3397,14 @@ devices and links as entities.</p>
 <p>One probe instance polls one device; declare one instance per device
 (or use discovery to enumerate them).</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core-switch</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_poll</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:SNMP_COMMUNITY}&quot;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-snmp-poll.yaml — each file under probes.d/ is a YAML array of probes</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core-switch</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp_poll</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:core-switch.community}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 </code></pre></div>
 <p>This polls system and interface tables every 60 seconds and emits
 one series per interface (<code>if_index</code> tag).</p>
@@ -3352,7 +3436,7 @@ one series per interface (<code>if_index</code> tag).</p>
 <tr>
 <td><code>community</code></td>
 <td><code>public</code></td>
-<td>Community string (v2c). Use <code>${env:...}</code> or <code>${file:...}</code> substitution rather than a literal</td>
+<td>Community string (v2c) — reference a stored secret via <code>${secret:&lt;name&gt;.community}</code>, <code>${env:VAR}</code> or <code>${file:/path}</code>. Inline plaintext is auto-sealed into the OS secret store on install.</td>
 </tr>
 <tr>
 <td><code>v3</code></td>

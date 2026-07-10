@@ -1553,6 +1553,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../powerstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../syslog/" class="md-nav__link">
         
   
@@ -2878,7 +2906,63 @@
   <span class="md-ellipsis">
     
   
-    Next (0.5.0, unreleased)
+    Next (0.6.0, unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.0
   
 
     
@@ -3229,9 +3313,9 @@ Management Controller via <code>ipmitool</code>, reporting temperatures, fan spe
 voltages and power supply status.</p>
 <p><strong>Linux only.</strong> Requires <code>ipmitool</code> and the OpenIPMI kernel driver (<code>ipmi_si</code>).</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipmi</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipmi</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-ipmi.yaml — each file under probes.d/ is a YAML array of probes</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipmi</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipmi</span>
 </code></pre></div>
 <p>For local sensors, no parameters are needed. The probe calls <code>ipmitool sdr</code>
 against the local BMC.</p>
@@ -3263,7 +3347,7 @@ against the local BMC.</p>
 <tr>
 <td><code>remote_password</code></td>
 <td>—</td>
-<td>IPMI password for remote access</td>
+<td>IPMI password for remote access — reference a stored secret via <code>${secret:&lt;name&gt;.remote_password}</code>, <code>${env:VAR}</code> or <code>${file:/path}</code>. Inline plaintext is auto-sealed into the OS secret store on install.</td>
 </tr>
 <tr>
 <td><code>remote_iface</code></td>
