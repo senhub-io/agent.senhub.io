@@ -3179,14 +3179,17 @@
 <p><strong>Collected data:</strong></p>
 <ul>
 <li>Cluster reachability and configuration state</li>
-<li>Hardware component health (healthy vs faulted counts)</li>
-<li>Physical and logical capacity, data-reduction and efficiency ratios</li>
-<li>Performance: IOPS, bandwidth, latency, average I/O size, CPU workload</li>
-<li>Replication sessions</li>
-<li>Volume counts (total, not-ready)</li>
+<li>Hardware component health (healthy vs faulted counts) and per-drive state</li>
+<li>Physical and logical capacity, data-reduction and efficiency ratios — array-wide and per-appliance</li>
+<li>Performance: IOPS, bandwidth, latency, average I/O size, CPU workload — array-wide, per-appliance and per-node</li>
+<li>Per-volume state and capacity; volume counts (total, not-ready)</li>
+<li>Replication sessions (count and per-session state)</li>
 <li>Active alerts by severity</li>
 </ul>
-<p>All metrics are emitted under the <code>senhub.powerstore.*</code> namespace.</p>
+<p>All metrics are emitted under the <code>senhub.powerstore.*</code> namespace. Cluster-level
+aggregates are complemented by <strong>per-resource series</strong> (per volume, appliance,
+node, drive and replication session), each carrying a resource attribute that
+also acts as a filter in the Web UI Sensor Builder.</p>
 <h1 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h1>
 <h2 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/20-powerstore.yaml — each file under probes.d/ is a YAML array of probes</span>
@@ -3369,8 +3372,8 @@
 </tr>
 <tr>
 <td><code>senhub.powerstore.latency</code></td>
-<td><code>s</code></td>
-<td>I/O latency (read / write / total, by attribute)</td>
+<td><code>us</code></td>
+<td>I/O latency in microseconds (read / write / total, by attribute)</td>
 </tr>
 <tr>
 <td><code>senhub.powerstore.io_size</code></td>
@@ -3380,10 +3383,16 @@
 <tr>
 <td><code>senhub.powerstore.cpu.utilization</code></td>
 <td><code>1</code></td>
-<td>CPU workload utilization ratio</td>
+<td>CPU workload utilization — exported as a <code>0..1</code> ratio; the PRTG/Nagios pull views show it as a percentage</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Ratios in the pull views</p>
+<p><code>capacity.used_ratio</code> and <code>cpu.utilization</code> are exported to OTLP/Prometheus as
+<code>0..1</code> ratios (OTel unit <code>1</code>). The PRTG and Nagios views display them as
+percentages (e.g. <code>42 %</code>, not <code>0.42</code>).</p>
+</div>
 <h2 id="replication">Replication<a class="headerlink" href="#replication" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3440,6 +3449,125 @@
 </tr>
 </tbody>
 </table>
+<h2 id="per-resource-series">Per-resource series<a class="headerlink" href="#per-resource-series" title="Permanent link">&para;</a></h2>
+<p>In addition to the cluster-level aggregates above, the probe emits one series per
+resource. Each carries a resource attribute (mapped from the <code>volume</code>,
+<code>appliance</code>, <code>node</code>, <code>drive</code> or <code>session</code> tag) so instances stay distinct in
+OTLP/Prometheus and become filterable in the Web UI.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Unit</th>
+<th>Resource attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.powerstore.volume.state</code></td>
+<td><code>1</code></td>
+<td><code>volume.name</code></td>
+<td>Volume operational state (Ready=1, else 0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.logical_used</code></td>
+<td><code>By</code></td>
+<td><code>volume.name</code></td>
+<td>Logical data written before data reduction</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.size</code></td>
+<td><code>By</code></td>
+<td><code>volume.name</code></td>
+<td>Provisioned (thin) volume size</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.drive.state</code></td>
+<td><code>1</code></td>
+<td><code>drive.name</code></td>
+<td>Drive lifecycle state (Healthy=1, else 0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.state</code></td>
+<td><code>1</code></td>
+<td><code>appliance.name</code></td>
+<td>Appliance lifecycle state (Healthy=1, else 0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.capacity.physical</code></td>
+<td><code>By</code></td>
+<td><code>appliance.name</code></td>
+<td>Physical capacity (used / total, by attribute)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.capacity.logical</code></td>
+<td><code>By</code></td>
+<td><code>appliance.name</code></td>
+<td>Logical used capacity</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.iops</code></td>
+<td><code>{operation}/s</code></td>
+<td><code>appliance.name</code></td>
+<td>Appliance IOPS (read / write / total, by attribute)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.bandwidth</code></td>
+<td><code>By/s</code></td>
+<td><code>appliance.name</code></td>
+<td>Appliance throughput</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.latency</code></td>
+<td><code>us</code></td>
+<td><code>appliance.name</code></td>
+<td>Appliance latency (microseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.cpu.utilization</code></td>
+<td><code>1</code></td>
+<td><code>appliance.name</code></td>
+<td>Appliance CPU workload (ratio; <code>%</code> in pull views)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.node.cpu.utilization</code></td>
+<td><code>1</code></td>
+<td><code>node.name</code></td>
+<td>Node CPU workload (ratio; <code>%</code> in pull views)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.node.iops</code></td>
+<td><code>{operation}/s</code></td>
+<td><code>node.name</code></td>
+<td>Node total IOPS</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.replication.state</code></td>
+<td><code>1</code></td>
+<td><code>replication.session_id</code></td>
+<td>Replication session state (OK=2, transitional=1, error=0)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Per-volume performance</p>
+<p>Per-volume <strong>capacity and state</strong> are collected for every volume. Per-volume
+<strong>performance</strong> (IOPS/latency per volume) is not collected by default — it
+costs one REST request per volume per cycle, which does not scale on arrays
+with many volumes. Appliance- and node-level performance cover the array
+without that per-volume cost.</p>
+</div>
+<h2 id="filtering-web-ui-sensor-builder">Filtering (Web UI Sensor Builder)<a class="headerlink" href="#filtering-web-ui-sensor-builder" title="Permanent link">&para;</a></h2>
+<p>The PRTG/Web UI Sensor Builder exposes filters for this probe:</p>
+<ul>
+<li><strong>Metric Type</strong> (category) — cluster, hardware, volumes, alerts, capacity, performance, replication</li>
+<li><strong>Alert Severity</strong> — Critical / Major / Minor / Info</li>
+<li><strong>Volume</strong>, <strong>Appliance</strong>, <strong>Node</strong>, <strong>Drive</strong>, <strong>Replication Session</strong> — pick a specific resource</li>
+</ul>
+<p><code>Cluster State</code>, <code>Array Reachable</code>, <code>Drive</code>/<code>Appliance</code>/<code>Volume State</code> and
+<code>Replication State</code> render as text (e.g. <code>CONFIGURED</code>, <code>UP</code>, <code>Healthy</code>) via PRTG
+value lookups rather than raw numbers.</p>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
 <li><strong>PowerStore REST API</strong> reachable from the agent host (HTTPS, default port 443).</li>
@@ -3447,9 +3575,9 @@
 <li>Network path from the agent to the array's management endpoint.</li>
 </ul>
 <h1 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h1>
-<p>PowerStore metrics are available through every configured output — OTLP, Prometheus, and the pull formats (PRTG, Nagios, Web UI). For PRTG and Nagios, query the probe by name:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>agentkey<span class="o">}</span>/prtg/metrics<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;probe&quot;: &quot;powerstore-prod&quot;}&#39;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/nagios/metrics?probe=powerstore-prod&quot;</span>
+<p>PowerStore metrics are available through every configured output — OTLP, Prometheus, and the pull formats (PRTG, Nagios, Web UI). For PRTG and Nagios, query the probe by its configured <code>name</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/prtg/metrics/powerstore-prod&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/nagios/metrics/powerstore-prod&quot;</span>
 </code></pre></div>
 
 
