@@ -3372,8 +3372,8 @@ also acts as a filter in the Web UI Sensor Builder.</p>
 </tr>
 <tr>
 <td><code>senhub.powerstore.latency</code></td>
-<td><code>us</code></td>
-<td>I/O latency in microseconds (read / write / total, by attribute)</td>
+<td><code>ms</code></td>
+<td>I/O latency in milliseconds (read / write / total, by attribute); exported as seconds over OTel</td>
 </tr>
 <tr>
 <td><code>senhub.powerstore.io_size</code></td>
@@ -3492,7 +3492,7 @@ OTLP/Prometheus and become filterable in the Web UI.</p>
 <td><code>senhub.powerstore.appliance.state</code></td>
 <td><code>1</code></td>
 <td><code>appliance.name</code></td>
-<td>Appliance lifecycle state (Healthy=1, else 0)</td>
+<td>Appliance health (1 = no faulted component, else 0)</td>
 </tr>
 <tr>
 <td><code>senhub.powerstore.appliance.capacity.physical</code></td>
@@ -3520,9 +3520,9 @@ OTLP/Prometheus and become filterable in the Web UI.</p>
 </tr>
 <tr>
 <td><code>senhub.powerstore.appliance.latency</code></td>
-<td><code>us</code></td>
+<td><code>ms</code></td>
 <td><code>appliance.name</code></td>
-<td>Appliance latency (microseconds)</td>
+<td>Appliance latency (milliseconds)</td>
 </tr>
 <tr>
 <td><code>senhub.powerstore.appliance.cpu.utilization</code></td>

@@ -1896,6 +1896,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#job-type-shows-customplatform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Job type shows "CustomPlatform"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#no-job-metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3562,6 +3573,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#job-type-shows-customplatform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Job type shows "CustomPlatform"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#no-job-metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3955,6 +3977,11 @@
 <p>The Veeam account must have the <strong>Backup Administrator</strong> role. The REST API does not work with Backup Viewer.</p>
 <h3 id="http-500-on-job-collection">HTTP 500 on job collection<a class="headerlink" href="#http-500-on-job-collection" title="Permanent link">&para;</a></h3>
 <p>Some Veeam installations have job types (e.g., HyperVBackup) that cause server-side errors. The agent handles this automatically by querying jobs per type.</p>
+<h3 id="job-type-shows-customplatform">Job type shows "CustomPlatform"<a class="headerlink" href="#job-type-shows-customplatform" title="Permanent link">&para;</a></h3>
+<p>Plugin-managed backups (Veeam Backup for <strong>Nutanix AHV</strong> and other external
+modules) are reported by Veeam's <code>/jobs/states</code> endpoint without a standard job
+type. The agent labels these as <code>CustomPlatform</code> (Veeam's own term) so they are
+grouped and filterable, rather than left as "Unknown".</p>
 <h3 id="no-job-metrics">No job metrics<a class="headerlink" href="#no-job-metrics" title="Permanent link">&para;</a></h3>
 <p>If <code>hours_to_check</code> is too short, jobs that ran outside the time window are excluded. Increase the value (default: 24 hours).</p>
 
