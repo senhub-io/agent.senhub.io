@@ -2,374 +2,386 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://agent.senhub.io/docs/latest/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/cli/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/configuration/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/http-https/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/installation/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/otlp/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/presentation/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/secret-store/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/troubleshooting/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/web-interface/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/activemq/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/apache/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/cassandra/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/ceph/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/chrony/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/citrix/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/clickhouse/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/consul/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/couchdb/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/cpu/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/dns-latency/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/docker/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/elasticsearch/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/envoy/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/event/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/exec/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/filetail/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/haproxy/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/http-check/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/hyperv/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/icmp-check/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/influxdb/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/ipmi/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/jenkins/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/kafka/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/kubernetes/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/linux-logs/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/load-webapp/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/logicaldisk/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/memcached/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/memory/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/modbus/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/mongodb/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/mssql/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/mysql/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/nats/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/netscaler/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/network/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/nginx/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/nvidia/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/opensearch/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/oracle/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/otlp-receiver/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/php-fpm/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/ping-gateway/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/ping-webapp/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/postgresql/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/latest/probes/powerstore/</loc>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/process/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/prometheus-scrape/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/proxmox/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/pulsar/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/rabbitmq/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/redfish/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/redis/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/smart/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/snmp-poll/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/snmp-trap/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/solr/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/syslog/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/systemd/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/tcp-dial/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/tomcat/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/unifi/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/varnish/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/veeam/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/wifi-signal-strength/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/wildfly/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/windows-eventlog/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/windows-services/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/probes/zookeeper/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/prometheus/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/prometheus/metrics-reference/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.2.0/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.2.1/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.2.2/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.2.3/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.3.2/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.4.0/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.4.1/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/0.4.2/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/latest/whats-new/0.5.0/</loc>
+         <lastmod>2026-07-10</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/latest/whats-new/0.5.1/</loc>
+         <lastmod>2026-07-10</lastmod>
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/latest/whats-new/next/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-10</lastmod>
     </url>
 </urlset>
