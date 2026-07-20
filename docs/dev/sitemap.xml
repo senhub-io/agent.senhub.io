@@ -49,6 +49,10 @@
          <lastmod>2026-07-20</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/ad_hybrid/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/apache/</loc>
          <lastmod>2026-07-20</lastmod>
     </url>
@@ -105,6 +109,10 @@
          <lastmod>2026-07-20</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/exchange_online/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/exec/</loc>
          <lastmod>2026-07-20</lastmod>
     </url>
@@ -122,6 +130,14 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/hyperv/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/hyperv_ha/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/ibmi/</loc>
          <lastmod>2026-07-20</lastmod>
     </url>
     <url>
@@ -181,6 +197,10 @@
          <lastmod>2026-07-20</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/mssql_ha/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/mysql/</loc>
          <lastmod>2026-07-20</lastmod>
     </url>
@@ -210,6 +230,10 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/oracle/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/oracle_enterprise/</loc>
          <lastmod>2026-07-20</lastmod>
     </url>
     <url>
@@ -306,6 +330,10 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/veeam/</loc>
+         <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/vsphere_ha/</loc>
          <lastmod>2026-07-20</lastmod>
     </url>
     <url>
