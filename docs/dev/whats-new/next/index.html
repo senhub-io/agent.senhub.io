@@ -1488,6 +1488,202 @@
   
   
     <li class="md-nav__item">
+      <a href="../../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../probes/syslog/" class="md-nav__link">
         
   
@@ -2890,6 +3086,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hyperv_ha-mssql_ha-oracle_enterprise-and-vsphere_ha-metric-names-normalized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hyperv_ha, mssql_ha, oracle_enterprise and vsphere_ha metric names normalized
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3268,6 +3475,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hyperv_ha-mssql_ha-oracle_enterprise-and-vsphere_ha-metric-names-normalized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hyperv_ha, mssql_ha, oracle_enterprise and vsphere_ha metric names normalized
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3402,6 +3620,27 @@ below.</p>
 </table>
 <p>The mail-flow counters are now correctly typed as counters, and mailbox storage
 now declares the <code>By</code> unit.</p>
+<h3 id="hyperv_ha-mssql_ha-oracle_enterprise-and-vsphere_ha-metric-names-normalized"><code>hyperv_ha</code>, <code>mssql_ha</code>, <code>oracle_enterprise</code> and <code>vsphere_ha</code> metric names normalized<a class="headerlink" href="#hyperv_ha-mssql_ha-oracle_enterprise-and-vsphere_ha-metric-names-normalized" title="Permanent link">&para;</a></h3>
+<p>The same normalization was applied to the four high-availability probes — they had
+the identical inconsistency (only <code>up</code> was namespaced) and no transformer. All
+their metrics now live under <code>senhub.&lt;probe&gt;.*</code>, with declared units and types.</p>
+<p><strong>hyperv_ha</strong> (OTLP): <code>hyperv.replica.health</code> / <code>.state</code> / <code>.lag</code>,
+<code>hyperv.cluster.node.state</code>, <code>hyperv.cluster.group.state</code> →
+<code>senhub.hyperv_ha.replica.*</code> / <code>senhub.hyperv_ha.cluster.*</code>.</p>
+<p><strong>mssql_ha</strong> (OTLP): <code>sqlserver.ag.replica.role</code> / <code>.health</code> / <code>.connected</code>,
+<code>sqlserver.ag.database.lag</code>, <code>sqlserver.ag.log_send_queue</code> / <code>redo_queue</code> /
+<code>log_send_rate</code> / <code>redo_rate</code> → <code>senhub.mssql_ha.*</code>.</p>
+<p><strong>oracle_enterprise</strong> (OTLP <strong>and</strong> Prometheus): <code>oracle.awr.*</code>, <code>oracle.ash.*</code>,
+<code>oracle.rac.*</code>, <code>oracle.dataguard.*</code> → <code>senhub.oracle_enterprise.*</code>. This also
+fixes a Prometheus namespace collision with the Free <code>oracle</code> probe
+(<code>senhub_oracle_awr_db_time</code> → <code>senhub_oracle_enterprise_awr_db_time</code>).
+<code>oracle.rac.instance.count</code> → <code>senhub.oracle_enterprise.rac.instances</code>; the two
+RAC metrics are now typed as counters.</p>
+<p><strong>vsphere_ha</strong> (OTLP): <code>vsphere.vsan.*</code> and <code>vsphere.nsx.*</code> →
+<code>senhub.vsphere_ha.vsan.*</code> / <code>senhub.vsphere_ha.nsx.*</code>. The vSAN object
+health/degraded pair is collapsed to <code>senhub.vsphere_ha.vsan.objects</code> with an
+<code>object.state</code> attribute.</p>
+<p>(In every case the pre-existing <code>senhub.&lt;probe&gt;.up</code> metric is unchanged.)</p>
 
 
 
