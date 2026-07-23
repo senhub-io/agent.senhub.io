@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/mongodb/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/os-updates/">
       
       
-        <link rel="prev" href="../mssql/">
+        <link rel="prev" href="../chrony/">
       
       
-        <link rel="next" href="../oracle/">
+        <link rel="next" href="../smart/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>MongoDB - SenHub Agent</title>
+        <title>OS Updates - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mongodb" class="md-skip">
+        <a href="#os-updates" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MongoDB
+              OS Updates
             
           </span>
         </div>
@@ -1011,10 +1011,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../os-updates/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1030,6 +1057,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-os-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-OS behaviour
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Per-OS behaviour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debian-ubuntu-apt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debian / Ubuntu (apt)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rhel-and-derivatives-dnf-yum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RHEL and derivatives (dnf / yum)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-windows-update-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows (Windows Update Agent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other platforms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1991,37 +2143,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MongoDB
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../mongodb/" class="md-nav__link">
         
   
   
@@ -2037,70 +2162,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3519,6 +3580,67 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#per-os-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-OS behaviour
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Per-OS behaviour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debian-ubuntu-apt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debian / Ubuntu (apt)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rhel-and-derivatives-dnf-yum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RHEL and derivatives (dnf / yum)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-windows-update-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows (Windows Update Agent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other platforms
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3546,7 +3668,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/mongodb.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/os-updates.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3554,21 +3676,24 @@
   
 
 
-<p><img src="https://cdn.simpleicons.org/mongodb" alt="" class="probe-page-logo probe-page-logo-si"></p>
+<p><img src="https://api.iconify.design/mdi/update.svg?color=%23666" alt="" class="probe-page-logo probe-page-logo-mdi"></p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p><strong>License: Free</strong> — part of the universal collection tier.</p>
 </div>
-<h1 id="mongodb">MongoDB<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h1>
-<p>The <code>mongodb</code> probe monitors a MongoDB server or replica set via <code>serverStatus</code>
-and per-database <code>dbStats</code>, covering connections, operation throughput, memory
-usage, replication state and database storage.</p>
+<h1 id="os-updates">OS Updates<a class="headerlink" href="#os-updates" title="Permanent link">&para;</a></h1>
+<p>The <code>os_updates</code> probe reports the patch posture of the machine the agent runs
+on: how many OS updates are pending, how many of them are security updates, and
+whether the OS is waiting for a reboot. It replaces hand-deployed scripts (for
+example an <code>exec</code> probe wrapping <code>apt-check</code>) with a native, cross-platform
+probe that also covers Windows.</p>
+<p>All queries are read-only and run without privilege escalation.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/20-mongodb.yaml — each file under probes.d/ is a YAML array of probes</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/40-os-updates.yaml — each file under probes.d/ is a YAML array of probes</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">os-updates</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">os_updates</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb://localhost:27017</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1800</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3581,19 +3706,14 @@ usage, replication state and database storage.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>uri</code></td>
-<td><code>mongodb://localhost:27017</code></td>
-<td>MongoDB connection URI. Credentials can be embedded: <code>mongodb://user:pass@host:27017</code></td>
+<td><code>interval</code></td>
+<td><code>3600</code></td>
+<td>Collection interval in seconds. Update status changes slowly; 30-60 minutes is a sensible range.</td>
 </tr>
 <tr>
-<td><code>direct_connection</code></td>
-<td><code>true</code></td>
-<td>Connect directly to the specified host (skips topology discovery). Set to <code>false</code> for Atlas or replica-set-aware routing</td>
-</tr>
-<tr>
-<td><code>instance_name</code></td>
-<td>—</td>
-<td>Override for the entity instance ID (stable name across restarts)</td>
+<td><code>command_timeout</code></td>
+<td><code>120</code></td>
+<td>Timeout in seconds for the package-manager queries on Linux.</td>
 </tr>
 </tbody>
 </table>
@@ -3608,72 +3728,75 @@ usage, replication state and database storage.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub.mongodb.up</code></td>
+<td><code>senhub.os.updates.up</code></td>
 <td>1</td>
-<td>1 when the agent reached the MongoDB server this cycle</td>
+<td>1 when the update backend answered, 0 when it failed or the platform is unsupported</td>
 </tr>
 <tr>
-<td><code>mongodb.uptime</code></td>
-<td>s</td>
-<td>Server uptime in seconds</td>
+<td><code>senhub.os.updates.pending</code></td>
+<td>update</td>
+<td>Number of updates available and not yet installed</td>
 </tr>
 <tr>
-<td><code>mongodb.connections.current</code></td>
-<td>{connection}</td>
-<td>Current client connections</td>
+<td><code>senhub.os.updates.pending.security</code></td>
+<td>update</td>
+<td>Number of pending updates classified as security fixes</td>
 </tr>
 <tr>
-<td><code>mongodb.connections.available</code></td>
-<td>{connection}</td>
-<td>Available connection slots</td>
-</tr>
-<tr>
-<td><code>mongodb.operations.count</code></td>
-<td>{operation}</td>
-<td>Operations by type (insert/query/update/delete/getmore/command), tagged with <code>operation</code></td>
-</tr>
-<tr>
-<td><code>mongodb.memory.resident</code></td>
-<td>By</td>
-<td>Resident (physical) memory used by the server</td>
-</tr>
-<tr>
-<td><code>mongodb.memory.virtual</code></td>
-<td>By</td>
-<td>Virtual memory used by the server</td>
-</tr>
-<tr>
-<td><code>mongodb.locks.deadlock.count</code></td>
-<td>{deadlock}</td>
-<td>Global lock deadlocks</td>
-</tr>
-<tr>
-<td><code>mongodb.index.accesses</code></td>
-<td>{access}</td>
-<td>Index accesses by database, tagged with <code>database</code></td>
-</tr>
-<tr>
-<td><code>mongodb.database.storage.size</code></td>
-<td>By</td>
-<td>Storage allocated per database</td>
-</tr>
-<tr>
-<td><code>mongodb.database.document.count</code></td>
-<td>{document}</td>
-<td>Document count per database</td>
-</tr>
-<tr>
-<td><code>mongodb.replica_set.state</code></td>
+<td><code>senhub.os.updates.reboot_required</code></td>
 <td>1</td>
-<td>Replica set member state (1 = PRIMARY, 2 = SECONDARY, …)</td>
+<td>1 when the OS reports a pending reboot, 0 otherwise</td>
 </tr>
 </tbody>
 </table>
+<p>Every metric carries the backend that answered as an attribute
+(<code>os.package_manager</code>: <code>apt</code>, <code>dnf</code>, <code>yum</code> or <code>wua</code>).</p>
+<h2 id="per-os-behaviour">Per-OS behaviour<a class="headerlink" href="#per-os-behaviour" title="Permanent link">&para;</a></h2>
+<h3 id="debian-ubuntu-apt">Debian / Ubuntu (apt)<a class="headerlink" href="#debian-ubuntu-apt" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Counts come from <code>/usr/lib/update-notifier/apt-check</code> when it is installed
+  (package <code>update-notifier-common</code>); it reports the exact security count
+  maintained by the distribution.</li>
+<li>Without apt-check, the probe falls back to simulating an upgrade
+  (<code>apt-get -s upgrade</code>) and counting packages, marking those coming from a
+  <code>*-security</code> archive as security updates.</li>
+<li>The reboot flag is the existence of <code>/var/run/reboot-required</code>.</li>
+<li>The probe does not refresh package lists (<code>apt-get update</code> is never run);
+  counts reflect the lists maintained by the system's own update timers.</li>
+</ul>
+<h3 id="rhel-and-derivatives-dnf-yum">RHEL and derivatives (dnf / yum)<a class="headerlink" href="#rhel-and-derivatives-dnf-yum" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Counts come from <code>dnf -q updateinfo list</code> and
+  <code>dnf -q updateinfo list --security</code> (or <code>yum</code> on older systems). The count is
+  advisory-package pairs, which is what <code>updateinfo</code> reports.</li>
+<li>The reboot flag comes from <code>needs-restarting -r</code> (package <code>dnf-utils</code> /
+  <code>yum-utils</code>); if the tool is not installed the flag is reported as 0.</li>
+<li>Depending on the metadata cache age, the first query after boot may take
+  longer while dnf refreshes its metadata.</li>
+</ul>
+<h3 id="windows-windows-update-agent">Windows (Windows Update Agent)<a class="headerlink" href="#windows-windows-update-agent" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The probe queries the Windows Update Agent COM API
+  (<code>IsInstalled=0 and IsHidden=0 and Type='Software'</code>). The result honours the
+  machine's update source: WSUS-managed hosts report what WSUS approved.</li>
+<li>Security updates are the ones carrying an MSRC severity or the
+  "Security Updates" category.</li>
+<li>The reboot flag is the Windows Update pending-reboot state.</li>
+<li>The first search on a host that has not scanned recently can take minutes;
+  the probe reports it at the next interval. Keep the interval at 1800 seconds
+  or more.</li>
+</ul>
+<h3 id="other-platforms">Other platforms<a class="headerlink" href="#other-platforms" title="Permanent link">&para;</a></h3>
+<p>On unsupported platforms (macOS) the probe emits <code>senhub.os.updates.up=0</code>.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>For authenticated clusters embed credentials in the URI: <code>mongodb://monitor:pass@host:27017/admin?authSource=admin</code>.</li>
-<li>Replica set members: set <code>direct_connection: false</code> and provide the replica set URI (<code>mongodb://host1,host2,host3/?replicaSet=rs0</code>) for topology-aware routing.</li>
-<li>For MongoDB Atlas, use the Atlas connection string and set <code>direct_connection: false</code>.</li>
+<li>This probe is host-local: it reads the update state of the machine the agent
+  runs on, not a remote system.</li>
+<li>When the backend fails (package manager busy, WUA service stopped), the probe
+  keeps emitting <code>senhub.os.updates.up=0</code> and suppresses the counts for that
+  cycle instead of dropping the series.</li>
+<li>Alerting suggestion: warn on <code>senhub.os.updates.pending.security &gt; 0</code>
+  sustained for more than a day, and on <code>senhub.os.updates.reboot_required = 1</code>.</li>
 </ul>
 
 
@@ -3710,7 +3833,7 @@ usage, replication state and database storage.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../mssql/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Microsoft SQL Server">
+          <a href="../chrony/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chrony (NTP)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3720,20 +3843,20 @@ usage, replication state and database storage.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Microsoft SQL Server
+                Chrony (NTP)
               </div>
             </div>
           </a>
         
         
           
-          <a href="../oracle/" class="md-footer__link md-footer__link--next" aria-label="Next: Oracle Database">
+          <a href="../smart/" class="md-footer__link md-footer__link--next" aria-label="Next: S.M.A.R.T. Disk Health">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Oracle Database
+                S.M.A.R.T. Disk Health
               </div>
             </div>
             <div class="md-footer__button md-icon">
