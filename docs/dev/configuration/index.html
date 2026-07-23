@@ -5316,7 +5316,7 @@ reports the core host probes; the full Free tier is broader — see the
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:DB_HOST:-127.0.0.1}&quot;</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${file:/etc/senhub/secrets/db_password}&quot;</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${file:/etc/senhub-agent/secrets/db_password}&quot;</span>
 </code></pre></div>
 <p>A missing required reference (file not found, no default) <strong>aborts agent boot</strong> with the offending reference in the error message. An unset environment variable without a default substitutes to an empty string and does <strong>not</strong> abort — match POSIX shell behaviour.</p>
 <h2 id="inspecting-the-merged-configuration">Inspecting the merged configuration<a class="headerlink" href="#inspecting-the-merged-configuration" title="Permanent link">&para;</a></h2>
