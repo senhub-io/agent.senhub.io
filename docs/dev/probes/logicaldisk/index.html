@@ -4849,12 +4849,12 @@
 - Real-time per-drive metrics</p>
 <p><strong>Drive Identification:</strong>
 - Drive letters: <code>C:</code>, <code>D:</code>, <code>E:</code>, etc.
-- Tag: <code>drive=C:</code></p>
+- Tags: <code>drive=C:</code>, <code>device=C:</code>, <code>fs_type=ntfs</code></p>
 <p><strong>Default Filters:</strong>
 - Includes: All drives (empty = all)
 - Excludes: <code>HarddiskVolume*</code> (system volumes), <code>_Total</code> (aggregate)</p>
 <p><strong>Example Metrics:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>disk_free_mb{drive=&quot;C:&quot;} = 102400
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>disk_free_mb{drive=&quot;C:&quot;,device=&quot;C:&quot;,fs_type=&quot;ntfs&quot;} = 102400
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>disk_free_percent{drive=&quot;C:&quot;} = 45.2
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>disk_reads_sec{drive=&quot;C:&quot;} = 123.4
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>disk_writes_sec{drive=&quot;C:&quot;} = 87.6

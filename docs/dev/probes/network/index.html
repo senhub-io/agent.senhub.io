@@ -4708,6 +4708,7 @@
 <li><strong>Interfaces with IP addresses</strong> (IPv4 or IPv6)</li>
 <li><strong>Excludes</strong>: Virtual adapters, disabled interfaces, loopback</li>
 </ul>
+<p>A performance-counter instance that no adapter claims (name mismatch, or an adapter without an IP) still emits its counters, without the IP tags — real traffic is never dropped.</p>
 <h3 id="unixlinuxmacos">Unix/Linux/macOS<a class="headerlink" href="#unixlinuxmacos" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Non-loopback interfaces</strong> (excludes <code>lo</code>, <code>lo0</code>)</li>
@@ -5017,9 +5018,9 @@
 <td><code>192.168.1.10</code>, <code>2001:db8::1</code></td>
 </tr>
 <tr>
-<td><code>hostname</code></td>
-<td>System hostname</td>
-<td><code>web-server-01</code></td>
+<td><code>host</code></td>
+<td>System FQDN, lower-cased</td>
+<td><code>web-01.example.com</code></td>
 </tr>
 <tr>
 <td><code>os</code></td>
@@ -5027,9 +5028,9 @@
 <td><code>linux</code>, <code>windows</code>, <code>darwin</code></td>
 </tr>
 <tr>
-<td><code>arch</code></td>
-<td>System architecture</td>
-<td><code>amd64</code>, <code>arm64</code></td>
+<td><code>platform</code></td>
+<td>OS distribution / platform</td>
+<td><code>debian</code>, <code>ubuntu</code></td>
 </tr>
 </tbody>
 </table>
@@ -5051,7 +5052,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">packets_received</span><span class="p">{</span><span class="nl">ip</span><span class="o">=</span><span class="p">&quot;</span><span class="s">192.168.1.10</span><span class="p">&quot;}</span>
 </code></pre></div></p>
 <p><strong>Aggregate all interfaces:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">sum</span><span class="o">(</span><span class="nv">bytes_sent</span><span class="p">{</span><span class="nl">hostname</span><span class="o">=</span><span class="p">&quot;</span><span class="s">web-01</span><span class="p">&quot;}</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">sum</span><span class="o">(</span><span class="nv">bytes_sent</span><span class="p">{</span><span class="nl">host</span><span class="o">=</span><span class="p">&quot;</span><span class="s">web-01.example.com</span><span class="p">&quot;}</span><span class="o">)</span>
 </code></pre></div></p>
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>The Network probe requires no authentication as it collects local system metrics only.</p>
