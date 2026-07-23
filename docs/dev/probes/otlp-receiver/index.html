@@ -3568,6 +3568,11 @@ deployment.</p>
 <td><code>grpc</code> (OTLP/gRPC) or <code>http</code> (OTLP/HTTP protobuf)</td>
 </tr>
 <tr>
+<td><code>signals</code></td>
+<td><code>[metrics]</code></td>
+<td>Which OTLP signals the listener accepts: any combination of <code>metrics</code>, <code>logs</code>, <code>traces</code>. Logs and traces are relayed onward through a configured OTLP export strategy (see Behavior)</td>
+</tr>
+<tr>
 <td><code>address</code></td>
 <td><code>127.0.0.1:4317</code> (grpc), <code>127.0.0.1:4318</code> (http)</td>
 <td>Listen address. Loopback by default — accepting remote OTLP requires an explicit address (e.g. <code>"0.0.0.0:4317"</code>); pair it with the protections below</td>
@@ -3580,7 +3585,7 @@ deployment.</p>
 <tr>
 <td><code>http_path</code></td>
 <td><code>/v1/metrics</code></td>
-<td>Route served by the HTTP receiver (ignored for gRPC)</td>
+<td>Route the HTTP receiver serves metrics on (ignored for gRPC). Logs are always served on <code>/v1/logs</code>, traces on <code>/v1/traces</code></td>
 </tr>
 <tr>
 <td><code>bearer_token</code></td>
@@ -3632,16 +3637,47 @@ deployment.</p>
   and every other resource attribute is folded onto each datapoint,
   so downstream sinks can group by origin. Per-datapoint attributes
   win on key collisions.</li>
-<li><strong>Scalar metrics only.</strong> Gauges and Sums are ingested. Histograms,
-  exponential histograms and summaries are dropped and reported in
-  the OTLP partial-success response — the sender's SDK logs it.</li>
+<li><strong>All metric types.</strong> Gauges and Sums map to one value each.
+  Explicit-bucket histograms are ingested <strong>natively</strong>: re-exported over
+  OTLP as a genuine histogram (buckets, sum, count, min/max preserved)
+  and on the Prometheus endpoint as a classic histogram — cumulative
+  <code>&lt;name&gt;_bucket{le="…"}</code>, <code>&lt;name&gt;_sum</code>, <code>&lt;name&gt;_count</code>. Sinks without
+  histogram rendering (PRTG, Nagios, cloud) show the observation count.
+  Summaries are ingested as their component series — <code>&lt;name&gt;_count</code>,
+  <code>&lt;name&gt;_sum</code>, <code>&lt;name&gt;{quantile="…"}</code> — and exponential histograms
+  contribute their <code>_count</code> / <code>_sum</code> / <code>_min</code> / <code>_max</code> aggregates
+  (the base-2 buckets are not expanded yet). Only a metric with an
+  unrecognized or unset data type is dropped, reported in the OTLP
+  partial-success response.</li>
 <li><strong>Pass-through naming.</strong> Ingested metric names are forwarded
   unchanged; nothing is renamed or prefixed.</li>
+<li><strong>Logs are relayed.</strong> With <code>signals: [logs]</code>, OTLP log records are
+  accepted (gRPC <code>LogsService</code>, or HTTP on <code>/v1/logs</code>) and handed to a
+  configured OTLP export strategy, which forwards them onward over OTLP
+  (an OTLP-in → OTLP-out relay). Severity, body, and attributes are
+  preserved; resource attributes are folded onto each record. The pull
+  sinks (Prometheus/PRTG/Nagios) are metrics-only, so <strong>logs need an OTLP
+  export strategy</strong> — without one, ingested logs are discarded and the
+  agent logs a throttled warning.</li>
+<li><strong>Traces are relayed.</strong> With <code>signals: [traces]</code>, OTLP trace spans are
+  accepted (gRPC <code>TracesService</code>, or HTTP on <code>/v1/traces</code>) and forwarded
+  as a raw pass-through: spans are relayed verbatim — trace IDs, span
+  IDs, attributes, events, and resource are untouched (an OTLP-in →
+  OTLP-out relay). <strong>Traces need an OTLP export strategy with
+  <code>signals.traces.enabled: true</code></strong> — the traces signal on the export side
+  gates the relay; without it, ingested spans are discarded and the agent
+  logs a throttled warning.</li>
 <li><strong>Limits.</strong> gRPC accepts payloads up to 4 MiB (the OTel SDK
   default); the HTTP server applies a 30-second read timeout.</li>
 </ul>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Observability.</strong> The agent exposes <code>senhub_agent_otlp_receiver_ingested_total</code>
+  (items accepted, by <code>signal</code>) and <code>senhub_agent_otlp_receiver_dropped_total</code>
+  (discarded, by <code>signal</code> + <code>reason</code> — <code>no_sink</code> when logs/traces arrive with
+  no export strategy, <code>unmapped</code> for a metric with an unrecognized data type).
+  A rising <code>dropped{reason="no_sink"}</code> means a sender is pushing logs/traces the
+  agent has nowhere to relay to.</li>
 <li>A bind failure (port already taken) surfaces at probe start, not
   silently at runtime.</li>
 <li>The listener accepts plaintext OTLP. Keep it on localhost or a
