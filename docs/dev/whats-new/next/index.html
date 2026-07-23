@@ -3102,6 +3102,50 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improved
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3491,6 +3535,50 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Improved
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3517,7 +3605,7 @@
 
 
 <h1 id="next-060-unreleased">Next — 0.6.0 (unreleased)<a class="headerlink" href="#next-060-unreleased" title="Permanent link">&para;</a></h1>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2.03v2.02c4.39.54 7.5 4.53 6.96 8.92-.46 3.64-3.32 6.53-6.96 6.96v2c5.5-.55 9.5-5.43 8.95-10.93-.45-4.75-4.22-8.5-8.95-8.97m-2 .03c-1.95.19-3.81.94-5.33 2.2L7.1 5.74c1.12-.9 2.47-1.48 3.9-1.68zM4.26 5.67A9.9 9.9 0 0 0 2.05 11h2c.19-1.42.75-2.77 1.64-3.9zM2.06 13c.2 1.96.97 3.81 2.21 5.33l1.42-1.43A8 8 0 0 1 4.06 13zm5.04 5.37-1.43 1.37A10 10 0 0 0 11 22v-2a8 8 0 0 1-3.9-1.63M12.5 7v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg></span> In progress — changes for the next stable release will be listed here.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2.03v2.02c4.39.54 7.5 4.53 6.96 8.92-.46 3.64-3.32 6.53-6.96 6.96v2c5.5-.55 9.5-5.43 8.95-10.93-.45-4.75-4.22-8.5-8.95-8.97m-2 .03c-1.95.19-3.81.94-5.33 2.2L7.1 5.74c1.12-.9 2.47-1.48 3.9-1.68zM4.26 5.67A9.9 9.9 0 0 0 2.05 11h2c.19-1.42.75-2.77 1.64-3.9zM2.06 13c.2 1.96.97 3.81 2.21 5.33l1.42-1.43A8 8 0 0 1 4.06 13zm5.04 5.37-1.43 1.37A10 10 0 0 0 11 22v-2a8 8 0 0 1-3.9-1.63M12.5 7v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg></span> In progress — OTLP receiver handles logs and traces, file-based license, cleaner Windows uninstall, Redis mTLS.</p>
 <div class="rn-filter"></div>
 
 <h2 id="breaking-changes">Breaking changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
@@ -3641,6 +3729,31 @@ RAC metrics are now typed as counters.</p>
 health/degraded pair is collapsed to <code>senhub.vsphere_ha.vsan.objects</code> with an
 <code>object.state</code> attribute.</p>
 <p>(In every case the pre-existing <code>senhub.&lt;probe&gt;.up</code> metric is unchanged.)</p>
+<h2 id="new">New<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
+<ul class="rn">
+<li><span class="tag t-new">New</span> <span class="tag t-area">OTLP</span> The <strong>OTLP receiver</strong> probe now accepts <strong>logs and traces</strong>, not just metrics. A <code>signals</code> list (<code>metrics</code>, <code>logs</code>, <code>traces</code>) chooses what it ingests; logs and traces are relayed onward through a configured OTLP export strategy. This turns the agent into a single OTLP intake for every signal type. (#655)</li>
+<li><span class="tag t-new">New</span> <span class="tag t-area">License</span> The license now lives in its own <code>license.jwt</code> file next to <code>agent.yaml</code>. Hand a customer a single file to drop in place, then restart — no pasting a long token into YAML. <code>license activate</code> writes the file for you, and an existing inline license is moved into it automatically on the next start. (#639)</li>
+</ul>
+
+<h2 id="improved">Improved<a class="headerlink" href="#improved" title="Permanent link">&para;</a></h2>
+<ul class="rn">
+<li><span class="tag t-improved">Improved</span> <span class="tag t-area">OTLP</span> Explicit-bucket histograms pushed to the OTLP receiver are now carried <strong>natively</strong> end to end — re-exported over OTLP as a real histogram (buckets, sum, count, min/max) and rendered as a classic histogram on the Prometheus endpoint. (#659)</li>
+<li><span class="tag t-improved">Improved</span> <span class="tag t-area">Windows</span> <span class="tag t-area">MSI</span> A plain uninstall now leaves a clean tree: the transient <code>logs\</code> and <code>update\</code> folders are removed, while configuration, the sealed secret store and the license are preserved. A full purge — including config and secrets — stays opt-in with <code>PURGE_DATA=1</code>. (#648)</li>
+<li><span class="tag t-improved">Improved</span> <span class="tag t-area">Observability</span> The <code>collect_errors_total</code> self-metric is now broken down by <code>probe</code> and <code>reason</code>, so collection failures are attributable per probe and per cause. (#646)</li>
+<li><span class="tag t-improved">Improved</span> <span class="tag t-area">Windows</span> Filesystem metrics now carry <code>system_filesystem_type</code> and <code>system_device</code> attributes, and the host name is a consistent lower-cased FQDN. (#627)</li>
+</ul>
+
+<h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
+<ul class="rn">
+<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">Windows</span> <span class="tag t-area">Network</span> On multi-NIC Windows hosts, network adapters are now matched exactly instead of by a loose substring, and an adapter that matches no performance-counter instance still emits its counters rather than being dropped. (#643, #644)</li>
+<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">systemd</span> The <code>systemd</code> probe now emits its unit as a topology entity — the entity was previously built but never registered, so it never reached the backend. (#471)</li>
+<li><span class="tag t-fixed">Fixed</span> <span class="tag t-area">systemd</span> <span class="tag t-area">CLI</span> <code>refresh-unit</code> now reconciles the service <code>ExecStart</code>, so a CLI-installed agent keeps its correct start command after a refresh. (#396)</li>
+</ul>
+
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<ul class="rn">
+<li><span class="tag t-security">Security</span> <span class="tag t-area">Redis</span> The Redis probe now supports <strong>TLS client-certificate authentication (mTLS)</strong> via <code>tls_cert_file</code> / <code>tls_key_file</code>, plus a custom CA bundle with <code>tls_ca_file</code>. (#405)</li>
+</ul>
 
 
 

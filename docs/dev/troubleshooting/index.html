@@ -4422,7 +4422,7 @@ Typically: <code>C:\ProgramData\SenHub\logs\senhubagent.log</code></p>
 <p><strong>Symptom:</strong> A probe type is rejected with a license error, or premium probes are not available.</p>
 <p><strong>Possible causes and solutions:</strong></p>
 <ul>
-<li><strong>No license activated</strong>: Check with <code>senhub-agent license show</code>. Free tier only allows cpu, memory, logicaldisk, network.</li>
+<li><strong>No license activated</strong>: Check with <code>senhub-agent license show</code>. Without a license the agent runs every Free-tier probe — the whole universal collection tier (OS/host, logs, network checks, application, database and broker probes); only the Pro probes need a license. Each page of the <a href="../probes/">probe catalog</a> shows the tier badge.</li>
 <li><strong>License expired</strong>: Check the expiration date. There is a 7-day grace period after expiration. Contact support for renewal.</li>
 <li><strong>Probe not in license tier</strong>: Verify the probe type is included in your tier. See the License Tiers table in the <a href="../configuration/">Configuration section</a>.</li>
 </ul>

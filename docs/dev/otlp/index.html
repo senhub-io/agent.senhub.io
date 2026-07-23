@@ -713,6 +713,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#signalstraces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        signals.traces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#signalsentities" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3789,6 +3800,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#signalstraces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        signals.traces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#signalsentities" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4079,7 +4101,7 @@
 
 
 <h1 id="otlp-opentelemetry">OTLP / OpenTelemetry<a class="headerlink" href="#otlp-opentelemetry" title="Permanent link">&para;</a></h1>
-<p>SenHub Agent can push metrics and logs natively over <strong>OTLP/gRPC</strong> to any
+<p>SenHub Agent can push metrics, logs and traces natively over <strong>OTLP/gRPC</strong> to any
 OpenTelemetry receiver — an OTel collector, vmagent's OTLP endpoint, a
 direct VictoriaMetrics / VictoriaLogs ingest, Grafana Cloud OTLP, etc.</p>
 <p>OTLP is a <strong>push</strong> path, complementary to the <a href="../prometheus/">Prometheus pull
@@ -4161,15 +4183,22 @@ rewrite a single PromQL query.</p>
 <a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">          </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span><span class="w">            </span><span class="c1"># max records per gRPC export</span>
 <a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">          </span><span class="nt">batch_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span><span class="w">           </span><span class="c1"># flush even if batch_size not reached</span>
 <a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">          </span><span class="nt">buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span><span class="w">          </span><span class="c1"># bounded queue; drop-oldest beyond</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
-<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">      </span><span class="c1"># Resource attributes attached to every emitted batch. Defaults</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">      </span><span class="c1"># are derived from agent identity if omitted.</span>
-<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="w">      </span><span class="nt">resource</span><span class="p">:</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="w">        </span><span class="nt">service.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub-agent</span><span class="w">             </span><span class="c1"># default</span>
-<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="w">        </span><span class="nt">service.instance.id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;agent-key prefix&gt;</span><span class="w"> </span><span class="c1"># default: first 8 chars of agent.key</span>
-<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="w">        </span><span class="nt">deployment.environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
-<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a><span class="w">        </span><span class="c1"># Any additional keys are passed through as resource attributes.</span>
-<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a><span class="w">        </span><span class="nt">k8s.cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge-01</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">        </span><span class="nt">traces</span><span class="p">:</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">          </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">               </span><span class="c1"># default false — relays spans ingested by an</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">                                      </span><span class="c1"># otlp_receiver probe (signals: [traces])</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="w">          </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="w">          </span><span class="nt">batch_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="w">          </span><span class="nt">buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2048</span><span class="w">           </span><span class="c1"># bounded queue; drop beyond</span>
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="w">          </span><span class="nt">sample_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w">           </span><span class="c1"># head sampling, 0.0-1.0</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>
+<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a><span class="w">      </span><span class="c1"># Resource attributes attached to every emitted batch. Defaults</span>
+<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="w">      </span><span class="c1"># are derived from agent identity if omitted.</span>
+<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="w">      </span><span class="nt">resource</span><span class="p">:</span>
+<a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a><span class="w">        </span><span class="nt">service.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub-agent</span><span class="w">             </span><span class="c1"># default</span>
+<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a><span class="w">        </span><span class="nt">service.instance.id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;agent-key prefix&gt;</span><span class="w"> </span><span class="c1"># default: first 8 chars of agent.key</span>
+<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a><span class="w">        </span><span class="nt">deployment.environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a><span class="w">        </span><span class="c1"># Any additional keys are passed through as resource attributes.</span>
+<a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="w">        </span><span class="nt">k8s.cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge-01</span>
 </code></pre></div>
 <h3 id="endpoint-required"><code>endpoint</code> (required)<a class="headerlink" href="#endpoint-required" title="Permanent link">&para;</a></h3>
 <p><code>host:port</code> of the OTLP/gRPC receiver. No scheme prefix (it's gRPC).
@@ -4191,6 +4220,11 @@ the corresponding pipeline and keeps the gRPC connection idle.</p>
 OTel v1.0). Cumulative means counter values are reported as absolute
 totals since the agent start; consumers that prefer deltas (some
 Datadog setups, vmagent ingest) can set <code>temporality: delta</code>.</p>
+<h3 id="signalstraces"><code>signals.traces</code><a class="headerlink" href="#signalstraces" title="Permanent link">&para;</a></h3>
+<p>The agent produces no spans of its own. The traces signal relays spans
+received by an <a href="../probes/otlp-receiver/">otlp_receiver probe</a> configured
+with <code>signals: [traces]</code>; without such a probe there is nothing to
+export and the signal stays idle.</p>
 <h3 id="signalsentities"><code>signals.entities</code><a class="headerlink" href="#signalsentities" title="Permanent link">&para;</a></h3>
 <p>Entity events (the infrastructure graph: hosts, interfaces, services and
 their relationships) ride the OTLP <strong>log</strong> signal, so this signal has no
@@ -4287,6 +4321,14 @@ both paths under one PromQL query is straightforward.</p>
   <code>journalctl --output=json --follow</code> and emits a log per entry
   with <code>host.name</code>, <code>systemd.unit</code>, <code>syslog.appname</code>,
   <code>process.pid</code>, … See <a href="../probes/linux-logs/">linux_logs probe</a>.</li>
+<li><strong><code>filetail</code> probe</strong> — each line tailed from a watched log file
+  becomes a log record.</li>
+<li><strong><code>windows_eventlog</code> probe</strong> — each entry read from a subscribed
+  Windows Event Log channel becomes a log record.</li>
+<li><strong><code>snmp_trap</code> probe</strong> — each received SNMP trap becomes a log
+  record.</li>
+<li><strong><code>otlp_receiver</code> probe</strong> with <code>signals: [logs]</code> — relays log
+  records ingested over OTLP from other emitters.</li>
 </ul>
 <p>Probes still emit DataPoints to the existing PRTG/Nagios/event
 strategies; the logs path is <strong>additive</strong>.</p>
@@ -4415,7 +4457,8 @@ token and fans out to the storage backends.</p>
 </code></pre></div>
 <p>Notes:</p>
 <ul>
-<li><strong>One URL, one token, three signals.</strong> Entity events ride the logs
+<li><strong>One URL, one token, four signals</strong> (metrics, logs, traces,
+  entities). Entity events ride the logs
   transport — enabling <code>signals.entities</code> requires no extra endpoint.</li>
 <li>The bearer token comes from the environment (<code>${env:}</code>) or a root-only
   file (<code>${file:/etc/senhub-agent/bearer.token}</code>); never inline it.</li>
@@ -4575,7 +4618,9 @@ restart.</p>
 <li>The collector pipeline includes the <code>otlp</code> receiver in the <code>logs:</code>
    pipeline (not just <code>metrics:</code>).</li>
 <li>The probes you expect to produce logs are configured: <code>syslog</code>,
-   <code>event</code>, or <code>linux_logs</code>. Other probes do not produce log records.</li>
+   <code>event</code>, <code>linux_logs</code>, <code>filetail</code>, <code>windows_eventlog</code>, <code>snmp_trap</code>,
+   or an <code>otlp_receiver</code> with <code>signals: [logs]</code>. Other probes do not
+   produce log records.</li>
 <li>The receiver tolerates the OTel log data model; older versions of
    vmagent or Loki collectors may need a recent build.</li>
 </ol>

@@ -3588,6 +3588,16 @@ keyspace size, replication state and persistence (RDB/AOF) health.</p>
 <td>—</td>
 <td>Path to a PEM CA bundle used to verify the server certificate (defaults to the system trust store)</td>
 </tr>
+<tr>
+<td><code>timeout</code></td>
+<td><code>5</code></td>
+<td>Connection and command timeout in seconds</td>
+</tr>
+<tr>
+<td><code>instance_name</code></td>
+<td>—</td>
+<td>Logical name used as the entity instance identifier instead of <code>host:port</code>; set it to keep the identity stable if the address changes</td>
+</tr>
 </tbody>
 </table>
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>

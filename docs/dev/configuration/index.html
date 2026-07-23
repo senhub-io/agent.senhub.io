@@ -4690,92 +4690,7 @@ distributing a version 3 (sealed) configuration.</p>
 </tbody>
 </table>
 <h3 id="available-probe-types">Available Probe Types<a class="headerlink" href="#available-probe-types" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>License</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>cpu</code></td>
-<td>Free</td>
-<td>CPU utilization</td>
-</tr>
-<tr>
-<td><code>memory</code></td>
-<td>Free</td>
-<td>Memory usage (physical and swap)</td>
-</tr>
-<tr>
-<td><code>logicaldisk</code></td>
-<td>Free</td>
-<td>Disk space and I/O metrics</td>
-</tr>
-<tr>
-<td><code>network</code></td>
-<td>Free</td>
-<td>Network interface metrics (bandwidth, errors, packets)</td>
-</tr>
-<tr>
-<td><code>veeam</code></td>
-<td>Pro</td>
-<td>Veeam Backup &amp; Replication v13 monitoring (via REST API)</td>
-</tr>
-<tr>
-<td><code>citrix</code></td>
-<td>Pro</td>
-<td>Citrix Virtual Apps and Desktops monitoring (via Director API)</td>
-</tr>
-<tr>
-<td><code>netscaler</code></td>
-<td>Pro</td>
-<td>Citrix ADC / NetScaler monitoring (via NITRO API)</td>
-</tr>
-<tr>
-<td><code>redfish</code></td>
-<td>Pro</td>
-<td>Hardware monitoring via Redfish API (Dell iDRAC, HPE iLO, etc.)</td>
-</tr>
-<tr>
-<td><code>ping_webapp</code></td>
-<td>Pro</td>
-<td>Web application availability check</td>
-</tr>
-<tr>
-<td><code>load_webapp</code></td>
-<td>Pro</td>
-<td>Web page load time measurement</td>
-</tr>
-<tr>
-<td><code>ping_gateway</code></td>
-<td>Pro</td>
-<td>Network gateway connectivity monitoring</td>
-</tr>
-<tr>
-<td><code>syslog</code></td>
-<td>Pro</td>
-<td>Syslog message collection (UDP/TCP)</td>
-</tr>
-<tr>
-<td><code>event</code></td>
-<td>Pro</td>
-<td>Custom event collection via HTTP</td>
-</tr>
-<tr>
-<td><code>wifi_signal_strength</code></td>
-<td>Pro</td>
-<td>WiFi signal quality monitoring</td>
-</tr>
-<tr>
-<td><code>otel</code></td>
-<td>Enterprise</td>
-<td>OpenTelemetry metrics collection</td>
-</tr>
-</tbody>
-</table>
+<p>The complete list of probe types lives in the <a href="../probes/">probe catalog</a>. Each catalog page documents the probe's <code>type</code> value, its parameters and metrics, and carries a Free/Pro tier badge.</p>
 <h3 id="common-probe-parameters">Common Probe Parameters<a class="headerlink" href="#common-probe-parameters" title="Permanent link">&para;</a></h3>
 <p>All probes support the following parameters in the <code>params</code> section:</p>
 <table>
@@ -5112,17 +5027,17 @@ distributing a version 3 (sealed) configuration.</p>
 </ul>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <h3 id="free-tier">Free Tier<a class="headerlink" href="#free-tier" title="Permanent link">&para;</a></h3>
-<p>Without a license, the agent runs with free-tier probes only: <code>cpu</code>, <code>memory</code>, <code>logicaldisk</code>, <code>network</code>. These probes are always available regardless of license status.</p>
+<p>Without a license the agent runs every Free-tier probe: the whole universal collection tier — OS/host, logs, network checks, and the application, database and broker probes (MySQL, PostgreSQL, Redis, Kafka, Docker, and more). Each page of the <a href="../probes/">probe catalog</a> shows a Free/Pro tier badge. Only the Pro probes (deep vendor integrations) need a license.</p>
 <h3 id="obtaining-a-license">Obtaining a License<a class="headerlink" href="#obtaining-a-license" title="Permanent link">&para;</a></h3>
 <p>Contact SenHub support (support@senhub.io) to request a license token. Specify the probe types you need:</p>
 <ul>
-<li><strong>Pro license</strong>: adds Citrix, NetScaler, Redfish, Ping, SNMP, Syslog, Event</li>
+<li><strong>Pro license</strong>: adds the deep vendor, HA, cloud and active-check integrations — <code>citrix</code>, <code>netscaler</code>, <code>veeam</code>, <code>redfish</code>, <code>ibmi</code>, <code>powerstore</code>, <code>mssql_ha</code>, <code>oracle_enterprise</code>, <code>hyperv_ha</code>, <code>vsphere_ha</code>, <code>ad_hybrid</code>, <code>exchange_online</code>, <code>event</code>, <code>ping_gateway</code>, <code>ping_webapp</code>, <code>load_webapp</code></li>
 <li><strong>Enterprise license</strong>: all current and future probe types</li>
 </ul>
 <h3 id="where-the-license-is-stored">Where the license is stored<a class="headerlink" href="#where-the-license-is-stored" title="Permanent link">&para;</a></h3>
 <p>The license is kept in a dedicated file, <code>license.jwt</code>, next to <code>agent.yaml</code>:</p>
 <ul>
-<li>Linux: <code>/etc/senhub/license.jwt</code></li>
+<li>Linux: <code>/etc/senhub-agent/license.jwt</code></li>
 <li>Windows: <code>%ProgramData%\SenHub\license.jwt</code></li>
 </ul>
 <p>Keeping it in its own file makes it easy to hand over and avoids pasting a long
@@ -5145,7 +5060,7 @@ the next start.</p>
 from support as <code>license.jwt</code> next to <code>agent.yaml</code> (see paths above), then
 restart the agent:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Linux</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>license.jwt<span class="w"> </span>/etc/senhub/license.jwt
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>license.jwt<span class="w"> </span>/etc/senhub-agent/license.jwt
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
 </code></pre></div>
 <p><strong>Option B — CLI.</strong> Activate with the token; this validates it, verifies the
@@ -5167,10 +5082,14 @@ change is not picked up while the agent is running.</p>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">&quot;tier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pro&quot;</span><span class="p">,</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">&quot;expires_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-30T23:59:59Z&quot;</span><span class="p">,</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="nt">&quot;days_remaining&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">&quot;authorized_probes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;memory&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;logicaldisk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;network&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;citrix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;netscaler&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;redfish&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ping_webapp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;syslog&quot;</span><span class="p">],</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">&quot;authorized_probes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;citrix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;netscaler&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;redfish&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;veeam&quot;</span><span class="p">],</span>
 <a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="nt">&quot;free_tier_probes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;memory&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;logicaldisk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;network&quot;</span><span class="p">]</span>
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="p">}</span>
 </code></pre></div></p>
+<p><code>authorized_probes</code> lists the Pro probes this license unlocks (Free probes are
+always available and are not repeated here). <code>free_tier_probes</code> currently
+reports the core host probes; the full Free tier is broader — see the
+<a href="../probes/">probe catalog</a> for the tier badge on every probe.</p>
 <h3 id="license-tiers">License Tiers<a class="headerlink" href="#license-tiers" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -5182,11 +5101,11 @@ change is not picked up while the agent is running.</p>
 <tbody>
 <tr>
 <td><strong>Free</strong></td>
-<td>cpu, memory, logicaldisk, network</td>
+<td>The universal collection tier — OS/host, logs, network checks, application, database and broker probes. See the <a href="../probes/">probe catalog</a> for the tier badge on each probe.</td>
 </tr>
 <tr>
 <td><strong>Pro</strong></td>
-<td>All free + veeam, citrix, netscaler, redfish, ping_webapp, load_webapp, ping_gateway, syslog, event, wifi_signal_strength</td>
+<td>All free + citrix, netscaler, veeam, redfish, ibmi, powerstore, mssql_ha, oracle_enterprise, hyperv_ha, vsphere_ha, ad_hybrid, exchange_online, event, ping_gateway, ping_webapp, load_webapp</td>
 </tr>
 <tr>
 <td><strong>Enterprise</strong></td>
@@ -5321,11 +5240,10 @@ change is not picked up while the agent is running.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;550e8400-e29b-41d4-a716-446655440000&quot;</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${file:/etc/senhub/license.jwt}&quot;</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nt">cache</span><span class="p">:</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="nt">retention_minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="nt">auto_update</span><span class="p">:</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nt">cache</span><span class="p">:</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="nt">retention_minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="nt">auto_update</span><span class="p">:</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <h3 id="probesd01-systemyaml-example"><code>probes.d/01-system.yaml</code> example<a class="headerlink" href="#probesd01-systemyaml-example" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CPU</span>
@@ -5392,16 +5310,13 @@ change is not picked up while the agent is running.</p>
 <p>Substitution applies to <strong>values</strong> only — never to YAML keys. References inside <code>params:</code> blocks of probes and strategies are also resolved.</p>
 <p>For <code>${secret:}</code> — storing values, the per-OS backends, and sealing inline secrets — see the <a href="../secret-store/">Secret Store</a> page.</p>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">agent</span><span class="p">:</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${file:/etc/senhub/license.jwt}&quot;</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:DB_HOST:-127.0.0.1}&quot;</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
-<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${file:/etc/senhub/secrets/db_password}&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${env:DB_HOST:-127.0.0.1}&quot;</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${file:/etc/senhub/secrets/db_password}&quot;</span>
 </code></pre></div>
 <p>A missing required reference (file not found, no default) <strong>aborts agent boot</strong> with the offending reference in the error message. An unset environment variable without a default substitutes to an empty string and does <strong>not</strong> abort — match POSIX shell behaviour.</p>
 <h2 id="inspecting-the-merged-configuration">Inspecting the merged configuration<a class="headerlink" href="#inspecting-the-merged-configuration" title="Permanent link">&para;</a></h2>

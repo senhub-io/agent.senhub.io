@@ -4720,7 +4720,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>msiexec /x senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn
 </code></pre></div></p>
 <p>Or use <strong>Apps &amp; features</strong> / <strong>Programs and Features</strong> interactively.</p>
-<p>By default, uninstalling keeps everything under <code>%ProgramData%\SenHub\</code> (configuration, sealed secret store, license, logs), so a later reinstall or upgrade picks the existing setup back up. To delete that data tree as well when decommissioning a host, opt in with <code>PURGE_DATA=1</code>:</p>
+<p>By default, uninstalling keeps the operator state under <code>%ProgramData%\SenHub\</code> — configuration, sealed secret store, and license — while removing the transient <code>logs\</code> and <code>update\</code> folders (regenerated on the next run). A later reinstall or upgrade picks the existing setup back up. To delete that data tree as well when decommissioning a host, opt in with <code>PURGE_DATA=1</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>msiexec /x senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn PURGE_DATA=1
 </code></pre></div>
 <p>The purge is not recoverable and never applies during an upgrade. An interactive uninstall always keeps the data; use the command line to purge.</p>
