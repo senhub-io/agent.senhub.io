@@ -4508,8 +4508,8 @@ configured probes.</p>
 <tr>
 <td><code>senhub_agent_collect_errors_total</code></td>
 <td>counter</td>
-<td>Lifetime probe collection errors</td>
-<td>–</td>
+<td>Probe collection errors since start, per probe type and failure reason</td>
+<td><code>probe</code>, <code>reason</code></td>
 </tr>
 <tr>
 <td><code>senhub_agent_transformer_fallback_total</code></td>
@@ -4531,6 +4531,17 @@ configured probes.</p>
 </tr>
 </tbody>
 </table>
+<p><code>senhub_agent_collect_errors_total</code> carries two bounded labels so a spike can be
+attributed without log correlation:</p>
+<ul>
+<li><code>probe</code> — the probe <strong>type</strong> (<code>cpu</code>, <code>redfish</code>, <code>mysql</code>, …), not the
+  per-instance name, so cardinality stays bounded by the registry.</li>
+<li><code>reason</code> — <code>collect</code> (a <code>Collect()</code> cycle failed), <code>timeout</code> (that failure was
+  a deadline/timeout) or <code>route</code> (routing the collected data to an output
+  strategy failed).</li>
+</ul>
+<p>Each series appears only once its first error occurs; sum across labels for the
+lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
 <h2 id="system-probes">System probes<a class="headerlink" href="#system-probes" title="Permanent link">&para;</a></h2>
 <p>Probes flagged <code>host_level: true</code> — filtered out when
 <code>expose_host_metrics: false</code> is set.</p>
