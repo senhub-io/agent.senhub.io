@@ -4346,12 +4346,15 @@
 <h3 id="activate-a-license">Activate a license<a class="headerlink" href="#activate-a-license" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
 </code></pre></div>
-<p>Validates the license (a signed JWT) and saves it in the configuration file.</p>
+<p>Validates the license and writes it to the <code>license.jwt</code> file next to
+<code>agent.yaml</code>. Restart the agent for the change to take effect. You can also
+simply place the <code>license.jwt</code> file next to the config yourself and restart —
+no CLI needed.</p>
 <h3 id="remove-license">Remove license<a class="headerlink" href="#remove-license" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
 </code></pre></div>
-<p>Reverts to the free tier. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs.</p>
+<p>Reverts to the free tier: deletes <code>license.jwt</code> and clears any inline license. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs. Restart the agent for the change to take effect.</p>
 <h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
