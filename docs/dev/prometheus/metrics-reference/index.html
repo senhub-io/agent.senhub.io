@@ -4518,6 +4518,18 @@ configured probes.</p>
 <td>–</td>
 </tr>
 <tr>
+<td><code>senhub_agent_otlp_receiver_ingested_total</code></td>
+<td>counter</td>
+<td>Items accepted by the OTLP receiver, per signal (metrics datapoints, log records, spans)</td>
+<td><code>signal</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_dropped_total</code></td>
+<td>counter</td>
+<td>Items the OTLP receiver discarded, by signal and reason (<code>no_sink</code>, <code>unmapped</code>)</td>
+<td><code>signal</code>, <code>reason</code></td>
+</tr>
+<tr>
 <td><code>senhub_agent_http_requests_total</code></td>
 <td>counter</td>
 <td>HTTP requests served per route template</td>
