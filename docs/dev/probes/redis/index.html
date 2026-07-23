@@ -3573,6 +3573,21 @@ keyspace size, replication state and persistence (RDB/AOF) health.</p>
 <td><code>false</code></td>
 <td>Enable TLS for the Redis connection</td>
 </tr>
+<tr>
+<td><code>tls_cert_file</code></td>
+<td>—</td>
+<td>Path to a PEM client certificate, presented to the server for mutual TLS (requires <code>tls_key_file</code>)</td>
+</tr>
+<tr>
+<td><code>tls_key_file</code></td>
+<td>—</td>
+<td>Path to the PEM private key matching <code>tls_cert_file</code> (requires <code>tls_cert_file</code>)</td>
+</tr>
+<tr>
+<td><code>tls_ca_file</code></td>
+<td>—</td>
+<td>Path to a PEM CA bundle used to verify the server certificate (defaults to the system trust store)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
