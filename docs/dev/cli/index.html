@@ -4188,6 +4188,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license<span class="w"> </span>&lt;jwt&gt;<span class="w"> </span>--tags<span class="w"> </span><span class="nv">env</span><span class="o">=</span>prod,site<span class="o">=</span>paris
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>otlp.example.com:4317
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>vm.example.com:4318<span class="w"> </span>--otlp-protocol<span class="w"> </span>http
 </code></pre></div>
 <table>
 <thead>
@@ -4211,7 +4212,11 @@
 </tr>
 <tr>
 <td><code>--otlp-endpoint HOST:PORT</code></td>
-<td>Provision an OTLP push endpoint as a strategy fragment</td>
+<td>Provision an OTLP push endpoint as a strategy fragment (metrics + logs)</td>
+</tr>
+<tr>
+<td><code>--otlp-protocol grpc\|http</code></td>
+<td>OTLP transport (default <code>grpc</code>; use <code>http</code> for a native VictoriaMetrics / Grafana Alloy OTLP/HTTP endpoint)</td>
 </tr>
 </tbody>
 </table>
