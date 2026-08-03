@@ -2059,6 +2059,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#agent-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Backups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3764,6 +3775,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#agent-backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Backups
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#infrastructure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4182,6 +4204,25 @@
 </tr>
 </tbody>
 </table>
+<h3 id="agent-backups">Agent Backups<a class="headerlink" href="#agent-backups" title="Permanent link">&para;</a></h3>
+<p>Veeam Agent Backup jobs (physical Windows and Linux machines protected by the Veeam Agent) are not exposed by the Veeam REST <code>/jobs</code> endpoint — only as protected objects. The probe surfaces each agent-managed object as an additional <code>veeam_job_status</code> channel tagged <code>metric_type:jobs_status</code>, so it appears and is coloured by the same <strong>Job Status</strong> sensor as the VM jobs.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>veeam_job_status</code></td>
+<td>Lookup</td>
+<td>Agent backup status: Failed (last run failed), Never Run (no restore point yet), otherwise Success. The <code>job_type</code> tag is <code>WindowsAgentBackup</code> or <code>LinuxAgentBackup</code></td>
+</tr>
+</tbody>
+</table>
+<p>Because a protected object carries no session timestamp, the Stale and Running states do not apply to agent backups; the restore-point count stays on the <code>veeam_object_restore_points</code> channel above.</p>
 <h3 id="infrastructure">Infrastructure<a class="headerlink" href="#infrastructure" title="Permanent link">&para;</a></h3>
 <p>Managed server availability:</p>
 <table>
