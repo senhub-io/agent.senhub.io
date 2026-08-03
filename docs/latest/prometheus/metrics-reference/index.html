@@ -1566,6 +1566,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../probes/os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../probes/smart/" class="md-nav__link">
         
   
@@ -2022,6 +2050,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -4312,14 +4536,26 @@ configured probes.</p>
 <tr>
 <td><code>senhub_agent_collect_errors_total</code></td>
 <td>counter</td>
-<td>Lifetime probe collection errors</td>
-<td>–</td>
+<td>Probe collection errors since start, per probe type and failure reason</td>
+<td><code>probe</code>, <code>reason</code></td>
 </tr>
 <tr>
 <td><code>senhub_agent_transformer_fallback_total</code></td>
 <td>counter</td>
 <td>Datapoints processed without a transformer definition (no unit injection or corrections)</td>
 <td>–</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_ingested_total</code></td>
+<td>counter</td>
+<td>Items accepted by the OTLP receiver, per signal (metrics: emitted internal datapoints after family expansion — a summary counts as its count/sum/quantile points; logs: records; traces: spans)</td>
+<td><code>signal</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_dropped_total</code></td>
+<td>counter</td>
+<td>Items the OTLP receiver discarded, by signal and reason (<code>no_sink</code>, <code>unmapped</code>)</td>
+<td><code>signal</code>, <code>reason</code></td>
 </tr>
 <tr>
 <td><code>senhub_agent_http_requests_total</code></td>
@@ -4335,6 +4571,17 @@ configured probes.</p>
 </tr>
 </tbody>
 </table>
+<p><code>senhub_agent_collect_errors_total</code> carries two bounded labels so a spike can be
+attributed without log correlation:</p>
+<ul>
+<li><code>probe</code> — the probe <strong>type</strong> (<code>cpu</code>, <code>redfish</code>, <code>mysql</code>, …), not the
+  per-instance name, so cardinality stays bounded by the registry.</li>
+<li><code>reason</code> — <code>collect</code> (a <code>Collect()</code> cycle failed), <code>timeout</code> (that failure was
+  a deadline/timeout) or <code>route</code> (routing the collected data to an output
+  strategy failed).</li>
+</ul>
+<p>Each series appears only once its first error occurs; sum across labels for the
+lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
 <h2 id="system-probes">System probes<a class="headerlink" href="#system-probes" title="Permanent link">&para;</a></h2>
 <p>Probes flagged <code>host_level: true</code> — filtered out when
 <code>expose_host_metrics: false</code> is set.</p>

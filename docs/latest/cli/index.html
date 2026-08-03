@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../probes/os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../probes/smart/" class="md-nav__link">
         
   
@@ -1815,6 +1843,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -3964,6 +4188,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license<span class="w"> </span>&lt;jwt&gt;<span class="w"> </span>--tags<span class="w"> </span><span class="nv">env</span><span class="o">=</span>prod,site<span class="o">=</span>paris
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>otlp.example.com:4317
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>vm.example.com:4318<span class="w"> </span>--otlp-protocol<span class="w"> </span>http
 </code></pre></div>
 <table>
 <thead>
@@ -3987,7 +4212,11 @@
 </tr>
 <tr>
 <td><code>--otlp-endpoint HOST:PORT</code></td>
-<td>Provision an OTLP push endpoint as a strategy fragment</td>
+<td>Provision an OTLP push endpoint as a strategy fragment (metrics + logs)</td>
+</tr>
+<tr>
+<td><code>--otlp-protocol grpc\|http</code></td>
+<td>OTLP transport (default <code>grpc</code>; use <code>http</code> for a native VictoriaMetrics / Grafana Alloy OTLP/HTTP endpoint)</td>
 </tr>
 </tbody>
 </table>
@@ -4150,12 +4379,15 @@
 <h3 id="activate-a-license">Activate a license<a class="headerlink" href="#activate-a-license" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
 </code></pre></div>
-<p>Validates the license (a signed JWT) and saves it in the configuration file.</p>
+<p>Validates the license and writes it to the <code>license.jwt</code> file next to
+<code>agent.yaml</code>. Restart the agent for the change to take effect. You can also
+simply place the <code>license.jwt</code> file next to the config yourself and restart —
+no CLI needed.</p>
 <h3 id="remove-license">Remove license<a class="headerlink" href="#remove-license" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
 </code></pre></div>
-<p>Reverts to the free tier. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs.</p>
+<p>Reverts to the free tier: deletes <code>license.jwt</code> and clears any inline license. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs. Restart the agent for the change to take effect.</p>
 <h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

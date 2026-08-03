@@ -16,7 +16,7 @@
         <link rel="prev" href="../redfish/">
       
       
-        <link rel="next" href="../syslog/">
+        <link rel="next" href="../ibmi/">
       
       
         
@@ -1014,6 +1014,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../smart/" class="md-nav__link">
         
   
@@ -1488,6 +1516,202 @@
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3298,8 +3522,56 @@ also acts as a filter in the Web UI Sensor Builder.</p>
 <td><code>true</code></td>
 <td>Validate the array's TLS certificate (set <code>false</code> for self-signed management certificates)</td>
 </tr>
+<tr>
+<td><code>volume_perf.enabled</code></td>
+<td>boolean</td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Opt in to per-volume IOPS/bandwidth/latency (one <code>POST /metrics/generate</code> per volume)</td>
+</tr>
+<tr>
+<td><code>volume_perf.top_n</code></td>
+<td>integer</td>
+<td>No</td>
+<td><code>20</code></td>
+<td>Cap the number of volumes queried per run, ranked by logical usage (busiest first)</td>
+</tr>
+<tr>
+<td><code>volume_perf.interval</code></td>
+<td>integer</td>
+<td>No</td>
+<td><code>300</code></td>
+<td>Seconds between per-volume perf runs, independent of the main <code>interval</code></td>
+</tr>
 </tbody>
 </table>
+<h3 id="per-volume-performance-opt-in">Per-volume performance (opt-in)<a class="headerlink" href="#per-volume-performance-opt-in" title="Permanent link">&para;</a></h3>
+<p>Per-volume IOPS/bandwidth/latency is <strong>off by default</strong>: unlike the cluster,
+appliance and node rollups (one request each), it costs <strong>one <code>POST /metrics/generate</code>
+per volume</strong>, so on an array with hundreds or thousands of volumes an unconditional
+per-cycle collection is a real request-cost and cache-cardinality concern.</p>
+<p>When you enable it, the fan-out stays bounded on two axes:</p>
+<ul>
+<li><strong><code>top_n</code></strong> caps how many volumes are queried each run — the busiest by logical
+  usage, so the volumes that matter are covered without querying the long tail.</li>
+<li><strong><code>volume_perf.interval</code></strong> throttles the fan-out to its own (typically longer)
+  cadence, decoupled from the main probe <code>interval</code>.</li>
+</ul>
+<p>With the defaults (<code>top_n: 20</code>, <code>interval: 300</code>) the added load is at most 20
+requests every 5 minutes and 20 × 9 = 180 extra cache series — well within the
+agent's series cap. Raise <code>top_n</code> deliberately after checking your array's volume
+count.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://10.0.199.11&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;supervision&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${secret:powerstore.password}&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">volume_perf</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">top_n</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600</span>
+</code></pre></div>
 <h1 id="metrics-collected">Metrics Collected<a class="headerlink" href="#metrics-collected" title="Permanent link">&para;</a></h1>
 <p>All metrics carry a <code>cluster</code> attribute identifying the array. Metric families that split by direction or state (IOPS, bandwidth, latency, hardware) use an OTel attribute rather than separate metric names.</p>
 <h2 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h2>
@@ -3511,6 +3783,24 @@ OTLP/Prometheus and become filterable in the Web UI.</p>
 <td>Provisioned (thin) volume size</td>
 </tr>
 <tr>
+<td><code>senhub.powerstore.volume.iops</code></td>
+<td><code>{operation}/s</code></td>
+<td><code>volume.name</code></td>
+<td>Per-volume IOPS (read / write / total) — <strong>opt-in</strong>, see below</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.bandwidth</code></td>
+<td><code>By/s</code></td>
+<td><code>volume.name</code></td>
+<td>Per-volume throughput — <strong>opt-in</strong></td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.latency</code></td>
+<td><code>ms</code></td>
+<td><code>volume.name</code></td>
+<td>Per-volume latency (milliseconds) — <strong>opt-in</strong></td>
+</tr>
+<tr>
 <td><code>senhub.powerstore.drive.state</code></td>
 <td><code>1</code></td>
 <td><code>drive.name</code></td>
@@ -3604,8 +3894,8 @@ value lookups rather than raw numbers.</p>
 </ul>
 <h1 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h1>
 <p>PowerStore metrics are available through every configured output — OTLP, Prometheus, and the pull formats (PRTG, Nagios, Web UI). For PRTG and Nagios, query the probe by its configured <code>name</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/prtg/metrics/powerstore-prod&quot;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/nagios/metrics/powerstore-prod&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/prtg/metrics/powerstore-prod&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/nagios/metrics/powerstore-prod&quot;</span>
 </code></pre></div>
 
 
@@ -3659,13 +3949,13 @@ value lookups rather than raw numbers.</p>
         
         
           
-          <a href="../syslog/" class="md-footer__link md-footer__link--next" aria-label="Next: Syslog">
+          <a href="../ibmi/" class="md-footer__link md-footer__link--next" aria-label="Next: IBM i / AS400">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Syslog
+                IBM i / AS400
               </div>
             </div>
             <div class="md-footer__button md-icon">

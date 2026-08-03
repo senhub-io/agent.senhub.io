@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://agent.senhub.io/docs/latest/probes/syslog/">
       
       
-        <link rel="prev" href="../powerstore/">
+        <link rel="prev" href="../exchange_online/">
       
       
         <link rel="next" href="../event/">
@@ -1014,6 +1014,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../smart/" class="md-nav__link">
         
   
@@ -1470,6 +1498,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -4743,7 +4967,7 @@
 </code></pre></div></p>
 <p><strong>Verify probe configuration:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Check configuration (multi-file layout)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;type: syslog&quot;</span><span class="w"> </span>/etc/senhub/probes.d/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;type: syslog&quot;</span><span class="w"> </span>/etc/senhub-agent/probes.d/
 </code></pre></div></p>
 <h3 id="permission-denied-port-1024">Permission Denied (Port &lt; 1024)<a class="headerlink" href="#permission-denied-port-1024" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error binding to port 514 on Unix/Linux systems</p>
@@ -4756,7 +4980,7 @@ Ports below 1024 require elevated privileges on Unix/Linux:</p>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>sudo<span class="w"> </span>setcap<span class="w"> </span><span class="nv">cap_net_bind_service</span><span class="o">=</span>+ep<span class="w"> </span>./agent
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
 <a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># Option 3: Use alternate port (&gt;1024) and configure syslog sources</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="c1"># /etc/senhub/probes.d/10-syslog.yaml:</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="c1"># /etc/senhub-agent/probes.d/10-syslog.yaml:</span>
 <a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>-<span class="w"> </span>name:<span class="w"> </span>syslog
 <a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">  </span>type:<span class="w"> </span>syslog
 <a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">  </span>params:
@@ -5146,7 +5370,7 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../powerstore/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dell PowerStore">
+          <a href="../exchange_online/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Exchange Online">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5156,7 +5380,7 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Dell PowerStore
+                Exchange Online
               </div>
             </div>
           </a>
