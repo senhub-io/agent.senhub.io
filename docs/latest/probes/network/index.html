@@ -1628,6 +1628,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../smart/" class="md-nav__link">
         
   
@@ -2084,6 +2112,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -4512,6 +4736,7 @@
 <li><strong>Interfaces with IP addresses</strong> (IPv4 or IPv6)</li>
 <li><strong>Excludes</strong>: Virtual adapters, disabled interfaces, loopback</li>
 </ul>
+<p>A performance-counter instance that no adapter claims (name mismatch, or an adapter without an IP) still emits its counters, without the IP tags — real traffic is never dropped.</p>
 <h3 id="unixlinuxmacos">Unix/Linux/macOS<a class="headerlink" href="#unixlinuxmacos" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Non-loopback interfaces</strong> (excludes <code>lo</code>, <code>lo0</code>)</li>
@@ -4597,7 +4822,7 @@
 </code></pre></div></p>
 <p><strong>Verify probe is enabled:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Check configuration (multi-file layout)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;name: network&quot;</span><span class="w"> </span>/etc/senhub/probes.d/
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;name: network&quot;</span><span class="w"> </span>/etc/senhub-agent/probes.d/
 </code></pre></div></p>
 <p><strong>Check interface detection:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Unix/Linux: List network interfaces</span>
@@ -4821,9 +5046,9 @@
 <td><code>192.168.1.10</code>, <code>2001:db8::1</code></td>
 </tr>
 <tr>
-<td><code>hostname</code></td>
-<td>System hostname</td>
-<td><code>web-server-01</code></td>
+<td><code>host</code></td>
+<td>System FQDN, lower-cased</td>
+<td><code>web-01.example.com</code></td>
 </tr>
 <tr>
 <td><code>os</code></td>
@@ -4831,9 +5056,9 @@
 <td><code>linux</code>, <code>windows</code>, <code>darwin</code></td>
 </tr>
 <tr>
-<td><code>arch</code></td>
-<td>System architecture</td>
-<td><code>amd64</code>, <code>arm64</code></td>
+<td><code>platform</code></td>
+<td>OS distribution / platform</td>
+<td><code>debian</code>, <code>ubuntu</code></td>
 </tr>
 </tbody>
 </table>
@@ -4855,7 +5080,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">packets_received</span><span class="p">{</span><span class="nl">ip</span><span class="o">=</span><span class="p">&quot;</span><span class="s">192.168.1.10</span><span class="p">&quot;}</span>
 </code></pre></div></p>
 <p><strong>Aggregate all interfaces:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">sum</span><span class="o">(</span><span class="nv">bytes_sent</span><span class="p">{</span><span class="nl">hostname</span><span class="o">=</span><span class="p">&quot;</span><span class="s">web-01</span><span class="p">&quot;}</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">sum</span><span class="o">(</span><span class="nv">bytes_sent</span><span class="p">{</span><span class="nl">host</span><span class="o">=</span><span class="p">&quot;</span><span class="s">web-01.example.com</span><span class="p">&quot;}</span><span class="o">)</span>
 </code></pre></div></p>
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>The Network probe requires no authentication as it collects local system metrics only.</p>

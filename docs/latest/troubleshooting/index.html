@@ -1012,6 +1012,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../probes/os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../probes/smart/" class="md-nav__link">
         
   
@@ -1468,6 +1496,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -4226,7 +4450,7 @@ Typically: <code>C:\ProgramData\SenHub\logs\senhubagent.log</code></p>
 <p><strong>Symptom:</strong> A probe type is rejected with a license error, or premium probes are not available.</p>
 <p><strong>Possible causes and solutions:</strong></p>
 <ul>
-<li><strong>No license activated</strong>: Check with <code>senhub-agent license show</code>. Free tier only allows cpu, memory, logicaldisk, network.</li>
+<li><strong>No license activated</strong>: Check with <code>senhub-agent license show</code>. Without a license the agent runs every Free-tier probe — the whole universal collection tier (OS/host, logs, network checks, application, database and broker probes); only the Pro probes need a license. Each page of the <a href="../probes/">probe catalog</a> shows the tier badge.</li>
 <li><strong>License expired</strong>: Check the expiration date. There is a 7-day grace period after expiration. Contact support for renewal.</li>
 <li><strong>Probe not in license tier</strong>: Verify the probe type is included in your tier. See the License Tiers table in the <a href="../configuration/">Configuration section</a>.</li>
 </ul>

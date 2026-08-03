@@ -1616,6 +1616,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../smart/" class="md-nav__link">
         
   
@@ -2072,6 +2100,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -4653,12 +4877,12 @@
 - Real-time per-drive metrics</p>
 <p><strong>Drive Identification:</strong>
 - Drive letters: <code>C:</code>, <code>D:</code>, <code>E:</code>, etc.
-- Tag: <code>drive=C:</code></p>
+- Tags: <code>drive=C:</code>, <code>device=C:</code>, <code>fs_type=ntfs</code></p>
 <p><strong>Default Filters:</strong>
 - Includes: All drives (empty = all)
 - Excludes: <code>HarddiskVolume*</code> (system volumes), <code>_Total</code> (aggregate)</p>
 <p><strong>Example Metrics:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>disk_free_mb{drive=&quot;C:&quot;} = 102400
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>disk_free_mb{drive=&quot;C:&quot;,device=&quot;C:&quot;,fs_type=&quot;ntfs&quot;} = 102400
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>disk_free_percent{drive=&quot;C:&quot;} = 45.2
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>disk_reads_sec{drive=&quot;C:&quot;} = 123.4
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>disk_writes_sec{drive=&quot;C:&quot;} = 87.6
@@ -4723,7 +4947,7 @@ The LogicalDisk probe automatically recognizes and monitors APFS filesystems on 
 </code></pre></div></p>
 <p><strong>Verify probe is enabled:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Check configuration (multi-file layout)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;name: logicaldisk&quot;</span><span class="w"> </span>/etc/senhub/probes.d/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;name: logicaldisk&quot;</span><span class="w"> </span>/etc/senhub-agent/probes.d/
 </code></pre></div></p>
 <h3 id="windows-pdh-counter-errors">Windows: PDH Counter Errors<a class="headerlink" href="#windows-pdh-counter-errors" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error messages about Performance Data Helper (PDH) counters</p>

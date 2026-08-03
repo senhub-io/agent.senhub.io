@@ -1014,6 +1014,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../smart/" class="md-nav__link">
         
   
@@ -1470,6 +1498,202 @@
     
   
     Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
   
 
     
@@ -3376,6 +3600,31 @@ keyspace size, replication state and persistence (RDB/AOF) health.</p>
 <td><code>tls</code></td>
 <td><code>false</code></td>
 <td>Enable TLS for the Redis connection</td>
+</tr>
+<tr>
+<td><code>tls_cert_file</code></td>
+<td>—</td>
+<td>Path to a PEM client certificate, presented to the server for mutual TLS (requires <code>tls_key_file</code>)</td>
+</tr>
+<tr>
+<td><code>tls_key_file</code></td>
+<td>—</td>
+<td>Path to the PEM private key matching <code>tls_cert_file</code> (requires <code>tls_cert_file</code>)</td>
+</tr>
+<tr>
+<td><code>tls_ca_file</code></td>
+<td>—</td>
+<td>Path to a PEM CA bundle used to verify the server certificate (defaults to the system trust store)</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td><code>5</code></td>
+<td>Connection and command timeout in seconds</td>
+</tr>
+<tr>
+<td><code>instance_name</code></td>
+<td>—</td>
+<td>Logical name used as the entity instance identifier instead of <code>host:port</code>; set it to keep the identity stable if the address changes</td>
 </tr>
 </tbody>
 </table>
