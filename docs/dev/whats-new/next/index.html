@@ -3104,6 +3104,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#refresh-unit-no-longer-disarms-a-user-root-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        refresh-unit no longer disarms a --user root install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#filetail-can-read-the-system-log-files-again-on-a-hardened-install" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3532,6 +3543,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#refresh-unit-no-longer-disarms-a-user-root-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        refresh-unit no longer disarms a --user root install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#filetail-can-read-the-system-log-files-again-on-a-hardened-install" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3598,6 +3620,21 @@
 <div class="rn-filter"></div>
 
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
+<h3 id="refresh-unit-no-longer-disarms-a-user-root-install"><code>refresh-unit</code> no longer disarms a <code>--user root</code> install<a class="headerlink" href="#refresh-unit-no-longer-disarms-a-user-root-install" title="Permanent link">&para;</a></h3>
+<p><code>senhub-agent install --user root</code> writes a unit that runs with full
+privileges — which is the entire reason to choose it, for probes that need raw
+ICMP sockets or a privileged port. Running <code>senhub-agent refresh-unit</code> on such a
+host rewrote it to the hardened template with <code>User=root</code>, and the hardened
+template drops every Linux capability. The service kept starting, so nothing
+looked wrong; the active checks that needed those capabilities simply stopped
+working.</p>
+<p>A refresh on a root install now produces the same unit the install produced,
+capabilities included. Root identity is expressed the way the installer
+expresses it — by the absence of a <code>User=</code> directive, systemd's default being
+root — instead of an explicit <code>User=root</code> on a capability-dropping unit.</p>
+<p>Non-root installs are unchanged: the <code>senhub</code> user still gets the hardened unit
+verbatim, and a custom service user still gets it re-templated. A refresh still
+never switches a root install to the <code>senhub</code> user. (#689)</p>
 <h3 id="filetail-can-read-the-system-log-files-again-on-a-hardened-install"><code>filetail</code> can read the system log files again on a hardened install<a class="headerlink" href="#filetail-can-read-the-system-log-files-again-on-a-hardened-install" title="Permanent link">&para;</a></h3>
 <p>On Debian and Ubuntu, <code>/var/log/syslog</code> and <code>/var/log/auth.log</code> belong to
 <code>syslog:adm</code> with mode <code>0640</code>, so a <code>filetail</code> probe pointed at them collected
