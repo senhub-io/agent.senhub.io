@@ -3092,6 +3092,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="New">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#snmp_poll-collects-ipv6-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        snmp_poll collects IPv6 routes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fixed" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3559,6 +3587,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="New">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#snmp_poll-collects-ipv6-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        snmp_poll collects IPv6 routes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fixed" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3675,6 +3731,23 @@
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
 <div class="rn-filter"></div>
 
+<h2 id="new">New<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
+<h3 id="snmp_poll-collects-ipv6-routes"><code>snmp_poll</code> collects IPv6 routes<a class="headerlink" href="#snmp_poll-collects-ipv6-routes" title="Permanent link">&para;</a></h3>
+<p>Route collection walked only <code>ipCidrRouteTable</code> (RFC 2096), which is IPv4-only,
+so an IPv6 or dual-stack router surfaced none of its IPv6 routing table.</p>
+<p><code>snmp_poll</code> now also walks <code>inetCidrRouteTable</code> (RFC 4292), the
+address-family-agnostic successor, and emits IPv6 destinations as
+<code>network.route</code> entities exactly like IPv4 ones — canonical CIDR identity, host
+bits zeroed, RFC 5952 form (<code>2001:db8:abcd::/48</code>, <code>::/0</code> for the default
+route).</p>
+<p>Devices implementing both tables list their IPv4 routes twice; the first entity
+per destination wins and the IPv4 table is walked first, so IPv4 route
+identities are unchanged. A device implementing only one of the two tables is
+normal and no longer treated as a failure — collection fails only when neither
+table answers, and the error then names both causes.</p>
+<p>Zoned address families (<code>ipv4z</code>, <code>ipv6z</code>) are skipped: their destination is
+only meaningful inside one scope and would collide with its unzoned twin.
+(#716)</p>
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
 <h3 id="update-now-refreshes-the-binary-the-service-actually-runs"><code>update</code> now refreshes the binary the service actually runs<a class="headerlink" href="#update-now-refreshes-the-binary-the-service-actually-runs" title="Permanent link">&para;</a></h3>
 <p>On a hardened Linux install the agent is on disk twice: the CLI copy in
