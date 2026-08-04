@@ -3104,6 +3104,34 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#update-now-refreshes-the-binary-the-service-actually-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update now refreshes the binary the service actually runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-follow-ups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known follow-ups
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known follow-ups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#refresh-unit-no-longer-disarms-a-user-root-install" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3543,6 +3571,34 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#update-now-refreshes-the-binary-the-service-actually-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update now refreshes the binary the service actually runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-follow-ups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known follow-ups
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known follow-ups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#refresh-unit-no-longer-disarms-a-user-root-install" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3620,6 +3676,36 @@
 <div class="rn-filter"></div>
 
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
+<h3 id="update-now-refreshes-the-binary-the-service-actually-runs"><code>update</code> now refreshes the binary the service actually runs<a class="headerlink" href="#update-now-refreshes-the-binary-the-service-actually-runs" title="Permanent link">&para;</a></h3>
+<p>On a hardened Linux install the agent is on disk twice: the CLI copy in
+<code>PATH</code>, and the copy the systemd unit execs
+(<code>/var/lib/senhub-agent/bin/senhub-agent</code>), which the unprivileged daemon owns
+so it can replace it during auto-update. <code>sudo senhub-agent update &lt;version&gt;</code>
+only ever replaced the copy it ran from, so the service kept running the old
+release while the CLI reported the new one — and the closing "Restart the agent
+to use the new version" made it look like the upgrade had landed.</p>
+<p><code>update</code> now reconciles both copies and names each file it wrote. Ownership of
+the service copy is handed back to the unit's <code>User=</code>, so the daemon can still
+self-update afterwards. Re-running the command is also the repair for a host
+whose service copy already fell behind.</p>
+<p>A service copy running a <strong>newer</strong> release than the one being installed is
+reported and left untouched rather than downgraded — the daemon legitimately
+runs ahead of the CLI.</p>
+<p><code>senhub-agent --version</code> reports the skew instead of hiding it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Version: 0.5.3 (commit: a8e67f7)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Service binary: 0.5.4 (/var/lib/senhub-agent/bin/senhub-agent)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Note: the systemd service runs a different build than this CLI binary.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      &#39;sudo senhub-agent update &lt;version&gt;&#39; updates both copies.
+</code></pre></div>
+<p>The other binary's version is read from its build metadata, never by executing
+it. Nothing changes for a single-copy install (legacy root unit, Windows, MSI):
+both behaviours stay silent when there is only one binary. (#723)</p>
+<h2 id="known-follow-ups">Known follow-ups<a class="headerlink" href="#known-follow-ups" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hosts running <code>auto_update.include_beta: true</code> resolve <code>latest</code> to the newest
+  beta and never move to the stable release that supersedes it. Stable hosts are
+  unaffected. (#730)</li>
+</ul>
 <h3 id="refresh-unit-no-longer-disarms-a-user-root-install"><code>refresh-unit</code> no longer disarms a <code>--user root</code> install<a class="headerlink" href="#refresh-unit-no-longer-disarms-a-user-root-install" title="Permanent link">&para;</a></h3>
 <p><code>senhub-agent install --user root</code> writes a unit that runs with full
 privileges — which is the entire reason to choose it, for probes that need raw
@@ -3677,8 +3763,8 @@ path. (#730)</p>
 records straight to the log rail; the only datapoints they hand to the pull cache
 are their own throughput and health counters. Those probe types were not declared
 in the cache's discriminant-tag registry, so every HTTP-strategy push logged:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Probe type not in DiscriminantTagsRegistry - using no discriminant tags
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  metric_name=senhub.filetail.records_emitted probe_type=filetail
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Probe type not in DiscriminantTagsRegistry - using no discriminant tags
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  metric_name=senhub.filetail.records_emitted probe_type=filetail
 </code></pre></div>
 <p>The four types are now declared with an empty discriminant set, which is the
 correct shape rather than a gap: these counters carry no per-instance tag, and
