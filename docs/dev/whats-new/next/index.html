@@ -3104,6 +3104,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#hosts-opted-into-betas-now-converge-to-the-stable-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hosts opted into betas now converge to the stable release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#no-more-registry-warning-on-every-http-push-for-the-log-conduit-probes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3510,6 +3521,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#hosts-opted-into-betas-now-converge-to-the-stable-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hosts opted into betas now converge to the stable release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#no-more-registry-warning-on-every-http-push-for-the-log-conduit-probes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3554,6 +3576,23 @@
 <div class="rn-filter"></div>
 
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
+<h3 id="hosts-opted-into-betas-now-converge-to-the-stable-release">Hosts opted into betas now converge to the stable release<a class="headerlink" href="#hosts-opted-into-betas-now-converge-to-the-stable-release" title="Permanent link">&para;</a></h3>
+<p>A host running <code>auto_update.include_beta: true</code> resolved <code>latest</code> to the newest
+<strong>beta</strong> and stayed there — it never moved to the stable release that
+superseded it. A recette host opted into betas silently stopped tracking
+production.</p>
+<p>Each channel is published with an alias record first, carrying the resolved
+version (<code>{"latest", "0.5.3"}</code>, <code>{"latest-beta", "0.5.3-beta"}</code>), and the merge
+of the two channels de-duplicates by version keeping the first record — so for
+the newest release the alias record is usually the only one left. Version
+selection then discarded records named <code>latest</code>, which made the newest stable
+release invisible, while the beta alias, named <code>latest-beta</code>, escaped the same
+filter and won.</p>
+<p>Selection now looks at the version a record carries, never at the name of the
+record. A beta genuinely ahead of the newest stable still wins, so opting into
+betas keeps delivering them.</p>
+<p>Stable hosts were never affected: they resolve <code>latest</code> through a different
+path. (#730)</p>
 <h3 id="no-more-registry-warning-on-every-http-push-for-the-log-conduit-probes">No more registry warning on every HTTP push for the log conduit probes<a class="headerlink" href="#no-more-registry-warning-on-every-http-push-for-the-log-conduit-probes" title="Permanent link">&para;</a></h3>
 <p><code>filetail</code>, <code>linux_logs</code>, <code>windows_eventlog</code> and <code>snmp_trap</code> publish their
 records straight to the log rail; the only datapoints they hand to the pull cache
