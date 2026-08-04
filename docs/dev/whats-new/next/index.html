@@ -3104,6 +3104,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#filetail-can-read-the-system-log-files-again-on-a-hardened-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filetail can read the system log files again on a hardened install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hosts-opted-into-betas-now-converge-to-the-stable-release" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3521,6 +3532,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#filetail-can-read-the-system-log-files-again-on-a-hardened-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filetail can read the system log files again on a hardened install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hosts-opted-into-betas-now-converge-to-the-stable-release" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3576,6 +3598,26 @@
 <div class="rn-filter"></div>
 
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
+<h3 id="filetail-can-read-the-system-log-files-again-on-a-hardened-install"><code>filetail</code> can read the system log files again on a hardened install<a class="headerlink" href="#filetail-can-read-the-system-log-files-again-on-a-hardened-install" title="Permanent link">&para;</a></h3>
+<p>On Debian and Ubuntu, <code>/var/log/syslog</code> and <code>/var/log/auth.log</code> belong to
+<code>syslog:adm</code> with mode <code>0640</code>, so a <code>filetail</code> probe pointed at them collected
+nothing under the non-root unit — silently, with no error naming the cause. The
+journal was never affected: <code>linux_logs</code> reads it through the <code>systemd-journal</code>
+group the unit already grants.</p>
+<p><code>senhub-agent install</code>, <code>senhub-agent refresh-unit</code> and the <code>.deb</code> / <code>.rpm</code>
+postinstall now join the service user to the <code>adm</code> group, which grants exactly
+those log files and nothing else. Running <code>refresh-unit</code> is how an existing
+install picks it up. Where the group does not exist, the join is skipped and the
+install still succeeds.</p>
+<p>The membership is granted through the user database rather than the unit's
+<code>SupplementaryGroups=</code>, because a <code>SupplementaryGroups=</code> naming a group absent
+from the distribution fails the unit at startup with <code>216/GROUP</code>.</p>
+<p>The admin guide now documents the grant, and warns against the workaround it
+replaces: <code>CAP_DAC_READ_SEARCH</code> does make the logs readable, but it bypasses
+every file read permission check on the host — <code>/etc/shadow</code>, private keys and
+any customer data included. On Red Hat systems <code>rsyslog</code> writes
+<code>/var/log/messages</code> as <code>root:root 0600</code>, where <code>adm</code> does not help and
+<code>linux_logs</code> is the answer. (#732)</p>
 <h3 id="hosts-opted-into-betas-now-converge-to-the-stable-release">Hosts opted into betas now converge to the stable release<a class="headerlink" href="#hosts-opted-into-betas-now-converge-to-the-stable-release" title="Permanent link">&para;</a></h3>
 <p>A host running <code>auto_update.include_beta: true</code> resolved <code>latest</code> to the newest
 <strong>beta</strong> and stayed there — it never moved to the stable release that
