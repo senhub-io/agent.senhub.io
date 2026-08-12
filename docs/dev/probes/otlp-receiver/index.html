@@ -3692,7 +3692,17 @@ deployment.</p>
 <li><strong>Resource attributes become tags.</strong> <code>host.name</code>, <code>service.name</code>
   and every other resource attribute is folded onto each datapoint,
   so downstream sinks can group by origin. Per-datapoint attributes
-  win on key collisions.</li>
+  win on key collisions. This is what PRTG, Nagios, Prometheus, the web
+  UI and the cloud sink read, and it is unchanged.</li>
+<li><strong>The OTLP output relays the original batch.</strong> Those same points are
+  also forwarded verbatim on the OTLP export, under the <strong>emitting
+  application's</strong> resource rather than re-encoded under the agent's.
+  Without it a reserved identity key such as <code>service.name</code> would carry
+  two different values in one export — the agent's on the resource, the
+  application's on the datapoint — and the backend would silently keep
+  one. Agent context is added on top, never substituted, exactly as for
+  logs and traces. Only the OTLP output is affected; every other sink
+  keeps reading the tags above.</li>
 <li><strong>All metric types.</strong> Gauges and Sums map to one value each.
   Explicit-bucket histograms are ingested <strong>natively</strong>: re-exported over
   OTLP as a genuine histogram (buckets, sum, count, min/max preserved)
@@ -3707,14 +3717,31 @@ deployment.</p>
   partial-success response.</li>
 <li><strong>Pass-through naming.</strong> Ingested metric names are forwarded
   unchanged; nothing is renamed or prefixed.</li>
-<li><strong>Logs are relayed.</strong> With <code>signals: [logs]</code>, OTLP log records are
-  accepted (gRPC <code>LogsService</code>, or HTTP on <code>/v1/logs</code>) and handed to a
-  configured OTLP export strategy, which forwards them onward over OTLP
-  (an OTLP-in → OTLP-out relay). Severity, body, and attributes are
-  preserved; resource attributes are folded onto each record. The pull
-  sinks (Prometheus/PRTG/Nagios) are metrics-only, so <strong>logs need an OTLP
+<li>
+<p><strong>Logs are relayed.</strong> With <code>signals: [logs]</code>, OTLP log records are
+  accepted (gRPC <code>LogsService</code>, or HTTP on <code>/v1/logs</code>) and forwarded
+  verbatim by a configured OTLP export strategy (an OTLP-in → OTLP-out
+  relay). Severity, body, attributes <strong>and the emitting application's
+  resource</strong> are preserved: a record sent with <code>service.name=my-app</code>
+  arrives as <code>my-app</code>, so applications stay distinguishable at the
+  backend. Agent context (tenant, site, environment, the
+  <code>telemetry.relay.*</code> identity) is only ever <strong>added on top</strong> — an
+  attribute the sender already set is never replaced. The pull sinks
+  (Prometheus/PRTG/Nagios) are metrics-only, so <strong>logs need an OTLP
   export strategy</strong> — without one, ingested logs are discarded and the
-  agent logs a throttled warning.</li>
+  agent logs a throttled warning.</p>
+<div class="admonition note">
+<p class="admonition-title">Changed behaviour</p>
+<p>Before this release, ingested logs were re-emitted through the
+agent's own log pipeline, which replaced the sender's resource
+with the agent's — a record sent with <code>service.name=my-app</code> was
+stored under the agent's <code>service.name</code>, making applications
+indistinguishable by that attribute. If a dashboard or query
+relies on ingested logs carrying the agent's <code>service.name</code>,
+point it at the agent's own logs or at
+<code>telemetry.relay.instance.id</code> instead.</p>
+</div>
+<ul>
 <li><strong>Traces are relayed.</strong> With <code>signals: [traces]</code>, OTLP trace spans are
   accepted (gRPC <code>TracesService</code>, or HTTP on <code>/v1/traces</code>) and forwarded
   as a raw pass-through: spans are relayed verbatim — trace IDs, span
@@ -3725,6 +3752,8 @@ deployment.</p>
   logs a throttled warning.</li>
 <li><strong>Limits.</strong> gRPC accepts payloads up to 4 MiB (the OTel SDK
   default); the HTTP server applies a 30-second read timeout.</li>
+</ul>
+</li>
 </ul>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
