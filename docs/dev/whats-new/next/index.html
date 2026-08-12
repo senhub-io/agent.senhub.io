@@ -3092,6 +3092,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#telemetry-ingested-by-otlp_receiver-keeps-the-sending-applications-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetry ingested by otlp_receiver keeps the sending application's identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#new" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3102,6 +3130,17 @@
   
     <nav class="md-nav" aria-label="New">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-otlp-pipeline-reports-what-it-relays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The OTLP pipeline reports what it relays
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#snmp_poll-collects-ipv6-routes" class="md-nav__link">
@@ -3587,6 +3626,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Changed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#telemetry-ingested-by-otlp_receiver-keeps-the-sending-applications-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetry ingested by otlp_receiver keeps the sending application's identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#new" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3597,6 +3664,17 @@
   
     <nav class="md-nav" aria-label="New">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-otlp-pipeline-reports-what-it-relays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The OTLP pipeline reports what it relays
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#snmp_poll-collects-ipv6-routes" class="md-nav__link">
@@ -3731,7 +3809,50 @@
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
 <div class="rn-filter"></div>
 
+<h2 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h2>
+<h3 id="telemetry-ingested-by-otlp_receiver-keeps-the-sending-applications-identity">Telemetry ingested by <code>otlp_receiver</code> keeps the sending application's identity<a class="headerlink" href="#telemetry-ingested-by-otlp_receiver-keeps-the-sending-applications-identity" title="Permanent link">&para;</a></h3>
+<p>An application pushing to the agent's OTLP receiver sends its own resource —
+its <code>service.name</code>, its <code>host.name</code>. Until now the agent replaced that identity
+with its own on the way out, so several applications behind one agent arrived
+at the backend indistinguishable: a log sent with <code>service.name=my-app</code> was
+stored under the agent's <code>service.name</code>, and an ingested metric carried two
+different values for <code>service.name</code> in a single export — the agent's on the
+resource, the application's on the datapoint — leaving the backend to silently
+keep one.</p>
+<p>The three signals now honour one contract on the OTLP output: the emitting
+application's resource is forwarded as sent, and the agent's context (tenant,
+site, environment, and the <code>telemetry.relay.*</code> identity that names which agent
+relayed the data) is only ever <strong>added</strong> to keys the sender left unset. Traces
+already worked this way; logs and metrics now match them.</p>
+<p><strong>Nothing changes for PRTG, Nagios, Prometheus, the web UI or the SenHub
+cloud.</strong> Those sinks read tags, not an OTLP resource, and ingested telemetry
+still reaches them exactly as before — the sending application's resource
+attributes keep arriving as tags.</p>
+<p>If a dashboard or query relies on ingested <strong>logs</strong> carrying the agent's
+<code>service.name</code>, point it at the agent's own logs, or at
+<code>telemetry.relay.instance.id</code>, which names the relaying agent without
+overwriting the sender. (#765, #767)</p>
 <h2 id="new">New<a class="headerlink" href="#new" title="Permanent link">&para;</a></h2>
+<h3 id="the-otlp-pipeline-reports-what-it-relays">The OTLP pipeline reports what it relays<a class="headerlink" href="#the-otlp-pipeline-reports-what-it-relays" title="Permanent link">&para;</a></h3>
+<p>The relays had no success counter: an operator could watch
+<code>senhub_agent_otlp_receiver_ingested_total</code> climb with no way to tell telemetry
+the agent had forwarded from telemetry it had accepted and never sent. A field
+report spent half a day on that ambiguity — the agent was relaying correctly the
+whole time.</p>
+<p>Three counters close it, on <code>/info/otlp</code>, in <code>senhub-agent status --otlp</code> and on
+the Prometheus endpoint:</p>
+<ul>
+<li><code>senhub_agent_otlp_spans_relayed_total</code></li>
+<li><code>senhub_agent_otlp_logs_relayed_total</code></li>
+<li><code>senhub_agent_otlp_metrics_relayed_total</code></li>
+</ul>
+<p>Each counts only what the collector accepted, never a refused export, and pairs
+with the receiver's ingest counter for the same signal: equal totals mean
+everything ingested left the agent.</p>
+<p>The HTTP receiver's startup log also names every route it serves. It previously
+logged only the metrics path even when the logs and traces handlers were mounted,
+which read as "traces is not wired" at exactly the moment an operator checks
+that. (#764)</p>
 <h3 id="snmp_poll-collects-ipv6-routes"><code>snmp_poll</code> collects IPv6 routes<a class="headerlink" href="#snmp_poll-collects-ipv6-routes" title="Permanent link">&para;</a></h3>
 <p>Route collection walked only <code>ipCidrRouteTable</code> (RFC 2096), which is IPv4-only,
 so an IPv6 or dual-stack router surfaced none of its IPv6 routing table.</p>
@@ -3778,6 +3899,10 @@ both behaviours stay silent when there is only one binary. (#723)</p>
 <li>Hosts running <code>auto_update.include_beta: true</code> resolve <code>latest</code> to the newest
   beta and never move to the stable release that supersedes it. Stable hosts are
   unaffected. (#730)</li>
+<li>Relay enrichment is configured under <code>signals.traces.relay_enrichment</code>, but now
+  governs relayed logs and metrics too; disabling it on the traces signal
+  silently disables it for all three. The setting will move to a relay-level
+  block, with the current key kept as a deprecated alias. (#766)</li>
 </ul>
 <h3 id="refresh-unit-no-longer-disarms-a-user-root-install"><code>refresh-unit</code> no longer disarms a <code>--user root</code> install<a class="headerlink" href="#refresh-unit-no-longer-disarms-a-user-root-install" title="Permanent link">&para;</a></h3>
 <p><code>senhub-agent install --user root</code> writes a unit that runs with full
