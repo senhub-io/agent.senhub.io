@@ -2787,6 +2787,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-without-access-to-the-docker-socket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running without access to the Docker socket
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running without access to the Docker socket">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keeping-the-metadata-without-granting-host-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keeping the metadata without granting host root
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3603,6 +3631,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-without-access-to-the-docker-socket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running without access to the Docker socket
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running without access to the Docker socket">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keeping-the-metadata-without-granting-host-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keeping the metadata without granting host root
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3716,10 +3772,68 @@ Engine socket automatically.</p>
 </table>
 <p>Each metric is tagged with <code>container_name</code> and <code>container_id</code>; CPU metrics are
 additionally tagged with <code>core</code>.</p>
+<h2 id="running-without-access-to-the-docker-socket">Running without access to the Docker socket<a class="headerlink" href="#running-without-access-to-the-docker-socket" title="Permanent link">&para;</a></h2>
+<p><code>/var/run/docker.sock</code> is <code>root:docker</code> mode <code>0660</code>, so an agent running as the
+unprivileged <code>senhub</code> service user cannot open it. The usual remedy is to add
+that user to the <code>docker</code> group — and it is worth knowing what that grants:
+anyone who can reach the socket can start a container that mounts the host
+filesystem, so <strong><code>docker</code> group membership is root on the host by another
+route</strong>. It is a decision to make deliberately, which is why the installer never
+makes it for you.</p>
+<p>The probe does not require it. When the socket is unavailable it reads container
+counters straight from cgroups, which are world-readable:</p>
+<table>
+<thead>
+<tr>
+<th>Available from cgroups</th>
+<th>Needs the socket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>container.cpu.*</code></td>
+<td><code>container.network.*</code></td>
+</tr>
+<tr>
+<td><code>container.memory.*</code></td>
+<td><code>container.restarts</code></td>
+</tr>
+<tr>
+<td><code>container.blockio.*</code></td>
+<td>container name, image, labels, state</td>
+</tr>
+<tr>
+<td><code>container.pids.count</code></td>
+<td>the container entity in topology</td>
+</tr>
+</tbody>
+</table>
+<p>That is 26 of the probe's 31 metrics with no group, no capability and no path to
+root. Containers are identified by id alone in this mode — a name guessed from a
+cgroup path would be wrong the moment someone renamed a container, and wrong
+identity is worse than none.</p>
+<p><strong>Per-container network counters are the real loss.</strong> They live in the
+container's network namespace rather than its cgroup, so there is no
+unprivileged file to read; they are absent rather than reported as zero.</p>
+<p><code>senhub.docker.source</code> tells you which mode a cycle used, <code>socket</code> or <code>cgroup</code>.
+Alert on it if you rely on the socket-only metrics — the two modes do not carry
+the same fields, and a host that quietly fell back would otherwise look like a
+host whose containers stopped using the network.</p>
+<p><strong>Limitations:</strong> the fallback reads cgroup <strong>v2</strong> only. On a cgroup v1 host the
+probe still needs the socket, and says so in the log rather than publishing half
+the picture.</p>
+<h3 id="keeping-the-metadata-without-granting-host-root">Keeping the metadata without granting host root<a class="headerlink" href="#keeping-the-metadata-without-granting-host-root" title="Permanent link">&para;</a></h3>
+<p>A <strong>docker socket proxy</strong> — a small HAProxy in front of the socket that
+allow-lists only the endpoints the agent reads and returns <code>403</code> for everything
+else — gives the container names and labels back without granting container
+creation. The probe uses exactly two read-only endpoints,
+<code>GET /containers/json</code> and <code>GET /containers/{id}/stats</code>, so the allow-list is
+short. <a href="https://github.com/Tecnativa/docker-socket-proxy">Tecnativa/docker-socket-proxy</a>
+is the usual implementation.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The agent must have read access to <code>/var/run/docker.sock</code>. On Linux, add the agent user to the <code>docker</code> group or run as root.</li>
-<li>All containers visible to the socket are monitored; use Docker labels or external filtering to restrict if needed.</li>
+<li>All containers visible to the socket are monitored; use Docker labels or external filtering to restrict if needed. In cgroup mode every container with a cgroup is reported, and <code>include</code>/<code>exclude</code> cannot filter by name because no name is available.</li>
 <li>Stopped containers emit <code>senhub.docker.up=0</code> without CPU/memory metrics.</li>
 </ul>
 

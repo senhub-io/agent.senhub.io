@@ -4696,7 +4696,7 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Configure PRTG HTTP Advanced Sensor:</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># - URL: http://agent-host:8080/api/{agentkey}/prtg/metrics</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># - Method: POST</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># - Request body: {&quot;probe&quot;: &quot;cpu&quot;}</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># - Request body: {"probe": "cpu"}</span>
 </code></pre></div>
 <p><strong>PRTG Channels Available:</strong>
 - CPU Total Usage (%)
@@ -4758,13 +4758,13 @@
 </code></pre></div></p>
 <p><strong>Verify probe is enabled:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Check configuration (multi-file layout)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;name: cpu&quot;</span><span class="w"> </span>/etc/senhub-agent/probes.d/
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">"name: cpu"</span><span class="w"> </span>/etc/senhub-agent/probes.d/
 </code></pre></div></p>
 <h3 id="windows-pdh-counter-errors">Windows: PDH Counter Errors<a class="headerlink" href="#windows-pdh-counter-errors" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error messages about Performance Data Helper (PDH) counters</p>
 <p><strong>Solution:</strong>
 1. Verify Performance Counter service is running:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;PerfHost&quot;</span><span class="p">}</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">"PerfHost"</span><span class="p">}</span>
 </code></pre></div></p>
 <ol>
 <li>
