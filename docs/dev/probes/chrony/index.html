@@ -16,7 +16,7 @@
         <link rel="prev" href="../windows-services/">
       
       
-        <link rel="next" href="../os-updates/">
+        <link rel="next" href="../ntp/">
       
       
         
@@ -1079,6 +1079,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reading-the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the numbers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1093,6 +1115,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3575,6 +3625,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reading-the-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the numbers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3619,7 +3691,12 @@
 <p>The <code>chrony</code> probe monitors NTP synchronisation health on the local machine via
 <code>chronyc tracking</code>. It reports time offset, frequency offset, skew, root delay
 and dispersion, stratum and leap status.</p>
-<p>Works on Linux and macOS. Requires <code>chronyc</code> to be present in the PATH.</p>
+<p>Works on Linux and macOS. Requires <code>chronyc</code> to be present on the host.</p>
+<p>It reports what the chrony daemon believes about the clock it steers. To measure
+the clock against an independent reference — and to cover hosts that run
+systemd-timesyncd, ntpd, the Windows Time service or no daemon at all — see the
+<a href="../ntp/">NTP (direct)</a> probe. The two are complementary; the comparison at the
+bottom of that page says which question each one answers.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-chrony.yaml — each file under probes.d/ is a YAML array of probes</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chrony</span>
@@ -3627,7 +3704,30 @@ and dispersion, stratum and leap status.</p>
 </code></pre></div>
 <p>No parameters are required — the probe reads the local chrony daemon.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<p>This probe takes no configuration parameters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chronyc_path</code></td>
+<td>string</td>
+<td><code>chronyc</code></td>
+<td>Path to the <code>chronyc</code> binary. Set this when it is not on the agent's <code>PATH</code> — a hardened service unit does not inherit an interactive shell's <code>PATH</code>, so an absolute path such as <code>/usr/bin/chronyc</code> is the usual fix.</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>int (seconds)</td>
+<td><code>30</code></td>
+<td>Collection interval.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3644,8 +3744,13 @@ and dispersion, stratum and leap status.</p>
 <td>1 when chronyc returned a valid tracking response, 0 when chronyc failed or is not installed</td>
 </tr>
 <tr>
+<td><code>senhub.chrony.state</code></td>
+<td>1</td>
+<td>One series per reason, exactly one of which is 1: <code>ok</code>, <code>not_installed</code>, <code>exec_failed</code>, <code>parse_failed</code></td>
+</tr>
+<tr>
 <td><code>ntp.time.offset</code></td>
-<td>s</td>
+<td>ms</td>
 <td>Estimated error of the system clock relative to the NTP reference</td>
 </tr>
 <tr>
@@ -3660,12 +3765,12 @@ and dispersion, stratum and leap status.</p>
 </tr>
 <tr>
 <td><code>ntp.root.delay</code></td>
-<td>s</td>
+<td>ms</td>
 <td>Total round-trip delay to the reference clock source</td>
 </tr>
 <tr>
 <td><code>ntp.root.dispersion</code></td>
-<td>s</td>
+<td>ms</td>
 <td>Maximum error of the local clock relative to the reference source</td>
 </tr>
 <tr>
@@ -3680,11 +3785,90 @@ and dispersion, stratum and leap status.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="reading-the-numbers">Reading the numbers<a class="headerlink" href="#reading-the-numbers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><code>ntp.time.offset</code></th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>under 10 ms</td>
+<td>Normal for a synchronised host. Nothing to do.</td>
+</tr>
+<tr>
+<td>10 ms to 100 ms</td>
+<td>Correlating logs or traces across hosts starts putting events in the wrong order.</td>
+</tr>
+<tr>
+<td>100 ms to 1 s</td>
+<td>Worth alerting. chrony is running but not steering the clock effectively.</td>
+</tr>
+<tr>
+<td>over 60 s</td>
+<td>One-time passwords (TOTP) begin to fail.</td>
+</tr>
+<tr>
+<td>over 5 minutes</td>
+<td>Kerberos and Active Directory authentication fails outright.</td>
+</tr>
+</tbody>
+</table>
+<p>Two signals matter as much as the offset itself:</p>
+<ul>
+<li><strong><code>ntp.leap_status</code> = 3</strong> means chrony has lost its sources and is no longer
+  synchronised. This is the strongest single indicator, because an
+  unsynchronised chrony keeps reporting the last offset it knew: the number
+  stays reassuring while the clock quietly drifts.</li>
+<li><strong><code>ntp.skew</code> climbing over days</strong> is an early warning. Skew is the uncertainty
+  on the clock's drift rate, and it rises when a hardware clock or a
+  virtualisation host starts misbehaving — usually well before the time itself
+  moves far enough to break anything.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><code>senhub.chrony.state</code> names the cause directly, so a host with no chrony is
+distinguishable from a probe that cannot read the chrony it has.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Meaning</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ok</code></td>
+<td>Tracking was read and parsed.</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>not_installed</code></td>
+<td><code>chronyc</code> was not found.</td>
+<td>Either the host genuinely does not run chrony — in which case remove the probe or use <a href="../ntp/">NTP (direct)</a> instead — or the binary is not on the service's <code>PATH</code>, which <code>chronyc_path</code> fixes.</td>
+</tr>
+<tr>
+<td><code>exec_failed</code></td>
+<td><code>chronyc</code> ran but exited non-zero.</td>
+<td>Usually chronyd is not running, or its command socket is not reachable. Check <code>systemctl status chronyd</code>.</td>
+</tr>
+<tr>
+<td><code>parse_failed</code></td>
+<td>Output was returned but could not be read.</td>
+<td>Report it: the message names the field index and the offending value.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>This probe is host-local. It reads the chrony daemon on the machine the agent runs on, not a remote NTP server.</li>
-<li><code>ntp.time.offset</code> is signed: positive means the local clock is ahead, negative means it is behind.</li>
-<li>If <code>chronyc</code> is not installed, only <code>senhub.chrony.up=0</code> is emitted.</li>
+<li>This probe is host-local. It reads the chrony daemon on the machine the agent
+  runs on, not a remote NTP server.</li>
+<li><code>ntp.time.offset</code> is signed: positive means the local clock is ahead, negative
+  means it is behind.</li>
+<li>When <code>chronyc</code> cannot be read, only <code>senhub.chrony.up=0</code> and the
+  <code>senhub.chrony.state</code> series are emitted. No measurement is invented.</li>
 </ul>
 
 
@@ -3738,13 +3922,13 @@ and dispersion, stratum and leap status.</p>
         
         
           
-          <a href="../os-updates/" class="md-footer__link md-footer__link--next" aria-label="Next: OS Updates">
+          <a href="../ntp/" class="md-footer__link md-footer__link--next" aria-label="Next: NTP (direct)">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                OS Updates
+                NTP (direct)
               </div>
             </div>
             <div class="md-footer__button md-icon">
