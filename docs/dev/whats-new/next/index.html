@@ -5056,7 +5056,8 @@ filesystem, granted to a process that parses untrusted network input. (#794)</p>
 <h2 id="known-follow-ups">Known follow-ups<a class="headerlink" href="#known-follow-ups" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <code>swarm</code> and <code>docker</code> probes reach the Docker Engine over a Unix socket and
-  have no named-pipe support, so neither works against Docker on Windows.</li>
+  have no named-pipe support, so neither works against Docker on Windows — the
+  platform most customers run. (#801)</li>
 <li>Default probe configuration still covers four host probes; everything else on
   a machine is collected by nobody until someone writes YAML. (#777)</li>
 <li>
@@ -5074,9 +5075,6 @@ filesystem, granted to a process that parses untrusted network input. (#794)</p>
   is never explained in the log. (#796)</li>
 <li>The <code>docker</code> cgroup fallback covers cgroup v2 only; on a v1 host the probe
   still needs the socket. (#797)</li>
-<li>Hosts running <code>auto_update.include_beta: true</code> resolve <code>latest</code> to the newest
-  beta and never move to the stable release that supersedes it. Stable hosts are
-  unaffected. (#730)</li>
 <li>Relay enrichment is configured under <code>signals.traces.relay_enrichment</code>, but now
   governs relayed logs and metrics too; disabling it on the traces signal
   silently disables it for all three. The setting will move to a relay-level
