@@ -4423,7 +4423,7 @@ new versions when <code>auto_update.enabled</code> is set — it reports what it
 names the command that applies it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>A newer version is available. The agent does not install it itself on Linux:
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>the binary is root-owned so the service account cannot rewrite it.
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Apply it with &#39;sudo senhub-agent update&#39;, ...
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Apply it with 'sudo senhub-agent update', ...
 </code></pre></div>
 <p>Updating is <code>sudo senhub-agent update &lt;version&gt;</code> today, and <code>apt</code>/<code>dnf</code>/<code>zypper</code>
 once the packages are published. This is what package-managed agents do, and the
@@ -4630,8 +4630,8 @@ beats a node that is wrong on every machine.</p>
 re-encodes each entry through a map, and Go sorts map keys alphabetically — so
 the timestamp landed at the <strong>end</strong> of every line and the level sat somewhere in
 the middle. Nothing aligned from one line to the next.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{&quot;count&quot;:116,&quot;level&quot;:&quot;info&quot;,&quot;message&quot;:&quot;Successfully sent datapoints&quot;,
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> &quot;module&quot;:&quot;data_store&quot;,&quot;strategy&quot;:&quot;http&quot;,&quot;time&quot;:&quot;2026-08-13T11:12:58+02:00&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{"count":116,"level":"info","message":"Successfully sent datapoints",
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> "module":"data_store","strategy":"http","time":"2026-08-13T11:12:58+02:00"}
 </code></pre></div>
 <p>is now</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>2026-08-13 11:12:58.102 INF Successfully sent datapoints module=data_store count=116 strategy=http
@@ -4856,7 +4856,7 @@ only meaningful inside one scope and would collide with its unzoned twin.
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
 <h3 id="chrony-produced-no-measurement-at-all-on-any-host"><code>chrony</code> produced no measurement at all, on any host<a class="headerlink" href="#chrony-produced-no-measurement-at-all-on-any-host" title="Permanent link">&para;</a></h3>
 <p>Reported from the field on 0.5.3:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chronyc: parsing stratum: strconv.ParseFloat: parsing &quot;109.190.177.205&quot;: invalid syntax
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chronyc: parsing stratum: strconv.ParseFloat: parsing "109.190.177.205": invalid syntax
 </code></pre></div>
 <p><code>chronyc -c tracking</code> emits fourteen comma-separated fields, with the reference
 address at index 1 and the stratum at index 2. Every index in the parser was one
@@ -4923,7 +4923,7 @@ to use the new version" made it look like the upgrade had landed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Version: 0.5.3 (commit: a8e67f7)
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Service binary: 0.5.4 (/var/lib/senhub-agent/bin/senhub-agent)
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Note: the systemd service runs a different build than this CLI binary.
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>      &#39;sudo senhub-agent update &lt;version&gt;&#39; updates both copies.
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>      'sudo senhub-agent update &lt;version&gt;' updates both copies.
 </code></pre></div>
 <p>A service copy running a <strong>newer</strong> release than the one being installed is
 reported and left untouched rather than downgraded.</p>

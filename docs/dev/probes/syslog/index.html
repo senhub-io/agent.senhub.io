@@ -4753,7 +4753,7 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">514</span><span class="w">               </span><span class="c1"># Syslog port (default: 514)</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">udp</span><span class="w">           </span><span class="c1"># Protocol: udp or tcp (default: udp)</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.0.0.0&quot;</span><span class="w"> </span><span class="c1"># Required to receive from remote senders (default: 127.0.0.1)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span><span class="w"> </span><span class="c1"># Required to receive from remote senders (default: 127.0.0.1)</span>
 </code></pre></div>
 <h3 id="minimal-configuration">Minimal Configuration<a class="headerlink" href="#minimal-configuration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># probes.d/10-syslog.yaml</span>
@@ -4943,7 +4943,7 @@
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Configure PRTG HTTP Advanced Sensor:</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># - URL: http://agent-host:8080/api/{agentkey}/prtg/metrics</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># - Method: POST</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># - Request body: {&quot;probe&quot;: &quot;syslog&quot;}</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># - Request body: {"probe": "syslog"}</span>
 </code></pre></div>
 <p><strong>PRTG Channels Available:</strong>
 - Syslog Events Received (count)
@@ -4990,7 +4990,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># strategies.d/00-event.yaml — forward to multiple destinations</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">event</span><span class="p">:</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">event</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;senhub&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;local_storage&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;siem&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"senhub"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"local_storage"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"siem"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h3 id="security-monitoring-siem-integration">Security Monitoring (SIEM Integration)<a class="headerlink" href="#security-monitoring-siem-integration" title="Permanent link">&para;</a></h3>
 <p>Forward security-critical logs to SIEM systems:
@@ -5035,10 +5035,10 @@
 <h3 id="no-events-received">No Events Received<a class="headerlink" href="#no-events-received" title="Permanent link">&para;</a></h3>
 <p><strong>Check network connectivity:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Test UDP syslog</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;13&gt;Oct 13 14:23:45 test-host test-app: Test message&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>-u<span class="w"> </span>-w1<span class="w"> </span>localhost<span class="w"> </span><span class="m">514</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;13&gt;Oct 13 14:23:45 test-host test-app: Test message"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>-u<span class="w"> </span>-w1<span class="w"> </span>localhost<span class="w"> </span><span class="m">514</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Test TCP syslog</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;13&gt;Oct 13 14:23:45 test-host test-app: Test message&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>-w1<span class="w"> </span>localhost<span class="w"> </span><span class="m">514</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;13&gt;Oct 13 14:23:45 test-host test-app: Test message"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>-w1<span class="w"> </span>localhost<span class="w"> </span><span class="m">514</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
 <a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Verify port is listening</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>netstat<span class="w"> </span>-an<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">514</span>
@@ -5051,7 +5051,7 @@
 </code></pre></div></p>
 <p><strong>Verify probe configuration:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Check configuration (multi-file layout)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;type: syslog&quot;</span><span class="w"> </span>/etc/senhub-agent/probes.d/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">"type: syslog"</span><span class="w"> </span>/etc/senhub-agent/probes.d/
 </code></pre></div></p>
 <h3 id="permission-denied-port-1024">Permission Denied (Port &lt; 1024)<a class="headerlink" href="#permission-denied-port-1024" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error binding to port 514 on Unix/Linux systems</p>
@@ -5080,15 +5080,15 @@ Ports below 1024 require elevated privileges on Unix/Linux:</p>
 <p><strong>Solution:</strong>
 Add Windows Firewall rule:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c"># Allow UDP Syslog</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">New-NetFirewallRule</span> <span class="n">-DisplayName</span> <span class="s2">&quot;SenHub Agent Syslog (UDP)&quot;</span> <span class="p">`</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">New-NetFirewallRule</span> <span class="n">-DisplayName</span> <span class="s2">"SenHub Agent Syslog (UDP)"</span> <span class="p">`</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>  <span class="n">-Direction</span> <span class="n">Inbound</span> <span class="n">-Protocol</span> <span class="n">UDP</span> <span class="n">-LocalPort</span> <span class="n">514</span> <span class="n">-Action</span> <span class="n">Allow</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c"># Allow TCP Syslog</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="nb">New-NetFirewallRule</span> <span class="n">-DisplayName</span> <span class="s2">&quot;SenHub Agent Syslog (TCP)&quot;</span> <span class="p">`</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="nb">New-NetFirewallRule</span> <span class="n">-DisplayName</span> <span class="s2">"SenHub Agent Syslog (TCP)"</span> <span class="p">`</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>  <span class="n">-Direction</span> <span class="n">Inbound</span> <span class="n">-Protocol</span> <span class="n">TCP</span> <span class="n">-LocalPort</span> <span class="n">514</span> <span class="n">-Action</span> <span class="n">Allow</span>
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
 <a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="c"># Verify rules</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="nb">Get-NetFirewallRule</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span> <span class="o">-like</span> <span class="s2">&quot;*Syslog*&quot;</span><span class="p">}</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="nb">Get-NetFirewallRule</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span> <span class="o">-like</span> <span class="s2">"*Syslog*"</span><span class="p">}</span>
 </code></pre></div>
 <h3 id="udp-packet-loss">UDP Packet Loss<a class="headerlink" href="#udp-packet-loss" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Missing events during high-volume periods</p>
@@ -5110,8 +5110,8 @@ UDP is connectionless and can drop packets under load:</p>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.core.rmem_default<span class="o">=</span><span class="m">26214400</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># Make permanent</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;net.core.rmem_max=26214400&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;net.core.rmem_default=26214400&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"net.core.rmem_max=26214400"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"net.core.rmem_default=26214400"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
 </code></pre></div></p>
 </li>
 <li>
@@ -5153,7 +5153,7 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
 <li>
 <p><strong>Implement event filtering at source:</strong>
    <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># rsyslog: Filter by severity (only errors and above)</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="k">if</span><span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;err&#39;</span><span class="w"> </span>or<span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;crit&#39;</span><span class="w"> </span>or<span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;alert&#39;</span><span class="w"> </span>or<span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;emerg&#39;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>@@syslog-server:514
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="k">if</span><span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'err'</span><span class="w"> </span>or<span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'crit'</span><span class="w"> </span>or<span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'alert'</span><span class="w"> </span>or<span class="w"> </span><span class="nv">$syslogseverity</span>-text<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'emerg'</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>@@syslog-server:514
 </code></pre></div></p>
 </li>
 <li>
@@ -5378,7 +5378,7 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>&lt;PRI&gt;VERSION TIMESTAMP HOSTNAME APP-NAME PROCID MSGID [STRUCTURED-DATA] MESSAGE
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Example:
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>&lt;13&gt;1 2025-10-13T14:23:45.000Z server01 sshd 1234 ID47 [exampleSDID@32473 eventID=&quot;1&quot;] Connection from 192.168.1.100
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>&lt;13&gt;1 2025-10-13T14:23:45.000Z server01 sshd 1234 ID47 [exampleSDID@32473 eventID="1"] Connection from 192.168.1.100
 </code></pre></div>
 <h3 id="priority-pri-calculation">Priority (PRI) Calculation<a class="headerlink" href="#priority-pri-calculation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>PRI = (Facility * 8) + Severity

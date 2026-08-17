@@ -3541,9 +3541,9 @@
 - Standard user permissions sufficient (no admin rights needed)</p>
 <p><strong>Creating the service account:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># In Active Directory Users and Computers</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">New-ADUser</span> <span class="n">-Name</span> <span class="s2">&quot;svc-monitoring&quot;</span> <span class="p">`</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="n">-UserPrincipalName</span> <span class="s2">&quot;svc-monitoring@domain.com&quot;</span> <span class="p">`</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s2">&quot;SecureP@ssw0rd&quot;</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="p">`</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">New-ADUser</span> <span class="n">-Name</span> <span class="s2">"svc-monitoring"</span> <span class="p">`</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="n">-UserPrincipalName</span> <span class="s2">"svc-monitoring@domain.com"</span> <span class="p">`</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s2">"SecureP@ssw0rd"</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="p">`</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="n">-Enabled</span> <span class="nv">$true</span> <span class="p">`</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  <span class="n">-PasswordNeverExpires</span> <span class="nv">$true</span>
 </code></pre></div></p>
@@ -3558,13 +3558,13 @@
 <h2 id="basic-configuration-director-only">Basic Configuration (Director Only)<a class="headerlink" href="#basic-configuration-director-only" title="Permanent link">&para;</a></h2>
 <p>Minimal configuration for single-site Citrix environment:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># probes.d/10-citrix.yaml — each file under probes.d/ is a YAML array of probes</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;production-citrix&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"production-citrix"</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">citrix</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://director.company.com&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://director.company.com"</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span><span class="w">  </span><span class="c1"># 2 minutes recommended</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">auth</span><span class="p">:</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DOMAIN\\svc-monitoring&quot;</span><span class="w">  </span><span class="c1"># Note: double backslash</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"DOMAIN\\svc-monitoring"</span><span class="w">  </span><span class="c1"># Note: double backslash</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:production-citrix.password}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -3577,20 +3577,20 @@
 <h2 id="configuration-with-site-filtering-multi-site">Configuration with Site Filtering (Multi-Site)<a class="headerlink" href="#configuration-with-site-filtering-multi-site" title="Permanent link">&para;</a></h2>
 <p>For multi-site deployments requiring site-specific metrics:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># probes.d/10-citrix.yaml</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;citrix-paris-site&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"citrix-paris-site"</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">citrix</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://director-paris.company.com&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://director-paris.company.com"</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">delivery_controller</span><span class="p">:</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://citrix-ddc-paris.company.com&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://citrix-ddc-paris.company.com"</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">fallback_urls</span><span class="p">:</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;https://citrix-ddc-paris-backup.company.com&quot;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="nt">site_filter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SITE-PARIS&quot;</span><span class="w">  </span><span class="c1"># Filter to specific site</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"https://citrix-ddc-paris-backup.company.com"</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="nt">site_filter</span><span class="p">:</span><span class="w"> </span><span class="s">"SITE-PARIS"</span><span class="w">  </span><span class="c1"># Filter to specific site</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">auth</span><span class="p">:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DOMAIN\\svc-monitoring&quot;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"DOMAIN\\svc-monitoring"</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:citrix-paris-site.password}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nt">retry</span><span class="p">:</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">      </span><span class="nt">max_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
@@ -3726,11 +3726,11 @@
 <h2 id="base-url-format">Base URL Format<a class="headerlink" href="#base-url-format" title="Permanent link">&para;</a></h2>
 <p><strong>Correct formats:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Correct - no path suffix</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://director.company.com&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://citrix.company.com&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://director.company.com"</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://citrix.company.com"</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Incorrect - includes path</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://director.company.com/Director&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://director.company.com/Director"</span>
 </code></pre></div></p>
 <p>The probe automatically appends required API paths (<code>/Odata/v4/Data</code>, <code>/Controller</code>, etc.).</p>
 <h1 id="metrics-collected">Metrics Collected<a class="headerlink" href="#metrics-collected" title="Permanent link">&para;</a></h1>
@@ -4023,7 +4023,7 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">                    </span>-H<span class="w"> </span><span class="nv">$HOSTADDRESS</span>$<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">                    </span>-p<span class="w"> </span><span class="m">8443</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">                    </span>-S<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">                    </span>-u<span class="w"> </span><span class="s2">&quot;/api/</span><span class="nv">$ARG1</span>$<span class="s2">/nagios/status?probe=citrix&amp;metric=citrix.sessions.connected&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">                    </span>-u<span class="w"> </span><span class="s2">"/api/</span><span class="nv">$ARG1</span>$<span class="s2">/nagios/status?probe=citrix&amp;metric=citrix.sessions.connected"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">                    </span>-w<span class="w"> </span><span class="nv">$ARG2</span>$<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">                    </span>-c<span class="w"> </span><span class="nv">$ARG3</span>$
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="o">}</span>
@@ -4042,7 +4042,7 @@
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">                    </span>-H<span class="w"> </span><span class="nv">$HOSTADDRESS</span>$<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">                    </span>-p<span class="w"> </span><span class="m">8443</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                    </span>-S<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">                    </span>-u<span class="w"> </span><span class="s2">&quot;/api/</span><span class="nv">$ARG1</span>$<span class="s2">/nagios/status?probe=citrix&amp;metric=citrix.logon.duration_total&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">                    </span>-u<span class="w"> </span><span class="s2">"/api/</span><span class="nv">$ARG1</span>$<span class="s2">/nagios/status?probe=citrix&amp;metric=citrix.logon.duration_total"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">                    </span>-w<span class="w"> </span><span class="nv">$ARG2</span>$<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">                    </span>-c<span class="w"> </span><span class="nv">$ARG3</span>$
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="o">}</span>
@@ -4057,18 +4057,18 @@
 <h2 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h2>
 <h3 id="error-401-unauthorized">Error: 401 Unauthorized<a class="headerlink" href="#error-401-unauthorized" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[ERR] [probe.citrix] Authentication failed url=&quot;https://director.company.com&quot; error=&quot;401 Unauthorized&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[ERR] [probe.citrix] Authentication failed url="https://director.company.com" error="401 Unauthorized"
 </code></pre></div></p>
 <p><strong>Diagnosis:</strong></p>
 <ol>
 <li>
 <p><strong>Verify username format</strong> - Citrix requires domain backslash format:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Incorrect formats</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;user@domain.com&quot;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;domain/user&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"user@domain.com"</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"domain/user"</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># Correct format</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DOMAIN\\user&quot;</span><span class="w">  </span><span class="c1"># Note: double backslash in YAML</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"DOMAIN\\user"</span><span class="w">  </span><span class="c1"># Note: double backslash in YAML</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -4088,7 +4088,7 @@
 </ol>
 <h3 id="error-no-delivery-controllers-found">Error: No delivery controllers found<a class="headerlink" href="#error-no-delivery-controllers-found" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[ERR] [probe.citrix] No delivery controllers discovered base_url=&quot;https://director.company.com&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[ERR] [probe.citrix] No delivery controllers discovered base_url="https://director.company.com"
 </code></pre></div></p>
 <p><strong>Diagnosis:</strong></p>
 <ol>
@@ -4097,7 +4097,7 @@
 </ol>
 <h3 id="error-connection-timeout">Error: Connection timeout<a class="headerlink" href="#error-connection-timeout" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[ERR] [probe.citrix] Request timeout url=&quot;https://director.company.com&quot; error=&quot;context deadline exceeded&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[ERR] [probe.citrix] Request timeout url="https://director.company.com" error="context deadline exceeded"
 </code></pre></div></p>
 <p><strong>Resolution:</strong></p>
 <p>Increase timeout parameter:
@@ -4109,8 +4109,8 @@
 <p>Enable debug logging for Citrix probe:</p>
 <p><strong>Runtime log level change:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;module_levels&quot;: [{&quot;module&quot;: &quot;probe.citrix&quot;, &quot;level&quot;: &quot;debug&quot;}]}&#39;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [{"module": "probe.citrix", "level": "debug"}]}'</span>
 </code></pre></div></p>
 <p><strong>Or start agent with verbose logging:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>./senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose<span class="w"> </span>--debug-modules<span class="w"> </span>probe.citrix
