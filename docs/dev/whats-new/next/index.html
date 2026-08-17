@@ -3398,6 +3398,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#outbound-dependency-discovery-needs-root-and-now-says-so" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outbound dependency discovery needs root, and now says so
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chrony-produced-no-measurement-at-all-on-any-host" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4147,6 +4158,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#outbound-dependency-discovery-needs-root-and-now-says-so" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outbound dependency discovery needs root, and now says so
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chrony-produced-no-measurement-at-all-on-any-host" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4854,6 +4876,46 @@ table answers, and the error then names both causes.</p>
 only meaningful inside one scope and would collide with its unzoned twin.
 (#716)</p>
 <h2 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h2>
+<h3 id="outbound-dependency-discovery-needs-root-and-now-says-so">Outbound dependency discovery needs root, and now says so<a class="headerlink" href="#outbound-dependency-discovery-needs-root-and-now-says-so" title="Permanent link">&para;</a></h3>
+<p><code>entities.depends_on_enabled</code> derives "service A depends on B:5432" by mapping
+each outbound socket to the process that owns it. On Linux that mapping reads
+<code>/proc/&lt;pid&gt;/fd</code>, which only the owner may read — so the non-root daemon this
+release makes standard sees every other service's connections with no owner at
+all, and can emit nothing for them.</p>
+<p>Measured on a host with the agent running as <code>senhub</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Established sockets</th>
+<th>Attributed to a process</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>45, seen as root</td>
+<td>45</td>
+</tr>
+<tr>
+<td>45, seen as the service account</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The rail did not fail — it reported that nothing depended on anything, and a
+topology consumer retires dependencies by absence, so upgrading with this option
+enabled would have removed every dependency edge the consumer held.</p>
+<p>Three things changed. A scrape that can attribute no socket but the agent's own
+is now reported as a <strong>failed</strong> observation rather than an empty one, so the
+consumer keeps its last good view instead of being told the dependencies ended;
+what eventually expires is marked <code>unmonitored</code>, not <code>terminated</code>. The agent
+logs the situation once at startup, naming the cause and the remedy. And the
+debounce became symmetric: an edge that takes three scrapes to appear now
+survives three missed ones, where a single miss used to retract it — which is
+what made an occasional missed observation reach the graph as an edge flapping
+in and out.</p>
+<p>If you run this option and want the whole host's dependencies, the agent has to
+run as root. Left as-is on a non-root install, the rail reports only the agent's
+own outbound dependencies, and says so in the log rather than silently. (#808)</p>
 <h3 id="chrony-produced-no-measurement-at-all-on-any-host"><code>chrony</code> produced no measurement at all, on any host<a class="headerlink" href="#chrony-produced-no-measurement-at-all-on-any-host" title="Permanent link">&para;</a></h3>
 <p>Reported from the field on 0.5.3:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chronyc: parsing stratum: strconv.ParseFloat: parsing "109.190.177.205": invalid syntax
