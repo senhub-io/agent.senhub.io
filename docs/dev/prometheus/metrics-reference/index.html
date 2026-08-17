@@ -1566,6 +1566,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../probes/ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../probes/os-updates/" class="md-nav__link">
         
   
@@ -4980,7 +5008,7 @@ measurement (<code>up = 0</code>), never a missing series. Durations are seconds
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_icmp_up_ratio</code></td>
+<td><code>senhub_icmp_up</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>icmp_target</code>, <code>icmp_target_ip</code></td>
@@ -5017,7 +5045,7 @@ measurement (<code>up = 0</code>), never a missing series. Durations are seconds
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_httpcheck_up_ratio</code></td>
+<td><code>senhub_httpcheck_up</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>httpcheck_target</code></td>
@@ -5053,7 +5081,7 @@ measurement (<code>up = 0</code>), never a missing series. Durations are seconds
 <td><code>httpcheck_target</code> (TLS targets only)</td>
 </tr>
 <tr>
-<td><code>senhub_httpcheck_content_match_ratio</code></td>
+<td><code>senhub_httpcheck_content_match</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>httpcheck_target</code> (only with <code>content_match</code>)</td>
@@ -5072,7 +5100,7 @@ measurement (<code>up = 0</code>), never a missing series. Durations are seconds
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_tcpdial_up_ratio</code></td>
+<td><code>senhub_tcpdial_up</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>tcpdial_target</code></td>
@@ -5098,7 +5126,7 @@ measurement (<code>up = 0</code>), never a missing series. Durations are seconds
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_dns_up_ratio</code></td>
+<td><code>senhub_dns_up</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>dns_question_name</code>, <code>dns_resolver</code></td>
@@ -5133,7 +5161,7 @@ backend (<code>rate(...[5m])</code>).</p>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_snmp_up_ratio</code></td>
+<td><code>senhub_snmp_up</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>snmp_target</code></td>
@@ -5227,7 +5255,7 @@ gain <code>_total</code> if absent). Self-metrics:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_promscrape_up_ratio</code></td>
+<td><code>senhub_promscrape_up</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td><code>promscrape_target</code></td>
@@ -5279,13 +5307,13 @@ seconds and bytes to bytes. Self-metrics:</p>
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_exec_timeout_ratio</code></td>
+<td><code>senhub_exec_timeout</code></td>
 <td>gauge</td>
 <td>bool 0/1</td>
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_exec_skipped_ratio</code></td>
+<td><code>senhub_exec_skipped</code></td>
 <td>gauge</td>
 <td>bool 0/1 (overlap guard)</td>
 <td>–</td>
@@ -5370,7 +5398,7 @@ the same metric (independent of overall health).</p>
 <td><code>disk_io_direction</code></td>
 </tr>
 <tr>
-<td><code>senhub_hardware_logical_disk_encrypted_ratio</code></td>
+<td><code>senhub_hardware_logical_disk_encrypted</code></td>
 <td>gauge</td>
 <td>1</td>
 <td>bool 0/1</td>
@@ -5418,13 +5446,13 @@ the same metric (independent of overall health).</p>
 <td>per drive (mapper ÷100)</td>
 </tr>
 <tr>
-<td><code>senhub_hardware_physical_disk_has_active_operations_ratio</code></td>
+<td><code>senhub_hardware_physical_disk_has_active_operations</code></td>
 <td>gauge</td>
 <td>1</td>
 <td>bool</td>
 </tr>
 <tr>
-<td><code>senhub_hardware_physical_disk_location_indicator_active_ratio</code></td>
+<td><code>senhub_hardware_physical_disk_location_indicator_active</code></td>
 <td>gauge</td>
 <td>1</td>
 <td>bool</td>
@@ -5592,7 +5620,7 @@ the same metric (independent of overall health).</p>
 <td>per object</td>
 </tr>
 <tr>
-<td><code>senhub_veeam_object_last_run_failed_ratio</code></td>
+<td><code>senhub_veeam_object_last_run_failed</code></td>
 <td>gauge</td>
 <td>bool</td>
 </tr>
@@ -5676,7 +5704,7 @@ the same metric (independent of overall health).</p>
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_citrix_license_grace_active_ratio</code></td>
+<td><code>senhub_citrix_license_grace_active</code></td>
 <td>gauge</td>
 <td>bool</td>
 </tr>
