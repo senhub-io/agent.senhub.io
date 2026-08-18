@@ -1616,6 +1616,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../os-updates/" class="md-nav__link">
         
   
@@ -3324,6 +3352,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../proxmox/" class="md-nav__link">
         
   
@@ -3642,6 +3698,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
   
 
     
@@ -4798,8 +4882,8 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;C:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;D:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;E:&quot;</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;HarddiskVolume*&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;_Total&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"C:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"D:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"E:"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"HarddiskVolume*"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"_Total"</span><span class="p p-Indicator">]</span>
 </code></pre></div></p>
 <p><strong>Windows: Exclude drives matching patterns:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># probes.d/10-logicaldisk.yaml</span>
@@ -4808,7 +4892,7 @@
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;HarddiskVolume*&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;_Total&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;X:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Y:&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"HarddiskVolume*"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"_Total"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"X:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Y:"</span><span class="p p-Indicator">]</span>
 </code></pre></div></p>
 <h2 id="monitoring-tool-integration">Monitoring Tool Integration<a class="headerlink" href="#monitoring-tool-integration" title="Permanent link">&para;</a></h2>
 <h3 id="prtg-network-monitor">PRTG Network Monitor<a class="headerlink" href="#prtg-network-monitor" title="Permanent link">&para;</a></h3>
@@ -4819,7 +4903,7 @@
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Configure PRTG HTTP Advanced Sensor:</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># - URL: http://agent-host:8080/api/{agentkey}/prtg/metrics</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># - Method: POST</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># - Request body: {&quot;probe&quot;: &quot;logicaldisk&quot;}</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># - Request body: {"probe": "logicaldisk"}</span>
 </code></pre></div>
 <p><strong>PRTG Channels Available:</strong>
 - Disk Free Space (MB or %)
@@ -4910,13 +4994,13 @@
 - Includes: All drives (empty = all)
 - Excludes: <code>HarddiskVolume*</code> (system volumes), <code>_Total</code> (aggregate)</p>
 <p><strong>Example Metrics:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>disk_free_mb{drive=&quot;C:&quot;,device=&quot;C:&quot;,fs_type=&quot;ntfs&quot;} = 102400
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>disk_free_percent{drive=&quot;C:&quot;} = 45.2
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>disk_reads_sec{drive=&quot;C:&quot;} = 123.4
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>disk_writes_sec{drive=&quot;C:&quot;} = 87.6
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>disk_read_bytes_sec{drive=&quot;C:&quot;} = 5242880
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>disk_write_bytes_sec{drive=&quot;C:&quot;} = 3145728
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>disk_queue_length{drive=&quot;C:&quot;} = 0.8
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>disk_free_mb{drive="C:",device="C:",fs_type="ntfs"} = 102400
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>disk_free_percent{drive="C:"} = 45.2
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>disk_reads_sec{drive="C:"} = 123.4
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>disk_writes_sec{drive="C:"} = 87.6
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>disk_read_bytes_sec{drive="C:"} = 5242880
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>disk_write_bytes_sec{drive="C:"} = 3145728
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>disk_queue_length{drive="C:"} = 0.8
 </code></pre></div></p>
 <h3 id="unixlinux">Unix/Linux<a class="headerlink" href="#unixlinux" title="Permanent link">&para;</a></h3>
 <p><strong>Collection Method:</strong>
@@ -4931,15 +5015,15 @@
 - Full mount path: <code>/</code>, <code>/home</code>, <code>/var</code>, etc.
 - Tags: <code>mount_point=/home</code>, <code>fs_type=ext4</code>, <code>device=/dev/sda1</code></p>
 <p><strong>Example Metrics:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>fs_total_bytes{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 107374182400
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>fs_free_bytes{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 48318382080
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>fs_used_bytes{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 59055800320
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>fs_available_bytes{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 45318382080
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>fs_used_percent{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 55.0
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>fs_inodes_total{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 6553600
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>fs_inodes_free{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 5242880
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>fs_inodes_used{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 1310720
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>fs_inodes_used_percent{mount_point=&quot;/&quot;,device=&quot;/dev/sda1&quot;,fs_type=&quot;ext4&quot;} = 20.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>fs_total_bytes{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 107374182400
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>fs_free_bytes{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 48318382080
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>fs_used_bytes{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 59055800320
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>fs_available_bytes{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 45318382080
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>fs_used_percent{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 55.0
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>fs_inodes_total{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 6553600
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>fs_inodes_free{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 5242880
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>fs_inodes_used{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 1310720
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>fs_inodes_used_percent{mount_point="/",device="/dev/sda1",fs_type="ext4"} = 20.0
 </code></pre></div></p>
 <h3 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h3>
 <p><strong>Collection Method:</strong>
@@ -4960,11 +5044,11 @@ The LogicalDisk probe automatically recognizes and monitors APFS filesystems on 
 - <strong>Included:</strong> <code>/</code>, <code>/System/Volumes/Data</code>, <code>/Volumes/*</code>, APFS volumes
 - <strong>Excluded:</strong> <code>/dev</code>, <code>/System/Volumes/Preboot</code>, <code>/System/Volumes/VM</code>, <code>/System/Volumes/Update</code></p>
 <p><strong>Example Metrics:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fs_total_bytes{mount_point=&quot;/&quot;,device=&quot;/dev/disk1s1&quot;,fs_type=&quot;apfs&quot;} = 250685575168
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>fs_free_bytes{mount_point=&quot;/&quot;,device=&quot;/dev/disk1s1&quot;,fs_type=&quot;apfs&quot;} = 123456789120
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>fs_used_percent{mount_point=&quot;/&quot;,device=&quot;/dev/disk1s1&quot;,fs_type=&quot;apfs&quot;} = 50.7
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>fs_inodes_total{mount_point=&quot;/&quot;,device=&quot;/dev/disk1s1&quot;,fs_type=&quot;apfs&quot;} = 9223372036854775807
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>fs_inodes_used_percent{mount_point=&quot;/&quot;,device=&quot;/dev/disk1s1&quot;,fs_type=&quot;apfs&quot;} = 0.01
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fs_total_bytes{mount_point="/",device="/dev/disk1s1",fs_type="apfs"} = 250685575168
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>fs_free_bytes{mount_point="/",device="/dev/disk1s1",fs_type="apfs"} = 123456789120
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>fs_used_percent{mount_point="/",device="/dev/disk1s1",fs_type="apfs"} = 50.7
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>fs_inodes_total{mount_point="/",device="/dev/disk1s1",fs_type="apfs"} = 9223372036854775807
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>fs_inodes_used_percent{mount_point="/",device="/dev/disk1s1",fs_type="apfs"} = 0.01
 </code></pre></div></p>
 <p><strong>Note</strong>: APFS uses a dynamic inode allocation model, so inode metrics may show very large totals.</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
@@ -4975,13 +5059,13 @@ The LogicalDisk probe automatically recognizes and monitors APFS filesystems on 
 </code></pre></div></p>
 <p><strong>Verify probe is enabled:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Check configuration (multi-file layout)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">&quot;name: logicaldisk&quot;</span><span class="w"> </span>/etc/senhub-agent/probes.d/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>grep<span class="w"> </span>-rA5<span class="w"> </span><span class="s2">"name: logicaldisk"</span><span class="w"> </span>/etc/senhub-agent/probes.d/
 </code></pre></div></p>
 <h3 id="windows-pdh-counter-errors">Windows: PDH Counter Errors<a class="headerlink" href="#windows-pdh-counter-errors" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error messages about Performance Data Helper (PDH) counters</p>
 <p><strong>Solution:</strong>
 1. Verify Performance Counter service is running:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">&quot;PerfHost&quot;</span><span class="p">}</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s2">"PerfHost"</span><span class="p">}</span>
 </code></pre></div></p>
 <ol>
 <li>
@@ -5015,8 +5099,8 @@ Run the agent with appropriate permissions:
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logicaldisk</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;C:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;D:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;E:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Z:&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Explicitly include network drive</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;_Total&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Keep minimal exclusions</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"C:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"D:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"E:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"Z:"</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Explicitly include network drive</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"_Total"</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Keep minimal exclusions</span>
 </code></pre></div></p>
 <h3 id="unixlinux-filesystems-not-appearing">Unix/Linux: Filesystems Not Appearing<a class="headerlink" href="#unixlinux-filesystems-not-appearing" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Expected mount points missing from metrics</p>
@@ -5052,7 +5136,7 @@ Monitor <code>fs_inodes_used_percent</code> metric:
 3. <strong>Counter issue:</strong> PDH counter not updating</p>
 <p><strong>Debug:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c"># Check queue length in Performance Monitor</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">typeperf</span> <span class="s2">&quot;\LogicalDisk(C:)\Current Disk Queue Length&quot;</span> <span class="n">-sc</span> <span class="n">10</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">typeperf</span> <span class="s2">"\LogicalDisk(C:)\Current Disk Queue Length"</span> <span class="n">-sc</span> <span class="n">10</span>
 </code></pre></div></p>
 <h2 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h2>
 <h3 id="collection-overhead">Collection Overhead<a class="headerlink" href="#collection-overhead" title="Permanent link">&para;</a></h3>
@@ -5138,8 +5222,8 @@ Monitor <code>fs_inodes_used_percent</code> metric:
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;D:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;E:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;F:&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Only data drives</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;_Total&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"D:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"E:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"F:"</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Only data drives</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"_Total"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p><strong>Scenario:</strong> Exclude temporary/cache drives</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># probes.d/10-logicaldisk.yaml</span>
@@ -5148,7 +5232,7 @@ Monitor <code>fs_inodes_used_percent</code> metric:
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 <a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;HarddiskVolume*&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;_Total&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;T:&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;X:&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"HarddiskVolume*"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"_Total"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"T:"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"X:"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h3 id="unixlinux-filesystem-filtering">Unix/Linux Filesystem Filtering<a class="headerlink" href="#unixlinux-filesystem-filtering" title="Permanent link">&para;</a></h3>
 <p><strong>Note:</strong> Unix/Linux filesystem filtering is built-in and automatic. To customize:</p>

@@ -1014,6 +1014,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../os-updates/" class="md-nav__link">
         
   
@@ -2813,6 +2841,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../proxmox/" class="md-nav__link">
         
   
@@ -3131,6 +3187,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
   
 
     
@@ -3602,7 +3686,7 @@ deployment.</p>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp_receiver</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span><span class="w">          </span><span class="c1"># listens on 127.0.0.1:4317</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1"># address: &quot;0.0.0.0:4317&quot;  # required to accept remote senders</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1"># address: "0.0.0.0:4317"  # required to accept remote senders</span>
 </code></pre></div>
 <p>Point any OTel SDK or collector at the agent:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OTEL_EXPORTER_OTLP_ENDPOINT</span><span class="o">=</span>http://localhost:4317
@@ -3671,9 +3755,9 @@ deployment.</p>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp_receiver</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.0.0.0:4317&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0:4317"</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">bearer_token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:otlp-in.bearer_token}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;10.0.0.0/8&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.0.0.0/8"</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">rate_limit_rps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
 </code></pre></div>
 <p>Run two instances to serve both protocols at once:</p>
@@ -3692,7 +3776,17 @@ deployment.</p>
 <li><strong>Resource attributes become tags.</strong> <code>host.name</code>, <code>service.name</code>
   and every other resource attribute is folded onto each datapoint,
   so downstream sinks can group by origin. Per-datapoint attributes
-  win on key collisions.</li>
+  win on key collisions. This is what PRTG, Nagios, Prometheus, the web
+  UI and the cloud sink read, and it is unchanged.</li>
+<li><strong>The OTLP output relays the original batch.</strong> Those same points are
+  also forwarded verbatim on the OTLP export, under the <strong>emitting
+  application's</strong> resource rather than re-encoded under the agent's.
+  Without it a reserved identity key such as <code>service.name</code> would carry
+  two different values in one export — the agent's on the resource, the
+  application's on the datapoint — and the backend would silently keep
+  one. Agent context is added on top, never substituted, exactly as for
+  logs and traces. Only the OTLP output is affected; every other sink
+  keeps reading the tags above.</li>
 <li><strong>All metric types.</strong> Gauges and Sums map to one value each.
   Explicit-bucket histograms are ingested <strong>natively</strong>: re-exported over
   OTLP as a genuine histogram (buckets, sum, count, min/max preserved)
@@ -3707,14 +3801,31 @@ deployment.</p>
   partial-success response.</li>
 <li><strong>Pass-through naming.</strong> Ingested metric names are forwarded
   unchanged; nothing is renamed or prefixed.</li>
-<li><strong>Logs are relayed.</strong> With <code>signals: [logs]</code>, OTLP log records are
-  accepted (gRPC <code>LogsService</code>, or HTTP on <code>/v1/logs</code>) and handed to a
-  configured OTLP export strategy, which forwards them onward over OTLP
-  (an OTLP-in → OTLP-out relay). Severity, body, and attributes are
-  preserved; resource attributes are folded onto each record. The pull
-  sinks (Prometheus/PRTG/Nagios) are metrics-only, so <strong>logs need an OTLP
+<li>
+<p><strong>Logs are relayed.</strong> With <code>signals: [logs]</code>, OTLP log records are
+  accepted (gRPC <code>LogsService</code>, or HTTP on <code>/v1/logs</code>) and forwarded
+  verbatim by a configured OTLP export strategy (an OTLP-in → OTLP-out
+  relay). Severity, body, attributes <strong>and the emitting application's
+  resource</strong> are preserved: a record sent with <code>service.name=my-app</code>
+  arrives as <code>my-app</code>, so applications stay distinguishable at the
+  backend. Agent context (tenant, site, environment, the
+  <code>telemetry.relay.*</code> identity) is only ever <strong>added on top</strong> — an
+  attribute the sender already set is never replaced. The pull sinks
+  (Prometheus/PRTG/Nagios) are metrics-only, so <strong>logs need an OTLP
   export strategy</strong> — without one, ingested logs are discarded and the
-  agent logs a throttled warning.</li>
+  agent logs a throttled warning.</p>
+<div class="admonition note">
+<p class="admonition-title">Changed behaviour</p>
+<p>Before this release, ingested logs were re-emitted through the
+agent's own log pipeline, which replaced the sender's resource
+with the agent's — a record sent with <code>service.name=my-app</code> was
+stored under the agent's <code>service.name</code>, making applications
+indistinguishable by that attribute. If a dashboard or query
+relies on ingested logs carrying the agent's <code>service.name</code>,
+point it at the agent's own logs or at
+<code>telemetry.relay.instance.id</code> instead.</p>
+</div>
+<ul>
 <li><strong>Traces are relayed.</strong> With <code>signals: [traces]</code>, OTLP trace spans are
   accepted (gRPC <code>TracesService</code>, or HTTP on <code>/v1/traces</code>) and forwarded
   as a raw pass-through: spans are relayed verbatim — trace IDs, span
@@ -3725,6 +3836,8 @@ deployment.</p>
   logs a throttled warning.</li>
 <li><strong>Limits.</strong> gRPC accepts payloads up to 4 MiB (the OTel SDK
   default); the HTTP server applies a 30-second read timeout.</li>
+</ul>
+</li>
 </ul>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>

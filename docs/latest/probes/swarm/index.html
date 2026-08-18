@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/latest/probes/http-check/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/latest/probes/swarm/">
       
       
-        <link rel="prev" href="../icmp-check/">
+        <link rel="prev" href="../kubernetes/">
       
       
-        <link rel="next" href="../tcp-dial/">
+        <link rel="next" href="../proxmox/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>HTTP check - SenHub Agent</title>
+        <title>Docker Swarm - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#http_check-https-checks-with-tls-expiry" class="md-skip">
+        <a href="#docker-swarm" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HTTP check
+              Docker Swarm
             
           </span>
         </div>
@@ -1207,37 +1207,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    HTTP check
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../http-check/" class="md-nav__link">
         
   
   
@@ -1253,59 +1226,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2827,10 +2747,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../swarm/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2846,6 +2793,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it reports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What it reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-quorum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes and quorum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services-and-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services and tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overlay-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overlay networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3587,10 +3648,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick start
+        Requirements
       
     </span>
   </a>
@@ -3598,10 +3659,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        Configuration
       
     </span>
   </a>
@@ -3609,10 +3670,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#what-it-reports" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        What it reports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What it reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-quorum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes and quorum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services-and-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services and tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overlay-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overlay networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
       
     </span>
   </a>
@@ -3636,7 +3758,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/http-check.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/swarm.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3644,121 +3766,140 @@
   
 
 
-<p><img src="https://api.iconify.design/mdi/web.svg?color=%23666" alt="" class="probe-page-logo probe-page-logo-mdi"></p>
-<h1 id="http_check-https-checks-with-tls-expiry">http_check — HTTP(S) checks with TLS expiry<a class="headerlink" href="#http_check-https-checks-with-tls-expiry" title="Permanent link">&para;</a></h1>
-<p>Free tier. Checks a list of URLs every cycle: status validation, latency
-broken down by phase (DNS, connect, TLS handshake, time-to-first-byte,
-total), response size, optional content matching — and the remaining
-validity of the TLS certificate as a first-class metric.</p>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/30-web.yaml</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web-checks</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http_check</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"https://www.example.com"</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"https://api.example.com/healthz"</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<h1 id="docker-swarm">Docker Swarm<a class="headerlink" href="#docker-swarm" title="Permanent link">&para;</a></h1>
+<p><strong>Tier: Free</strong> · Probe type: <code>swarm</code></p>
+<p>Cluster-wide Docker Swarm state read from a manager node: nodes and quorum,
+service convergence, task failures, and the overlay segments that decide what
+can reach what.</p>
+<p>This is a different probe from <a href="../docker/"><code>docker</code></a>, and the line is the
+observation scope. <code>docker</code> watches the containers of one host. Everything here
+is cluster-wide and answerable only by a manager. Run both on a manager node if
+you want per-container resource metrics as well.</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The agent must run on a <strong>manager</strong> node. On a worker the Engine answers 503
+  to every cluster query, and the probe reports that explicitly rather than
+  showing an empty, healthy-looking cluster.</li>
+<li>Read access to the Docker socket (<code>/var/run/docker.sock</code>).</li>
+</ul>
+<p>Pointed at a worker or at an engine that is not in swarm mode, the probe still
+emits <code>senhub.swarm.up 0</code> plus a state series naming the reason — <code>worker</code>,
+<code>not_in_swarm</code> or <code>unreachable</code>. The distinction matters: one is a probe on the
+wrong node, another is a machine that was never clustered.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swarm</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swarm</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">socket_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/docker.sock</span><span class="w">   </span><span class="c1"># default</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w">                        </span><span class="c1"># seconds, default 60</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">                         </span><span class="c1"># seconds, default 10</span>
 </code></pre></div>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Key</th>
 <th>Default</th>
-<th>Description</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>targets</code></td>
-<td>required</td>
-<td>List of URLs to check</td>
-</tr>
-<tr>
-<td><code>method</code></td>
-<td>GET</td>
-<td>HTTP method</td>
-</tr>
-<tr>
-<td><code>timeout</code></td>
-<td>10</td>
-<td>Per-target budget in seconds</td>
+<td><code>socket_path</code></td>
+<td><code>/var/run/docker.sock</code></td>
+<td>Docker Engine socket</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
-<td>60</td>
-<td>Seconds between cycles</td>
+<td><code>60</code></td>
+<td>Collection cadence in seconds</td>
 </tr>
 <tr>
-<td><code>expected_status</code></td>
-<td>any 2xx/3xx</td>
-<td>Exact status code that counts as up</td>
-</tr>
-<tr>
-<td><code>content_match</code></td>
-<td>none</td>
-<td>Regexp the response body must match for the check to be up</td>
-</tr>
-<tr>
-<td><code>insecure_skip_verify</code></td>
-<td>false</td>
-<td>Accept self-signed certificates (labs)</td>
+<td><code>timeout</code></td>
+<td><code>10</code></td>
+<td>Per-request timeout in seconds</td>
 </tr>
 </tbody>
 </table>
-<p>Targets are checked in parallel (bounded). Redirects are reported, not
-followed: a 301 is the measured answer of the target.</p>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<p>One series per metric per target (<code>target</code> tag).</p>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.httpcheck.up</code></td>
-<td>bool</td>
-<td>Expected status (and content, if configured)</td>
-</tr>
-<tr>
-<td><code>senhub.httpcheck.status.code</code></td>
-<td>code</td>
-<td>Last response status</td>
-</tr>
-<tr>
-<td><code>httpcheck.duration</code></td>
-<td>ms</td>
-<td>Total request time</td>
-</tr>
-<tr>
-<td><code>senhub.httpcheck.duration.dns</code> / <code>.connect</code> / <code>.tls</code> / <code>.ttfb</code></td>
-<td>ms</td>
-<td>Phase breakdown</td>
-</tr>
-<tr>
-<td><code>senhub.httpcheck.response.size</code></td>
-<td>B</td>
-<td>Body size (1 MiB read cap)</td>
-</tr>
-<tr>
-<td><code>senhub.httpcheck.tls.expiry</code></td>
-<td>days</td>
-<td>Days until the certificate expires — negative once expired. Alert under 30</td>
-</tr>
-<tr>
-<td><code>senhub.httpcheck.content.match</code></td>
-<td>bool</td>
-<td>Only when <code>content_match</code> is configured</td>
-</tr>
-</tbody>
-</table>
-<p>A failing or unreachable target is a measurement (<code>up = 0</code>), never a
-probe failure.</p>
+<h2 id="what-it-reports">What it reports<a class="headerlink" href="#what-it-reports" title="Permanent link">&para;</a></h2>
+<h3 id="nodes-and-quorum">Nodes and quorum<a class="headerlink" href="#nodes-and-quorum" title="Permanent link">&para;</a></h3>
+<p>A Swarm that has lost manager quorum is the failure worth catching, and it is
+invisible from any single host: every machine keeps running its containers
+while the cluster silently refuses every change — no deploy, no rescheduling,
+no scaling.</p>
+<p><code>swarm.cluster.quorum</code> answers it directly rather than leaving you to derive it
+from two counters. The rule is a <strong>strict</strong> majority: two managers with one
+reachable is <em>not</em> quorum, which is exactly the shape of a two-manager cluster
+that has just lost one.</p>
+<p>Per node: <code>swarm.node.ready</code>, the one-hot <code>swarm.node.state</code>
+(ready/down/unknown/disconnected) and <code>swarm.node.availability</code>
+(active/pause/drain). Both families are needed — availability is the operator's
+intent, state is the reality, and a node drained on purpose looks identical to
+a node that fell over if you only have one of them.</p>
+<h3 id="services-and-tasks">Services and tasks<a class="headerlink" href="#services-and-tasks" title="Permanent link">&para;</a></h3>
+<p><code>swarm.service.replicas.desired</code> vs <code>.running</code>, plus <code>swarm.service.converged</code>.
+Running replicas are counted from the tasks, not read off the service: Swarm
+publishes no running count, and a service can declare five replicas while five
+tasks sit in <code>rejected</code>.</p>
+<p>A <strong>global</strong> service declares no replica count at all — it wants one task per
+eligible node. Its desired count comes from the tasks Swarm actually created,
+so a global service does not read as permanently unconverged.</p>
+<p><code>swarm.task.state</code> counts tasks per service per lifecycle state, which is what
+separates "not there yet" (<code>pending</code>, <code>preparing</code>, <code>starting</code>) from "will never
+get there" (<code>failed</code>, <code>rejected</code>, <code>orphaned</code>). A service stuck at 2/3 reads the
+same in both cases from the service object alone.</p>
+<h3 id="overlay-networks">Overlay networks<a class="headerlink" href="#overlay-networks" title="Permanent link">&para;</a></h3>
+<p>An overlay is a virtual L2 segment stretched across every node. It is the
+<strong>reachability boundary</strong>: two services on the same overlay resolve each other
+by name and can talk; two services on different overlays cannot, whatever the
+firewall says. When a deploy "cannot reach the database", that is the first
+question, and answering it today means reading several <code>docker network inspect</code>
+outputs on the right node.</p>
+<ul>
+<li><code>swarm.service.network.attached</code> — one series per (service, segment) pair,
+  carrying the service's <strong>virtual IP</strong> on that segment: the address its peers
+  actually resolve, and the one a reachability problem is about.</li>
+<li><code>swarm.network.services</code> / <code>.tasks</code> — how many are on each segment.</li>
+<li><code>swarm.network.ingress</code> — marks the routing-mesh segment. A port published
+  there answers on <strong>every</strong> node, including ones running none of the service.
+  That surprises people, so the publish mode rides as a label on
+  <code>swarm.service.port.published</code> rather than being flattened away.</li>
+<li><code>swarm.network.address.capacity</code> — assignable addresses in the subnet. An
+  overlay that runs out refuses new tasks with a scheduling error naming
+  neither the network nor the exhaustion; a /24 with 250 tasks on it is a
+  deploy about to fail.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Traffic volume between services is not reported</p>
+<p>The probe maps <strong>who can reach whom</strong>, not how much flows between them.
+The Engine API exposes no per-peer counters, and per-container interface
+counters cannot be attributed to a named overlay — the stats endpoint keys
+them by interface name (<code>eth0</code>, <code>eth1</code>), which the API never maps back to a
+network. A real traffic matrix needs conntrack or eBPF on each node: a
+different instrument with different privileges. Deriving one from an
+attachment map would be inventing numbers.</p>
+</div>
+<h2 id="topology">Topology<a class="headerlink" href="#topology" title="Permanent link">&para;</a></h2>
+<p>The probe emits the cluster itself as a <code>service.instance</code> entity keyed on the
+Swarm cluster id, with a <code>monitors</code> edge from the agent.</p>
+<p>It deliberately emits <strong>no entity</strong> for Swarm nodes or overlay networks:</p>
+<ul>
+<li>A Swarm node reports its hostname, never its <code>machine-id</code>, and the agent's
+  host entity is keyed on <code>machine-id</code>. A host minted from a hostname would be
+  a permanent duplicate of a machine that already has an entity. Run an agent
+  inside the node and it emits the real host itself.</li>
+<li>There is no registered entity type for a network segment, so an overlay is
+  carried as metric labels — queryable, but not traversable in the graph.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>Everything reads zero.</strong> Check <code>senhub.swarm.node_role_state</code>: if <code>worker</code> is
+1, the agent is on a worker and no cluster query can succeed. Move it to a
+manager.</p>
+<p><strong>A service shows no network attachment.</strong> Services declare networks in either
+of two spec slots depending on the Engine version that created them, by id or
+by name. The probe reads both slots and both spellings; if an attachment is
+still missing, the service genuinely has none — which is also what correct
+isolation looks like.</p>
 
 
 
@@ -3794,7 +3935,7 @@ probe failure.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../icmp-check/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ICMP check">
+          <a href="../kubernetes/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Kubernetes">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3804,20 +3945,20 @@ probe failure.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                ICMP check
+                Kubernetes
               </div>
             </div>
           </a>
         
         
           
-          <a href="../tcp-dial/" class="md-footer__link md-footer__link--next" aria-label="Next: TCP dial">
+          <a href="../proxmox/" class="md-footer__link md-footer__link--next" aria-label="Next: Proxmox VE">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                TCP dial
+                Proxmox VE
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -1014,6 +1014,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../os-updates/" class="md-nav__link">
         
   
@@ -2732,6 +2760,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../proxmox/" class="md-nav__link">
         
   
@@ -3050,6 +3106,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
   
 
     
@@ -3614,8 +3698,8 @@ distinct in OTLP/Prometheus.</p>
 </ul>
 <h1 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h1>
 <p>Hyper-V HA metrics are available through every configured output — OTLP, Prometheus, and the pull formats (PRTG, Nagios, Web UI). For PRTG and Nagios, query the probe by its configured <code>name</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/prtg/metrics/hyperv-ha-local&quot;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/api/{agentkey}/nagios/metrics/hyperv-ha-local&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/hyperv-ha-local"</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/nagios/metrics/hyperv-ha-local"</span>
 </code></pre></div>
 
 

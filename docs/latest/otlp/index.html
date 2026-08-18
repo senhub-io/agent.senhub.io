@@ -1402,6 +1402,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../probes/ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../probes/os-updates/" class="md-nav__link">
         
   
@@ -3110,6 +3138,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../probes/swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../probes/proxmox/" class="md-nav__link">
         
   
@@ -3428,6 +3484,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
   
 
     
@@ -4202,7 +4286,7 @@ ready-to-use <code>strategies.d/10-otlp.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">storage</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;otel-collector.internal:4317&quot;</span><span class="w">   </span><span class="c1"># required</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"otel-collector.internal:4317"</span><span class="w">   </span><span class="c1"># required</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">signals</span><span class="p">:</span>
@@ -4225,7 +4309,7 @@ ready-to-use <code>strategies.d/10-otlp.yaml</code>:</p>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>otel-collector<span class="w"> </span>-f
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># or query VictoriaMetrics directly</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>curl<span class="w"> </span>-G<span class="w"> </span>http://vm:8428/api/v1/query<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;query=count by(__name__) ({service_name=&quot;senhub-agent&quot;})&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--data-urlencode<span class="w"> </span><span class="s1">'query=count by(__name__) ({service_name="senhub-agent"})'</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>The full set of knobs (every key maps directly to an OTel SDK option):</p>
@@ -4233,16 +4317,16 @@ ready-to-use <code>strategies.d/10-otlp.yaml</code>:</p>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="c1"># Required: gRPC endpoint of the receiver (no scheme prefix).</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;otel-collector.internal:4317&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"otel-collector.internal:4317"</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="c1"># Optional multi-tenant routing: sugar for the X-Scope-OrgID header</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="c1"># (the standard tenant key for Mimir / Loki / Tempo / VictoriaMetrics).</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="c1"># &quot;org_id&quot; is accepted as an alias. Env-expandable.</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;acme&quot;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="c1"># "org_id" is accepted as an alias. Env-expandable.</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="s">"acme"</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="c1"># Optional headers (for example bearer auth at the gateway).</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="nt">headers</span><span class="p">:</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nt">Authorization</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bearer</span><span class="nv"> </span><span class="s">YOUR-INGEST-TOKEN&quot;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nt">Authorization</span><span class="p">:</span><span class="w"> </span><span class="s">"Bearer</span><span class="nv"> </span><span class="s">YOUR-INGEST-TOKEN"</span>
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="c1"># TLS — defaults to enabled. Disable explicitly for plaintext</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">      </span><span class="c1"># localhost / lab environments.</span>
@@ -4308,6 +4392,11 @@ Default OTLP/gRPC port is <strong>4317</strong>. There is intentionally <strong>
 default</strong> for this field — silently shipping data to localhost when
 the operator forgets to set it would be a worse failure mode than
 refusing to start.</p>
+<p>A standby ingress can be listed under <code>fallback_endpoints</code>: the agent prefers
+the primary, switches on a failed export and returns on its own once the
+primary recovers. See
+<a href="https://github.com/senhub-io/senhub-agent/blob/master/docs/admin-guide/BACKPRESSURE.md">the backpressure guide</a>
+for the shape and the trade-offs.</p>
 <h3 id="tls"><code>tls</code><a class="headerlink" href="#tls" title="Permanent link">&para;</a></h3>
 <p>Default is <code>enabled: true</code>. For <strong>production push to a remote
 collector you should always keep TLS enabled</strong>. The plaintext path is
@@ -4341,8 +4430,8 @@ source its own tenant with per-source rules:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">        </span><span class="nt">traces</span><span class="p">:</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">          </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">          </span><span class="nt">relay_tenant_overrides</span><span class="p">:</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;service.namespace&quot;</span><span class="p p-Indicator">,</span><span class="nt"> value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;client-b&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">              </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> tenant</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;client-b&quot;</span><span class="p p-Indicator">,</span><span class="nt"> site</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lyon&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> key</span><span class="p">:</span><span class="w"> </span><span class="s">"service.namespace"</span><span class="p p-Indicator">,</span><span class="nt"> value</span><span class="p">:</span><span class="w"> </span><span class="s">"client-b"</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">              </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> tenant</span><span class="p">:</span><span class="w"> </span><span class="s">"client-b"</span><span class="p p-Indicator">,</span><span class="nt"> site</span><span class="p">:</span><span class="w"> </span><span class="s">"lyon"</span><span class="w"> </span><span class="p p-Indicator">}</span>
 </code></pre></div>
 <p>A rule applies to relayed spans whose resource attribute <code>key</code> equals
 <code>value</code>; its <code>tags</code> are inserted (only when absent) instead of the default
@@ -4362,11 +4451,49 @@ endpoint or batch knobs of its own — it reuses the log transport.</p>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># opt-in (default false)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span><span class="w">            </span><span class="c1"># heartbeat cadence; also the liveness backstop</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span><span class="w">         </span><span class="c1"># bounded queue; drop-oldest beyond</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">depends_on_debounce</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">   </span><span class="c1"># consecutive scrapes before an outbound</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                               </span><span class="c1"># dependency edge is emitted (&gt;= 1, default 3)</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">redact_attributes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">    </span><span class="c1"># attribute keys DROPPED from every entity</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">                               </span><span class="c1"># event before export (default: none)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">depends_on_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># opt-in (default false): outbound dependency</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                                 </span><span class="c1"># edges. Needs root — see below</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">depends_on_debounce</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">   </span><span class="c1"># consecutive scrapes before an outbound</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">                               </span><span class="c1"># dependency edge is emitted (&gt;= 1, default 3)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">depends_on_exclude_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">  </span><span class="c1"># peer ranges dropped before anything is</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">                                    </span><span class="c1"># emitted (operator privacy filter)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">redact_attributes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">    </span><span class="c1"># attribute keys DROPPED from every entity</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">                               </span><span class="c1"># event before export (default: none)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">governance</span><span class="p">:</span><span class="w">              </span><span class="c1"># operator-asserted ownership / criticality /</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="nt">criticality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">low</span><span class="w">       </span><span class="c1"># location / lifecycle, stamped on the entities</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="nt">lifecycle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">active</span><span class="w">      </span><span class="c1"># this agent emits (default: none)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="nt">owner</span><span class="p">:</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">          </span><span class="nt">team</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sre</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">          </span><span class="nt">contact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sre@example.com</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">          </span><span class="nt">site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">          </span><span class="nt">rack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">R12</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">          </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">staging</span>
 </code></pre></div>
+<p><code>governance</code> stamps operator-asserted facts on the entities this agent emits —
+who owns them, how critical they are, where they physically sit, and where they
+are in their lifecycle. The agent cannot discover any of it; it comes from you.
+A topology consumer can then filter or group on those keys, so an incident view
+can be narrowed to one team's critical estate without touching the agent
+configuration on every host.</p>
+<p><code>criticality</code> takes <code>critical</code> / <code>high</code> / <code>medium</code> / <code>low</code>, and <code>lifecycle</code>
+takes <code>active</code> / <code>maintenance</code> / <code>decommissioning</code> / <code>retired</code>. <code>labels</code> is a
+free key/value map for anything that is yours alone.</p>
+<p><code>depends_on_enabled</code> turns on outbound dependency discovery — the edges that
+say "this service talks to that endpoint". It is off by default because mapping
+a host's connections can be privacy-sensitive.</p>
+<div class="admonition warning">
+<p class="admonition-title">Outbound dependency discovery needs root</p>
+<p>Mapping a socket to the process that owns it reads <code>/proc/&lt;pid&gt;/fd</code>, and
+only the owner may read it. The agent runs as a service account by
+default, so it can attribute its <strong>own</strong> connections and nothing else —
+every other service's dependencies are invisible.</p>
+<p>On a non-root install the agent says so once at startup, naming the
+counts and the account, and reports its view as failed rather than
+reporting an empty graph as fact. Leave the option off, or run the agent
+as root if you want the whole host's dependencies.</p>
+</div>
 <p><code>depends_on_debounce</code> controls how durable an outbound connection must be
 before it appears as a <code>depends_on</code> edge: a peer endpoint must be seen on
 this many consecutive emission scrapes before its edge is emitted, which
@@ -4374,6 +4501,11 @@ keeps ephemeral connections out of the graph. The latency to surface a
 dependency is <code>depends_on_debounce x interval</code> (so the default <code>3 x 60s</code> is
 about three minutes); lower it for a more responsive graph, raise it to
 filter out shorter-lived connections.</p>
+<p>The tolerance is symmetric: an edge that took <code>depends_on_debounce</code> scrapes to
+appear survives the same number of missed ones before it is given up. A
+long-lived connection the socket table happens to miss once is not a dependency
+that ended, and retracting it on a single miss would reach a topology consumer
+as an edge flapping in and out.</p>
 <p><code>redact_attributes</code> lists descriptive attribute keys the agent removes
 from every entity event before export — useful when the entity stream
 transits a shared collector or a third-party OTLP pipeline that should
@@ -4560,16 +4692,16 @@ VictoriaMetrics + VictoriaLogs:</p>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">otlp</span><span class="p">:</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">protocols</span><span class="p">:</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">grpc</span><span class="p">:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.0.0.0:4317&quot;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0:4317"</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nt">exporters</span><span class="p">:</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nt">prometheusremotewrite</span><span class="p">:</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://vm.internal:8428/api/v1/write&quot;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"http://vm.internal:8428/api/v1/write"</span>
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">resource_to_telemetry_conversion</span><span class="p">:</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">  </span><span class="nt">otlphttp/logs</span><span class="p">:</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="nt">logs_endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://victorialogs.internal:9428/insert/opentelemetry/v1/logs&quot;</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="nt">logs_endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"http://victorialogs.internal:9428/insert/opentelemetry/v1/logs"</span>
 <a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
 <a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="nt">service</span><span class="p">:</span>
 <a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="nt">pipelines</span><span class="p">:</span>
@@ -4593,11 +4725,11 @@ token and fans out to the storage backends.</p>
 <p>Agent-side, the entire client configuration is one strategy fragment:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># strategies.d/10-otlp.yaml</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">otlp</span><span class="p">:</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ingest.example.com:443&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"ingest.example.com:443"</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">headers</span><span class="p">:</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">Authorization</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bearer</span><span class="nv"> </span><span class="s">${env:OTLP_BEARER_TOKEN}&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">Authorization</span><span class="p">:</span><span class="w"> </span><span class="s">"Bearer</span><span class="nv"> </span><span class="s">${env:OTLP_BEARER_TOKEN}"</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nt">compression</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gzip</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="nt">signals</span><span class="p">:</span>
@@ -4654,9 +4786,9 @@ endpoint URL and ingest token from the Grafana Cloud console:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">storage</span><span class="p">:</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otlp</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;otlp-gateway-prod-eu-west-2.grafana.net:443&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"otlp-gateway-prod-eu-west-2.grafana.net:443"</span>
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">headers</span><span class="p">:</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span><span class="nt">Authorization</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Basic</span><span class="nv"> </span><span class="s">eW91...=&quot;</span><span class="w">   </span><span class="c1"># from Grafana Cloud console</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span><span class="nt">Authorization</span><span class="p">:</span><span class="w"> </span><span class="s">"Basic</span><span class="nv"> </span><span class="s">eW91...="</span><span class="w">   </span><span class="c1"># from Grafana Cloud console</span>
 <a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
@@ -4715,13 +4847,13 @@ you can read without scraping Prometheus, via three surfaces:</p>
 <p>If <code>Dropped by probe_cardinality</code> keeps climbing, lift the per-probe
 budget in your strategy YAML:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">otlp</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;otel-collector.internal:4317&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"otel-collector.internal:4317"</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">max_active_series_per_probe</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20000</span><span class="w">   </span><span class="c1"># default 10000</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">max_store_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span><span class="w">               </span><span class="c1"># default 50000 (global cap)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">staleness_ttl</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10m&quot;</span><span class="w">                 </span><span class="c1"># default 10m: a series with no new</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">staleness_ttl</span><span class="p">:</span><span class="w"> </span><span class="s">"10m"</span><span class="w">                 </span><span class="c1"># default 10m: a series with no new</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">                                       </span><span class="c1"># datapoint for this long is evicted</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">                                       </span><span class="c1"># instead of re-exporting forever</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">                                       </span><span class="c1"># (zombie series); &quot;0s&quot; disables</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">                                       </span><span class="c1"># (zombie series); "0s" disables</span>
 </code></pre></div>
 <p>Both knobs are gauges of last resort — they protect the agent's memory
 under runaway-cardinality conditions. Raise them only when you know
