@@ -4392,6 +4392,11 @@ Default OTLP/gRPC port is <strong>4317</strong>. There is intentionally <strong>
 default</strong> for this field — silently shipping data to localhost when
 the operator forgets to set it would be a worse failure mode than
 refusing to start.</p>
+<p>A standby ingress can be listed under <code>fallback_endpoints</code>: the agent prefers
+the primary, switches on a failed export and returns on its own once the
+primary recovers. See
+<a href="https://github.com/senhub-io/senhub-agent/blob/master/docs/admin-guide/BACKPRESSURE.md">the backpressure guide</a>
+for the shape and the trade-offs.</p>
 <h3 id="tls"><code>tls</code><a class="headerlink" href="#tls" title="Permanent link">&para;</a></h3>
 <p>Default is <code>enabled: true</code>. For <strong>production push to a remote
 collector you should always keep TLS enabled</strong>. The plaintext path is
@@ -4446,11 +4451,49 @@ endpoint or batch knobs of its own — it reuses the log transport.</p>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># opt-in (default false)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span><span class="w">            </span><span class="c1"># heartbeat cadence; also the liveness backstop</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">buffer_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span><span class="w">         </span><span class="c1"># bounded queue; drop-oldest beyond</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">depends_on_debounce</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">   </span><span class="c1"># consecutive scrapes before an outbound</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                               </span><span class="c1"># dependency edge is emitted (&gt;= 1, default 3)</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">redact_attributes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">    </span><span class="c1"># attribute keys DROPPED from every entity</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">                               </span><span class="c1"># event before export (default: none)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">depends_on_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># opt-in (default false): outbound dependency</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                                 </span><span class="c1"># edges. Needs root — see below</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">depends_on_debounce</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">   </span><span class="c1"># consecutive scrapes before an outbound</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">                               </span><span class="c1"># dependency edge is emitted (&gt;= 1, default 3)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">depends_on_exclude_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">  </span><span class="c1"># peer ranges dropped before anything is</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">                                    </span><span class="c1"># emitted (operator privacy filter)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">redact_attributes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">    </span><span class="c1"># attribute keys DROPPED from every entity</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">                               </span><span class="c1"># event before export (default: none)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">governance</span><span class="p">:</span><span class="w">              </span><span class="c1"># operator-asserted ownership / criticality /</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="nt">criticality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">low</span><span class="w">       </span><span class="c1"># location / lifecycle, stamped on the entities</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="nt">lifecycle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">active</span><span class="w">      </span><span class="c1"># this agent emits (default: none)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="nt">owner</span><span class="p">:</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">          </span><span class="nt">team</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sre</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">          </span><span class="nt">contact</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sre@example.com</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">          </span><span class="nt">site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">          </span><span class="nt">rack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">R12</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">          </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">staging</span>
 </code></pre></div>
+<p><code>governance</code> stamps operator-asserted facts on the entities this agent emits —
+who owns them, how critical they are, where they physically sit, and where they
+are in their lifecycle. The agent cannot discover any of it; it comes from you.
+A topology consumer can then filter or group on those keys, so an incident view
+can be narrowed to one team's critical estate without touching the agent
+configuration on every host.</p>
+<p><code>criticality</code> takes <code>critical</code> / <code>high</code> / <code>medium</code> / <code>low</code>, and <code>lifecycle</code>
+takes <code>active</code> / <code>maintenance</code> / <code>decommissioning</code> / <code>retired</code>. <code>labels</code> is a
+free key/value map for anything that is yours alone.</p>
+<p><code>depends_on_enabled</code> turns on outbound dependency discovery — the edges that
+say "this service talks to that endpoint". It is off by default because mapping
+a host's connections can be privacy-sensitive.</p>
+<div class="admonition warning">
+<p class="admonition-title">Outbound dependency discovery needs root</p>
+<p>Mapping a socket to the process that owns it reads <code>/proc/&lt;pid&gt;/fd</code>, and
+only the owner may read it. The agent runs as a service account by
+default, so it can attribute its <strong>own</strong> connections and nothing else —
+every other service's dependencies are invisible.</p>
+<p>On a non-root install the agent says so once at startup, naming the
+counts and the account, and reports its view as failed rather than
+reporting an empty graph as fact. Leave the option off, or run the agent
+as root if you want the whole host's dependencies.</p>
+</div>
 <p><code>depends_on_debounce</code> controls how durable an outbound connection must be
 before it appears as a <code>depends_on</code> edge: a peer endpoint must be seen on
 this many consecutive emission scrapes before its edge is emitted, which
@@ -4458,6 +4501,11 @@ keeps ephemeral connections out of the graph. The latency to surface a
 dependency is <code>depends_on_debounce x interval</code> (so the default <code>3 x 60s</code> is
 about three minutes); lower it for a more responsive graph, raise it to
 filter out shorter-lived connections.</p>
+<p>The tolerance is symmetric: an edge that took <code>depends_on_debounce</code> scrapes to
+appear survives the same number of missed ones before it is given up. A
+long-lived connection the socket table happens to miss once is not a dependency
+that ended, and retracting it on a single miss would reach a topology consumer
+as an edge flapping in and out.</p>
 <p><code>redact_attributes</code> lists descriptive attribute keys the agent removes
 from every entity event before export — useful when the entity stream
 transits a shared collector or a third-party OTLP pipeline that should
