@@ -1122,6 +1122,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../os-updates/" class="md-nav__link">
         
   
@@ -2830,6 +2858,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../proxmox/" class="md-nav__link">
         
   
@@ -3148,6 +3204,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
   
 
     
@@ -3688,7 +3772,7 @@ record:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/myapp/server.log</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">multiline</span><span class="p">:</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^\d{4}-\d{2}-\d{2}&#39;</span><span class="w">   </span><span class="c1"># a timestamp starts a new record</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^\d{4}-\d{2}-\d{2}'</span><span class="w">   </span><span class="c1"># a timestamp starts a new record</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">negate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
 </code></pre></div>
@@ -3723,9 +3807,9 @@ record:</p>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">&quot;(?P&lt;request&gt;[^&quot;]*)&quot;</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
 </code></pre></div>
 <table>
 <thead>

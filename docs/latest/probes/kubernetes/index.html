@@ -16,7 +16,7 @@
         <link rel="prev" href="../docker/">
       
       
-        <link rel="next" href="../proxmox/">
+        <link rel="next" href="../swarm/">
       
       
         
@@ -994,6 +994,34 @@
     
   
     Chrony (NTP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
   
 
     
@@ -2787,6 +2815,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cluster-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2801,6 +2840,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3131,6 +3198,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
   
 
     
@@ -3547,6 +3642,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cluster-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3589,8 +3695,10 @@
 </div>
 <h1 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h1>
 <p>The <code>kubernetes</code> probe monitors a Kubernetes cluster via the API server,
-collecting node readiness and allocatable resources, pod phase and container
-restart counts, deployment replica health, and namespace-level rollups.</p>
+collecting node health and capacity, pod and container state, every workload
+kind, storage, quotas and autoscaling — and publishing the cluster's own
+Events on the log rail, which is where Kubernetes explains why a metric
+moved.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <p><strong>In-cluster</strong> (agent runs as a Pod with a ServiceAccount):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-kubernetes.yaml — each file under probes.d/ is a YAML array of probes</span>
@@ -3628,6 +3736,71 @@ restart counts, deployment replica health, and namespace-level rollups.</p>
 <td><code>namespaces.exclude</code></td>
 <td><code>[kube-system]</code></td>
 <td>Namespaces to skip</td>
+</tr>
+<tr>
+<td><code>collect.nodes</code></td>
+<td><code>true</code></td>
+<td>Node health, capacity and pressure conditions</td>
+</tr>
+<tr>
+<td><code>collect.pods</code></td>
+<td><code>true</code></td>
+<td>Pod phase, readiness, restarts and resource requests</td>
+</tr>
+<tr>
+<td><code>collect.containers</code></td>
+<td><code>true</code></td>
+<td>Per-container state, waiting reason and resources</td>
+</tr>
+<tr>
+<td><code>collect.deployments</code></td>
+<td><code>true</code></td>
+<td>Deployment replica health</td>
+</tr>
+<tr>
+<td><code>collect.statefulsets</code></td>
+<td><code>true</code></td>
+<td>StatefulSet replica health</td>
+</tr>
+<tr>
+<td><code>collect.daemonsets</code></td>
+<td><code>true</code></td>
+<td>DaemonSet scheduling health</td>
+</tr>
+<tr>
+<td><code>collect.replicasets</code></td>
+<td><strong><code>false</code></strong></td>
+<td>Off by default: a Deployment owns one ReplicaSet per revision, so they multiply series without adding a fact the Deployment does not carry. Turn on while chasing a stuck rollout, where the previous ReplicaSet staying non-zero is exactly the symptom</td>
+</tr>
+<tr>
+<td><code>collect.jobs</code></td>
+<td><code>true</code></td>
+<td>Job active/succeeded/failed counts</td>
+</tr>
+<tr>
+<td><code>collect.cronjobs</code></td>
+<td><code>true</code></td>
+<td>CronJob active jobs and suspended state</td>
+</tr>
+<tr>
+<td><code>collect.storage</code></td>
+<td><code>true</code></td>
+<td>PersistentVolumes and Claims</td>
+</tr>
+<tr>
+<td><code>collect.quotas</code></td>
+<td><code>true</code></td>
+<td>ResourceQuota hard limits and use</td>
+</tr>
+<tr>
+<td><code>collect.autoscalers</code></td>
+<td><code>true</code></td>
+<td>HorizontalPodAutoscaler replica counts</td>
+</tr>
+<tr>
+<td><code>collect.events</code></td>
+<td><code>true</code></td>
+<td>Cluster Events, published on the log rail</td>
 </tr>
 </tbody>
 </table>
@@ -3681,11 +3854,67 @@ restart counts, deployment replica health, and namespace-level rollups.</p>
 <td>{pod}</td>
 <td>Desired replicas per deployment</td>
 </tr>
+<tr>
+<td><code>k8s.node.condition.disk_pressure</code></td>
+<td>1</td>
+<td><strong>1 means the pressure IS present</strong> — the opposite polarity to <code>ready</code>. A node under disk pressure is still <code>Ready</code> right up to the moment it is not: the kubelet begins evicting pods while readiness stays true. Same shape for <code>memory_pressure</code>, <code>pid_pressure</code>, <code>network_unavailable</code></td>
+</tr>
+<tr>
+<td><code>k8s.pod.cpu.request</code> / <code>.memory.request</code></td>
+<td>1 / By</td>
+<td>What the scheduler committed for this pod, summed over its containers. With the limits below, this is what answers "is this cluster over-committed" — a question that cannot be answered retroactively without the series</td>
+</tr>
+<tr>
+<td><code>k8s.pod.cpu.limit</code> / <code>.memory.limit</code></td>
+<td>1 / By</td>
+<td>The ceiling before throttling or an OOM kill. <strong>Absent when no limit is set</strong>: a pod with no limit is unbounded, which is a different fact from a limit of zero</td>
+</tr>
+<tr>
+<td><code>k8s.container.waiting</code></td>
+<td>1</td>
+<td>1 while the container waits, tagged with the reason. <code>ready=0</code> with rising restarts describes both CrashLoopBackOff and an image still pulling — the reason is what separates them, and they call for opposite reactions</td>
+</tr>
+<tr>
+<td><code>k8s.statefulset.*</code>, <code>k8s.daemonset.*</code>, <code>k8s.job.*</code>, <code>k8s.cronjob.*</code></td>
+<td>1</td>
+<td>Desired against actual per workload, tagged <code>k8s.workload.name</code> / <code>k8s.workload.kind</code></td>
+</tr>
+<tr>
+<td><code>k8s.persistentvolumeclaim.phase</code></td>
+<td>1</td>
+<td>One series per phase. A claim stuck <code>Pending</code> is why the pod that wants it never starts — indistinguishable, from the pod's own metrics, from a cluster simply out of CPU</td>
+</tr>
+<tr>
+<td><code>k8s.resourcequota.hard</code> / <code>.used</code></td>
+<td>1</td>
+<td>The pair is the point: a quota at 99 % is why a deployment will not scale, and neither number alone says so</td>
+</tr>
+<tr>
+<td><code>k8s.hpa.current_replicas</code> / <code>.max_replicas</code></td>
+<td>1</td>
+<td>An autoscaler pinned at max is the cluster refusing to grow, invisible from the workload's own replica counts</td>
+</tr>
 </tbody>
 </table>
+<h2 id="cluster-events">Cluster Events<a class="headerlink" href="#cluster-events" title="Permanent link">&para;</a></h2>
+<p>Events ride the <strong>log rail</strong>, not the metric rail: they are timestamped
+sentences — <code>0/5 nodes are available: 5 Insufficient cpu</code>, <code>Failed to pull
+image</code>, <code>Liveness probe failed</code> — and counting them would keep the number
+while throwing away the diagnosis.</p>
+<p>A Kubernetes <code>Warning</code> is recorded at <strong>Error</strong> severity. Kubernetes has only
+two event types and no error level, so a failed mount and an OOM kill arrive
+at the same level as routine notices; recording them as warnings buries them.</p>
+<p>Each record carries the identity label its subject's metrics already carry —
+an event about a pod carries <code>k8s.pod.name</code> — so you can go from "why did
+this pod restart" to that pod's series without parsing the message.</p>
+<p>Only new events are published. The API returns its whole retention window on
+every call, and the first cycle only sets the cursor: replaying that window at
+start would deliver an hour of past incidents as though they were happening
+now.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>For in-cluster operation, create a <code>ClusterRole</code> granting <code>get</code>/<code>list</code>/<code>watch</code> on <code>nodes</code>, <code>pods</code>, <code>deployments</code> and bind it to the agent's ServiceAccount.</li>
+<li>For in-cluster operation, create a <code>ClusterRole</code> granting <code>get</code>/<code>list</code>/<code>watch</code> on <code>nodes</code>, <code>pods</code>, <code>deployments</code>, <code>statefulsets</code>, <code>daemonsets</code>, <code>replicasets</code>, <code>jobs</code>, <code>cronjobs</code>, <code>persistentvolumes</code>, <code>persistentvolumeclaims</code>, <code>resourcequotas</code>, <code>horizontalpodautoscalers</code> and <code>events</code>, and bind it to the agent's ServiceAccount. A missing permission disables that collector only — the others keep reporting, and the gap is logged rather than presenting as an empty cluster.</li>
+<li>Also grant <code>get</code> on the <code>kube-system</code> <strong>namespace</strong>. The cluster entity is keyed on that namespace's UID, which is the only identifier the cluster reports about itself. Without it the identity falls back to the API server address, which re-keys the cluster in the graph on any endpoint change and collides between clusters sharing an address.</li>
 <li>The <code>kube-system</code> namespace is excluded by default. Override with <code>namespaces.include</code> / <code>namespaces.exclude</code> as needed.</li>
 <li>Metric names follow the <code>k8s.*</code> OTel semantic conventions aligned with the OpenTelemetry Kubernetes specification.</li>
 </ul>
@@ -3741,13 +3970,13 @@ restart counts, deployment replica health, and namespace-level rollups.</p>
         
         
           
-          <a href="../proxmox/" class="md-footer__link md-footer__link--next" aria-label="Next: Proxmox VE">
+          <a href="../swarm/" class="md-footer__link md-footer__link--next" aria-label="Next: Docker Swarm">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Proxmox VE
+                Docker Swarm
               </div>
             </div>
             <div class="md-footer__button md-icon">
