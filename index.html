@@ -671,7 +671,7 @@
         "@type": "SoftwareApplication",
         "name": "SenHub Agent",
         "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Linux, Windows, macOS",
+        "operatingSystem": "Linux, Windows",
         "description": "Open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits host and infrastructure metrics as OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs.",
         "url": "https://agent.senhub.io/",
         "codeRepository": "https://github.com/senhub-io/senhub-agent",
@@ -809,8 +809,8 @@
         <section>
           <h2>Light footprint, runs anywhere</h2>
           <p>
-            One static Go binary for Linux, Windows and macOS (amd64 and
-            arm64) — no JVM, no Python, no agent framework. Drop it onto bare
+            One static Go binary for Linux (amd64 and arm64) and Windows
+            (amd64) — no JVM, no Python, no agent framework. Drop it onto bare
             metal, a VM or a container: it collects locally and pushes OTLP
             out, replacing a stack of per-tool agents with a single
             low-overhead process.
@@ -825,14 +825,13 @@
               <div class="lbl">runtimes or dependencies</div>
             </div>
             <div class="stat">
-              <div class="num">5</div>
+              <div class="num">3</div>
               <div class="lbl">OS / arch targets</div>
             </div>
           </div>
           <div class="plats">
             <span>Linux</span>
             <span>Windows</span>
-            <span>macOS</span>
             <span class="sep">·</span>
             <span>amd64</span>
             <span>arm64</span>
@@ -847,7 +846,7 @@
           <h2>Quick start</h2>
           <p>
             Three steps, no agent-per-tool sprawl. The example is Linux;
-            Windows and macOS follow the same flow with their own archive.
+            Windows follows the same flow with its own archive.
           </p>
           <div class="steps">
             <div class="step">
