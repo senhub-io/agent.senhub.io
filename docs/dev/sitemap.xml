@@ -13,6 +13,10 @@
          <lastmod>2026-09-14</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/container/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/http-https/</loc>
          <lastmod>2026-09-14</lastmod>
     </url>
@@ -41,6 +45,26 @@
          <lastmod>2026-09-14</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/assets/probe-logos/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/license/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/license/agreement-en/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/license/agreement-fr/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/license/third-party/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/</loc>
          <lastmod>2026-09-14</lastmod>
     </url>
@@ -54,6 +78,10 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/apache/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/azure_container_apps/</loc>
          <lastmod>2026-09-14</lastmod>
     </url>
     <url>

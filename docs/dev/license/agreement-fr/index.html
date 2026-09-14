@@ -1,0 +1,4898 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+      
+      
+      
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/license/agreement-fr/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../agreement-en/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Contrat de licence (français, fait foi) - SenHub Agent</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#contrat-de-licence-logicielle-senhub-agent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SenHub Agent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Contrat de licence (français, fait foi)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/senhub-io/senhub-agent" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    senhub-io/senhub-agent
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    SenHub Agent
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/senhub-io/senhub-agent" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    senhub-io/senhub-agent
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../presentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secret-store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secret store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../http-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP / HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    License
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contrat de licence (français, fait foi)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contrat de licence (français, fait foi)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#article-1-objet-et-place-du-contrat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 1 — Objet et place du contrat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-2-structure-du-logiciel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 2 — Structure du Logiciel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-3-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 3 — Définitions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-4-concession" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 4 — Concession
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-5-niveaux-et-perimetre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 5 — Niveaux et périmètre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-6-mise-en-uvre-technique-du-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 6 — Mise en œuvre technique du contrôle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-7-duree-et-renouvellement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 7 — Durée et renouvellement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-8-versions-et-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 8 — Versions et maintenance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-9-propriete-intellectuelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 9 — Propriété intellectuelle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-10-composants-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 10 — Composants tiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-11-garantie-deviction-et-prise-en-charge-des-actions-en-contrefacon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 11 — Garantie d'éviction et prise en charge des actions en contrefaçon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-12-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 12 — Données
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-13-verification-de-conformite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 13 — Vérification de conformité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-14-conformite-exportations-et-probite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 14 — Conformité : exportations et probité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-15-cession-et-changement-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 15 — Cession et changement de contrôle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-16-resiliation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 16 — Résiliation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-17-droit-applicable-responsabilite-et-langue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 17 — Droit applicable, responsabilité et langue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signatures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annexe-1-composants-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annexe 1 — Composants tiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agreement-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License agreement (English translation)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../third-party/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus / VictoriaMetrics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Prometheus / VictoriaMetrics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prometheus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../otlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP / OpenTelemetry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Probes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/logicaldisk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logical disk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/linux-logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/windows-eventlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Event Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/filetail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File tail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/systemd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systemd Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/windows-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/chrony/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chrony (NTP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/smart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S.M.A.R.T. Disk Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ipmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPMI / BMC Sensors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nvidia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA GPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/modbus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modbus TCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/icmp-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICMP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/http-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/tcp-dial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCP dial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/dns-latency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS latency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/snmp-poll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP poll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/snmp-trap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP trap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/otlp-receiver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP receiver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/prometheus-scrape/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus scrape
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/citrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Citrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/netscaler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NetScaler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/redfish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redfish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/powerstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_container_apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syslog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/event/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ping-webapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ping WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/load-webapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ping-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ping gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/wifi-signal-strength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WiFi signal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/veeam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veeam Backup & Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mysql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL / MariaDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/redis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis / Valkey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/cassandra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Cassandra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/couchdb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CouchDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/clickhouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ClickHouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/elasticsearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elasticsearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenSearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/solr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Solr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/influxdb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InfluxDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/memcached/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memcached
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/apache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache HTTP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/haproxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HAProxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/envoy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Proxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/php-fpm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PHP-FPM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/varnish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Varnish Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/tomcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Tomcat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/wildfly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WildFly / JBoss
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RabbitMQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/activemq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache ActiveMQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NATS Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/pulsar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Pulsar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox VE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ceph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ceph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/consul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/zookeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache ZooKeeper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/jenkins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/unifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UniFi Controller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What's new
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    What's new
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.4.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.3.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.2.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.2.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#article-1-objet-et-place-du-contrat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 1 — Objet et place du contrat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-2-structure-du-logiciel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 2 — Structure du Logiciel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-3-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 3 — Définitions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-4-concession" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 4 — Concession
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-5-niveaux-et-perimetre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 5 — Niveaux et périmètre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-6-mise-en-uvre-technique-du-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 6 — Mise en œuvre technique du contrôle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-7-duree-et-renouvellement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 7 — Durée et renouvellement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-8-versions-et-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 8 — Versions et maintenance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-9-propriete-intellectuelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 9 — Propriété intellectuelle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-10-composants-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 10 — Composants tiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-11-garantie-deviction-et-prise-en-charge-des-actions-en-contrefacon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 11 — Garantie d'éviction et prise en charge des actions en contrefaçon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-12-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 12 — Données
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-13-verification-de-conformite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 13 — Vérification de conformité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-14-conformite-exportations-et-probite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 14 — Conformité : exportations et probité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-15-cession-et-changement-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 15 — Cession et changement de contrôle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-16-resiliation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 16 — Résiliation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#article-17-droit-applicable-responsabilite-et-langue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Article 17 — Droit applicable, responsabilité et langue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signatures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signatures
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annexe-1-composants-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annexe 1 — Composants tiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/license/agreement-fr.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="contrat-de-licence-logicielle-senhub-agent">CONTRAT DE LICENCE LOGICIELLE — SENHUB AGENT<a class="headerlink" href="#contrat-de-licence-logicielle-senhub-agent" title="Permanent link">&para;</a></h1>
+<p><em>Version 1.0 — complément aux Conditions Générales de Vente de Sensor Factory.
+Applicable au logiciel SenHub Agent, toutes versions.</em></p>
+<div class="admonition info">
+<p class="admonition-title">Version qui fait foi</p>
+<p>Ce texte est la version française du contrat, <strong>seule version qui fait
+foi</strong> entre les Parties. Une <a href="../agreement-en/">traduction anglaise de courtoisie</a>
+est disponible. La version imprimable est téléchargeable en
+<a href="../contrat-de-licence-senhub-agent.pdf">PDF</a>.</p>
+</div>
+<hr />
+<h2 id="article-1-objet-et-place-du-contrat">Article 1 — Objet et place du contrat<a class="headerlink" href="#article-1-objet-et-place-du-contrat" title="Permanent link">&para;</a></h2>
+<p>1.1 — Le présent contrat (le « <strong>Contrat de Licence</strong> ») régit la concession, par
+<strong>SENSOR FACTORY SAS</strong> (ci-après « Sensor Factory »), du droit d'utiliser les
+composants sous licence du logiciel <strong>SenHub Agent</strong> (le « <strong>Logiciel</strong> »).</p>
+<p>1.2 — Il complète les Conditions Générales de Vente de Sensor Factory en vigueur à
+la date de la commande (les « <strong>CGV</strong> »), qui demeurent le socle de la relation
+commerciale et régissent tout ce que le présent contrat ne traite pas expressément.</p>
+<p>1.3 — <strong>Formation.</strong> L'acceptation du Devis par le Client, par signature ou par
+l'émission d'un bon de commande y faisant référence, emporte acceptation du présent
+Contrat de Licence et des CGV. Le Devis porte le niveau souscrit et les éléments de
+dimensionnement. Les Parties peuvent convenir de Conditions particulières ; chacune
+peut en demander l'établissement avant l'acceptation du Devis.</p>
+<p>1.4 — <strong>Ordre de préséance.</strong> Pour ce que chacun régit, les documents contractuels
+s'appliquent dans l'ordre suivant : (1) les Conditions particulières, lorsque les
+Parties en signent ; (2) le présent Contrat de Licence, pour la concession du droit
+d'usage du Logiciel, son périmètre, sa durée et son contrôle ; (3) le Devis accepté,
+pour le niveau souscrit, le dimensionnement et le prix ; (4) les CGV. En cas de
+contradiction, le document de rang supérieur prévaut.</p>
+<p><strong>Par exception</strong>, les stipulations des CGV visées à l'article 17.2 prévalent sur
+tout autre document, quel que soit son rang, y compris les Conditions particulières
+et le Devis, sauf renonciation <strong>expresse</strong> de Sensor Factory, écrite, visant
+nommément la stipulation à laquelle il est dérogé et signée par un mandataire
+social.</p>
+<h2 id="article-2-structure-du-logiciel">Article 2 — Structure du Logiciel<a class="headerlink" href="#article-2-structure-du-logiciel" title="Permanent link">&para;</a></h2>
+<p>2.1 — Le Logiciel se compose de deux ensembles dont le régime juridique diffère.
+Cette distinction commande la lecture de tout ce qui suit.</p>
+<p>2.2 — <strong>Le cœur ouvert.</strong> Une partie du Logiciel, décrite dans sa documentation, est
+publiée sous licence <strong>Apache 2.0</strong> et son code source est public. Le Client en
+dispose selon les termes de cette licence, indépendamment du présent Contrat de
+Licence.</p>
+<p>Cette licence est acquise, pour chaque version, à la version dans laquelle le
+composant a été publié : ce qui a été publié sous Apache 2.0 le demeure. Sensor
+Factory ne s'engage en revanche à aucune répartition déterminée entre le cœur ouvert
+et les composants sous licence dans les versions à venir, et demeure libre de
+publier un composant nouveau sous l'un ou l'autre régime.</p>
+<p>2.3 — <strong>Les sondes sous licence.</strong> Certains types de sondes, portant sur des
+équipements et des logiciels d'éditeurs tiers, ne sont pas couverts par la licence
+Apache 2.0. Leur usage est concédé par le présent Contrat de Licence, contre
+rémunération, pour la durée qu'il fixe.</p>
+<p>2.4 — Il en résulte une conséquence que le Client doit connaître avant de signer :
+l'expiration ou la résiliation du présent Contrat de Licence ne prive le Client
+d'aucun des droits qu'il tient de la licence Apache 2.0 sur le cœur ouvert. Elle
+porte sur les seules Sondes sous Licence. Le fonctionnement correspondant du
+Logiciel est décrit à l'article 6.6.</p>
+<h2 id="article-3-definitions">Article 3 — Définitions<a class="headerlink" href="#article-3-definitions" title="Permanent link">&para;</a></h2>
+<p>Les termes définis par les CGV conservent ici le même sens. Sont en outre définis :</p>
+<ul>
+<li><strong>Agent</strong> : une instance du Logiciel installée sur une machine, physique ou
+  virtuelle, ou exécutée dans un conteneur.</li>
+<li><strong>Parc</strong> : l'ensemble des Agents exploités par le Client et par les entités
+  qu'il contrôle au sens de l'article L.233-3 du code de commerce, sous réserve de
+  l'article 15.4. Le Client répond du respect du présent contrat par ces entités
+  <strong>comme du sien propre</strong>, et se porte fort de leur collaboration à la
+  vérification prévue à l'article 13.3.</li>
+<li><strong>Périmètre Souscrit</strong> : les éléments de dimensionnement figurant au Devis
+  accepté, notamment le nombre d'Agents, dans la limite desquels le droit d'usage
+  est concédé. À défaut de mention chiffrée au Devis, le Périmètre Souscrit est
+  celui que le Client a déclaré lors de la commande et, à défaut de déclaration, le
+  nombre d'Agents en service dans le Parc à la date de prise d'effet du contrat.</li>
+<li><strong>Clé d'Agent</strong> : l'identifiant que chaque Agent produit lui-même à sa première
+  exécution. Elle n'est jamais saisie par le Client ni attribuée par Sensor Factory.</li>
+<li><strong>Jeton de Licence</strong> : le fichier signé que Sensor Factory remet au Client et qui
+  porte le niveau concédé, le périmètre des sondes autorisées, le titulaire et la
+  date d'échéance.</li>
+<li><strong>Sonde sous Licence</strong> : un type de sonde dont l'usage requiert un Jeton de
+  Licence valide.</li>
+<li><strong>Sonde Libre</strong> : tout autre type de sonde, utilisable sans Jeton de Licence et
+  sans contrepartie financière.</li>
+</ul>
+<h2 id="article-4-concession">Article 4 — Concession<a class="headerlink" href="#article-4-concession" title="Permanent link">&para;</a></h2>
+<p>4.1 — Sensor Factory concède au Client, pour la durée fixée à l'article 7 et sous
+réserve du paiement du prix convenu, un droit d'utiliser les Sondes sous Licence
+correspondant au niveau souscrit.</p>
+<p>4.2 — Ce droit est <strong>non exclusif</strong>, <strong>non cessible</strong> et <strong>non susceptible de
+sous-licence</strong>. Il est concédé pour les besoins propres du Client, à l'exclusion de
+toute exploitation pour le compte de tiers, qu'elle soit rémunérée ou non.</p>
+<p>4.3 — <strong>Périmètre.</strong> Le droit s'exerce sur le Parc dans la limite du Périmètre
+Souscrit.</p>
+<p>Les modalités par lesquelles ce droit se met en œuvre sur chaque Agent, qu'il
+s'agisse de déclaration, d'activation ou de vérification, sont celles de la version
+du Logiciel que le Client déploie. L'article 6 les expose dans leur état à la date
+de souscription et l'article 6.8 en encadre l'évolution. Aucune de ces modalités ne
+modifie le Périmètre Souscrit, qu'elle en facilite ou non le contrôle.</p>
+<p><strong>Le dépassement</strong> de chacun des éléments quantitatifs du Périmètre Souscrit, pris
+séparément, ne donne pas lieu à régularisation dans la limite de <strong>cinq pour cent
+(5 %)</strong> de la valeur souscrite pour cet élément, arrondie à l'unité supérieure.
+Au-delà, le Client en informe Sensor Factory dans les trente (30) jours et les
+Parties conviennent de l'extension correspondante, facturée au tarif
+public en vigueur et au prorata de la période restant à courir. À défaut
+d'information dans ce délai, l'article 13.4 s'applique.</p>
+<p>4.4 — <strong>À chaque renouvellement</strong>, le Client déclare par écrit à Sensor Factory les
+éléments constitutifs du Périmètre Souscrit pour la période suivante. Cette
+déclaration conditionne le renouvellement et sert de base au prix. Une déclaration
+inexacte produit les effets de l'article 13.</p>
+<p>4.5 — <strong>Le Client s'interdit</strong> de contourner, neutraliser ou retirer les mécanismes
+décrits à l'article 6, de communiquer son Jeton de Licence à un tiers, de proposer
+les Sondes sous Licence dans une offre de service à des tiers, et de décompiler les
+composants sous licence hors des cas où la loi l'autorise impérativement.
+L'article L.122-6-1 du code de la propriété intellectuelle demeure réservé.</p>
+<p>4.6 — Le Client s'interdit également de supprimer ou d'altérer les mentions de
+propriété, de licence et de version portées par le Logiciel.</p>
+<p>4.7 — Le Client s'interdit de publier des résultats d'essais comparatifs portant sur
+les Sondes sous Licence sans l'accord écrit préalable de Sensor Factory. Cet accord
+ne peut être refusé sans motif. Sensor Factory dispose d'un délai de trente (30)
+jours pour se prononcer ; <strong>son silence à l'expiration de ce délai vaut accord</strong>.</p>
+<h2 id="article-5-niveaux-et-perimetre">Article 5 — Niveaux et périmètre<a class="headerlink" href="#article-5-niveaux-et-perimetre" title="Permanent link">&para;</a></h2>
+<p>5.1 — Trois niveaux existent. Le niveau souscrit figure dans le Devis accepté et se
+retrouve dans le Jeton de Licence.</p>
+<ul>
+<li><strong>Gratuit</strong> : toutes les Sondes Libres. Aucun Jeton de Licence, aucune
+  contrepartie financière, aucune limite de durée ni de nombre d'Agents. Ce niveau
+  ne requiert aucune souscription ; le présent contrat ne le régit que lorsqu'un
+  niveau payant est par ailleurs souscrit.</li>
+<li><strong>Pro</strong> : les Sondes Libres, et les Sondes sous Licence que la documentation
+  produit désigne comme telles à la date de souscription.</li>
+<li><strong>Entreprise</strong> : les Sondes Libres, les Sondes sous Licence, et celles que Sensor
+  Factory viendrait à publier pendant la durée du contrat, à l'exception des modules
+  que Sensor Factory désigne, lors de leur publication, comme faisant l'objet d'une
+  tarification distincte, notamment lorsqu'ils dépendent d'un composant ou d'une
+  infrastructure tierce donnant lieu à redevance.</li>
+</ul>
+<p>5.2 — Le périmètre concédé ne se lit pas dans le présent Contrat de Licence, qui ne
+le fige pas, mais dans la documentation du Logiciel et dans le Devis accepté. Chaque
+Agent indique en outre, dans sa console et par la commande en ligne que la
+documentation du Logiciel désigne à cet effet, les types de sondes qui requièrent
+une licence et ceux que la sienne autorise.</p>
+<p>Cette indication est fournie à titre informatif et pour la commodité du Client. Une
+erreur d'affichage ne crée aucun droit d'usage : en cas de divergence, le Devis
+accepté et la documentation prévalent.</p>
+<p>5.3 — Le passage d'une Sonde Libre au régime sous licence pendant la durée du
+contrat ne peut être opposé au Client : une sonde qu'il utilisait sans licence le
+reste jusqu'au terme de la période en cours. La reconduction prévue à l'article 7.2
+ouvre une nouvelle période, au régime en vigueur à sa date de prise d'effet.</p>
+<h2 id="article-6-mise-en-uvre-technique-du-controle">Article 6 — Mise en œuvre technique du contrôle<a class="headerlink" href="#article-6-mise-en-uvre-technique-du-controle" title="Permanent link">&para;</a></h2>
+<p>6.1 — Sensor Factory expose ici le fonctionnement du contrôle de licence <strong>dans la
+version du Logiciel livrée à la date de souscription</strong>, afin que le Client puisse
+l'auditer et en tenir compte dans sa propre analyse de risque. Cet exposé décrit un
+état du Logiciel ; il ne fige pas son évolution, que l'article 6.8 encadre.</p>
+<p>6.2 — <strong>Une vérification locale.</strong> Le Jeton de Licence est un jeton signé par une
+clé privée détenue par Sensor Factory. L'Agent vérifie cette signature avec la clé
+publique correspondante, incluse dans le binaire.</p>
+<p>6.3 — <strong>Aucune connexion sortante.</strong> La vérification n'émet aucune requête réseau.
+L'Agent ne contacte aucun serveur de licence, à l'installation comme à l'exécution.
+Un Agent coupé de tout réseau public fonctionne à l'identique.</p>
+<p>6.4 — <strong>Aucune remontée d'usage.</strong> Sensor Factory ne reçoit, du fait du contrôle de
+licence, aucune donnée relative au Parc du Client : ni le nombre d'Agents, ni leur
+identité, ni les sondes activées, ni les machines supervisées.</p>
+<p>6.5 — <strong>Une période de tolérance.</strong> À l'échéance du Jeton de Licence, les Sondes
+sous Licence continuent de fonctionner pendant sept (7) jours. Cette tolérance est
+une facilité technique destinée à couvrir le délai matériel de renouvellement. Elle
+<strong>ne proroge pas le droit d'usage</strong>, dont l'échéance demeure celle que porte le
+Jeton de Licence.</p>
+<p>6.6 — <strong>Une dégradation partielle.</strong> Passée cette période, les seules Sondes sous
+Licence cessent de collecter. L'Agent continue de fonctionner, les Sondes Libres
+continuent de collecter, et les sorties configurées continuent d'émettre.</p>
+<p>6.7 — Le Jeton de Licence porte un titulaire. Selon ce que les Parties conviennent,
+il désigne le Client, et vaut alors pour l'ensemble de son Parc, ou un Agent
+déterminé par sa Clé d'Agent, et ne vaut alors que pour lui. La première forme est
+celle retenue par défaut ; sous cette forme, un même jeton active tous les Agents du
+Parc sans déclaration ni activation individuelle.</p>
+<p>6.8 — <strong>Évolution du mécanisme, et garantie d'une voie hors ligne.</strong> <strong>Sensor
+Factory s'engage à ce que tout mécanisme de contrôle de licence, dans les versions
+publiées pendant la durée du contrat, comporte une voie hors ligne</strong> : une voie
+permettant au Client d'obtenir et d'installer l'autorisation requise sans aucun flux
+sortant depuis le Parc, par un échange de fichiers hors bande. Le Client demeure
+entièrement libre de la politique de sécurité de son système d'information, et
+notamment de fermer tout flux sortant ; il lui appartient alors d'employer cette
+voie. La fermeture de flux réseau au titre de cette politique ne constitue pas, en
+elle-même, un contournement au sens de l'article 4.5.</p>
+<p>Sous cette garantie, Sensor Factory peut faire évoluer le contrôle de licence dans
+les versions ultérieures du Logiciel, notamment pour y introduire une déclaration,
+une activation ou une vérification à distance, le cas échéant Agent par Agent. Un tel
+mécanisme est limité aux données nécessaires au contrôle de la licence et à la
+facturation ; il ne porte en aucun cas sur les données que le Logiciel collecte pour
+le compte du Client. Les évolutions de cette nature sont annoncées dans les notes de
+la version qui les introduit. Le Client demeure libre de ne pas déployer une version,
+sous réserve de l'article 8.4 ; lorsqu'il en déploie une, il se soumet au contrôle
+par l'une des voies que le Logiciel propose.</p>
+<p>À défaut de voie hors ligne dans une version, le Client n'est pas tenu de la
+déployer et conserve le bénéfice de l'article 8.4 sur la version précédente. Si
+aucune version supportée ne comporte de voie hors ligne, il peut résilier le Contrat
+de Licence et obtenir le remboursement de la fraction du prix correspondant à la
+période restant à courir. <strong>Ce remède épuise les obligations de Sensor Factory au
+titre du présent alinéa.</strong></p>
+<h2 id="article-7-duree-et-renouvellement">Article 7 — Durée et renouvellement<a class="headerlink" href="#article-7-duree-et-renouvellement" title="Permanent link">&para;</a></h2>
+<p>7.1 — Le contrat prend effet à la remise du Jeton de Licence et court jusqu'à
+l'échéance que ce jeton porte.</p>
+<p>7.2 — <strong>Reconduction tacite.</strong> Il se renouvelle ensuite par tacite reconduction,
+par périodes successives de douze (12) mois, matérialisées par la remise d'un
+nouveau Jeton de Licence. Chaque Partie peut s'y opposer en informant l'autre par
+écrit au plus tard <strong>trois (3) mois</strong> avant l'échéance de la période en cours, sans
+avoir à motiver sa décision et sans indemnité de part ni d'autre. Le délai de
+préavis du présent article se substitue à celui de l'article 22.5 des CGV.</p>
+<p>7.3 — <strong>Information et conditions financières.</strong> Sensor Factory informe le Client de
+l'échéance au moins <strong>quatre (4) mois</strong> avant celle-ci, et lui communique à cette
+occasion les conditions financières de la période suivante. À défaut de
+communication de nouvelles conditions, celles de la période échue sont reconduites.
+<strong>À défaut d'information dans ce délai, le Client peut s'opposer à la reconduction
+jusqu'au trentième (30e) jour suivant la réception de cette information</strong>, le cas
+échéant après la prise d'effet de la nouvelle période, qui prend alors fin à cette
+date moyennant remboursement au prorata. La non-reconduction produit les effets
+décrits à l'article 6, sans autre formalité.</p>
+<p>7.4 — <strong>Coût des composants et infrastructures tiers.</strong> Les conditions financières
+sont établies au regard des composants logiciels et des services d'infrastructure
+tiers que le Logiciel met en œuvre à la date de la commande, et de leur régime de
+mise à disposition à cette même date. Si l'un de ces composants ou services devient
+payant, si ses conditions tarifaires évoluent, ou si une fonctionnalité du Logiciel
+vient à dépendre d'un composant ou d'une infrastructure donnant lieu à redevance,
+Sensor Factory peut réviser ses conditions financières à concurrence du coût
+supplémentaire qu'elle supporte. La révision prend effet au renouvellement suivant,
+est notifiée avec l'information prévue à l'article 7.3 et motivée à la demande du
+Client.</p>
+<p>Cette révision est <strong>distincte de l'indexation annuelle prévue par les CGV</strong> et ne
+s'impute pas sur le plafond qu'elles fixent. Elle ne peut porter que sur le coût
+supplémentaire effectivement supporté par Sensor Factory et n'est mise en œuvre que
+lorsque ce coût excède cinq pour cent (5 %) du prix de la période échue. Le Client
+conserve en toute hypothèse la faculté de s'opposer à la reconduction dans les
+conditions de l'article 7.2.</p>
+<p>7.5 — <strong>Retenues à la source.</strong> Les prix s'entendent nets de toute retenue. Si une
+réglementation étrangère impose au Client de pratiquer une retenue à la source sur
+les sommes dues à Sensor Factory, notamment au titre des redevances, <strong>le Client
+majore son paiement du montant nécessaire</strong> pour que Sensor Factory perçoive la
+somme qu'elle aurait perçue en l'absence de retenue. Le Client lui remet sans délai
+les justificatifs permettant d'imputer cette retenue, et les Parties font
+application, le cas échéant, de la convention fiscale applicable.</p>
+<h2 id="article-8-versions-et-maintenance">Article 8 — Versions et maintenance<a class="headerlink" href="#article-8-versions-et-maintenance" title="Permanent link">&para;</a></h2>
+<p>8.1 — Pendant la durée du contrat, le Client accède aux versions correctives et
+évolutives du Logiciel publiées par Sensor Factory <strong>pour le niveau qu'il a
+souscrit</strong>, sans supplément de prix. Il en décide seul le déploiement.</p>
+<p>Sensor Factory demeure libre de commercialiser séparément une fonctionnalité
+nouvelle, sous la forme d'un niveau supérieur ou d'un module distinct. Une telle
+fonctionnalité n'est pas comprise dans la présente concession, ce que les notes de
+la version qui l'introduit indiquent.</p>
+<p>8.2 — Sensor Factory ne garantit pas la compatibilité ascendante des formats de
+sortie entre versions majeures. Les changements de cette nature sont annoncés dans
+les notes de version, avec le chemin de migration.</p>
+<p>8.3 — Le support technique, lorsqu'il est souscrit, relève d'un contrat distinct et
+n'est pas compris dans la présente concession.</p>
+<p>8.4 — <strong>Versions supportées.</strong> Sensor Factory n'est tenue de corriger que la version
+courante et la version majeure qui la précède. Les engagements des articles 8.1 et 11
+ne jouent qu'au bénéfice d'un Client exploitant une version supportée.</p>
+<p>8.5 — <strong>Nature de l'obligation.</strong> Le Logiciel est un outil de collecte et de
+restitution de données techniques. Il n'analyse pas les données qu'il restitue, ne
+définit aucun seuil et n'émet par lui-même aucun jugement sur l'état des systèmes
+supervisés. <strong>Le Client définit seul</strong> les systèmes à superviser, les sondes
+activées, leur fréquence, les destinations de sortie et, dans les outils dont il
+dispose, les seuils et les règles d'alerte.</p>
+<p>Sensor Factory s'oblige à mettre à disposition un Logiciel <strong>conforme à sa
+documentation</strong> pour la version considérée, et à corriger, dans les conditions de
+l'article 8.4, les défauts de conformité qui lui sont signalés. Elle est tenue à cet
+égard d'une <strong>obligation de moyens</strong>, conformément à l'article 10.1 des CGV.</p>
+<p>Elle ne garantit pas un fonctionnement ininterrompu ou exempt d'erreur, ni
+l'exactitude ou l'exhaustivité des données que les systèmes supervisés lui
+renvoient. La détection d'un incident et l'émission d'une alerte procédant de la
+configuration, des seuils et des outils que le Client retient, <strong>elles ne relèvent
+pas des obligations de Sensor Factory</strong>.</p>
+<p>Le Logiciel ne constitue ni un dispositif de sécurité des personnes ou des biens,
+ni un système de conduite de processus, ni un dispositif de continuité d'activité.
+Il ne se substitue ni aux procédures d'exploitation du Client, ni à sa supervision
+humaine, ni à ses propres dispositifs de sauvegarde et de reprise. Le Client
+demeure seul responsable de la configuration qu'il retient et des décisions qu'il
+prend au vu des données restituées.</p>
+<p>8.6 — <strong>Cœur ouvert.</strong> Les composants publiés sous licence Apache 2.0 sont fournis
+selon les termes de cette licence, <strong>en l'état et sans garantie</strong>. Le présent contrat
+n'ajoute aucune garantie à leur égard.</p>
+<p>8.7 — <strong>Versions d'évaluation.</strong> Sensor Factory peut mettre à disposition des
+versions préliminaires, identifiées comme telles par leur numéro ou par les notes de
+version. Elles sont fournies <strong>en l'état et sans garantie</strong>, pour évaluation et hors
+production. Les articles 8.1, 8.4 et 11 ne leur sont pas applicables, et elles ne
+constituent pas des versions supportées au sens de l'article 8.4.</p>
+<h2 id="article-9-propriete-intellectuelle">Article 9 — Propriété intellectuelle<a class="headerlink" href="#article-9-propriete-intellectuelle" title="Permanent link">&para;</a></h2>
+<p>9.1 — Sensor Factory demeure titulaire de l'ensemble des droits de propriété
+intellectuelle sur les composants sous licence. Le présent Contrat de Licence
+n'emporte aucune cession.</p>
+<p>9.2 — Les marques des éditeurs et constructeurs tiers, citées dans le Logiciel et
+dans sa documentation pour désigner les systèmes supervisés, demeurent la propriété
+de leurs titulaires respectifs. Leur mention n'emporte ni partenariat ni
+certification.</p>
+<h2 id="article-10-composants-tiers">Article 10 — Composants tiers<a class="headerlink" href="#article-10-composants-tiers" title="Permanent link">&para;</a></h2>
+<p>10.1 — Le Logiciel incorpore des composants développés par des tiers et distribués
+sous leurs propres licences, pour l'essentiel des licences libres. Ces licences
+s'appliquent à ces composants et prévalent, <strong>pour eux seuls</strong>, sur le présent
+Contrat de Licence.</p>
+<p>10.2 — Aucune stipulation du présent Contrat de Licence ne restreint les droits que
+le Client tient de ces licences, ni ne lui en impose au-delà de ce qu'elles
+prévoient.</p>
+<p>10.3 — La liste de ces composants et de leurs licences fait l'objet de
+l'<strong>Annexe 1</strong>. Cette annexe se rapporte à une version déterminée du Logiciel et
+est mise à jour à chaque version publiée. Sensor Factory remet au Client, sur
+simple demande, l'annexe correspondant à la version qu'il exploite ; elle
+accompagne également le Logiciel et figure dans sa documentation.</p>
+<p>10.4 — Sensor Factory ne concède aucun droit sur ces composants au-delà de ce que
+leurs titulaires concèdent, et n'assume à leur égard aucune obligation de garantie
+ni de maintien en condition.</p>
+<h2 id="article-11-garantie-deviction-et-prise-en-charge-des-actions-en-contrefacon">Article 11 — Garantie d'éviction et prise en charge des actions en contrefaçon<a class="headerlink" href="#article-11-garantie-deviction-et-prise-en-charge-des-actions-en-contrefacon" title="Permanent link">&para;</a></h2>
+<p>11.1 — Sensor Factory déclare détenir les droits nécessaires à la concession
+consentie par le présent Contrat de Licence.</p>
+<p>11.2 — Si un tiers engage contre le Client une action fondée sur le fait que les
+composants sous licence, dans une version supportée au sens de l'article 8.4 et
+employés conformément au présent Contrat de Licence, porteraient atteinte à ses
+droits de propriété intellectuelle, Sensor Factory prend l'action en charge et
+supporte les sommes mises à la charge du Client <strong>par une décision de justice
+passée en force de chose jugée</strong>, ou par une transaction qu'elle a elle-même
+conclue ou approuvée par écrit.</p>
+<p>Ne sont pas couverts les coûts internes du Client, les conseils qu'il engagerait de
+son propre chef, ni aucun préjudice indirect au sens des CGV.</p>
+<p>11.3 — Cette garantie est subordonnée à quatre conditions cumulatives : que le
+Client avise Sensor Factory <strong>sans délai et par écrit</strong>, et en tout état de cause
+dans un délai qui ne compromet pas la défense ; qu'il lui laisse la direction de
+l'action et toute liberté pour transiger ; qu'il lui apporte les informations et
+l'assistance nécessaires à sa défense ; qu'il s'abstienne de toute reconnaissance de
+responsabilité et de toute transaction sans son accord écrit.</p>
+<p>11.4 — Si l'usage du Logiciel venait à être interdit, Sensor Factory, <strong>à son choix
+et à ses frais</strong>, obtient le droit de poursuivre l'usage, remplace ou modifie
+l'élément en cause de manière à faire cesser l'atteinte, ou rembourse au Client la
+fraction du prix correspondant à la période restant à courir. Ce remboursement met
+fin au Contrat de Licence pour l'avenir et épuise les obligations de Sensor Factory
+au titre du présent article.</p>
+<p>11.5 — La garantie ne joue pas lorsque l'atteinte résulte d'une modification du
+Logiciel par le Client ou par un tiers, d'une combinaison avec des éléments que
+Sensor Factory n'a pas fournis, d'un usage non conforme au présent Contrat de
+Licence, du maintien d'une version non supportée au sens de l'article 8.4, du
+maintien de l'usage de l'élément en cause après que Sensor Factory a mis à
+disposition une version corrigée ou de remplacement ou invité le Client par écrit à
+en cesser l'usage, ou d'un composant tiers au sens de l'article 10.</p>
+<p>11.6 — Les stipulations du présent article constituent la seule garantie de Sensor
+Factory au titre des droits de propriété intellectuelle <strong>des tiers</strong> et, sous cette
+réserve, <strong>épuisent les recours</strong> du Client à ce titre. Elles s'exercent dans la limite du plafond de responsabilité
+fixé par les CGV et, si ce plafond venait à ne pas trouver à s'appliquer, dans la
+limite des sommes effectivement perçues par Sensor Factory au titre du présent
+Contrat de Licence au cours des douze (12) mois précédant le fait générateur.</p>
+<p>Le présent article <strong>ne limite ni n'écarte</strong> la garantie due par Sensor Factory à
+raison d'un fait qui lui est personnel, ni sa responsabilité en cas de <strong>dol ou de
+faute lourde</strong>.</p>
+<h2 id="article-12-donnees">Article 12 — Données<a class="headerlink" href="#article-12-donnees" title="Permanent link">&para;</a></h2>
+<p>12.1 — Le Logiciel collecte des données techniques sur les systèmes que le Client
+lui désigne et les transmet aux destinations que le Client configure. Sensor Factory
+n'est destinataire d'aucune de ces données, sauf si le Client configure expressément
+une sortie vers une plateforme exploitée par Sensor Factory, auquel cas les
+conditions de cette plateforme s'appliquent en complément.</p>
+<p>12.2 — Le Client demeure <strong>responsable de traitement</strong> au sens du règlement
+2016/679 pour les données que l'Agent collecte. Il lui appartient de vérifier que
+les sondes qu'il active ne collectent pas de données à caractère personnel au-delà
+de ce que sa propre analyse autorise.</p>
+<p>Sensor Factory <strong>ne reçoit aucune de ces données</strong>, ne les traite pour aucune
+finalité propre et n'en détermine ni les finalités ni les moyens. Elle n'intervient
+donc à leur égard <strong>ni comme responsable de traitement, ni comme sous-traitant</strong> au
+sens de l'article 28 du même règlement. L'article 12.2 des CGV ne s'applique pas à
+ces données.</p>
+<p>Le Client <strong>s'engage à ne pas configurer l'Agent de manière à transmettre à Sensor
+Factory des données à caractère personnel</strong>. S'il envisage une configuration qui
+aurait cet effet, il en informe Sensor Factory par écrit et préalablement, et les
+Parties conviennent des stipulations requises par l'article 28 du règlement 2016/679
+avant sa mise en œuvre.</p>
+<p><strong>Par exception</strong>, si une version du Logiciel met en œuvre un mécanisme au sens de
+l'article 6.8, Sensor Factory est <strong>responsable de traitement</strong> pour les seules
+données que ce mécanisme lui transmet aux fins du contrôle de la licence et de la
+facturation. Elle en informe le Client dans les notes de la version et dans sa
+politique de confidentialité.</p>
+<p>12.3 — <strong>Garantie du Client.</strong> Le Client garantit Sensor Factory contre toute action
+d'un tiers ou d'une personne concernée fondée sur les données que l'Agent collecte,
+transporte ou restitue sur sa configuration, ou sur les systèmes qu'il a désignés à
+l'Agent, et en supporte les conséquences pécuniaires.</p>
+<p>Si une autorité de contrôle engage à l'encontre de Sensor Factory une procédure
+ayant pour objet ces mêmes données, le Client lui apporte sans délai les
+informations et l'assistance nécessaires à sa défense et <strong>prend en charge les frais
+de défense exposés</strong>. Les sanctions pécuniaires prononcées par une autorité
+demeurent à la charge de la Partie à laquelle elles sont infligées.</p>
+<p>Cette garantie s'exerce dans les conditions de l'article 11.3, appliquées au
+bénéfice de Sensor Factory.</p>
+<h2 id="article-13-verification-de-conformite">Article 13 — Vérification de conformité<a class="headerlink" href="#article-13-verification-de-conformite" title="Permanent link">&para;</a></h2>
+<p>13.1 — Tant que le contrôle décrit à l'article 6 ne mesure pas l'usage, la
+conformité repose d'abord sur la déclaration du Client prévue à l'article 4.4. Le Client est
+tenu de la sincérité de cette déclaration.</p>
+<p>13.2 — Sensor Factory peut, <strong>une fois par période de douze (12) mois</strong> et moyennant
+un préavis de <strong>trente (30) jours</strong>, demander au Client une attestation écrite du
+niveau souscrit et du périmètre d'usage, signée par une personne habilitée.</p>
+<p>13.3 — <strong>Vérification.</strong> En cas d'indice sérieux d'un usage excédant le périmètre
+souscrit, Sensor Factory peut faire procéder à une vérification, par elle-même ou
+par un tiers indépendant tenu au secret, moyennant un préavis de <strong>trente (30)
+jours</strong>. Cette vérification se déroule pendant les heures ouvrées, sans perturber
+l'exploitation, et ne porte que sur les éléments nécessaires à établir le périmètre.
+Elle n'ouvre aucun accès aux données que le Logiciel collecte pour le compte du
+Client.</p>
+<p>La vérification s'opère à partir des inventaires et des journaux dont le Client
+dispose, selon une méthode que Sensor Factory lui communique avec le préavis. <strong>Elle
+ne requiert l'exécution d'aucun programme fourni par Sensor Factory dans le système
+d'information du Client.</strong> Ses conclusions sont établies contradictoirement.</p>
+<p>13.4 — <strong>Frais et régularisation.</strong> Les frais de vérification sont supportés par
+Sensor Factory. Ils sont à la charge du Client lorsque la vérification établit un
+usage excédant le Périmètre Souscrit au-delà de la tolérance prévue à l'article 4.3.</p>
+<p>Dans ce cas, <strong>ou lorsque le Client a omis l'information prévue à l'article 4.3</strong>,
+le Client règle la différence de prix pour la période au cours de laquelle le
+dépassement est établi, et au plus pour les <strong>douze (12) mois</strong> précédant la
+notification de la vérification ou de l'omission. La régularisation est calculée aux
+conditions financières du Devis accepté.</p>
+<p>Elle est calculée au tarif public en vigueur, <strong>majorée de vingt pour cent (20 %)</strong>,
+lorsque le dépassement procède d'une <strong>déclaration sciemment inexacte</strong> ou de la
+mise en échec des mécanismes de l'article 6.</p>
+<p>Le règlement de cette régularisation vaut extension du Périmètre Souscrit pour la
+période en cours. <strong>Sensor Factory ne peut soumettre à une nouvelle vérification les
+usages ainsi régularisés.</strong></p>
+<p>13.5 — Le manquement délibéré aux articles 4.4, 13.2 ou 13.3 constitue un manquement grave
+au sens de l'article 16.</p>
+<h2 id="article-14-conformite-exportations-et-probite">Article 14 — Conformité : exportations et probité<a class="headerlink" href="#article-14-conformite-exportations-et-probite" title="Permanent link">&para;</a></h2>
+<p>14.1 — Le Client s'engage à respecter les réglementations françaises, européennes
+et, le cas échéant, étrangères applicables au contrôle des exportations et aux
+mesures restrictives.</p>
+<p>14.2 — Il s'interdit en particulier d'exporter, de réexporter, de céder ou de mettre
+à disposition le Logiciel, directement ou indirectement, au bénéfice d'un pays,
+d'une personne ou d'une entité visés par une mesure d'embargo ou de gel des avoirs,
+notamment au titre des règlements de l'Union européenne, de l'<em>Export Administration
+Regulations</em> et des programmes de sanctions administrés par l'<em>Office of Foreign
+Assets Control</em> des États-Unis,
+ainsi que de l'employer à une fin prohibée, notamment en rapport avec des armes
+nucléaires, chimiques ou biologiques ou leurs vecteurs.</p>
+<p>14.3 — Le Client déclare n'être lui-même visé par aucune de ces mesures et informe
+Sensor Factory sans délai s'il venait à l'être. Il garantit Sensor Factory contre les conséquences
+d'un manquement au présent article, qui constitue en outre un manquement grave au
+sens de l'article 16. Les sanctions pécuniaires prononcées par une autorité
+demeurent à la charge de la Partie à laquelle elles sont infligées.</p>
+<p>14.4 — <strong>Probité.</strong> Chaque Partie déclare respecter les réglementations applicables
+en matière de lutte contre la corruption et le trafic d'influence, notamment la loi
+n° 2016-1691 du 9 décembre 2016, le <em>UK Bribery Act 2010</em> et le <em>Foreign Corrupt
+Practices Act</em>, et s'interdit d'offrir, de promettre ou d'accorder un paiement ou un
+avantage quelconque en vue d'obtenir un avantage indu. Elle s'engage à ce que ses
+dirigeants, préposés et sous-traitants intervenant au titre du contrat respectent
+les mêmes règles. Le manquement au présent article constitue un manquement grave au
+sens de l'article 16.</p>
+<h2 id="article-15-cession-et-changement-de-controle">Article 15 — Cession et changement de contrôle<a class="headerlink" href="#article-15-cession-et-changement-de-controle" title="Permanent link">&para;</a></h2>
+<p>15.1 — Le Client ne peut céder le présent Contrat de Licence, ni les droits et
+obligations qui en découlent, sans l'accord écrit préalable de Sensor Factory. En
+cas de transmission universelle de son patrimoine, le contrat se poursuit de plein
+droit avec le bénéficiaire, moyennant information préalable de Sensor Factory.</p>
+<p>15.2 — Sensor Factory peut céder le présent Contrat de Licence à une société de son
+groupe ou à l'acquéreur de la branche d'activité concernée, moyennant information du
+Client.</p>
+<p>15.3 — <strong>Une précision s'impose, la concession portant sur le Parc entier.</strong> En cas
+de prise de contrôle du Client, le Parc couvert demeure celui qui existait à la date
+de l'opération, augmenté de sa croissance propre. L'extension de la concession au
+parc de l'acquéreur ou des entités qu'il contrôle par ailleurs fait l'objet d'un
+avenant.</p>
+<p>15.4 — Il en va de même dans l'autre sens. Lorsque le Client prend le contrôle d'une
+entité pendant la durée du contrat, le parc de cette entité n'entre dans le Parc
+qu'au renouvellement suivant, sur la base de la déclaration prévue à l'article 4.4
+et des conditions financières qui en découlent.</p>
+<h2 id="article-16-resiliation">Article 16 — Résiliation<a class="headerlink" href="#article-16-resiliation" title="Permanent link">&para;</a></h2>
+<p>16.1 — Chaque Partie peut résilier le contrat en cas de manquement grave de l'autre,
+non réparé dans les <strong>trente (30) jours</strong> de sa mise en demeure.</p>
+<p>16.2 — <strong>Suspension.</strong> En cas de défaut de paiement à l'échéance, ou de manquement
+aux articles 4.5, 4.6, 13 ou 14, Sensor Factory peut suspendre la délivrance de tout
+nouveau Jeton de Licence, sans formalité autre qu'une notification écrite et sans
+préjudice de son droit à résiliation.</p>
+<p>16.3 — La résiliation emporte <strong>cessation immédiate du droit d'usage des Sondes sous
+Licence</strong>. Le Client cesse cet usage et en atteste par écrit dans les trente (30)
+jours. Il n'est pas tenu de désinstaller l'Agent ni privé des Sondes Libres, dont
+l'usage relève de la licence Apache 2.0.</p>
+<p>16.4 — Les sommes versées au titre de la période en cours restent acquises à Sensor
+Factory. En cas de résiliation à ses torts, elle rembourse la fraction du prix
+correspondant à la période restant à courir. <strong>Ce remboursement s'impute sur toute
+indemnité due, dans les limites fixées par les CGV et rappelées à l'article 17.2.</strong> Les sommes restant dues deviennent immédiatement exigibles.</p>
+<p>16.5 — <strong>Survie.</strong> Survivent à la fin du contrat, quelle qu'en soit la cause, les
+articles 1.4, 2.4, 4.5 à 4.7, 8.5 à 8.7, 9 à 14 et 17, ainsi que toute stipulation dont la nature
+commande qu'elle demeure.</p>
+<h2 id="article-17-droit-applicable-responsabilite-et-langue">Article 17 — Droit applicable, responsabilité et langue<a class="headerlink" href="#article-17-droit-applicable-responsabilite-et-langue" title="Permanent link">&para;</a></h2>
+<p>17.1 — Le présent Contrat de Licence est soumis au <strong>droit français</strong>. La
+Convention des Nations unies sur les contrats de vente internationale de
+marchandises du 11 avril 1980 ne lui est pas applicable.</p>
+<p>17.2 — <strong>Limitations de responsabilité.</strong> Les stipulations des CGV relatives à la
+nature de l'obligation de Sensor Factory, à l'exclusion du préjudice indirect, au
+plafond de responsabilité, au délai de réclamation, à la force majeure et au
+règlement des litiges s'appliquent au présent Contrat de Licence. Elles couvrent
+l'intégralité des obligations qu'il stipule, y compris les engagements, déclarations
+et garanties qu'il contient, <strong>ainsi que les obligations de prise en charge et
+d'indemnisation des articles 11 et 12</strong>.</p>
+<p>Conformément à l'article 1.4, elles prévalent sur toute stipulation contraire de
+tout autre document contractuel ; toute stipulation qui y dérogerait sans la
+renonciation expresse prévue à l'article 1.4 est <strong>sans effet</strong>.</p>
+<p>Si l'une de ces stipulations venait à ne pas trouver à s'appliquer, la
+responsabilité de Sensor Factory demeure limitée aux sommes qu'elle a effectivement
+perçues au titre du présent Contrat de Licence au cours des <strong>douze (12) mois</strong>
+précédant le fait générateur.</p>
+<p>Les limitations et exclusions prévues au présent article ne s'appliquent ni au
+<strong>dol</strong>, ni à la <strong>faute lourde</strong>, ni aux <strong>dommages corporels</strong>, ni à toute
+responsabilité qui ne peut être limitée en vertu de la loi applicable.</p>
+<p>Les Parties reconnaissent que les conditions financières du présent Contrat de
+Licence reflètent la répartition des risques qui résulte du présent article, et que
+<strong>Sensor Factory n'aurait pas contracté sans celle-ci</strong>.</p>
+<p>17.3 — <strong>Force majeure.</strong> L'article 17 des CGV s'applique au présent contrat. Sont
+notamment susceptibles de constituer un cas de force majeure, <strong>lorsqu'ils
+réunissent les conditions de l'article 1218 du code civil</strong> : les catastrophes
+naturelles, les incendies et inondations, les guerres, actes de terrorisme et
+troubles civils, les épidémies et les mesures sanitaires qui s'y rapportent, les
+décisions d'une autorité publique, les grèves générales ou sectorielles, les
+cyberattaques d'ampleur, et l'interruption prolongée des réseaux publics de
+télécommunications ou de fourniture d'énergie.</p>
+<p>17.4 — Le présent Contrat de Licence est rédigé en <strong>langue française</strong>. Sensor
+Factory peut en remettre une traduction, notamment en langue anglaise, pour la
+commodité du Client. Cette traduction n'a qu'une valeur d'information : <strong>seule la
+version française fait foi</strong> entre les Parties, et elle seule sera opposée devant
+toute juridiction. En cas de divergence entre la version française et une
+traduction, quelle qu'en soit la cause, la version française prévaut.</p>
+<hr />
+<h2 id="signatures">Signatures<a class="headerlink" href="#signatures" title="Permanent link">&para;</a></h2>
+<p>Fait à ……………………………, le …………………………, en deux exemplaires originaux.</p>
+<p><strong>Pour SENSOR FACTORY SAS</strong> — Nom : ………………………… Qualité : …………………………</p>
+<p><strong>Pour le Client</strong> — Dénomination : ………………………… Nom : ………………………… Qualité :
+…………………………</p>
+<p>Le présent contrat peut être signé par voie électronique, dans les conditions des
+articles 1366 et 1367 du code civil et du règlement (UE) n° 910/2014. Il peut être
+signé en plusieurs exemplaires séparés, l'ensemble formant un seul et même acte.</p>
+<hr />
+<h2 id="annexe-1-composants-tiers">Annexe 1 — Composants tiers<a class="headerlink" href="#annexe-1-composants-tiers" title="Permanent link">&para;</a></h2>
+<p>Cette annexe se rapporte à une version déterminée du Logiciel, indiquée en tête
+de tableau. Elle est produite depuis le graphe de dépendances de la
+construction, et décrit donc ce qui est effectivement lié dans le binaire
+distribué, et non ce que le fichier de dépendances déclare : un composant
+utilisé par les seuls tests n'y figure pas.</p>
+<p>Les licences ci-dessous s'appliquent à ces composants seuls et prévalent, pour
+eux, sur le présent Contrat de Licence, conformément à l'article 10.</p>
+<p>La liste des composants tiers liés dans le binaire distribué, avec leurs
+licences respectives, est publiée et tenue à jour à la page
+<a href="../third-party/">Composants tiers</a>. Elle est produite depuis le graphe de
+dépendances de la construction, et décrit donc ce qui est effectivement lié
+dans le binaire distribué.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../agreement-en/" class="md-footer__link md-footer__link--next" aria-label="Next: License agreement (English translation)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                License agreement (English translation)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/senhub-io/senhub-agent" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://senhub.io" target="_blank" rel="noopener" title="senhub.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/rn-filter.js"></script>
+      
+        <script src="../../javascripts/dev-banner.js"></script>
+      
+    
+  </body>
+</html>

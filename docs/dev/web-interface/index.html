@@ -16,7 +16,7 @@
         <link rel="prev" href="../http-https/">
       
       
-        <link rel="next" href="../prometheus/">
+        <link rel="next" href="../license/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Web interface - SenHub Agent</title>
+        <title>Web console - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#web-interface" class="md-skip">
+        <a href="#web-console" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Web interface
+              Web console
             
           </span>
         </div>
@@ -347,6 +347,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../configuration/" class="md-nav__link">
         
   
@@ -444,7 +471,7 @@
   <span class="md-ellipsis">
     
   
-    Web interface
+    Web console
   
 
     
@@ -462,7 +489,7 @@
   <span class="md-ellipsis">
     
   
-    Web interface
+    Web console
   
 
     
@@ -488,10 +515,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#accessing-the-dashboard" class="md-nav__link">
+  <a href="#opening-the-console" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing the Dashboard
+        Opening the console
       
     </span>
   </a>
@@ -499,34 +526,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#available-sections" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Available Sections
+        Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Available Sections">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dashboard" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dashboard
+        Probes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Dashboard">
+    <nav class="md-nav" aria-label="Probes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#otlp-pipeline-card" class="md-nav__link">
+  <a href="#the-list" class="md-nav__link">
     <span class="md-ellipsis">
       
-        OTLP Pipeline card
+        The list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The editor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets
       
     </span>
   </a>
@@ -537,12 +585,24 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#sensor-builder" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensor Builder
+        Outputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otlp-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTLP output
       
     </span>
   </a>
@@ -550,10 +610,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#http-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation
+        HTTP output
       
     </span>
   </a>
@@ -562,6 +622,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
   
 </li>
       
@@ -569,12 +640,12 @@
   <a href="#monitoring-system-integration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Monitoring System Integration
+        Monitoring system integration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Monitoring System Integration">
+    <nav class="md-nav" aria-label="Monitoring system integration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -593,7 +664,7 @@
   <a href="#sensor-type" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensor Type
+        Sensor type
       
     </span>
   </a>
@@ -604,7 +675,7 @@
   <a href="#creating-a-prtg-sensor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creating a PRTG Sensor
+        Creating a PRTG sensor
       
     </span>
   </a>
@@ -615,7 +686,7 @@
   <a href="#finding-available-probe-names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Finding Available Probe Names
+        Finding available probe names
       
     </span>
   </a>
@@ -626,7 +697,7 @@
   <a href="#filtering-metrics-by-tags" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Filtering Metrics by Tags
+        Filtering metrics by tags
       
     </span>
   </a>
@@ -637,7 +708,7 @@
   <a href="#installing-prtg-value-lookups" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installing PRTG Value Lookups
+        Installing PRTG value lookups
       
     </span>
   </a>
@@ -660,8 +731,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-consoles-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The console's API
+      
+    </span>
+  </a>
   
 </li>
       
@@ -669,19 +762,19 @@
   <a href="#useful-api-queries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Useful API Queries
+        Useful API queries
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Useful API Queries">
+    <nav class="md-nav" aria-label="Useful API queries">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#check-agent-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check Agent Health
+        Check agent health
       
     </span>
   </a>
@@ -689,10 +782,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#list-configured-probes" class="md-nav__link">
+  <a href="#list-collected-probes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        List Configured Probes
+        List collected probes
       
     </span>
   </a>
@@ -703,7 +796,7 @@
   <a href="#view-system-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        View System Information
+        View system information
       
     </span>
   </a>
@@ -711,10 +804,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#check-license-status" class="md-nav__link">
+  <a href="#check-licence-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check License Status
+        Check licence status
       
     </span>
   </a>
@@ -722,10 +815,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#view-active-configuration" class="md-nav__link">
+  <a href="#otlp-counters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        View Active Configuration
+        OTLP counters
       
     </span>
   </a>
@@ -736,7 +829,7 @@
   <a href="#cache-statistics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cache Statistics
+        Cache statistics
       
     </span>
   </a>
@@ -747,7 +840,7 @@
   <a href="#clear-the-cache" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clear the Cache
+        Clear the cache
       
     </span>
   </a>
@@ -787,10 +880,181 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    License
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/agreement-fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contrat de licence (français, fait foi)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/agreement-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License agreement (English translation)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/third-party/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
             
   
   
@@ -808,8 +1072,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -956,10 +1220,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
         
           
-          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
             
   
   
@@ -977,8 +1241,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_11">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2039,6 +2303,34 @@
     
   
     Exchange Online
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_container_apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container Apps
   
 
     
@@ -3338,10 +3630,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -3359,8 +3651,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3824,10 +4116,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#accessing-the-dashboard" class="md-nav__link">
+  <a href="#opening-the-console" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing the Dashboard
+        Opening the console
       
     </span>
   </a>
@@ -3835,34 +4127,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#available-sections" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Available Sections
+        Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Available Sections">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dashboard" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dashboard
+        Probes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Dashboard">
+    <nav class="md-nav" aria-label="Probes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#otlp-pipeline-card" class="md-nav__link">
+  <a href="#the-list" class="md-nav__link">
     <span class="md-ellipsis">
       
-        OTLP Pipeline card
+        The list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The editor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets
       
     </span>
   </a>
@@ -3873,12 +4186,24 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#sensor-builder" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensor Builder
+        Outputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otlp-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTLP output
       
     </span>
   </a>
@@ -3886,10 +4211,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#http-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation
+        HTTP output
       
     </span>
   </a>
@@ -3898,6 +4223,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3905,12 +4241,12 @@
   <a href="#monitoring-system-integration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Monitoring System Integration
+        Monitoring system integration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Monitoring System Integration">
+    <nav class="md-nav" aria-label="Monitoring system integration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3929,7 +4265,7 @@
   <a href="#sensor-type" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sensor Type
+        Sensor type
       
     </span>
   </a>
@@ -3940,7 +4276,7 @@
   <a href="#creating-a-prtg-sensor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creating a PRTG Sensor
+        Creating a PRTG sensor
       
     </span>
   </a>
@@ -3951,7 +4287,7 @@
   <a href="#finding-available-probe-names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Finding Available Probe Names
+        Finding available probe names
       
     </span>
   </a>
@@ -3962,7 +4298,7 @@
   <a href="#filtering-metrics-by-tags" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Filtering Metrics by Tags
+        Filtering metrics by tags
       
     </span>
   </a>
@@ -3973,7 +4309,7 @@
   <a href="#installing-prtg-value-lookups" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installing PRTG Value Lookups
+        Installing PRTG value lookups
       
     </span>
   </a>
@@ -3996,8 +4332,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-consoles-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The console's API
+      
+    </span>
+  </a>
   
 </li>
       
@@ -4005,19 +4363,19 @@
   <a href="#useful-api-queries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Useful API Queries
+        Useful API queries
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Useful API Queries">
+    <nav class="md-nav" aria-label="Useful API queries">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#check-agent-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check Agent Health
+        Check agent health
       
     </span>
   </a>
@@ -4025,10 +4383,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#list-configured-probes" class="md-nav__link">
+  <a href="#list-collected-probes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        List Configured Probes
+        List collected probes
       
     </span>
   </a>
@@ -4039,7 +4397,7 @@
   <a href="#view-system-information" class="md-nav__link">
     <span class="md-ellipsis">
       
-        View System Information
+        View system information
       
     </span>
   </a>
@@ -4047,10 +4405,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#check-license-status" class="md-nav__link">
+  <a href="#check-licence-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Check License Status
+        Check licence status
       
     </span>
   </a>
@@ -4058,10 +4416,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#view-active-configuration" class="md-nav__link">
+  <a href="#otlp-counters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        View Active Configuration
+        OTLP counters
       
     </span>
   </a>
@@ -4072,7 +4430,7 @@
   <a href="#cache-statistics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cache Statistics
+        Cache statistics
       
     </span>
   </a>
@@ -4083,7 +4441,7 @@
   <a href="#clear-the-cache" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clear the Cache
+        Clear the cache
       
     </span>
   </a>
@@ -4120,204 +4478,317 @@
   
 
 
-<h1 id="web-interface">Web Interface<a class="headerlink" href="#web-interface" title="Permanent link">&para;</a></h1>
-<p>SenHub Agent includes a built-in web dashboard for monitoring agent status, exploring the API, and configuring your monitoring system integration.</p>
-<h2 id="accessing-the-dashboard">Accessing the Dashboard<a class="headerlink" href="#accessing-the-dashboard" title="Permanent link">&para;</a></h2>
-<p>Open a browser and navigate to:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://agent-server:8080/web/{authentication-key}/
+<h1 id="web-console">Web console<a class="headerlink" href="#web-console" title="Permanent link">&para;</a></h1>
+<p>SenHub Agent ships a web console. It answers the questions an operator asks in the order they ask them: is the agent running, what does it collect, where does the data go, and what URL does the poller need.</p>
+<h2 id="opening-the-console">Opening the console<a class="headerlink" href="#opening-the-console" title="Permanent link">&para;</a></h2>
+<p>The console is served by the <code>http</code> output on the agent's port. Open:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://agent-server:8080/web/{agent-key}/
 </code></pre></div>
-<p>Replace <code>agent-server</code> with the hostname or IP address of the machine running the agent, and <code>{authentication-key}</code> with your agent's UUID key.</p>
-<p>If HTTPS is enabled, use <code>https://</code> and the HTTPS port (default 8443):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://agent-server:8443/web/{authentication-key}/
+<p>Replace <code>agent-server</code> with the address of the machine running the agent and <code>{agent-key}</code> with the agent's key. The key is printed by <code>senhub-agent key show</code> and by <code>senhub-agent console --print</code>; on Windows the installer creates a Start Menu shortcut that opens the console directly. With HTTPS enabled, use <code>https://</code> and the HTTPS port (8443 by default).</p>
+<p>The console requires the <code>web</code> endpoint of the <code>http</code> output, which the installer enables:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"127.0.0.1"</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
-<p>The web interface requires the <code>web</code> endpoint to be enabled in the storage configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">storage</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">]</span>
-</code></pre></div>
-<h2 id="available-sections">Available Sections<a class="headerlink" href="#available-sections" title="Permanent link">&para;</a></h2>
-<h3 id="dashboard">Dashboard<a class="headerlink" href="#dashboard" title="Permanent link">&para;</a></h3>
-<p>The main dashboard displays:</p>
+<p>The header of every page shows the host name, the agent's state, its version and its uptime, so you can see that the agent runs without leaving the page you are on. The menu has five entries: Overview, Probes, Outputs, Settings and Docs. Docs opens this documentation on <a href="https://agent.senhub.io/docs">agent.senhub.io</a>; the API reference embedded in the agent remains available at <code>/web/{agent-key}/docs</code>.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The Overview is the landing page.</p>
+<p><img alt="Overview" src="../images/web-interface/overview.webp" title="Overview with the getting-started steps, the probe and output summaries, the agent, the licence and the recent events" /></p>
 <ul>
-<li>Agent status and version</li>
-<li>List of configured probes and their collection status</li>
-<li>Number of cached metrics per probe</li>
-<li>Memory and CPU usage</li>
-<li>Agent uptime</li>
+<li><strong>Getting started</strong> lists four steps and computes their state from the agent: the agent runs, probes are configured, data is sent somewhere, the poller has its sensor URL. The current step is highlighted and carries the link that resolves it. Hide it once you are done; it disappears on its own when every step is complete.</li>
+<li><strong>Probes</strong> is a compact table of the configured probes, the ones needing attention first, with their state, the number of series they hold and the time of their last collection. Probes whose target is down are counted on their own, not under "running".</li>
+<li><strong>Outputs</strong> lists every output with its state and the action that matters: build a sensor URL for the HTTP output, edit a push output, enable a disabled one.</li>
+<li><strong>Agent</strong> merges the former status, health and resources cards: version, host, uptime, port, memory, CPU, goroutines and cache size. A warning appears when the configuration watch is off, because edits made by hand then need a restart.</li>
+<li><strong>Licence</strong> shows the tier, the expiry date, how many probe types are available and how many need a licence, and the agent key with a copy button.</li>
+<li><strong>Recent events</strong> shows the last transitions: a probe that started failing or recovered, an output that could not start, a save made from the console, a configuration reloaded from disk. The agent keeps the last fifty in memory; they do not survive a restart.</li>
 </ul>
-<p>This page gives you a quick overview of the agent's health and activity.</p>
-<p><img alt="Agent dashboard overview" src="../images/dashboard-hero.webp" title="Main dashboard showing probe status, cache size and uptime" /></p>
-<h4 id="otlp-pipeline-card">OTLP Pipeline card<a class="headerlink" href="#otlp-pipeline-card" title="Permanent link">&para;</a></h4>
-<p>When the agent is configured with the <a href="../otlp/">OTLP push strategy</a>, the dashboard renders a dedicated <strong>OTLP Pipeline</strong> card next to the probe list with four sub-sections:</p>
+<p>The page refreshes every thirty seconds.</p>
+<h2 id="probes">Probes<a class="headerlink" href="#probes" title="Permanent link">&para;</a></h2>
+<p>The Probes page lists what the agent collects and lets you add, edit, enable, disable and delete probe instances without editing YAML on the server.</p>
+<p><img alt="Probes list" src="../images/web-interface/probes.webp" title="Probes list with states, intervals, series counts and last runs" /></p>
+<h3 id="the-list">The list<a class="headerlink" href="#the-list" title="Permanent link">&para;</a></h3>
+<p>Each row shows the probe's name, its type, its state (running, target down, failing with the reason, starting, disabled, not licensed, or not on this platform), its interval, the number of series it holds and the time of its last collection. A probe that collects while the system it reads does not answer is shown as <strong>target down</strong>, naming the <code>up</code> series that reads zero: the collection succeeded, the target is what is missing. Failing and target-down rows come first and keep their actions visible; other rows show them on hover: Edit, Sensor URL, Enable or Disable, Delete. Chips filter the list by state and a search box filters by name or type.</p>
+<p>Probes declared in files written by hand carry a <code>file</code> pill: they are listed but left to the file. Only the fragments the console wrote, one file per instance under <code>probes.d</code> with a header comment, are edited from the page.</p>
+<p>On a fresh install the page shows four starters instead of an empty table: <strong>This host</strong> creates the CPU, memory, disk and network probes in one click; <strong>A database</strong>, <strong>A network device</strong> and <strong>A web endpoint</strong> open the editor on the matching type.</p>
+<h3 id="the-editor">The editor<a class="headerlink" href="#the-editor" title="Permanent link">&para;</a></h3>
+<p><img alt="Probe editor" src="../images/web-interface/probe-editor.webp" title="Probe editor with the block of parameters required to start, the sticky action bar and the collapsed optional sections" /></p>
+<p>The editor puts first what the probe needs to start, and folds everything else.</p>
+<p><img alt="Probe types" src="../images/web-interface/probe-types.webp" title="The type grid, filterable by name and by category, with a picture per category" /></p>
 <ul>
-<li><strong>Pipeline</strong> — total metrics / logs pushed since boot, export errors, dropped data-points broken down by reason (<code>probe_cardinality</code>, <code>store_cap</code>, <code>memory_soft_limit</code>, <code>memory_hard_limit</code>).</li>
-<li><strong>Store &amp; Export</strong> — current in-memory store size, log buffer fill ratio, last and mean export duration.</li>
-<li><strong>Checkpoint</strong> — when persistence is enabled: file size, time since the last save, entries restored at boot, errors by stage.</li>
-<li><strong>Parallel export</strong> — number of sub-batches the last push fanned out across.</li>
+<li><strong>Type</strong> is chosen in a grid of cards, filterable by name and by category. Each card carries a picture of its category, so a database, a queue and a web server are told apart before the words are read. Pro types show a lock until a licence is activated; a type that does not run on this operating system says so instead (Windows only, Linux only), so a lock always means a licence and never a platform. Once chosen, the type collapses to one line with a Change link.</li>
+<li><strong>Required to start</strong> holds the name, the enabled switch and the parameters the probe does nothing useful without: for MySQL the host, port, user and password; for SNMP the target, version and community, replaced by the v3 credentials when the version is v3; for an HTTP check the URLs. Everything below this block has a working default.</li>
+<li>The <strong>action bar</strong> stays visible while you scroll: Validate checks the values against the schema and asks the probe what it would refuse; Test runs one real collection from this host and shows the first metrics that came back; Save (Save and start for a new probe) writes the file, and the agent starts, restarts or stops the probe on its own. Save stays disabled until the name and every required value are present, and the bar says what is missing.</li>
+<li><strong>Optional settings</strong> are one collapsed section per group of the schema. A section whose values are all at their default says so in grey; a section with a value set shows a count and the values, so you know what is set without opening it. A section holding an error opens on its own with a red mark.</li>
+<li><strong>Governance and tags</strong> is one section: owning team and contact, criticality, lifecycle, location, the application chain (the <code>application</code> label) and other labels. It is stamped on the entities, metrics and logs of this probe only; see <a href="../configuration/#governance-per-probe">Governance per probe</a>.</li>
+<li><strong>Edit as YAML</strong> shows the fragment as it will be written and accepts edits, checked with the same rules as the form.</li>
+<li>The right column shows the result of the last Validate or Test, the file that will be written with a live YAML preview, and a link to the probe's documentation.</li>
 </ul>
-<p>The card is hidden when the agent has no OTLP strategy, so older deployments render unchanged. Values refresh on the dashboard's 30-second cycle.</p>
-<p>For an operator-level reference of every field exposed by this card, see <a href="https://github.com/senhub-io/senhub-agent/blob/dev/docs/admin-guide/OTLP-OBSERVABILITY.md">OTLP observability</a> in the admin guide.</p>
-<h3 id="sensor-builder">Sensor Builder<a class="headerlink" href="#sensor-builder" title="Permanent link">&para;</a></h3>
-<p>The Sensor Builder provides an interactive interface to:</p>
+<p>Validation and test errors are anchored: the banner lists them, each one is a link to its field, and the message is repeated under the field. When a test fails, the raw message of the probe is shown together with a plain-language explanation for the common cases (refused credentials, a host that does not answer, an untrusted certificate).</p>
+<h3 id="secrets">Secrets<a class="headerlink" href="#secrets" title="Permanent link">&para;</a></h3>
+<p>A password typed in the form goes to the agent's secret store; the file holds a <code>${secret:...}</code> reference. A stored secret is shown as a state, not as a value: the word Stored, the reference, and a Replace button. Leaving it alone keeps it; the form never sends a stored value back to the agent. Replace clears the field: type a new value to change the secret, or leave the field empty and save to drop it. This holds for a secret inside a block and inside a list of blocks, such as the users of an SNMP v3 device. A field can also take a reference you already have, <code>${secret:...}</code> or <code>${env:...}</code>. Without a usable secret store the save is refused with the alternative rather than writing a password in clear.</p>
+<p>Delete removes the file and its stored secrets; Disable keeps them, which is the better choice during an incident. Every deletion is confirmed in the page itself, not in a browser dialog: Escape cancels, Enter confirms, and the focus starts on Cancel.</p>
+<h2 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h2>
+<p>The Outputs page shows where the collected data goes. Pull outputs wait for a poller; push outputs send on their own.</p>
+<p><img alt="Outputs" src="../images/web-interface/outputs.webp" title="Outputs list with the HTTP output listening and an OTLP output kept disabled" /></p>
+<p>Each output is one file under <code>strategies.d</code>. The list shows, per output, its state and a line of life: which poller last read an endpoint and when, or when the last export succeeded and when the last one failed and why.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listening</td>
+<td>The HTTP output serves its endpoints; the life line says which poller came and when.</td>
+</tr>
+<tr>
+<td>exporting</td>
+<td>A push output delivered its last batch.</td>
+</tr>
+<tr>
+<td>idle</td>
+<td>A push output is enabled and has delivered nothing yet, for instance traces without an <code>otlp_receiver</code> probe.</td>
+</tr>
+<tr>
+<td>failing</td>
+<td>The last delivery failed, or the output could not start; the reason is on the line.</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>The file is renamed <code>.disabled</code>; nothing is lost.</td>
+</tr>
+</tbody>
+</table>
+<p>Add an output picks a type: OTLP push, PRTG push, SenHub cloud, or events. The HTTP output exists once per agent and is created by the installer; PRTG pull, Nagios and Prometheus are endpoints of that one output.</p>
+<p>The switch at the top of the editor, Starts as soon as saved, can be turned off before the first save: the file is then written as <code>.disabled</code> from the start, so an output can be prepared before its collector exists and enabled later from the list.</p>
+<p>A file under <code>strategies.d</code> the agent cannot read, because of a YAML error or because it holds more than one output, is listed as failing with that error rather than left out, so the list shows every file on disk.</p>
+<h3 id="otlp-output">OTLP output<a class="headerlink" href="#otlp-output" title="Permanent link">&para;</a></h3>
+<p>The OTLP editor follows the probe editor: the endpoint, the transport, TLS and the authorization header in the block at the top; signals, authentication and routing, TLS details, resource attributes, delivery, memory and persistence in collapsed sections; the YAML at the bottom.</p>
+<p><strong>Test connection</strong> opens a fresh connection with the values on the page, saved or not, and reports each step: name resolution, TCP, the TLS handshake with the certificate's subject and expiry, and the export of one test metric the receiver has to accept. A failing step is shown with its error, so a dead collector is diagnosed from the page.</p>
+<p>The right column carries the counters of the OTLP pipeline (exports, errors, dropped points, mean export time, log queue, store size) that used to live on the dashboard.</p>
+<h3 id="http-output">HTTP output<a class="headerlink" href="#http-output" title="Permanent link">&para;</a></h3>
+<p>The HTTP output page has two tabs.</p>
+<p><strong>Settings</strong> holds the port, whether the console is reachable from this machine only or from other machines, and which endpoints answer: PRTG, Nagios, Prometheus and the web console itself. TLS and the cache are collapsed sections. The right column says who is reading: the last request per endpoint, or that a poller has never come, which is the usual sign that the URL is not yet in its sensor.</p>
+<p><strong>Sensor URLs</strong> replaces the former Sensor Builder. Three choices, one URL:</p>
+<ol>
+<li>The poller: PRTG, Nagios or Prometheus.</li>
+<li>The probe.</li>
+<li>An optional filter on the probe's tags, for probes that return many components.</li>
+</ol>
+<p>Copy pastes the URL into the poller's sensor. Below it, a preview reads the URL on screen and follows it: change the poller, the probe or the filter and the panel refreshes on its own, and the Refresh button re-reads the same URL on demand. It opens on the raw response — what the poller actually receives — with the channel table one click away; whichever view you pick is the one you get next time. The page also offers the PRTG lookups for download and lists the steps on the PRTG side. The old address <code>/web/{agent-key}/explorer</code> redirects here.</p>
+<p><img alt="Sensor URLs" src="../images/web-interface/sensor-urls.webp" title="Sensor URLs tab with a PRTG URL and its preview" /></p>
+<h2 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h2>
+<p>The Settings page changes the agent's own configuration from the browser, so a Windows operator does not have to edit YAML on the server.</p>
+<p><img alt="Settings" src="../images/web-interface/settings.webp" title="Settings with the connection block on the left and the licence block on the right" /></p>
 <ul>
-<li>Browse all available API endpoints and their HTTP methods</li>
-<li>Test API calls directly from the browser with live responses</li>
-<li>View the raw JSON output from each endpoint</li>
-<li>Discover available probes and their metrics</li>
+<li><strong>Connection</strong> shows the port and bind address of the HTTP output, the same values the Outputs page edits, and links to it for the endpoints, TLS and the sensor URLs. Changing the port moves the console to the new address; the page tells you where to reconnect. The change is applied live, with no restart.</li>
+<li><strong>Licence</strong> uploads the licence file you received, or takes the pasted token. A customer licence is valid across the whole fleet, so the same file activates every agent; a licence issued for one specific agent is checked against that agent. The card shows how many Pro probe types are locked and links to the catalogue.</li>
 </ul>
-<p>This is especially useful when setting up PRTG, Nagios, or other monitoring tool integrations. You can see exactly what data is available and how it is formatted before configuring your monitoring system.</p>
-<p><img alt="Sensor Builder" src="../images/web-interface/sensor-builder.webp" title="Sensor Builder with endpoint list and live JSON response" /></p>
-<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
-<p>The Docs section provides embedded reference documentation accessible directly from the agent, without needing an internet connection. This is useful in air-gapped environments.</p>
-<h2 id="monitoring-system-integration">Monitoring System Integration<a class="headerlink" href="#monitoring-system-integration" title="Permanent link">&para;</a></h2>
+<p>These changes are written to the multi-file configuration and picked up by the running agent, exactly as the <code>senhub-agent config set</code> command does.</p>
+<h2 id="monitoring-system-integration">Monitoring system integration<a class="headerlink" href="#monitoring-system-integration" title="Permanent link">&para;</a></h2>
 <h3 id="prtg-network-monitor">PRTG Network Monitor<a class="headerlink" href="#prtg-network-monitor" title="Permanent link">&para;</a></h3>
-<h4 id="sensor-type">Sensor Type<a class="headerlink" href="#sensor-type" title="Permanent link">&para;</a></h4>
+<h4 id="sensor-type">Sensor type<a class="headerlink" href="#sensor-type" title="Permanent link">&para;</a></h4>
 <p>Use the <strong>HTTP Data Advanced</strong> sensor type in PRTG. This sensor sends an HTTP request to the agent and parses the JSON response.</p>
-<h4 id="creating-a-prtg-sensor">Creating a PRTG Sensor<a class="headerlink" href="#creating-a-prtg-sensor" title="Permanent link">&para;</a></h4>
+<h4 id="creating-a-prtg-sensor">Creating a PRTG sensor<a class="headerlink" href="#creating-a-prtg-sensor" title="Permanent link">&para;</a></h4>
 <p>For each probe you want to monitor in PRTG:</p>
 <ol>
-<li>In PRTG, right-click a device and select <strong>Add Sensor</strong></li>
-<li>Search for <strong>HTTP Data Advanced</strong> and select it</li>
+<li>In PRTG, right-click a device and select <strong>Add Sensor</strong>.</li>
+<li>Search for <strong>HTTP Data Advanced</strong> and select it.</li>
 <li>Configure the sensor:</li>
-<li><strong>URL</strong>: <code>http://agent-server:8080/api/{key}/prtg/metrics/{probe-name}</code></li>
-<li><strong>Request Method</strong>: GET</li>
-<li><strong>Content Type</strong>: Leave default</li>
+<li><strong>URL</strong>: <code>http://agent-server:8080/api/{key}/prtg/metrics/{probe-name}</code>, as built by the Sensor URLs tab.</li>
+<li><strong>Request Method</strong>: GET.</li>
+<li><strong>Content Type</strong>: leave the default.</li>
 </ol>
 <p><img alt="PRTG HTTP Data Advanced sensor" src="../images/web-interface/prtg-sensor-setup.webp" title="PRTG sensor creation dialog pointing to the agent URL" /></p>
 <p>The agent returns metrics in the PRTG JSON format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"prtg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPU Usage"</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.2</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent"</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="p">},</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Memory Available"</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BytesMemory"</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="p">}</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"prtg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPU Usage"</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.2</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent"</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Memory Available"</span><span class="p">,</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BytesMemory"</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">}</span>
 </code></pre></div>
 <p>Each channel becomes a separate metric in PRTG with its own graph and alerting thresholds.</p>
-<h4 id="finding-available-probe-names">Finding Available Probe Names<a class="headerlink" href="#finding-available-probe-names" title="Permanent link">&para;</a></h4>
+<h4 id="finding-available-probe-names">Finding available probe names<a class="headerlink" href="#finding-available-probe-names" title="Permanent link">&para;</a></h4>
 <p>To see which probe names are available for PRTG sensors:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/prtg/probes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/prtg/probes
 </code></pre></div>
-<p>Or navigate to the Sensor Builder in the web dashboard.</p>
-<h4 id="filtering-metrics-by-tags">Filtering Metrics by Tags<a class="headerlink" href="#filtering-metrics-by-tags" title="Permanent link">&para;</a></h4>
-<p>Some probes (Citrix, NetScaler) return metrics for multiple components. You can filter by tags:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>http://agent-server:8080/api/{key}/prtg/metrics/{probe}?tags=vserver_name:vs_web
+<p>Or open the Sensor URLs tab of the HTTP output in the console.</p>
+<h4 id="filtering-metrics-by-tags">Filtering metrics by tags<a class="headerlink" href="#filtering-metrics-by-tags" title="Permanent link">&para;</a></h4>
+<p>Some probes (Citrix, NetScaler, SNMP) return metrics for multiple components. You can filter by tags:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>http://agent-server:8080/api/{key}/prtg/metrics/{probe}?tags=vserver_name:vs_web
 </code></pre></div>
-<p>This returns only the metrics for the virtual server named <code>vs_web</code>.</p>
-<h4 id="installing-prtg-value-lookups">Installing PRTG Value Lookups<a class="headerlink" href="#installing-prtg-value-lookups" title="Permanent link">&para;</a></h4>
-<p>SenHub Agent provides custom PRTG Lookup files that translate numeric status values into meaningful text (e.g., displaying "Up" instead of "1", "Down" instead of "0"):</p>
+<p>This returns only the metrics for the virtual server named <code>vs_web</code>. The Sensor URLs tab builds this filter from the tags the probe reports.</p>
+<h4 id="installing-prtg-value-lookups">Installing PRTG value lookups<a class="headerlink" href="#installing-prtg-value-lookups" title="Permanent link">&para;</a></h4>
+<p>SenHub Agent provides custom PRTG lookup files that translate numeric status values into meaningful text (for instance "Up" instead of "1"):</p>
 <ol>
 <li>
 <p>Download the lookups from the agent API:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-o<span class="w"> </span>senhub-prtg-lookups.zip<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/lookups/prtg
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-o<span class="w"> </span>senhub-prtg-lookups.zip<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/lookups/prtg
 </code></pre></div>
-   Or navigate to the Sensor Builder in the web dashboard and click the download button.</p>
+   Or use the download link of the Sensor URLs tab.</p>
 </li>
 <li>
 <p>Extract the ZIP file to the PRTG custom lookups directory on your PRTG server:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Expand-Archive</span> <span class="n">senhub-prtg-lookups</span><span class="p">.</span><span class="n">zip</span> <span class="p">`</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  <span class="n">-DestinationPath</span> <span class="s2">"C:\Program Files (x86)\PRTG Network Monitor\lookups\custom\"</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Expand-Archive</span> <span class="n">senhub-prtg-lookups</span><span class="p">.</span><span class="n">zip</span> <span class="p">`</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  <span class="n">-DestinationPath</span> <span class="s2">"C:\Program Files (x86)\PRTG Network Monitor\lookups\custom\"</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>In the PRTG web interface, go to <strong>Administration &gt; Administrative Tools</strong> and click <strong>Load Lookups and File Lists</strong></p>
+<p>In the PRTG web interface, go to <strong>Administration &gt; Administrative Tools</strong> and click <strong>Load Lookups and File Lists</strong>.</p>
 </li>
 </ol>
-<p>After loading the lookups, PRTG sensors will display human-readable status values instead of raw numbers.</p>
-<p>The ZIP file contains lookup files in the PRTG <code>.ovl</code> format:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>senhub-prtg-lookups.zip
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  netscaler.lbvserver.state.ovl
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  netscaler.service.state.ovl
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  netscaler.ha.node.state.ovl
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  ...
-</code></pre></div></p>
+<p>After loading the lookups, PRTG sensors display human-readable status values instead of raw numbers. The ZIP file contains lookup files in the PRTG <code>.ovl</code> format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>senhub-prtg-lookups.zip
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  netscaler.lbvserver.state.ovl
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  netscaler.service.state.ovl
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  netscaler.ha.node.state.ovl
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  ...
+</code></pre></div>
 <h3 id="nagios">Nagios<a class="headerlink" href="#nagios" title="Permanent link">&para;</a></h3>
 <p>For Nagios, use the Nagios-formatted endpoints:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>http://agent-server:8080/api/{key}/nagios/metrics/{probe-name}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>http://agent-server:8080/api/{key}/nagios/metrics/{probe-name}
 </code></pre></div>
 <p>The response follows the standard Nagios plugin output format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>OK - Probe has 12 metrics | cpu_usage=45.2% memory_available=8192MB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>OK - Probe has 12 metrics | cpu_usage=45.2% memory_available=8192MB
 </code></pre></div>
 <p>This can be used with <code>check_http</code> or a custom check command. Example Nagios command definition:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>define command {
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    command_name    check_senhub
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    command_line    /usr/lib/nagios/plugins/check_http -H $HOSTADDRESS$ -p 8080 -u '/api/{key}/nagios/metrics/$ARG1$'
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>define command {
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    command_name    check_senhub
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    command_line    /usr/lib/nagios/plugins/check_http -H $HOSTADDRESS$ -p 8080 -u '/api/{key}/nagios/metrics/$ARG1$'
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>}
 </code></pre></div>
 <p>To list available checks:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
 </code></pre></div>
-<h2 id="useful-api-queries">Useful API Queries<a class="headerlink" href="#useful-api-queries" title="Permanent link">&para;</a></h2>
-<h3 id="check-agent-health">Check Agent Health<a class="headerlink" href="#check-agent-health" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>http://agent-server:8080/health
+<h3 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h3>
+<p>Prometheus scrapes every probe from one URL, <code>/metrics</code> on the agent's port, with the agent key as bearer token. See <a href="../prometheus/">Prometheus</a>.</p>
+<h2 id="the-consoles-api">The console's API<a class="headerlink" href="#the-consoles-api" title="Permanent link">&para;</a></h2>
+<p>Everything the console does goes through the agent's JSON API, so scripts can do the same.</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/{key}/catalog/probes</code></td>
+<td>Probe types with their parameter schema, tier and licence verdict</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/config/probes</code></td>
+<td>Configured probes with their live state, interval, series count and last update</td>
+</tr>
+<tr>
+<td><code>POST /api/{key}/config/probes</code>, <code>PUT</code> and <code>DELETE</code> on <code>.../{name}</code></td>
+<td>Create, update, delete a probe fragment</td>
+</tr>
+<tr>
+<td><code>POST /api/{key}/config/validate</code>, <code>POST /api/{key}/config/test</code></td>
+<td>Check values against the schema; run one real collection</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/catalog/outputs</code></td>
+<td>Output types with their parameter schema</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/config/outputs</code></td>
+<td>Configured outputs with their state, delivery record and, for HTTP, the last poller per endpoint</td>
+</tr>
+<tr>
+<td><code>POST /api/{key}/config/outputs</code>, <code>PUT</code> and <code>DELETE</code> on <code>.../{name}</code></td>
+<td>Create (with <code>enabled: false</code> to write the file as <code>.disabled</code>), update, delete an output file</td>
+</tr>
+<tr>
+<td><code>POST /api/{key}/config/outputs/validate</code>, <code>POST /api/{key}/config/outputs/test</code></td>
+<td>Check values; test the connection step by step</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/config/settings</code>, <code>POST</code></td>
+<td>Port, bind address, licence</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/info/events</code></td>
+<td>The recent events shown on the Overview</td>
+</tr>
+</tbody>
+</table>
+<p>An update sends only what it changes. A <code>PUT</code> on an output without <code>enabled</code> keeps it in its current state, so a parameter edit never re-enables what an operator disabled. A stored secret the body does not mention is kept, for probes and outputs alike; to drop one, send its key with the value <code>null</code>, inside a block or a list of blocks as well.</p>
+<h2 id="useful-api-queries">Useful API queries<a class="headerlink" href="#useful-api-queries" title="Permanent link">&para;</a></h2>
+<h3 id="check-agent-health">Check agent health<a class="headerlink" href="#check-agent-health" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>http://agent-server:8080/health
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.80"</span><span class="p">,</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">"uptime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2h30m"</span><span class="p">,</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="nt">"probes_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5.5"</span><span class="p">,</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">"uptime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2h30m"</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">"probes_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
 </code></pre></div></p>
-<h3 id="list-configured-probes">List Configured Probes<a class="headerlink" href="#list-configured-probes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/probes
+<h3 id="list-collected-probes">List collected probes<a class="headerlink" href="#list-collected-probes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/probes
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">"probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CPU"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Citrix Production"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NetScaler LB"</span><span class="p">],</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">"probe_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">"CPU"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">"Memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="nt">"Citrix Production"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="nt">"NetScaler LB"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="nt">"total_metrics"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">"probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"core-sw-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mysql-prod"</span><span class="p">],</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nt">"probe_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">"core-sw-01"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nt">"mysql-prod"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">  </span><span class="nt">"total_metrics"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="p">}</span>
 </code></pre></div></p>
-<h3 id="view-system-information">View System Information<a class="headerlink" href="#view-system-information" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
+<h3 id="view-system-information">View system information<a class="headerlink" href="#view-system-information" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
 </code></pre></div>
-<p>Returns version, uptime, memory usage, CPU usage, cache statistics, and service health.</p>
-<h3 id="check-license-status">Check License Status<a class="headerlink" href="#check-license-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
+<p>Returns the host name, version, uptime, memory usage, CPU usage, cache statistics, service health and the outputs that are not running.</p>
+<h3 id="check-licence-status">Check licence status<a class="headerlink" href="#check-licence-status" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="nt">"tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="nt">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-30T23:59:59Z"</span><span class="p">,</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span><span class="nt">"days_remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="nt">"authorized_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"citrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"netscaler"</span><span class="p">,</span><span class="w"> </span><span class="s2">"redfish"</span><span class="p">],</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="nt">"free_tier_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"logicaldisk"</span><span class="p">,</span><span class="w"> </span><span class="s2">"network"</span><span class="p">]</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">"tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-30T23:59:59Z"</span><span class="p">,</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="nt">"days_remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="nt">"authorized_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"citrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"netscaler"</span><span class="p">,</span><span class="w"> </span><span class="s2">"redfish"</span><span class="p">],</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="nt">"free_tier_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"logicaldisk"</span><span class="p">,</span><span class="w"> </span><span class="s2">"network"</span><span class="p">]</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">}</span>
 </code></pre></div></p>
-<h3 id="view-active-configuration">View Active Configuration<a class="headerlink" href="#view-active-configuration" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/config/probes
+<h3 id="otlp-counters">OTLP counters<a class="headerlink" href="#otlp-counters" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/otlp
 </code></pre></div>
-<p>Returns the active probe configuration as read from <code>agent-config.yaml</code>.</p>
-<h3 id="cache-statistics">Cache Statistics<a class="headerlink" href="#cache-statistics" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/stats/cache
+<p>Returns the counters of the OTLP pipeline shown on the OTLP output page; see <a href="../otlp/#monitoring-the-otlp-pipeline">Monitoring the OTLP pipeline</a>.</p>
+<h3 id="cache-statistics">Cache statistics<a class="headerlink" href="#cache-statistics" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/stats/cache
 </code></pre></div>
-<p>Returns the number of cached metrics, memory usage, and TTL (time-to-live) of the cache.</p>
-<h3 id="clear-the-cache">Clear the Cache<a class="headerlink" href="#clear-the-cache" title="Permanent link">&para;</a></h3>
+<p>Returns the number of cached metrics, memory usage, and the cache's time to live.</p>
+<h3 id="clear-the-cache">Clear the cache<a class="headerlink" href="#clear-the-cache" title="Permanent link">&para;</a></h3>
 <p>If you need to force a fresh collection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/admin/cache/clear
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/admin/cache/clear
 </code></pre></div>
-<p>This clears all cached metrics. The next collection cycle will repopulate the cache.</p>
+<p>This clears all cached metrics. The next collection cycle repopulates the cache.</p>
 
 
 
@@ -4370,7 +4841,7 @@
         
         
           
-          <a href="../prometheus/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="../license/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
@@ -4396,6 +4867,11 @@
       © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
     </div>
   
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
   
 </div>
       
