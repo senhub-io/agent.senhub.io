@@ -3352,6 +3352,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.5.5/" class="md-nav__link">
         
   
@@ -3795,7 +3823,8 @@
 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
 <p>The Azure Container Apps probe reads the console log stream of an application hosted on Azure Container Apps: the standard output and standard error of every container of every replica, as they are written. It is the same stream <code>az containerapp logs show --follow</code> reads, obtained through Azure Resource Manager with an Entra ID app registration. Nothing changes in the container: no volume, no sidecar, no logging library.</p>
 <p>Lines ride the agent's log rail exactly like lines read by <code>filetail</code>: the same parsers (raw, regex, json, logfmt), the same multiline folding for stack traces, and the same outputs (OTLP logs first). Each record carries the application, revision, replica and container it came from, so one stream never blends into another.</p>
-<p>One probe instance follows one application; add an instance per application. Replicas that appear with a scale-out or a new revision are attached on the next scan; replicas that disappear are released.</p>
+<p>One probe instance follows one application; to follow several, declare one instance per application, each with its own <code>name</code> and its own <code>bookmark_path</code>. Two instances sharing a bookmark would overwrite each other's position and replay or skip lines after a restart. In the container image the <code>SENHUB_AZURE_APP</code> variable takes a comma-separated list and writes those instances for you, see <a href="../../container/#reading-azure-container-apps">Container image</a>.</p>
+<p>Replicas that appear with a scale-out or a new revision are attached on the next scan; replicas that disappear are released.</p>
 <p><strong>Collected data:</strong></p>
 <ul>
 <li>Every stdout and stderr line of every replica and container of the application, as log records</li>
