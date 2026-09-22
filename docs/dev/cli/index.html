@@ -1106,6 +1106,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zabbix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zabbix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3726,6 +3765,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
@@ -4395,6 +4490,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zabbix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zabbix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4844,20 +4978,153 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.5.4
 </code></pre></div>
 <p>Downloads and installs the specified version. Restart the service to apply.</p>
+<h2 id="zabbix">Zabbix<a class="headerlink" href="#zabbix" title="Permanent link">&para;</a></h2>
+<h3 id="zabbix-setup">zabbix setup<a class="headerlink" href="#zabbix-setup" title="Permanent link">&para;</a></h3>
+<p>Prepares a Zabbix server for the agent in one call: it imports the
+generated templates, creates the host group, and creates the
+autoregistration action that turns an agent's first contact into a host
+carrying them. After it, a machine needs the agent and two lines naming
+the server, with nothing typed in the Zabbix interface.</p>
+<p>It is an administrator command, run once. A deployed agent never holds
+an API token and still registers by itself. Every step is idempotent, so
+re-running it is safe and is also how a template is refreshed after an
+upgrade.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--token-file<span class="w"> </span>~/.zbx-token
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--token-file<span class="w"> </span>~/.zbx-token<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>--probe<span class="w"> </span>cpu<span class="w"> </span>--probe<span class="w"> </span>memory<span class="w"> </span>--probe<span class="w"> </span>veeam<span class="w"> </span>--group<span class="w"> </span><span class="s2">"SenHub agents"</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--dry-run
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--url URL</code></td>
+<td>Zabbix frontend, required. The agent pushes to the trapper port, not this one</td>
+</tr>
+<tr>
+<td><code>--token-file PATH</code></td>
+<td>File holding the API token. Preferred: a token on the command line is visible to every process on the machine</td>
+</tr>
+<tr>
+<td><code>--token VALUE</code></td>
+<td>API token. Read after <code>--token-file</code> and before <code>SENHUB_ZABBIX_TOKEN</code></td>
+</tr>
+<tr>
+<td><code>--probe TYPE</code></td>
+<td>Probe whose template is linked to every host that registers. Repeatable. Without it, the probes every machine runs: cpu, memory, network, logicaldisk, process</td>
+</tr>
+<tr>
+<td><code>--group NAME</code></td>
+<td>Host group the registering hosts join</td>
+</tr>
+<tr>
+<td><code>--metadata STRING</code></td>
+<td>Host metadata the autoregistration action matches on; must equal the agent's <code>host_metadata</code></td>
+</tr>
+<tr>
+<td><code>--action-name NAME</code></td>
+<td>Name of the autoregistration action it writes</td>
+</tr>
+<tr>
+<td><code>--discovery-delay INTERVAL</code></td>
+<td>Update interval of the discovery rules, which Zabbix sets to one hour by default</td>
+</tr>
+<tr>
+<td><code>--no-discovery-delay</code></td>
+<td>Leave the discovery rules as the template declares them</td>
+</tr>
+<tr>
+<td><code>--prefix PREFIX</code></td>
+<td>First segment of the item keys; must match the output's <code>key_prefix</code></td>
+</tr>
+<tr>
+<td><code>--version 6.0\|7.0</code></td>
+<td>Export format of the templates written</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td>Describe what it would do and change nothing. Works without a token</td>
+</tr>
+</tbody>
+</table>
+<p>The token is read from <code>--token-file</code>, then <code>--token</code>, then the
+environment variable <code>SENHUB_ZABBIX_TOKEN</code>.</p>
+<p><code>setup</code> also names any other enabled autoregistration action a
+registering agent would match. Zabbix runs every matching action, and
+two that both link templates do not merge: the second link fails,
+because Zabbix refuses two linked templates declaring one key, and it
+fails silently. The host then comes up with whichever set won and items
+that never fill. <code>setup</code> reports it rather than disabling it, since an
+action you wrote may do things it knows nothing about.</p>
+<p>Every template is imported, including the probes not named with
+<code>--probe</code>; only the linking is narrowed. A template linked to a host
+whose agent does not run that probe adds discovery rules that never
+answer, which is why the default is the universal set.</p>
+<h3 id="zabbix-template">zabbix template<a class="headerlink" href="#zabbix-template" title="Permanent link">&para;</a></h3>
+<p>Writes the Zabbix templates generated from the probe definitions, one
+file per probe type, without touching a server. Use it to read what will
+be imported, to keep the templates under version control, or to import
+them by a route of your own.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--out<span class="w"> </span>./templates
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--probe<span class="w"> </span>memory<span class="w"> </span>--platform<span class="w"> </span>linux
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--probe<span class="w"> </span>veeam<span class="w"> </span>--version<span class="w"> </span><span class="m">6</span>.0
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--probe TYPE</code></td>
+<td>Probe type to generate. Repeatable. Without it, every definition</td>
+</tr>
+<tr>
+<td><code>--platform linux\|windows</code></td>
+<td>Keep only the metrics that platform can produce. Without it, the definition whole</td>
+</tr>
+<tr>
+<td><code>--version 6.0\|7.0</code></td>
+<td>Export format, <code>7.0</code> by default</td>
+</tr>
+<tr>
+<td><code>--prefix PREFIX</code></td>
+<td>First segment of the item keys; must match the output's <code>key_prefix</code></td>
+</tr>
+<tr>
+<td><code>--delay INTERVAL</code></td>
+<td>Update interval of the item prototypes</td>
+</tr>
+<tr>
+<td><code>--out DIR</code></td>
+<td>Directory to write into. Without it, and with a single <code>--probe</code>, the template goes to standard output</td>
+</tr>
+</tbody>
+</table>
+<p>With <code>--out</code>, a small <strong>SenHub Agent</strong> template is written beside the
+others, carrying the agent's own items. Link it on every host: it is
+what turns the host's availability green.</p>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <h3 id="show-license-status">Show license status<a class="headerlink" href="#show-license-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
 </code></pre></div>
 <h3 id="activate-a-license">Activate a license<a class="headerlink" href="#activate-a-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
 </code></pre></div>
 <p>Validates the license and writes it to the <code>license.jwt</code> file next to
 <code>agent.yaml</code>. Restart the agent for the change to take effect. You can also
 simply place the <code>license.jwt</code> file next to the config yourself and restart —
 no CLI needed.</p>
 <h3 id="remove-license">Remove license<a class="headerlink" href="#remove-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
 </code></pre></div>
 <p>Reverts to the free tier: deletes <code>license.jwt</code> and clears any inline license. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs. Restart the agent for the change to take effect.</p>
 <h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
@@ -4953,11 +5220,6 @@ no CLI needed.</p>
       © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
     </div>
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       
