@@ -3433,6 +3433,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.5.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.5.4/" class="md-nav__link">
         
   
@@ -3899,15 +3955,27 @@
 </div>
 <h1 id="process-monitor">Process Monitor<a class="headerlink" href="#process-monitor" title="Permanent link">&para;</a></h1>
 <p>The <code>process</code> probe monitors the local process table, reporting per-process
-CPU utilization, memory usage, thread count, open file descriptors and uptime.
-An optional aggregate metric rolls up counts across processes sharing the same
-name. Equivalent to PRTG's "Top Processes" sensor.</p>
+CPU utilization, memory usage, thread count, open file descriptors and uptime,
+plus a roll-up over the processes sharing a name. Equivalent to PRTG's "Top
+Processes" sensor.</p>
+<div class="admonition important">
+<p class="admonition-title">Name what you want to watch</p>
+<p>Without a <code>filter</code>, the probe reports the <strong>roll-up only</strong>: the count, the
+CPU and the memory of each process name. The per-process detail appears
+when you narrow the scope with <code>by_name</code>, <code>by_user</code> or <code>top_n</code>.</p>
+<p>That is deliberate. A process id is part of the identity of a per-process
+series, so an unfiltered view creates a new set of series every time any
+program starts, and they are never fed again. Measured on a machine with
+837 processes, the unfiltered per-process view produced 4596 series and
+grew by about 50 a minute, indefinitely. The roll-up is stable, because a
+process name is.</p>
+</div>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-process.yaml — each file under probes.d/ is a YAML array of probes</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
 </code></pre></div>
-<p>Monitors all processes by default. Add a <code>filter</code> block to narrow the scope.</p>
+<p>Reports the per-name roll-up for every process by default. Add a <code>filter</code> block to narrow the scope and get the per-process detail.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
@@ -3932,7 +4000,7 @@ name. Equivalent to PRTG's "Top Processes" sensor.</p>
 <td><code>filter</code></td>
 <td>No</td>
 <td>-</td>
-<td>Narrows the process table; empty watches every process</td>
+<td>Narrows the process table and turns on the per-process detail; empty reports the per-name roll-up over every process</td>
 </tr>
 <tr>
 <td><code>filter.by_name</code></td>
@@ -3950,7 +4018,7 @@ name. Equivalent to PRTG's "Top Processes" sensor.</p>
 <td><code>filter.top_n</code></td>
 <td>No</td>
 <td><code>0</code></td>
-<td>Keep only the N processes with the highest CPU usage; 0 keeps all</td>
+<td>Keep only the N processes with the highest CPU usage; 0 keeps all. A positive value also turns on the per-process detail, because it bounds how many processes carry it</td>
 </tr>
 <tr>
 <td><code>aggregate</code></td>
@@ -4013,13 +4081,47 @@ name. Equivalent to PRTG's "Top Processes" sensor.</p>
 <td>{process}</td>
 <td>Aggregate process count per name (when <code>aggregate.enabled: true</code>)</td>
 </tr>
+<tr>
+<td><code>senhub.system.kernel.max_files</code></td>
+<td>{file}</td>
+<td>Ceiling the kernel puts on open file descriptors for the whole machine, which the per-process counts are measured against (Linux only)</td>
+</tr>
+<tr>
+<td><code>senhub.system.kernel.max_processes</code></td>
+<td>{process}</td>
+<td>Highest process id the kernel will assign, which is the ceiling on how many processes can exist at once (Linux only)</td>
+</tr>
+<tr>
+<td><code>senhub.system.users.count</code></td>
+<td>{session}</td>
+<td>Open login sessions, one per login rather than per account: four terminals on the same account count four</td>
+</tr>
 </tbody>
 </table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>On Linux, the probe reads from <code>/proc</code>. Root privilege is required only if monitoring processes owned by other users.</li>
 <li><code>process.open_file_descriptors</code> is Linux-only; not emitted on Windows.</li>
-<li><code>filter.top_n</code> is applied after all other filters. It is useful for "monitor the 5 most CPU-hungry processes" scenarios.</li>
+<li>The three machine-wide values above belong to the machine, not to a
+  process, so they carry no <code>process.name</code> and are reported once
+  whatever the filter selects.</li>
+<li><code>senhub.system.users.count</code> reads the login accounting file on Linux
+  and the terminal services sessions on Windows, where a session whose
+  client is detached still counts. A machine whose libc is musl keeps no
+  such file, so the value is absent rather than zero — which is the case
+  inside a container built on Alpine.</li>
+<li><strong>Naming processes gives the per-process detail, and keeps it.</strong> A
+  filter reports one series per process, identified by its process id,
+  beside the roll-up over the processes sharing a name — you get both.
+  A process id is not stable: when a named program restarts, its
+  workers come back under new ones. On a sink that creates what it is
+  sent, Zabbix among them, the items of the processes that are gone
+  stay on the host and stop being fed. That is what per-process
+  monitoring is, and the filter is what bounds it: only the programs
+  you named can produce those series. An unfiltered view reports the
+  roll-up alone for that reason.</li>
+<li><code>filter.top_n</code> is applied after all other filters. It is useful for "monitor the 5 most CPU-hungry processes" scenarios, and it turns on the per-process detail because it bounds how many processes can carry it.</li>
+<li>The processes you name with <code>by_name</code> or <code>by_user</code> also become entities on the topology graph, with an edge to their host. A <code>top_n</code> or unfiltered view does not, because its membership changes every cycle.</li>
 </ul>
 
 
@@ -4099,11 +4201,6 @@ name. Equivalent to PRTG's "Top Processes" sensor.</p>
       © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
     </div>
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       

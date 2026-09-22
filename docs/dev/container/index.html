@@ -474,10 +474,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reading-an-azure-container-app" class="md-nav__link">
+  <a href="#reading-azure-container-apps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading an Azure Container App
+        Reading Azure Container Apps
       
     </span>
   </a>
@@ -3503,6 +3503,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
@@ -3961,10 +4017,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reading-an-azure-container-app" class="md-nav__link">
+  <a href="#reading-azure-container-apps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading an Azure Container App
+        Reading Azure Container Apps
       
     </span>
   </a>
@@ -4140,7 +4196,7 @@ feature they configure is wanted.</p>
 <td><code>SENHUB_PROBES</code></td>
 <td>No</td>
 <td>-</td>
-<td>YAML of the probes to run, as a <code>probes.d</code> file would hold it</td>
+<td>YAML of the probes to run, as a <code>probes.d</code> file would hold it. Not merged with <code>SENHUB_AZURE_APP</code>, see <a href="#reading-azure-container-apps">Reading Azure Container Apps</a></td>
 </tr>
 <tr>
 <td><code>SENHUB_OUTPUT</code></td>
@@ -4192,13 +4248,13 @@ of its own when the same directory serves several instances: see
 <p>Whichever you choose, the configuration is checked before the agent
 starts: a container whose variables produce a file the agent would
 refuse stops with the reason rather than restarting in a loop.</p>
-<h3 id="reading-an-azure-container-app">Reading an Azure Container App<a class="headerlink" href="#reading-an-azure-container-app" title="Permanent link">&para;</a></h3>
+<h3 id="reading-azure-container-apps">Reading Azure Container Apps<a class="headerlink" href="#reading-azure-container-apps" title="Permanent link">&para;</a></h3>
 <p>This is a shorthand for the fragment <code>SENHUB_PROBES</code> would carry, kept
 because it is the probe this image is most often asked for. Set the
-application and its credentials, and the agent reads the console log
-stream of that Container App. Setting <code>SENHUB_AZURE_APP</code> without the
-rest stops the container with the list of what is missing, rather than
-starting half configured.</p>
+applications and their credentials, and the agent reads the console log
+stream of each one. Setting <code>SENHUB_AZURE_APP</code> without the rest stops
+the container with the list of what is missing, rather than starting
+half configured.</p>
 <table>
 <thead>
 <tr>
@@ -4209,7 +4265,7 @@ starting half configured.</p>
 <tbody>
 <tr>
 <td><code>SENHUB_AZURE_APP</code></td>
-<td>Name of the Container App to read</td>
+<td>Names of the Container Apps to read, comma-separated</td>
 </tr>
 <tr>
 <td><code>SENHUB_AZURE_TENANT_ID</code></td>
@@ -4236,6 +4292,26 @@ starting half configured.</p>
 <p>None of these credentials is written to a file: the configuration holds
 a reference and the agent reads the value from the environment at every
 start.</p>
+<p>One probe instance follows one application, so <code>SENHUB_AZURE_APP</code> takes
+a list and writes one instance per name, each with its own bookmark:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">SENHUB_AZURE_APP</span><span class="p">:</span><span class="w"> </span><span class="s">"oltp,billing,web"</span>
+</code></pre></div>
+<p>The applications must share the credentials, the subscription and the
+resource group, since those are one variable each. An application in
+another subscription or another resource group belongs to another
+collector. Spaces around a name are absorbed, a name given twice is
+declared once, and a name that is not a Container App name stops the
+container.</p>
+<p>The credentials, and so the collector, are what this list is bounded
+by, not a limit of the probe. How many applications one agent can
+follow before the Azure control plane refuses its scans is measured
+under <a href="../probes/azure_container_apps/#requirements">Requirements</a>.</p>
+<p><code>SENHUB_AZURE_APP</code> and <code>SENHUB_PROBES</code> write two different files and
+are <strong>not merged</strong>. An application named in both is declared twice, and
+every line of it is read twice, counted twice by whatever ingests it.
+The entrypoint says so on
+startup when both variables are set; name each application in one place
+only.</p>
 <p>The role behind the app registration needs four actions, and <code>Reader</code>
 is not enough. See <a href="../probes/azure_container_apps/">Azure Container Apps</a>.</p>
 <h2 id="bringing-your-own-configuration">Bringing your own configuration<a class="headerlink" href="#bringing-your-own-configuration" title="Permanent link">&para;</a></h2>
@@ -4243,10 +4319,10 @@ is not enough. See <a href="../probes/azure_container_apps/">Azure Container App
 nothing: your files win and every <code>SENHUB_*</code> variable is ignored. The
 entrypoint says which of the two it did on startup, so a container that
 ignores your variables tells you why.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-v<span class="w"> </span>/srv/senhub/conf:/etc/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.5.5-beta
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-v<span class="w"> </span>/srv/senhub/conf:/etc/senhub-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.5.5-beta
 </code></pre></div>
 <p>Your configuration wins completely, and that includes the agent key
 under <code>agent: key:</code>. The entrypoint does not touch it, so a
@@ -4258,8 +4334,8 @@ data.</p>
 <p>Two ways out, both cheap. Give each instance its own value through the
 environment, which works because substitution is applied to the whole
 file before it is parsed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">agent</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"${env:SENHUB_AGENT_KEY}"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">agent</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"${env:SENHUB_AGENT_KEY}"</span>
 </code></pre></div>
 <p>Or leave the key out of the shared configuration entirely and let each
 instance generate its own, kept in its own state volume.</p>
@@ -4358,11 +4434,6 @@ scheduler the agent is up.</p>
       © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
     </div>
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       

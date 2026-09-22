@@ -10,31 +10,27 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/memcached/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/zabbix/">
       
       
-        <link rel="prev" href="../influxdb/">
-      
-      
-        <link rel="next" href="../apache/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/favicon.svg">
+      <link rel="icon" href="../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Memcached - SenHub Agent</title>
+        <title>Zabbix output (preview) - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +49,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#memcached" class="md-skip">
+        <a href="#zabbix-output-preview" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +98,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Memcached
+              Zabbix output (preview)
             
           </span>
         </div>
@@ -239,7 +235,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -266,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -293,7 +289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../presentation/" class="md-nav__link">
+      <a href="../presentation/" class="md-nav__link">
         
   
   
@@ -320,7 +316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -347,7 +343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../container/" class="md-nav__link">
+      <a href="../container/" class="md-nav__link">
         
   
   
@@ -374,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -401,7 +397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secret-store/" class="md-nav__link">
+      <a href="../secret-store/" class="md-nav__link">
         
   
   
@@ -428,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http-https/" class="md-nav__link">
+      <a href="../http-https/" class="md-nav__link">
         
   
   
@@ -455,7 +451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web-interface/" class="md-nav__link">
+      <a href="../web-interface/" class="md-nav__link">
         
   
   
@@ -534,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/" class="md-nav__link">
+      <a href="../license/" class="md-nav__link">
         
   
   
@@ -562,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-fr/" class="md-nav__link">
+      <a href="../license/agreement-fr/" class="md-nav__link">
         
   
   
@@ -590,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-en/" class="md-nav__link">
+      <a href="../license/agreement-en/" class="md-nav__link">
         
   
   
@@ -618,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/third-party/" class="md-nav__link">
+      <a href="../license/third-party/" class="md-nav__link">
         
   
   
@@ -705,7 +701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/" class="md-nav__link">
+      <a href="../prometheus/" class="md-nav__link">
         
   
   
@@ -733,7 +729,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -768,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -795,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../otlp/" class="md-nav__link">
+      <a href="../otlp/" class="md-nav__link">
         
   
   
@@ -819,8 +815,6 @@
       
   
   
-    
-  
   
   
     
@@ -833,11 +827,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
         
           
           <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
@@ -858,7 +852,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             
@@ -876,7 +870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../probes/" class="md-nav__link">
         
   
   
@@ -904,7 +898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cpu/" class="md-nav__link">
+      <a href="../probes/cpu/" class="md-nav__link">
         
   
   
@@ -932,7 +926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory/" class="md-nav__link">
+      <a href="../probes/memory/" class="md-nav__link">
         
   
   
@@ -960,7 +954,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../network/" class="md-nav__link">
+      <a href="../probes/network/" class="md-nav__link">
         
   
   
@@ -988,7 +982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logicaldisk/" class="md-nav__link">
+      <a href="../probes/logicaldisk/" class="md-nav__link">
         
   
   
@@ -1016,7 +1010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linux-logs/" class="md-nav__link">
+      <a href="../probes/linux-logs/" class="md-nav__link">
         
   
   
@@ -1044,7 +1038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-eventlog/" class="md-nav__link">
+      <a href="../probes/windows-eventlog/" class="md-nav__link">
         
   
   
@@ -1072,7 +1066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../filetail/" class="md-nav__link">
+      <a href="../probes/filetail/" class="md-nav__link">
         
   
   
@@ -1100,7 +1094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process/" class="md-nav__link">
+      <a href="../probes/process/" class="md-nav__link">
         
   
   
@@ -1128,7 +1122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../systemd/" class="md-nav__link">
+      <a href="../probes/systemd/" class="md-nav__link">
         
   
   
@@ -1156,7 +1150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-services/" class="md-nav__link">
+      <a href="../probes/windows-services/" class="md-nav__link">
         
   
   
@@ -1184,7 +1178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../chrony/" class="md-nav__link">
+      <a href="../probes/chrony/" class="md-nav__link">
         
   
   
@@ -1212,7 +1206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ntp/" class="md-nav__link">
+      <a href="../probes/ntp/" class="md-nav__link">
         
   
   
@@ -1240,7 +1234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../os-updates/" class="md-nav__link">
+      <a href="../probes/os-updates/" class="md-nav__link">
         
   
   
@@ -1268,7 +1262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smart/" class="md-nav__link">
+      <a href="../probes/smart/" class="md-nav__link">
         
   
   
@@ -1296,7 +1290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ipmi/" class="md-nav__link">
+      <a href="../probes/ipmi/" class="md-nav__link">
         
   
   
@@ -1324,7 +1318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nvidia/" class="md-nav__link">
+      <a href="../probes/nvidia/" class="md-nav__link">
         
   
   
@@ -1352,7 +1346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../modbus/" class="md-nav__link">
+      <a href="../probes/modbus/" class="md-nav__link">
         
   
   
@@ -1380,7 +1374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../icmp-check/" class="md-nav__link">
+      <a href="../probes/icmp-check/" class="md-nav__link">
         
   
   
@@ -1408,7 +1402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http-check/" class="md-nav__link">
+      <a href="../probes/http-check/" class="md-nav__link">
         
   
   
@@ -1436,7 +1430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tcp-dial/" class="md-nav__link">
+      <a href="../probes/tcp-dial/" class="md-nav__link">
         
   
   
@@ -1464,7 +1458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dns-latency/" class="md-nav__link">
+      <a href="../probes/dns-latency/" class="md-nav__link">
         
   
   
@@ -1492,7 +1486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-poll/" class="md-nav__link">
+      <a href="../probes/snmp-poll/" class="md-nav__link">
         
   
   
@@ -1520,7 +1514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-trap/" class="md-nav__link">
+      <a href="../probes/snmp-trap/" class="md-nav__link">
         
   
   
@@ -1548,7 +1542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../otlp-receiver/" class="md-nav__link">
+      <a href="../probes/otlp-receiver/" class="md-nav__link">
         
   
   
@@ -1576,7 +1570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus-scrape/" class="md-nav__link">
+      <a href="../probes/prometheus-scrape/" class="md-nav__link">
         
   
   
@@ -1604,7 +1598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exec/" class="md-nav__link">
+      <a href="../probes/exec/" class="md-nav__link">
         
   
   
@@ -1632,7 +1626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../citrix/" class="md-nav__link">
+      <a href="../probes/citrix/" class="md-nav__link">
         
   
   
@@ -1660,7 +1654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netscaler/" class="md-nav__link">
+      <a href="../probes/netscaler/" class="md-nav__link">
         
   
   
@@ -1688,7 +1682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redfish/" class="md-nav__link">
+      <a href="../probes/redfish/" class="md-nav__link">
         
   
   
@@ -1716,7 +1710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../powerstore/" class="md-nav__link">
+      <a href="../probes/powerstore/" class="md-nav__link">
         
   
   
@@ -1744,7 +1738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ibmi/" class="md-nav__link">
+      <a href="../probes/ibmi/" class="md-nav__link">
         
   
   
@@ -1772,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql_ha/" class="md-nav__link">
+      <a href="../probes/mssql_ha/" class="md-nav__link">
         
   
   
@@ -1800,7 +1794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle_enterprise/" class="md-nav__link">
+      <a href="../probes/oracle_enterprise/" class="md-nav__link">
         
   
   
@@ -1828,7 +1822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv_ha/" class="md-nav__link">
+      <a href="../probes/hyperv_ha/" class="md-nav__link">
         
   
   
@@ -1856,7 +1850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vsphere_ha/" class="md-nav__link">
+      <a href="../probes/vsphere_ha/" class="md-nav__link">
         
   
   
@@ -1884,7 +1878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_hybrid/" class="md-nav__link">
+      <a href="../probes/ad_hybrid/" class="md-nav__link">
         
   
   
@@ -1912,7 +1906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exchange_online/" class="md-nav__link">
+      <a href="../probes/exchange_online/" class="md-nav__link">
         
   
   
@@ -1940,7 +1934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_apps/" class="md-nav__link">
+      <a href="../probes/azure_container_apps/" class="md-nav__link">
         
   
   
@@ -1968,7 +1962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../syslog/" class="md-nav__link">
+      <a href="../probes/syslog/" class="md-nav__link">
         
   
   
@@ -1996,7 +1990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../event/" class="md-nav__link">
+      <a href="../probes/event/" class="md-nav__link">
         
   
   
@@ -2024,7 +2018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-webapp/" class="md-nav__link">
+      <a href="../probes/ping-webapp/" class="md-nav__link">
         
   
   
@@ -2052,7 +2046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../load-webapp/" class="md-nav__link">
+      <a href="../probes/load-webapp/" class="md-nav__link">
         
   
   
@@ -2080,7 +2074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-gateway/" class="md-nav__link">
+      <a href="../probes/ping-gateway/" class="md-nav__link">
         
   
   
@@ -2108,7 +2102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wifi-signal-strength/" class="md-nav__link">
+      <a href="../probes/wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -2136,7 +2130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../veeam/" class="md-nav__link">
+      <a href="../probes/veeam/" class="md-nav__link">
         
   
   
@@ -2164,7 +2158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../probes/mysql/" class="md-nav__link">
         
   
   
@@ -2192,7 +2186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../postgresql/" class="md-nav__link">
+      <a href="../probes/postgresql/" class="md-nav__link">
         
   
   
@@ -2220,7 +2214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql/" class="md-nav__link">
+      <a href="../probes/mssql/" class="md-nav__link">
         
   
   
@@ -2248,7 +2242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mongodb/" class="md-nav__link">
+      <a href="../probes/mongodb/" class="md-nav__link">
         
   
   
@@ -2276,7 +2270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle/" class="md-nav__link">
+      <a href="../probes/oracle/" class="md-nav__link">
         
   
   
@@ -2304,7 +2298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redis/" class="md-nav__link">
+      <a href="../probes/redis/" class="md-nav__link">
         
   
   
@@ -2332,7 +2326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cassandra/" class="md-nav__link">
+      <a href="../probes/cassandra/" class="md-nav__link">
         
   
   
@@ -2360,7 +2354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../couchdb/" class="md-nav__link">
+      <a href="../probes/couchdb/" class="md-nav__link">
         
   
   
@@ -2388,7 +2382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clickhouse/" class="md-nav__link">
+      <a href="../probes/clickhouse/" class="md-nav__link">
         
   
   
@@ -2416,7 +2410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../elasticsearch/" class="md-nav__link">
+      <a href="../probes/elasticsearch/" class="md-nav__link">
         
   
   
@@ -2444,7 +2438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../opensearch/" class="md-nav__link">
+      <a href="../probes/opensearch/" class="md-nav__link">
         
   
   
@@ -2472,7 +2466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../solr/" class="md-nav__link">
+      <a href="../probes/solr/" class="md-nav__link">
         
   
   
@@ -2500,7 +2494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../influxdb/" class="md-nav__link">
+      <a href="../probes/influxdb/" class="md-nav__link">
         
   
   
@@ -2525,37 +2519,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Memcached
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../probes/memcached/" class="md-nav__link">
         
   
   
@@ -2571,70 +2538,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2647,7 +2550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../apache/" class="md-nav__link">
+      <a href="../probes/apache/" class="md-nav__link">
         
   
   
@@ -2675,7 +2578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx/" class="md-nav__link">
+      <a href="../probes/nginx/" class="md-nav__link">
         
   
   
@@ -2703,7 +2606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../haproxy/" class="md-nav__link">
+      <a href="../probes/haproxy/" class="md-nav__link">
         
   
   
@@ -2731,7 +2634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy/" class="md-nav__link">
+      <a href="../probes/envoy/" class="md-nav__link">
         
   
   
@@ -2759,7 +2662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../php-fpm/" class="md-nav__link">
+      <a href="../probes/php-fpm/" class="md-nav__link">
         
   
   
@@ -2787,7 +2690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../varnish/" class="md-nav__link">
+      <a href="../probes/varnish/" class="md-nav__link">
         
   
   
@@ -2815,7 +2718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tomcat/" class="md-nav__link">
+      <a href="../probes/tomcat/" class="md-nav__link">
         
   
   
@@ -2843,7 +2746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wildfly/" class="md-nav__link">
+      <a href="../probes/wildfly/" class="md-nav__link">
         
   
   
@@ -2871,7 +2774,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kafka/" class="md-nav__link">
+      <a href="../probes/kafka/" class="md-nav__link">
         
   
   
@@ -2899,7 +2802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
+      <a href="../probes/rabbitmq/" class="md-nav__link">
         
   
   
@@ -2927,7 +2830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../activemq/" class="md-nav__link">
+      <a href="../probes/activemq/" class="md-nav__link">
         
   
   
@@ -2955,7 +2858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nats/" class="md-nav__link">
+      <a href="../probes/nats/" class="md-nav__link">
         
   
   
@@ -2983,7 +2886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pulsar/" class="md-nav__link">
+      <a href="../probes/pulsar/" class="md-nav__link">
         
   
   
@@ -3011,7 +2914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker/" class="md-nav__link">
+      <a href="../probes/docker/" class="md-nav__link">
         
   
   
@@ -3039,7 +2942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/" class="md-nav__link">
+      <a href="../probes/kubernetes/" class="md-nav__link">
         
   
   
@@ -3067,7 +2970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../swarm/" class="md-nav__link">
+      <a href="../probes/swarm/" class="md-nav__link">
         
   
   
@@ -3095,7 +2998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../proxmox/" class="md-nav__link">
+      <a href="../probes/proxmox/" class="md-nav__link">
         
   
   
@@ -3123,7 +3026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv/" class="md-nav__link">
+      <a href="../probes/hyperv/" class="md-nav__link">
         
   
   
@@ -3151,7 +3054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ceph/" class="md-nav__link">
+      <a href="../probes/ceph/" class="md-nav__link">
         
   
   
@@ -3179,7 +3082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../consul/" class="md-nav__link">
+      <a href="../probes/consul/" class="md-nav__link">
         
   
   
@@ -3207,7 +3110,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zookeeper/" class="md-nav__link">
+      <a href="../probes/zookeeper/" class="md-nav__link">
         
   
   
@@ -3235,7 +3138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jenkins/" class="md-nav__link">
+      <a href="../probes/jenkins/" class="md-nav__link">
         
   
   
@@ -3263,7 +3166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unifi/" class="md-nav__link">
+      <a href="../probes/unifi/" class="md-nav__link">
         
   
   
@@ -3298,7 +3201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/" class="md-nav__link">
+      <a href="../troubleshooting/" class="md-nav__link">
         
   
   
@@ -3377,7 +3280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/" class="md-nav__link">
+      <a href="../whats-new/" class="md-nav__link">
         
   
   
@@ -3405,7 +3308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/next/" class="md-nav__link">
+      <a href="../whats-new/next/" class="md-nav__link">
         
   
   
@@ -3433,7 +3336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.6/" class="md-nav__link">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
         
   
   
@@ -3461,7 +3364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.5/" class="md-nav__link">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
         
   
   
@@ -3489,7 +3392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+      <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
   
@@ -3517,7 +3420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.3/" class="md-nav__link">
+      <a href="../whats-new/0.5.3/" class="md-nav__link">
         
   
   
@@ -3545,7 +3448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.2/" class="md-nav__link">
+      <a href="../whats-new/0.5.2/" class="md-nav__link">
         
   
   
@@ -3573,7 +3476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+      <a href="../whats-new/0.5.1/" class="md-nav__link">
         
   
   
@@ -3601,7 +3504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+      <a href="../whats-new/0.5.0/" class="md-nav__link">
         
   
   
@@ -3629,7 +3532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.2/" class="md-nav__link">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
         
   
   
@@ -3657,7 +3560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.1/" class="md-nav__link">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
         
   
   
@@ -3685,7 +3588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.0/" class="md-nav__link">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
         
   
   
@@ -3713,7 +3616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.3.2/" class="md-nav__link">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
         
   
   
@@ -3741,7 +3644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+      <a href="../whats-new/0.2.3/" class="md-nav__link">
         
   
   
@@ -3769,7 +3672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.2/" class="md-nav__link">
+      <a href="../whats-new/0.2.2/" class="md-nav__link">
         
   
   
@@ -3797,7 +3700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.1/" class="md-nav__link">
+      <a href="../whats-new/0.2.1/" class="md-nav__link">
         
   
   
@@ -3825,7 +3728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.0/" class="md-nav__link">
+      <a href="../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -3880,10 +3783,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick start
+        Configuration
       
     </span>
   </a>
@@ -3891,10 +3794,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#item-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        Item keys
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metrics-relayed-from-another-sender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics relayed from another sender
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics relayed from another sender">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-standard-conventions-arrive-with-a-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The standard conventions arrive with a template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templates-and-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templates and discovery
       
     </span>
   </a>
@@ -3902,10 +3850,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#passive-polling" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        Passive polling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Passive polling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encrypting-the-polled-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encrypting the polled port
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-hosts-inventory-fills-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The host's inventory fills itself
       
     </span>
   </a>
@@ -3913,10 +3889,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
+  <a href="#one-template-set-per-platform" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operational notes
+        One template set per platform
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-agents-own-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent's own items
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#through-a-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Through a proxy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoregistration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autoregistration
       
     </span>
   </a>
@@ -3940,7 +3949,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/memcached.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/zabbix.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3948,148 +3957,423 @@
   
 
 
-<p><img src="../../assets/probe-logos/memcached.svg" alt="" class="probe-page-logo probe-page-logo-si"></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p><strong>License: Free</strong> — part of the universal collection tier.</p>
+<h1 id="zabbix-output-preview">Zabbix output (preview)<a class="headerlink" href="#zabbix-output-preview" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Preview</p>
+<p>The Zabbix output is being built during the 0.6.0 cycle and is not
+supported yet. It is proven against Zabbix 7.0 and 8.0 on a Linux
+and a Windows host, templates and discovery included, but it has not
+run long enough anywhere to be called supported.</p>
 </div>
-<h1 id="memcached">Memcached<a class="headerlink" href="#memcached" title="Permanent link">&para;</a></h1>
-<p>The <code>memcached</code> probe monitors a Memcached server via the TCP text protocol
-(<code>stats</code> command), reporting connection counts, item counts, memory usage,
-cache hit/miss ratios, command throughput and eviction counters.</p>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-memcached.yaml — each file under probes.d/ is a YAML array of probes</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memcached</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">memcached</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">11211</span>
+<p>The <code>zabbix</code> output makes the agent a native <strong>Zabbix active agent</strong>: it
+connects out to a Zabbix server or proxy on port 10051, registers the host
+through Zabbix autoregistration, asks which items the server wants for it,
+and pushes their latest values in batches. Nothing listens on the agent
+side; PRTG, Nagios and Prometheus keep working next to it.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># strategies.d/20-zabbix.yaml</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s">"web-01"</span><span class="w">            </span><span class="c1"># default: the machine's host name</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">host_metadata</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-agent"</span><span class="w"> </span><span class="c1"># matched by the autoregistration action</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span><span class="w">                 </span><span class="c1"># push cadence</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">refresh_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120s</span><span class="w">        </span><span class="c1"># item list refresh</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">heartbeat_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">key_prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">server_name</span><span class="p">:</span><span class="w"> </span><span class="s">""</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">insecure_skip_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<!-- schema:params:start -->
-<!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Must set</th>
 <th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>host</code></td>
-<td>In practice</td>
-<td><code>localhost</code></td>
-<td>Server hostname or address</td>
+<td><code>server</code></td>
+<td>required</td>
+<td>Zabbix server or proxy, <code>host:port</code>; <code>10051</code> when the port is omitted. Several addresses separated by commas name a proxy group (see below).</td>
 </tr>
 <tr>
-<td><code>port</code></td>
-<td>In practice</td>
-<td><code>11211</code></td>
-<td>Server TCP port</td>
+<td><code>hostname</code></td>
+<td>machine host name</td>
+<td>Name this host registers under.</td>
+</tr>
+<tr>
+<td><code>host_metadata</code></td>
+<td><code>senhub-agent</code></td>
+<td>Sent with every check-list request; the autoregistration action matches on it to choose host groups and templates. The agent appends its operating system, so <code>senhub-agent linux</code>, which is how the per-platform actions tell hosts apart. Limited to 2034 bytes by Zabbix.</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
-<td>No</td>
-<td><code>60</code></td>
-<td>Seconds between collections</td>
+<td><code>60s</code></td>
+<td>Push cadence of the collected values.</td>
+</tr>
+<tr>
+<td><code>refresh_interval</code></td>
+<td><code>120s</code></td>
+<td>How often the item list is asked again.</td>
+</tr>
+<tr>
+<td><code>heartbeat_interval</code></td>
+<td><code>60s</code></td>
+<td>Heartbeat cadence; the server declares the host unavailable after twice that.</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
-<td>No</td>
-<td><code>5</code></td>
-<td>Connection and command timeout in seconds</td>
+<td><code>10s</code></td>
+<td>Bound on one connection, request and reply.</td>
 </tr>
 <tr>
-<td><code>instance_name</code></td>
-<td>No</td>
-<td>-</td>
-<td>Stable identity of this server instead of host:port</td>
+<td><code>key_prefix</code></td>
+<td><code>senhub</code></td>
+<td>First segment of every item key.</td>
+</tr>
+<tr>
+<td><code>passive.enabled</code></td>
+<td><code>false</code></td>
+<td>Answer the server's polls on the passive port (see below).</td>
+</tr>
+<tr>
+<td><code>passive.bind_address</code></td>
+<td><code>0.0.0.0</code></td>
+<td>Address the passive listener binds to.</td>
+</tr>
+<tr>
+<td><code>passive.port</code></td>
+<td><code>10050</code></td>
+<td>Port the passive listener binds to; sent to the server so autoregistration creates the agent interface on it.</td>
+</tr>
+<tr>
+<td><code>passive.allow</code></td>
+<td>server addresses</td>
+<td>Addresses or CIDR ranges allowed to poll the passive port.</td>
+</tr>
+<tr>
+<td><code>passive.advertise</code></td>
+<td>source address</td>
+<td>Address or name the server should poll, sent with the registration.</td>
+</tr>
+<tr>
+<td><code>passive.tls.enabled</code></td>
+<td><code>false</code></td>
+<td>Encrypt what the server polls. Needs <code>cert_file</code> and <code>key_file</code>.</td>
+</tr>
+<tr>
+<td><code>passive.tls.cert_file</code>, <code>passive.tls.key_file</code></td>
+<td></td>
+<td>Certificate the agent presents to whoever polls it, and its key.</td>
+</tr>
+<tr>
+<td><code>passive.tls.ca_file</code></td>
+<td></td>
+<td>Authority that signed the server's certificate. When set, a poller must present one it signed.</td>
+</tr>
+<tr>
+<td><code>tls.enabled</code></td>
+<td><code>false</code></td>
+<td>Encrypt the connection with TLS (certificate).</td>
+</tr>
+<tr>
+<td><code>tls.ca_file</code></td>
+<td></td>
+<td>CA certificate that signed the server's certificate.</td>
+</tr>
+<tr>
+<td><code>tls.cert_file</code>, <code>tls.key_file</code></td>
+<td></td>
+<td>Client certificate and key, both or none.</td>
+</tr>
+<tr>
+<td><code>tls.server_name</code></td>
+<td>server host</td>
+<td>Name expected in the server's certificate.</td>
+</tr>
+<tr>
+<td><code>tls.insecure_skip_verify</code></td>
+<td><code>false</code></td>
+<td>Skip the server certificate check.</td>
 </tr>
 </tbody>
 </table>
-<!-- schema:params:end -->
-
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<p>Zabbix pre-shared keys (PSK) are not supported: Go's TLS library has no
+PSK cipher suites. Encrypted autoregistration, which Zabbix only offers
+with PSK, is therefore not available; register in clear or through a
+local proxy, then encrypt the data connection with a certificate.</p>
+<h2 id="item-keys">Item keys<a class="headerlink" href="#item-keys" title="Permanent link">&para;</a></h2>
+<p>Every series is sent under a key built from the probe's definition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;key_prefix&gt;.&lt;metric&gt;[&lt;probe name&gt;,&lt;dimension&gt;,...,&lt;static attribute&gt;,...]
+</code></pre></div>
+<p>The metric is the OTel name of the series (<code>system.cpu.utilization</code>,
+<code>senhub.veeam.job.status</code>), so it is called the same thing here, on the
+Prometheus endpoint and on the OTLP output. The dimensions are the
+metric's <code>multi_instance_labels</code>, in the order the definition lists them;
+a metric that names its own replaces the probe's rather than adding to
+them, so a Windows drive metric carries the drive letter alone and not
+the device and mount point it does not have.</p>
+<p>The static attributes are the values of the metric's <code>otel.attributes</code>,
+in attribute-key order: they tell apart the internal metrics that share
+one OTel name, so on a probe named <code>memory</code> the used memory is
+<code>senhub.system.memory.usage[memory,used]</code> and the free memory
+<code>senhub.system.memory.usage[memory,free]</code>, while a filesystem series
+carries its device and mount point first:
+<code>senhub.system.filesystem.usage[logicaldisk,/dev/sda1,/,used]</code>. A metric
+whose OTel name already starts with the prefix is not prefixed twice. Values follow the OTel unit (a
+percentage is a ratio, a duration is in seconds); an enum metric is sent
+as its raw code under one key.</p>
+<p>The server only receives the keys it asked for. Until the host exists on
+the server and a template gives it items, the log says so at start and
+nothing is pushed.</p>
+<h3 id="metrics-relayed-from-another-sender">Metrics relayed from another sender<a class="headerlink" href="#metrics-relayed-from-another-sender" title="Permanent link">&para;</a></h3>
+<p>An agent running the <code>otlp_receiver</code> probe relays what applications send
+it, under the names they chose. The agent describes none of those names,
+so their key is built from the metric name alone, and the emitter is
+carried beside the probe:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>senhub.http.server.request.duration[relay,checkout]
+</code></pre></div>
+<p>where <code>checkout</code> is the sender's <code>service.name</code>. Without it two
+applications reporting the same metric name through one receiver would
+build the same key, and the second value would overwrite the first on an
+item that goes on looking healthy. <code>service.name</code> is used rather than
+the host name because a replaced container keeps the first and changes
+the second, which would create an item on every deployment. A sender
+that names itself neither keeps the shorter key.</p>
+<p>The matching discovery rule is <code>senhub.discovery[otlp_receiver,service.name]</code>,
+whose instances carry <code>{#PROBE}</code> and <code>{#SERVICE_NAME}</code>.</p>
+<h4 id="the-standard-conventions-arrive-with-a-template">The standard conventions arrive with a template<a class="headerlink" href="#the-standard-conventions-arrive-with-a-template" title="Permanent link">&para;</a></h4>
+<p>Zabbix asks for nothing it was not told about, so a relayed metric had
+to be declared by hand. The usual application metrics no longer do: the
+agent ships a template for the OpenTelemetry semantic conventions —
+HTTP server, JVM and database client — generated from the same
+definitions as every other template.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--probe<span class="w"> </span>otlp_receiver
+</code></pre></div>
+<p>A host carrying it discovers the applications that relay through it, and
+their series become items keyed on the sender and on the attributes the
+convention defines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>senhub.http.server.request.duration.count[relay,checkout,GET,/cart,200]
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>senhub.jvm.memory.used[relay,checkout,heap,G1 Eden Space]
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>senhub.db.client.operation.duration.sum[relay,catalog,postgresql,SELECT]
+</code></pre></div>
+<p>Nothing is rewritten on the way. A relayed metric reaches every output
+through a pass-through that is consulted before any definition, so the
+name, the unit and the value stay the application's. The template only
+tells the server what to ask for.</p>
+<p><strong>A duration arrives as a distribution</strong>, not as a number: a count, a
+sum and a bucket ladder. A sink that holds one value per item cannot
+hold that, so the agent sends the two facts it can, under keys that say
+which is which — <code>.count</code> and <code>.sum</code>. Sending the bare name would put a
+number of requests under a key that reads as a latency. The average over
+a period is the change in the sum divided by the change in the count,
+which is a calculated item in Zabbix.</p>
+<p><strong>A metric outside those conventions is not lost.</strong> It keeps the shorter
+key its own name gives it, and an operator who wants it declares its
+item once. Adding a convention to the shipped set is a definition file,
+not code.</p>
+<p>One limit is worth knowing: items are created per dimension set, so an
+application exporting part of a set — one of the three JVM metrics keyed
+on the sender alone, say — gets items for the rest of it, which stay
+empty. A language SDK usually exports its standard set together, so the
+case is a runtime that exports part of a family. (#922)</p>
+<h2 id="templates-and-discovery">Templates and discovery<a class="headerlink" href="#templates-and-discovery" title="Permanent link">&para;</a></h2>
+<p>The templates are generated from the same definitions the keys come from,
+one per probe type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--out<span class="w"> </span>./templates<span class="w">            </span><span class="c1"># every probe type</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--probe<span class="w"> </span>memory<span class="w"> </span>--probe<span class="w"> </span>veeam<span class="w"> </span><span class="c1"># a selection</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--probe<span class="w"> </span>veeam<span class="w"> </span>--version<span class="w"> </span><span class="m">6</span>.0<span class="w">  </span><span class="c1"># to standard output</span>
+</code></pre></div>
+<p>Options: <code>--version 6.0|7.0</code> (export format, <code>7.0</code> by default), <code>--prefix</code>
+(must match the output's <code>key_prefix</code>), <code>--delay</code> (update interval of the
+items, <code>1m</code> by default), <code>--out</code> (directory; without it a single template
+goes to standard output).</p>
+<p>Every item of a template is a prototype under a low-level discovery rule,
+because the probe instance name is discovered too: the rule
+<code>senhub.discovery[memory]</code> returns <code>[{"{#PROBE}":"memory"}]</code>, and a
+metric with dimensions hangs under the rule of its dimension set,
+<code>senhub.discovery[logicaldisk,device,mount_point]</code>, with one macro per
+dimension. The agent serves these discovery keys like any other item, so
+a host gets its items within one discovery interval (1 hour by default,
+<code>--delay</code> does not change it; edit the rule in Zabbix if you want faster
+discovery on a lab). An enum metric with a lookup gets a value map.</p>
+<p>Import the files through <strong>Data collection &gt; Templates &gt; Import</strong>, or
+<code>configuration.import</code> on the API. Re-importing a regenerated template
+updates the same objects: the identifiers are derived from the keys.</p>
+<h2 id="passive-polling">Passive polling<a class="headerlink" href="#passive-polling" title="Permanent link">&para;</a></h2>
+<p>With <code>passive.enabled: true</code> the agent also listens on <code>passive.port</code>
+(10050 by default) and answers the server's polls the way a classic
+agent does: <code>agent.ping</code>, so the host's availability icon turns green,
+<code>agent.version</code>, <code>agent.hostname</code>, and every item key the active push
+sends, for an operator who prefers passive items. Both wire dialects are
+served, the bare key of servers before 7.0 and the JSON batch of 7.0 and
+later.</p>
+<p>Only the addresses in <code>passive.allow</code> may poll; when the list is empty,
+the addresses the configured <code>server</code> resolves to. The port is sent with
+the registration request so the autoregistration action creates the
+agent interface on it.</p>
+<p>Zabbix records the address the packets came from, which behind NAT is
+the translation and not somewhere it can poll. <code>passive.advertise</code> names
+the address instead: a name creates a DNS interface, an address creates
+an IP one.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">advertise</span><span class="p">:</span><span class="w"> </span><span class="s">"web-01.example.com"</span>
+</code></pre></div>
+<h3 id="encrypting-the-polled-port">Encrypting the polled port<a class="headerlink" href="#encrypting-the-polled-port" title="Permanent link">&para;</a></h3>
+<p>The listener takes its own <code>tls</code> block, apart from the one on the
+outbound connection, because the two are opposite roles: there the agent
+checks a server, here it presents itself to one.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.crt</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.key</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/zabbix-ca.crt</span>
+</code></pre></div>
+<p>With <code>cert_file</code> and <code>key_file</code> alone, the agent encrypts what it serves
+and anyone the allow list admits may read it. Add <code>ca_file</code> and the
+agent also demands a certificate from whoever polls, signed by that
+authority: the allow list says which addresses may connect, a
+certificate says who they are.</p>
+<p>On the Zabbix side, set the host's "Connections to host" to
+<em>Certificate</em>. A certificate that cannot be read stops the agent at
+start rather than leaving a listener that serves in clear.</p>
+<p>Pre-shared keys are not available here either, for the reason given
+above.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h2 id="the-hosts-inventory-fills-itself">The host's inventory fills itself<a class="headerlink" href="#the-hosts-inventory-fills-itself" title="Permanent link">&para;</a></h2>
+<p>Beside the measurements, the agent knows what the machine <em>is</em>: its
+operating system, its hardware, its serial number. Zabbix keeps those
+facts in host inventory, and the <strong>SenHub Agent</strong> template carries them
+as text items linked to the matching inventory fields.</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
+<th>Inventory field</th>
+<th>What the agent reports</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub.memcached.up</code></td>
-<td>1</td>
-<td>1 when the server responds to <code>stats</code>, 0 otherwise</td>
+<td>Name</td>
+<td>The name the machine reports for itself</td>
 </tr>
 <tr>
-<td><code>memcached.uptime</code></td>
-<td>s</td>
-<td>Seconds since the Memcached server started</td>
+<td>OS, OS (Full), OS (Short)</td>
+<td>Operating system, its full description, and its family</td>
 </tr>
 <tr>
-<td><code>memcached.current_connections</code></td>
-<td>{connection}</td>
-<td>Active client connections</td>
+<td>Type</td>
+<td>What the machine is: a server, a virtual machine, a laptop</td>
 </tr>
 <tr>
-<td><code>memcached.total_connections</code></td>
-<td>{connection}</td>
-<td>Total connections accepted since start</td>
+<td>Hardware</td>
+<td>Processor model</td>
 </tr>
 <tr>
-<td><code>memcached.current_items</code></td>
-<td>{item}</td>
-<td>Items currently stored</td>
+<td>Vendor, Model</td>
+<td>What the firmware names</td>
 </tr>
 <tr>
-<td><code>memcached.total_items</code></td>
-<td>{item}</td>
-<td>Items stored since start</td>
-</tr>
-<tr>
-<td><code>memcached.bytes</code></td>
-<td>By</td>
-<td>Current memory used for item storage</td>
-</tr>
-<tr>
-<td><code>memcached.limit_maxbytes</code></td>
-<td>By</td>
-<td>Configured memory limit</td>
-</tr>
-<tr>
-<td><code>memcached.operations</code></td>
-<td>{operation}</td>
-<td>Get/set/delete/etc. operations, tagged with <code>command</code></td>
-</tr>
-<tr>
-<td><code>memcached.hits</code></td>
-<td>{operation}</td>
-<td>Cache hits by command, tagged with <code>command</code></td>
-</tr>
-<tr>
-<td><code>memcached.misses</code></td>
-<td>{operation}</td>
-<td>Cache misses by command</td>
-</tr>
-<tr>
-<td><code>memcached.evictions</code></td>
-<td>{eviction}</td>
-<td>Items evicted to free memory</td>
+<td>Serial number A</td>
+<td>Serial number from the firmware, which ties the host to an asset record</td>
 </tr>
 </tbody>
 </table>
-<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Memcached has no authentication mechanism; ensure the port is not exposed to untrusted networks.</li>
-<li>Metric names follow the OpenTelemetry Collector contrib <code>memcachedreceiver</code> convention where equivalents exist.</li>
-</ul>
+<p><code>zabbix setup</code> sets the autoregistration action to put new hosts in
+<strong>automatic</strong> inventory mode, without which the values arrive and fill
+nothing. On a host created by hand, set the mode yourself under
+<strong>Inventory</strong>.</p>
+<p>A fact the agent did not find is not sent at all, so its field keeps
+whatever it held rather than being blanked. On one Linux host, eight of
+the nine fill by themselves at the first collection.</p>
+<p>The relationships the agent also discovers, which machine a container
+runs on and which card is the same machine seen twice, have no home
+here: Zabbix has hosts, groups and tags, not a graph. They stay on the
+topology rail rather than being flattened into a text field.</p>
+<h2 id="one-template-set-per-platform">One template set per platform<a class="headerlink" href="#one-template-set-per-platform" title="Permanent link">&para;</a></h2>
+<p>A definition declares every metric its probe can produce, and a probe
+does not produce the same ones everywhere: a processor's deferred
+procedure calls exist on Windows and nowhere else. Declaring them all on
+every host leaves items that can never receive a value, which an
+operator reads as a defect rather than as an absence.</p>
+<p>So <code>zabbix template</code> writes one set per platform and names the files for
+it, <code>senhub-cpu-linux-7.0.yaml</code> beside <code>senhub-cpu-windows-7.0.yaml</code>.
+Use <code>--platform linux</code> or <code>--platform windows</code>; without it the template
+carries every metric of the definition, which is what you want when you
+generate for reading rather than for import.</p>
+<p>Nothing has to be chosen per host. The agent appends its operating
+system to the host metadata it registers with, and <code>zabbix setup</code>
+creates one autoregistration action per platform matching on it, so a
+Linux host is linked to the Linux templates and a Windows host to the
+Windows ones by itself.</p>
+<p>Only the published platforms have an action. An agent built for macOS,
+which is a development target and not a release, registers as
+<code>... darwin</code>, matches nothing and waits for an autoregistration that
+never comes; the server logs <code>host [...] not found</code> and the agent says
+it is waiting. Add a condition for it by hand if you monitor one. A setup run on a server prepared by an earlier
+version disables the single action that version created, because Zabbix
+runs every matching action and leaving it would link both sets.</p>
+<h2 id="the-agents-own-items">The agent's own items<a class="headerlink" href="#the-agents-own-items" title="Permanent link">&para;</a></h2>
+<p>Beside the probe templates, <code>zabbix template</code> writes a small <strong>SenHub
+Agent</strong> template carrying <code>agent.ping</code>, <code>agent.version</code> and
+<code>agent.hostname</code>. Link it on every host: <code>agent.ping</code> is what turns the
+host's availability green, and the other two say which agent is running
+there. <code>zabbix setup</code> imports it and adds it to the autoregistration
+action by itself.</p>
+<p>It is a template of its own because Zabbix refuses two linked templates
+that declare the same key, and every probe template is linked beside the
+others. The three items are served on both rails, so they arrive whether
+the host is monitored actively or polled on the passive port.</p>
+<h2 id="through-a-proxy">Through a proxy<a class="headerlink" href="#through-a-proxy" title="Permanent link">&para;</a></h2>
+<p>Point <code>server</code> at the proxy instead of the server and nothing else
+changes: the agent registers through it, the server attaches the host to
+the proxy that relayed the registration, and the values travel the same
+way.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
+</code></pre></div>
+<p>A <strong>proxy group</strong> needs every member listed, separated by commas, the way
+a classic agent takes several <code>ServerActive</code> entries:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
+</code></pre></div>
+<p>The agent talks to the first member that answers. When the host is held
+by another member, that member replies with a redirection and the agent
+moves to it for every request, the check list, the values and the
+heartbeat alike. If the member holding the host goes down, the agent
+forgets the redirection and asks the configured addresses again, which is
+how it learns where the group moved the host.</p>
+<p>With <code>passive.enabled</code> and no explicit <code>passive.allow</code>, every configured
+address is allowed to poll the agent, because the member polling today is
+not necessarily the one that polled yesterday.</p>
+<h2 id="autoregistration">Autoregistration<a class="headerlink" href="#autoregistration" title="Permanent link">&para;</a></h2>
+<p>Create an action under <strong>Alerts &gt; Actions &gt; Autoregistration actions</strong>
+with a condition on the host metadata (<code>contains senhub-agent</code>, or
+whatever you set in <code>host_metadata</code>) and three operations: add host, add
+to a host group, link the generated templates. Every agent whose
+metadata matches then appears by itself at its first check-list request,
+with its items created by discovery within the discovery interval.</p>
 
 
 
@@ -4120,44 +4404,6 @@ cache hit/miss ratios, command throughput and eviction counters.</p>
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../influxdb/" class="md-footer__link md-footer__link--prev" aria-label="Previous: InfluxDB">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                InfluxDB
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../apache/" class="md-footer__link md-footer__link--next" aria-label="Next: Apache HTTP Server">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Apache HTTP Server
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -4211,14 +4457,14 @@ cache hit/miss ratios, command throughput and eviction counters.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../javascripts/rn-filter.js"></script>
+        <script src="../javascripts/rn-filter.js"></script>
       
-        <script src="../../javascripts/dev-banner.js"></script>
+        <script src="../javascripts/dev-banner.js"></script>
       
     
   </body>

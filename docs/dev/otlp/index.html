@@ -1131,6 +1131,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#what-time-a-point-carries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What time a point carries
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3763,6 +3774,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
@@ -4424,6 +4491,17 @@
     <span class="md-ellipsis">
       
         Cardinality controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-time-a-point-carries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What time a point carries
       
     </span>
   </a>
@@ -5274,6 +5352,24 @@ budget in your strategy YAML:</p>
 under runaway-cardinality conditions. Raise them only when you know
 what's generating the series, otherwise the agent will happily eat
 RAM tracking churning timeseries.</p>
+<h3 id="what-time-a-point-carries">What time a point carries<a class="headerlink" href="#what-time-a-point-carries" title="Permanent link">&para;</a></h3>
+<p>Every push re-exports the last value of every stored series, so the time
+stamped on a point decides what a consumer sees between two runs of a
+probe:</p>
+<ul>
+<li>While the probe still vouches for the value, the point carries the
+  export time. A probe vouches for its last value for one and a half
+  times its <code>interval</code>, plus one push interval. A gauge from a probe
+  that runs every 30 minutes is therefore published as current every
+  30 seconds, and an alert with a five-minute lookback keeps seeing it.</li>
+<li>Once that window has elapsed, the point carries the time the value was
+  measured: the probe missed its own next run, or the target it measured
+  is no longer in its configuration, and re-stamping the old value would
+  assert a measurement that never happened. The series is evicted after
+  <code>staleness_ttl</code>.</li>
+<li>A series restored from the checkpoint at start-up carries its
+  measurement time until its probe observes it again in this process.</li>
+</ul>
 <h2 id="backward-compatibility">Backward compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Existing storages</strong> (PRTG, Nagios, SenHub, HTTP/Prometheus) are
@@ -5420,11 +5516,6 @@ does not close it.</p>
       © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
     </div>
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       
