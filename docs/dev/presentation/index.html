@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
@@ -557,6 +557,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../web-interface/" class="md-nav__link">
         
   
@@ -597,10 +651,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -618,8 +672,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -768,10 +822,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -789,8 +843,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -937,10 +991,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -958,8 +1012,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2048,6 +2102,34 @@
     
   
     Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
   
 
     
@@ -3347,10 +3429,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3368,8 +3450,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3979,7 +4061,8 @@ or observability tool you already operate.</p>
 <p>You install a single binary on a host that has network access to
 the systems you want to monitor. A YAML file declares which probes
 the agent should run and where the values should go (PRTG / Nagios
-HTTP endpoints, Prometheus <code>/metrics</code> scrape page, OTLP/gRPC push).
+HTTP endpoints, Prometheus <code>/metrics</code> scrape page, a native Zabbix
+agent, OTLP/gRPC push).
 The agent starts collecting on its own schedule and stays out of
 the way — restartable, observable, and runnable in air-gapped
 environments where no callback to the SenHub backend is allowed.</p>
@@ -3992,8 +4075,8 @@ environments where no callback to the SenHub backend is allowed.</p>
 <li><strong>One vocabulary across every output.</strong> Probes emit values into
   a shared in-memory cache. From there the agent serves PRTG /
   Nagios HTTP endpoints, exposes a Prometheus <code>/metrics</code> scrape
-  page, and natively pushes OTLP/gRPC metrics and logs to any
-  OpenTelemetry receiver — collector, vmagent, Tempo, Grafana
+  page, acts as a native Zabbix active agent, and natively pushes
+  OTLP/gRPC metrics and logs to any OpenTelemetry receiver — collector, vmagent, Tempo, Grafana
   Cloud OTLP. <strong>Metric names, units and attributes match across
   all sinks</strong>, so a query that works in Grafana today keeps working
   in your PRTG sensor template tomorrow.</li>
@@ -4049,19 +4132,25 @@ environments where no callback to the SenHub backend is allowed.</p>
 <td>Prometheus / VictoriaMetrics scrape</td>
 </tr>
 <tr>
+<td>Zabbix active agent</td>
+<td>Zabbix protocol, TLS or PSK</td>
+<td>Push to a Zabbix server or proxy on 10051, autoregistration and discovery</td>
+</tr>
+<tr>
 <td>OTLP gRPC client</td>
 <td>gRPC, mTLS</td>
 <td>Push to OTel collector, vmagent, Tempo, Grafana Cloud OTLP</td>
 </tr>
 </tbody>
 </table>
-<p>All four read from the same in-memory metric cache so the data is
+<p>All five read from the same in-memory metric cache so the data is
 consistent regardless of which sinks you enable.</p>
 <h2 id="where-to-next">Where to next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../installation/">Installation</a> — install the binary on Windows or Linux</li>
 <li><a href="../configuration/">Configuration</a> — write the YAML</li>
 <li><a href="../probes/">Probes</a> — browse the probe catalog by vendor family</li>
+<li><a href="../zabbix/">Zabbix</a> — native active agent, templates and autoregistration</li>
 <li><a href="../prometheus/">Prometheus / VictoriaMetrics</a> — scrape configuration and metrics reference</li>
 <li><a href="../otlp/">OTLP / OpenTelemetry</a> — push metrics + logs to an OTel receiver</li>
 </ul>

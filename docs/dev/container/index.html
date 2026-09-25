@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
@@ -618,6 +618,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../web-interface/" class="md-nav__link">
         
   
@@ -658,10 +712,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -679,8 +733,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -829,10 +883,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -850,8 +904,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -998,10 +1052,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -1019,8 +1073,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2109,6 +2163,34 @@
     
   
     Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
   
 
     
@@ -3408,10 +3490,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3429,8 +3511,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4119,9 +4201,17 @@ is what the receiving side reads to tell two agents apart, so two agents
 carrying the same key are one agent to everything downstream. Keeping it
 in the volume means one agent per volume, not one per container.</p>
 <p>If your platform already knows what this host is, <code>SENHUB_HOST_ID</code>
-settles the first without a volume. Give each instance its own value:
-an identity shared between several running agents is worse than one
-that changes, because nothing signals it.</p>
+settles the first without a volume, and <code>SENHUB_AGENT_KEY</code> the second.
+With both set, a container without a volume comes back as the same host
+and the same agent. Give each instance its own values: an identity
+shared between several running agents is worse than one that changes,
+because nothing signals it, and an example or blank value is refused at
+start.</p>
+<p>What survives a new container without a volume: the host identity and
+the agent identity when those two variables are set, the configuration
+the variables describe. What does not: the log bookmarks, so a log
+probe re-reads from where its source starts, and anything written to the
+configuration from the console.</p>
 <p>Nothing else needs a mount. The configuration lives inside the container
 unless you choose otherwise, and the log file is written to
 <code>/var/log/senhub-agent</code> inside it.</p>
@@ -4190,7 +4280,13 @@ feature they configure is wanted.</p>
 <td><code>SENHUB_HOST_ID</code></td>
 <td>No</td>
 <td>kept in the state directory</td>
-<td>Host identity, 32 hexadecimal characters, dashes optional. One value per instance</td>
+<td>Host identity, 32 hexadecimal characters, dashes optional. One value per instance: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AGENT_KEY</code></td>
+<td>No</td>
+<td>kept in the state directory</td>
+<td>Agent identity, a UUID. One value per instance; with <code>SENHUB_HOST_ID</code> it lets a container without a volume keep one identity</td>
 </tr>
 <tr>
 <td><code>SENHUB_PROBES</code></td>
@@ -4206,9 +4302,9 @@ feature they configure is wanted.</p>
 </tr>
 </tbody>
 </table>
-<p>The agent key is <strong>not</strong> a variable: the agent generates its own on
-first start, and the entrypoint keeps it in the state directory so the
-next container reuses it. That is why the mount matters.</p>
+<p>Without <code>SENHUB_AGENT_KEY</code> the agent generates its own key on first
+start, and the entrypoint keeps it in the state directory so the next
+container reuses it. That is why the mount matters.</p>
 <p>Never bake either identity into an image. An image is deployed in
 several copies by construction, so an identity that belongs to the image
 belongs to all of its instances at once.</p>

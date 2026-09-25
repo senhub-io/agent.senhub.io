@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
@@ -563,6 +563,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../web-interface/" class="md-nav__link">
         
   
@@ -603,10 +657,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -624,8 +678,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -774,10 +828,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -795,8 +849,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -943,10 +997,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -964,8 +1018,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2054,6 +2108,34 @@
     
   
     Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
   
 
     
@@ -3353,10 +3435,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3374,8 +3456,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4051,6 +4133,13 @@
 <li><code>SENHUB_SECRET_BACKEND=systemd-creds</code> is set (explicit admin opt-in, e.g. for the seal step outside the unit);</li>
 <li>a populated <code>creds.d/</code> store already exists.</li>
 </ul>
+<p>With <code>systemd-creds</code>, the service reads its secrets through the credentials systemd hands it at start, which the drop-in <code>/etc/systemd/system/senhub-agent.service.d/10-senhub-credentials.conf</code> declares, one <code>LoadCredentialEncrypted=</code> line per sealed secret. The agent keeps that drop-in in line with <code>creds.d/</code> by itself:</p>
+<ul>
+<li><code>agent install</code> and <code>agent refresh-unit</code> write it when <code>creds.d/</code> holds secrets and remove it when it holds none, then reload systemd;</li>
+<li><code>agent secret migrate --wire-unit</code> wires the secrets it has just sealed;</li>
+<li><code>agent uninstall</code> removes it with the configuration.</li>
+</ul>
+<p>After a <code>secret set</code> or <code>secret rm</code>, run <code>agent secret wire-unit</code> (or <code>agent refresh-unit</code>) so the next start sees the change. None of these restart the service: run <code>agent restart</code> to load the new credentials.</p>
 <p>The store files are owned by the account the agent runs as and readable only by it (age key file <code>0600</code>, DPAPI files restricted to SYSTEM + Administrators). Because the store is root-/service-owned, resolving a sealed secret requires the same privilege as the agent itself — see the privilege note under <a href="#agent-key-show"><code>agent key show</code></a>.</p>
 <h2 id="the-agent-secret-command">The <code>agent secret</code> command<a class="headerlink" href="#the-agent-secret-command" title="Permanent link">&para;</a></h2>
 <p><code>agent secret</code> manages the store. A secret VALUE is never accepted on the command line (it would leak via <code>ps</code> or shell history); <code>set</code> reads it from a hidden prompt, from standard input, or from a file. The command reads and writes the root-/service-owned store, so it runs behind the agent's privilege gate.</p>
@@ -4080,7 +4169,7 @@
 </tr>
 <tr>
 <td><code>secret migrate</code></td>
-<td>Move inline plaintext secrets out of the config into the store and rewrite them as <code>${secret:}</code> references (see <a href="#sealing-inline-secrets-into-the-store">Sealing inline secrets</a>).</td>
+<td>Move inline plaintext secrets out of the config into the store and rewrite them as <code>${secret:}</code> references (see <a href="#sealing-inline-secrets-into-the-store">Sealing inline secrets</a>). With <code>--wire-unit</code>, then wire the systemd-creds drop-in.</td>
 </tr>
 <tr>
 <td><code>secret status</code></td>
@@ -4088,7 +4177,7 @@
 </tr>
 <tr>
 <td><code>secret wire-unit</code></td>
-<td>(Linux/systemd-creds) Regenerate the unit credential drop-in.</td>
+<td>(Linux/systemd-creds) Regenerate the unit credential drop-in from <code>creds.d/</code>, or remove it when the store is empty.</td>
 </tr>
 </tbody>
 </table>
@@ -4125,6 +4214,12 @@ version 2 and is untouched. <code>agent secret migrate</code> is the explicit,
 on-demand equivalent of that boot-time step (for example to seal a
 configuration before distributing it). See
 <a href="../configuration/#config-versions">Configuration → Config versions</a>.</p>
+<p>With the <code>systemd-creds</code> backend the service cannot do this step: it
+runs as a non-root account, and only root can encrypt with the host
+key. It then leaves the inline values in place and logs once, at
+start, <code>Inline secrets left in place: the secret store seals only as
+root</code>. Seal them with <code>sudo senhub-agent secret migrate --wire-unit</code>
+and restart the service.</p>
 </div>
 <p><code>agent secret migrate</code> scans the configuration for fields whose NAME denotes a secret (<code>password</code>, <code>passphrase</code>, <code>secret</code>, <code>token</code>, <code>api_key</code>, <code>community</code>, <code>credential</code>, <code>dsn</code>, <code>uri</code>, <code>private_key</code>) and whose value is still an inline plaintext (not already a <code>${...}</code> reference). It moves each value into the store and rewrites the field to a <code>${secret:}</code> reference. Identifier-style fields such as <code>user</code>, <code>login</code> and <code>email</code> are deliberately left alone.</p>
 <p>Before:</p>
