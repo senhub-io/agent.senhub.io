@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/license/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/nagios/">
       
       
-        <link rel="prev" href="../web-interface/">
+        <link rel="prev" href="../http-https/">
       
       
-        <link rel="next" href="agreement-fr/">
+        <link rel="next" href="../zabbix/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Overview - SenHub Agent</title>
+        <title>Nagios - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#license" class="md-skip">
+        <a href="#nagios-output" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Nagios
             
           </span>
         </div>
@@ -452,10 +452,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../nagios/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -471,6 +498,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enable-the-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable the endpoint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#call-the-agent-from-nagios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call the agent from Nagios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-probe-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The probe summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shipped-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The shipped checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-one-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run one check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-checks-at-once-as-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All checks at once, as JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-your-own-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Write your own checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write your own checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#channel-is-the-metric-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        channel is the metric name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metric-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-a-value-is-judged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How a value is judged
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -533,8 +724,6 @@
       
   
   
-    
-  
   
   
     
@@ -547,11 +736,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
           <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
@@ -572,7 +761,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -587,37 +776,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../license/" class="md-nav__link">
         
   
   
@@ -633,81 +795,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-open-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The open core
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-licensed-probes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The licensed probes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-agreement-says-about-the-control" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the agreement says about the control
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#third-party-components" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Third-party components
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#which-probes-need-a-license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Which probes need a license
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -720,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agreement-fr/" class="md-nav__link">
+      <a href="../license/agreement-fr/" class="md-nav__link">
         
   
   
@@ -748,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agreement-en/" class="md-nav__link">
+      <a href="../license/agreement-en/" class="md-nav__link">
         
   
   
@@ -776,7 +863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="third-party/" class="md-nav__link">
+      <a href="../license/third-party/" class="md-nav__link">
         
   
   
@@ -3973,10 +4060,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-open-core" class="md-nav__link">
+  <a href="#enable-the-endpoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The open core
+        Enable the endpoint
       
     </span>
   </a>
@@ -3984,10 +4071,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-licensed-probes" class="md-nav__link">
+  <a href="#call-the-agent-from-nagios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The licensed probes
+        Call the agent from Nagios
       
     </span>
   </a>
@@ -3995,10 +4082,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-agreement-says-about-the-control" class="md-nav__link">
+  <a href="#the-probe-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What the agreement says about the control
+        The probe summary
       
     </span>
   </a>
@@ -4006,24 +4093,113 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#third-party-components" class="md-nav__link">
+  <a href="#checks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Third-party components
+        Checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shipped-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The shipped checks
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#which-probes-need-a-license" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#run-one-check" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Which probes need a license
+        Run one check
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-checks-at-once-as-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All checks at once, as JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#write-your-own-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Write your own checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write your own checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#channel-is-the-metric-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        channel is the metric name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metric-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-a-value-is-judged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How a value is judged
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4044,7 +4220,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/license/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/nagios.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -4052,76 +4228,345 @@
   
 
 
-<h1 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h1>
-<p>SenHub Agent is two things under one binary, and which license applies
-depends on which part you use.</p>
-<h2 id="the-open-core">The open core<a class="headerlink" href="#the-open-core" title="Permanent link">&para;</a></h2>
-<p>The binary, its collection engine, its output formats and most of its
-probes are published under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>, and their
-source code is public at
-<a href="https://github.com/senhub-io/senhub-agent">github.com/senhub-io/senhub-agent</a>. You may use, modify and
-redistribute them on the terms of that license. Nothing on this page
-restricts it, and nothing expires.</p>
-<h2 id="the-licensed-probes">The licensed probes<a class="headerlink" href="#the-licensed-probes" title="Permanent link">&para;</a></h2>
-<p>Some probe types read equipment and software from third-party vendors and
-are not covered by the Apache license. Their use is granted commercially
-by Sensor Factory, per customer and across the whole estate, under the
-SenHub Agent license agreement.</p>
-<p>The agreement is drawn up in French, which is the only binding version.
-An English translation is provided for convenience. Both are published as
-web pages; a printable PDF of each is linked alongside.</p>
+<h1 id="nagios-output">Nagios output<a class="headerlink" href="#nagios-output" title="Permanent link">&para;</a></h1>
+<p>The agent answers Nagios the way a plugin does: one line,
+<code>STATUS - message | perfdata</code>, fetched over HTTP from the agent's REST
+API. It works with Nagios Core, Nagios XI and any tool that runs Nagios
+plugins. Nothing is installed on the Nagios side beyond a short command.</p>
+<p>Two kinds of answer are available:</p>
+<ul>
+<li><strong>The probe summary</strong>, one per probe: is the probe collecting, is its
+  target reachable, and every value it holds as performance data.</li>
+<li><strong>Checks</strong>, which hold chosen metrics against thresholds and return
+  OK, WARNING, CRITICAL or UNKNOWN. The agent ships a set of checks, and
+  you can write your own.</li>
+</ul>
+<h2 id="enable-the-endpoint">Enable the endpoint<a class="headerlink" href="#enable-the-endpoint" title="Permanent link">&para;</a></h2>
+<p>The <code>nagios</code> endpoint of the HTTP output must be listed. The installer
+lists it by default:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>Every URL below carries the agent key, printed by <code>senhub-agent key show</code>.
+See <a href="../http-https/">HTTP / HTTPS</a> for the port, TLS and the firewall.</p>
+<h2 id="call-the-agent-from-nagios">Call the agent from Nagios<a class="headerlink" href="#call-the-agent-from-nagios" title="Permanent link">&para;</a></h2>
+<p>The agent sets the status in the first word of its answer. A four-line
+plugin turns that word into the exit code Nagios reads:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># /usr/local/nagios/libexec/check_senhub URL</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>--max-time<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="k">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"UNKNOWN - agent unreachable"</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$out</span><span class="s2">"</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$out</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>OK*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span>WARNING*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span>CRITICAL*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span>*<span class="o">)</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="k">esac</span>
+</code></pre></div>
+<p>With HTTPS and a certificate your Nagios host does not trust, add
+<code>--cacert /path/to/ca.pem</code> to the <code>curl</code> line rather than <code>-k</code>.</p>
+<p>Then declare the command once, and one service per check:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>define command {
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    command_name  check_senhub
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    command_line  $USER1$/check_senhub "http://$HOSTADDRESS$:8080/api/$USER3$/nagios/$ARG1$"
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>}
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>define service {
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    use                  generic-service
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    host_name            web-01
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    service_description  CPU
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    check_command        check_senhub!check/cpu_detailed
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>}
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>define service {
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    use                  generic-service
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    host_name            web-01
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    service_description  SenHub memory probe
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    check_command        check_senhub!metrics/memory
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>}
+</code></pre></div>
+<p><code>$USER3$</code> holds the agent key; set it in <code>resource.cfg</code> so the key stays
+out of the object files.</p>
+<h2 id="the-probe-summary">The probe summary<a class="headerlink" href="#the-probe-summary" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/metrics/cpu
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>OK - Probe cpu healthy - 3 metrics collected | CPU_Total_Usage=12.00 CPU_System=5.00 CPU_User=10.00
+</code></pre></div>
+<p>The status is <strong>OK</strong> while the probe holds values, and <strong>CRITICAL</strong> when
+it holds none or when every availability metric it reports (a metric
+whose name ends in <code>.up</code>) is 0, meaning its target cannot be reached.
+The summary never returns WARNING: thresholds belong to checks.</p>
+<p>Performance data labels are the PRTG channel labels of the probe's
+metrics, with spaces turned into underscores. The last part of the URL
+is the probe's <code>name</code> as configured, whatever its case; the probes the
+installer writes are named after their type (<code>cpu</code>, <code>memory</code>, ...).</p>
+<p>The HTTP status is 500 when the answer is CRITICAL, 200 otherwise.</p>
+<h2 id="checks">Checks<a class="headerlink" href="#checks" title="Permanent link">&para;</a></h2>
+<h3 id="the-shipped-checks">The shipped checks<a class="headerlink" href="#the-shipped-checks" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
+</code></pre></div>
+<p>lists every check with its metrics and thresholds, as JSON. The agent
+ships checks for the host (<code>system_health</code>, <code>cpu_detailed</code>, <code>cpu_cores</code>,
+<code>memory_detailed</code>, <code>network_detailed</code>, <code>network_health</code>), for the
+<code>ping_gateway</code>, <code>ping_webapp</code> and <code>load_webapp</code> probes, and for Veeam.</p>
+<h3 id="run-one-check">Run one check<a class="headerlink" href="#run-one-check" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/check/cpu_detailed
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>CRITICAL - cpu_usage_total: CRITICAL 97.00%, cpu_system: OK 5.00%, cpu_user: OK 10.00% | cpu_usage_total=97.00%;80;90;0;100 cpu_system=5.00%;30;50;0;100 cpu_user=10.00%;70;85;0;100
+</code></pre></div>
+<p>The worst metric sets the status of the check. The HTTP status is 500
+from CRITICAL upward, 404 when no check has that name, 200 otherwise.</p>
+<p>Right after the agent starts, a check can answer UNKNOWN for one
+collection interval: rates and CPU time shares need two readings before
+they have a value.</p>
+<p>A request can narrow or override a check:</p>
 <table>
 <thead>
 <tr>
-<th>Version</th>
-<th>Standing</th>
-<th>Read</th>
-<th>Download</th>
+<th>Parameter</th>
+<th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>French</td>
-<td><strong>Binding</strong></td>
-<td><a href="agreement-fr/">Contrat de licence SenHub Agent</a></td>
-<td><a href="contrat-de-licence-senhub-agent.pdf">PDF</a></td>
+<td><code>warning=</code>, <code>critical=</code></td>
+<td>Replace the thresholds of every metric in the check</td>
 </tr>
 <tr>
-<td>English</td>
-<td>Courtesy translation</td>
-<td><a href="agreement-en/">SenHub Agent License Agreement</a></td>
-<td><a href="senhub-agent-license-agreement.pdf">PDF</a></td>
+<td><code>tag_&lt;name&gt;=&lt;value&gt;</code></td>
+<td>Keep only the series whose tag <code>&lt;name&gt;</code> equals the value, for example <code>tag_interface=eth0</code></td>
+</tr>
+<tr>
+<td><code>tags=&lt;name&gt;:&lt;v1&gt;,&lt;v2&gt;</code></td>
+<td>Keep only the series whose tag takes one of the values</td>
+</tr>
+<tr>
+<td><code>exclude_tags=&lt;name&gt;:&lt;v1&gt;,&lt;v2&gt;</code></td>
+<td>Drop the series whose tag takes one of the values</td>
+</tr>
+<tr>
+<td><code>metrics=&lt;name&gt;,&lt;name&gt;</code></td>
+<td>Keep only these metric names</td>
 </tr>
 </tbody>
 </table>
-<p>Where the two differ, for any reason, the French version prevails.</p>
-<h2 id="what-the-agreement-says-about-the-control">What the agreement says about the control<a class="headerlink" href="#what-the-agreement-says-about-the-control" title="Permanent link">&para;</a></h2>
-<p>Three points matter to anyone assessing the agent before deploying it,
-and the agreement states them as undertakings rather than as intentions.</p>
-<p><strong>The check is local.</strong> The license token is verified against a public
-key inside the binary. The agent contacts no license server, at
-installation or at run time, and an agent cut off from every public
-network behaves identically.</p>
-<p><strong>Nothing is reported.</strong> Sensor Factory receives no data about your
-estate from the license control: not the number of agents, nor their
-identity, nor the probes you enable, nor the machines you monitor.</p>
-<p><strong>Expiry degrades, it does not stop.</strong> The licensed probes keep working
-for at least seven days after a token expires, then stop collecting. The agent keeps running, the free
-probes keep collecting, and the configured outputs keep sending.</p>
-<h2 id="third-party-components">Third-party components<a class="headerlink" href="#third-party-components" title="Permanent link">&para;</a></h2>
-<p>The binary links components published by third parties under their own
-licences, which apply to those components alone and prevail, for them, over
-the agreement. The list is generated from the build's dependency graph and
-is published as <a href="third-party/">Third-party components</a>, which is Annex 1
-of the agreement.</p>
-<h2 id="which-probes-need-a-license">Which probes need a license<a class="headerlink" href="#which-probes-need-a-license" title="Permanent link">&para;</a></h2>
-<p>The probe catalogue marks each type. In the web console, the Probes page
-shows a lock on a type that needs one and names the reason; a type that
-does not run on your operating system says so instead, so a lock always
-means a license and never a platform.</p>
-<p>From the command line:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
+<h3 id="all-checks-at-once-as-json">All checks at once, as JSON<a class="headerlink" href="#all-checks-at-once-as-json" title="Permanent link">&para;</a></h3>
+<p><code>GET /api/{key}/nagios/metrics</code> runs every check and answers
+<code>{"checks": [...], "count": n}</code>, each entry carrying <code>status</code> (0 to 3),
+<code>status_text</code>, <code>message</code> and <code>perfdata</code>. A <code>POST</code> with a JSON body runs
+one check, the query string winning over the body where both set a value:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"check_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu_cores"</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">"overrides"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">"warning"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70"</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">"critical"</span><span class="p">:</span><span class="w"> </span><span class="s2">"95"</span><span class="p">,</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">"tag_filters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"core"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
 </code></pre></div>
+<h2 id="write-your-own-checks">Write your own checks<a class="headerlink" href="#write-your-own-checks" title="Permanent link">&para;</a></h2>
+<p>Put your checks in <code>nagios.yaml</code>, in the directory that holds the agent
+configuration, then restart the agent:</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td><code>/etc/senhub-agent/nagios.yaml</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>C:\ProgramData\SenHub\nagios.yaml</code></td>
+</tr>
+</tbody>
+</table>
+<p>The example is written for a Linux host. A metric can be specific to
+one operating system: on Windows the same check reads <code>disk_used_percent</code>
+with the tag <code>drive</code>. The metric reference of each probe page lists the
+names; the agent log says at start when a check names a metric this
+system does not produce.</p>
+<p>The file <strong>replaces</strong> the shipped checks; copy the ones you want to keep
+from the output of <code>/api/{key}/nagios/checks</code>. The agent reads the file
+once, at start. A file it cannot use is reported in the agent log and
+the shipped checks are served instead. <code>senhub-agent config check</code>
+runs the same loader: it reports a file that would be refused as an
+error, and a check naming a metric this platform does not emit as a
+warning, before any restart.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Checks</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">web-01"</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">checks</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">disk_space</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"Space</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">every</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">system"</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">probe_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logicaldisk</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">tag_filters</span><span class="p">:</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mount_point</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_in</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="nt">values</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"/boot"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nt">metrics</span><span class="p">:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fs_used_percent</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nt">aggregation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="nt">tag_context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mount_point</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="nt">warning</span><span class="p">:</span><span class="w"> </span><span class="s">"80"</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="nt">critical</span><span class="p">:</span><span class="w"> </span><span class="s">"90"</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">        </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="s">"%"</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">        </span><span class="nt">tag_specific_thresholds</span><span class="p">:</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> mount_point</span><span class="p">:</span><span class="w"> </span><span class="s">"/var"</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">            </span><span class="nt">warning</span><span class="p">:</span><span class="w"> </span><span class="s">"70"</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">            </span><span class="nt">critical</span><span class="p">:</span><span class="w"> </span><span class="s">"85"</span>
+</code></pre></div>
+<h3 id="channel-is-the-metric-name"><code>channel</code> is the metric name<a class="headerlink" href="#channel-is-the-metric-name" title="Permanent link">&para;</a></h3>
+<p>In a check, <code>channel:</code> takes the metric's <strong>name</strong>, the second column of
+the metric reference at the bottom of every probe page. It is not the
+PRTG label, and not the OpenTelemetry name. On the CPU page, that is
+<code>cpu_user</code>, not <code>CPU User</code> and not <code>system.cpu.utilization</code>.</p>
+<p>When a check names a metric no probe emits on this system, the agent
+logs it at start, names the metric to use when what was given is a PRTG
+label, and says which systems emit it when it belongs to another one. Probes
+whose metric names are set by their configuration (<code>exec</code>,
+<code>prometheus_scrape</code>, <code>snmp_poll</code>, <code>otlp_receiver</code>) are not in the
+reference, so the log mentions them without proving them wrong.</p>
+<h3 id="check-fields">Check fields<a class="headerlink" href="#check-fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>yes</td>
+<td>Name used in <code>/nagios/check/{name}</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>Shown when no metric returns a message</td>
+</tr>
+<tr>
+<td><code>probe_filter</code></td>
+<td>no</td>
+<td>Only look at the probes of this type or with this name, whatever the case. Empty: every probe</td>
+</tr>
+<tr>
+<td><code>tag_filters</code></td>
+<td>no</td>
+<td>Keep only the series that pass every filter (below)</td>
+</tr>
+<tr>
+<td><code>metrics</code></td>
+<td>yes</td>
+<td>One entry or more (below)</td>
+</tr>
+</tbody>
+</table>
+<p>A tag filter has a <code>key</code>, an <code>operator</code> and, except for <code>exists</code>,
+<code>values</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Keeps the series whose tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>in</code></td>
+<td>takes one of the values</td>
+</tr>
+<tr>
+<td><code>not_in</code></td>
+<td>takes none of the values</td>
+</tr>
+<tr>
+<td><code>equals</code></td>
+<td>equals the first value</td>
+</tr>
+<tr>
+<td><code>not_equals</code></td>
+<td>differs from the first value</td>
+</tr>
+<tr>
+<td><code>exists</code></td>
+<td>is present</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metric-fields">Metric fields<a class="headerlink" href="#metric-fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>channel</code></td>
+<td>yes</td>
+<td>The metric name, see above</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>yes</td>
+<td>A number, the last acceptable value</td>
+</tr>
+<tr>
+<td><code>critical</code></td>
+<td>no</td>
+<td>A number, the last value before CRITICAL. Empty: the metric never goes past WARNING</td>
+</tr>
+<tr>
+<td><code>invert</code></td>
+<td>no</td>
+<td><code>true</code> when low values are the problem, such as free space or days left</td>
+</tr>
+<tr>
+<td><code>aggregation</code></td>
+<td>no</td>
+<td><code>none</code> (the default) evaluates each series; <code>average</code>, <code>max</code>, <code>min</code>, <code>sum</code> or <code>count</code> reduce them to one value first</td>
+</tr>
+<tr>
+<td><code>tag_context</code></td>
+<td>no</td>
+<td>Tag whose value names each series in the message and the perfdata, for example <code>core</code> or <code>mount_point</code></td>
+</tr>
+<tr>
+<td><code>tag_specific_thresholds</code></td>
+<td>no</td>
+<td>Thresholds for the series that carry all the listed tags. The first matching entry wins; <code>warning=</code> and <code>critical=</code> in the request still win over it. Needs <code>aggregation: none</code></td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td>no</td>
+<td>Unit printed in the message and the perfdata</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>Free text</td>
+</tr>
+</tbody>
+</table>
+<p>The agent refuses the file when a field is misspelt, a threshold is not
+a number, an aggregation or an operator is unknown, or
+<code>tag_specific_thresholds</code> is set on an aggregated metric. The log names
+the check and the metric at fault.</p>
+<h3 id="how-a-value-is-judged">How a value is judged<a class="headerlink" href="#how-a-value-is-judged" title="Permanent link">&para;</a></h3>
+<p>A threshold is the last acceptable value, as in the Nagios plugin
+convention. With <code>warning: "80"</code> and <code>critical: "90"</code>, 80 is OK, 80.5 is
+WARNING and 90.5 is CRITICAL. With <code>invert: true</code>, the value alerts when
+it drops below the threshold. <code>warning: "0"</code> on a count of failures
+alerts on the first failure.</p>
+<p>Some metrics report a state rather than a quantity, such as a Veeam job
+status or a Redfish health. Their values are named states, listed in the
+PRTG lookups the agent ships, and each state carries its own severity:
+for those metrics the thresholds are not used, and the message shows the
+state's name (<code>veeam_job_status: SUCCESS</code>).</p>
 
 
 
@@ -4157,7 +4602,7 @@ means a license and never a platform.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../web-interface/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Web console">
+          <a href="../http-https/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HTTP / HTTPS">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4167,20 +4612,20 @@ means a license and never a platform.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Web console
+                HTTP / HTTPS
               </div>
             </div>
           </a>
         
         
           
-          <a href="agreement-fr/" class="md-footer__link md-footer__link--next" aria-label="Next: Contrat de licence (français, fait foi)">
+          <a href="../zabbix/" class="md-footer__link md-footer__link--next" aria-label="Next: Zabbix">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Contrat de licence (français, fait foi)
+                Zabbix
               </div>
             </div>
             <div class="md-footer__button md-icon">

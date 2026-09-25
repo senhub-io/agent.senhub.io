@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/license/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/azure_container_app_jobs/">
       
       
-        <link rel="prev" href="../web-interface/">
+        <link rel="prev" href="../azure_container_apps/">
       
       
-        <link rel="next" href="agreement-fr/">
+        <link rel="next" href="../syslog/">
       
       
         
       
       
-      <link rel="icon" href="../assets/favicon.svg">
+      <link rel="icon" href="../../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Overview - SenHub Agent</title>
+        <title>Azure Container App Jobs - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#license" class="md-skip">
+        <a href="#azure-container-app-jobs" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="../../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Azure Container App Jobs
             
           </span>
         </div>
@@ -239,7 +239,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="../../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -266,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../presentation/" class="md-nav__link">
+      <a href="../../presentation/" class="md-nav__link">
         
   
   
@@ -320,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -347,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../container/" class="md-nav__link">
+      <a href="../../container/" class="md-nav__link">
         
   
   
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   
@@ -401,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../secret-store/" class="md-nav__link">
+      <a href="../../secret-store/" class="md-nav__link">
         
   
   
@@ -428,7 +428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http-https/" class="md-nav__link">
+      <a href="../../http-https/" class="md-nav__link">
         
   
   
@@ -455,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nagios/" class="md-nav__link">
+      <a href="../../nagios/" class="md-nav__link">
         
   
   
@@ -482,7 +482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zabbix/" class="md-nav__link">
+      <a href="../../zabbix/" class="md-nav__link">
         
   
   
@@ -509,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../web-interface/" class="md-nav__link">
+      <a href="../../web-interface/" class="md-nav__link">
         
   
   
@@ -533,8 +533,6 @@
       
   
   
-    
-  
   
   
     
@@ -547,11 +545,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
           <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
@@ -572,7 +570,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -587,37 +585,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
         
   
   
@@ -633,81 +604,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-open-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The open core
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-licensed-probes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The licensed probes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-the-agreement-says-about-the-control" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What the agreement says about the control
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#third-party-components" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Third-party components
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#which-probes-need-a-license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Which probes need a license
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -720,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agreement-fr/" class="md-nav__link">
+      <a href="../../license/agreement-fr/" class="md-nav__link">
         
   
   
@@ -748,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agreement-en/" class="md-nav__link">
+      <a href="../../license/agreement-en/" class="md-nav__link">
         
   
   
@@ -776,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="third-party/" class="md-nav__link">
+      <a href="../../license/third-party/" class="md-nav__link">
         
   
   
@@ -863,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus/" class="md-nav__link">
+      <a href="../../prometheus/" class="md-nav__link">
         
   
   
@@ -891,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -926,7 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/" class="md-nav__link">
+      <a href="../../cli/" class="md-nav__link">
         
   
   
@@ -953,7 +849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../otlp/" class="md-nav__link">
+      <a href="../../otlp/" class="md-nav__link">
         
   
   
@@ -977,8 +873,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -989,11 +887,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
@@ -1014,7 +912,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1032,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -1060,7 +958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/cpu/" class="md-nav__link">
+      <a href="../cpu/" class="md-nav__link">
         
   
   
@@ -1088,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/memory/" class="md-nav__link">
+      <a href="../memory/" class="md-nav__link">
         
   
   
@@ -1116,7 +1014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/network/" class="md-nav__link">
+      <a href="../network/" class="md-nav__link">
         
   
   
@@ -1144,7 +1042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/logicaldisk/" class="md-nav__link">
+      <a href="../logicaldisk/" class="md-nav__link">
         
   
   
@@ -1172,7 +1070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/linux-logs/" class="md-nav__link">
+      <a href="../linux-logs/" class="md-nav__link">
         
   
   
@@ -1200,7 +1098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/windows-eventlog/" class="md-nav__link">
+      <a href="../windows-eventlog/" class="md-nav__link">
         
   
   
@@ -1228,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/filetail/" class="md-nav__link">
+      <a href="../filetail/" class="md-nav__link">
         
   
   
@@ -1256,7 +1154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/process/" class="md-nav__link">
+      <a href="../process/" class="md-nav__link">
         
   
   
@@ -1284,7 +1182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/systemd/" class="md-nav__link">
+      <a href="../systemd/" class="md-nav__link">
         
   
   
@@ -1312,7 +1210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/windows-services/" class="md-nav__link">
+      <a href="../windows-services/" class="md-nav__link">
         
   
   
@@ -1340,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/chrony/" class="md-nav__link">
+      <a href="../chrony/" class="md-nav__link">
         
   
   
@@ -1368,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ntp/" class="md-nav__link">
+      <a href="../ntp/" class="md-nav__link">
         
   
   
@@ -1396,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/os-updates/" class="md-nav__link">
+      <a href="../os-updates/" class="md-nav__link">
         
   
   
@@ -1424,7 +1322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/smart/" class="md-nav__link">
+      <a href="../smart/" class="md-nav__link">
         
   
   
@@ -1452,7 +1350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ipmi/" class="md-nav__link">
+      <a href="../ipmi/" class="md-nav__link">
         
   
   
@@ -1480,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/nvidia/" class="md-nav__link">
+      <a href="../nvidia/" class="md-nav__link">
         
   
   
@@ -1508,7 +1406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/modbus/" class="md-nav__link">
+      <a href="../modbus/" class="md-nav__link">
         
   
   
@@ -1536,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/icmp-check/" class="md-nav__link">
+      <a href="../icmp-check/" class="md-nav__link">
         
   
   
@@ -1564,7 +1462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/http-check/" class="md-nav__link">
+      <a href="../http-check/" class="md-nav__link">
         
   
   
@@ -1592,7 +1490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/tcp-dial/" class="md-nav__link">
+      <a href="../tcp-dial/" class="md-nav__link">
         
   
   
@@ -1620,7 +1518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/dns-latency/" class="md-nav__link">
+      <a href="../dns-latency/" class="md-nav__link">
         
   
   
@@ -1648,7 +1546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/snmp-poll/" class="md-nav__link">
+      <a href="../snmp-poll/" class="md-nav__link">
         
   
   
@@ -1676,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/snmp-trap/" class="md-nav__link">
+      <a href="../snmp-trap/" class="md-nav__link">
         
   
   
@@ -1704,7 +1602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/otlp-receiver/" class="md-nav__link">
+      <a href="../otlp-receiver/" class="md-nav__link">
         
   
   
@@ -1732,7 +1630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/prometheus-scrape/" class="md-nav__link">
+      <a href="../prometheus-scrape/" class="md-nav__link">
         
   
   
@@ -1760,7 +1658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/exec/" class="md-nav__link">
+      <a href="../exec/" class="md-nav__link">
         
   
   
@@ -1788,7 +1686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/citrix/" class="md-nav__link">
+      <a href="../citrix/" class="md-nav__link">
         
   
   
@@ -1816,7 +1714,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/netscaler/" class="md-nav__link">
+      <a href="../netscaler/" class="md-nav__link">
         
   
   
@@ -1844,7 +1742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/redfish/" class="md-nav__link">
+      <a href="../redfish/" class="md-nav__link">
         
   
   
@@ -1872,7 +1770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/powerstore/" class="md-nav__link">
+      <a href="../powerstore/" class="md-nav__link">
         
   
   
@@ -1900,7 +1798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ibmi/" class="md-nav__link">
+      <a href="../ibmi/" class="md-nav__link">
         
   
   
@@ -1928,7 +1826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/mssql_ha/" class="md-nav__link">
+      <a href="../mssql_ha/" class="md-nav__link">
         
   
   
@@ -1956,7 +1854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/oracle_enterprise/" class="md-nav__link">
+      <a href="../oracle_enterprise/" class="md-nav__link">
         
   
   
@@ -1984,7 +1882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/hyperv_ha/" class="md-nav__link">
+      <a href="../hyperv_ha/" class="md-nav__link">
         
   
   
@@ -2012,7 +1910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/vsphere_ha/" class="md-nav__link">
+      <a href="../vsphere_ha/" class="md-nav__link">
         
   
   
@@ -2040,7 +1938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ad_hybrid/" class="md-nav__link">
+      <a href="../ad_hybrid/" class="md-nav__link">
         
   
   
@@ -2068,7 +1966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/exchange_online/" class="md-nav__link">
+      <a href="../exchange_online/" class="md-nav__link">
         
   
   
@@ -2096,7 +1994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/azure_container_apps/" class="md-nav__link">
+      <a href="../azure_container_apps/" class="md-nav__link">
         
   
   
@@ -2121,10 +2019,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2140,6 +2065,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-alert-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to alert on
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-wildcard-and-what-happens-without-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the wildcard, and what happens without it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metric-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2152,7 +2191,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/syslog/" class="md-nav__link">
+      <a href="../syslog/" class="md-nav__link">
         
   
   
@@ -2180,7 +2219,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/event/" class="md-nav__link">
+      <a href="../event/" class="md-nav__link">
         
   
   
@@ -2208,7 +2247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ping-webapp/" class="md-nav__link">
+      <a href="../ping-webapp/" class="md-nav__link">
         
   
   
@@ -2236,7 +2275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/load-webapp/" class="md-nav__link">
+      <a href="../load-webapp/" class="md-nav__link">
         
   
   
@@ -2264,7 +2303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ping-gateway/" class="md-nav__link">
+      <a href="../ping-gateway/" class="md-nav__link">
         
   
   
@@ -2292,7 +2331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/wifi-signal-strength/" class="md-nav__link">
+      <a href="../wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -2320,7 +2359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/veeam/" class="md-nav__link">
+      <a href="../veeam/" class="md-nav__link">
         
   
   
@@ -2348,7 +2387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/mysql/" class="md-nav__link">
+      <a href="../mysql/" class="md-nav__link">
         
   
   
@@ -2376,7 +2415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/postgresql/" class="md-nav__link">
+      <a href="../postgresql/" class="md-nav__link">
         
   
   
@@ -2404,7 +2443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/mssql/" class="md-nav__link">
+      <a href="../mssql/" class="md-nav__link">
         
   
   
@@ -2432,7 +2471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/mongodb/" class="md-nav__link">
+      <a href="../mongodb/" class="md-nav__link">
         
   
   
@@ -2460,7 +2499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/oracle/" class="md-nav__link">
+      <a href="../oracle/" class="md-nav__link">
         
   
   
@@ -2488,7 +2527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/redis/" class="md-nav__link">
+      <a href="../redis/" class="md-nav__link">
         
   
   
@@ -2516,7 +2555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/cassandra/" class="md-nav__link">
+      <a href="../cassandra/" class="md-nav__link">
         
   
   
@@ -2544,7 +2583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/couchdb/" class="md-nav__link">
+      <a href="../couchdb/" class="md-nav__link">
         
   
   
@@ -2572,7 +2611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/clickhouse/" class="md-nav__link">
+      <a href="../clickhouse/" class="md-nav__link">
         
   
   
@@ -2600,7 +2639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/elasticsearch/" class="md-nav__link">
+      <a href="../elasticsearch/" class="md-nav__link">
         
   
   
@@ -2628,7 +2667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/opensearch/" class="md-nav__link">
+      <a href="../opensearch/" class="md-nav__link">
         
   
   
@@ -2656,7 +2695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/solr/" class="md-nav__link">
+      <a href="../solr/" class="md-nav__link">
         
   
   
@@ -2684,7 +2723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/influxdb/" class="md-nav__link">
+      <a href="../influxdb/" class="md-nav__link">
         
   
   
@@ -2712,7 +2751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/memcached/" class="md-nav__link">
+      <a href="../memcached/" class="md-nav__link">
         
   
   
@@ -2740,7 +2779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/apache/" class="md-nav__link">
+      <a href="../apache/" class="md-nav__link">
         
   
   
@@ -2768,7 +2807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/nginx/" class="md-nav__link">
+      <a href="../nginx/" class="md-nav__link">
         
   
   
@@ -2796,7 +2835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/haproxy/" class="md-nav__link">
+      <a href="../haproxy/" class="md-nav__link">
         
   
   
@@ -2824,7 +2863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/envoy/" class="md-nav__link">
+      <a href="../envoy/" class="md-nav__link">
         
   
   
@@ -2852,7 +2891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/php-fpm/" class="md-nav__link">
+      <a href="../php-fpm/" class="md-nav__link">
         
   
   
@@ -2880,7 +2919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/varnish/" class="md-nav__link">
+      <a href="../varnish/" class="md-nav__link">
         
   
   
@@ -2908,7 +2947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/tomcat/" class="md-nav__link">
+      <a href="../tomcat/" class="md-nav__link">
         
   
   
@@ -2936,7 +2975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/wildfly/" class="md-nav__link">
+      <a href="../wildfly/" class="md-nav__link">
         
   
   
@@ -2964,7 +3003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/kafka/" class="md-nav__link">
+      <a href="../kafka/" class="md-nav__link">
         
   
   
@@ -2992,7 +3031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/rabbitmq/" class="md-nav__link">
+      <a href="../rabbitmq/" class="md-nav__link">
         
   
   
@@ -3020,7 +3059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/activemq/" class="md-nav__link">
+      <a href="../activemq/" class="md-nav__link">
         
   
   
@@ -3048,7 +3087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/nats/" class="md-nav__link">
+      <a href="../nats/" class="md-nav__link">
         
   
   
@@ -3076,7 +3115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/pulsar/" class="md-nav__link">
+      <a href="../pulsar/" class="md-nav__link">
         
   
   
@@ -3104,7 +3143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/docker/" class="md-nav__link">
+      <a href="../docker/" class="md-nav__link">
         
   
   
@@ -3132,7 +3171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/kubernetes/" class="md-nav__link">
+      <a href="../kubernetes/" class="md-nav__link">
         
   
   
@@ -3160,7 +3199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/swarm/" class="md-nav__link">
+      <a href="../swarm/" class="md-nav__link">
         
   
   
@@ -3188,7 +3227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/proxmox/" class="md-nav__link">
+      <a href="../proxmox/" class="md-nav__link">
         
   
   
@@ -3216,7 +3255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/hyperv/" class="md-nav__link">
+      <a href="../hyperv/" class="md-nav__link">
         
   
   
@@ -3244,7 +3283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/ceph/" class="md-nav__link">
+      <a href="../ceph/" class="md-nav__link">
         
   
   
@@ -3272,7 +3311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/consul/" class="md-nav__link">
+      <a href="../consul/" class="md-nav__link">
         
   
   
@@ -3300,7 +3339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/zookeeper/" class="md-nav__link">
+      <a href="../zookeeper/" class="md-nav__link">
         
   
   
@@ -3328,7 +3367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/jenkins/" class="md-nav__link">
+      <a href="../jenkins/" class="md-nav__link">
         
   
   
@@ -3356,7 +3395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probes/unifi/" class="md-nav__link">
+      <a href="../unifi/" class="md-nav__link">
         
   
   
@@ -3391,7 +3430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   
@@ -3470,7 +3509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/" class="md-nav__link">
+      <a href="../../whats-new/" class="md-nav__link">
         
   
   
@@ -3498,7 +3537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/next/" class="md-nav__link">
+      <a href="../../whats-new/next/" class="md-nav__link">
         
   
   
@@ -3526,7 +3565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.6/" class="md-nav__link">
+      <a href="../../whats-new/0.5.6/" class="md-nav__link">
         
   
   
@@ -3554,7 +3593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.5/" class="md-nav__link">
+      <a href="../../whats-new/0.5.5/" class="md-nav__link">
         
   
   
@@ -3582,7 +3621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.4/" class="md-nav__link">
+      <a href="../../whats-new/0.5.4/" class="md-nav__link">
         
   
   
@@ -3610,7 +3649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.3/" class="md-nav__link">
+      <a href="../../whats-new/0.5.3/" class="md-nav__link">
         
   
   
@@ -3638,7 +3677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.2/" class="md-nav__link">
+      <a href="../../whats-new/0.5.2/" class="md-nav__link">
         
   
   
@@ -3666,7 +3705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.1/" class="md-nav__link">
+      <a href="../../whats-new/0.5.1/" class="md-nav__link">
         
   
   
@@ -3694,7 +3733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.5.0/" class="md-nav__link">
+      <a href="../../whats-new/0.5.0/" class="md-nav__link">
         
   
   
@@ -3722,7 +3761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.4.2/" class="md-nav__link">
+      <a href="../../whats-new/0.4.2/" class="md-nav__link">
         
   
   
@@ -3750,7 +3789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.4.1/" class="md-nav__link">
+      <a href="../../whats-new/0.4.1/" class="md-nav__link">
         
   
   
@@ -3778,7 +3817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.4.0/" class="md-nav__link">
+      <a href="../../whats-new/0.4.0/" class="md-nav__link">
         
   
   
@@ -3806,7 +3845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.3.2/" class="md-nav__link">
+      <a href="../../whats-new/0.3.2/" class="md-nav__link">
         
   
   
@@ -3834,7 +3873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.2.3/" class="md-nav__link">
+      <a href="../../whats-new/0.2.3/" class="md-nav__link">
         
   
   
@@ -3862,7 +3901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.2.2/" class="md-nav__link">
+      <a href="../../whats-new/0.2.2/" class="md-nav__link">
         
   
   
@@ -3890,7 +3929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.2.1/" class="md-nav__link">
+      <a href="../../whats-new/0.2.1/" class="md-nav__link">
         
   
   
@@ -3918,7 +3957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/0.2.0/" class="md-nav__link">
+      <a href="../../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -3973,10 +4012,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-open-core" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The open core
+        Quick start
       
     </span>
   </a>
@@ -3984,10 +4023,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-licensed-probes" class="md-nav__link">
+  <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The licensed probes
+        Parameters
       
     </span>
   </a>
@@ -3995,10 +4034,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-the-agreement-says-about-the-control" class="md-nav__link">
+  <a href="#metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What the agreement says about the control
+        Metrics
       
     </span>
   </a>
@@ -4006,10 +4045,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#third-party-components" class="md-nav__link">
+  <a href="#what-to-alert-on" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Third-party components
+        What to alert on
       
     </span>
   </a>
@@ -4017,10 +4056,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#which-probes-need-a-license" class="md-nav__link">
+  <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Which probes need a license
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-wildcard-and-what-happens-without-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the wildcard, and what happens without it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metric-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric reference
       
     </span>
   </a>
@@ -4044,7 +4122,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/license/index.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/azure_container_app_jobs.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -4052,76 +4130,389 @@
   
 
 
-<h1 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h1>
-<p>SenHub Agent is two things under one binary, and which license applies
-depends on which part you use.</p>
-<h2 id="the-open-core">The open core<a class="headerlink" href="#the-open-core" title="Permanent link">&para;</a></h2>
-<p>The binary, its collection engine, its output formats and most of its
-probes are published under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>, and their
-source code is public at
-<a href="https://github.com/senhub-io/senhub-agent">github.com/senhub-io/senhub-agent</a>. You may use, modify and
-redistribute them on the terms of that license. Nothing on this page
-restricts it, and nothing expires.</p>
-<h2 id="the-licensed-probes">The licensed probes<a class="headerlink" href="#the-licensed-probes" title="Permanent link">&para;</a></h2>
-<p>Some probe types read equipment and software from third-party vendors and
-are not covered by the Apache license. Their use is granted commercially
-by Sensor Factory, per customer and across the whole estate, under the
-SenHub Agent license agreement.</p>
-<p>The agreement is drawn up in French, which is the only binding version.
-An English translation is provided for convenience. Both are published as
-web pages; a printable PDF of each is linked alongside.</p>
+<p><img src="../../assets/probe-logos/azure_container_apps.svg" alt="" class="probe-page-logo probe-page-logo-mdi"></p>
+<h1 id="azure-container-app-jobs">Azure Container App Jobs<a class="headerlink" href="#azure-container-app-jobs" title="Permanent link">&para;</a></h1>
+<p><strong>Type:</strong> <code>azure_container_app_jobs</code> · <strong>Tier:</strong> Pro · <strong>Platforms:</strong> any</p>
+<p>The Azure Container App Jobs probe watches one job: whether its executions ran, whether they worked, how long they took, and what they wrote. One instance per job.</p>
+<p>It is a separate probe from <a href="../azure_container_apps/">Azure Container Apps</a>, because a job is not an application. An application runs continuously and the question is whether it is up; its console is a stream the agent tails. A job is discrete: an execution starts, ends and leaves a verdict. Its console output is read <strong>once</strong>, after it has finished, and never again.</p>
+<p>Both probes share the same credential, the same Azure Resource Manager access and the same read-budget pacing, so an agent watching applications and jobs on one subscription does not compete with itself.</p>
+<p><strong>Collected data:</strong></p>
+<ul>
+<li>The verdict, the duration and the age of the last success, per job</li>
+<li>The console output of each finished execution, as log records</li>
+<li>The probe's own state: executions read, executions whose output was already cleaned up, and the reads left in the subscription's ARM budget</li>
+</ul>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/41-azure-container-app-jobs.yaml</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nightly-import</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_app_jobs</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">tenant_id</span><span class="p">:</span><span class="w"> </span><span class="s">"00000000-0000-0000-0000-000000000000"</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">client_id</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:azure.client_id}"</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">client_secret</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:azure.client_secret}"</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">subscription_id</span><span class="p">:</span><span class="w"> </span><span class="s">"00000000-0000-0000-0000-000000000000"</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">resource_group</span><span class="p">:</span><span class="w"> </span><span class="s">"rg-production"</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="s">"nightly-import"</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">bookmark_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/var/lib/senhub/nightly-import.executions"</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+</code></pre></div>
+<p><code>app</code> is the name of the job. It is called <code>app</code> because the two probes share their configuration shape; a job goes in the same field an application would.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<!-- schema:params:start -->
+<!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
+<!-- sha256:d1a6aba39d901183a8fc6d679f75d132fb14ffe408766e80b2e15805e7081464 -->
+
 <table>
 <thead>
 <tr>
-<th>Version</th>
-<th>Standing</th>
-<th>Read</th>
-<th>Download</th>
+<th>Parameter</th>
+<th>Must set</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>French</td>
-<td><strong>Binding</strong></td>
-<td><a href="agreement-fr/">Contrat de licence SenHub Agent</a></td>
-<td><a href="contrat-de-licence-senhub-agent.pdf">PDF</a></td>
+<td><code>tenant_id</code></td>
+<td>Yes</td>
+<td>-</td>
+<td>Entra ID tenant (directory) ID</td>
 </tr>
 <tr>
-<td>English</td>
-<td>Courtesy translation</td>
-<td><a href="agreement-en/">SenHub Agent License Agreement</a></td>
-<td><a href="senhub-agent-license-agreement.pdf">PDF</a></td>
+<td><code>client_id</code></td>
+<td>Yes</td>
+<td>-</td>
+<td>Application (client) ID of the app registration</td>
+</tr>
+<tr>
+<td><code>client_secret</code></td>
+<td>Yes</td>
+<td>-</td>
+<td>Client secret of the app registration. A secret: reference it with <code>${secret:…}</code>, <code>${env:…}</code> or <code>${file:…}</code> rather than writing it in the file</td>
+</tr>
+<tr>
+<td><code>subscription_id</code></td>
+<td>Yes</td>
+<td>-</td>
+<td>Subscription that holds the job</td>
+</tr>
+<tr>
+<td><code>resource_group</code></td>
+<td>Yes</td>
+<td>-</td>
+<td>Resource group of the job</td>
+</tr>
+<tr>
+<td><code>app</code></td>
+<td>Yes</td>
+<td>-</td>
+<td>Name of the Container Apps job</td>
+</tr>
+<tr>
+<td><code>containers</code></td>
+<td>No</td>
+<td>-</td>
+<td>Container names to read; empty reads every container of the execution</td>
+</tr>
+<tr>
+<td><code>tail_lines</code></td>
+<td>No</td>
+<td><code>100</code></td>
+<td>Lines read from a finished execution, 0 to 300. An execution's log is read once, so this is the whole of what is published for it</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>No</td>
+<td><code>60</code></td>
+<td>Seconds between two reads of the execution list. A job that runs less often than this is still seen, its verdict being read from history. Its OUTPUT is not: Azure keeps an execution replica about 150 seconds after the run ends, so an interval above that loses the logs</td>
+</tr>
+<tr>
+<td><code>bookmark_path</code></td>
+<td>No</td>
+<td>-</td>
+<td>File remembering the executions already published, so a restart does not publish a run's output twice. Without it, a restart republishes the window Azure still holds</td>
+</tr>
+<tr>
+<td><code>parser</code></td>
+<td>No</td>
+<td>-</td>
+<td>How each line is read</td>
+</tr>
+<tr>
+<td><code>parser.type</code></td>
+<td>No</td>
+<td><code>raw</code></td>
+<td>Shape of a line; raw keeps it whole. One of <code>raw</code>, <code>regex</code>, <code>json</code>, <code>logfmt</code></td>
+</tr>
+<tr>
+<td><code>parser.pattern</code></td>
+<td>No</td>
+<td>-</td>
+<td>Regular expression with named groups (type regex)</td>
+</tr>
+<tr>
+<td><code>parser.timestamp_field</code></td>
+<td>No</td>
+<td>-</td>
+<td>Parsed field that carries the record timestamp</td>
+</tr>
+<tr>
+<td><code>parser.timestamp_format</code></td>
+<td>No</td>
+<td>-</td>
+<td>Go layout of the timestamp field</td>
+</tr>
+<tr>
+<td><code>max_bytes_per_line</code></td>
+<td>No</td>
+<td><code>1048576</code></td>
+<td>Cap on one line read from an execution</td>
+</tr>
+<tr>
+<td><code>exclude</code></td>
+<td>No</td>
+<td>-</td>
+<td>Regular expressions; a line matching one is dropped</td>
+</tr>
+<tr>
+<td><code>authority_host</code></td>
+<td>No</td>
+<td><code>login.microsoftonline.com</code></td>
+<td>Entra ID authority, for sovereign clouds</td>
+</tr>
+<tr>
+<td><code>management_host</code></td>
+<td>No</td>
+<td><code>management.azure.com</code></td>
+<td>Azure Resource Manager endpoint, for sovereign clouds</td>
 </tr>
 </tbody>
 </table>
-<p>Where the two differ, for any reason, the French version prevails.</p>
-<h2 id="what-the-agreement-says-about-the-control">What the agreement says about the control<a class="headerlink" href="#what-the-agreement-says-about-the-control" title="Permanent link">&para;</a></h2>
-<p>Three points matter to anyone assessing the agent before deploying it,
-and the agreement states them as undertakings rather than as intentions.</p>
-<p><strong>The check is local.</strong> The license token is verified against a public
-key inside the binary. The agent contacts no license server, at
-installation or at run time, and an agent cut off from every public
-network behaves identically.</p>
-<p><strong>Nothing is reported.</strong> Sensor Factory receives no data about your
-estate from the license control: not the number of agents, nor their
-identity, nor the probes you enable, nor the machines you monitor.</p>
-<p><strong>Expiry degrades, it does not stop.</strong> The licensed probes keep working
-for at least seven days after a token expires, then stop collecting. The agent keeps running, the free
-probes keep collecting, and the configured outputs keep sending.</p>
-<h2 id="third-party-components">Third-party components<a class="headerlink" href="#third-party-components" title="Permanent link">&para;</a></h2>
-<p>The binary links components published by third parties under their own
-licences, which apply to those components alone and prevail, for them, over
-the agreement. The list is generated from the build's dependency graph and
-is published as <a href="third-party/">Third-party components</a>, which is Annex 1
-of the agreement.</p>
-<h2 id="which-probes-need-a-license">Which probes need a license<a class="headerlink" href="#which-probes-need-a-license" title="Permanent link">&para;</a></h2>
-<p>The probe catalogue marks each type. In the web console, the Probes page
-shows a lock on a type that needs one and names the reason; a type that
-does not run on your operating system says so instead, so a lock always
-means a license and never a platform.</p>
-<p>From the command line:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
-</code></pre></div>
+<!-- schema:params:end -->
+
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.azure_container_app_jobs.up</code></td>
+<td>1</td>
+<td>1 when Azure Resource Manager answered the last read</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.last_execution.status</code></td>
+<td>1</td>
+<td>Verdict of the most recent execution: 0 unknown, 1 running, 2 succeeded, 3 failed</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.since_last_success</code></td>
+<td>s</td>
+<td>Seconds since the last execution that succeeded</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.last_execution.duration</code></td>
+<td>s</td>
+<td>How long the most recent finished execution took</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions</code></td>
+<td>{execution}</td>
+<td>Executions in the reported history, split by state</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions.read</code></td>
+<td>{execution}</td>
+<td>Executions whose output has been published</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions.without_logs</code></td>
+<td>{execution}</td>
+<td>Executions whose verdict was read but whose output was gone</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.records.emitted</code></td>
+<td>{record}</td>
+<td>Log records published from execution output</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.arm.reads_remaining</code></td>
+<td>{read}</td>
+<td>Reads left in the subscription's ARM budget</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-alert-on">What to alert on<a class="headerlink" href="#what-to-alert-on" title="Permanent link">&para;</a></h2>
+<p><strong><code>since_last_success</code>, not the last status.</strong> A scheduled job that has not succeeded since well past its period has a problem, whatever its most recent execution says — a job that stopped being triggered at all reports a perfectly good last status for ever. The metric is absent until one execution has succeeded, so a job that has never worked does not read as healthy.</p>
+<p><code>last_execution.status</code> is what tells you <em>which</em> kind of problem once the first has fired.</p>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>An execution's output is read once, after it finishes.</strong> A run still going is counted but not read: reading it would publish half of it and never the rest. Its lines arrive on the next cycle after it ends.</li>
+<li><strong><code>bookmark_path</code> is what keeps a restart from republishing.</strong> Without it, the agent republishes the executions Azure still holds each time it starts, and an operator sees yesterday's failures arrive again this morning. The file holds execution names, not a position in a stream.</li>
+<li><strong>Azure cleans up execution replicas in about two and a half minutes.</strong> Measured on a real job: the replica of a finished execution still answered 150 seconds after the run ended and was gone at 180. Past that the verdict and the duration are still readable — they come from the execution history — but the output is gone, counted as <code>executions.without_logs</code> rather than reported as an error.</li>
+<li><strong>So <code>interval</code> is not only a freshness setting here.</strong> An execution is read on the first cycle after it finishes, which is up to <code>interval</code> seconds later; an interval above the cleanup window loses the output of every run while the metrics keep looking healthy. The default of 60 seconds leaves roughly a minute and a half of margin. The probe warns at start when the configured interval is at or above 150 seconds.</li>
+<li><strong>The history is a window.</strong> The execution counts are what Azure reports now, not everything that ever ran.</li>
+<li><strong>Two of the four job calls are served by a preview Azure API.</strong> Reading the job and listing its executions answer on the same stable version the application probe uses; an execution's replicas and the job's <code>getAuthToken</code> answer only on <code>2023-11-02-preview</code>. So the verdict, the duration and the counts rest on a stable contract, and only reading the output rests on a preview one that Microsoft may change without a compatibility promise.</li>
+</ul>
+<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
+<p>The probe reads; it never triggers a job. Three entries are enough, and
+one of them has to be a wildcard:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.App/jobs/read</code></td>
+<td>the job itself: its trigger type and its stream endpoint</td>
+</tr>
+<tr>
+<td><code>Microsoft.App/jobs/*/read</code></td>
+<td>its executions, <strong>and the replicas of an execution</strong></td>
+</tr>
+<tr>
+<td><code>Microsoft.App/jobs/getAuthtoken/action</code></td>
+<td>the short-lived token the log stream accepts</td>
+</tr>
+</tbody>
+</table>
+<p><code>Microsoft.App/jobs/start/action</code> is deliberately <strong>not</strong> in that list:
+the probe observes runs, it does not cause them.</p>
+<h3 id="why-the-wildcard-and-what-happens-without-it">Why the wildcard, and what happens without it<a class="headerlink" href="#why-the-wildcard-and-what-happens-without-it" title="Permanent link">&para;</a></h3>
+<p><code>Microsoft.App/jobs/executions/read</code> is the obvious spelling for the
+second line, and it is not enough. Listing the <strong>replicas</strong> of an
+execution is the call that leads to its output, and Azure's provider
+catalogue declares no action for it: there is no
+<code>Microsoft.App/jobs/executions/replicas/read</code> to grant. The wildcard is
+what covers it.</p>
+<p>What makes this worth a paragraph is the failure mode. A credential
+without it is not refused. The replicas call answers <strong>HTTP 200 with an
+empty list</strong>, exactly as it does for an execution Azure has already
+cleaned up. So the probe reports every verdict, every duration and every
+count correctly, and never publishes a single line of output, while
+<code>executions.without_logs</code> climbs and nothing anywhere says "permission".</p>
+<p>Measured, not deduced: on one execution, while it was still running, a
+credential holding the narrow action listed zero replicas at the same
+moment an administrator listed one. Adding the wildcard, the next run's
+output arrived.</p>
+<p>If a job's verdicts look right and its logs never come, check this
+before anything else.</p>
+<p><strong>An existing Container Apps credential is usually not enough.</strong> A role
+assignment written for the applications probe is commonly scoped to
+<code>Microsoft.App/containerApps/...</code>, which does not cover jobs. That one is
+not a deduction either: on a subscription where the applications probe
+was already collecting, the job reads were refused with
+<code>AuthorizationFailed</code> naming <code>Microsoft.App/jobs/read</code>. The two probes
+share a credential only if its role covers both; a credential already
+carrying the four application actions needs these three added to it.</p>
+<h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
+<p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
+OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
+<a href="../../nagios/">Nagios check</a> and the API <code>metrics=</code> filter match.
+<strong>PRTG channel</strong> is the label PRTG shows, placeholders filled from the
+series' tags.</p>
+<!-- schema:metrics:start -->
+<!-- Generated from the probe's definition. Run `make docs-metrics` after changing it. -->
+
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Name</th>
+<th>PRTG channel</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.azure_container_app_jobs.up</code></td>
+<td><code>azure_container_app_jobs_up</code></td>
+<td>Control Plane Reachable</td>
+<td>#</td>
+<td>1 when Azure Resource Manager answered the last read of the job, 0 when it did not</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.last_execution.status</code></td>
+<td><code>azure_container_app_jobs_last_execution_status</code></td>
+<td>Last Execution</td>
+<td>#</td>
+<td>Verdict of the most recent execution: 0 unknown, 1 running, 2 succeeded, 3 failed</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.since_last_success</code></td>
+<td><code>azure_container_app_jobs_since_last_success</code></td>
+<td>Since Last Success</td>
+<td>s</td>
+<td>Seconds since the last execution that succeeded. On a scheduled job this is the number to alert on: a job well past its period without a success has a problem, whatever its last execution says. Absent until one has succeeded</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.last_execution.duration</code></td>
+<td><code>azure_container_app_jobs_last_execution_duration</code></td>
+<td>Last Execution Duration</td>
+<td>s</td>
+<td>How long the most recent finished execution took; 0 while one is still running</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions</code></td>
+<td><code>azure_container_app_jobs_executions_running</code></td>
+<td>Executions Running</td>
+<td>#</td>
+<td>Executions in flight in the history Azure reports</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions</code></td>
+<td><code>azure_container_app_jobs_executions_succeeded</code></td>
+<td>Executions Succeeded</td>
+<td>#</td>
+<td>Executions that succeeded in the history Azure reports. Azure keeps a window, so this counts what is visible rather than everything that ever ran</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions</code></td>
+<td><code>azure_container_app_jobs_executions_failed</code></td>
+<td>Executions Failed</td>
+<td>#</td>
+<td>Executions that failed in the history Azure reports</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions.read</code></td>
+<td><code>azure_container_app_jobs_executions_drained</code></td>
+<td>Executions Read</td>
+<td>#</td>
+<td>Executions whose console output has been published. An execution is read once, after it finishes</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.executions.without_logs</code></td>
+<td><code>azure_container_app_jobs_executions_without_logs</code></td>
+<td>Executions Without Logs</td>
+<td>#</td>
+<td>Executions whose verdict was read but whose output was gone: Azure had already cleaned up the replica. The run is still counted; only its lines are lost</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.records.emitted</code></td>
+<td><code>azure_container_app_jobs_records_emitted</code></td>
+<td>Records Emitted</td>
+<td>#</td>
+<td>Log records published from execution output</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.arm.reads_remaining</code></td>
+<td><code>azure_container_app_jobs_arm_reads_remaining</code></td>
+<td>ARM Reads Remaining</td>
+<td>#</td>
+<td>Reads left in the subscription's Azure Resource Manager budget, as ARM reports it; a fleet of instances shows here how close it is to being throttled</td>
+</tr>
+</tbody>
+</table>
+<!-- schema:metrics:end -->
 
 
 
@@ -4157,7 +4548,7 @@ means a license and never a platform.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../web-interface/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Web console">
+          <a href="../azure_container_apps/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Azure Container Apps">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4167,20 +4558,20 @@ means a license and never a platform.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Web console
+                Azure Container Apps
               </div>
             </div>
           </a>
         
         
           
-          <a href="agreement-fr/" class="md-footer__link md-footer__link--next" aria-label="Next: Contrat de licence (français, fait foi)">
+          <a href="../syslog/" class="md-footer__link md-footer__link--next" aria-label="Next: Syslog">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Contrat de licence (français, fait foi)
+                Syslog
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -4243,14 +4634,14 @@ means a license and never a platform.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../javascripts/rn-filter.js"></script>
+        <script src="../../javascripts/rn-filter.js"></script>
       
-        <script src="../javascripts/dev-banner.js"></script>
+        <script src="../../javascripts/dev-banner.js"></script>
       
     
   </body>

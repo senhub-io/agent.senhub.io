@@ -6,13 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
         <link rel="canonical" href="https://agent.senhub.io/docs/dev/zabbix/">
       
       
+        <link rel="prev" href="../nagios/">
+      
+      
+        <link rel="next" href="../web-interface/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>Zabbix output (preview) - SenHub Agent</title>
+        <title>Zabbix - SenHub Agent</title>
       
     
     
@@ -76,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zabbix-output-preview" class="md-skip">
+        <a href="#zabbix-output" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Zabbix output (preview)
+              Zabbix
             
           </span>
         </div>
@@ -451,6 +455,363 @@
   
   
     <li class="md-nav__item">
+      <a href="../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Item keys
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item keys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metrics-relayed-from-another-sender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics relayed from another sender
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics relayed from another sender">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-standard-conventions-arrive-with-a-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The standard conventions arrive with a template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templates-and-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templates and discovery
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Templates and discovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#triggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Triggers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encryption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Encryption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-a-pre-shared-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With a pre-shared key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-a-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With a certificate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-to-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which to choose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is implemented
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passive-polling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passive polling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Passive polling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encrypting-the-polled-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encrypting the polled port
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-hosts-inventory-fills-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The host's inventory fills itself
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-template-set-per-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One template set per platform
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-agents-own-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent's own items
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#through-a-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Through a proxy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Versions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autoregistration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autoregistration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Autoregistration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-host-already-registered-keeps-the-templates-it-was-given" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A host already registered keeps the templates it was given
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../web-interface/" class="md-nav__link">
         
   
@@ -491,10 +852,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -512,8 +873,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -662,10 +1023,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -683,8 +1044,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -831,10 +1192,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -852,8 +1213,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1942,6 +2303,34 @@
     
   
     Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
   
 
     
@@ -3241,10 +3630,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3262,8 +3651,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3847,6 +4236,84 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Templates and discovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#triggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Triggers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encryption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Encryption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#with-a-pre-shared-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With a pre-shared key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-a-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With a certificate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-to-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which to choose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is implemented
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3922,6 +4389,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Versions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#autoregistration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3929,6 +4407,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Autoregistration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-host-already-registered-keeps-the-templates-it-was-given" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A host already registered keeps the templates it was given
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3957,19 +4452,15 @@
   
 
 
-<h1 id="zabbix-output-preview">Zabbix output (preview)<a class="headerlink" href="#zabbix-output-preview" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Preview</p>
-<p>The Zabbix output is being built during the 0.6.0 cycle and is not
-supported yet. It is proven against Zabbix 7.0 and 8.0 on a Linux
-and a Windows host, templates and discovery included, but it has not
-run long enough anywhere to be called supported.</p>
-</div>
+<h1 id="zabbix-output">Zabbix output<a class="headerlink" href="#zabbix-output" title="Permanent link">&para;</a></h1>
 <p>The <code>zabbix</code> output makes the agent a native <strong>Zabbix active agent</strong>: it
 connects out to a Zabbix server or proxy on port 10051, registers the host
 through Zabbix autoregistration, asks which items the server wants for it,
 and pushes their latest values in batches. Nothing listens on the agent
 side; PRTG, Nagios and Prometheus keep working next to it.</p>
+<p>It is proven against Zabbix 7.0 and 8.0 on a Linux and a Windows host:
+every generated template imports into both lines, and encryption works
+both ways with a certificate or a pre-shared key.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># strategies.d/20-zabbix.yaml</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">zabbix</span><span class="p">:</span>
@@ -4016,7 +4507,7 @@ side; PRTG, Nagios and Prometheus keep working next to it.</p>
 <tr>
 <td><code>interval</code></td>
 <td><code>60s</code></td>
-<td>Push cadence of the collected values.</td>
+<td>Push cadence of the collected values. Each push sends the latest value of every item, including the value of a probe that runs less often, until that probe's next run is due.</td>
 </tr>
 <tr>
 <td><code>refresh_interval</code></td>
@@ -4103,12 +4594,25 @@ side; PRTG, Nagios and Prometheus keep working next to it.</p>
 <td><code>false</code></td>
 <td>Skip the server certificate check.</td>
 </tr>
+<tr>
+<td><code>tls.psk_identity</code></td>
+<td></td>
+<td>Identity sent with the pre-shared key; must match what the server or the autoregistration setting holds.</td>
+</tr>
+<tr>
+<td><code>tls.psk_file</code></td>
+<td></td>
+<td>File holding the pre-shared key, hex-encoded as Zabbix writes it. Excludes <code>cert_file</code>.</td>
+</tr>
+<tr>
+<td><code>passive.tls.psk_identity</code>, <code>passive.tls.psk_file</code></td>
+<td></td>
+<td>The same pair for the polled port, configured apart because the roles are opposite.</td>
+</tr>
 </tbody>
 </table>
-<p>Zabbix pre-shared keys (PSK) are not supported: Go's TLS library has no
-PSK cipher suites. Encrypted autoregistration, which Zabbix only offers
-with PSK, is therefore not available; register in clear or through a
-local proxy, then encrypt the data connection with a certificate.</p>
+<p>A block takes a certificate <strong>or</strong> a pre-shared key, never both. See
+<a href="#encryption">Encryption</a> for both forms and for what each one buys.</p>
 <h2 id="item-keys">Item keys<a class="headerlink" href="#item-keys" title="Permanent link">&para;</a></h2>
 <p>Every series is sent under a key built from the probe's definition:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;key_prefix&gt;.&lt;metric&gt;[&lt;probe name&gt;,&lt;dimension&gt;,...,&lt;static attribute&gt;,...]
@@ -4129,7 +4633,10 @@ carries its device and mount point first:
 <code>senhub.system.filesystem.usage[logicaldisk,/dev/sda1,/,used]</code>. A metric
 whose OTel name already starts with the prefix is not prefixed twice. Values follow the OTel unit (a
 percentage is a ratio, a duration is in seconds); an enum metric is sent
-as its raw code under one key.</p>
+as its raw code under one key. The generated templates multiply a
+utilization by 100 on the server side, so it is stored and shown as a
+percentage (<code>95.31 %</code>) as the native agent shows it; write a trigger or
+a calculated item against the percentage.</p>
 <p>The server only receives the keys it asked for. Until the host exists on
 the server and a template gives it items, the log says so at start and
 nothing is pushed.</p>
@@ -4179,11 +4686,9 @@ which is a calculated item in Zabbix.</p>
 key its own name gives it, and an operator who wants it declares its
 item once. Adding a convention to the shipped set is a definition file,
 not code.</p>
-<p>One limit is worth knowing: items are created per dimension set, so an
-application exporting part of a set — one of the three JVM metrics keyed
-on the sender alone, say — gets items for the rest of it, which stay
-empty. A language SDK usually exports its standard set together, so the
-case is a runtime that exports part of a family. (#922)</p>
+<p>An application that exports only part of a set, one of the three JVM
+memory metrics of a pool for instance, gets items for what it sends and
+none for the rest: discovery lists, per sender, the metrics it feeds.</p>
 <h2 id="templates-and-discovery">Templates and discovery<a class="headerlink" href="#templates-and-discovery" title="Permanent link">&para;</a></h2>
 <p>The templates are generated from the same definitions the keys come from,
 one per probe type:</p>
@@ -4204,9 +4709,136 @@ dimension. The agent serves these discovery keys like any other item, so
 a host gets its items within one discovery interval (1 hour by default,
 <code>--delay</code> does not change it; edit the rule in Zabbix if you want faster
 discovery on a lab). An enum metric with a lookup gets a value map.</p>
+<p>An instance only gets the items of the metrics it sends. Each discovery
+row carries <code>{#SENHUB.FED}</code>, the list of metrics that instance feeds,
+and the rule holds every prototype to it: a virtual network card whose
+kernel reports no speed gets no speed item, while a bridge on the same
+host that reports one does. An agent too old to send the list keeps
+every item, as before.</p>
 <p>Import the files through <strong>Data collection &gt; Templates &gt; Import</strong>, or
 <code>configuration.import</code> on the API. Re-importing a regenerated template
 updates the same objects: the identifiers are derived from the keys.</p>
+<p>Every generated template is imported into a live Zabbix 7.0 and 8.0
+before a release, in both export formats and for both platforms. Two
+probes get no file at all: <code>syslog</code> and <code>event</code> relay records rather
+than measuring anything, so they declare no item, and the command says
+so on standard error rather than writing a template that could only
+ever stay empty.</p>
+<p>Two constraints of Zabbix's own are worth knowing if you write a
+definition. A template's technical name is validated as a host name, so
+the generator strips what that forbids — a friendly name like
+"IBM i / Power Systems" becomes <code>SenHub IBM i Power Systems</code>, while the
+name an operator reads keeps the slash. And the 6.0 export spells the
+root template-group tag <code>groups</code> where 7.0 renamed it to
+<code>template_groups</code>; <code>--version</code> picks the right one.</p>
+<h3 id="triggers">Triggers<a class="headerlink" href="#triggers" title="Permanent link">&para;</a></h3>
+<p>The templates carry triggers, so a host linked to them raises problems
+without anyone writing an expression.</p>
+<ul>
+<li><strong>States.</strong> A metric that reports a state (a virtual server that is
+  down, a backup job that failed, a cluster in red) raises a problem
+  from the same classification PRTG and Nagios read: the codes its
+  lookup calls an error raise a <em>High</em> problem, the ones it calls a
+  warning raise a <em>Warning</em>. The problem names the state, through the
+  item's value map.</li>
+<li><strong>Thresholds.</strong> Processor, memory and disk usage raise a <em>Warning</em>
+  and a <em>High</em> problem when every value over the last five minutes is
+  above a threshold: 80 and 90 % for the processor and the disks, 85
+  and 95 % for the memory, the values the shipped Nagios checks use.
+  The warning depends on the high one, so a value past both raises one
+  problem. Each threshold is a template macro, overridden on a host or
+  a host group without editing the template:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Macro</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{$SENHUB.CPU_USAGE_TOTAL.WARN}</code> / <code>.CRIT}</code></td>
+<td>80 / 90</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.MEMORY_USED_PERCENT.WARN}</code> / <code>.CRIT}</code></td>
+<td>85 / 95</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.FS_USED_PERCENT.WARN}</code> / <code>.CRIT}</code> (Linux)</td>
+<td>80 / 90</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.DISK_USED_PERCENT.WARN}</code> / <code>.CRIT}</code> (Windows)</td>
+<td>80 / 90</td>
+</tr>
+</tbody>
+</table>
+<p>Items and triggers are tagged the way the native templates are: every
+item carries <code>component</code> (the probe type, or <code>agent</code> and <code>inventory</code> on
+the agent's own items), and every trigger carries <code>scope</code>:
+<code>availability</code> for a state, <code>performance</code> for the processor, <code>capacity</code>
+for memory and disks. Filter problem views and actions on them.</p>
+<h2 id="encryption">Encryption<a class="headerlink" href="#encryption" title="Permanent link">&para;</a></h2>
+<p>The agent encrypts with <strong>certificates</strong> or with a <strong>pre-shared key</strong>,
+in both directions, which is the same choice a native Zabbix agent
+offers.</p>
+<h3 id="with-a-pre-shared-key">With a pre-shared key<a class="headerlink" href="#with-a-pre-shared-key" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">psk_identity</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-paris"</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">psk_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix.psk</span>
+</code></pre></div>
+<p><code>psk_file</code> holds the key hex-encoded, exactly as Zabbix writes it, and
+is the only place it appears: nothing carries it in the configuration,
+so <code>config show</code> has nothing to redact and the file's permissions are
+the protection. Generate one the way Zabbix documents:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>openssl<span class="w"> </span>rand<span class="w"> </span>-hex<span class="w"> </span><span class="m">32</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/senhub-agent/zabbix.psk
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/senhub-agent/zabbix.psk
+</code></pre></div>
+<p>On the Zabbix side, set the same identity and key on the host, or in
+<strong>Administration &gt; General &gt; Autoregistration</strong> for agents that register
+themselves.</p>
+<p>The polled port takes the same two settings under <code>passive.tls</code>, and the
+two are configured apart because the roles are opposite. A block takes a
+certificate <strong>or</strong> a pre-shared key, never both: Zabbix picks one
+encryption per connection, and configuring both would leave the agent
+choosing silently which secret proves it.</p>
+<h3 id="with-a-certificate">With a certificate<a class="headerlink" href="#with-a-certificate" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix-ca.crt</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/agent.crt</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/agent.key</span>
+</code></pre></div>
+<p>See <a href="#encrypting-the-polled-port">Encrypting the polled port</a> for the
+listener's own block.</p>
+<h3 id="which-to-choose">Which to choose<a class="headerlink" href="#which-to-choose" title="Permanent link">&para;</a></h3>
+<p>A pre-shared key needs no certificate authority, which is why most
+Zabbix sites use it, and it is the <strong>only</strong> encryption Zabbix offers for
+autoregistration — that setting takes "none", "PSK" or both, and refuses
+a certificate. So an agent that registers itself on a site which
+encrypts that step needs PSK. A certificate carries an identity a
+authority vouches for, and is the better answer where a PKI already
+exists.</p>
+<h3 id="what-is-implemented">What is implemented<a class="headerlink" href="#what-is-implemented" title="Permanent link">&para;</a></h3>
+<p>TLS 1.2 with <code>TLS_PSK_WITH_AES_128_GCM_SHA256</code> or
+<code>TLS_PSK_WITH_AES_256_GCM_SHA384</code>, which is what Zabbix's own default
+PSK cipher list offers. Go's standard TLS has no external pre-shared
+keys, so this profile is implemented in the agent: one suite family, no
+certificate, no resumption, no renegotiation, no 0-RTT.</p>
+<p>Verified against real servers on both lines — the outbound connection,
+autoregistration (the host is created with PSK set on both directions by
+Zabbix itself), collection, and the polled port answering <code>zabbix_get
+--tls-connect psk</code>. A wrong key, a wrong identity and an unencrypted
+poll are all refused.</p>
+<p>Not implemented: the TLS 1.3 external-PSK profile. Both Zabbix lines
+accept the 1.2 one, so this is not a limitation in practice; a server
+configured to refuse TLS 1.2 outright would not be served.</p>
 <h2 id="passive-polling">Passive polling<a class="headerlink" href="#passive-polling" title="Permanent link">&para;</a></h2>
 <p>With <code>passive.enabled: true</code> the agent also listens on <code>passive.port</code>
 (10050 by default) and answers the server's polls the way a classic
@@ -4223,26 +4855,26 @@ agent interface on it.</p>
 the translation and not somewhere it can poll. <code>passive.advertise</code> names
 the address instead: a name creates a DNS interface, an address creates
 an IP one.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">advertise</span><span class="p">:</span><span class="w"> </span><span class="s">"web-01.example.com"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">advertise</span><span class="p">:</span><span class="w"> </span><span class="s">"web-01.example.com"</span>
 </code></pre></div>
 <h3 id="encrypting-the-polled-port">Encrypting the polled port<a class="headerlink" href="#encrypting-the-polled-port" title="Permanent link">&para;</a></h3>
 <p>The listener takes its own <code>tls</code> block, apart from the one on the
 outbound connection, because the two are opposite roles: there the agent
 checks a server, here it presents itself to one.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.crt</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.key</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/zabbix-ca.crt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">      </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.crt</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">      </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.key</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/zabbix-ca.crt</span>
 </code></pre></div>
 <p>With <code>cert_file</code> and <code>key_file</code> alone, the agent encrypts what it serves
 and anyone the allow list admits may read it. Add <code>ca_file</code> and the
@@ -4254,12 +4886,12 @@ certificate says who they are.</p>
 start rather than leaving a listener that serves in clear.</p>
 <p>Pre-shared keys are not available here either, for the reason given
 above.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h2 id="the-hosts-inventory-fills-itself">The host's inventory fills itself<a class="headerlink" href="#the-hosts-inventory-fills-itself" title="Permanent link">&para;</a></h2>
 <p>Beside the measurements, the agent knows what the machine <em>is</em>: its
@@ -4350,13 +4982,13 @@ the host is monitored actively or polled on the passive port.</p>
 changes: the agent registers through it, the server attaches the host to
 the proxy that relayed the registration, and the values travel the same
 way.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
 </code></pre></div>
 <p>A <strong>proxy group</strong> needs every member listed, separated by commas, the way
 a classic agent takes several <code>ServerActive</code> entries:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
 </code></pre></div>
 <p>The agent talks to the first member that answers. When the host is held
 by another member, that member replies with a redirection and the agent
@@ -4367,6 +4999,70 @@ how it learns where the group moved the host.</p>
 <p>With <code>passive.enabled</code> and no explicit <code>passive.allow</code>, every configured
 address is allowed to poll the agent, because the member polling today is
 not necessarily the one that polled yesterday.</p>
+<h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h2>
+<p>Measured on a server of each line, not inferred from a changelog.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Zabbix 7.0.30</th>
+<th>Zabbix 8.0.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zabbix setup</code> (templates, host group, autoregistration action)</td>
+<td>yes</td>
+<td>yes, unchanged</td>
+</tr>
+<tr>
+<td>autoregistration</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>items by low-level discovery</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>host inventory filled from what the agent knows</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>polled port read by <code>zabbix_get</code></td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>proxy group redirection</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<p>Two things are worth knowing about the 8.0 line specifically.</p>
+<p><strong>The API no longer accepts the session token in the request body.</strong>
+Where 7.0 took <code>"auth": "&lt;token&gt;"</code> inside the JSON-RPC envelope, 8.0
+answers <code>unexpected parameter "auth"</code> and wants an
+<code>Authorization: Bearer</code> header. <code>senhub-agent zabbix setup</code> has always
+sent the header, so it works on both lines without a flag; a script of
+your own that drives the API may need changing.</p>
+<p><strong>The proxy group redirection is unchanged.</strong> A host assigned to a group
+makes the server answer the check-list request with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"redirect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proxy:10051"</span><span class="p">}}</span>
+</code></pre></div>
+<p>which is the same shape 7.0 emits, and the agent follows it to the
+member holding the host. Two conditions have to be met for a group to
+redirect at all, and missing either one looks like the feature not
+working: the group needs a member that is <strong>online</strong>, and the host has
+to be assigned with <code>monitored_by</code> set to the proxy group rather than
+left on the server. While the assignment propagates, the server answers
+once with <code>host ... is monitored by a proxy</code> and no redirect; the agent
+logs it and the next request is redirected normally.</p>
+<p>The templates are exported in the 7.0 format and import into 8.0 as they
+are; <code>--version 8.0</code> is not needed and does not exist.</p>
 <h2 id="autoregistration">Autoregistration<a class="headerlink" href="#autoregistration" title="Permanent link">&para;</a></h2>
 <p>Create an action under <strong>Alerts &gt; Actions &gt; Autoregistration actions</strong>
 with a condition on the host metadata (<code>contains senhub-agent</code>, or
@@ -4374,6 +5070,16 @@ whatever you set in <code>host_metadata</code>) and three operations: add host, 
 to a host group, link the generated templates. Every agent whose
 metadata matches then appears by itself at its first check-list request,
 with its items created by discovery within the discovery interval.</p>
+<p><code>zabbix setup</code> creates these actions for you, one per platform.</p>
+<h3 id="a-host-already-registered-keeps-the-templates-it-was-given">A host already registered keeps the templates it was given<a class="headerlink" href="#a-host-already-registered-keeps-the-templates-it-was-given" title="Permanent link">&para;</a></h3>
+<p>Zabbix runs an autoregistration action when a host registers, not
+afterwards. Re-running <code>zabbix setup</code> after an upgrade refreshes the
+content of every template, and hosts already linked to them receive the
+change. A template the action links for the first time, because you
+named a new probe with <code>--probe</code>, reaches only the hosts that register
+from then on. For the hosts already there, link it yourself: select them
+under <strong>Data collection &gt; Hosts</strong>, then <strong>Mass update &gt; Templates &gt;
+Link</strong>.</p>
 
 
 
@@ -4404,6 +5110,44 @@ with its items created by discovery within the discovery interval.</p>
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../nagios/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Nagios">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Nagios
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../web-interface/" class="md-footer__link md-footer__link--next" aria-label="Next: Web console">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Web console
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
