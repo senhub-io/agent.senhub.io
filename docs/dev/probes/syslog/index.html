@@ -5465,20 +5465,26 @@
 <h3 id="permission-denied-port-1024">Permission Denied (Port &lt; 1024)<a class="headerlink" href="#permission-denied-port-1024" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error binding to port 514 on Unix/Linux systems</p>
 <p><strong>Solution:</strong>
-Ports below 1024 require elevated privileges on Unix/Linux:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Option 1: Run agent as root (not recommended)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>senhub-agent<span class="w"> </span>run
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># Option 2: Grant port binding capability (Linux)</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>sudo<span class="w"> </span>setcap<span class="w"> </span><span class="nv">cap_net_bind_service</span><span class="o">=</span>+ep<span class="w"> </span>/opt/senhub/bin/senhub-agent
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># Option 3: Use alternate port (&gt;1024) and configure syslog sources</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># /etc/senhub-agent/probes.d/10-syslog.yaml:</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>-<span class="w"> </span>name:<span class="w"> </span>syslog
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span>type:<span class="w"> </span>syslog
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span>params:
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span>port:<span class="w"> </span><span class="m">1514</span><span class="w">  </span><span class="c1"># Non-privileged port</span>
+The Linux service runs as the unprivileged <code>senhub</code> account with every
+capability dropped, so it cannot bind a port below 1024. The error says
+so: <code>bind: permission denied: port 514 is below 1024</code>. Two ways out:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Option 1: grant the one capability in a unit drop-in</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>senhub-agent.service
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1">#   [Service]</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1">#   CapabilityBoundingSet=CAP_NET_BIND_SERVICE</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1">#   AmbientCapabilities=CAP_NET_BIND_SERVICE</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># Option 2: listen on a port above 1023 and point the senders at it</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># /etc/senhub-agent/probes.d/10-syslog.yaml:</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>-<span class="w"> </span>name:<span class="w"> </span>syslog
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span>type:<span class="w"> </span>syslog
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span>params:
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span>port:<span class="w"> </span><span class="m">1514</span><span class="w">  </span><span class="c1"># Non-privileged port</span>
 </code></pre></div>
+<p><code>setcap</code> on the binary does not help: the unit's empty capability bounding
+set removes file capabilities, and an update replaces the file. See
+<a href="https://github.com/senhub-io/senhub-agent/blob/dev/docs/admin-guide/LEAST-PRIVILEGE.md">Running the agent least-privilege</a>.</p>
 <p><strong>Configure syslog sources to use alternate port:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># rsyslog configuration (/etc/rsyslog.conf or /etc/rsyslog.d/*.conf)</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>*.*<span class="w"> </span>@syslog-server:1514<span class="w">  </span><span class="c1"># UDP</span>

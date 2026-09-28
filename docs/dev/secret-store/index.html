@@ -4139,6 +4139,12 @@
 <li><code>agent secret migrate --wire-unit</code> wires the secrets it has just sealed;</li>
 <li><code>agent uninstall</code> removes it with the configuration.</li>
 </ul>
+<p>A host already on the age store keeps its secrets there when it moves to
+<code>systemd-creds</code>: while both stores exist the agent reads <code>creds.d/</code> first
+and the age store for the names it does not hold, so the move can be made
+one secret at a time, each re-stored with
+<code>SENHUB_SECRET_BACKEND=systemd-creds agent secret set &lt;name&gt;</code>, before the
+age files are removed.</p>
 <p>After a <code>secret set</code> or <code>secret rm</code>, run <code>agent secret wire-unit</code> (or <code>agent refresh-unit</code>) so the next start sees the change. None of these restart the service: run <code>agent restart</code> to load the new credentials.</p>
 <p>The store files are owned by the account the agent runs as and readable only by it (age key file <code>0600</code>, DPAPI files restricted to SYSTEM + Administrators). Because the store is root-/service-owned, resolving a sealed secret requires the same privilege as the agent itself — see the privilege note under <a href="#agent-key-show"><code>agent key show</code></a>.</p>
 <h2 id="the-agent-secret-command">The <code>agent secret</code> command<a class="headerlink" href="#the-agent-secret-command" title="Permanent link">&para;</a></h2>
