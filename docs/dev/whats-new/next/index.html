@@ -4131,6 +4131,12 @@ was silently replaced by the shipped checks.</p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
+<p><strong>The agent shows its instance id.</strong> <code>senhub-agent key instance-id</code>,
+  <code>senhub-agent status</code> and the <strong>Agent</strong> card of the web console show
+  the <code>service.instance.id</code> the agent's telemetry and entity carry, so
+  it can be found in a metrics store or a topology graph.</p>
+</li>
+<li>
 <p><strong>The Zabbix output</strong>, as a native active agent. It connects out to
   port 10051, registers the host through autoregistration, asks which
   items the server wants and pushes their values. Low-level discovery
