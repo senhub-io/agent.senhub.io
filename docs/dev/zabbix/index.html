@@ -4702,10 +4702,17 @@ items, <code>1m</code> by default), <code>--out</code> (directory; without it a 
 goes to standard output).</p>
 <p>Every item of a template is a prototype under a low-level discovery rule,
 because the probe instance name is discovered too: the rule
-<code>senhub.discovery[memory]</code> returns <code>[{"{#PROBE}":"memory"}]</code>, and a
-metric with dimensions hangs under the rule of its dimension set,
+<code>senhub.discovery[memory]</code> returns
+<code>[{"{#PROBE}":"memory","{#PROBE_MEMORY}":"memory"}]</code>, and a metric with
+dimensions hangs under the rule of its dimension set,
 <code>senhub.discovery[logicaldisk,device,mount_point]</code>, with one macro per
-dimension. The agent serves these discovery keys like any other item, so
+dimension.</p>
+<p>Both macros carry the same instance name. The item keys use the one
+named after the probe type, <code>senhub.db.up[{#PROBE_POSTGRESQL}]</code>, because
+Zabbix refuses to link two templates that declare the same key, and a
+plain <code>{#PROBE}</code> made the PostgreSQL and MySQL templates both declare
+<code>senhub.db.up[{#PROBE}]</code>. The key the agent sends is the same either
+way, <code>senhub.db.up[production-postgres]</code>; item names keep <code>{#PROBE}</code>. The agent serves these discovery keys like any other item, so
 a host gets its items within one discovery interval (1 hour by default,
 <code>--delay</code> does not change it; edit the rule in Zabbix if you want faster
 discovery on a lab). An enum metric with a lookup gets a value map.</p>
@@ -4798,6 +4805,7 @@ so <code>config show</code> has nothing to redact and the file's permissions are
 the protection. Generate one the way Zabbix documents:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>openssl<span class="w"> </span>rand<span class="w"> </span>-hex<span class="w"> </span><span class="m">32</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/senhub-agent/zabbix.psk
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/senhub-agent/zabbix.psk
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>chown<span class="w"> </span>senhub:senhub<span class="w"> </span>/etc/senhub-agent/zabbix.psk<span class="w">   </span><span class="c1"># the service account reads it</span>
 </code></pre></div>
 <p>On the Zabbix side, set the same identity and key on the host, or in
 <strong>Administration &gt; General &gt; Autoregistration</strong> for agents that register
@@ -5042,6 +5050,11 @@ not necessarily the one that polled yesterday.</p>
 </tr>
 </tbody>
 </table>
+<p><code>zabbix setup</code> also prepares a 6.0 LTS server (measured on 6.0.48). A
+server before 6.4 reads the API token only inside the request, and one
+before 6.2 has no template groups and cannot read the 7.0 export format;
+the command reads the server's version and adapts to both, so
+<code>--version 6.0</code> is chosen for you there.</p>
 <p>Two things are worth knowing about the 8.0 line specifically.</p>
 <p><strong>The API no longer accepts the session token in the request body.</strong>
 Where 7.0 took <code>"auth": "&lt;token&gt;"</code> inside the JSON-RPC envelope, 8.0

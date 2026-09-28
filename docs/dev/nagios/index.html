@@ -4264,25 +4264,35 @@ plugin turns that word into the exit code Nagios reads:</p>
 <p>Then declare the command once, and one service per check:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>define command {
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    command_name  check_senhub
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    command_line  $USER1$/check_senhub "http://$HOSTADDRESS$:8080/api/$USER3$/nagios/$ARG1$"
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    command_line  $USER1$/check_senhub "http://$HOSTADDRESS$:8080/api/$_HOSTSENHUB_KEY$/nagios/$ARG1$"
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>}
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>define service {
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    use                  generic-service
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    host_name            web-01
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    service_description  CPU
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    check_command        check_senhub!check/cpu_detailed
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>define host {
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    use          linux-server
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    host_name    web-01
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    address      192.0.2.10
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    _SENHUB_KEY  0f6c...   ; senhub-agent key show, on web-01
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>}
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>define service {
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    use                  generic-service
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    host_name            web-01
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    service_description  SenHub memory probe
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    check_command        check_senhub!metrics/memory
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    service_description  CPU
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    check_command        check_senhub!check/cpu_detailed
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>}
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>define service {
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    use                  generic-service
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    host_name            web-01
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    service_description  SenHub memory probe
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    check_command        check_senhub!metrics/memory
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>}
 </code></pre></div>
-<p><code>$USER3$</code> holds the agent key; set it in <code>resource.cfg</code> so the key stays
-out of the object files.</p>
+<p>Every agent generates its own key, so the key belongs to the host:
+<code>_SENHUB_KEY</code> is a custom variable of the host, which the command reads
+as <code>$_HOSTSENHUB_KEY$</code>. A single <code>$USER3$</code> in <code>resource.cfg</code> works only
+while Nagios polls one agent. The key only reads; still, give the file
+holding the host definitions the permissions of <code>resource.cfg</code>.</p>
 <h2 id="the-probe-summary">The probe summary<a class="headerlink" href="#the-probe-summary" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/metrics/cpu
 </code></pre></div>
@@ -4291,6 +4301,10 @@ out of the object files.</p>
 <p>The status is <strong>OK</strong> while the probe holds values, and <strong>CRITICAL</strong> when
 it holds none or when every availability metric it reports (a metric
 whose name ends in <code>.up</code>) is 0, meaning its target cannot be reached.
+A probe that relays records and measures nothing, such as <code>syslog</code> or
+<code>otlp_receiver</code>, holds no values by design: its summary follows the
+probe's own state instead, <strong>OK</strong> while it runs and its listener
+receives, <strong>CRITICAL</strong> with the cause when it fails.
 The summary never returns WARNING: thresholds belong to checks.</p>
 <p>Performance data labels are the PRTG channel labels of the probe's
 metrics, with spaces turned into underscores. The last part of the URL

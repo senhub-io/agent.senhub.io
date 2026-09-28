@@ -4179,7 +4179,7 @@ else is a parameter.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.5.5-beta
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.0
 </code></pre></div>
 <p>That is the whole of it for a first run: one variable, one mount.</p>
 <h2 id="the-one-mount-that-matters">The one mount that matters<a class="headerlink" href="#the-one-mount-that-matters" title="Permanent link">&para;</a></h2>
@@ -4216,6 +4216,11 @@ the variables describe. What does not: the log bookmarks, so a
 Container Apps stream re-sends its recent lines and a file probe skips
 what was written in between, and anything written to the configuration
 from the console.</p>
+<p>The host's <em>name</em> is another matter: it is the container's host name,
+which Docker sets to the container id unless told otherwise, so a new
+container shows up under a new name while keeping the same identity.
+Give it one that means something with <code>--hostname</code> (<code>hostname:</code> in a
+Compose file).</p>
 <p>Nothing else needs a mount. The configuration lives inside the container
 unless you choose otherwise, and the log file is written to
 <code>/var/log/senhub-agent</code> inside it.</p>
@@ -4249,6 +4254,18 @@ feature they configure is wanted.</p>
 <td>No</td>
 <td><code>grpc</code></td>
 <td><code>grpc</code> or <code>http</code>, the latter for a backend that ingests OTLP over HTTP</td>
+</tr>
+<tr>
+<td><code>SENHUB_ENTITIES</code></td>
+<td>No</td>
+<td><code>true</code></td>
+<td>Sends the entities (this host, the agent, what its probes watch) a topology backend builds its map from. <code>false</code> exports measurements and logs only</td>
+</tr>
+<tr>
+<td><code>SENHUB_OTLP_TLS</code></td>
+<td>No</td>
+<td><code>true</code></td>
+<td><code>false</code> for a collector that listens in plain text, such as a sidecar on <code>localhost:4317</code>. The token then crosses the network unencrypted: keep it to the same host or a trusted network</td>
 </tr>
 <tr>
 <td><code>SENHUB_LICENSE</code></td>
@@ -4422,7 +4439,7 @@ ignores your variables tells you why.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-v<span class="w"> </span>/srv/senhub/conf:/etc/senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.5.5-beta
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.0
 </code></pre></div>
 <p>Your configuration wins completely, and that includes the agent key
 under <code>agent: key:</code>. The entrypoint does not touch it, so a

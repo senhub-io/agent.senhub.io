@@ -5201,9 +5201,12 @@ what turns the host's availability green.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
 </code></pre></div>
 <h3 id="activate-a-license">Activate a license<a class="headerlink" href="#activate-a-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>license.jwt
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
 </code></pre></div>
-<p>Validates the license and writes it to the <code>license.jwt</code> file next to
+<p>With <code>-</code>, or with no argument and a file or pipe on standard input, the
+token is read from standard input and never appears in the process list
+or the shell history. Validates the license and writes it to the <code>license.jwt</code> file next to
 <code>agent.yaml</code>. Restart the agent for the change to take effect. You can also
 simply place the <code>license.jwt</code> file next to the config yourself and restart —
 no CLI needed.</p>
