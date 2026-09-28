@@ -4018,6 +4018,41 @@ collection gaps that comparison exposed.</p>
 <h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
+<p><strong>The web console and the configuration API need their own key.</strong> The
+  agent key is what a monitoring tool is given to read this agent, and
+  it travels in the URL path, so it lands in the access log of every
+  machine between the poller and the agent. It also opened everything
+  that <em>changes</em> the agent: clearing the metric cache, injecting values
+  into it, changing log levels, reading the agent's own logs, editing
+  probes and outputs. A read-only consumer held the means to falsify
+  what it read.</p>
+<p>The two surfaces are now told apart. <code>admin_key</code> on the <code>http</code>
+output opens the administration one, and it alone; the agent key
+reads and stops there. The administration key carries the read
+privilege too, so one key is enough to use the console.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:agent.admin_key}"</span>
+</code></pre></div>
+<p><strong>Without it the administration surface is not served at all</strong> — its
+routes are not registered and answer 404, rather than asking for a
+key nobody has. An installation that exists to feed PRTG or Nagios
+never needed that surface and no longer carries it; its pollers are
+untouched.</p>
+<p><strong>You do not have to do anything.</strong> An agent that starts without an
+administration key generates one and writes it into its <code>http</code>
+output, where the next sealing pass moves it into the operating
+system's store like every other secret. <code>senhub-agent console</code>
+resolves it, so the Windows desktop and Start Menu shortcuts keep
+opening the console exactly as before — they name the binary, never
+the key.</p>
+<p>What does change: an address you <strong>bookmarked</strong> carries the old key
+and now answers 404. Open the console from the shortcut, or run
+<code>senhub-agent console --print</code>, and bookmark that instead. Likewise
+for anything scripted against the configuration API with the agent
+key.</p>
+</li>
+<li>
 <p><strong><code>service.instance.id</code> is now an RFC 4122 UUID.</strong> The OpenTelemetry
   semantic conventions ask for a UUID; the agent now derives one (version
   5) from its key. Each agent's <code>service.instance.id</code> therefore changes
@@ -4044,11 +4079,11 @@ installation running the probe without a filter loses
 <code>senhub.process.group.memory.usage</code> beside <code>process.count</code>.</p>
 <p><strong>To keep the per-process detail</strong>, name what to watch or bound the
 sample. Any one of these is enough:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">filter</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">by_name</span><span class="p">:</span><span class="w"> </span><span class="s">"^(nginx|php-fpm)"</span><span class="w">   </span><span class="c1"># or by_user, or top_n</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">filter</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">by_name</span><span class="p">:</span><span class="w"> </span><span class="s">"^(nginx|php-fpm)"</span><span class="w">   </span><span class="c1"># or by_user, or top_n</span>
 </code></pre></div>
 <p>The processes named this way also become entities on the topology
 graph, which an unfiltered view never did, for the same reason.</p>
@@ -4268,6 +4303,22 @@ last status for ever.</p>
   discovery block is set, instead of one named application. The role
   does not have to be granted across the subscription: Azure returns
   only what the credential may read.</p>
+</li>
+<li>
+<p><strong>The Windows shortcuts no longer go through a script.</strong> They ran
+  <code>wscript.exe</code> on a VBScript launcher whose only job was to open the
+  console without showing a terminal — the agent being a console
+  program, a shortcut aimed at it leaves a command window in front of
+  the browser for as long as it waits for the service, up to fifteen
+  seconds on a fresh install.</p>
+<p>VBScript is a feature-on-demand since Windows 11 24H2 and Microsoft
+has announced its removal; a scripting host launching a signed
+binary is a pattern endpoint protection flags; and the script was
+the one piece of executable content in the package our signing chain
+did not cover. It is replaced by <code>senhub-console.exe</code>, a small
+launcher built for the Windows graphical subsystem, so no terminal
+is ever created — and signed with everything else.</p>
+<p>Nothing to do: the shortcuts are rewritten by the installer.</p>
 </li>
 <li>
 <p><strong>The image publication scans before it pushes</strong>, and the dependency
