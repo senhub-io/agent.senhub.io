@@ -4185,9 +4185,12 @@ else is a parameter.</p>
 <h2 id="the-one-mount-that-matters">The one mount that matters<a class="headerlink" href="#the-one-mount-that-matters" title="Permanent link">&para;</a></h2>
 <p><code>/var/lib/senhub-agent</code> holds everything that makes this agent <em>this</em>
 agent: its host identity, its own key, and the bookmarks its log probes
-keep. <strong>Mount it, or every container arrives as a new host</strong> and
-re-reads the tail of every log it follows. The entrypoint says so on
-startup when the directory is not a mounted volume.</p>
+keep. <strong>Mount it, or every container arrives as a new host</strong> and its
+log probes lose their place: a Container Apps stream re-sends its last
+<code>tail_lines</code>, a file probe skips what was written in between. The
+entrypoint says so on startup when the directory is not a mounted
+volume, naming only what <code>SENHUB_HOST_ID</code> and <code>SENHUB_AGENT_KEY</code> do not
+already carry.</p>
 <p>Two identities live there, and they answer different questions.</p>
 <p><code>machine-id</code> is the host identity. It is what a container has none of:
 on a real machine the operating system provides it, and the agent reads
@@ -4209,9 +4212,10 @@ because nothing signals it, and an example or blank value is refused at
 start.</p>
 <p>What survives a new container without a volume: the host identity and
 the agent identity when those two variables are set, the configuration
-the variables describe. What does not: the log bookmarks, so a log
-probe re-reads from where its source starts, and anything written to the
-configuration from the console.</p>
+the variables describe. What does not: the log bookmarks, so a
+Container Apps stream re-sends its recent lines and a file probe skips
+what was written in between, and anything written to the configuration
+from the console.</p>
 <p>Nothing else needs a mount. The configuration lives inside the container
 unless you choose otherwise, and the log file is written to
 <code>/var/log/senhub-agent</code> inside it.</p>

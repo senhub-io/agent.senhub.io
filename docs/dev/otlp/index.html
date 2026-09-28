@@ -4861,7 +4861,7 @@ ready-to-use <code>strategies.d/10-otlp.yaml</code>:</p>
 <a id="__codelineno-3-94" name="__codelineno-3-94" href="#__codelineno-3-94"></a><span class="w">      </span><span class="c1"># are derived from agent identity if omitted.</span>
 <a id="__codelineno-3-95" name="__codelineno-3-95" href="#__codelineno-3-95"></a><span class="w">      </span><span class="nt">resource</span><span class="p">:</span>
 <a id="__codelineno-3-96" name="__codelineno-3-96" href="#__codelineno-3-96"></a><span class="w">        </span><span class="nt">service.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub-agent</span><span class="w">             </span><span class="c1"># default</span>
-<a id="__codelineno-3-97" name="__codelineno-3-97" href="#__codelineno-3-97"></a><span class="w">        </span><span class="nt">service.instance.id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;agent-key prefix&gt;</span><span class="w"> </span><span class="c1"># default: first 8 chars of agent.key</span>
+<a id="__codelineno-3-97" name="__codelineno-3-97" href="#__codelineno-3-97"></a><span class="w">        </span><span class="nt">service.instance.id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;uuid&gt;</span><span class="w">             </span><span class="c1"># default: an RFC 4122 UUID derived from agent.key</span>
 <a id="__codelineno-3-98" name="__codelineno-3-98" href="#__codelineno-3-98"></a><span class="w">        </span><span class="nt">deployment.environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
 <a id="__codelineno-3-99" name="__codelineno-3-99" href="#__codelineno-3-99"></a><span class="w">        </span><span class="c1"># Any additional keys are passed through as resource attributes.</span>
 <a id="__codelineno-3-100" name="__codelineno-3-100" href="#__codelineno-3-100"></a><span class="w">        </span><span class="nt">k8s.cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">edge-01</span>
@@ -5109,9 +5109,9 @@ can keep the full attribute set while this one redacts.</p>
 group series and logs into entities. Defaults:</p>
 <ul>
 <li><code>service.name</code> = <code>"senhub-agent"</code></li>
-<li><code>service.instance.id</code> = first 8 chars of the agent authentication
-  key (avoids leaking the full secret to backends while keeping
-  per-agent disambiguation)</li>
+<li><code>service.instance.id</code> = an RFC 4122 UUID (version 5) derived from the
+  agent key: one per agent, stable for as long as the key is, as the
+  OpenTelemetry semantic conventions recommend</li>
 <li><code>service.version</code> = the agent build version (when known)</li>
 </ul>
 <p>Any additional key/value pair under <code>resource:</code> is passed through
