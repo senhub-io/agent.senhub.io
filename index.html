@@ -3,1100 +3,699 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <title>SenHub Agent — The OpenTelemetry-native infrastructure agent</title>
-    <meta
-      name="description"
-      content="SenHub Agent is an open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits OTLP into your stack (Prometheus, VictoriaMetrics, Grafana), with first-class native PRTG and Nagios outputs."
-    />
+    <meta name="description" content="SenHub Agent is an open-source, OpenTelemetry-native infrastructure monitoring agent: a single static Go binary with 83 integrations, serving OTLP, Prometheus, Zabbix, PRTG and Nagios natively. Apache-2.0." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/" />
-
-    <!-- Open Graph -->
     <meta property="og:title" content="SenHub Agent — The OpenTelemetry-native infrastructure agent" />
-    <meta
-      property="og:description"
-      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs. Open-core."
-    />
+    <meta property="og:description" content="SenHub Agent is an open-source, OpenTelemetry-native infrastructure monitoring agent: a single static Go binary with 83 integrations, serving OTLP, Prometheus, Zabbix, PRTG and Nagios natively. Apache-2.0." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://agent.senhub.io" />
+    <meta property="og:url" content="https://agent.senhub.io/" />
     <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="SenHub Agent — the OpenTelemetry-native infrastructure agent. A single lightweight Go binary emitting OTLP into Prometheus and Grafana, with first-class native PRTG and Nagios outputs."
-    />
-
-    <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SenHub Agent — The OpenTelemetry-native infrastructure agent" />
-    <meta
-      name="twitter:description"
-      content="A single, lightweight Go binary that emits your host and infrastructure metrics as OpenTelemetry — OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs. Open-core."
-    />
+    <meta name="twitter:description" content="SenHub Agent is an open-source, OpenTelemetry-native infrastructure monitoring agent: a single static Go binary with 83 integrations, serving OTLP, Prometheus, Zabbix, PRTG and Nagios natively. Apache-2.0." />
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
-
-    <style>
-      /* ---- Palette: SenHub brand (senhub.io) — amber fill, cyan accent ---- */
-      :root {
-        --bg: #fbfbfd;          /* near-white surface */
-        --panel: #ffffff;       /* raised panels */
-        --ink: #212529;         /* anthracite body text */
-        --muted: #5b6472;       /* secondary text */
-        --accent: #fcbe36;      /* SenHub amber — buttons / highlights */
-        --accent-dark: #f0ad17; /* hover state */
-        --accent-ink: #212529;  /* dark text on amber */
-        --cyan: #00caf6;        /* SenHub cyan — links / accents */
-        --cyan-dark: #0091bd;   /* legible cyan for text */
-        --line: #e7e9ef;        /* hairline borders */
-        --robot: #4c4949;       /* robot body / strong ink */
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      html {
-        -webkit-text-size-adjust: 100%;
-      }
-
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        font-size: 17px;
-        line-height: 1.65;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      .wrap {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      a {
-        color: var(--cyan-dark);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      a:focus-visible,
-      .btn:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 3px;
-        border-radius: 4px;
-        text-decoration: none;
-      }
-
-      /* ---- Header ---- */
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 26px 0;
-      }
-
-      .logo {
-        display: block;
-        height: 52px;
-        width: auto;
-      }
-
-      nav a {
-        color: var(--muted);
-        margin-left: 22px;
-        font-size: 0.95rem;
-      }
-
-      nav a:hover {
-        color: var(--cyan-dark);
-      }
-
-      section {
-        padding: 56px 0;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin: 0 0 16px;
-      }
-
-      p {
-        margin: 0 0 16px;
-      }
-
-      /* ---- Hero ---- */
-      .hero {
-        text-align: center;
-        padding: 64px 0 52px;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-        line-height: 1.08;
-        font-weight: 800;
-        letter-spacing: -0.015em;
-        margin: 0 0 20px;
-      }
-
-      .hero h1 .hl {
-        background: linear-gradient(transparent 56%, rgba(252, 190, 54, 0.55) 56%);
-        padding: 0 0.06em;
-        border-radius: 2px;
-      }
-
-      .hero .subtagline {
-        font-size: 1.15rem;
-        color: var(--muted);
-        max-width: 44ch;
-        margin: 0 auto 34px;
-      }
-
-      /* ---- Buttons ---- */
-      .buttons {
-        display: flex;
-        gap: 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 12px 22px;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        border: 1px solid var(--accent);
-        transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-      }
-
-      .btn-primary {
-        background: var(--accent);
-        color: var(--accent-ink);
-        border-color: var(--accent);
-      }
-
-      .btn-primary:hover {
-        background: var(--accent-dark);
-        border-color: var(--accent-dark);
-        text-decoration: none;
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: var(--cyan-dark);
-        border-color: var(--cyan);
-      }
-
-      .btn-secondary:hover {
-        background: var(--cyan);
-        color: #062d38;
-        border-color: var(--cyan);
-        text-decoration: none;
-      }
-
-      /* ---- Badges ---- */
-      .badges {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        flex-wrap: wrap;
-        align-items: center;
-        min-height: 20px;
-        margin: 26px 0 0;
-      }
-
-      .badges img {
-        display: block;
-        height: 20px;
-        width: auto;
-      }
-
-      /* ---- Fan-out demo: one source, every sink ---- */
-      .demo {
-        padding-top: 8px;
-      }
-
-      .fanout {
-        margin: 0 auto;
-        max-width: 640px;
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        box-shadow: 0 1px 3px rgba(31, 36, 48, 0.05);
-        overflow: hidden;
-      }
-
-      .fanout-head {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 18px 22px;
-        border-bottom: 1px solid var(--line);
-        background: #fcfcfe;
-      }
-
-      .fanout-head img {
-        height: 34px;
-        width: auto;
-      }
-
-      .fanout-head .ft {
-        font-weight: 700;
-        font-size: 1rem;
-      }
-
-      .fanout-head .fs {
-        font-size: 0.86rem;
-        color: var(--muted);
-      }
-
-      .fanout-body {
-        padding: 20px 22px;
-      }
-
-      .src-line {
-        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-        font-size: 0.84rem;
-        color: var(--robot);
-        background: #f5f6f9;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 10px 14px;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-
-      .src-line .c {
-        color: var(--muted);
-      }
-
-      .arrow {
-        text-align: center;
-        color: var(--cyan-dark);
-        font-size: 0.9rem;
-        margin: 12px 0;
-        letter-spacing: 0.04em;
-      }
-
-      .sinks {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
-        justify-content: center;
-      }
-
-      .sink {
-        font-size: 0.86rem;
-        font-weight: 600;
-        padding: 7px 13px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: #fff;
-        color: var(--ink);
-      }
-
-      .sink b {
-        color: var(--cyan-dark);
-        font-weight: 700;
-      }
-
-      .sink-soon {
-        color: var(--muted);
-        border-style: dashed;
-      }
-
-      .demo-caption {
-        text-align: center;
-        font-size: 0.92rem;
-        color: var(--muted);
-        max-width: 52ch;
-        margin: 20px auto 0;
-      }
-
-      /* ---- Three columns ---- */
-      .cols {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-      }
-
-      .cols h3 {
-        font-size: 1.05rem;
-        margin: 0 0 8px;
-      }
-
-      .cols p {
-        font-size: 0.95rem;
-        color: var(--muted);
-        margin: 0;
-      }
-
-      /* ---- Platform callout ---- */
-      .platform {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-left: 4px solid var(--cyan);
-        border-radius: 12px;
-        padding: 26px 28px;
-      }
-
-      .platform h2 {
-        margin-top: 0;
-      }
-
-      .platform p:last-child {
-        margin-bottom: 0;
-      }
-
-      /* ---- Free tier chip list ---- */
-      .tier {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 4px 0 0;
-      }
-
-      .tier code {
-        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-        font-size: 0.82rem;
-        background: rgba(0, 202, 246, 0.10);
-        color: var(--cyan-dark);
-        padding: 3px 9px;
-        border-radius: 6px;
-      }
-
-      /* ---- Inline code in prose ---- */
-      p code,
-      li code {
-        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-        font-size: 0.84em;
-        background: rgba(0, 202, 246, 0.10);
-        color: var(--cyan-dark);
-        padding: 1px 6px;
-        border-radius: 5px;
-      }
-
-      /* ---- Quick start: numbered steps + dark code blocks ---- */
-      .steps {
-        display: grid;
-        gap: 24px;
-      }
-
-      .step-head {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 0 0 12px;
-      }
-
-      .step-num {
-        flex: 0 0 auto;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: var(--accent);
-        color: var(--accent-ink);
-        font-weight: 800;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .step-head h3 {
-        font-size: 1.05rem;
-        margin: 0;
-      }
-
-      pre.code {
-        margin: 0 0 0 40px;
-        background: #1e232b;
-        color: #e6e9ef;
-        border-radius: 10px;
-        padding: 15px 18px;
-        overflow-x: auto;
-        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-        font-size: 0.84rem;
-        line-height: 1.6;
-      }
-
-      pre.code .cmt { color: #7c8694; }
-      pre.code .k { color: var(--cyan); }
-      pre.code .s { color: var(--accent); }
-      pre.code .p { color: #9aa4b2; }
-
-      /* ---- Probe catalog grid ---- */
-      .pgrid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-
-      .pcat {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        padding: 16px 18px;
-      }
-
-      .pcat h3 {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        font-size: 0.96rem;
-        margin: 0 0 7px;
-      }
-
-      .pcat p {
-        font-size: 0.85rem;
-        color: var(--muted);
-        margin: 0;
-      }
-
-      .tag {
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        padding: 2px 7px;
-        border-radius: 999px;
-        white-space: nowrap;
-      }
-
-      .tag-free { background: rgba(0, 202, 246, 0.14); color: var(--cyan-dark); }
-      .tag-pro { background: rgba(252, 190, 54, 0.22); color: #946800; }
-
-      .section-note {
-        font-size: 0.9rem;
-        color: var(--muted);
-        margin: 18px 0 0;
-      }
-
-      /* ---- Tables (integrations + tiers) ---- */
-      .tbl-wrap {
-        overflow-x: auto;
-      }
-
-      table.tbl {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.92rem;
-        min-width: 460px;
-      }
-
-      table.tbl th,
-      table.tbl td {
-        text-align: left;
-        padding: 11px 12px;
-        border-bottom: 1px solid var(--line);
-        vertical-align: top;
-      }
-
-      table.tbl th {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--muted);
-        font-weight: 700;
-      }
-
-      table.tbl td:first-child {
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      table.tbl code {
-        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-        font-size: 0.82rem;
-        color: var(--cyan-dark);
-      }
-
-      .st {
-        font-size: 0.68rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        padding: 2px 8px;
-        border-radius: 999px;
-        white-space: nowrap;
-      }
-
-      .st-primary { background: rgba(252, 190, 54, 0.22); color: #946800; }
-      .st-ok { background: rgba(0, 202, 246, 0.14); color: var(--cyan-dark); }
-
-      /* ---- Footprint stats band ---- */
-      .stats {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 26px 52px;
-        margin: 8px 0 0;
-      }
-
-      .stat {
-        text-align: center;
-      }
-
-      .stat .num {
-        font-size: 2.1rem;
-        font-weight: 800;
-        line-height: 1.1;
-        letter-spacing: -0.01em;
-      }
-
-      .stat .num .u {
-        color: var(--cyan-dark);
-      }
-
-      .stat .lbl {
-        font-size: 0.85rem;
-        color: var(--muted);
-        margin-top: 3px;
-      }
-
-      /* ---- Platform / deployment chips ---- */
-      .plats {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
-        justify-content: center;
-        max-width: 560px;
-        margin: 28px auto 0;
-      }
-
-      .plats span {
-        font-size: 0.85rem;
-        font-weight: 600;
-        padding: 6px 13px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: #fff;
-        color: var(--ink);
-      }
-
-      .plats .sep {
-        border: 0;
-        background: none;
-        color: var(--muted);
-        font-weight: 400;
-        padding: 6px 2px;
-        align-self: center;
-      }
-
-      .plats .soon {
-        color: var(--muted);
-        border-style: dashed;
-      }
-
-      .divider {
-        border: 0;
-        border-top: 1px solid var(--line);
-        margin: 0;
-      }
-
-      /* ---- Footer ---- */
-      footer {
-        padding: 40px 0 56px;
-        font-size: 0.9rem;
-        color: var(--muted);
-        text-align: center;
-      }
-
-      footer a {
-        color: var(--muted);
-      }
-
-      footer nav a {
-        margin: 0 10px;
-      }
-
-      footer a:hover {
-        color: var(--cyan-dark);
-      }
-
-      footer .copy {
-        margin-bottom: 10px;
-      }
-
-      @media (max-width: 760px) {
-        .cols {
-          grid-template-columns: 1fr;
-          gap: 28px;
-        }
-
-        .pgrid {
-          grid-template-columns: 1fr;
-        }
-
-        pre.code {
-          margin-left: 0;
-        }
-
-        .hero h1 {
-          font-size: 2.25rem;
-        }
-
-        .hero {
-          padding: 44px 0 36px;
-        }
-
-        .logo {
-          height: 40px;
-        }
-
-        nav a {
-          margin-left: 12px;
-          font-size: 0.85rem;
-        }
-      }
-    </style>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "SenHub Agent",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Linux, Windows",
-        "description": "Open-core, OpenTelemetry-native infrastructure monitoring agent: a single lightweight Go binary that emits host and infrastructure metrics as OTLP into Prometheus, VictoriaMetrics or Grafana, with first-class native PRTG and Nagios outputs.",
-        "url": "https://agent.senhub.io/",
-        "codeRepository": "https://github.com/senhub-io/senhub-agent",
-        "programmingLanguage": "Go",
-        "license": "https://www.apache.org/licenses/LICENSE-2.0",
-        "isPartOf": {
-          "@type": "WebSite",
-          "name": "SenHub",
-          "url": "https://senhub.io"
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "Sensor Factory",
-          "url": "https://sensorfactory.fr"
-        }
-      }
-    </script>
+  <style>
+  /* Palette reprise de index.html — marque SenHub : ambre + cyan */
+  :root {
+    --bg: #fbfbfd;
+    --panel: #ffffff;
+    --panel-2: #f5f6fa;
+    --ink: #212529;
+    --muted: #5b6472;
+    --accent: #fcbe36;
+    --accent-dark: #f0ad17;
+    --accent-ink: #212529;
+    --cyan: #00caf6;
+    --cyan-dark: #0091bd;
+    --line: #e7e9ef;
+    --robot: #4c4949;
+    --note-bg: #fffaf0;
+    --note-line: #f0d9a4;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15171c;
+      --panel: #1d2026;
+      --panel-2: #23262e;
+      --ink: #eceef3;
+      --muted: #99a2b1;
+      --accent: #fcbe36;
+      --accent-dark: #ffd066;
+      --accent-ink: #1a1c21;
+      --cyan: #00caf6;
+      --cyan-dark: #53d9f7;
+      --line: #2c313a;
+      --robot: #d4d0d0;
+      --note-bg: #241f14;
+      --note-line: #5c4a24;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #15171c;
+    --panel: #1d2026;
+    --panel-2: #23262e;
+    --ink: #eceef3;
+    --muted: #99a2b1;
+    --accent: #fcbe36;
+    --accent-dark: #ffd066;
+    --accent-ink: #1a1c21;
+    --cyan: #00caf6;
+    --cyan-dark: #53d9f7;
+    --line: #2c313a;
+    --robot: #d4d0d0;
+    --note-bg: #241f14;
+    --note-line: #5c4a24;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding-inline: 24px; }
+
+  a { color: var(--cyan-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--cyan-dark);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .nav .wrap {
+    display: flex; align-items: center; gap: 20px;
+    padding-block: 14px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
+  }
+  .brand:hover { text-decoration: none; }
+  .brand .mark { width: 30px; height: 30px; flex: none; display: block; }
+  .brand .bt span { color: var(--muted); font-weight: 500; }
+  .nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding-block: 64px 40px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--cyan-dark);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5.4vw, 45px);
+    line-height: 1.12; letter-spacing: -0.022em; font-weight: 800;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(transparent 62%, var(--accent) 62%);
+  }
+  .hero p.lede {
+    font-size: 19px; color: var(--muted);
+    margin: 20px 0 0; max-width: 62ch;
+  }
+  .facts {
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    list-style: none; margin: 22px 0 0; padding: 0;
+    font-size: 13.5px; color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .facts li { display: flex; align-items: center; gap: 8px; }
+  .facts li::before {
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--cyan); flex: none;
+  }
+  .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 7px;
+    font-weight: 650; font-size: 15px; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: var(--accent-dark); text-decoration: none; }
+  .btn-ghost {
+    border-color: var(--line); color: var(--ink); background: var(--panel);
+  }
+  .btn-ghost:hover { border-color: var(--cyan-dark); text-decoration: none; }
+
+  /* ---------- le bloc de code du hero ---------- */
+  .shell {
+    margin-top: 30px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--panel-2); overflow: hidden;
+  }
+  .shell-bar {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 9px 16px; background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+  .shell-bar.mid { border-top: 1px solid var(--line); }
+  .shell pre {
+    margin: 0; padding: 14px 16px; overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px; line-height: 1.7; color: var(--ink);
+  }
+  .shell .p { color: var(--accent-dark); font-weight: 700; }
+  .shell .k { color: var(--cyan-dark); }
+  .shell .c { color: var(--muted); }
+  .shell-note {
+    margin: 12px 0 0; font-size: 14px; color: var(--muted);
+    max-width: 66ch; line-height: 1.55;
+  }
+
+  /* ---------- la rangee de plateformes, facon Telegraf / Netdata ---------- */
+  .plats {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px;
+    list-style: none; margin: 30px 0 46px; padding: 0;
+    font-size: 13.5px; color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .plats li { display: flex; align-items: center; gap: 8px; }
+  .plats li::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan); flex: none;
+  }
+
+  /* ---------- le mur d'integrations : la densite EST l'argument ---------- */
+  .cats {
+    margin-top: 26px;
+    columns: 2; column-gap: 28px;
+  }
+  .cat { break-inside: avoid; margin-bottom: 22px; }
+  .cat h3 {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: baseline; gap: 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  .cat h3 span {
+    margin-left: auto; font-variant-numeric: tabular-nums;
+    font-weight: 700; color: var(--ink); letter-spacing: 0;
+  }
+  .cat ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .cat li {
+    font-size: 14px; line-height: 1.5; padding: 2px 0;
+    display: flex; align-items: baseline; gap: 7px;
+  }
+  .cat li i {
+    font-style: normal; font-size: 9.5px; font-weight: 800;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--accent-ink); background: var(--accent);
+    padding: 1px 5px; border-radius: 3px; flex: none;
+  }
+  @media (max-width: 680px) { .cats { columns: 1; } }
+
+  /* ---------- Zabbix, nouveauté 0.6.0 ---------- */
+  .badge {
+    display: inline-block; font-size: 11.5px; font-weight: 800;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    background: var(--accent); color: var(--accent-ink);
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .zx { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .zx .card {
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 18px; background: var(--panel);
+  }
+  .zx .card h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 5px; }
+  .zx .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .zx .card .port {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px; color: var(--cyan-dark); display: block; margin-top: 7px;
+  }
+  .setup {
+    margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center;
+    gap: 18px 26px; border: 1px solid var(--accent);
+    border-radius: 10px; padding: 16px 20px; background: var(--panel-2);
+  }
+  .setup .big {
+    font-size: 27px; font-weight: 800; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+  }
+  .setup .big small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  .setup p { margin: 0; font-size: 14.5px; color: var(--muted); flex: 1 1 260px; }
+
+  /* ---------- sections ---------- */
+  section.band { padding-block: 44px; border-top: 1px solid var(--line); }
+  h2 {
+    font-size: 26px; letter-spacing: -0.015em; font-weight: 750;
+    margin-bottom: 14px;
+  }
+  section.band > .wrap > p { color: var(--muted); max-width: 64ch; margin: 0 0 14px; }
+  section.band > .wrap > p:last-child { margin-bottom: 0; }
+  strong { font-weight: 680; color: var(--ink); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 26px; }
+  .cols h3 { font-size: 16.5px; font-weight: 700; margin-bottom: 6px; }
+  .cols p { margin: 0; font-size: 15px; color: var(--muted); }
+
+  /* une seule chose surlignée : la ligne CMDB */
+  .pull {
+    margin: 26px 0 0; padding: 18px 20px;
+    border-left: 3px solid var(--accent);
+    background: var(--panel-2); border-radius: 0 8px 8px 0;
+    font-size: 17.5px; line-height: 1.5;
+  }
+  .pull span { color: var(--muted); font-size: 14.5px; display: block; margin-top: 8px; }
+
+  .yaml {
+    margin-top: 20px; border: 1px solid var(--line); border-radius: 9px;
+    background: var(--panel-2); overflow-x: auto;
+  }
+  .yaml pre {
+    margin: 0; padding: 16px 18px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13.5px; line-height: 1.7; color: var(--ink);
+  }
+  .yaml .k { color: var(--cyan-dark); }
+  .yaml .c { color: var(--muted); }
+
+  .stats { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 24px; }
+  .stat .num {
+    font-size: 30px; font-weight: 800; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; line-height: 1.1;
+  }
+  .stat .lbl { font-size: 13.5px; color: var(--muted); }
+
+  .tiers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 22px; }
+  .tier { border: 1px solid var(--line); border-radius: 9px; padding: 14px 16px; }
+  .tier .n { font-weight: 700; font-size: 15px; }
+  .tier .d { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+
+  /* ---------- what's new ---------- */
+  .news { margin-top: 24px; display: flex; flex-direction: column; gap: 0; }
+  .news .item {
+    display: grid; grid-template-columns: 92px 1fr; gap: 20px;
+    padding: 16px 0; border-top: 1px solid var(--line);
+  }
+  .news .item:last-child { border-bottom: 1px solid var(--line); }
+  .news .ver {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .news .ver small { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+  .news .item.now .ver { color: var(--accent-dark); }
+  .news h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 4px; }
+  .news p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.55; }
+  .news-more { margin-top: 18px; font-size: 14.5px; }
+
+  @media (max-width: 520px) {
+    .news .item { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  footer { border-top: 1px solid var(--line); padding-block: 26px 40px; }
+  footer p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  section.band code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px; background: var(--panel); padding: 2px 6px;
+    border-radius: 4px; border: 1px solid var(--line); color: var(--ink);
+  }
+
+  @media (max-width: 620px) {
+    .cols, .tiers, .zx { grid-template-columns: 1fr; }
+    .hero { padding-block: 44px 32px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  </style>
   </head>
-
   <body>
-    <div class="wrap">
-      <header>
-        <a href="/" aria-label="SenHub Agent home"><img class="logo" src="/logo-full.svg" alt="SenHub Agent" /></a>
-        <nav aria-label="Primary">
-          <a href="/docs/">Docs</a>
-          <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
-          <a href="https://senhub.io">SenHub</a>
-        </nav>
-      </header>
 
-      <main>
-        <section class="hero">
-          <h1>The <span class="hl">OpenTelemetry-native</span><br />infrastructure agent.</h1>
-          <p class="subtagline">
-            Collect host and infrastructure metrics as OpenTelemetry — push
-            via OTLP to Prometheus, VictoriaMetrics or Grafana, or serve PRTG
-            and Nagios natively. Your stack, your choice.
-          </p>
-          <div class="buttons">
-            <a class="btn btn-primary" href="/docs/">Get started</a>
-            <a class="btn btn-secondary" href="https://github.com/senhub-io/senhub-agent"
-              >★ Star on GitHub</a
-            >
-          </div>
-          <div class="badges">
-            <a href="https://github.com/senhub-io/senhub-agent/stargazers" aria-label="Star SenHub Agent on GitHub">
-              <img src="/assets/badges/github-star.svg" alt="GitHub: star" width="102" height="20" />
-            </a>
-            <img src="/assets/badges/license-apache.svg" alt="License: Apache 2.0" width="124" height="20" />
-            <img src="/assets/badges/open-core.svg" alt="Model: open core" width="118" height="20" />
-          </div>
-        </section>
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="rbt" viewBox="0 0 120 120">
+    <rect x="57" y="20" width="6" height="20" rx="3" fill="#4a4a4a"/>
+    <circle cx="60" cy="18" r="9" fill="#00caf6"/>
+    <rect x="14" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="90" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="24" y="40" width="72" height="64" rx="16" fill="#4a4a4a"/>
+    <rect x="33" y="49" width="54" height="46" rx="9" fill="#ededed"/>
+    <circle cx="49" cy="66" r="7" fill="#fcbe36"/>
+    <circle cx="71" cy="66" r="7" fill="#fcbe36"/>
+    <rect x="42" y="80" width="36" height="11" rx="2" fill="none" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="51" y1="80" x2="51" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="60" y1="80" x2="60" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="69" y1="80" x2="69" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+  </symbol>
+</svg>
 
-        <hr class="divider" />
-
-        <section class="demo" aria-label="Collect once, ship everywhere">
-          <div class="fanout">
-            <div class="fanout-head">
-              <img src="/logo-mark.svg" alt="" aria-hidden="true" />
-              <div>
-                <div class="ft">SenHub Agent</div>
-                <div class="fs">one collector running on every host</div>
-              </div>
-            </div>
-            <div class="fanout-body">
-              <div class="src-line">
-                <span class="c"># collect host &amp; infrastructure metrics</span><br />
-                cpu · memory · disk · network · logs · databases · Citrix · NetScaler · Veeam …
-              </div>
-              <div class="arrow">▼ &nbsp; one OpenTelemetry-native pipeline &nbsp; ▼</div>
-              <div class="sinks">
-                <span class="sink"><b>OTLP</b></span>
-                <span class="sink"><b>Prometheus</b></span>
-                <span class="sink"><b>PRTG</b></span>
-                <span class="sink"><b>Nagios</b></span>
-              </div>
-            </div>
-          </div>
-          <p class="demo-caption">
-            One OpenTelemetry pipeline, every output. Push OTLP, scrape
-            Prometheus, or serve PRTG and Nagios — all first-class, all from the
-            same agent. No per-tool agents to deploy.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Why SenHub Agent</h2>
-          <p>
-            Observability has standardized on OpenTelemetry — everywhere except
-            the infrastructure edge, where each tool still ships its own agent.
-            SenHub Agent closes that gap: a single OTel-native collector for
-            hosts, databases and infrastructure. Emit OTLP into a modern stack,
-            or serve PRTG, Nagios and Prometheus natively — every output is
-            first-class and fully supported. Adopt OpenTelemetry at your own
-            pace, without leaving the tools you rely on.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>What it does</h2>
-          <div class="cols">
-            <div>
-              <h3>OpenTelemetry-native</h3>
-              <p>
-                Every metric is modelled on OpenTelemetry semantic conventions
-                from the start, then emitted straight out as OTLP — no
-                proprietary protocol, no translation layer, no lock-in.
-              </p>
-            </div>
-            <div>
-              <h3>Plugs into what you run</h3>
-              <p>
-                OTLP and Prometheus feed a modern stack — VictoriaMetrics,
-                Grafana, any OTel backend. PRTG, Nagios and Prometheus are
-                first-class outputs too — natively supported, your choice.
-              </p>
-            </div>
-            <div>
-              <h3>Open-core &amp; lightweight</h3>
-              <p>
-                Host self-observability and universal collection are free and
-                Apache-2.0; deep vendor probes are the paid layer. A single
-                static binary, no runtime, no dependencies.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Light footprint, runs anywhere</h2>
-          <p>
-            One static Go binary for Linux (amd64 and arm64) and Windows
-            (amd64) — no JVM, no Python, no agent framework. Drop it onto bare
-            metal, a VM or a container: it collects locally and pushes OTLP
-            out, replacing a stack of per-tool agents with a single
-            low-overhead process.
-          </p>
-          <div class="stats">
-            <div class="stat">
-              <div class="num">1</div>
-              <div class="lbl">static binary</div>
-            </div>
-            <div class="stat">
-              <div class="num">0</div>
-              <div class="lbl">runtimes or dependencies</div>
-            </div>
-            <div class="stat">
-              <div class="num">3</div>
-              <div class="lbl">OS / arch targets</div>
-            </div>
-          </div>
-          <div class="plats">
-            <span>Linux</span>
-            <span>Windows</span>
-            <span class="sep">·</span>
-            <span>amd64</span>
-            <span>arm64</span>
-            <span class="sep">·</span>
-            <span>Docker</span>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Quick start</h2>
-          <p>
-            Three steps, no agent-per-tool sprawl. The example is Linux;
-            Windows follows the same flow with its own archive.
-          </p>
-          <div class="steps">
-            <div class="step">
-              <div class="step-head">
-                <span class="step-num">1</span>
-                <h3>Install the binary as a service</h3>
-              </div>
-<pre class="code"><span class="p">$</span> unzip senhub-agent-linux-amd64.zip -d /opt/senhub/bin/
-<span class="p">$</span> /opt/senhub/bin/senhub-agent <span class="k">install</span>
-<span class="p">$</span> /opt/senhub/bin/senhub-agent <span class="k">start</span></pre>
-            </div>
-            <div class="step">
-              <div class="step-head">
-                <span class="step-num">2</span>
-                <h3>Declare probes and an output in YAML</h3>
-              </div>
-<pre class="code"><span class="cmt"># agent-config.yaml</span>
-<span class="k">probes</span>:
-  - { name: cpu,         type: cpu,         params: { interval: <span class="s">30</span> } }
-  - { name: memory,      type: memory,      params: { interval: <span class="s">30</span> } }
-  - { name: logicaldisk, type: logicaldisk, params: { interval: <span class="s">30</span> } }
-
-<span class="k">storage</span>:
-  <span class="cmt"># push OpenTelemetry to your collector / backend</span>
-  - name: otlp
-    params: { protocol: grpc, endpoint: <span class="s">"otel-collector:4317"</span> }
-  <span class="cmt"># …and/or expose pull endpoints (Prometheus, PRTG, Nagios)</span>
-  - name: http
-    params: { port: <span class="s">8080</span>, endpoints: [<span class="s">"prometheus"</span>, <span class="s">"prtg"</span>, <span class="s">"nagios"</span>] }</pre>
-            </div>
-            <div class="step">
-              <div class="step-head">
-                <span class="step-num">3</span>
-                <h3>It's already shipping</h3>
-              </div>
-<pre class="code"><span class="cmt"># OTLP is already pushing — scrape Prometheus or check from Nagios too</span>
-<span class="p">$</span> curl -s localhost:<span class="s">8080</span>/api/&lt;agentkey&gt;/prometheus/metrics
-<span class="p">$</span> curl -s localhost:<span class="s">8080</span>/api/&lt;agentkey&gt;/prtg/metrics/cpu</pre>
-            </div>
-          </div>
-          <p class="section-note">
-            Validate any config with <code>agent config check</code> and inspect
-            the live pipeline with <code>agent status --otlp</code>. Pro probes
-            unlock via <code>agent license activate &lt;token&gt;</code>. Full
-            reference at <a href="/docs/">the documentation</a>.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>What it monitors</h2>
-          <p>
-            From host self-observability to deep vendor infrastructure — one
-            agent, one config format, OpenTelemetry-native throughout.
-          </p>
-          <div class="pgrid">
-            <div class="pcat">
-              <h3>Host &amp; OS <span class="tag tag-free">Free</span></h3>
-              <p>CPU, memory, logical disk, network interfaces.</p>
-            </div>
-            <div class="pcat">
-              <h3>Host logs <span class="tag tag-free">Free</span></h3>
-              <p>Linux journald shipping (<code>linux_logs</code>).</p>
-            </div>
-            <div class="pcat">
-              <h3>Databases <span class="tag tag-pro">Pro</span></h3>
-              <p>MySQL, PostgreSQL — OTel-first metric mappings.</p>
-            </div>
-            <div class="pcat">
-              <h3>Virtualization / VDI <span class="tag tag-pro">Pro</span></h3>
-              <p>Citrix Virtual Apps &amp; Desktops sessions and machines.</p>
-            </div>
-            <div class="pcat">
-              <h3>Application delivery <span class="tag tag-pro">Pro</span></h3>
-              <p>Citrix NetScaler ADC — vServers, services, load balancing.</p>
-            </div>
-            <div class="pcat">
-              <h3>Server hardware <span class="tag tag-pro">Pro</span></h3>
-              <p>Redfish — iDRAC, iLO and other BMCs.</p>
-            </div>
-            <div class="pcat">
-              <h3>Data protection <span class="tag tag-pro">Pro</span></h3>
-              <p>Veeam Backup &amp; Replication jobs and sessions.</p>
-            </div>
-            <div class="pcat">
-              <h3>Synthetic &amp; wireless <span class="tag tag-pro">Pro</span></h3>
-              <p>Gateway ping, web-app reachability and load, Wi-Fi signal.</p>
-            </div>
-            <div class="pcat">
-              <h3>Syslog &amp; events <span class="tag tag-pro">Pro</span></h3>
-              <p>Syslog relay (RFC 3164 / 5424) and custom HTTP events.</p>
-            </div>
-          </div>
-          <p class="section-note">
-            Free probes ship in the Apache-2.0 build and need no licence. The
-            full, growing catalogue lives at
-            <a href="/docs/">the documentation</a>.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Integrations</h2>
-          <p>
-            One neutral, OpenTelemetry-mapped data store; each output is a
-            serialization of the same metrics — pull or push, your choice.
-          </p>
-          <div class="tbl-wrap">
-            <table class="tbl">
-              <thead>
-                <tr><th>Output</th><th>Mode</th><th>Format</th><th>Status</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>OpenTelemetry</td><td>Push</td><td>OTLP / gRPC</td>
-                  <td><span class="st st-ok">Stable</span></td>
-                </tr>
-                <tr>
-                  <td>Prometheus</td><td>Pull</td><td><code>/metrics</code> (text 0.0.4)</td>
-                  <td><span class="st st-ok">Stable</span></td>
-                </tr>
-                <tr>
-                  <td>PRTG</td><td>Pull</td><td>Native PRTG JSON</td>
-                  <td><span class="st st-ok">Stable</span></td>
-                </tr>
-                <tr>
-                  <td>Nagios</td><td>Pull</td><td>Plugin text + perfdata</td>
-                  <td><span class="st st-ok">Stable</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="section-note">
-            OTLP and Prometheus drop straight into any OpenTelemetry backend —
-            VictoriaMetrics, Grafana, and the rest. PRTG and Nagios are
-            first-class, fully-supported outputs — use whichever fits your team.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Open-core</h2>
-          <p>
-            The free tier is enough to monitor a whole fleet. Paid tiers add
-            vendor and infrastructure probes — and the licence validates fully
-            offline, with no call home.
-          </p>
-          <div class="tbl-wrap">
-            <table class="tbl">
-              <thead>
-                <tr><th>Tier</th><th>What you get</th><th>Activation</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Free</td>
-                  <td>Host self-observability — CPU, memory, disk, network,
-                    journald logs. Unlimited hosts.</td>
-                  <td>None — Apache-2.0 build</td>
-                </tr>
-                <tr>
-                  <td>Pro</td>
-                  <td>Vendor &amp; infra probes — databases, Citrix, NetScaler,
-                    Redfish, Veeam, syslog, synthetic checks.</td>
-                  <td><code>agent license activate</code></td>
-                </tr>
-                <tr>
-                  <td>Enterprise</td>
-                  <td>Every probe, including future ones (wildcard) — e.g.
-                    IBM&nbsp;i.</td>
-                  <td><code>agent license activate</code></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="section-note">
-            Licences are signed JWTs verified locally — offline by design, with
-            a 7-day grace period after expiry.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <div class="platform">
-            <h2>Part of SenHub</h2>
-            <p>
-              SenHub Agent is open source and built by the team behind
-              <a href="https://senhub.io">SenHub</a> (Sensor Factory). It stays
-              deliberately vendor-neutral — it speaks open standards and feeds
-              whatever you already run, with no lock-in and no mandatory
-              backend.
-            </p>
-            <p>
-              New here? The full install guide, probe catalogue and
-              configuration reference live at
-              <a href="/docs/">the documentation</a>.
-            </p>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Follow along</h2>
-          <p>
-            SenHub Agent is built in the open. The fastest way to support it is
-            to star the repository — it tells us the direction resonates. Read
-            the docs to get running in minutes, or open an issue to shape
-            what's next.
-          </p>
-          <div class="buttons">
-            <a class="btn btn-primary" href="https://github.com/senhub-io/senhub-agent"
-              >★ Star on GitHub</a
-            >
-            <a class="btn btn-secondary" href="/docs/">Read the docs</a>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <section>
-          <h2>Running it in production?</h2>
-          <p>
-            Sensor Factory — the team behind SenHub Agent — designs and operates
-            the full observability stack at scale, as Monitoring as a Service.
-            If you'd rather have SenHub Agent run for you, let's talk.
-          </p>
-          <div class="buttons">
-            <a class="btn btn-primary" href="https://sensorfactory.fr/en/contact-us/">Talk to Sensor Factory</a>
-          </div>
-        </section>
-      </main>
-
-      <hr class="divider" />
-
-      <footer>
-        <div class="copy">
-          © 2026 SenHub Agent contributors. Released under the Apache License 2.0.
-          Built by <a href="https://sensorfactory.fr">Sensor Factory</a>.
-        </div>
-        <nav aria-label="Footer">
-          <a href="https://senhub.io">SenHub</a>
-          <a href="/docs/">Docs</a>
-          <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
-          <a href="https://sensorfactory.fr">Sensor Factory</a>
-        </nav>
-      </footer>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>
+      <span class="bt">SenHub <span>Agent</span></span>
+    </a>
+    <div class="links">
+      <a href="/docs/latest/">Docs</a>
+      <a href="/news.html">Releases</a>
+      <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
     </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Open source · 0.6.0</div>
+    <h1>OpenTelemetry-native agent for <em>hosts and infrastructure</em>.</h1>
+    <p class="lede">
+      Free and Apache-2.0. Collects host, network, container and vendor metrics
+      once, models them on OpenTelemetry semantic conventions, and serves them
+      natively to the platforms you already run. 83 integrations, one static binary,
+      no runtime.
+    </p>
+    <ul class="facts">
+      <li>Apache-2.0</li>
+      <li>83 integrations</li>
+      <li>OTLP · Prometheus · Zabbix · PRTG · Nagios</li>
+      <li>1 static binary</li>
+    </ul>
+    <div class="buttons">
+      <a class="btn btn-primary" href="/docs/latest/installation/">Install</a>
+      <a class="btn btn-ghost" href="https://github.com/senhub-io/senhub-agent">Source on GitHub</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="shell">
+      <div class="shell-bar">point it at a collector</div>
+<pre><span class="p">$</span> senhub-agent config init --otlp-endpoint otel-collector.internal:4317</pre>
+      <div class="shell-bar mid">then add a probe — one file per probe</div>
+<pre><span class="c"># /etc/senhub-agent/probes.d/10-postgresql.yaml</span>
+- <span class="k">name</span>: postgresql
+  <span class="k">type</span>: postgresql
+  <span class="k">params</span>:
+    <span class="k">host</span>: db.example.com
+    <span class="k">port</span>: 5432
+    <span class="k">username</span>: senhub_monitor
+    <span class="k">password</span>: ${secret:postgres.password}</pre>
+    </div>
+    <p class="shell-note">
+      PRTG, Nagios and Prometheus need no configuration at all — they are served from
+      the built-in HTTP output. Secrets are stored with
+      <code>senhub-agent secret set</code>, read from standard input, never from the
+      command line.
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+  <ul class="plats">
+    <li>Linux</li><li>Windows</li><li>Docker</li><li>Kubernetes</li>
+    <li>bare metal</li><li>virtual machines</li>
+  </ul>
+</div>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What it watches</h2>
+    <p>
+      One integration is one thing watched: a service, a device, an endpoint. You
+      enable it in a file, or from the console. Eighty-three in the catalogue — some
+      specific to Windows or to Linux, so a given host offers fewer.
+    </p>
+  </div>
+  <div class="wrap cats">
+      <section class="cat">
+        <h3>Databases <span>16</span></h3>
+        <ul><li>Apache Cassandra</li><li>Apache Solr</li><li>ClickHouse</li><li>CouchDB</li><li>Elasticsearch</li><li>InfluxDB</li><li>Memcached</li><li>Microsoft SQL Server</li><li>MongoDB</li><li>MySQL / MariaDB</li><li>OpenSearch</li><li>Oracle Database</li><li>Oracle Enterprise</li><li>PostgreSQL</li><li>Redis / Valkey</li><li>SQL Server AlwaysOn</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Host <span>15</span></h3>
+        <ul><li>CPU</li><li>Chrony (NTP)</li><li>IBM i</li><li>IPMI sensors</li><li>Logical disk</li><li>Memory</li><li>NVIDIA GPU</li><li>Network interfaces</li><li>OS updates</li><li>Process monitor</li><li>Redfish hardware</li><li>S.M.A.R.T. disk health</li><li>Systemd units</li><li>Wi-Fi signal</li><li>Windows services</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Integrations <span>10</span></h3>
+        <ul><li>Citrix NetScaler</li><li>Event receiver</li><li>HashiCorp Consul</li><li>Jenkins</li><li>Load web app</li><li>OTLP receiver</li><li>Ping gateway</li><li>Ping web app</li><li>Prometheus scrape</li><li>Veeam Backup & Replication</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Web servers <span>9</span></h3>
+        <ul><li>Apache HTTP Server</li><li>Apache Tomcat</li><li>Envoy Proxy</li><li>HAProxy</li><li>HTTP check</li><li>Nginx</li><li>PHP-FPM</li><li>Varnish Cache</li><li>WildFly / JBoss EAP</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Network <span>8</span></h3>
+        <ul><li>DNS latency</li><li>ICMP check</li><li>Modbus TCP</li><li>NTP</li><li>SNMP poll</li><li>SNMP trap receiver</li><li>TCP dial</li><li>UniFi Controller</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Messaging <span>6</span></h3>
+        <ul><li>Apache ActiveMQ</li><li>Apache Kafka</li><li>Apache Pulsar</li><li>Apache ZooKeeper</li><li>NATS</li><li>RabbitMQ</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Virtualisation <span>5</span></h3>
+        <ul><li>Citrix Virtual Apps and Desktops</li><li>Proxmox VE</li><li>VMware vSphere HA</li><li>Windows Hyper-V</li><li>Windows Hyper-V HA</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Logs <span>4</span></h3>
+        <ul><li>File tail</li><li>Linux journal</li><li>Syslog receiver</li><li>Windows Event Log</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Cloud <span>4</span></h3>
+        <ul><li>Azure AD Connect Health</li><li>Azure Container App Jobs</li><li>Azure Container Apps</li><li>Exchange Online</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Containers <span>3</span></h3>
+        <ul><li>Docker</li><li>Docker Swarm</li><li>Kubernetes</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Storage <span>2</span></h3>
+        <ul><li>Ceph</li><li>Dell PowerStore</li></ul>
+      </section>
+      <section class="cat">
+        <h3>Custom <span>1</span></h3>
+        <ul><li>Exec check</li></ul>
+      </section>
+  </div>
+</section>
+
+
+
+<section class="band">
+  <div class="wrap">
+    <div class="badge">New in 0.6.0</div>
+    <h2>Zabbix support</h2>
+    <p>
+      New in 0.6.0. The agent speaks the Zabbix protocol in both directions, and
+      <strong>generates the Zabbix templates from its own probe definitions</strong>
+      — the part a third-party agent normally leaves you to model by hand in the
+      front end.
+    </p>
+    <div class="zx">
+      <div class="card">
+        <h3>Active</h3>
+        <p>The agent connects out, asks the server which items it wants for this
+           host, and pushes values in batches — encrypted with a pre-shared key or a
+           certificate. An unknown host triggers autoregistration, so a whole fleet
+           appears in Zabbix without anyone creating hosts by hand. Proxy groups are
+           followed to the member holding the host.<span class="port">→ server :10051</span></p>
+      </div>
+      <div class="card">
+        <h3>Passive</h3>
+        <p>The agent listens and answers the server's polls over TLS, with an
+           allow-list of permitted addresses, in both dialects — the raw key before
+           Zabbix 7.0, the framed request from 7.0 on. A plaintext poll, a wrong key
+           or a wrong identity is refused.<span class="port">← agent :10050</span></p>
+      </div>
+      <div class="card">
+        <h3>Templates you didn't write</h3>
+        <p>One template per probe type and platform, generated from the agent's own metric
+           definitions rather than maintained by hand — with low-level discovery for
+           anything that comes in varying numbers: filesystems, interfaces,
+           instances. Enable a probe, its template is already there.</p>
+      </div>
+      <div class="card">
+        <h3>Inventory that fills itself</h3>
+        <p>Host inventory fields are populated from what the agent already knows
+           about the machine, so the Zabbix side stops drifting from reality the
+           week after someone typed it in.</p>
+      </div>
+    </div>
+    <div class="setup">
+      <div class="big">0<small>clicks in the Zabbix front end</small></div>
+      <p><code>senhub-agent zabbix setup --url &lt;frontend&gt; --token-file &lt;f&gt;</code>
+         imports the templates, creates the host group and the autoregistration
+         action. After that, two lines naming the server in the agent's config are
+         enough: the host registers itself, gets its templates linked, and its items
+         arrive by low-level discovery.</p>
+    </div>
+    <p style="margin-top:18px">
+      Pushing values into Zabbix is something several agents do. This one also
+      <strong>answers the server's own polls</strong>, and <strong>hands you the
+      templates</strong> — generated from its probe definitions and imported for you,
+      so the items are not modelled by hand. PRTG and Nagios are served natively from
+      the same process.
+    </p>
+    <p>
+      And it holds on a locked-down site. A pre-shared key is the <em>only</em>
+      encryption Zabbix offers for autoregistration — it will not take a certificate
+      for that step — so without PSK a fleet cannot enrol itself where that step is
+      encrypted. SenHub Agent speaks it, which is what keeps the zero-click setup
+      true there too.
+    </p>
+    <p>
+      Verified end to end against real servers on Zabbix <strong>7.0 and 8.0</strong>.
+      Free and Apache-2.0, like every other output.
+    </p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Resource attributes, declared once</h2>
+    <p>
+      Owner, criticality, site and lifecycle are declared once in the agent's
+      configuration and ride with every metric and log the agent emits. They are
+      OpenTelemetry resource attributes, so they survive the trip into any backend
+      that understands them — and <strong>hosts, containers and services</strong>
+      carry them into the entity graph, where you can filter on them.
+    </p>
+    <div class="yaml">
+<pre><span class="c"># senhub-agent.yaml</span>
+<span class="k">resource</span>:
+  <span class="k">entity.owner.team</span>:      platform-core
+  <span class="k">entity.owner.contact</span>:   platform@example.com
+  <span class="k">service.criticality</span>:    critical
+  <span class="k">entity.location.site</span>:   par-dc1
+  <span class="k">entity.lifecycle.status</span>: production</pre>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Across every output</h3>
+        <p>The same labels ride with the signal whether it leaves over OTLP or
+           answers a Zabbix poll — no mapping table to keep in sync.</p>
+      </div>
+      <div>
+        <h3>On the alert</h3>
+        <p>The owning team, the contact and the criticality travel with the signal,
+           so they are already present when a rule fires.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>One process, no runtime</h2>
+    <p>
+      A single static Go binary: no JVM, no Python, no agent framework, nothing extra
+      to keep patched. Linux amd64 and arm64, Windows amd64, signed packages, an MSI
+      installer and an official container image. It runs on bare metal, a virtual
+      machine, a container or a Windows server, collecting locally and serving out
+      from the same process.
+    </p>
+    <p>
+      It also carries its own console: edit a probe and test it in place, set the
+      listen port, the bind address and the licence, without touching a file.
+    </p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What's new</h2>
+    <p>
+      Every release ships with a written note: what changed, why, and what breaks.
+    </p>
+    <div class="news">
+      <div class="item now">
+        <div class="ver">0.6.0<small>current</small></div>
+        <div>
+          <h3>Native Zabbix, both directions</h3>
+          <p>Active and passive, encrypted with PSK or a certificate, templates
+             generated from the probe definitions, and a <code>zabbix setup</code>
+             command that prepares the server. Verified on 7.0 and 8.0.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ver">0.5.6</div>
+        <div>
+          <h3>Container image fixes</h3>
+          <p>Corrections to the official image published the release before.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ver">0.5.5</div>
+        <div>
+          <h3>A console on the box, and a container image</h3>
+          <p>Rebuilt web console with a probe editor and a Test button, a settings
+             page for port, bind address and licence. Self-signed TLS when no
+             certificate is supplied. First official container image.</p>
+        </div>
+      </div>
+    </div>
+    <p class="news-more"><a href="/news.html">All releases →</a></p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Entities and relations</h2>
+    <p>
+      Collecting a metric means identifying what produced it. So alongside the
+      measurements, the agent can emit the things themselves — hosts, services,
+      containers, network interfaces and the relations between them — as
+      OpenTelemetry entity events.
+    </p>
+    <p>
+      That output feeds <a href="https://github.com/senhub-io">Toise</a>, our map of
+      what runs where and how it changed. <strong>It requires an OTLP output</strong>;
+      an agent deployed only for Zabbix, PRTG or Nagios collects metrics and stops
+      there.
+    </p>
+    <p>
+      This is the newest part of the agent. Treat it as groundwork that comes with a
+      collection you were running anyway, not as a finished inventory product.
+    </p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Open core</h2>
+    <p>
+      The agent, every output and 65 of the 83 integrations are Apache-2.0 — that is
+      the whole product for most people, with nothing to sign and nothing to expire.
+      <strong>No output and no protocol is ever behind a licence.</strong>
+    </p>
+    <p>
+      The 18 vendor integrations that took weeks of protocol work each — Citrix,
+      NetScaler, Veeam, VMware HA, Oracle Enterprise, PowerStore, the Azure and
+      Microsoft 365 ones — are the commercial layer. They fund the rest.
+    </p>
+    <div class="buttons">
+      <a class="btn btn-primary" href="/docs/latest/installation/">Install</a>
+      <a class="btn btn-ghost" href="/docs/latest/">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Proposition de refonte — SenHub Agent · page produit, pas la page Toise.</p>
+  </div>
+</footer>
+
   </body>
 </html>
