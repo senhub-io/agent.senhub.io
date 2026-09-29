@@ -4365,7 +4365,10 @@
 (<code>851034/QUSER/QP0ZSPWT</code>), which changes at every run, and PRTG keeps every
 channel it has seen: each run would leave a dead channel on the sensor, and
 thousands of them overload the PRTG server. PRTG gets the aggregates above;
-the per-job detail stays on the Prometheus, OTLP, Nagios and Zabbix outputs.</p>
+the per-job detail stays on the Prometheus, OTLP, Nagios and Zabbix outputs.
+The relayed events (QSYSOPR messages, QHST and audit entries, MSGW jobs) are
+kept out of PRTG for the same reason; the number of jobs waiting on a
+message remains visible there through the jobs-by-status count.</p>
 <h2 id="job-queues-scheduled-jobs">Job queues &amp; scheduled jobs<a class="headerlink" href="#job-queues-scheduled-jobs" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4803,7 +4806,7 @@ release will export them as OTLP logs.</p>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
 <li><strong>Db2 for i SQL services</strong> reachable from the agent host over the JT400 (JTOpen) toolbox — the database host server must be started (<code>STRHOSTSVR SERVER(*DATABASE)</code>).</li>
-<li>An <strong>IBM i user profile</strong> for the probe with read access to the SQL services used (system, jobs, storage, database, network and message catalogs under <code>QSYS2</code> / <code>SYSTOOLS</code>). A profile with <code>*USE</code> authority to those services is sufficient; <code>*ALLOBJ</code> is not required. Give it a non-expiring password and no interactive display sessions.</li>
+<li>An <strong>IBM i user profile</strong> for the probe with read access to the SQL services used (system, jobs, storage, database, network and message catalogs under <code>QSYS2</code> / <code>SYSTOOLS</code>). A profile with <code>*USE</code> authority to those services is sufficient; <code>*ALLOBJ</code> is not required. Give it a non-expiring password and no interactive display sessions. When IBM i refuses the password, the probe is not retried on its own: each retry would be another invalid sign-on, and the system disables a profile after a few (<code>QMAXSIGN</code>). The agent log says so; fix the password, then reload the configuration or restart the agent.</li>
 <li>The <strong>JT400 bridge</strong>: either the bundled <code>Jt400Runner.class</code> + <code>jt400.jar</code> under <code>bridge_runner_dir</code> with a JRE on the agent host, or a GraalVM native-image <code>jt400runner</code> binary referenced via <code>native_runner</code>.</li>
 <li>Network path from the agent host to the partition (default database host-server port <code>8471</code>, plus the port-mapper on <code>449</code>).</li>
 </ul>
@@ -4812,6 +4815,21 @@ release will export them as OTLP logs.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/ibmi-prod"</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/nagios/metrics/ibmi-prod"</span>
 </code></pre></div>
+<h3 id="prtg-one-sensor-per-family">PRTG: one sensor per family<a class="headerlink" href="#prtg-one-sensor-per-family" title="Permanent link">&para;</a></h3>
+<p>A partition yields far more series than the 50 channels a PRTG sensor
+holds, so split it into several sensors. Every metric carries a
+<code>metric_type</code> tag naming its family, the segment after <code>ibmi.</code> in its
+name, and a sensor selects one family with it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/ibmi-prod?tags=metric_type:cpu"</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/ibmi-prod?tags=metric_type:user_profile"</span>
+</code></pre></div>
+<p>Several families fit one sensor when their series stay under 50:
+<code>?tags=metric_type:cpu,memory,jobs</code>. A family with one series per disk
+unit, output queue or journal can exceed 50 on a large partition; add a
+<code>metrics=</code> filter to keep one measurement per sensor, for example
+<code>?tags=metric_type:disk&amp;metrics=ibmi.disk.busy_percent</code>. The families
+are the ones of the metric reference below (<code>asp</code>, <code>cpu</code>, <code>disk</code>, <code>job_queue</code>,
+<code>netstat</code>, <code>output_queue</code>, <code>user_profile</code>, <code>collector</code>, …).</p>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
 OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
@@ -5213,28 +5231,28 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.table.rows</code></td>
 <td><code>ibmi.table.rows_count</code></td>
-<td>Rows — {table_schema}.{table_name}</td>
+<td>Rows — {schema}.{table_name}</td>
 <td>#</td>
 <td>Rows in this table</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.table.logical_reads</code></td>
 <td><code>ibmi.table.logical_reads_total</code></td>
-<td>Logical Reads — {table_schema}.{table_name}</td>
+<td>Logical Reads — {schema}.{table_name}</td>
 <td>#</td>
 <td>Logical reads against this table since the statistics were last reset</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.table.updates</code></td>
 <td><code>ibmi.table.updates_total</code></td>
-<td>Updates — {table_schema}.{table_name}</td>
+<td>Updates — {schema}.{table_name}</td>
 <td>#</td>
 <td>Update operations against this table since the statistics were last reset</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.table.deleted_rows</code></td>
 <td><code>ibmi.table.deleted_rows</code></td>
-<td>Deleted Rows — {table_schema}.{table_name}</td>
+<td>Deleted Rows — {schema}.{table_name}</td>
 <td>#</td>
 <td>Rows deleted but not yet reorganised; space a REORG would reclaim</td>
 </tr>
@@ -5451,7 +5469,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.library_list.position</code></td>
 <td><code>ibmi.library_list.position</code></td>
-<td>Library {library} ({type})</td>
+<td>Library {schema} ({type})</td>
 <td>#</td>
 <td>Position of this library in the list, in order of search</td>
 </tr>

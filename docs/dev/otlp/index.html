@@ -4998,6 +4998,9 @@ app trace is slow → show the infra telemetry of the same tenant".</p>
 <p>Entity events (the infrastructure graph: hosts, interfaces, services and
 their relationships) ride the OTLP <strong>log</strong> signal, so this signal has no
 endpoint or batch knobs of its own — it reuses the log transport.</p>
+<p>When <code>entities.enabled</code> is off, the output logs one warning at start,
+<code>entity emission is off on this OTLP output</code>, so an empty topology can be
+traced to its cause from the agent log.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="nt">entities</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># opt-in (default false)</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span><span class="w">            </span><span class="c1"># heartbeat cadence; also the liveness backstop</span>

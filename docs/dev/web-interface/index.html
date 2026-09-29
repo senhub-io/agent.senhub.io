@@ -4683,8 +4683,8 @@ pollers are unaffected either way.</p>
 <li><strong>Getting started</strong> lists four steps and computes their state from the agent: the agent runs, probes are configured, data is sent somewhere, the poller has its sensor URL. The current step is highlighted and carries the link that resolves it. Hide it once you are done; it disappears on its own when every step is complete.</li>
 <li><strong>Probes</strong> is a compact table of the configured probes, the ones needing attention first, with their state, the number of series they hold and the time of their last collection. Probes whose target is down are counted on their own, not under "running".</li>
 <li><strong>Outputs</strong> lists every output with its state and the action that matters: build a sensor URL for the HTTP output, edit a push output, enable a disabled one.</li>
-<li><strong>Agent</strong> merges the former status, health and resources cards: version, host, uptime, port, memory, CPU, goroutines and cache size. A warning appears when the configuration watch is off, because edits made by hand then need a restart.</li>
-<li><strong>Licence</strong> shows the tier, the expiry date, how many probe types are available and how many need a licence, and the agent key with a copy button.</li>
+<li><strong>Agent</strong> merges the former status, health and resources cards: version, host, instance ID, uptime, port, configuration path, memory, CPU, goroutines and cache size. A warning appears when the configuration watch is off, because edits made by hand then need a restart.</li>
+<li><strong>Licence</strong> shows the tier, the expiry date, how many probe types are available and how many need a licence, and the agent key with a copy button. The Settings page gathers the identifiers and the licence in full.</li>
 <li><strong>Recent events</strong> shows the last transitions: a probe that started failing or recovered, an output that could not start, a save made from the console, a configuration reloaded from disk. The agent keeps the last fifty in memory; they do not survive a restart.</li>
 </ul>
 <p>The page refreshes every thirty seconds.</p>
@@ -4817,6 +4817,7 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">}</span>
 </code></pre></div>
 <p>Each channel becomes a separate metric in PRTG with its own graph and alerting thresholds.</p>
+<p>PRTG keeps one value per channel name, so no two channels of one result share a name: when two series would, the agent appends the tag value that tells them apart (a CPU number, a container name), or a number when no tag does. PRTG takes at most 50 channels per sensor; narrow a larger result with a tag or <code>metrics=</code> filter.</p>
 <h4 id="finding-available-probe-names">Finding available probe names<a class="headerlink" href="#finding-available-probe-names" title="Permanent link">&para;</a></h4>
 <p>To see which probe names are available for PRTG sensors:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/prtg/probes
@@ -4921,7 +4922,7 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <tr>
 <td><code>GET /api/{key}/config/settings</code>, <code>POST</code></td>
 <td>admin</td>
-<td>Port, bind address, licence</td>
+<td>Port, bind address, licence; the GET also returns the instance ID and the TLS state (certificate subject and expiry)</td>
 </tr>
 <tr>
 <td><code>POST /api/{key}/admin/cache/clear</code></td>
