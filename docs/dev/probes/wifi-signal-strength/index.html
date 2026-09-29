@@ -4644,15 +4644,16 @@ every 60 seconds; the cadence is fixed in the code and a <code>params</code> blo
 </tr>
 </tbody>
 </table>
-<p>On Linux the signal level is the one <code>iwconfig</code> reports. On Windows <code>netsh</code>
+<p>On Linux the signal level is the one <code>iwconfig</code> reports, or, where
+<code>iwconfig</code> is not installed, the one <code>iw</code> reports; the link quality then
+follows iwconfig's own scale, (dBm + 110) out of 70. On Windows <code>netsh</code>
 reports a percentage, which the probe converts to dBm with the usual
 approximation (dBm = percentage / 2 - 100), so 100% reads as -50 dBm and 60%
-as -70 dBm. <code>wifi_quality</code> is emitted only when <code>iwconfig</code> prints the link
-quality on the same line as the signal level, which is its normal layout.</p>
+as -70 dBm.</p>
 <h2 id="platform-support">Platform Support<a class="headerlink" href="#platform-support" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Windows</strong> - Uses <code>netsh wlan show interfaces</code> (signal percentage, converted to dBm)</li>
-<li><strong>Linux</strong> - Uses <code>iwconfig</code> (signal level in dBm, link quality in %)</li>
+<li><strong>Linux</strong> - Uses <code>iwconfig</code> when present (package <code>wireless-tools</code>), otherwise <code>iw</code>, which current distributions install by default (Debian 13 and Raspberry Pi OS included). <code>iw</code> lives in <code>/usr/sbin</code>; the probe finds it there even when the service account's PATH does not include it.</li>
 <li><strong>macOS</strong> - Not supported</li>
 <li><strong>BSD</strong> - Not supported</li>
 </ul>

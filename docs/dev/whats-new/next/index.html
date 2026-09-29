@@ -4222,6 +4222,17 @@ Breaking Changes or Fixes below.</p>
 <li><strong>OTLP receiver counters.</strong> Queries on the sending service of
     <code>senhub_agent_otlp_receiver_received_total</code> use the label
     <code>senhub_otlp_receiver_sender_service_name</code> instead of <code>service_name</code>.</li>
+<li><strong>Linux hosts running the IBM i probe, or Java or Node.js plugins
+    through the exec probe.</strong> Run <code>sudo senhub-agent refresh-unit --yes</code>
+    once after upgrading: the installed service unit still forbids the
+    writable-executable memory a JVM needs, and an upgrade does not
+    rewrite the unit.</li>
+<li><strong>Linux agents that stopped after <code>sudo senhub-agent secret set</code>.</strong> In
+    0.5.x that command left <code>/etc/senhub-agent/secrets.age</code> owned by root,
+    and the service, which runs as <code>senhub</code>, could no longer read it.
+    Give the file back before or after upgrading:
+    <code>sudo chown senhub:senhub /etc/senhub-agent/secrets.age</code>. From 0.6.0,
+    files written with sudo keep the owner of their directory.</li>
 </ol>
 <h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4753,7 +4764,10 @@ last status for ever.</p>
   channel it has seen: each program restart left one more dead channel
   on the sensor (163 for 75 live on the recette bench). PRTG now gets the
   per-name roll-up; the per-process detail stays on the other outputs.
-  A definition marks such a metric with <code>prtg_skip</code>.</p>
+  A definition marks such a metric with <code>prtg_skip</code>. The IBM i per-job
+  series are kept out of PRTG the same way: their names carry the job
+  number, and a bench sensor had grown to 2,583 channels for 1,447 served,
+  enough to saturate the PRTG server.</p>
 </li>
 <li>
 <p><strong>A syslog probe has a PRTG channel.</strong> The probe relays messages as
@@ -4776,6 +4790,84 @@ last status for ever.</p>
   at logout; in the default view they became series, and PRTG channels,
   that died with the session. They are left out unless <code>units</code> names
   them.</p>
+</li>
+<li>
+<p><strong>The Swarm probe tells a node outside any swarm from a worker.</strong> The
+  Engine answers "This node is not a swarm manager" in both cases, so an
+  engine never joined to a swarm was reported as a worker, with advice to
+  point the probe at a manager. The probe now reads the node's swarm
+  state from <code>/info</code>.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/wifi-signal-strength/">Wi-Fi</a> probe works without
+  iwconfig.</strong> It needed <code>iwconfig</code> (wireless-tools), which current
+  distributions no longer install; it now falls back to <code>iw</code>, found in
+  <code>/usr/sbin</code> even off the PATH. The SSID tag also lost a closing quote
+  and padding it carried from iwconfig's output.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/oracle/">Oracle</a> session limit is read inside a
+  PDB.</strong> <code>V$RESOURCE_LIMIT</code> has no rows in a pluggable database, where a
+  monitoring user normally connects, so <code>oracle.sessions.limit</code> was never
+  reported and a warning was logged on every collection. The limit is
+  now read from <code>V$PARAMETER</code> there, which needs one more grant
+  (<code>GRANT SELECT ON V_$PARAMETER</code>).</p>
+</li>
+<li>
+<p><strong>The IBM i probe starts on a Linux service.</strong> The service unit set
+  <code>MemoryDenyWriteExecute=true</code>, which the processes the agent launches
+  inherit: the IBM i probe's Java bridge could not start its JVM, and its
+  native runner could not load. The unit no longer sets it (the agent
+  itself still makes no executable memory). An existing install picks it
+  up with <code>senhub-agent refresh-unit</code>.</p>
+</li>
+<li>
+<p><strong>A refused password is not retried every two minutes.</strong> A probe whose
+  start failed was retried on a two-minute timer, and for the IBM i probe
+  each retry was a sign-on: a wrong password disabled the monitoring
+  profile after three (QMAXSIGN). A start refused for its credentials now
+  waits for a configuration reload or a restart; other start failures
+  keep the timer.</p>
+</li>
+<li>
+<p><strong>The IBM i probe finds its Java runtime and names the right
+  settings.</strong> It read <code>JAVA_HOME</code> only, although an empty <code>java_home</code>
+  was documented to use the environment: a host with Java on the PATH
+  got "no IBM i runtime found". That message also named settings that
+  do not exist (<code>bridge.java_home</code>, <code>bridge.runner_dir</code>); it now names
+  <code>java_home</code>, <code>bridge_runner_dir</code> and <code>native_runner</code>, and Java on the
+  PATH is used.</p>
+</li>
+<li>
+<p><strong>The console's Settings page gathers the agent's identity and HTTPS
+  state.</strong> The agent key, the instance ID and the administration key
+  (masked until revealed) now sit together in an Identity card, and an
+  HTTPS card shows whether TLS is on, the certificate and key files, the
+  certificate's subject and expiry, and links to where TLS is set. They
+  were spread over the Overview page, the Outputs page and the command
+  line.</p>
+</li>
+<li>
+<p><strong>The console's Settings page shows the agent key.</strong> It showed the
+  administration key, which the console is opened with, under "Agent
+  key", next to the advice to give that key to Sensor Factory when
+  ordering a licence, and its Copy button copied it. It now shows and
+  copies the agent key, the one a licence is bound to, as the Overview
+  page already did.</p>
+</li>
+<li>
+<p><strong>A disconnected UniFi access point no longer reports 0 satisfaction.</strong>
+  For an access point that is not connected the controller returns a
+  null satisfaction, which the probe published as 0, the worst score,
+  with 0 clients. Only a connected access point now reports them, and a
+  null satisfaction reports nothing.</p>
+</li>
+<li>
+<p><strong>OTLP metrics no longer carry a contradicting <code>unit</code> attribute.</strong>
+  Every point carried the definition's display unit as an attribute, so
+  <code>system.cpu.utilization</code> reached the backend as a ratio (0.061) with
+  <code>unit="%"</code>, which a dashboard shows as 0.061 %. The attribute is gone;
+  the OTel unit remains the metric's own.</p>
 </li>
 <li>
 <p><strong>A change made with <code>sudo</code> no longer stops a non-root service.</strong>
