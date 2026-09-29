@@ -4191,7 +4191,16 @@ throughput and connected-client totals.</p>
 </table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Create a read-only local user in the UniFi Controller under <strong>Settings → Admins</strong>. The "Read Only" role is sufficient.</li>
+<li>
+<p><code>unifi.devices.adopted</code> is what the controller reports as adopted. A
+  device whose adoption failed (state 10) still counts there; read it
+  together with <code>unifi.devices.disconnected</code>, which counts every device
+  that is not connected. A disconnected access point reports no client
+  count and no satisfaction.</p>
+</li>
+<li>
+<p>Create a read-only local user in the UniFi Controller under <strong>Settings → Admins</strong>. The "Read Only" role is sufficient.</p>
+</li>
 <li>For UniFi OS (UDM/UDR), use <code>https://&lt;controller&gt;/proxy/network</code> as the endpoint, not the legacy <code>:8443</code> port.</li>
 <li><code>verify_tls: false</code> should only be used for home lab controllers with self-signed certificates. In production, install a valid certificate.</li>
 </ul>
@@ -4234,7 +4243,7 @@ series' tags.</p>
 <td><code>unifi.devices.adopted</code></td>
 <td>UniFi {device_type} Adopted</td>
 <td>#</td>
-<td>Number of adopted devices of this type</td>
+<td>Number of devices of this type the controller marks adopted; a device whose adoption failed still counts, so read it with unifi.devices.disconnected</td>
 </tr>
 <tr>
 <td><code>unifi.devices.disconnected</code></td>
