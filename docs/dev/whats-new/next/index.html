@@ -4642,7 +4642,9 @@ last status for ever.</p>
   recovers the timestamp, hostname and tag, leaves out the facility and
   priority it was not given, and for a CEF record takes the severity
   from the CEF header (0-3 informational, 4-6 warning, 7-8 error, 9-10
-  critical).</p>
+  critical).
+  A record from a UniFi switch no longer opens with ": ": the separator
+  some senders leave after the tag is dropped.</p>
 </li>
 <li>
 <p><strong><a href="../../probes/filetail/">File tail</a> reads a file whose directory
