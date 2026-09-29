@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#dell-powerstore-probe" class="md-skip">
           Skip to content
         </a>
       
@@ -455,6 +455,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../web-interface/" class="md-nav__link">
         
   
@@ -495,10 +549,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -516,8 +570,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -666,10 +720,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -687,8 +741,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -837,10 +891,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -858,8 +912,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1725,6 +1779,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1741,6 +1813,258 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-volume-performance-opt-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-volume performance (opt-in)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-collected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics Collected
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics Collected">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capacity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Replication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volumes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-resource-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-resource series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-sensor-urls-tab-of-the-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering (Sensor URLs tab of the console)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metric-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1958,6 +2282,34 @@
     
   
     Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
   
 
     
@@ -3257,10 +3609,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3278,8 +3630,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3332,6 +3684,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.0
   
 
     
@@ -3792,6 +4172,247 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-volume-performance-opt-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-volume performance (opt-in)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-collected" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics Collected
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics Collected">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capacity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Replication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volumes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-resource-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-resource series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-sensor-urls-tab-of-the-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering (Sensor URLs tab of the console)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metric-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3820,7 +4441,8 @@
 <p class="admonition-title">Warning</p>
 <p><strong>License: Pro</strong> - Requires a Pro or Enterprise license.</p>
 </div>
-<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
+<h1 id="dell-powerstore-probe">Dell PowerStore Probe<a class="headerlink" href="#dell-powerstore-probe" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The PowerStore probe monitors Dell PowerStore storage arrays through the PowerStore REST API, providing cluster health, hardware faults, capacity, performance, and active-alert metrics. One probe instance monitors one array (cluster); add more instances for additional arrays.</p>
 <p><strong>Collected data:</strong></p>
 <ul>
@@ -3836,8 +4458,8 @@
 aggregates are complemented by <strong>per-resource series</strong> (per volume, appliance,
 node, drive and replication session), each carrying a resource attribute that
 also acts as a filter in the Sensor URLs tab of the console.</p>
-<h1 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h1>
-<h2 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">&para;</a></h2>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<h3 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/20-powerstore.yaml — each file under probes.d/ is a YAML array of probes</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore-prod</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore</span>
@@ -3849,7 +4471,7 @@ also acts as a filter in the Sensor URLs tab of the console.</p>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p><code>endpoint</code> may be given with or without a scheme; <code>https://</code> is assumed when none is provided. The <code>${secret:...}</code> reference resolves the password from the OS-native secret store (see <a href="../../configuration/">Configuration</a>).</p>
-<h2 id="multiple-arrays">Multiple Arrays<a class="headerlink" href="#multiple-arrays" title="Permanent link">&para;</a></h2>
+<h3 id="multiple-arrays">Multiple Arrays<a class="headerlink" href="#multiple-arrays" title="Permanent link">&para;</a></h3>
 <p>Monitor several arrays with separate probe instances:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># probes.d/20-powerstore.yaml</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore-dc1</span>
@@ -3869,9 +4491,10 @@ also acts as a filter in the Sensor URLs tab of the console.</p>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">   </span><span class="c1"># self-signed management certificate</span>
 </code></pre></div>
-<h1 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h1>
+<h2 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
+<!-- sha256:b4ae6b22150deef6507aae1a70fe83972427bc3cba0d5f95bae6904c5524fda0 -->
 
 <table>
 <thead>
@@ -3957,20 +4580,22 @@ per-cycle collection is a real request-cost and cache-cardinality concern.</p>
 requests every 5 minutes and 20 × 9 = 180 extra cache series — well within the
 agent's series cap. Raise <code>top_n</code> deliberately after checking your array's volume
 count.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://10.0.199.11"</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"supervision"</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:powerstore.password}"</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">volume_perf</span><span class="p">:</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">top_n</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># probes.d/20-powerstore.yaml</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">powerstore</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://powerstore.example.com"</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"monitoring"</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:powerstore.password}"</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">volume_perf</span><span class="p">:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="nt">top_n</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600</span>
 </code></pre></div>
-<h1 id="metrics-collected">Metrics Collected<a class="headerlink" href="#metrics-collected" title="Permanent link">&para;</a></h1>
+<h2 id="metrics-collected">Metrics Collected<a class="headerlink" href="#metrics-collected" title="Permanent link">&para;</a></h2>
 <p>All metrics carry a <code>cluster</code> attribute identifying the array. Metric families that split by direction or state (IOPS, bandwidth, latency, hardware) use an OTel attribute rather than separate metric names.</p>
-<h2 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h2>
+<h3 id="cluster">Cluster<a class="headerlink" href="#cluster" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -3992,7 +4617,7 @@ count.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
+<h3 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4009,7 +4634,7 @@ count.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="capacity">Capacity<a class="headerlink" href="#capacity" title="Permanent link">&para;</a></h2>
+<h3 id="capacity">Capacity<a class="headerlink" href="#capacity" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4046,7 +4671,7 @@ count.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
+<h3 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4089,7 +4714,7 @@ count.</p>
 <code>0..1</code> ratios (OTel unit <code>1</code>). The PRTG and Nagios views display them as
 percentages (e.g. <code>42 %</code>, not <code>0.42</code>).</p>
 </div>
-<h2 id="replication">Replication<a class="headerlink" href="#replication" title="Permanent link">&para;</a></h2>
+<h3 id="replication">Replication<a class="headerlink" href="#replication" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4106,7 +4731,7 @@ percentages (e.g. <code>42 %</code>, not <code>0.42</code>).</p>
 </tr>
 </tbody>
 </table>
-<h2 id="volumes">Volumes<a class="headerlink" href="#volumes" title="Permanent link">&para;</a></h2>
+<h3 id="volumes">Volumes<a class="headerlink" href="#volumes" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4128,7 +4753,7 @@ percentages (e.g. <code>42 %</code>, not <code>0.42</code>).</p>
 </tr>
 </tbody>
 </table>
-<h2 id="alerts">Alerts<a class="headerlink" href="#alerts" title="Permanent link">&para;</a></h2>
+<h3 id="alerts">Alerts<a class="headerlink" href="#alerts" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4145,7 +4770,7 @@ percentages (e.g. <code>42 %</code>, not <code>0.42</code>).</p>
 </tr>
 </tbody>
 </table>
-<h2 id="per-resource-series">Per-resource series<a class="headerlink" href="#per-resource-series" title="Permanent link">&para;</a></h2>
+<h3 id="per-resource-series">Per-resource series<a class="headerlink" href="#per-resource-series" title="Permanent link">&para;</a></h3>
 <p>In addition to the cluster-level aggregates above, the probe emits one series per
 resource. Each carries a resource attribute (mapped from the <code>volume</code>,
 <code>appliance</code>, <code>node</code>, <code>drive</code> or <code>session</code> tag) so instances stay distinct in
@@ -4272,7 +4897,7 @@ costs one REST request per volume per cycle, which does not scale on arrays
 with many volumes. Appliance- and node-level performance cover the array
 without that per-volume cost.</p>
 </div>
-<h2 id="filtering-sensor-urls-tab-of-the-console">Filtering (Sensor URLs tab of the console)<a class="headerlink" href="#filtering-sensor-urls-tab-of-the-console" title="Permanent link">&para;</a></h2>
+<h3 id="filtering-sensor-urls-tab-of-the-console">Filtering (Sensor URLs tab of the console)<a class="headerlink" href="#filtering-sensor-urls-tab-of-the-console" title="Permanent link">&para;</a></h3>
 <p>The Sensor URLs tab of the console exposes filters for this probe:</p>
 <ul>
 <li><strong>Metric Type</strong> (category) — cluster, hardware, volumes, alerts, capacity, performance, replication</li>
@@ -4282,17 +4907,404 @@ without that per-volume cost.</p>
 <p><code>Cluster State</code>, <code>Array Reachable</code>, <code>Drive</code>/<code>Appliance</code>/<code>Volume State</code> and
 <code>Replication State</code> render as text (e.g. <code>CONFIGURED</code>, <code>UP</code>, <code>Healthy</code>) via PRTG
 value lookups rather than raw numbers.</p>
-<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>PowerStore REST API</strong> reachable from the agent host (HTTPS, default port 443).</li>
 <li>A <strong>PowerStore user</strong> with read access to the REST API (a monitoring/operator role is sufficient; no administrative rights are required).</li>
 <li>Network path from the agent to the array's management endpoint.</li>
 </ul>
-<h1 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h1>
+<h2 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h2>
 <p>PowerStore metrics are available through every configured output — OTLP, Prometheus, and the pull formats (PRTG, Nagios, Web UI). For PRTG and Nagios, query the probe by its configured <code>name</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/powerstore-prod"</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/nagios/metrics/powerstore-prod"</span>
 </code></pre></div>
+<h3 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h3>
+<p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
+OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
+<a href="../../nagios/">Nagios check</a> and the API <code>metrics=</code> filter match.
+<strong>PRTG channel</strong> is the label PRTG shows, placeholders filled from the
+series' tags.</p>
+<!-- schema:metrics:start -->
+<!-- Generated from the probe's definition. Run `make docs-metrics` after changing it. -->
+
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Name</th>
+<th>PRTG channel</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.powerstore.up</code></td>
+<td><code>powerstore_up</code></td>
+<td>Array Reachable</td>
+<td>#</td>
+<td>1 when the PowerStore management API answered this cycle, else 0</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.cluster.state</code></td>
+<td><code>powerstore_cluster_state</code></td>
+<td>Cluster State</td>
+<td>#</td>
+<td>Cluster configuration state (Configured=2, Unconfigured=1, other=0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.hardware.components</code></td>
+<td><code>powerstore_hardware_healthy</code></td>
+<td>Hardware Healthy</td>
+<td>#</td>
+<td>Number of hardware components in the Healthy lifecycle state</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.hardware.components</code></td>
+<td><code>powerstore_hardware_faulted</code></td>
+<td>Hardware Faulted</td>
+<td>#</td>
+<td>Number of hardware components in a fault lifecycle state (not Healthy/Empty/Initializing)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.drive.state</code></td>
+<td><code>powerstore_drive_state</code></td>
+<td>Drive {drive} State</td>
+<td>#</td>
+<td>Drive lifecycle state (Healthy=1, otherwise 0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.state</code></td>
+<td><code>powerstore_appliance_state</code></td>
+<td>Appliance {appliance} State</td>
+<td>#</td>
+<td>Appliance health (1 = no faulted component, 0 = a faulted component)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.capacity.physical</code></td>
+<td><code>powerstore_capacity_physical_used</code></td>
+<td>Physical Used</td>
+<td>Bytes</td>
+<td>Physical space used on the array</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.capacity.physical</code></td>
+<td><code>powerstore_capacity_physical_total</code></td>
+<td>Physical Total</td>
+<td>Bytes</td>
+<td>Total physical capacity of the array</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.capacity.used_ratio</code></td>
+<td><code>powerstore_capacity_used_ratio</code></td>
+<td>Physical Used Ratio</td>
+<td>%</td>
+<td>Percentage of physical capacity used (0-100; exported as a 0..1 ratio)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.capacity.logical</code></td>
+<td><code>powerstore_capacity_logical_used</code></td>
+<td>Logical Used</td>
+<td>Bytes</td>
+<td>Logical (thin-provisioned) space used before data reduction</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.data_reduction_ratio</code></td>
+<td><code>powerstore_data_reduction_ratio</code></td>
+<td>Data Reduction Ratio</td>
+<td>#</td>
+<td>Data reduction ratio (logical:physical), e.g. 1.49 = 1.49:1</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.efficiency_ratio</code></td>
+<td><code>powerstore_efficiency_ratio</code></td>
+<td>Overall Efficiency Ratio</td>
+<td>#</td>
+<td>Overall storage efficiency ratio (thin + dedup + compression + snapshots)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.capacity.logical</code></td>
+<td><code>powerstore_capacity_logical_provisioned</code></td>
+<td>Logical Provisioned</td>
+<td>Bytes</td>
+<td>Logical capacity provisioned to hosts (thin)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.capacity.physical</code></td>
+<td><code>powerstore_appliance_physical_used</code></td>
+<td>{appliance} Physical Used</td>
+<td>Bytes</td>
+<td>Physical space used on the appliance</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.capacity.physical</code></td>
+<td><code>powerstore_appliance_physical_total</code></td>
+<td>{appliance} Physical Total</td>
+<td>Bytes</td>
+<td>Total physical capacity of the appliance</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.capacity.logical</code></td>
+<td><code>powerstore_appliance_logical_used</code></td>
+<td>{appliance} Logical Used</td>
+<td>Bytes</td>
+<td>Logical (thin) space used on the appliance before data reduction</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.iops</code></td>
+<td><code>powerstore_iops_read</code></td>
+<td>Read IOPS</td>
+<td>#</td>
+<td>Average read IOPS over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.iops</code></td>
+<td><code>powerstore_iops_write</code></td>
+<td>Write IOPS</td>
+<td>#</td>
+<td>Average write IOPS over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.iops</code></td>
+<td><code>powerstore_iops_total</code></td>
+<td>Total IOPS</td>
+<td>#</td>
+<td>Average total IOPS over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.bandwidth</code></td>
+<td><code>powerstore_bandwidth_read</code></td>
+<td>Read Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average read bandwidth over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.bandwidth</code></td>
+<td><code>powerstore_bandwidth_write</code></td>
+<td>Write Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average write bandwidth over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.bandwidth</code></td>
+<td><code>powerstore_bandwidth_total</code></td>
+<td>Total Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average total bandwidth over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.latency</code></td>
+<td><code>powerstore_latency_read</code></td>
+<td>Read Latency</td>
+<td>ms</td>
+<td>Average read latency over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.latency</code></td>
+<td><code>powerstore_latency_write</code></td>
+<td>Write Latency</td>
+<td>ms</td>
+<td>Average write latency over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.latency</code></td>
+<td><code>powerstore_latency_total</code></td>
+<td>Latency</td>
+<td>ms</td>
+<td>Average overall latency over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.io_size</code></td>
+<td><code>powerstore_io_size</code></td>
+<td>Average IO Size</td>
+<td>Bytes</td>
+<td>Average IO size over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.cpu.utilization</code></td>
+<td><code>powerstore_cpu_utilization</code></td>
+<td>CPU Workload Utilization</td>
+<td>%</td>
+<td>Array IO-workload CPU utilization, appliance-level (percent; exported as a 0..1 ratio)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.iops</code></td>
+<td><code>powerstore_appliance_iops_read</code></td>
+<td>{appliance} Read IOPS</td>
+<td>#</td>
+<td>Average read IOPS on the appliance over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.iops</code></td>
+<td><code>powerstore_appliance_iops_write</code></td>
+<td>{appliance} Write IOPS</td>
+<td>#</td>
+<td>Average write IOPS on the appliance over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.iops</code></td>
+<td><code>powerstore_appliance_iops_total</code></td>
+<td>{appliance} Total IOPS</td>
+<td>#</td>
+<td>Average total IOPS on the appliance over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.bandwidth</code></td>
+<td><code>powerstore_appliance_bandwidth_total</code></td>
+<td>{appliance} Total Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average total bandwidth on the appliance over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.latency</code></td>
+<td><code>powerstore_appliance_latency_total</code></td>
+<td>{appliance} Latency</td>
+<td>ms</td>
+<td>Average overall latency on the appliance over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.appliance.cpu.utilization</code></td>
+<td><code>powerstore_appliance_cpu_utilization</code></td>
+<td>{appliance} CPU Utilization</td>
+<td>%</td>
+<td>Appliance IO-workload CPU utilization (percent; exported as a 0..1 ratio)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.node.cpu.utilization</code></td>
+<td><code>powerstore_node_cpu_utilization</code></td>
+<td>Node {node} CPU Utilization</td>
+<td>%</td>
+<td>Node IO-workload CPU utilization (percent; exported as a 0..1 ratio)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.node.iops</code></td>
+<td><code>powerstore_node_iops_total</code></td>
+<td>Node {node} Total IOPS</td>
+<td>#</td>
+<td>Average total IOPS on the node over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.replication.sessions</code></td>
+<td><code>powerstore_replication_sessions</code></td>
+<td>Replication Sessions</td>
+<td>#</td>
+<td>Number of replication sessions (0 when replication is not configured)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.replication.state</code></td>
+<td><code>powerstore_replication_state</code></td>
+<td>Replication {session} State</td>
+<td>#</td>
+<td>Replication session state (OK=2, transitional=1, error=0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volumes</code></td>
+<td><code>powerstore_volumes_total</code></td>
+<td>Volumes Total</td>
+<td>#</td>
+<td>Total number of provisioned volumes</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volumes.not_ready</code></td>
+<td><code>powerstore_volumes_not_ready</code></td>
+<td>Volumes Not Ready</td>
+<td>#</td>
+<td>Number of volumes not in the Ready state</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.state</code></td>
+<td><code>powerstore_volume_state</code></td>
+<td>{volume} State</td>
+<td>#</td>
+<td>Volume operational state (Ready=1, otherwise 0)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.logical_used</code></td>
+<td><code>powerstore_volume_logical_used</code></td>
+<td>{volume} Logical Used</td>
+<td>Bytes</td>
+<td>Logical data written to the volume before data reduction</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.size</code></td>
+<td><code>powerstore_volume_size</code></td>
+<td>{volume} Provisioned Size</td>
+<td>Bytes</td>
+<td>Provisioned (thin) size of the volume</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.iops</code></td>
+<td><code>powerstore_volume_iops_read</code></td>
+<td>{volume} Read IOPS</td>
+<td>#</td>
+<td>Average read IOPS for the volume over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.iops</code></td>
+<td><code>powerstore_volume_iops_write</code></td>
+<td>{volume} Write IOPS</td>
+<td>#</td>
+<td>Average write IOPS for the volume over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.iops</code></td>
+<td><code>powerstore_volume_iops_total</code></td>
+<td>{volume} Total IOPS</td>
+<td>#</td>
+<td>Average total IOPS for the volume over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.bandwidth</code></td>
+<td><code>powerstore_volume_bandwidth_read</code></td>
+<td>{volume} Read Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average read bandwidth for the volume over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.bandwidth</code></td>
+<td><code>powerstore_volume_bandwidth_write</code></td>
+<td>{volume} Write Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average write bandwidth for the volume over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.bandwidth</code></td>
+<td><code>powerstore_volume_bandwidth_total</code></td>
+<td>{volume} Total Bandwidth</td>
+<td>Bytes/s</td>
+<td>Average total bandwidth for the volume over the interval</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.latency</code></td>
+<td><code>powerstore_volume_latency_read</code></td>
+<td>{volume} Read Latency</td>
+<td>ms</td>
+<td>Average read latency for the volume over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.latency</code></td>
+<td><code>powerstore_volume_latency_write</code></td>
+<td>{volume} Write Latency</td>
+<td>ms</td>
+<td>Average write latency for the volume over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.volume.latency</code></td>
+<td><code>powerstore_volume_latency_total</code></td>
+<td>{volume} Latency</td>
+<td>ms</td>
+<td>Average overall latency for the volume over the interval (milliseconds)</td>
+</tr>
+<tr>
+<td><code>senhub.powerstore.alerts.active</code></td>
+<td><code>powerstore_alerts_active</code></td>
+<td>Active Alerts ({severity})</td>
+<td>#</td>
+<td>Number of active (uncleared) alerts by severity</td>
+</tr>
+</tbody>
+</table>
+<!-- schema:metrics:end -->
 
 
 
