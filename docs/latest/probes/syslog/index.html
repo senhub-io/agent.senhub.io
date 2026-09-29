@@ -6,14 +6,14 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
         <link rel="canonical" href="https://agent.senhub.io/docs/latest/probes/syslog/">
       
       
-        <link rel="prev" href="../azure_container_apps/">
+        <link rel="prev" href="../azure_container_app_jobs/">
       
       
         <link rel="next" href="../event/">
@@ -455,6 +455,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../web-interface/" class="md-nav__link">
         
   
@@ -495,10 +549,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -516,8 +570,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -666,10 +720,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -687,8 +741,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -837,10 +891,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -858,8 +912,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1965,6 +2019,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -2534,6 +2616,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#messages-without-a-pri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Messages without a PRI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#priority-pri-calculation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2618,6 +2711,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metric-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric reference
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3888,10 +3992,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3909,8 +4013,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3963,6 +4067,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.0
   
 
     
@@ -4936,6 +5068,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#messages-without-a-pri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Messages without a PRI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#priority-pri-calculation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5020,6 +5163,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metric-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metric reference
+      
+    </span>
+  </a>
   
 </li>
       
@@ -5173,6 +5327,7 @@
 <h2 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
+<!-- sha256:54ce1c720fc663806d6432688a679d4f207229fc6f569d8847c3c4910c54cb27 -->
 
 <table>
 <thead>
@@ -5360,20 +5515,26 @@
 <h3 id="permission-denied-port-1024">Permission Denied (Port &lt; 1024)<a class="headerlink" href="#permission-denied-port-1024" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Error binding to port 514 on Unix/Linux systems</p>
 <p><strong>Solution:</strong>
-Ports below 1024 require elevated privileges on Unix/Linux:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Option 1: Run agent as root (not recommended)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>senhub-agent<span class="w"> </span>run
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># Option 2: Grant port binding capability (Linux)</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>sudo<span class="w"> </span>setcap<span class="w"> </span><span class="nv">cap_net_bind_service</span><span class="o">=</span>+ep<span class="w"> </span>/opt/senhub/bin/senhub-agent
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># Option 3: Use alternate port (&gt;1024) and configure syslog sources</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># /etc/senhub-agent/probes.d/10-syslog.yaml:</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>-<span class="w"> </span>name:<span class="w"> </span>syslog
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span>type:<span class="w"> </span>syslog
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span>params:
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span>port:<span class="w"> </span><span class="m">1514</span><span class="w">  </span><span class="c1"># Non-privileged port</span>
+The Linux service runs as the unprivileged <code>senhub</code> account with every
+capability dropped, so it cannot bind a port below 1024. The error says
+so: <code>bind: permission denied: port 514 is below 1024</code>. Two ways out:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Option 1: grant the one capability in a unit drop-in</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>senhub-agent.service
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1">#   [Service]</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1">#   CapabilityBoundingSet=CAP_NET_BIND_SERVICE</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1">#   AmbientCapabilities=CAP_NET_BIND_SERVICE</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># Option 2: listen on a port above 1023 and point the senders at it</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># /etc/senhub-agent/probes.d/10-syslog.yaml:</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>-<span class="w"> </span>name:<span class="w"> </span>syslog
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span>type:<span class="w"> </span>syslog
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span>params:
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span>port:<span class="w"> </span><span class="m">1514</span><span class="w">  </span><span class="c1"># Non-privileged port</span>
 </code></pre></div>
+<p><code>setcap</code> on the binary does not help: the unit's empty capability bounding
+set removes file capabilities, and an update replaces the file. See
+<a href="https://github.com/senhub-io/senhub-agent/blob/dev/docs/admin-guide/LEAST-PRIVILEGE.md">Running the agent least-privilege</a>.</p>
 <p><strong>Configure syslog sources to use alternate port:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># rsyslog configuration (/etc/rsyslog.conf or /etc/rsyslog.d/*.conf)</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>*.*<span class="w"> </span>@syslog-server:1514<span class="w">  </span><span class="c1"># UDP</span>
@@ -5684,12 +5845,23 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>Example:
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>&lt;13&gt;1 2025-10-13T14:23:45.000Z server01 sshd 1234 ID47 [exampleSDID@32473 eventID="1"] Connection from 192.168.1.100
 </code></pre></div>
+<h3 id="messages-without-a-pri">Messages without a PRI<a class="headerlink" href="#messages-without-a-pri" title="Permanent link">&para;</a></h3>
+<p>Some senders start the line at the timestamp, with no <code>&lt;PRI&gt;</code>: the UniFi
+controller's activity log, for one.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Sep 29 18:08:37 unifi-pi CEF:0|Ubiquiti|UniFi Network|10.6.106|546|Config Modified|5|...
+</code></pre></div>
+<p>The probe still reads the timestamp, the hostname and the tag from such a
+line, and keeps the rest as the body. It sets no <code>facility</code> or <code>priority</code>,
+since the sender gave none. The severity is <code>5</code> (notice), unless the body
+is a CEF record: the severity then comes from the CEF header, 0-3 as
+informational, 4-6 as warning, 7-8 as error and 9-10 as critical. A
+message that carries a PRI keeps the severity of its PRI.</p>
 <h3 id="priority-pri-calculation">Priority (PRI) Calculation<a class="headerlink" href="#priority-pri-calculation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>PRI = (Facility * 8) + Severity
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Examples:
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>- Facility 1 (user), Severity 3 (error): PRI = (1*8)+3 = 11
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>- Facility 4 (security), Severity 2 (critical): PRI = (4*8)+2 = 34
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>PRI = (Facility * 8) + Severity
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>Examples:
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>- Facility 1 (user), Severity 3 (error): PRI = (1*8)+3 = 11
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>- Facility 4 (security), Severity 2 (critical): PRI = (4*8)+2 = 34
 </code></pre></div>
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>The Syslog probe requires no authentication for incoming syslog messages. Access control should be implemented at the network level (firewall rules, VLANs).</p>
@@ -5723,6 +5895,43 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
 <li>RFC 3164 (BSD Syslog) or RFC 5424 (IETF Syslog) format</li>
 <li>UDP or TCP transport support</li>
 </ul>
+<h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
+<p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
+OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
+<a href="../../nagios/">Nagios check</a> and the API <code>metrics=</code> filter match.
+<strong>PRTG channel</strong> is the label PRTG shows, placeholders filled from the
+series' tags.</p>
+<!-- schema:metrics:start -->
+<!-- Generated from the probe's definition. Run `make docs-metrics` after changing it. -->
+
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Name</th>
+<th>PRTG channel</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.syslog.records_emitted</code></td>
+<td><code>senhub.syslog.records_emitted</code></td>
+<td>Syslog Records Emitted</td>
+<td>#</td>
+<td>Cumulative count of syslog messages this probe has relayed to the log rail</td>
+</tr>
+<tr>
+<td>-</td>
+<td><code>syslog_event</code></td>
+<td>Syslog {facility_name} Severity</td>
+<td>#</td>
+<td>Syslog message severity level (RFC 3164)</td>
+</tr>
+</tbody>
+</table>
+<!-- schema:metrics:end -->
 
 
 
@@ -5758,7 +5967,7 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../azure_container_apps/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Azure Container Apps">
+          <a href="../azure_container_app_jobs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Azure Container App Jobs">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5768,7 +5977,7 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Azure Container Apps
+                Azure Container App Jobs
               </div>
             </div>
           </a>

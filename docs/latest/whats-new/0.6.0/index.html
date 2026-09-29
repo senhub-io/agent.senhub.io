@@ -1,0 +1,5458 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
+      
+      
+      
+        <link rel="canonical" href="https://agent.senhub.io/docs/latest/whats-new/0.6.0/">
+      
+      
+        <link rel="prev" href="../next/">
+      
+      
+        <link rel="next" href="../0.5.6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>0.6.0 - SenHub Agent</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#060-2026-09-29" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SenHub Agent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0.6.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/senhub-io/senhub-agent" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    senhub-io/senhub-agent
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    SenHub Agent
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/senhub-io/senhub-agent" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    senhub-io/senhub-agent
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../presentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secret-store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secret store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../http-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP / HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    License
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/agreement-fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contrat de licence (français, fait foi)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/agreement-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License agreement (English translation)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/third-party/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus / VictoriaMetrics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Prometheus / VictoriaMetrics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prometheus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../otlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP / OpenTelemetry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Probes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/logicaldisk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logical disk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/linux-logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/windows-eventlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Event Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/filetail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File tail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/systemd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systemd Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/windows-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/chrony/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chrony (NTP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/smart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S.M.A.R.T. Disk Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ipmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPMI / BMC Sensors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nvidia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA GPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/modbus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modbus TCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/icmp-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICMP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/http-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/tcp-dial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCP dial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/dns-latency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS latency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/snmp-poll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP poll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/snmp-trap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP trap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/otlp-receiver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP receiver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/prometheus-scrape/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus scrape
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/citrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Citrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/netscaler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NetScaler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/redfish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redfish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/powerstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_container_apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syslog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/event/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ping-webapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ping WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/load-webapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ping-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ping gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/wifi-signal-strength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WiFi signal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/veeam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veeam Backup & Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mysql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL / MariaDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/redis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis / Valkey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/cassandra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Cassandra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/couchdb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CouchDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/clickhouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ClickHouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/elasticsearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elasticsearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenSearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/solr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Solr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/influxdb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InfluxDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/memcached/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memcached
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/apache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache HTTP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/haproxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HAProxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/envoy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Proxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/php-fpm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PHP-FPM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/varnish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Varnish Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/tomcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Tomcat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/wildfly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WildFly / JBoss
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RabbitMQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/activemq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache ActiveMQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NATS Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/pulsar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Pulsar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox VE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ceph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ceph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/consul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/zookeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache ZooKeeper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/jenkins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/unifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UniFi Controller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What's new
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    What's new
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.0
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opentelemetry-and-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenTelemetry and topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nagios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nagios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-console-and-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI, console and packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.4.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.3.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opentelemetry-and-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenTelemetry and topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nagios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nagios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-console-and-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI, console and packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/whats-new/0.6.0.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="060-2026-09-29">0.6.0 — 2026-09-29<a class="headerlink" href="#060-2026-09-29" title="Permanent link">&para;</a></h1>
+<p>0.6.0 adds a native <a href="../../zabbix/">Zabbix output</a>: an active agent with
+generated templates and autoregistration prepared by
+<code>senhub-agent zabbix setup</code>, for Zabbix 6.0, 7.0 and 8.0. It also
+introduces a separate administration key for the console and the
+configuration API, makes <code>service.instance.id</code> a UUID, and brings the
+fixes listed below.</p>
+<div class="rn-filter"></div>
+
+<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
+<p>Actions for an installation running 0.5.x. Each one is detailed under
+Breaking Changes or Fixes below.</p>
+<ol>
+<li><strong>Console bookmarks and configuration API scripts.</strong> A bookmarked
+   console address carries the agent key and now answers 401 (Unauthorized): open the
+   console with <code>senhub-agent console</code>, or get its address with
+   <code>senhub-agent console --print</code>. Scripts calling the configuration API
+   use the <code>admin_key</code>.</li>
+<li><strong><code>service.instance.id</code> changes once.</strong> Dashboards and queries keyed on
+   it start new series after the upgrade.</li>
+<li><strong>Unfiltered <code>process</code> probe.</strong> Add a <code>filter</code> to keep the
+   per-process series; without one, only the per-name roll-up remains.</li>
+<li><strong>Nagios thresholds.</strong> A value equal to the threshold is now OK;
+   review your thresholds. <code>nagios.yaml</code> is now read next to <code>agent.yaml</code>
+   (the former location remains a fallback).</li>
+<li><strong>Renamed ActiveMQ and Redfish metrics.</strong> Update the alert rules and
+   panels that use them.</li>
+<li><strong>Veeam protected objects.</strong> Discovered items are recreated once.</li>
+<li><strong>Windows hosts installed from a pre-release (beta) MSI.</strong> Copy
+   <code>C:\ProgramData\SenHub</code> aside, uninstall the beta MSI once (Settings &gt;
+   Apps, or <code>msiexec /x</code>), then install the release: the uninstall
+   removes the configuration directory.</li>
+<li><strong>Zabbix users of a 0.6.0 pre-release.</strong> Re-run <code>zabbix setup</code>, then
+   relink the templates (<strong>Mass update &gt; Templates</strong>) on the hosts that
+   registered before; see
+   <a href="../../zabbix/#a-host-already-registered-keeps-the-templates-it-was-given">Zabbix</a>.</li>
+<li><strong>Interface queries.</strong> SNMP interface series move from the label
+   <code>interface_name</code> to <code>network_interface_name</code>; interface entities are
+   replaced once.</li>
+<li><strong>PRTG sensors.</strong> Recreate the sensors of the <code>process</code> and <code>swarm</code>
+    probes: <code>process</code> no longer sends its per-process channels to PRTG,
+    and <code>swarm</code> channels are renamed after the node, service or network
+    they describe. PRTG keeps the old channels without values until the
+    sensor is recreated. On any probe, channels that used to share a name
+    now carry a suffix that sets them apart, and appear as new channels.</li>
+<li><strong>OTLP receiver counters.</strong> Queries on the sending service of
+    <code>senhub_agent_otlp_receiver_received_total</code> use the label
+    <code>senhub_otlp_receiver_sender_service_name</code> instead of <code>service_name</code>.</li>
+<li><strong>Linux hosts running the IBM i probe, or Java or Node.js plugins
+    through the exec probe.</strong> Run <code>sudo senhub-agent refresh-unit --yes</code>
+    once after upgrading: the installed service unit still forbids the
+    writable-executable memory a JVM needs, and an upgrade does not
+    rewrite the unit.</li>
+<li><strong>Linux agents that stopped after <code>sudo senhub-agent secret set</code>.</strong> In
+    0.5.x that command left <code>/etc/senhub-agent/secrets.age</code> owned by root,
+    and the service, which runs as <code>senhub</code>, could no longer read it.
+    Give the file back before or after upgrading:
+    <code>sudo chown senhub:senhub /etc/senhub-agent/secrets.age</code>. From 0.6.0,
+    files written with sudo keep the owner of their directory.</li>
+</ol>
+<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>The web console and the configuration API need their own key.</strong> The
+  agent key is what a monitoring tool is given to read this agent, and
+  it travels in the URL path, so it lands in the access log of every
+  machine between the poller and the agent. It also opened everything
+  that <em>changes</em> the agent: clearing the metric cache, injecting values
+  into it, changing log levels, reading the agent's own logs, editing
+  probes and outputs. A read-only consumer held the means to falsify
+  what it read.</p>
+<p>The two surfaces are now told apart. <code>admin_key</code> on the <code>http</code>
+output opens the administration one, and it alone; the agent key
+reads and stops there. The administration key carries the read
+privilege too, so one key is enough to use the
+<a href="../../web-interface/">web console</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:agent.admin_key}"</span>
+</code></pre></div>
+<p><strong>You do not have to do anything.</strong> When the <code>http</code> output has no
+<code>admin_key</code>, the agent generates one at its first start and writes it
+into that output, where the next sealing pass moves it into the
+operating system's store like every other secret. Only if that
+generation fails are the administration routes left unregistered:
+they answer 404 until a key is set by hand. Pollers reading with the
+agent key are untouched. <code>senhub-agent console</code> resolves the key, so
+the Windows desktop and Start Menu shortcuts keep opening the console
+as before: they name the binary, never the key.</p>
+<p>What does change: an address you <strong>bookmarked</strong> carries the old key
+and now answers 401 (Unauthorized). Open the console from the shortcut, or run
+<code>senhub-agent console --print</code>, and bookmark that instead. Likewise
+for anything scripted against the configuration API with the agent
+key.</p>
+</li>
+<li>
+<p><strong><code>service.instance.id</code> is now an RFC 4122 UUID.</strong> The OpenTelemetry
+  semantic conventions ask for a UUID; the agent now derives one (version
+  5) from its key. Each agent's
+  <code>service.instance.id</code> therefore changes once at upgrade: series keyed
+  on it start new, and the agent's <code>service.instance</code> entity in a
+  topology backend is replaced by a new one (the old one expires).
+  Setting <code>resource.service.instance.id</code> on the OTLP output still
+  overrides it.</p>
+</li>
+<li>
+<p><strong>Interfaces are keyed on <code>network.interface.name</code>.</strong> The attribute
+  that names a network interface, and identifies the <code>network.interface</code>
+  entity with its device or host, follows the OpenTelemetry name:
+  <code>interface.name</code> becomes <code>network.interface.name</code> on the entities, on
+  the SNMP interface metrics and on the host network metrics (Prometheus
+  label <code>network_interface_name</code>, which the host series already used).
+  Every interface entity in a topology backend is replaced once, and SNMP
+  interface series change label. On Windows, the host network metrics now
+  carry the connection name (<code>Ethernet 2</code>) in <code>network.interface.name</code>,
+  where the adapter description sat before; the description stays in the
+  <code>interface</code> attribute.</p>
+</li>
+<li>
+<p><strong>MAC addresses take the OpenTelemetry form.</strong> The entity attributes
+  and identities that carry a MAC (SNMP and host interfaces, LLDP
+  neighbours, the <code>mac:</code> device identity) render it in uppercase with
+  hyphens, <code>BC-24-11-1B-04-82</code>, instead of <code>bc:24:11:1b:04:82</code>. Metric
+  labels are unchanged: the Redfish and Wi-Fi probes pass on the MAC as
+  the device reports it.</p>
+</li>
+<li>
+<p><strong>The <code>process</code> probe no longer reports every process by default.</strong>
+  Without a <code>filter</code>, it emitted six series per process, and the identity
+  of those series carried the process id: a machine with 837 processes
+  produced 4596 series and added about fifty a minute, for ever, since
+  every program start minted a set that was never fed again. An
+  unfiltered view now reports the roll-up over the processes sharing a
+  name, which gains the CPU and the memory summed beside the count that
+  was already there.</p>
+<p>This removes series on every output, not only on Zabbix. An
+installation running the probe without a filter loses
+<code>process.cpu.utilization</code>, <code>process.memory.usage</code>,
+<code>process.memory.virtual_memory_usage</code>, <code>process.threads</code>,
+<code>process.open_file_descriptors</code> and <code>process.uptime</code>, and gains
+<code>senhub.process.group.cpu.utilization</code> and
+<code>senhub.process.group.memory.usage</code> beside <code>process.count</code>.</p>
+<p><strong>To keep the per-process detail</strong>, name what to watch or bound the
+sample. Any one of these is enough:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">filter</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">by_name</span><span class="p">:</span><span class="w"> </span><span class="s">"^(nginx|php-fpm)"</span><span class="w">   </span><span class="c1"># or by_user, or top_n</span>
+</code></pre></div>
+<p>The processes named this way also become entities on the topology
+graph, which an unfiltered view never did, for the same reason.</p>
+<p>A named view reports both: the per-process detail and the roll-up
+over the processes sharing a name. The detail is identified by the
+process id, so a named program that restarts leaves the items of its
+former workers behind on a sink that creates what it is sent. That
+is what watching a process one by one means, and the filter is what
+bounds it, which is why an unfiltered view reports the roll-up
+alone. (#910)</p>
+</li>
+<li>
+<p><strong>Nagios checks follow the plugin convention.</strong> A threshold is now the
+  last acceptable value: a value equal to it is OK, where the agent
+  alerted on it. A metric is read as a health state only when its
+  definition names its values, where any name containing <code>status</code> or a
+  small integer was read that way: a count of two failed Veeam jobs
+  read CRITICAL against a warning threshold of five. Review the
+  thresholds you wrote against the old reading.</p>
+<p>The operator's <code>nagios.yaml</code> is now read from the directory that
+holds the agent configuration (<code>/etc/senhub-agent/</code> on Linux,
+<code>C:\ProgramData\SenHub\</code> on Windows), with the former location as a
+fallback. A file with a misspelt key, a threshold that is not a
+number or an unknown aggregation is refused and reported, where it
+was silently replaced by the shipped checks. See
+<a href="../../nagios/">Nagios</a>.</p>
+</li>
+<li>
+<p><strong>Three metric names change.</strong> The per-destination ActiveMQ counts are
+  <code>activemq.destination.consumer.count</code> and
+  <code>activemq.destination.producer.count</code>; they shared the broker totals'
+  names and rendered under the broker-wide channel. A Redfish drive's
+  predicted failure is <code>senhub.hardware.physical_disk.failure_predicted</code>,
+  a 0/1 gauge; as a state of <code>hw.status</code> it made every healthy drive
+  overwrite its own health with <code>unknown</code>. Channels and display names
+  are unchanged.</p>
+</li>
+<li>
+<p><strong>A Veeam protected object is identified by its id.</strong> A machine
+  protected by several jobs comes back once per job, and keyed on its
+  name one entry overwrote the others: on one server, a third of the
+  objects reported a sibling's figures. The series gain the object id,
+  so discovered items are recreated once.</p>
+</li>
+</ul>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h3 id="zabbix-output">Zabbix output<a class="headerlink" href="#zabbix-output" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>The <a href="../../zabbix/">Zabbix output</a></strong>, as a native active agent. It
+  connects out to port 10051, registers the host through
+  autoregistration, asks which items the server wants and pushes their
+  values. Low-level discovery finds the probe instances and the values
+  each host actually feeds, the templates are generated from the same
+  definitions the keys come from, and an optional listener answers the
+  server's polls on 10050 in both wire dialects.</p>
+</li>
+<li>
+<p><strong>One command prepares the server.</strong> <code>senhub-agent zabbix setup</code>
+  imports the templates, creates the host group and creates the
+  autoregistration action. After it, a machine needs the agent and two
+  lines naming the server, with nothing typed in the Zabbix interface.
+  It is an administrator command run once; a deployed agent never holds
+  an API token. Every step is idempotent, which is also how a template
+  is refreshed after an upgrade.</p>
+</li>
+<li>
+<p><strong>Zabbix 6.0, 7.0 and 8.0.</strong> Every generated template imports into 7.0
+  and 8.0, and autoregistration, discovery, inventory, the polled port
+  and the proxy group redirection are tested on a server of each.
+  <code>zabbix setup</code> reads the server's version first: before 6.4 it sends
+  the API token in the request body, the only place those versions read
+  it, and from 6.4 on in the <code>Authorization</code> header that 8.0 requires;
+  before 6.2 it exports the templates in the 6.0 format with the matching
+  import rules, without <code>--version</code>.</p>
+</li>
+<li>
+<p><strong>Proxies and proxy groups.</strong> Point <code>server</code> at a proxy and nothing
+  else changes. A proxy group is named by listing its members separated
+  by commas: the agent talks to the first that answers and follows the
+  group's redirection to whichever member holds the host, for the check
+  list, the values and the heartbeat alike. When that member goes down
+  the agent asks the configured addresses again, which is how it learns
+  where the host moved.</p>
+</li>
+<li>
+<p><strong>One template set per platform.</strong> A definition declares every metric
+  its probe can produce, and a probe does not produce the same ones
+  everywhere. The agent appends its operating system to the host
+  metadata it registers with, and <code>setup</code> creates one autoregistration
+  action per platform, so a Linux host is linked to the Linux templates
+  and a Windows host to the Windows ones without anyone choosing.</p>
+</li>
+<li>
+<p><strong>The host's inventory fills itself.</strong> The agent already discovers
+  what the machine is, and Zabbix keeps those facts in host inventory.
+  Nine text items carry the operating system, the hardware, the vendor,
+  the model and the serial number into the matching fields, and <code>setup</code>
+  puts new hosts in automatic inventory mode. A fact the agent did not
+  find is not sent, so a field an operator typed by hand is not blanked.</p>
+</li>
+<li>
+<p><strong>Certificate encryption on the polled port.</strong> The passive listener
+  takes its own <code>tls</code> block: with a certificate it encrypts what it
+  serves, and with an authority it also demands one from whoever polls.
+  A certificate that cannot be read stops the agent rather than leaving
+  a listener that serves in clear. (#904)</p>
+</li>
+<li>
+<p><strong>Pre-shared keys, both directions.</strong> Most Zabbix sites encrypt with
+  a pre-shared key, and it is the only encryption Zabbix offers for
+  autoregistration. The agent speaks the TLS 1.2 PSK profile both Zabbix
+  lines accept, outbound and on the polled port, and reads the key from
+  a file hex-encoded the way Zabbix writes it, never from the
+  configuration. An encrypted autoregistration creates the host with PSK
+  set on both directions by itself. (#903)</p>
+</li>
+<li>
+<p><strong>The agent says what it is to the server</strong>: its version, its session
+  and the revision of the item list it holds. The server shows it in the
+  host's agent columns and resends the list only when it changed, where
+  it resent all of it at every refresh. (#905)</p>
+</li>
+<li>
+<p><strong>Behind NAT, the agent names the address to poll.</strong>
+  <code>passive.advertise</code> takes a name or an address and autoregistration
+  creates the interface on it, instead of on the translated source
+  address the server cannot reach. (#906)</p>
+</li>
+<li>
+<p><strong><code>zabbix setup</code> names the other actions a new host would match.</strong>
+  Zabbix runs every autoregistration action whose condition matches, and
+  two that link templates collide in silence: the host comes up with
+  whichever set won and items that never fill. <code>setup</code> now lists those
+  actions and says what will happen, without disabling one an operator
+  wrote. (#907)</p>
+</li>
+<li>
+<p><strong>The templates raise problems.</strong> A state metric raises a High or a
+  Warning problem from the codes its lookup classes as an error or a
+  warning, the classification PRTG and Nagios already read; processor,
+  memory and disk usage raise a Warning and a High problem past
+  thresholds held in macros a site overrides per host or per group.
+  Items and triggers carry the <code>component</code> and <code>scope</code> tags the native
+  templates use.</p>
+</li>
+<li>
+<p><strong>A utilization reads as a percentage in Zabbix.</strong> The templates
+  multiply the OTel fraction by 100 on the server side and show it in
+  <code>%</code>, as the native agent does. The agent still sends the fraction,
+  under the same key.</p>
+</li>
+<li>
+<p><strong>The agent answers for itself.</strong> <code>agent.ping</code>, <code>agent.version</code> and
+  <code>agent.hostname</code> are served on both rails and declared in a template
+  of their own, so a host monitored actively has the availability line
+  a native agent gives for free.</p>
+</li>
+<li>
+<p><strong>An application's own metrics reach Zabbix without anyone declaring
+  them.</strong> Zabbix speaks no OpenTelemetry, so an agent that speaks both
+  is the bridge between an instrumented application and a Zabbix
+  server. A template ships for the OpenTelemetry semantic conventions,
+  HTTP server, JVM and database client, generated from the same
+  definitions as every other template. A host carrying it discovers the
+  applications relaying through the agent and creates their items, keyed
+  on the sender's <code>service.name</code> and on the attributes the convention
+  defines. Nothing is rewritten on the way: the name, the unit and the
+  value stay the application's.</p>
+<p>A duration arrives as a distribution, and a sink holding one value
+per item cannot hold one, so it is sent as its count and its sum
+under keys that say which is which. A metric outside the shipped
+conventions keeps the shorter key its own name gives it. An
+application exporting part of a dimension set gets items only for
+what it sends. (#922, #940)</p>
+</li>
+</ul>
+<h3 id="opentelemetry-and-topology">OpenTelemetry and topology<a class="headerlink" href="#opentelemetry-and-topology" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>The <a href="../../container/">container</a> sends entities by default.</strong> An
+  agent started from the image exported measurements and logs but no
+  entities, so a topology backend never saw the host, the agent or what
+  it watches. The output the image writes now enables them;
+  <code>SENHUB_ENTITIES=false</code> turns them off.</p>
+</li>
+<li>
+<p><strong>The agent shows its instance id.</strong> <code>senhub-agent key instance-id</code>,
+  <code>senhub-agent status</code> and the <strong>Agent</strong> card of the web console show
+  the <code>service.instance.id</code> the agent's telemetry and entity carry, so
+  it can be found in a metrics store or a topology graph.</p>
+</li>
+<li>
+<p><strong>Logs and traces from this machine carry its host identity.</strong> An
+  application sending its OTLP to the local agent gets the agent's
+  <code>host.id</code> and <code>host.name</code> on what it sends, when it stated no
+  <code>host.*</code> of its own, so the three signals of one machine join on one
+  key. Only a sender known to be local is stamped: a new Unix socket
+  listener (<code>address: unix:/run/senhub-agent/otlp.sock</code>) is local by
+  construction, and a loopback TCP sender counts only when it is not
+  itself a relay. Two counters,
+  <code>senhub.agent.otlp_receiver.received</code> and
+  <code>.received.without_host_id</code>, by signal, origin and service, make the
+  join's coverage measurable.</p>
+</li>
+<li>
+<p><strong><code>config check</code> says when an OTLP output will send no entity event.</strong>
+  Entities are off unless enabled, and a host missing from the topology
+  had nothing anywhere saying why. (#938)</p>
+</li>
+</ul>
+<h3 id="nagios">Nagios<a class="headerlink" href="#nagios" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>A Nagios command calls one check.</strong> <code>GET
+  /api/{key}/nagios/check/{name}</code> runs one configured check and answers
+  in plugin format, <code>STATUS - message | perfdata</code>, with 404 for a check
+  that is not configured. Before, configured checks were reachable only
+  as JSON for all of them at once, which needed a wrapper script. The
+  Nagios output has its own page, <a href="../../nagios/">Nagios</a>, tested against
+  Nagios Core.</li>
+</ul>
+<h3 id="probes">Probes<a class="headerlink" href="#probes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Counters a native Zabbix agent reports.</strong> On Linux: interrupts and
+  context switches per second, the processor count, the runnable process
+  count, the guest and guest nice modes, page faults, and the kernel's
+  ceilings on open file descriptors and on processes, which is what the
+  counted ones are measured against. On Windows: context switches, idle
+  time, the processor count, the negotiated link speed and the page file
+  size. On both: the speed and the operational state of a network
+  interface, and the number of open login sessions. On Linux, the
+  <code>os_updates</code> probe also reports how many packages are installed, which
+  is what its pending count is measured against. (#909)</p>
+</li>
+<li>
+<p><strong>A new probe watches Azure Container Apps jobs.</strong> The existing probe
+  follows applications, which run continuously; a job is discrete: an
+  execution starts, ends and leaves a verdict. <code>azure_container_app_jobs</code>
+  reports whether the last run worked, how long it took, how long it has
+  been since one succeeded, and publishes the console output of each
+  execution once it has finished. It shares the credential, the Azure
+  Resource Manager access and the read-budget pacing of the applications
+  probe.</p>
+<p>The metric to alert on is the age of the last success, not the last
+status: a job that stopped being triggered reports a perfectly good
+last status for ever.</p>
+</li>
+<li>
+<p><strong>The Azure Container Apps probe reports the collection's own state</strong>
+  in detail, and <strong>follows every application of a subscription</strong> when a
+  discovery block is set, instead of one named application. The role
+  does not have to be granted across the subscription: Azure returns
+  only what the credential may read.</p>
+</li>
+<li>
+<p><strong>The Veeam probe says which protected objects get no job status</strong>,
+  per platform, so a backup missing from the consolidated sensor can be
+  explained from the Veeam console.</p>
+</li>
+<li>
+<p><strong>Every probe page lists every metric.</strong> A generated reference gives
+  each metric its OTel name, its PRTG and Nagios channel, its unit and
+  its description. 303 of the 1314 metrics the probes emit were named
+  nowhere, and the 93 IBM i metrics without a description now have one.</p>
+</li>
+</ul>
+<h3 id="cli-console-and-packaging">CLI, console and packaging<a class="headerlink" href="#cli-console-and-packaging" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong><code>license activate</code> reads the token from standard input.</strong>
+  <code>senhub-agent license activate - &lt; license.jwt</code> keeps the token out of
+  the process list and the shell history, as <code>secret set</code> already does
+  for secrets. The argument still works.</p>
+</li>
+<li>
+<p><strong>The Windows console shortcuts no longer run a VBScript.</strong> They ran
+  <code>wscript.exe</code> on a VBScript launcher whose only job was to open the
+  console without showing a terminal: the agent being a console
+  program, a shortcut aimed at it leaves a command window in front of
+  the browser for as long as it waits for the service, up to fifteen
+  seconds on a fresh install. VBScript is a feature-on-demand since
+  Windows 11 24H2 and is being removed, and a scripting host launching a
+  signed binary is a pattern endpoint protection flags. The console
+  launcher no longer uses it: <code>senhub-console.exe</code>, a signed launcher
+  built for the Windows graphical subsystem, opens the console without
+  a terminal window.</p>
+<p>Nothing to do: the shortcuts are rewritten by the installer.</p>
+</li>
+<li>
+<p><strong>The systemd-creds <a href="../../secret-store/">secret store</a> wires itself
+  into the unit.</strong> <code>install</code> and <code>refresh-unit</code> write the credentials
+  drop-in from <code>creds.d/</code>, or remove it when the store is empty;
+  <code>secret migrate --wire-unit</code> wires what it has just sealed;
+  <code>uninstall</code> removes it. <code>secret wire-unit</code> was a step an operator had
+  to know about. Tested under systemd 252, 255 and 257. (#605)</p>
+</li>
+</ul>
+<h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong><a href="../../probes/ibmi/">IBM i</a> metrics carry their family for PRTG.</strong>
+  A partition yields far more series than the 50 channels of a PRTG
+  sensor, and choosing a sensor's metrics meant listing each name in its
+  URL. Every IBM i metric now carries <code>metric_type</code>, its family
+  (<code>disk</code>, <code>cpu</code>, <code>user_profile</code>, ...), so a sensor selects one with
+  <code>?tags=metric_type:disk</code>. The tag also reaches the OTLP and Prometheus
+  outputs as an attribute, as on the other probes that set it. No other
+  probe changes.</p>
+</li>
+<li>
+<p><strong><a href="../../probes/syslog/">Syslog</a> reads a message sent without its
+  priority.</strong> Some senders, the UniFi controller's activity log among
+  them, start the line at the timestamp. The whole line, header
+  included, ended up in the body, the hostname fell back to the sender's
+  address and the record took the default priority 13. The probe now
+  recovers the timestamp, hostname and tag, leaves out the facility and
+  priority it was not given, and for a CEF record takes the severity
+  from the CEF header (0-3 informational, 4-6 warning, 7-8 error, 9-10
+  critical).
+  A record from a UniFi switch no longer opens with ": ": the separator
+  some senders leave after the tag is dropped.</p>
+</li>
+<li>
+<p><strong><a href="../../probes/filetail/">File tail</a> reads a file whose directory
+  appears after the agent starts.</strong> A log path under a mount that comes
+  up after the service, or a directory created later, was never read:
+  the tail gave up at start and the probe kept it registered, so nothing
+  was sent until a restart. The probe now waits for the file to exist,
+  reads it from its first line since all of it was written after the
+  agent began watching, and restarts any tail that ends on its own.</p>
+</li>
+<li>
+<p><strong><code>prometheus_scrape</code> no longer warns on every exporter.</strong> A target
+  ending in <code>/metrics</code> was taken for the agent's own endpoint, which
+  flagged node_exporter and almost any exporter, the probe's ordinary
+  use. Only the agent's legacy path, or <code>/metrics</code> on this host's
+  default agent port, is warned about now.</p>
+</li>
+<li>
+<p><strong>A <a href="../../probes/cassandra/">Cassandra</a> node without traffic is no
+  longer reported down.</strong> On a node that has served no read or no write,
+  the latency mean has no value yet and Jolokia returns it empty; the
+  probe failed its whole collection on it and published <code>up = 0</code>. It
+  now leaves that one measurement out. It also read an <code>Errors</code> counter
+  that Cassandra does not have, which failed every collection on a real
+  node: the errors metric is now the sum of failures, timeouts and
+  unavailables.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/activemq/">ActiveMQ</a> probe reaches a current
+  broker.</strong> ActiveMQ Classic 5.16 and later refuse a Jolokia request that
+  carries no <code>Origin</code> header (HTTP 403), which is every request the probe
+  made, so the probe stayed down on a default install. It now names the
+  broker's own address as the origin. The per-queue and per-topic
+  metrics were never collected either: the probe listed destinations
+  with a Jolokia request every broker rejects, and now searches for them.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/wildfly/">WildFly</a> probe authenticates on a
+  default install.</strong> The management interface asks for HTTP Digest and
+  refuses Basic, the only scheme the probe sent: every collection ended
+  on HTTP 401. The probe now answers the Digest challenge, and keeps
+  working against an interface set to Basic.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/clickhouse/">ClickHouse</a> probe collects on a
+  default install.</strong> It read the Prometheus <code>/metrics</code> page on port 8123,
+  which ClickHouse does not serve there (HTTP 404; the Prometheus endpoint
+  is off unless configured on a port of its own), so the probe reported
+  every server down. It now reads the system tables over the HTTP
+  interface with the configured user. Three metrics named counters that
+  ClickHouse does not have and were never emitted: connections is now
+  the sum of the TCP, HTTP, MySQL and PostgreSQL connections, active
+  parts reads <code>PartsActive</code>, and written data reads the bytes written to
+  MergeTree parts.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/vsphere_ha/">vSphere HA</a> probe connects with the
+  documented address.</strong> Given a bare <code>https://vcenter</code> host, as in the
+  documentation, it sent its requests to the root of the server instead
+  of the <code>/sdk</code> endpoint, and vCenter answered 404 on every collection.
+  The <code>/sdk</code> path, and <code>https://</code> when no scheme is given, are now
+  supplied.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/redfish/">Redfish</a> probe reads standard power
+  supplies and storage.</strong> A supply described as the Redfish schema
+  defines it (<code>InputRanges</code> as a list) failed to parse, so a conformant
+  BMC produced no power-supply metric; the storage collection requested
+  a doubled <code>Systems/Systems/...</code> path and got 404 on every generic
+  system; and any supply whose name contained the letter "a" was tagged
+  <code>controller=A</code>. Metrics that the probe emits without a definition are
+  still missing from the Prometheus and OTLP outputs (#954).</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/ceph/">Ceph</a> probe reports OSDs, monitors and pools
+  as they are.</strong> It read fields that the Manager dashboard API does not
+  return: every cluster showed 0 OSDs up and 0 in, which an OSD-down
+  alert fires on, and 0 monitors, and the pool statistics were never
+  requested, so objects, stored data and operations stayed at 0.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/netscaler/">NetScaler</a> probe reports service group
+  traffic.</strong> It asked NITRO for all bindings and all member statistics
+  at once, which NITRO refuses: every service group published 0
+  requests, responses, throughput and connections whatever its traffic,
+  and service groups were never tagged with their vServer. Bindings and
+  member statistics are now read per object; a group whose members
+  cannot all be read leaves its traffic metrics out rather than
+  publishing a wrong sum. The service group state read the
+  administrative flag (<code>ENABLED</code>) and showed UNKNOWN on every group, and
+  the member counts were always 0: the state now comes from the group's
+  effective state (<code>PARTIAL-UP</code> included) and the counts from its
+  members.</p>
+</li>
+<li>
+<p><strong>An OTLP output that sends no entities says so.</strong> A strategy file
+  written without <code>signals.entities.enabled: true</code> sent metrics and logs
+  but no entity, and a topology backend stayed empty with nothing in the
+  agent log to explain it. The agent now logs a warning at start naming
+  the setting.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/process/">process</a> roll-up no longer churns on
+  Linux kernel workers.</strong> Kernel workqueue threads rename themselves as
+  they pick up work and live seconds, so each became its own roll-up
+  series and, on the Zabbix output, an item left without data; the same
+  thread even changed name under one process id, so per-process Zabbix
+  items churned too. They are now reported as <code>kworker</code>, in the roll-up
+  and in the per-process detail.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/hyperv/">Hyper-V</a> probe collects.</strong> Its two WMI
+  queries named properties the Hyper-V classes do not have
+  (<code>NumberOfProcessors</code> on <code>Msvm_ComputerSystem</code>, <code>CPUUsage</code> on
+  <code>Msvm_SummaryInformation</code>), and WMI rejects a whole query for one
+  unknown property: every collection failed with "Invalid query", on any
+  host. The probe now reads the processor count and load where Hyper-V
+  publishes them.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/pulsar/">Pulsar</a> probe reads the broker totals.</strong>
+  It looked only for the per-namespace series, which a broker publishes
+  once topics exist: a current broker without topics reported <code>up</code> and
+  nothing else, and one with topics reported per namespace. It now reads
+  the broker-level <code>pulsar_broker_*</code> aggregates, and falls back to the
+  per-namespace series on a broker that does not publish them.</p>
+</li>
+<li>
+<p><strong>The OTLP receiver's own counters stay the agent's.</strong>
+  <code>senhub.agent.otlp_receiver.received</code> and <code>…received.without_host_id</code>
+  named the sending service <code>service.name</code>, which overrode the
+  resource's <code>service.name=senhub-agent</code> in the backend: the agent's own
+  counters read as metrics of the service it relayed. The sender is now
+  <code>senhub.otlp_receiver.sender.service.name</code> (Prometheus
+  <code>senhub_otlp_receiver_sender_service_name</code>).</p>
+</li>
+<li>
+<p><strong>PRTG no longer merges channels that share a name.</strong> PRTG keeps one
+  value per channel name, and several series could reach it under the
+  same name: a scraped exporter's labels, the CPUs of a Redfish system,
+  two containers of a pod. They collapsed into one channel and the other
+  values were lost. On both the pull endpoint and the push output, names
+  that collide now carry the tags that set them apart, for example
+  <code>Node CPU Seconds (cpu=0, mode=idle)</code>.</p>
+</li>
+<li>
+<p><strong>The process probe no longer piles up PRTG channels.</strong> Its
+  per-process channels carried the process id, and PRTG keeps every
+  channel it has seen: each program restart left one more dead channel
+  on the sensor (163 for 75 live on the recette bench). PRTG now gets the
+  per-name roll-up; the per-process detail stays on the other outputs.
+  A definition marks such a metric with <code>prtg_skip</code>. The IBM i per-job
+  series are kept out of PRTG the same way: their names carry the job
+  number, and a bench sensor had grown to 2,583 channels for 1,447 served,
+  enough to saturate the PRTG server. Its relayed events (QSYSOPR, QHST,
+  audit, MSGW) are kept out of PRTG too: each event had become a channel.
+  Two IBM i channel families named a tag the probe does not emit, so all
+  their series shared one name: the library list now names the library
+  (<code>Library QGPL (USER)</code>) and the table statistics their schema.</p>
+</li>
+<li>
+<p><strong>A syslog probe has a PRTG channel.</strong> The probe relays messages as
+  events and published no metric, so its PRTG sensor found no channel
+  and stayed down. Like the file-tail and journal probes, it now reports
+  <code>senhub.syslog.records_emitted</code>, the count of messages it has relayed.</p>
+</li>
+<li>
+<p><strong>Swarm channels name their node, service and network.</strong> The Swarm
+  display names were bare ("Node Ready", "Service Replicas Running",
+  "Senhub Node_Role_State"), so every node or service of a cluster
+  reached PRTG and Zabbix under the same name. They now carry the node,
+  service or network they describe, for example
+  <code>Service web Replicas Running</code>. PRTG sensors on the Swarm probe get
+  these channels as new ones; the old, merged channels stop updating.</p>
+</li>
+<li>
+<p><strong>The systemd probe leaves login sessions out.</strong> Each user login
+  creates <code>run-user-UID.mount</code> and <code>user-runtime-dir@UID.service</code>, removed
+  at logout; in the default view they became series, and PRTG channels,
+  that died with the session. They are left out unless <code>units</code> names
+  them.</p>
+</li>
+<li>
+<p><strong>The Swarm probe tells a node outside any swarm from a worker.</strong> The
+  Engine answers "This node is not a swarm manager" in both cases, so an
+  engine never joined to a swarm was reported as a worker, with advice to
+  point the probe at a manager. The probe now reads the node's swarm
+  state from <code>/info</code>.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/wifi-signal-strength/">Wi-Fi</a> probe works without
+  iwconfig.</strong> It needed <code>iwconfig</code> (wireless-tools), which current
+  distributions no longer install; it now falls back to <code>iw</code>, found in
+  <code>/usr/sbin</code> even off the PATH. The SSID tag also lost a closing quote
+  and padding it carried from iwconfig's output.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/oracle/">Oracle</a> session limit is read inside a
+  PDB.</strong> <code>V$RESOURCE_LIMIT</code> has no rows in a pluggable database, where a
+  monitoring user normally connects, so <code>oracle.sessions.limit</code> was never
+  reported and a warning was logged on every collection. The limit is
+  now read from <code>V$PARAMETER</code> there, which needs one more grant
+  (<code>GRANT SELECT ON V_$PARAMETER</code>).</p>
+</li>
+<li>
+<p><strong>The IBM i probe starts on a Linux service.</strong> The service unit set
+  <code>MemoryDenyWriteExecute=true</code>, which the processes the agent launches
+  inherit: the IBM i probe's Java bridge could not start its JVM, and its
+  native runner could not load. The unit no longer sets it (the agent
+  itself still makes no executable memory). An existing install picks it
+  up with <code>senhub-agent refresh-unit</code>.</p>
+</li>
+<li>
+<p><strong>A refused password is not retried every two minutes.</strong> A probe whose
+  start failed was retried on a two-minute timer, and for the IBM i probe
+  each retry was a sign-on: a wrong password disabled the monitoring
+  profile after three (QMAXSIGN). A start refused for its credentials now
+  waits for a configuration reload or a restart; other start failures
+  keep the timer.</p>
+</li>
+<li>
+<p><strong>The IBM i probe finds its Java runtime and names the right
+  settings.</strong> It read <code>JAVA_HOME</code> only, although an empty <code>java_home</code>
+  was documented to use the environment: a host with Java on the PATH
+  got "no IBM i runtime found". That message also named settings that
+  do not exist (<code>bridge.java_home</code>, <code>bridge.runner_dir</code>); it now names
+  <code>java_home</code>, <code>bridge_runner_dir</code> and <code>native_runner</code>, and Java on the
+  PATH is used.</p>
+</li>
+<li>
+<p><strong>The console's Settings page gathers the agent's identity and HTTPS
+  state.</strong> The agent key, the instance ID and the administration key
+  (masked until revealed) now sit together in an Identity card, and an
+  HTTPS card shows whether TLS is on, the certificate and key files, the
+  certificate's subject and expiry, and links to where TLS is set. They
+  were spread over the Overview page, the Outputs page and the command
+  line.</p>
+</li>
+<li>
+<p><strong>The console's Settings page shows the agent key.</strong> It showed the
+  administration key, which the console is opened with, under "Agent
+  key", next to the advice to give that key to Sensor Factory when
+  ordering a licence, and its Copy button copied it. It now shows and
+  copies the agent key, the one a licence is bound to, as the Overview
+  page already did.</p>
+</li>
+<li>
+<p><strong>A disconnected UniFi access point no longer reports 0 satisfaction.</strong>
+  For an access point that is not connected the controller returns a
+  null satisfaction, which the probe published as 0, the worst score,
+  with 0 clients. Only a connected access point now reports them, and a
+  null satisfaction reports nothing.</p>
+</li>
+<li>
+<p><strong>OTLP metrics no longer carry a contradicting <code>unit</code> attribute.</strong>
+  Every point carried the definition's display unit as an attribute, so
+  <code>system.cpu.utilization</code> reached the backend as a ratio (0.061) with
+  <code>unit="%"</code>, which a dashboard shows as 0.061 %. The attribute is gone;
+  the OTel unit remains the metric's own.</p>
+</li>
+<li>
+<p><strong>A change made with <code>sudo</code> no longer stops a non-root service.</strong>
+  <code>sudo senhub-agent config set ...</code>, <code>secret set ...</code> and
+  <code>license activate</code> rewrote the file as root with mode 0600. The Linux
+  service runs as <code>senhub</code> and could no longer read it: the reload was
+  refused, and the next restart failed to start. A file written by root
+  in the configuration directory now takes the owner of that directory.</p>
+</li>
+<li>
+<p><strong>The install tells you which binary to call.</strong> The closing line of a
+  Linux install repeated the path you ran the installer from, often a
+  download directory. It now names the installed
+  <code>/usr/local/bin/senhub-agent</code>, by its full path: on the RHEL family
+  <code>sudo</code> does not search <code>/usr/local/bin</code>, and <code>sudo senhub-agent</code> is
+  "command not found" there.</p>
+</li>
+<li>
+<p><strong>A failed DNS lookup names the resolver it asked.</strong> With <code>resolvers</code>
+  set, the query went to the named resolver, but the error still named
+  the system one (<code>lookup x on 127.0.0.53:53</code>), which sent operators to
+  the wrong server. It now names the resolver that was queried.</p>
+</li>
+<li>
+<p><strong>The Docker and Swarm probes speak the API version the engine
+  serves.</strong> They called the Engine API at a fixed version 1.43. Docker
+  Engine 29 refuses anything below 1.44, so the Docker probe fell back
+  to reading cgroups, without container names, network or restart
+  counts, and reported the socket as unreachable; Engine 20.10, which
+  serves up to 1.41, refused it too. The probes now read the range the
+  engine serves and pick a version inside it.</p>
+</li>
+<li>
+<p><strong>A target that goes down stops showing its last values.</strong> A probe
+  whose target is down keeps running and reports only that it is down.
+  Its other values were still inside the window during which the agent
+  presents a value as current, so OTLP exported them with fresh
+  timestamps, Zabbix received them, and PRTG, Nagios and Prometheus
+  served them, for up to about two and a half minutes. A run of a probe
+  now retires the series it no longer reports. Zabbix keeps them in
+  discovery, so its items are not disabled for the length of an outage.</p>
+</li>
+<li>
+<p><strong>Nagios checks read the same way throughout.</strong> A metric the check
+  aggregates, such as the processor in <code>system_health</code>, answered
+  <code>OK - OK: cpu_usage_total 2.50% (aggregated from 1 metrics)</code> beside
+  metrics written <code>cpu_user: OK 0.10%</code>. It now reads
+  <code>cpu_usage_total: OK 2.50%</code>, and names the aggregation only when it
+  combined several series: <code>(max of 4 series)</code>.</p>
+</li>
+<li>
+<p><strong>An output that starts after entity detection receives the entities
+  at once.</strong> The OTLP output subscribes to entity events when it starts,
+  which can be just after detection's first cycle: at agent start, or
+  when the output is enabled or changed from the console. It then missed
+  that cycle and waited for the next re-emission, up to ten minutes by
+  default, before learning of the host. A new subscriber now triggers a
+  cycle that sends it the whole current state.</p>
+</li>
+<li>
+<p><strong>The <a href="../../container/">container</a> reaches a collector that listens in
+  plain text.</strong> Its variables had no way to turn TLS off, so a collector
+  without TLS, such as a sidecar on <code>localhost:4317</code>, could only be
+  reached by mounting a whole configuration; the export failed on "first
+  record does not look like a TLS handshake". <code>SENHUB_OTLP_TLS=false</code>
+  now does it.</p>
+</li>
+<li>
+<p><strong>The free tier is described as it is.</strong> Without a licence the agent
+  logged "using free tier (cpu, memory, logicaldisk, network)", four
+  probes, while the free tier runs every probe type except the paid
+  ones. The message now says so.</p>
+</li>
+<li>
+<p><strong>No colour codes in container logs.</strong> Run in the foreground, as a
+  container runs it, the agent wrote its log lines with terminal colour
+  codes, which reached <code>docker logs</code> and log collectors as <code>ESC[90m</code> and
+  <code>ESC[32mINFESC[0m</code>. Colour is now used only when standard error is a
+  terminal.</p>
+</li>
+<li>
+<p><strong><code>status</code> answers inside a container.</strong> It asked the service manager
+  first and stopped when there was none, so in a container it printed
+  <code>"rc-service" failed</code> and nothing else. It now says there is no
+  service manager and asks the running agent, as it does on a host.</p>
+</li>
+<li>
+<p><strong>A configuration the agent cannot use no longer stops the output it
+  replaces.</strong> An edited output was stopped first and then rebuilt; when
+  the new configuration was refused (a key file the service cannot read,
+  a value out of range) the agent was left without that output until a
+  restart. The new configuration is now checked first: refused, it is
+  reported in the log and on the console while the output keeps running
+  as before, and it is applied at the next change once fixed.</p>
+</li>
+<li>
+<p><strong>A listener refused its port says what to do.</strong> Syslog on 514 or
+  traps on 162, their standard ports, fail under the non-root Linux
+  service with a bare "bind: permission denied". The error now adds that
+  the port is below 1024 and names the two ways out: the
+  <code>CAP_NET_BIND_SERVICE</code> capability in a unit drop-in, or a port above</p>
+</li>
+<li>
+<p>The syslog guide no longer suggests <code>setcap</code>, which the service
+  unit ignores.</p>
+</li>
+<li>
+<p><strong>A listener keeps listening when its configuration changes.</strong> Editing
+  a syslog, trap or OTLP receiver probe started the new instance while
+  the old one still held the port: the new one failed with "address
+  already in use", the old one was then stopped, and nothing listened
+  until the retry two minutes later. The old instance is now stopped
+  first.</p>
+</li>
+<li>
+<p><strong>Storing a first secret with systemd-creds no longer locks out the
+  others.</strong> On a host whose secrets live in the age store, one
+  <code>secret set</code> with the systemd-creds backend switched the whole host to
+  it: every age secret, the agent key among them, answered "secret not
+  found", and the next start failed. While both stores exist the agent
+  now reads both, which also makes moving from one to the other possible
+  one secret at a time. See <a href="../../secret-store/">Secret store</a>.</p>
+</li>
+<li>
+<p><strong><code>config check</code> judges required parameters by the probe's schema.</strong>
+  A hand-written table beside the schemas had gone stale: it demanded a
+  <code>listen_address</code> syslog has never read, a <code>destination</code> for
+  <code>ping_gateway</code>, which takes no parameter, and a <code>password</code> from a
+  NetScaler probe configured with an API key, and reported working
+  configurations in error.</p>
+</li>
+<li>
+<p><strong>A syslog or OTLP receiver probe is no longer CRITICAL in Nagios.</strong>
+  These probes relay records and hold no metric, and the probe summary
+  answered "No metrics available", CRITICAL, for as long as they ran.
+  It now reports the probe's own state: OK while it runs and receives,
+  CRITICAL with the cause when it fails.</p>
+</li>
+<li>
+<p><strong>Enabling entities takes effect on save.</strong> The console applies an
+  output change without a restart, but entity detection kept the choice
+  it made when the agent started: entities enabled from the console were
+  only sent after the next restart. Detection now follows the
+  configuration.</p>
+</li>
+<li>
+<p><strong>A console value that holds a reference is written as typed.</strong> A
+  header entered as <code>Bearer ${secret:name}</code> was sealed into a new secret
+  whose value was that reference. The output resolved it when exporting,
+  but the console's save check resolves one level, so every later edit
+  of that output was refused as "unresolved". A value carrying <code>${...}</code>
+  anywhere is now kept verbatim, as the start-time seal already did.</p>
+</li>
+<li>
+<p><strong>Chrony is offered on Linux and macOS only.</strong> It declared no platform,
+  so a Windows console offered it and it started there with no chronyc,
+  reporting down for ever.</p>
+</li>
+<li>
+<p><strong>Windows Services names a selected service it cannot find.</strong> A
+  misspelt or unreadable service simply had no series; the probe now
+  logs each such name once.</p>
+</li>
+<li>
+<p><strong>The console's list fields show their example one value per line.</strong>
+  A list field split on lines but displayed the probe's example
+  comma-separated (<code>wuauserv, Spooler</code>), so a list typed like the
+  example was saved as one value; for Windows Services that value matched
+  no service and nothing was collected. Ten probe types had such an
+  example.</p>
+</li>
+<li>
+<p><strong>The container's volume warning names only what is lost.</strong> A
+  container started with <code>SENHUB_HOST_ID</code> and <code>SENHUB_AGENT_KEY</code> but no
+  volume was told it would arrive as a new host; those two variables
+  already carry the identity and the key. The warning now lists only the
+  log bookmarks in that case, and says what losing them costs per probe.</p>
+</li>
+<li>
+<p><strong>The Pro web application checks no longer flood the log.</strong> Their
+  probe types had no discriminant declaration, and the pull cache warned
+  once per datapoint: dozens of lines a minute per probe. They are
+  declared, like five other probe types that lacked one, the warning is
+  logged once per type, and a test now requires the declaration for
+  every probe that has a definition.</p>
+</li>
+<li>
+<p><strong>No internal routing label on the exported series.</strong> The Pro web
+  application and gateway checks carried <code>prtg_metric_id</code>, a tag meant
+  for the legacy PRTG push, and it reached Prometheus, OTLP and Zabbix
+  with its unexpanded <code>[name]</code> template. Private tags now stay inside
+  the agent.</p>
+</li>
+<li>
+<p><strong><code>config check</code> reads the service's environment.</strong> A token set in the
+  unit's <code>Environment=</code> or <code>EnvironmentFile=</code> was missing from the shell
+  running the check, so every such host ended on an error for a working
+  file. When the checked configuration is the one the installed service
+  runs, the check now uses the unit's variables (a variable already
+  exported in the shell wins). Linux only; values are never printed.</p>
+</li>
+<li>
+<p><strong><code>config check</code> reports a probe name used twice.</strong> The agent runs
+  the first probe of that name and ignores the others, and only its log
+  said so; the check listed every one of them as OK.</p>
+</li>
+<li>
+<p><strong><code>refresh-unit</code> keeps the binary the service runs.</strong> On a host
+  still in the pre-0.5.4 layout that also held an older copy under
+  <code>/usr/local/bin</code>, the refreshed unit pointed at that older copy,
+  silently downgrading the agent.</p>
+</li>
+<li>
+<p><strong>No false warning about the update registry URL.</strong> <code>update</code> and
+  <code>config check</code> reported that a URL ending in <code>/</code> "carries a path";
+  the built-in default itself triggered it on every update.</p>
+</li>
+<li>
+<p><strong>A systemd-creds install no longer reports a seal failure on every
+  start.</strong> The service runs as a non-root account and only root can
+  encrypt with the host key, so the start-time seal always failed and
+  restored its backups. It now says once that the inline secrets stay in
+  place, and names the command that seals them.</p>
+</li>
+<li>
+<p><strong>A probe that runs less often than the push or the cache retention
+  stays visible between two runs.</strong> On OTLP, a gauge from a probe
+  running every 30 minutes gave one sample per run, so an alert with a
+  short lookback resolved while the condition still held (#890). The
+  pull outputs dropped a value five minutes after it was produced, and
+  the PRTG path held that limit in its own code whatever
+  <code>cache.retention_minutes</code> said: an hourly probe such as <code>os_updates</code>,
+  or an <code>exec</code> check every thirty minutes, answered an empty PRTG sensor
+  most of the time, and the Web UI listed it with no metric. A value is
+  now exported as current, and served on PRTG, Nagios and Prometheus,
+  until its probe's next run is due.</p>
+</li>
+<li>
+<p><strong><code>senhub-agent update</code> no longer needs the archive and the binary in
+  memory.</strong> It streams both, where it used about 250 MB for a 100 MB
+  binary and was killed on a small host. (#891)</p>
+</li>
+<li>
+<p><strong><code>config check</code> names the environment variable behind an empty
+  credential</strong>, instead of pointing at a configuration that may be
+  correct. (#892)</p>
+</li>
+<li>
+<p><strong>Every application of a Container Apps collector reaches the pull
+  outputs.</strong> Following several applications split the state metrics by
+  application, but the HTTP cache still keyed on the probe alone, so
+  PRTG, Nagios and the Web UI published one application's state and
+  dropped the rest, silently. The OTLP and Prometheus outputs key on the
+  full tag set and were never affected.</p>
+<p>The same review found six more probes in that shape, predating it,
+and all six are now registered. Three carried a real loss: an IBM i
+host published one user profile class and dropped the others, a
+syslog collector published one sending machine's event count and
+dropped every other machine's, and a Redfish collector polling
+several service processors mixed their drives together. (#915)</p>
+</li>
+<li>
+<p><strong>The legacy PRTG POST endpoint no longer merges instances into one
+  channel.</strong> <code>POST /api/{key}/prtg/metrics</code> stripped the instance from
+  channel names, and PRTG keeps one channel per name: a MySQL server's
+  per-database sizes, a PowerStore's volumes and a Windows host's drives
+  each came out as a single channel, every instance but the last lost.</p>
+</li>
+<li>
+<p><strong>Nagios checks apply what they declare.</strong> <code>probe_filter</code> matches the
+  probe type as well as its name, so the shipped Veeam checks work on a
+  probe named otherwise; <code>tag_specific_thresholds</code>, <code>tag_&lt;name&gt;=</code> filters
+  and POST overrides were parsed and ignored, and are now applied. A
+  check naming a metric its platform never emits is reported at load.
+  Plugin output carries no semicolon, which Nagios reserves, and lists
+  its series in the same order at every poll.</p>
+</li>
+<li>
+<p><strong>The probe pages named 160 metrics the agent never emits</strong>, some a
+  misspelling of a real one, some never collected. A reader building a
+  panel on one got an empty series.</p>
+</li>
+<li>
+<p><strong>Every metric declares the dimensions it carries</strong>, instead of
+  inheriting the probe's union. On swarm, kubernetes, netscaler and
+  memcached a cluster counter claimed a container name, and Zabbix
+  refused the resulting discovery rule. The memory probe declares which
+  of its metrics exist only on Windows or only on Unix.</p>
+</li>
+<li>
+<p><strong>Redfish hardware health reads as a state on every output.</strong> The
+  tables that name the health codes (OK, Warning, Critical), the power
+  states and the drive failure prediction lived in files the agent
+  embedded and never read. A server's health reached PRTG, Nagios and
+  Zabbix as a bare 0 to 3: no PRTG lookup to download, no Nagios state,
+  no Zabbix value map and no trigger. They are now in the lookup
+  registry, a drive predicting its own failure has a table of its own
+  that calls it an error, and a test fails on any definition naming a
+  lookup that does not exist. (#931)</p>
+</li>
+<li>
+<p><strong>A probe that cannot start is no longer absent in silence.</strong> It was
+  logged once at start and then left out of the probe total, so the
+  agent reported every probe healthy while one, for instance with an
+  expired password, collected nothing. It now counts in the total and
+  never as healthy, the Web UI shows it failing with the reason, and the
+  agent tries it again every two minutes, so a credential fixed
+  afterwards is picked up without a restart. The error of a probe's
+  first collection, which the scheduler swallowed, is logged too. (#935)</p>
+</li>
+<li>
+<p><strong>A copied example host identity is refused.</strong> A container given
+  <code>SENHUB_HOST_ID=01234567-89ab-cdef-0123-456789abcdef</code>, the shape of a
+  documentation example, merged on the topology graph with every other
+  host given it, silently. The container now refuses such a value at
+  start, judged on its shape (all zeros, a long ascending run) rather
+  than against a list; the agent logs an error when the machine itself
+  reports one; and a host whose identity came from <code>SENHUB_HOST_ID</code>
+  carries <code>senhub.host.id.source=configuration</code>, so a collision can be
+  traced to the copy.</p>
+</li>
+<li>
+<p><strong>The Citrix licence grace period is exported in seconds.</strong> The probe
+  reports hours and the definition gave a unit the mapper cannot
+  convert, so 48 hours left read as 48 seconds on OTLP and Prometheus.
+  Probe definitions are now decoded strictly, a key the schema does not
+  define fails the build, and a metric published in seconds or bytes
+  must come from a unit the mapper converts. The same pass fixed the
+  PRTG unit of ten metrics that showed a raw label (<code>BytesFile</code>,
+  <code>TimeSeconds</code>, a byte count as <code>Count</code>), and the NetScaler heartbeat
+  rates now read <code>pkt/s</code>. (#930)</p>
+</li>
+<li>
+<p><strong>A Windows host installed from a beta MSI can install the next
+  release.</strong> A beta MSI carried its version as <code>0.5.5-beta</code>, which
+  Windows Installer does not read as a version: it registered as newer
+  than any release, and <code>senhub-agent-0.5.6-amd64.msi</code> refused to
+  install with "A newer version of SenHub Agent is already installed".
+  The MSI now carries the numeric part only, and a release replaces the
+  beta of the same number. <strong>A host still on a beta MSI built before
+  this fix must uninstall it once</strong> (Settings &gt; Apps, or <code>msiexec /x</code>);
+  the configuration under <code>C:\ProgramData\SenHub</code> is removed by the
+  uninstall, so copy it aside first.</p>
+</li>
+<li>
+<p><strong>A probe the open-source build does not carry names the edition that
+  does.</strong> On the open-source MSI a <code>veeam</code> probe was reported as
+  "requires a valid license, upgrade license to enable", and
+  <code>config check</code> said "unknown type". A licence cannot add code the
+  binary does not contain; both now say the probe ships in the full
+  edition.</p>
+</li>
+<li>
+<p><strong><code>config check</code> no longer warns on every Windows MSI install</strong> that
+  "self-update will fail every cycle". It tried to open the running
+  executable for writing, which the service holds, although an
+  MSI-managed install updates through a new MSI and never writes its
+  binary.</p>
+</li>
+<li>
+<p><strong><code>config check</code> validates <code>nagios.yaml</code>.</strong> A file the agent would
+  refuse at start is an error, and a check naming a metric this
+  platform does not emit is a warning, instead of both being found in
+  the log after a restart. (#939)</p>
+</li>
+<li>
+<p><strong><code>SENHUB_AGENT_KEY</code> keeps the agent identity of a container without a
+  volume</strong>, as <code>SENHUB_HOST_ID</code> keeps the host's. With both, two
+  successive containers with no shared state report the same host and
+  the same agent. (#882)</p>
+</li>
+<li>
+<p><strong>Saving an output from the Web UI no longer drops a header it did not
+  show.</strong> The console hides every value of the OTLP <code>headers</code> map, and
+  the server only put back the ones that were <code>${secret:}</code> references:
+  a plain <code>X-Tenant: acme</code> disappeared from the file on a save that
+  changed nothing. What the console hides is now kept, by the same rule
+  that hides it, and the preview of the file shows it. (#856)</p>
+</li>
+</ul>
+<h2 id="internal">Internal<a class="headerlink" href="#internal" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The image publication scans before it pushes, and the dependency scan
+  runs in the development chain, with the scanner used by common
+  container registries; the two libraries it reported are raised and the
+  image's base moves to a supported Alpine (#900). A published release is
+  also checked for completeness rather than assumed finished.</li>
+<li>The documentation deploy refuses to run from a branch that publishes
+  no line; a manual run from a release branch overwrote the development
+  line. (#913)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../next/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Next (unreleased)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Next (unreleased)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../0.5.6/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.5.6">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0.5.6
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/senhub-io/senhub-agent" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://senhub.io" target="_blank" rel="noopener" title="senhub.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/rn-filter.js"></script>
+      
+        <script src="../../javascripts/dev-banner.js"></script>
+      
+    
+  </body>
+</html>

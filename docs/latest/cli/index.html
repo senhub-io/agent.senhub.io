@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Prometheus, OTLP) and release notes.">
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
       
       
       
@@ -455,6 +455,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../web-interface/" class="md-nav__link">
         
   
@@ -495,10 +549,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
             
   
   
@@ -516,8 +570,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -666,10 +720,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="">
             
   
   
@@ -687,8 +741,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -855,6 +909,17 @@
     <span class="md-ellipsis">
       
         Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refresh unit
       
     </span>
   </a>
@@ -1106,6 +1171,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zabbix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zabbix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1122,6 +1226,17 @@
     <span class="md-ellipsis">
       
         Show license status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print-the-agent-key-for-a-licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Print the agent key for a licence
       
     </span>
   </a>
@@ -1221,10 +1336,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -1242,8 +1357,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2332,6 +2447,34 @@
     
   
     Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
   
 
     
@@ -3631,10 +3774,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
         
           
-          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
             
   
   
@@ -3652,8 +3795,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3706,6 +3849,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.0
   
 
     
@@ -4207,6 +4378,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#refresh-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refresh unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#run-console-mode" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4451,6 +4633,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zabbix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zabbix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix template
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4467,6 +4688,17 @@
     <span class="md-ellipsis">
       
         Show license status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print-the-agent-key-for-a-licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Print the agent key for a licence
       
     </span>
   </a>
@@ -4539,7 +4771,8 @@
 <h1 id="cli-reference">CLI Reference<a class="headerlink" href="#cli-reference" title="Permanent link">&para;</a></h1>
 <p>All commands are run from the agent binary. Release artifacts are ZIP archives named <code>senhub-agent-&lt;os&gt;-&lt;arch&gt;.zip</code> (e.g. <code>senhub-agent-linux-amd64.zip</code>, <code>senhub-agent-windows-amd64.zip</code>). Each ZIP contains a binary already named <code>senhub-agent</code> (Linux) or <code>senhub-agent.exe</code> (Windows) — no renaming needed after extraction. See the <a href="../installation/">Installation guide</a> for details.</p>
 <h2 id="output-conventions">Output conventions<a class="headerlink" href="#output-conventions" title="Permanent link">&para;</a></h2>
-<p>CLI output is plain text with no decorative symbols. Data and command results are written to stdout, so a command can be piped or captured without post-processing. Diagnostic errors and warnings go to stderr, and a fatal error prints a single <code>Error: &lt;message&gt;</code> line to stderr before the process exits non-zero. Destructive commands (<code>uninstall</code>, <code>secret rm</code>, <code>license remove</code>) prompt for confirmation before acting; each accepts a flag to skip the prompt for unattended runs (see the relevant sections below).</p>
+<p>CLI output is plain text with no decorative symbols. Data and command results are written to stdout, so a command can be piped or captured without post-processing. Diagnostic errors and warnings go to stderr, and a fatal error prints a single <code>Error: &lt;message&gt;</code> line to stderr before the process exits non-zero. Destructive commands (<code>uninstall</code>, <code>refresh-unit</code>, <code>secret rm</code>, <code>license remove</code>) prompt for confirmation before acting; each accepts a flag to skip the prompt for unattended runs (see the relevant sections below).</p>
+<p>On Linux, commands that touch the service, the secret store or the binary run as root with the full path of the installed binary: <code>sudo /usr/local/bin/senhub-agent &lt;command&gt;</code>. On RHEL, AlmaLinux and Rocky Linux, the <code>sudo</code> search path leaves out <code>/usr/local/bin</code>, so <code>sudo senhub-agent</code> is not found there. The short <code>senhub-agent</code> form below stands for that full invocation; on Windows, run <code>senhub-agent.exe</code> from an elevated prompt.</p>
 <h2 id="service-management">Service Management<a class="headerlink" href="#service-management" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4555,11 +4788,19 @@
 </tr>
 <tr>
 <td><code>uninstall</code></td>
-<td>Remove the system service (prompts before deleting config/certs/logs)</td>
+<td>Remove the system service and delete the configuration directory, including the sealed secret store and the agent key. Irreversible; prompts first</td>
 </tr>
 <tr>
 <td><code>uninstall --yes</code></td>
-<td>Remove the system service without confirmation</td>
+<td>Same, without confirmation</td>
+</tr>
+<tr>
+<td><code>refresh-unit</code></td>
+<td>Linux: bring the installed systemd unit up to date with the one embedded in this binary</td>
+</tr>
+<tr>
+<td><code>refresh-unit --yes</code></td>
+<td>Same, without confirmation</td>
 </tr>
 <tr>
 <td><code>start</code></td>
@@ -4588,8 +4829,8 @@
 </tbody>
 </table>
 <h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>senhub-agent<span class="w"> </span>status
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>senhub-agent<span class="w"> </span>status<span class="w"> </span>--otlp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>status
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>status<span class="w"> </span>--otlp
 </code></pre></div>
 <p>The default <code>status</code> view prints service state, version, health, probes summary and resource usage. <code>--otlp</code> appends a four-section block summarising the OTLP push pipeline:</p>
 <table>
@@ -4620,10 +4861,16 @@
 </table>
 <p>Drops with <code>reason=probe_cardinality</code> indicate the per-probe cardinality budget was hit; <code>store_cap</code>, <code>memory_soft_limit</code> and <code>memory_hard_limit</code> flag other backpressure paths. See the <a href="../otlp/#monitoring-the-otlp-pipeline">OTLP guide</a> for how to interpret each field.</p>
 <p><code>--otlp</code> calls the local HTTP strategy on port 8080 — the agent must have the <code>web</code> (or any other HTTP) endpoint enabled for the flag to return data. If the call fails, the standard <code>status</code> output still prints; a single-line note explains what went wrong.</p>
+<h3 id="refresh-unit">Refresh unit<a class="headerlink" href="#refresh-unit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>refresh-unit
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>refresh-unit<span class="w"> </span>--yes
+</code></pre></div>
+<p>Linux only, as root. Compares <code>/etc/systemd/system/senhub-agent.service</code> with the unit embedded in the running binary, prints the difference and, once confirmed, rewrites the unit and runs <code>systemctl daemon-reload</code>. It keeps the <code>User=</code> / <code>Group=</code> the unit runs as and its <code>ExecStart</code> line while that binary still exists, creates the service user if it is missing, and keeps the systemd-creds drop-in in line with the secret store. It does not restart the service: run <code>restart</code> afterwards.</p>
+<p>This is the way to move an existing install to the hardened unit. Do not use <code>uninstall</code> followed by <code>install</code> for that: <code>uninstall</code> deletes the configuration directory, the sealed secret store and the agent key with it.</p>
 <h3 id="run-console-mode">Run (Console Mode)<a class="headerlink" href="#run-console-mode" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>senhub-agent<span class="w"> </span>run
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>senhub-agent<span class="w"> </span>run
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam
 </code></pre></div>
 <p>The agent reads its configuration from the YAML file pointed at by <code>--config-path</code>. The default path is OS-specific: <code>/etc/senhub-agent/agent.yaml</code> (Linux), <code>%ProgramData%\SenHub\agent.yaml</code> (Windows), <code>/usr/local/etc/senhub-agent/agent.yaml</code> (macOS).</p>
 <table>
@@ -4644,22 +4891,26 @@
 </tr>
 <tr>
 <td><code>--config-path PATH</code></td>
-<td>Configuration file path (default: OS canonical path)</td>
+<td>Configuration file path (default: OS canonical path; a relative path resolves next to the binary)</td>
+</tr>
+<tr>
+<td><code>--log-format text\|json</code></td>
+<td>Layout of the log file: <code>text</code> (default) or <code>json</code>. Also read from <code>SENHUB_LOG_FORMAT</code>. The console output stays readable text</td>
 </tr>
 </tbody>
 </table>
 <h3 id="debug-filter-examples">Debug Filter Examples<a class="headerlink" href="#debug-filter-examples" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam<span class="w">           </span><span class="c1"># Veeam probe only</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe<span class="w">                  </span><span class="c1"># All probes</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>strategy.http,sensor<span class="w">   </span><span class="c1"># HTTP API + probe management</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam<span class="w">           </span><span class="c1"># Veeam probe only</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe<span class="w">                  </span><span class="c1"># All probes</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>strategy.http,sensor<span class="w">   </span><span class="c1"># HTTP API + probe management</span>
 </code></pre></div>
 <p>Use <code>debug-modules-list</code> to see all available filters.</p>
 <h2 id="web-console">Web console<a class="headerlink" href="#web-console" title="Permanent link">&para;</a></h2>
 <h3 id="console">console<a class="headerlink" href="#console" title="Permanent link">&para;</a></h3>
-<p>Opens the built-in web console in the default browser, or prints its address with <code>--print</code>. The address carries the agent key, which is sealed on a modern install: the command needs the rights of the service account or an administrator. On Windows, a non-elevated call asks for elevation once, then opens the browser with the user's own rights. The command waits up to fifteen seconds for the agent to answer on its port before opening the page.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>senhub-agent<span class="w"> </span>console
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>senhub-agent<span class="w"> </span>console<span class="w"> </span>--print
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>senhub-agent<span class="w"> </span>console<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub/agent.yaml
+<p>Opens the built-in web console in the default browser, or prints its address with <code>--print</code>. The address carries the administration key, the key of the <code>http</code> output's <code>admin_key</code> setting, which the agent generates when it writes its configuration (or, on an older install, at its first start after the upgrade) and seals. It is not the agent key PRTG, Nagios or a Prometheus scrape read with: the console and the administration API answer only the administration key. Reading it needs the rights of the service account or an administrator. On Windows, a non-elevated call asks for elevation once, then opens the browser with the user's own rights. The command waits up to fifteen seconds for the agent to answer on its port before opening the page.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>senhub-agent<span class="w"> </span>console
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>console<span class="w"> </span>--print
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>console<span class="w"> </span>--print<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub-agent/agent.yaml
 </code></pre></div>
 <table>
 <thead>
@@ -4683,8 +4934,8 @@
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <h3 id="config-set">config set<a class="headerlink" href="#config-set" title="Permanent link">&para;</a></h3>
 <p>Changes one setting in the multi-file layout without editing YAML by hand. It writes the matching fragment under <code>strategies.d/</code>, preserving the file's comments and key order, and the running agent reloads the change on its own — no restart. An invalid value is refused and the file is left untouched.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>http.port<span class="w"> </span><span class="m">9080</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>http.bind_address<span class="w"> </span><span class="m">0</span>.0.0.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>http.port<span class="w"> </span><span class="m">9080</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>http.bind_address<span class="w"> </span><span class="m">0</span>.0.0.0
 </code></pre></div>
 <table>
 <thead>
@@ -4707,11 +4958,13 @@
 <p>Changing <code>http.port</code> moves the web console and the PRTG / Nagios endpoints to the new port; reconnect on the new address.</p>
 <h3 id="config-init">config init<a class="headerlink" href="#config-init" title="Permanent link">&para;</a></h3>
 <p>Creates the default configuration for an unattended install (for example a silent MSI install or a scripted provisioning step), then applies the fields an installer can pass. It is idempotent: if a configuration already exists at the target path it is left untouched.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license<span class="w"> </span>&lt;jwt&gt;<span class="w"> </span>--tags<span class="w"> </span><span class="nv">env</span><span class="o">=</span>prod,site<span class="o">=</span>paris
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>otlp.example.com:4317
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>vm.example.com:4318<span class="w"> </span>--otlp-protocol<span class="w"> </span>http
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--http-port<span class="w"> </span><span class="m">9080</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license<span class="w"> </span>&lt;jwt&gt;<span class="w"> </span>--tags<span class="w"> </span><span class="nv">env</span><span class="o">=</span>prod,site<span class="o">=</span>paris
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>otlp.example.com:4317
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>vm.example.com:4318<span class="w"> </span>--otlp-protocol<span class="w"> </span>http
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--http-port<span class="w"> </span><span class="m">9080</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license-file<span class="w"> </span>/tmp/customer.jwt
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license-dir<span class="w"> </span>/mnt/install
 </code></pre></div>
 <p>Before writing anything, <code>config init</code> binds the HTTP port it is about to configure and releases it. A port already in use is refused with the reason and the command exits non-zero, so an unattended install fails visibly instead of leaving a service that runs and answers nothing.</p>
 <table>
@@ -4735,6 +4988,14 @@
 <td>License token to seed (unlocks paid probe tiers)</td>
 </tr>
 <tr>
+<td><code>--license-file PATH</code></td>
+<td>Read the licence token from this file; it takes precedence over <code>--license</code> unless the file is empty</td>
+</tr>
+<tr>
+<td><code>--license-dir DIR</code></td>
+<td>Look for a single <code>*.jwt</code> file in this directory and use it as <code>--license-file</code>. No file installs on the Free tier; more than one is refused</td>
+</tr>
+<tr>
 <td><code>--tags k=v,k2=v2</code></td>
 <td>Host-level global tags applied to the generated config</td>
 </tr>
@@ -4748,11 +5009,11 @@
 </tr>
 </tbody>
 </table>
-<p>The generated layout is the multi-file form (<code>agent.yaml</code> + <code>probes.d/</code> + <code>strategies.d/</code>). By default the generated configuration pushes to no collector; <code>--otlp-endpoint</code> is what wires up a push.</p>
+<p>The generated layout is the multi-file form (<code>agent.yaml</code> + <code>probes.d/</code> + <code>strategies.d/</code>), the same one <code>install</code> and the Windows MSI write. By default the generated configuration pushes to no collector; <code>--otlp-endpoint</code> is what wires up a push.</p>
 <h3 id="config-check">config check<a class="headerlink" href="#config-check" title="Permanent link">&para;</a></h3>
 <p>Validates a configuration file and reports errors and warnings.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check<span class="w"> </span>/path/to/agent-config.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check<span class="w"> </span>/path/to/agent-config.yaml
 </code></pre></div>
 <p>Checks performed:
 - YAML syntax (with line-level error context)
@@ -4765,10 +5026,10 @@
 <p><img alt="senhub-agent config check output" src="../images/cli/config-check.webp" title="Terminal output of senhub-agent config check on a valid configuration" /></p>
 <h3 id="config-show">config show<a class="headerlink" href="#config-show" title="Permanent link">&para;</a></h3>
 <p>Prints the merged and resolved configuration as YAML. Secret handling depends on the flag:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--raw
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--resolved
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>/path/to/agent.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--raw
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--resolved
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>/path/to/agent.yaml
 </code></pre></div>
 <table>
 <thead>
@@ -4795,12 +5056,12 @@
 <p>An optional trailing path selects a config file other than the OS default.</p>
 <h3 id="config-migrate">config migrate<a class="headerlink" href="#config-migrate" title="Permanent link">&para;</a></h3>
 <p>Converts a legacy monolithic <code>agent-config.yaml</code> into the multi-file layout (<code>agent.yaml</code> + <code>probes.d/</code> + <code>strategies.d/</code>), writing a timestamped backup of the original. It is idempotent: a config that is already multi-file reports nothing to do and exits 0.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>migrate
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>migrate<span class="w"> </span>/path/to/agent-config.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>migrate
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>migrate<span class="w"> </span>/path/to/agent-config.yaml
 </code></pre></div>
 <h3 id="debug-modules-list">debug-modules-list<a class="headerlink" href="#debug-modules-list" title="Permanent link">&para;</a></h3>
 <p>Lists all available debug filter names.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>senhub-agent<span class="w"> </span>debug-modules-list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>senhub-agent<span class="w"> </span>debug-modules-list
 </code></pre></div>
 <h2 id="secret-store">Secret Store<a class="headerlink" href="#secret-store" title="Permanent link">&para;</a></h2>
 <p>The <code>secret</code> command manages the OS-native secret store that backs <code>${secret:NAME}</code> references in the configuration, so that passwords and tokens never sit in plaintext in <code>agent.yaml</code>, <code>probes.d/*.yaml</code> or <code>strategies.d/*.yaml</code>. See the <a href="../secret-store/">Secret Store guide</a> for the backends and the full workflow.</p>
@@ -4835,7 +5096,7 @@
 </tr>
 <tr>
 <td><code>secret migrate</code></td>
-<td>Move inline plaintext secrets from the config into the store</td>
+<td>Move inline plaintext secrets from the config into the store (<code>--wire-unit</code> also wires the systemd-creds drop-in)</td>
 </tr>
 <tr>
 <td><code>secret wire-unit</code></td>
@@ -4843,22 +5104,28 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam_password<span class="w">          </span><span class="c1"># hidden prompt</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam_password<span class="w"> </span>--from-file<span class="w"> </span>/root/veeam.pw
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PW</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam_password
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span>list
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>senhub-agent<span class="w"> </span>secret<span class="w"> </span>status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam_password<span class="w">          </span><span class="c1"># hidden prompt</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam_password<span class="w"> </span>--from-file<span class="w"> </span>/root/veeam.pw
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PW</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>secret<span class="w"> </span><span class="nb">set</span><span class="w"> </span>veeam_password
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>secret<span class="w"> </span>list
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>secret<span class="w"> </span>status
 </code></pre></div>
+<p>On Linux the backend is chosen automatically (see the <a href="../secret-store/#backends-per-os">Secret Store guide</a>). <code>SENHUB_SECRET_BACKEND=age</code> or <code>SENHUB_SECRET_BACKEND=systemd-creds</code> forces one, for example <code>sudo SENHUB_SECRET_BACKEND=systemd-creds /usr/local/bin/senhub-agent secret migrate --wire-unit</code>.</p>
 <p>Once stored, reference the secret from the configuration as <code>${secret:veeam_password}</code>.</p>
 <h3 id="agent-key">Agent key<a class="headerlink" href="#agent-key" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>senhub-agent<span class="w"> </span>key<span class="w"> </span>show
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>key<span class="w"> </span>show
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>key<span class="w"> </span>show<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub-agent/agent.yaml
 </code></pre></div>
-<p>Prints the configured agent key — the bearer token needed to reach the web interface and to configure PRTG / Nagios scrapers. It resolves the key whether it is still inline in the config or has been sealed into the store as <code>${secret:agent.key}</code>. Because it reveals a sealed value, the command runs behind the same privilege gate as the service commands.</p>
+<p>Prints the configured agent key: the key PRTG, Nagios and a Prometheus scrape read the agent with. It does not open the web console or the administration API, which answer only the administration key; open the console with <code>senhub-agent console</code>. It resolves the key whether it is still inline in the config or has been sealed into the store as <code>${secret:agent.key}</code>. Because it reveals a sealed value, the command runs behind the same privilege gate as the service commands.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>key<span class="w"> </span>instance-id
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>key<span class="w"> </span>instance-id<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub-agent/agent.yaml
+</code></pre></div>
+<p>Prints the agent's instance id: the <code>service.instance.id</code> its telemetry and its topology entity carry, an RFC 4122 UUID derived from the agent key. Use it to find this agent in a metrics store or in a topology graph. It is not a credential; <code>senhub-agent status</code>, the <strong>Identity</strong> card of the console's Settings page and the <strong>Agent</strong> card of its Overview show it too.</p>
 <h2 id="database-helpers">Database Helpers<a class="headerlink" href="#database-helpers" title="Permanent link">&para;</a></h2>
 <h3 id="db-monitoring-init">db-monitoring init<a class="headerlink" href="#db-monitoring-init" title="Permanent link">&para;</a></h3>
 <p>Generates the least-privilege SQL needed to provision a monitoring user for the database probes. The command never connects to a database — it prints the <code>GRANT</code> block to stdout for a DBA to review and run. It requires no license tier, and no administrator privileges on Windows.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>senhub-agent<span class="w"> </span>db-monitoring<span class="w"> </span>init<span class="w"> </span>--engine<span class="w"> </span>postgresql
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>senhub-agent<span class="w"> </span>db-monitoring<span class="w"> </span>init<span class="w"> </span>--engine<span class="w"> </span>mysql<span class="w"> </span>--user<span class="w"> </span>mon_user<span class="w"> </span>--host<span class="w"> </span><span class="m">10</span>.0.0.5
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>senhub-agent<span class="w"> </span>db-monitoring<span class="w"> </span>init<span class="w"> </span>--engine<span class="w"> </span>postgresql
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>senhub-agent<span class="w"> </span>db-monitoring<span class="w"> </span>init<span class="w"> </span>--engine<span class="w"> </span>mysql<span class="w"> </span>--user<span class="w"> </span>mon_user<span class="w"> </span>--host<span class="w"> </span><span class="m">10</span>.0.0.5
 </code></pre></div>
 <table>
 <thead>
@@ -4888,32 +5155,197 @@
 </table>
 <h2 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h2>
 <h3 id="check-for-updates">Check for updates<a class="headerlink" href="#check-for-updates" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>senhub-agent<span class="w"> </span>update
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>senhub-agent<span class="w"> </span>update
 </code></pre></div>
 <p>Checks if a newer version is available and displays it.</p>
 <h3 id="list-available-versions">List available versions<a class="headerlink" href="#list-available-versions" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>senhub-agent<span class="w"> </span>update<span class="w"> </span>--list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>update<span class="w"> </span>--list
 </code></pre></div>
 <p>Lists all stable versions. If <code>auto_update.include_beta: true</code> is set in the configuration, beta versions are also listed.</p>
 <p><img alt="senhub-agent update --list output" src="../images/cli/update-list.webp" title="Terminal output of senhub-agent update --list showing available versions" /></p>
 <h3 id="install-a-specific-version">Install a specific version<a class="headerlink" href="#install-a-specific-version" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.5.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--dry-run
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--registry-url<span class="w"> </span>https://releases.example.com
 </code></pre></div>
-<p>Downloads and installs the specified version. Restart the service to apply.</p>
+<p>Downloads and installs the specified version. Restart the service to apply. Updating replaces the binary and needs the same privileges as the service commands.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code>, <code>-d</code></td>
+<td>Do not install; print the version that would be installed</td>
+</tr>
+<tr>
+<td><code>--registry-url URL</code></td>
+<td>Release registry to download from, instead of the built-in one</td>
+</tr>
+<tr>
+<td><code>--verbose</code>, <code>-v</code></td>
+<td>Enable verbose logging</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zabbix">Zabbix<a class="headerlink" href="#zabbix" title="Permanent link">&para;</a></h2>
+<h3 id="zabbix-setup">zabbix setup<a class="headerlink" href="#zabbix-setup" title="Permanent link">&para;</a></h3>
+<p>Prepares a Zabbix server for the agent in one call: it imports the
+generated templates, creates the host group, and creates the
+autoregistration action that turns an agent's first contact into a host
+carrying them. After it, a machine needs the agent and two lines naming
+the server, with nothing typed in the Zabbix interface.</p>
+<p>It is an administrator command, run once. A deployed agent never holds
+an API token and still registers by itself. Every step is idempotent, so
+re-running it is safe and is also how a template is refreshed after an
+upgrade.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--token-file<span class="w"> </span>~/.zbx-token
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--token-file<span class="w"> </span>~/.zbx-token<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span>--probe<span class="w"> </span>cpu<span class="w"> </span>--probe<span class="w"> </span>memory<span class="w"> </span>--probe<span class="w"> </span>veeam<span class="w"> </span>--group<span class="w"> </span><span class="s2">"SenHub agents"</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>setup<span class="w"> </span>--url<span class="w"> </span>https://zabbix.example.com<span class="w"> </span>--dry-run
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--url URL</code></td>
+<td>Zabbix frontend, required. The agent pushes to the trapper port, not this one</td>
+</tr>
+<tr>
+<td><code>--token-file PATH</code></td>
+<td>File holding the API token. Preferred: a token on the command line is visible to every process on the machine</td>
+</tr>
+<tr>
+<td><code>--token VALUE</code></td>
+<td>API token. Read after <code>--token-file</code> and before <code>SENHUB_ZABBIX_TOKEN</code></td>
+</tr>
+<tr>
+<td><code>--probe TYPE</code></td>
+<td>Probe whose template is linked to every host that registers. Repeatable. Without it, the probes every machine runs: cpu, memory, network, logicaldisk, process</td>
+</tr>
+<tr>
+<td><code>--group NAME</code></td>
+<td>Host group the registering hosts join</td>
+</tr>
+<tr>
+<td><code>--metadata STRING</code></td>
+<td>Host metadata the autoregistration action matches on; must equal the agent's <code>host_metadata</code></td>
+</tr>
+<tr>
+<td><code>--action-name NAME</code></td>
+<td>Name of the autoregistration action it writes</td>
+</tr>
+<tr>
+<td><code>--discovery-delay INTERVAL</code></td>
+<td>Update interval of the discovery rules, which Zabbix sets to one hour by default</td>
+</tr>
+<tr>
+<td><code>--no-discovery-delay</code></td>
+<td>Leave the discovery rules as the template declares them</td>
+</tr>
+<tr>
+<td><code>--prefix PREFIX</code></td>
+<td>First segment of the item keys; must match the output's <code>key_prefix</code></td>
+</tr>
+<tr>
+<td><code>--version 6.0\|7.0</code></td>
+<td>Export format of the templates written</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td>Describe what it would do and change nothing. Works without a token</td>
+</tr>
+</tbody>
+</table>
+<p>The token is read from <code>--token-file</code>, then <code>--token</code>, then the
+environment variable <code>SENHUB_ZABBIX_TOKEN</code>.</p>
+<p><code>setup</code> also names any other enabled autoregistration action a
+registering agent would match. Zabbix runs every matching action, and
+two that both link templates do not merge: the second link fails,
+because Zabbix refuses two linked templates declaring one key, and it
+fails silently. The host then comes up with whichever set won and items
+that never fill. <code>setup</code> reports it rather than disabling it, since an
+action you wrote may do things it knows nothing about.</p>
+<p>Every template is imported, including the probes not named with
+<code>--probe</code>; only the linking is narrowed. A template linked to a host
+whose agent does not run that probe adds discovery rules that never
+answer, which is why the default is the universal set.</p>
+<h3 id="zabbix-template">zabbix template<a class="headerlink" href="#zabbix-template" title="Permanent link">&para;</a></h3>
+<p>Writes the Zabbix templates generated from the probe definitions, one
+file per probe type, without touching a server. Use it to read what will
+be imported, to keep the templates under version control, or to import
+them by a route of your own.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--out<span class="w"> </span>./templates
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--probe<span class="w"> </span>memory<span class="w"> </span>--platform<span class="w"> </span>linux
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>senhub-agent<span class="w"> </span>zabbix<span class="w"> </span>template<span class="w"> </span>--probe<span class="w"> </span>veeam<span class="w"> </span>--version<span class="w"> </span><span class="m">6</span>.0
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--probe TYPE</code></td>
+<td>Probe type to generate. Repeatable. Without it, every definition</td>
+</tr>
+<tr>
+<td><code>--platform linux\|windows</code></td>
+<td>Keep only the metrics that platform can produce. Without it, the definition whole</td>
+</tr>
+<tr>
+<td><code>--version 6.0\|7.0</code></td>
+<td>Export format, <code>7.0</code> by default</td>
+</tr>
+<tr>
+<td><code>--prefix PREFIX</code></td>
+<td>First segment of the item keys; must match the output's <code>key_prefix</code></td>
+</tr>
+<tr>
+<td><code>--delay INTERVAL</code></td>
+<td>Update interval of the item prototypes</td>
+</tr>
+<tr>
+<td><code>--out DIR</code></td>
+<td>Directory to write into. Without it, and with a single <code>--probe</code>, the template goes to standard output</td>
+</tr>
+</tbody>
+</table>
+<p>With <code>--out</code>, a small <strong>SenHub Agent</strong> template is written beside the
+others, carrying the agent's own items. Link it on every host: it is
+what turns the host's availability green.</p>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <h3 id="show-license-status">Show license status<a class="headerlink" href="#show-license-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
 </code></pre></div>
+<h3 id="print-the-agent-key-for-a-licence">Print the agent key for a licence<a class="headerlink" href="#print-the-agent-key-for-a-licence" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>key
+</code></pre></div>
+<p>Prints this agent's key, the value to give Sensor Factory when a licence is ordered for this agent, and the value <code>license activate</code> checks the licence binding against.</p>
 <h3 id="activate-a-license">Activate a license<a class="headerlink" href="#activate-a-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>license.jwt
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>cat<span class="w"> </span>license.jwt<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>-
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>&lt;license-jwt&gt;
 </code></pre></div>
-<p>Validates the license and writes it to the <code>license.jwt</code> file next to
+<p>With <code>-</code>, or with no argument and a file or pipe on standard input, the
+token is read from standard input and never appears in the process list
+or the shell history. Validates the license and writes it to the <code>license.jwt</code> file next to
 <code>agent.yaml</code>. Restart the agent for the change to take effect. You can also
 simply place the <code>license.jwt</code> file next to the config yourself and restart —
 no CLI needed.</p>
 <h3 id="remove-license">Remove license<a class="headerlink" href="#remove-license" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
 </code></pre></div>
 <p>Reverts to the free tier: deletes <code>license.jwt</code> and clears any inline license. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs. Restart the agent for the change to take effect.</p>
 <h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
