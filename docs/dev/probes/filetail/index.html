@@ -4225,16 +4225,29 @@ record:</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
 </code></pre></div>
 <p>With <code>match: after</code>, a matching line starts a new record and non-matching
-lines are continuations. With <code>match: before</code>, a matching line flushes the
-accumulated record first.</p>
+lines are continuations. With <code>match: before</code>, a matching line ends the
+record: it is added to it, then the record is sent. <code>negate: true</code> inverts
+the test, so a line that does <em>not</em> match the pattern is the one that
+starts (or ends) a record.</p>
+<p>The pattern describes the line that <strong>starts</strong> a record, which is not how
+Filebeat reads the same keys. A Filebeat configuration for Java logs,
+<code>pattern: '^\['</code> with <code>negate: true</code> and <code>match: after</code>, describes the
+continuation lines; here the same record is written with <code>negate: false</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">  </span><span class="nt">multiline</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^\['</span><span class="w">      </span><span class="c1"># "[2026-09-29T18:21:51,024+02:00] ..." starts a record</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">negate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
+</code></pre></div>
+<p>Copied as is from Filebeat, <code>negate: true</code> takes every stack-trace line
+for the start of a new record.</p>
 <h3 id="structured-parsing">Structured parsing<a class="headerlink" href="#structured-parsing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
 </code></pre></div>
 <p>With <code>regex</code>, each named capture group becomes a log attribute. With
 <code>json</code> and <code>logfmt</code>, every key becomes a log attribute. With <code>raw</code>, the

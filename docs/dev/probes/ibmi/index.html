@@ -4823,13 +4823,137 @@ name, and a sensor selects one family with it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/ibmi-prod?tags=metric_type:cpu"</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/ibmi-prod?tags=metric_type:user_profile"</span>
 </code></pre></div>
-<p>Several families fit one sensor when their series stay under 50:
-<code>?tags=metric_type:cpu,memory,jobs</code>. A family with one series per disk
-unit, output queue or journal can exceed 50 on a large partition; add a
-<code>metrics=</code> filter to keep one measurement per sensor, for example
-<code>?tags=metric_type:disk&amp;metrics=ibmi.disk.busy_percent</code>. The families
-are the ones of the metric reference below (<code>asp</code>, <code>cpu</code>, <code>disk</code>, <code>job_queue</code>,
-<code>netstat</code>, <code>output_queue</code>, <code>user_profile</code>, <code>collector</code>, …).</p>
+<p>Several families fit one sensor when their series stay under 50, with
+<code>?tags=metric_type:cpu,memory</code>. A family with one series per disk unit,
+listener, output queue or journal can exceed 50: add a <code>metrics=</code> filter
+to keep one or two measurements per sensor.</p>
+<p>The plan below was measured on a partition with 46 disk units, 38 TCP
+listeners, 33 output queues and 17 journals. Append each query to the
+probe's PRTG URL, <code>/api/{agentkey}/prtg/metrics/ibmi-prod</code>.</p>
+<p><strong>Base set</strong> (nine sensors)</p>
+<table>
+<thead>
+<tr>
+<th>Sensor</th>
+<th>Query</th>
+<th>Channels measured</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System: CPU, memory, pools, ASPs</td>
+<td><code>?tags=metric_type:cpu,memory,memory_pool,asp</code></td>
+<td>30</td>
+</tr>
+<tr>
+<td>Jobs by status</td>
+<td><code>?tags=metric_type:jobs&amp;metrics=ibmi.jobs.count_by_status</code></td>
+<td>23 to 28</td>
+</tr>
+<tr>
+<td>Jobs by subsystem, totals</td>
+<td><code>?tags=metric_type:jobs&amp;metrics=ibmi.jobs.count_by_subsystem,ibmi.jobs.total_count,ibmi.jobs.active_total</code></td>
+<td>20</td>
+</tr>
+<tr>
+<td>Subsystems and job queues</td>
+<td><code>?tags=metric_type:subsystem,job_queue</code></td>
+<td>35</td>
+</tr>
+<tr>
+<td>Disks, percent used</td>
+<td><code>?tags=metric_type:disk&amp;metrics=ibmi.disk.percent_used</code></td>
+<td>46</td>
+</tr>
+<tr>
+<td>Active TCP listeners</td>
+<td><code>?tags=metric_type:netstat&amp;metrics=ibmi.netstat.listener_up</code></td>
+<td>38</td>
+</tr>
+<tr>
+<td>TCP and HTTP servers</td>
+<td><code>?tags=metric_type:tcp,http_server</code></td>
+<td>17</td>
+</tr>
+<tr>
+<td>Security: system values, user profiles</td>
+<td><code>?tags=metric_type:sysval,user_profile</code></td>
+<td>25</td>
+</tr>
+<tr>
+<td>Collector failures</td>
+<td><code>?tags=metric_type:collector&amp;metrics=ibmi.collector.failure_total</code></td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional</strong></p>
+<table>
+<thead>
+<tr>
+<th>Sensor</th>
+<th>Query</th>
+<th>Channels measured</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disks, free space</td>
+<td><code>?tags=metric_type:disk&amp;metrics=ibmi.disk.available_gb</code></td>
+<td>46</td>
+</tr>
+<tr>
+<td>User storage, hardware, JVM, media, spool</td>
+<td><code>?tags=metric_type:user_storage,hardware_resource,jvm,media_library,spooled_file</code></td>
+<td>27</td>
+</tr>
+<tr>
+<td>Scheduled jobs</td>
+<td><code>?tags=metric_type:scheduled_job</code></td>
+<td>28</td>
+</tr>
+<tr>
+<td>Journals</td>
+<td><code>?tags=metric_type:journal&amp;metrics=ibmi.journal.receivers_count,ibmi.journal.receivers_total_size_kb</code></td>
+<td>34</td>
+</tr>
+<tr>
+<td>Journal receivers</td>
+<td><code>?tags=metric_type:journal_receiver</code></td>
+<td>40</td>
+</tr>
+<tr>
+<td>Library list</td>
+<td><code>?tags=metric_type:library_list</code></td>
+<td>15</td>
+</tr>
+<tr>
+<td>Output queues, files</td>
+<td><code>?tags=metric_type:output_queue&amp;metrics=ibmi.output_queue.files_count</code></td>
+<td>33</td>
+</tr>
+<tr>
+<td>Licences used</td>
+<td><code>?tags=metric_type:license&amp;metrics=ibmi.license.usage_count,ibmi.license.usage_limit</code></td>
+<td>24</td>
+</tr>
+<tr>
+<td>Network interfaces and connections</td>
+<td><code>?tags=metric_type:netstat&amp;metrics=ibmi.netstat.connections_by_state,ibmi.netstat.connections_total,ibmi.netstat.interface_up,ibmi.netstat.interface_mtu</code></td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p>The counts grow with the partition. The job-status sensor follows the
+statuses present at each collection: a status that appears once leaves a
+channel PRTG keeps, empty, which is why jobs by status and jobs by
+subsystem are two sensors. The disk, listener and output-queue sensors
+follow the number of objects: a system with more than 50 disk units or
+listeners needs them split further, for example by ASP with
+<code>&amp;tags=asp_number:1</code>; check the channel count in the console's
+Sensor URLs preview before creating a sensor. Do not point one PRTG
+sensor at the whole probe: on the partition above it returns about 800
+channels, sixteen times what PRTG takes on one sensor, and it loaded a test PRTG server to full CPU.</p>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
 OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
