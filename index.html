@@ -185,6 +185,21 @@
     max-width: 66ch; line-height: 1.55;
   }
 
+  /* ---------- la capture de la console ---------- */
+  .shot {
+    margin: 0 0 52px; padding: 0;
+    border: 1px solid var(--line); border-radius: 12px;
+    background: var(--panel-2); overflow: hidden;
+  }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border-bottom: 1px solid var(--line);
+  }
+  .shot figcaption {
+    margin: 0; padding: 14px 18px; max-width: 60ch;
+    font-size: 14px; color: var(--muted); line-height: 1.55;
+  }
+
   /* ---------- la rangee de plateformes, facon Telegraf / Netdata ---------- */
   .plats {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px;
@@ -427,6 +442,17 @@
     <li>Linux</li><li>Windows</li><li>Docker</li><li>Kubernetes</li>
     <li>bare metal</li><li>virtual machines</li>
   </ul>
+</div>
+
+<div class="wrap">
+  <figure class="shot">
+    <img src="/assets/console-overview.webp" width="1400" height="1197"
+         alt="The SenHub Agent console: seven probes with their state and metric counts, two outputs, and the agent's own version, uptime and licence tier." />
+    <figcaption>
+      Every agent carries its own console — what it collects, where it sends it, and
+      what is failing right now. No server to stand up first.
+    </figcaption>
+  </figure>
 </div>
 
 <section class="band">
