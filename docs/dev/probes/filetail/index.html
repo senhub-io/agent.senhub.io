@@ -4208,6 +4208,11 @@ mode so the producing application is never blocked.</p>
 
 <p>Without <code>bookmark_path</code> the probe tails from the end of each file on every
 start. <code>from_beginning</code> only applies to a file no bookmark knows yet.</p>
+<p>A path that does not exist yet, or whose directory is not there yet (a
+mount that comes up after the agent), is picked up by the rescan once it
+appears. Such a file is read from its first line, whatever
+<code>from_beginning</code> says, since all of it was written after the probe
+started watching for it.</p>
 <h3 id="multiline-folding">Multiline folding<a class="headerlink" href="#multiline-folding" title="Permanent link">&para;</a></h3>
 <p>Java stacktraces, Python tracebacks and pretty-printed payloads span
 several physical lines. The <code>multiline</code> block folds them into one

@@ -4122,19 +4122,19 @@ outside <code>params</code>. Values must be strings.</p>
 - <code>netscaler.system.network.throughput_mbps</code> - Network throughput (Mbps)
 - <code>netscaler.system.network.packets_per_sec</code> - Packet rate (packets/sec)</p>
 <p><strong>Load Balancer Virtual Server Metrics:</strong>
-- <code>netscaler.lbvserver.state</code> - vServer state (UP=1, DOWN=0)
+- <code>netscaler.lbvserver.state</code> - vServer state (7=UP, 1=DOWN, 2=UNKNOWN, 3=BUSY, 4=OUT OF SERVICE, 5=TROFS, 8=TROFS_DOWN)
 - <code>netscaler.lbvserver.health</code> - Health percentage (0-100%)
 - <code>netscaler.lbvserver.requests_per_sec</code> - Request rate
 - <code>netscaler.lbvserver.connections.active</code> - Active connections
 - <code>netscaler.lbvserver.connections.established</code> - Total established connections</p>
 <p>Tags: <code>vserver_name</code>, <code>vserver_type</code> (HTTP, SSL, TCP, UDP), <code>protocol</code></p>
 <p><strong>Service Metrics:</strong>
-- <code>netscaler.service.state</code> - Service state (UP=1, DOWN=0)
+- <code>netscaler.service.state</code> - Service state (7=UP, 1=DOWN, 2=UNKNOWN, 3=BUSY, 4=OUT OF SERVICE, 5=TROFS, 8=TROFS_DOWN)
 - <code>netscaler.service.throughput_mbps</code> - Service throughput
 - <code>netscaler.service.active_transactions</code> - Current transactions</p>
 <p>Tags: <code>service_name</code>, <code>vserver_name</code>, <code>ip_address</code>, <code>port</code></p>
 <p><strong>Service Group Metrics:</strong>
-- <code>netscaler.servicegroup.state</code> - Service group state (UP=1, DOWN=0)
+- <code>netscaler.servicegroup.state</code> - Service group effective state (same codes, plus 6=PARTIAL-UP when only some members are up)
 - <code>netscaler.servicegroup.members.total</code> - Total group members
 - <code>netscaler.servicegroup.members.active</code> - Active members</p>
 <p>Tags: <code>servicegroup_name</code>, <code>vserver_name</code></p>
@@ -4266,7 +4266,7 @@ outside <code>params</code>. Values must be strings.</p>
 <p><strong>Available Lookups:</strong>
 - <code>netscaler.lbvserver.state</code>: UP, DOWN, OUT OF SERVICE, BUSY, UNKNOWN
 - <code>netscaler.service.state</code>: UP, DOWN, OUT OF SERVICE, BUSY, UNKNOWN
-- <code>netscaler.servicegroup.state</code>: UP, DOWN, OUT OF SERVICE, BUSY, UNKNOWN
+- <code>netscaler.servicegroup.state</code>: UP, PARTIAL-UP, DOWN, OUT OF SERVICE, BUSY, UNKNOWN
 - <code>netscaler.interface.state</code>: ENABLED, DISABLED
 - <code>netscaler.ssl.certificate.status</code>: VALID, INVALID
 - <code>netscaler.ha.state</code>: PRIMARY, SECONDARY, UNKNOWN

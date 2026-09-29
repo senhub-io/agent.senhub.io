@@ -2616,6 +2616,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#messages-without-a-pri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Messages without a PRI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#priority-pri-calculation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5029,6 +5040,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#messages-without-a-pri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Messages without a PRI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#priority-pri-calculation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5795,12 +5817,23 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>Example:
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>&lt;13&gt;1 2025-10-13T14:23:45.000Z server01 sshd 1234 ID47 [exampleSDID@32473 eventID="1"] Connection from 192.168.1.100
 </code></pre></div>
+<h3 id="messages-without-a-pri">Messages without a PRI<a class="headerlink" href="#messages-without-a-pri" title="Permanent link">&para;</a></h3>
+<p>Some senders start the line at the timestamp, with no <code>&lt;PRI&gt;</code>: the UniFi
+controller's activity log, for one.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Sep 29 18:08:37 unifi-pi CEF:0|Ubiquiti|UniFi Network|10.6.106|546|Config Modified|5|...
+</code></pre></div>
+<p>The probe still reads the timestamp, the hostname and the tag from such a
+line, and keeps the rest as the body. It sets no <code>facility</code> or <code>priority</code>,
+since the sender gave none. The severity is <code>5</code> (notice), unless the body
+is a CEF record: the severity then comes from the CEF header, 0-3 as
+informational, 4-6 as warning, 7-8 as error and 9-10 as critical. A
+message that carries a PRI keeps the severity of its PRI.</p>
 <h3 id="priority-pri-calculation">Priority (PRI) Calculation<a class="headerlink" href="#priority-pri-calculation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>PRI = (Facility * 8) + Severity
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Examples:
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>- Facility 1 (user), Severity 3 (error): PRI = (1*8)+3 = 11
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>- Facility 4 (security), Severity 2 (critical): PRI = (4*8)+2 = 34
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>PRI = (Facility * 8) + Severity
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>Examples:
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>- Facility 1 (user), Severity 3 (error): PRI = (1*8)+3 = 11
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>- Facility 4 (security), Severity 2 (critical): PRI = (4*8)+2 = 34
 </code></pre></div>
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>The Syslog probe requires no authentication for incoming syslog messages. Access control should be implemented at the network level (firewall rules, VLANs).</p>
