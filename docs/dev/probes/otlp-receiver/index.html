@@ -4305,7 +4305,8 @@ and gets no host identity.</p>
   the records relayed and
   <code>senhub_agent_otlp_receiver_received_without_host_id_total</code> those that
   still had no <code>host.id</code> afterwards, both by <code>signal</code>, <code>origin</code> (<code>uds</code>,
-  <code>tcp_loopback</code>, <code>remote</code>) and <code>service_name</code>. The share without is
+  <code>tcp_loopback</code>, <code>remote</code>) and the sending service
+  (<code>senhub_otlp_receiver_sender_service_name</code>). The share without is
   expected on <code>remote</code> and a defect on <code>uds</code>. The sending service is
   capped at 200 distinct values; past them records count under <code>other</code>.</li>
 <li><strong>The agent carries the three signals of the machine.</strong> Sending logs

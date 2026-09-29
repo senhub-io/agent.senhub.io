@@ -857,6 +857,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Agent self-observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otlp-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTLP output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent process
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4431,6 +4459,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Agent self-observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otlp-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTLP output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent process
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4967,8 +5023,9 @@ for the underlying naming convention.</p>
   the systematic <code>probe_name</code>, <code>probe_type</code> and <code>custom_tags</code> labels).</p>
 </blockquote>
 <h2 id="agent-self-observability">Agent self-observability<a class="headerlink" href="#agent-self-observability" title="Permanent link">&para;</a></h2>
-<p>Always emitted when the <code>prometheus</code> endpoint is active, regardless of
-configured probes.</p>
+<p>Emitted when the <code>prometheus</code> endpoint is active, regardless of
+configured probes. A counter appears once it has counted something, and
+the OTLP receiver counters once that probe has received traffic.</p>
 <table>
 <thead>
 <tr>
@@ -5031,13 +5088,13 @@ configured probes.</p>
 <td><code>senhub_agent_otlp_receiver_received_total</code></td>
 <td>counter</td>
 <td>Records relayed by the OTLP receiver, by signal, origin and sending service</td>
-<td><code>signal</code>, <code>origin</code>, <code>service_name</code></td>
+<td><code>signal</code>, <code>origin</code>, <code>senhub_otlp_receiver_sender_service_name</code></td>
 </tr>
 <tr>
 <td><code>senhub_agent_otlp_receiver_received_without_host_id_total</code></td>
 <td>counter</td>
 <td>Relayed records that still had no <code>host.id</code> afterwards; expected on <code>origin=remote</code>, a defect on <code>uds</code></td>
-<td><code>signal</code>, <code>origin</code>, <code>service_name</code></td>
+<td><code>signal</code>, <code>origin</code>, <code>senhub_otlp_receiver_sender_service_name</code></td>
 </tr>
 <tr>
 <td><code>senhub_agent_otlp_receiver_dropped_total</code></td>
@@ -5070,6 +5127,162 @@ attributed without log correlation:</p>
 </ul>
 <p>Each series appears only once its first error occurs; sum across labels for the
 lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
+<h3 id="otlp-output">OTLP output<a class="headerlink" href="#otlp-output" title="Permanent link">&para;</a></h3>
+<p>Emitted when an OTLP output is configured.</p>
+<table>
+<thead>
+<tr>
+<th>Prometheus name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub_agent_otlp_active_endpoint_index</code></td>
+<td>gauge</td>
+<td>Index of the OTLP endpoint currently serving exports: 0 = primary, &gt;0 = a configured fallback (endpoint failover, #217). Always 0 when no fallback_endpoints are configured.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_buffer_fill_ratio</code></td>
+<td>gauge</td>
+<td>Highest fill ratio (0..1) across all active log channel subscriptions at scrape time. Approaches 1 means the consumer is falling behind producers.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_checkpoint_last_save_age_seconds</code></td>
+<td>gauge</td>
+<td>Seconds since the most recent successful OTLP checkpoint save. 0 when persistence disabled or no save has succeeded yet.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_checkpoint_restored_entries</code></td>
+<td>gauge</td>
+<td>Number of entries restored from the OTLP checkpoint at the last agent boot. 0 means no restore (no file present, persistence disabled, or fresh install).</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_checkpoint_size_bytes</code></td>
+<td>gauge</td>
+<td>Size in bytes of the most recently written OTLP checkpoint file. 0 when persistence disabled or no save has succeeded yet.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_dropped_log_records_total</code></td>
+<td>counter</td>
+<td>Cumulative count of log records dropped due to subscriber backpressure on the agent log channel.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_dropped_span_batches_total</code></td>
+<td>counter</td>
+<td>Cumulative count of received span batches dropped due to backpressure on the agent span channel (the trace relay could not keep up).</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_endpoint_switches_total</code></td>
+<td>counter</td>
+<td>Cumulative endpoint failover switches (the active OTLP endpoint changed). Rising means the primary is flapping.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_export_duration_seconds</code></td>
+<td>gauge</td>
+<td>Wall-clock duration of the most recent successful OTLP metrics export.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_logs_pushed_total</code></td>
+<td>counter</td>
+<td>Cumulative count of log records emitted via OTLP/gRPC.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_logs_queue_bytes</code></td>
+<td>gauge</td>
+<td>Bytes currently held by the on-disk logs dead-letter queue.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_logs_queue_records</code></td>
+<td>gauge</td>
+<td>Event-log records currently held in the on-disk dead-letter queue (awaiting replay). 0 when the backend is healthy or persistence is disabled.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_logs_queued_total</code></td>
+<td>counter</td>
+<td>Cumulative event-log records written to the dead-letter queue after a failed export.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_logs_relayed_total</code></td>
+<td>counter</td>
+<td>Cumulative count of ingested log records forwarded verbatim, with the emitting application's Resource preserved. Distinct from logs.pushed, which counts records the agent itself produced.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_logs_replayed_total</code></td>
+<td>counter</td>
+<td>Cumulative event-log records re-emitted from the dead-letter queue at boot or on backend recovery.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_metrics_pushed_total</code></td>
+<td>counter</td>
+<td>Cumulative count of metric records successfully pushed via OTLP/gRPC.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_metrics_relayed_total</code></td>
+<td>counter</td>
+<td>Cumulative count of ingested metric points forwarded verbatim, with the emitting application's Resource preserved. Distinct from metrics.pushed, which counts points re-encoded from the agent's own store.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_parallel_sub_batches</code></td>
+<td>gauge</td>
+<td>Number of sub-batches the most recent OTLP push fanned out across. 1 means the single-batch path (max_concurrent_exports=1 or cycle below threshold); &gt;1 means per-probe parallel export fired.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_spans_relayed_total</code></td>
+<td>counter</td>
+<td>Cumulative count of received spans forwarded verbatim by the trace relay. Pairs with the receiver's ingested{signal=traces} counter: equal totals mean every ingested span left the agent.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_store_size</code></td>
+<td>gauge</td>
+<td>Number of distinct series held in the OTLP strategy's last-writer-wins metric store at the last push.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="agent-process">Agent process<a class="headerlink" href="#agent-process" title="Permanent link">&para;</a></h3>
+<p>The agent's own process, always emitted.</p>
+<table>
+<thead>
+<tr>
+<th>Prometheus name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub_agent_process_cpu_time_seconds_total</code></td>
+<td>counter</td>
+<td>Cumulative CPU time consumed by the agent process since startup, in seconds.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_process_gc_cycles_total</code></td>
+<td>counter</td>
+<td>Cumulative number of Go garbage collection cycles. Rate over time exposes GC pressure.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_process_goroutines</code></td>
+<td>gauge</td>
+<td>Number of goroutines currently running in the agent process. Monotonic growth typically indicates a goroutine leak.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_process_memory_heap_bytes</code></td>
+<td>gauge</td>
+<td>Go runtime heap memory currently allocated for objects, in bytes. Useful with process.memory.resident to spot heap-vs-OS memory leaks.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_process_memory_resident_bytes</code></td>
+<td>gauge</td>
+<td>Resident set size of the agent process, in bytes (OS-reported VmRSS / WorkingSetSize). 0 if the running OS exposes no such counter.</td>
+</tr>
+<tr>
+<td><code>senhub_agent_process_open_fds</code></td>
+<td>gauge</td>
+<td>Open file descriptors / Windows handles for the agent process. 0 if the running OS exposes no such counter.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="system-probes">System probes<a class="headerlink" href="#system-probes" title="Permanent link">&para;</a></h2>
 <p>Probes flagged <code>host_level: true</code> — filtered out when
 <code>expose_host_metrics: false</code> is set.</p>

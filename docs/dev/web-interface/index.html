@@ -4642,9 +4642,9 @@
 <p>SenHub Agent ships a web console. It answers the questions an operator asks in the order they ask them: is the agent running, what does it collect, where does the data go, and what URL does the poller need.</p>
 <h2 id="opening-the-console">Opening the console<a class="headerlink" href="#opening-the-console" title="Permanent link">&para;</a></h2>
 <p>The console is served by the <code>http</code> output on the agent's port. Open:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://agent-server:8080/web/{agent-key}/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://agent-server:8080/web/{admin-key}/
 </code></pre></div>
-<p>Replace <code>agent-server</code> with the address of the machine running the agent and <code>{agent-key}</code> with the agent's key. The key is printed by <code>senhub-agent key show</code> and by <code>senhub-agent console --print</code>; on Windows the installer creates a Start Menu shortcut that opens the console directly. With HTTPS enabled, use <code>https://</code> and the HTTPS port (8443 by default).</p>
+<p>Replace <code>agent-server</code> with the address of the machine running the agent and <code>{admin-key}</code> with the administration key, the <code>admin_key</code> of the <code>http</code> output. <code>senhub-agent console --print</code>, run as root or administrator, prints the full address with that key in it; on Windows the installer creates a Start Menu shortcut that opens the console directly. <code>senhub-agent key show</code> prints the agent key, which only reads metrics and does not open the console. With HTTPS enabled, use <code>https://</code> and the HTTPS port (8443 by default).</p>
 <p>The console requires the <code>web</code> endpoint of the <code>http</code> output and an
 administration key. <strong>The agent generates that key by itself</strong> on the
 first start that finds none, so an upgraded installation keeps working
@@ -4675,7 +4675,7 @@ carries the old key. Take a fresh one from the shortcut or from
 404 rather than asking for a key nobody has. An agent installed to feed
 PRTG or Nagios therefore exposes nothing that can change it. Your
 pollers are unaffected either way.</p>
-<p>The header of every page shows the host name, the agent's state, its version and its uptime, so you can see that the agent runs without leaving the page you are on. The menu has five entries: Overview, Probes, Outputs, Settings and Docs. Docs opens this documentation on <a href="https://agent.senhub.io/docs">agent.senhub.io</a>; the API reference embedded in the agent remains available at <code>/web/{agent-key}/docs</code>.</p>
+<p>The header of every page shows the host name, the agent's state, its version and its uptime, so you can see that the agent runs without leaving the page you are on. The menu has five entries: Overview, Probes, Outputs, Settings and Docs. Docs opens this documentation on <a href="https://agent.senhub.io/docs">agent.senhub.io</a>; the API reference embedded in the agent remains available at <code>/web/{admin-key}/docs</code>.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Overview is the landing page.</p>
 <p><img alt="Overview" src="../images/web-interface/overview.webp" title="Overview with the getting-started steps, the probe and output summaries, the agent, the licence and the recent events" /></p>
@@ -4769,7 +4769,7 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <li>The probe.</li>
 <li>An optional filter on the probe's tags, for probes that return many components.</li>
 </ol>
-<p>Copy pastes the URL into the poller's sensor. Below it, a preview reads the URL on screen and follows it: change the poller, the probe or the filter and the panel refreshes on its own, and the Refresh button re-reads the same URL on demand. It opens on the raw response — what the poller actually receives — with the channel table one click away; whichever view you pick is the one you get next time. The page also offers the PRTG lookups for download and lists the steps on the PRTG side. The old address <code>/web/{agent-key}/explorer</code> redirects here.</p>
+<p>Copy pastes the URL into the poller's sensor. Below it, a preview reads the URL on screen and follows it: change the poller, the probe or the filter and the panel refreshes on its own, and the Refresh button re-reads the same URL on demand. It opens on the raw response — what the poller actually receives — with the channel table one click away; whichever view you pick is the one you get next time. The page also offers the PRTG lookups for download and lists the steps on the PRTG side. The old address <code>/web/{admin-key}/explorer</code> redirects here.</p>
 <p><img alt="Sensor URLs" src="../images/web-interface/sensor-urls.webp" title="Sensor URLs tab with a PRTG URL and its preview" /></p>
 <h2 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h2>
 <p>The Settings page changes the agent's own configuration from the browser, so a Windows operator does not have to edit YAML on the server.</p>
@@ -4856,67 +4856,89 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>http://agent-server:8080/api/{key}/nagios/metrics/{probe-name}
 </code></pre></div>
 <p>The response follows the standard Nagios plugin output format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>OK - Probe has 12 metrics | cpu_usage=45.2% memory_available=8192MB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>OK - Probe cpu healthy - 3 metrics collected | CPU_Total_Usage=12.00 CPU_System=5.00 CPU_User=10.00
 </code></pre></div>
-<p>This can be used with <code>check_http</code> or a custom check command. Example Nagios command definition:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>define command {
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    command_name    check_senhub
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    command_line    /usr/lib/nagios/plugins/check_http -H $HOSTADDRESS$ -p 8080 -u '/api/{key}/nagios/metrics/$ARG1$'
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>}
-</code></pre></div>
+<p>Nagios reads the status from the plugin's exit code, which an HTTP answer does not carry. The <code>check_senhub</code> script in <a href="../nagios/#call-the-agent-from-nagios">Call the agent from Nagios</a> turns the first word of the answer into that exit code, with the matching command and service definitions.</p>
 <p>To list available checks:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
 </code></pre></div>
 <h3 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h3>
 <p>Prometheus scrapes every probe from one URL, <code>/metrics</code> on the agent's port, with the agent key as bearer token. See <a href="../prometheus/">Prometheus</a>.</p>
 <h2 id="the-consoles-api">The console's API<a class="headerlink" href="#the-consoles-api" title="Permanent link">&para;</a></h2>
 <p>Everything the console does goes through the agent's JSON API, so scripts can do the same.</p>
+<p>The routes marked <strong>admin</strong> answer the administration key alone and exist only when <code>admin_key</code> is set on the <code>http</code> output; without it they answer 404. The catalog, <code>config/outputs</code>, <code>config/settings</code> and the probe create, update and delete routes also need the <code>web</code> endpoint, as the console does. The other routes answer the agent key or the administration key.</p>
 <table>
 <thead>
 <tr>
 <th>Route</th>
+<th>Key</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET /api/{key}/catalog/probes</code></td>
+<td>admin</td>
 <td>Probe types with their parameter schema, tier and licence verdict</td>
 </tr>
 <tr>
 <td><code>GET /api/{key}/config/probes</code></td>
+<td>admin</td>
 <td>Configured probes with their live state, interval, series count and last update</td>
 </tr>
 <tr>
 <td><code>POST /api/{key}/config/probes</code>, <code>PUT</code> and <code>DELETE</code> on <code>.../{name}</code></td>
+<td>admin</td>
 <td>Create, update, delete a probe fragment</td>
 </tr>
 <tr>
-<td><code>POST /api/{key}/config/validate</code>, <code>POST /api/{key}/config/test</code></td>
-<td>Check values against the schema; run one real collection</td>
+<td><code>POST /api/{key}/config/validate</code>, <code>POST /api/{key}/config/preview</code>, <code>POST /api/{key}/config/test</code></td>
+<td>admin</td>
+<td>Check values against the schema; preview; run one real collection</td>
 </tr>
 <tr>
 <td><code>GET /api/{key}/catalog/outputs</code></td>
+<td>admin</td>
 <td>Output types with their parameter schema</td>
 </tr>
 <tr>
 <td><code>GET /api/{key}/config/outputs</code></td>
+<td>admin</td>
 <td>Configured outputs with their state, delivery record and, for HTTP, the last poller per endpoint</td>
 </tr>
 <tr>
 <td><code>POST /api/{key}/config/outputs</code>, <code>PUT</code> and <code>DELETE</code> on <code>.../{name}</code></td>
+<td>admin</td>
 <td>Create (with <code>enabled: false</code> to write the file as <code>.disabled</code>), update, delete an output file</td>
 </tr>
 <tr>
 <td><code>POST /api/{key}/config/outputs/validate</code>, <code>POST /api/{key}/config/outputs/test</code></td>
+<td>admin</td>
 <td>Check values; test the connection step by step</td>
 </tr>
 <tr>
 <td><code>GET /api/{key}/config/settings</code>, <code>POST</code></td>
+<td>admin</td>
 <td>Port, bind address, licence</td>
 </tr>
 <tr>
+<td><code>POST /api/{key}/admin/cache/clear</code></td>
+<td>admin</td>
+<td>Empty the metric cache</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/debug/logs</code>, <code>POST</code></td>
+<td>admin</td>
+<td>Read the agent's recent logs; change log levels</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/debug/pprof/...</code></td>
+<td>admin</td>
+<td>Go runtime profiler</td>
+</tr>
+<tr>
 <td><code>GET /api/{key}/info/events</code></td>
+<td>agent or admin</td>
 <td>The recent events shown on the Overview</td>
 </tr>
 </tbody>
@@ -4924,62 +4946,62 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <p>An update sends only what it changes. A <code>PUT</code> on an output without <code>enabled</code> keeps it in its current state, so a parameter edit never re-enables what an operator disabled. A stored secret the body does not mention is kept, for probes and outputs alike; to drop one, send its key with the value <code>null</code>, inside a block or a list of blocks as well.</p>
 <h2 id="useful-api-queries">Useful API queries<a class="headerlink" href="#useful-api-queries" title="Permanent link">&para;</a></h2>
 <h3 id="check-agent-health">Check agent health<a class="headerlink" href="#check-agent-health" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>http://agent-server:8080/health
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>http://agent-server:8080/health
 </code></pre></div>
-<p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5.5"</span><span class="p">,</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">"uptime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2h30m"</span><span class="p">,</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">"probes_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
+<p>The route is public: it takes no key. Response:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-29T10:15:00+02:00"</span><span class="p">,</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">"memory_mb"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.4</span><span class="p">,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HTTP Strategy v1.0"</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">}</span>
 </code></pre></div></p>
+<p><code>memory_mb</code> is the memory the Go runtime holds at the time of the request. <code>version</code> names the HTTP output's handler, not the agent release; <code>GET /api/{key}/info/system</code> returns the agent version.</p>
 <h3 id="list-collected-probes">List collected probes<a class="headerlink" href="#list-collected-probes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/probes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/probes
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">"probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"core-sw-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mysql-prod"</span><span class="p">],</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nt">"probe_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">"core-sw-01"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nt">"mysql-prod"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">  </span><span class="nt">"total_metrics"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">"probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"core-sw-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mysql-prod"</span><span class="p">],</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">"probe_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="nt">"core-sw-01"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nt">"mysql-prod"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">  </span><span class="nt">"total_metrics"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">}</span>
 </code></pre></div></p>
 <h3 id="view-system-information">View system information<a class="headerlink" href="#view-system-information" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
 </code></pre></div>
 <p>Returns the host name, version, uptime, memory usage, CPU usage, cache statistics, service health and the outputs that are not running.</p>
 <h3 id="check-licence-status">Check licence status<a class="headerlink" href="#check-licence-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">"tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-30T23:59:59Z"</span><span class="p">,</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="nt">"days_remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="nt">"authorized_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"citrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"netscaler"</span><span class="p">,</span><span class="w"> </span><span class="s2">"redfish"</span><span class="p">],</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="nt">"free_tier_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"logicaldisk"</span><span class="p">,</span><span class="w"> </span><span class="s2">"network"</span><span class="p">]</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="nt">"tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nt">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-30T23:59:59Z"</span><span class="p">,</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">  </span><span class="nt">"days_remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">  </span><span class="nt">"authorized_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"citrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"netscaler"</span><span class="p">,</span><span class="w"> </span><span class="s2">"redfish"</span><span class="p">],</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="nt">"free_tier_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"logicaldisk"</span><span class="p">,</span><span class="w"> </span><span class="s2">"network"</span><span class="p">]</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">}</span>
 </code></pre></div></p>
 <h3 id="otlp-counters">OTLP counters<a class="headerlink" href="#otlp-counters" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/otlp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/otlp
 </code></pre></div>
 <p>Returns the counters of the OTLP pipeline shown on the OTLP output page; see <a href="../otlp/#monitoring-the-otlp-pipeline">Monitoring the OTLP pipeline</a>.</p>
 <h3 id="cache-statistics">Cache statistics<a class="headerlink" href="#cache-statistics" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/stats/cache
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/stats/cache
 </code></pre></div>
 <p>Returns the number of cached metrics, memory usage, and the cache's time to live.</p>
 <h3 id="clear-the-cache">Clear the cache<a class="headerlink" href="#clear-the-cache" title="Permanent link">&para;</a></h3>
 <p>If you need to force a fresh collection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/admin/cache/clear
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/admin/cache/clear
 </code></pre></div>
-<p>This clears all cached metrics. The next collection cycle repopulates the cache.</p>
+<p>This route answers the administration key only; the agent key gets 401. It clears all cached metrics. The next collection cycle repopulates the cache.</p>
 
 
 

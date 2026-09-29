@@ -4058,15 +4058,19 @@
 <p><strong>License: Free</strong> — part of the universal collection tier.</p>
 </div>
 <h1 id="clickhouse">ClickHouse<a class="headerlink" href="#clickhouse" title="Permanent link">&para;</a></h1>
-<p>The <code>clickhouse</code> probe monitors a ClickHouse server by scraping the standard
-Prometheus <code>/metrics</code> endpoint (available since ClickHouse 20.1), mapping the
-key instantaneous gauges, async metrics, and cumulative profile-event counters.</p>
+<p>The <code>clickhouse</code> probe monitors a ClickHouse server through its HTTP
+interface (port 8123). It reads <code>system.metrics</code>, <code>system.events</code> and
+<code>system.asynchronous_metrics</code> in one query per collection: active queries,
+connections, memory, parts and merges, and the query, insert and I/O
+counters since the server started.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-clickhouse.yaml — each file under probes.d/ is a YAML array of probes</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clickhouse</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clickhouse</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:8123</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">senhub</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:clickhouse.password}</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
@@ -4130,66 +4134,20 @@ key instantaneous gauges, async metrics, and cumulative profile-event counters.<
 <!-- schema:params:end -->
 
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.clickhouse.up</code></td>
-<td>1</td>
-<td>1 when the <code>/metrics</code> endpoint answered successfully</td>
-</tr>
-<tr>
-<td><code>clickhouse.queries.active</code></td>
-<td>{query}</td>
-<td>Queries currently executing (<code>ClickHouseMetrics_Query</code>)</td>
-</tr>
-<tr>
-<td><code>clickhouse.connections</code></td>
-<td>{connection}</td>
-<td>Open client connections</td>
-</tr>
-<tr>
-<td><code>clickhouse.merges.active</code></td>
-<td>{merge}</td>
-<td>Background merge operations currently running</td>
-</tr>
-<tr>
-<td><code>clickhouse.parts.active</code></td>
-<td>{part}</td>
-<td>Total data parts across all tables</td>
-</tr>
-<tr>
-<td><code>clickhouse.memory.used</code></td>
-<td>By</td>
-<td>Process memory allocated by the ClickHouse server</td>
-</tr>
-<tr>
-<td><code>clickhouse.inserted.rows</code></td>
-<td>{row}</td>
-<td>Rows inserted since server start (profile counter)</td>
-</tr>
-<tr>
-<td><code>clickhouse.queries.select</code></td>
-<td>{query}</td>
-<td>SELECT queries since server start</td>
-</tr>
-<tr>
-<td><code>clickhouse.queries.insert</code></td>
-<td>{query}</td>
-<td>INSERT queries since server start</td>
-</tr>
-</tbody>
-</table>
+<p>Active queries, open client connections, memory tracked by the server,
+active parts and running merges, uptime, and the cumulative query, insert
+and read and write counters. The full list is in the
+<a href="#metric-reference">metric reference</a> below.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The probe uses the Prometheus text format at <code>/metrics</code>, not the SQL interface. No extra user grant is required unless metrics access is restricted.</li>
-<li>ClickHouse 20.1+ exposes the Prometheus endpoint by default on the HTTP port (8123). Older installations require <code>prometheus.port</code> in the server config.</li>
+<li>The probe needs a user that can read the <code>system</code> tables, nothing more.
+  A read-only user is enough:
+  <code>CREATE USER senhub IDENTIFIED BY '…' SETTINGS readonly = 1; GRANT SELECT ON system.* TO senhub;</code></li>
+<li>It does not use the Prometheus endpoint, which ClickHouse leaves off
+  unless a <code>&lt;prometheus&gt;</code> block gives it a port of its own. <code>/metrics</code> on
+  port 8123 answers 404 on a default install.</li>
+<li>A counter the server has never incremented, such as the INSERT count on
+  a server that has received none, is reported as 0.</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
@@ -4216,98 +4174,98 @@ series' tags.</p>
 <td><code>senhub.clickhouse.up</code></td>
 <td>ClickHouse {instance} Up</td>
 <td>#</td>
-<td>1 when the ClickHouse /metrics endpoint answered successfully, 0 otherwise</td>
+<td>1 when the ClickHouse HTTP interface answered the system-table query, 0 otherwise</td>
 </tr>
 <tr>
 <td><code>clickhouse.queries.active</code></td>
 <td><code>clickhouse.queries.active</code></td>
 <td>ClickHouse {instance} Active Queries</td>
 <td>#</td>
-<td>Number of queries currently being processed (ClickHouseMetrics_Query)</td>
+<td>Number of queries currently being processed (system.metrics Query)</td>
 </tr>
 <tr>
 <td><code>clickhouse.connections</code></td>
 <td><code>clickhouse.connections</code></td>
 <td>ClickHouse {instance} Connections</td>
 <td>#</td>
-<td>Number of open client connections (ClickHouseMetrics_Connection)</td>
+<td>Open client connections: TCP, HTTP, MySQL and PostgreSQL interfaces (system.metrics)</td>
 </tr>
 <tr>
 <td><code>clickhouse.memory.used</code></td>
 <td><code>clickhouse.memory.used</code></td>
 <td>ClickHouse {instance} Memory Used</td>
 <td>B</td>
-<td>Memory tracked by the query tracker (ClickHouseMetrics_MemoryTracking)</td>
+<td>Memory tracked by the query tracker (system.metrics MemoryTracking)</td>
 </tr>
 <tr>
 <td><code>clickhouse.parts.active</code></td>
 <td><code>clickhouse.parts.active</code></td>
 <td>ClickHouse {instance} Active Parts</td>
 <td>#</td>
-<td>Active data parts in MergeTree tables (ClickHouseMetrics_Parts)</td>
+<td>Active data parts in MergeTree tables (system.metrics PartsActive)</td>
 </tr>
 <tr>
 <td><code>clickhouse.merges.active</code></td>
 <td><code>clickhouse.merges.active</code></td>
 <td>ClickHouse {instance} Active Merges</td>
 <td>#</td>
-<td>MergeTree background merges currently running (ClickHouseMetrics_Merge)</td>
+<td>MergeTree background merges currently running (system.metrics Merge)</td>
 </tr>
 <tr>
 <td><code>clickhouse.uptime</code></td>
 <td><code>clickhouse.uptime</code></td>
 <td>ClickHouse {instance} Uptime</td>
 <td>s</td>
-<td>Server uptime in seconds (ClickHouseAsyncMetrics_Uptime)</td>
+<td>Server uptime in seconds (system.asynchronous_metrics Uptime)</td>
 </tr>
 <tr>
 <td><code>clickhouse.queries.total</code></td>
 <td><code>clickhouse.queries.total</code></td>
 <td>ClickHouse {instance} Total Queries</td>
 <td>#</td>
-<td>Cumulative number of queries executed (ClickHouseProfileEvents_Query)</td>
+<td>Cumulative number of queries executed (system.events Query)</td>
 </tr>
 <tr>
 <td><code>clickhouse.queries.select</code></td>
 <td><code>clickhouse.queries.select</code></td>
 <td>ClickHouse {instance} SELECT Queries</td>
 <td>#</td>
-<td>Cumulative SELECT queries executed (ClickHouseProfileEvents_SelectQuery)</td>
+<td>Cumulative SELECT queries executed (system.events SelectQuery)</td>
 </tr>
 <tr>
 <td><code>clickhouse.queries.insert</code></td>
 <td><code>clickhouse.queries.insert</code></td>
 <td>ClickHouse {instance} INSERT Queries</td>
 <td>#</td>
-<td>Cumulative INSERT queries executed (ClickHouseProfileEvents_InsertQuery)</td>
+<td>Cumulative INSERT queries executed (system.events InsertQuery)</td>
 </tr>
 <tr>
 <td><code>clickhouse.inserted.rows</code></td>
 <td><code>clickhouse.inserted.rows</code></td>
 <td>ClickHouse {instance} Inserted Rows</td>
 <td>#</td>
-<td>Cumulative rows inserted (ClickHouseProfileEvents_InsertedRows)</td>
+<td>Cumulative rows inserted (system.events InsertedRows)</td>
 </tr>
 <tr>
 <td><code>clickhouse.inserted.data</code></td>
 <td><code>clickhouse.inserted.data</code></td>
 <td>ClickHouse {instance} Inserted Bytes</td>
 <td>B</td>
-<td>Cumulative bytes inserted (ClickHouseProfileEvents_InsertedBytes)</td>
+<td>Cumulative bytes inserted (system.events InsertedBytes)</td>
 </tr>
 <tr>
 <td><code>clickhouse.read.data</code></td>
 <td><code>clickhouse.read.data</code></td>
 <td>ClickHouse {instance} Read Compressed Bytes</td>
 <td>B</td>
-<td>Cumulative compressed bytes read from storage (ClickHouseProfileEvents_ReadCompressedBytes)</td>
+<td>Cumulative compressed bytes read from storage (system.events ReadCompressedBytes)</td>
 </tr>
 <tr>
 <td><code>clickhouse.written.data</code></td>
 <td><code>clickhouse.written.data</code></td>
 <td>ClickHouse {instance} Written Compressed Bytes</td>
 <td>B</td>
-<td>Cumulative compressed bytes written to storage (ClickHouseProfileEvents_WriteCompressedBytes)</td>
+<td>Cumulative compressed bytes written to MergeTree parts by inserts (system.events MergeTreeDataWriterCompressedBytes)</td>
 </tr>
 </tbody>
 </table>

@@ -4225,8 +4225,11 @@ Compose file).</p>
 unless you choose otherwise, and the log file is written to
 <code>/var/log/senhub-agent</code> inside it.</p>
 <h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
-<p>One is required. The rest have defaults or are only read when the
-feature they configure is wanted.</p>
+<p>None is strictly required. <code>OTLP_BEARER_TOKEN</code> is what a first run
+needs to export to SenHub; the rest have defaults or are only read when
+the feature they configure is wanted. These variables are read only when
+the entrypoint writes the configuration, that is when no <code>agent.yaml</code> is
+present (see <a href="#bringing-your-own-configuration">Bringing your own configuration</a>).</p>
 <table>
 <thead>
 <tr>
@@ -4239,14 +4242,14 @@ feature they configure is wanted.</p>
 <tbody>
 <tr>
 <td><code>OTLP_BEARER_TOKEN</code></td>
-<td>Yes</td>
+<td>No (needed to export to SenHub)</td>
 <td>-</td>
-<td>Authenticates the export to SenHub. Without it the agent collects and exports nothing</td>
+<td>Authenticates the export to SenHub, sent as <code>Authorization: Bearer</code> and resolved from the environment at every start, never written to a file. Without it and without <code>SENHUB_OTLP_ENDPOINT</code>, no OTLP output is written: the agent collects and serves its local HTTP endpoints but exports nothing, and the entrypoint says so on startup. With <code>SENHUB_OTLP_ENDPOINT</code> set, the export goes out without an <code>Authorization</code> header</td>
 </tr>
 <tr>
 <td><code>SENHUB_OTLP_ENDPOINT</code></td>
 <td>No</td>
-<td><code>eu-west-1.intake.senhub.io:443</code></td>
+<td><code>eu-west-1.intake.senhub.io:443</code> when <code>OTLP_BEARER_TOKEN</code> is set</td>
 <td>Another collector: your own OpenTelemetry collector, VictoriaMetrics, Grafana Alloy</td>
 </tr>
 <tr>
@@ -4259,13 +4262,13 @@ feature they configure is wanted.</p>
 <td><code>SENHUB_ENTITIES</code></td>
 <td>No</td>
 <td><code>true</code></td>
-<td>Sends the entities (this host, the agent, what its probes watch) a topology backend builds its map from. <code>false</code> exports measurements and logs only</td>
+<td>Sends the entities (this host, the agent, what its probes watch) a topology backend builds its map from. <code>false</code> exports measurements and logs only. Any value other than <code>true</code> or <code>false</code> stops the container</td>
 </tr>
 <tr>
 <td><code>SENHUB_OTLP_TLS</code></td>
 <td>No</td>
 <td><code>true</code></td>
-<td><code>false</code> for a collector that listens in plain text, such as a sidecar on <code>localhost:4317</code>. The token then crosses the network unencrypted: keep it to the same host or a trusted network</td>
+<td><code>false</code> for a collector that listens in plain text, such as a sidecar on <code>localhost:4317</code>. The token then crosses the network unencrypted: keep it to the same host or a trusted network. Any value other than <code>true</code> or <code>false</code> stops the container</td>
 </tr>
 <tr>
 <td><code>SENHUB_LICENSE</code></td>
@@ -4448,14 +4451,17 @@ receiving side reads that key to tell agents apart, and their health
 metrics land on the same series with different values. Nothing signals
 it, and the counters it hides are the ones read when looking for missing
 data.</p>
-<p>Two ways out, both cheap. Give each instance its own value through the
-environment, which works because substitution is applied to the whole
-file before it is parsed:</p>
+<p>With a mounted configuration, each instance must therefore carry its own
+key. Reference it from the environment, which works because substitution
+is applied to the whole file before it is parsed, and give every
+instance its own <code>SENHUB_AGENT_KEY</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"${env:SENHUB_AGENT_KEY}"</span>
 </code></pre></div>
-<p>Or leave the key out of the shared configuration entirely and let each
-instance generate its own, kept in its own state volume.</p>
+<p>The agent resolves that reference itself, even though the entrypoint
+ignores <code>SENHUB_*</code> variables in this mode. Do not leave the key out or
+empty: the loader refuses a configuration whose agent key is empty, and
+the container stops at start.</p>
 <h2 id="what-the-container-does-not-do">What the container does not do<a class="headerlink" href="#what-the-container-does-not-do" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>No service commands.</strong> <code>install</code>, <code>start</code>, <code>stop</code> and their kin

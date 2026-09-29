@@ -5128,8 +5128,8 @@
 <p>SenHub Agent uses YAML configuration to define monitoring probes, data storage, and agent settings. Changes are detected automatically and applied without restarting the service.</p>
 <p>Two layouts are supported and the agent auto-detects which one you use:</p>
 <ul>
-<li><strong>Single file</strong> — one <code>agent.yaml</code> (or legacy <code>agent-config.yaml</code>) with everything, used by the installer.</li>
-<li><strong>Multi-file</strong> — <code>agent.yaml</code> for global settings plus <code>probes.d/</code> and <code>strategies.d/</code> directories for fragments (introduced in 0.1.93). Cleaner once you start managing more than a handful of probes or sinks. See <a href="#multi-file-configuration-layout">Multi-File Configuration Layout</a> below.</li>
+<li><strong>Multi-file</strong>: <code>agent.yaml</code> for global settings plus <code>probes.d/</code> and <code>strategies.d/</code> directories for fragments. This is the layout <code>install</code>, <code>config init</code> and the Windows MSI generate. See <a href="#multi-file-configuration-layout">Multi-File Configuration Layout</a> below.</li>
+<li><strong>Single file</strong> (legacy): one <code>agent.yaml</code> or <code>agent-config.yaml</code> carrying top-level <code>probes:</code> and <code>storage:</code> blocks. Existing installs keep working; <code>senhub-agent config migrate</code> converts them. The single-file examples on this page show the same settings in one block for readability; in the multi-file layout, probes go under <code>probes.d/</code> and outputs under <code>strategies.d/</code>.</li>
 </ul>
 <h2 id="configuration-file-location">Configuration File Location<a class="headerlink" href="#configuration-file-location" title="Permanent link">&para;</a></h2>
 <p>The default configuration file is <code>agent.yaml</code> at the OS canonical path:</p>
@@ -5155,12 +5155,12 @@
 </tr>
 </tbody>
 </table>
-<p>Legacy <code>agent-config.yaml</code> files continue to work unchanged. You can override the path at install time:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>senhub-agent<span class="w"> </span>install<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub-agent/agent.yaml
+<p>Legacy <code>agent-config.yaml</code> files continue to work unchanged. You can override the path at install time; an absolute path is used as given, and a relative path resolves next to the binary:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>./senhub-agent<span class="w"> </span>install<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub-agent/agent.yaml
 </code></pre></div>
 <h2 id="configuration-structure-overview">Configuration Structure Overview<a class="headerlink" href="#configuration-structure-overview" title="Permanent link">&para;</a></h2>
-<p>The configuration file has four main sections:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<p>The configuration has four main sections, shown here in the legacy single-file form:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span>
@@ -5196,21 +5196,21 @@ and stamps the new version on disk.</p>
 <tr>
 <td><code>1</code></td>
 <td>0.1.x</td>
-<td>Legacy baseline.</td>
+<td>Legacy.</td>
 </tr>
 <tr>
 <td><code>2</code></td>
-<td>—</td>
-<td>Current baseline: multi-file layout and <code>${env:}</code> / <code>${file:}</code> substitution.</td>
+<td>0.2.x</td>
+<td>Legacy: multi-file layout and <code>${env:}</code> / <code>${file:}</code> substitution.</td>
 </tr>
 <tr>
 <td><code>3</code></td>
 <td>0.5.0</td>
-<td>Secret references: inline plaintext secrets are sealed into the <a href="../secret-store/">secret store</a> and rewritten as <code>${secret:...}</code>.</td>
+<td>Current. Secret references: inline plaintext secrets are sealed into the <a href="../secret-store/">secret store</a> and rewritten as <code>${secret:...}</code>. A new configuration is written at version 3.</td>
 </tr>
 </tbody>
 </table>
-<p>On first boot under version 3, the agent seals any inline plaintext secret
+<p>Versions 1 and 2 are legacy numbers an older configuration may still carry; the agent loads them and migrates them forward. On first boot under version 3, the agent seals any inline plaintext secret
 into the store, replaces it with a <code>${secret:...}</code> reference, and stamps the
 file <code>config_version: 3</code>. The bump to 3 happens <strong>only when a secret is
 actually sealed</strong> — a secret-free version 2 configuration stays at version 2
@@ -5238,7 +5238,7 @@ distributing a version 3 (sealed) configuration.</p>
 <tr>
 <td><code>key</code></td>
 <td>Yes</td>
-<td>Authentication key (UUID format), provided by SenHub support</td>
+<td>Agent key (UUID format), generated on the machine by <code>install</code>, <code>config init</code> or the MSI. It identifies the agent and is the key PRTG, Nagios and a Prometheus scrape read with. It must not be empty. It does not open the web console, which answers only the administration key (<code>admin_key</code> of the <code>http</code> output)</td>
 </tr>
 <tr>
 <td><code>license</code></td>
@@ -5363,7 +5363,7 @@ sockets. An agent that does not want it pays none of it.</p>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
 </code></pre></div>
 <p>Deleting the entry works too, but it takes the credentials, intervals and tags
 with it — which have to be retyped to turn the probe back on. <code>agent config
@@ -5544,10 +5544,10 @@ is refused by the web console.</p>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="nt">min_tls_version</span><span class="p">:</span><span class="w"> </span><span class="s">"1.2"</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/senhub/certs/agent-cert.pem"</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="s">"/opt/senhub/certs/agent-key.pem"</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="s">"/etc/senhub-agent/certs/agent-cert.pem"</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="s">"/etc/senhub-agent/certs/agent-key.pem"</span>
 </code></pre></div>
-<p>If you installed with <code>--enable-https</code>, the agent generated self-signed certificates automatically in the <code>certs/</code> directory. You can replace them with your own certificates.</p>
+<p>If you installed with <code>--enable-https</code>, the agent generated self-signed certificates automatically in the <code>certs/</code> directory next to <code>agent.yaml</code> (<code>/etc/senhub-agent/certs/</code> on Linux, <code>%ProgramData%\SenHub\certs\</code> on Windows). You can replace them with your own certificates.</p>
 <table>
 <thead>
 <tr>
@@ -5663,7 +5663,7 @@ storage but <code>http</code>.</p>
 <h2 id="configuration-examples">Configuration Examples<a class="headerlink" href="#configuration-examples" title="Permanent link">&para;</a></h2>
 <h3 id="minimal-configuration">Minimal Configuration<a class="headerlink" href="#minimal-configuration" title="Permanent link">&para;</a></h3>
 <p>The simplest configuration with system monitoring probes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span>
@@ -5681,7 +5681,7 @@ storage but <code>http</code>.</p>
 </code></pre></div>
 <h3 id="system-monitoring-configuration">System Monitoring Configuration<a class="headerlink" href="#system-monitoring-configuration" title="Permanent link">&para;</a></h3>
 <p>A complete system monitoring setup with all free-tier probes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span>
@@ -5718,7 +5718,7 @@ storage but <code>http</code>.</p>
 </code></pre></div>
 <h3 id="production-configuration-with-premium-probes">Production Configuration with Premium Probes<a class="headerlink" href="#production-configuration-with-premium-probes" title="Permanent link">&para;</a></h3>
 <p>A production setup monitoring Citrix and NetScaler infrastructure:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span>
@@ -5761,13 +5761,13 @@ storage but <code>http</code>.</p>
 <a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Citrix</span><span class="nv"> </span><span class="s">Production"</span>
 <a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">citrix</span>
 <a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="w">      </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://director.company.com"</span>
-<a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
-<a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a><span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
-<a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"DOMAIN\\svc-monitoring"</span>
-<a id="__codelineno-12-48" name="__codelineno-12-48" href="#__codelineno-12-48"></a><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"SecurePassword123"</span>
-<a id="__codelineno-12-49" name="__codelineno-12-49" href="#__codelineno-12-49"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-12-50" name="__codelineno-12-50" href="#__codelineno-12-50"></a><span class="w">        </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="w">      </span><span class="nt">director</span><span class="p">:</span>
+<a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://director.company.com"</span>
+<a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a><span class="w">        </span><span class="nt">auth</span><span class="p">:</span>
+<a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"DOMAIN\\svc-monitoring"</span>
+<a id="__codelineno-12-48" name="__codelineno-12-48" href="#__codelineno-12-48"></a><span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:citrix-production.password}"</span>
+<a id="__codelineno-12-49" name="__codelineno-12-49" href="#__codelineno-12-49"></a><span class="w">        </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-12-50" name="__codelineno-12-50" href="#__codelineno-12-50"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span>
 <a id="__codelineno-12-51" name="__codelineno-12-51" href="#__codelineno-12-51"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 <a id="__codelineno-12-52" name="__codelineno-12-52" href="#__codelineno-12-52"></a><span class="w">    </span><span class="nt">custom_tags</span><span class="p">:</span>
 <a id="__codelineno-12-53" name="__codelineno-12-53" href="#__codelineno-12-53"></a><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="s">"production"</span>
@@ -5778,7 +5778,7 @@ storage but <code>http</code>.</p>
 <a id="__codelineno-12-58" name="__codelineno-12-58" href="#__codelineno-12-58"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-12-59" name="__codelineno-12-59" href="#__codelineno-12-59"></a><span class="w">      </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://netscaler.company.com"</span>
 <a id="__codelineno-12-60" name="__codelineno-12-60" href="#__codelineno-12-60"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"monitoring-user"</span>
-<a id="__codelineno-12-61" name="__codelineno-12-61" href="#__codelineno-12-61"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"SecurePassword123"</span>
+<a id="__codelineno-12-61" name="__codelineno-12-61" href="#__codelineno-12-61"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:netscaler-lb.password}"</span>
 <a id="__codelineno-12-62" name="__codelineno-12-62" href="#__codelineno-12-62"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 <a id="__codelineno-12-63" name="__codelineno-12-63" href="#__codelineno-12-63"></a><span class="w">    </span><span class="nt">custom_tags</span><span class="p">:</span>
 <a id="__codelineno-12-64" name="__codelineno-12-64" href="#__codelineno-12-64"></a><span class="w">      </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="s">"production"</span>
@@ -5786,16 +5786,15 @@ storage but <code>http</code>.</p>
 <a id="__codelineno-12-66" name="__codelineno-12-66" href="#__codelineno-12-66"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Hardware</span><span class="nv"> </span><span class="s">iDRAC"</span>
 <a id="__codelineno-12-67" name="__codelineno-12-67" href="#__codelineno-12-67"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
 <a id="__codelineno-12-68" name="__codelineno-12-68" href="#__codelineno-12-68"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-12-69" name="__codelineno-12-69" href="#__codelineno-12-69"></a><span class="w">      </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://idrac-server01.company.com"</span>
+<a id="__codelineno-12-69" name="__codelineno-12-69" href="#__codelineno-12-69"></a><span class="w">      </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://idrac-server01.company.com"</span>
 <a id="__codelineno-12-70" name="__codelineno-12-70" href="#__codelineno-12-70"></a><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"monitoring"</span>
-<a id="__codelineno-12-71" name="__codelineno-12-71" href="#__codelineno-12-71"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"SecurePassword123"</span>
+<a id="__codelineno-12-71" name="__codelineno-12-71" href="#__codelineno-12-71"></a><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:hardware-idrac.password}"</span>
 <a id="__codelineno-12-72" name="__codelineno-12-72" href="#__codelineno-12-72"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-12-73" name="__codelineno-12-73" href="#__codelineno-12-73"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-12-74" name="__codelineno-12-74" href="#__codelineno-12-74"></a><span class="w">        </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-12-73" name="__codelineno-12-73" href="#__codelineno-12-73"></a><span class="w">      </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <h3 id="web-application-monitoring-configuration">Web Application Monitoring Configuration<a class="headerlink" href="#web-application-monitoring-configuration" title="Permanent link">&para;</a></h3>
 <p>Monitoring web application availability and load times:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span>
@@ -5808,19 +5807,19 @@ storage but <code>http</code>.</p>
 <a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://www.company.com"</span>
 <a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
-<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Website</span><span class="nv"> </span><span class="s">Load</span><span class="nv"> </span><span class="s">Time"</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_webapp</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://www.company.com"</span>
-<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
-<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
-<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Gateway</span><span class="nv"> </span><span class="s">Paris"</span>
-<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ping_gateway</span>
-<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">"192.168.1.1"</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Website</span><span class="nv"> </span><span class="s">Load</span><span class="nv"> </span><span class="s">Time"</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">load_webapp</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://www.company.com"</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="s">"30s"</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="w">  </span><span class="c1"># One instance per host. The gateway is read from the routing table,</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="w">  </span><span class="c1"># so the probe takes no parameter beyond the common interval.</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Gateway"</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ping_gateway</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
 </code></pre></div>
 <h2 id="applying-configuration-changes">Applying Configuration Changes<a class="headerlink" href="#applying-configuration-changes" title="Permanent link">&para;</a></h2>
@@ -5849,7 +5848,8 @@ storage but <code>http</code>.</p>
 </ul>
 <p>Keeping it in its own file makes it easy to hand over and avoids pasting a long
 token into your YAML. The token is stored in clear text there by design (it is
-bound to your agent key and grants nothing on its own), so it is not sealed.</p>
+signed, bound to your organisation or to one agent key, and grants nothing on
+its own), so it is not sealed.</p>
 <blockquote>
 <p>An existing install that still has the token inline under <code>agent:</code> <code>license:</code>
 in <code>agent.yaml</code> keeps working, and is moved to <code>license.jwt</code> automatically on
@@ -5868,9 +5868,9 @@ restart the agent:</p>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>license.jwt<span class="w"> </span>/etc/senhub-agent/license.jwt
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
 </code></pre></div>
-<p><strong>Option B — CLI.</strong> Activate with the token; this validates it, verifies the
-agent-key binding, and writes <code>license.jwt</code> for you:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>license.jwt
+<p><strong>Option B — CLI.</strong> Activate with the token; this validates it, verifies that it
+is issued for this agent (or for your organisation), and writes <code>license.jwt</code> for you:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>license.jwt
 </code></pre></div>
 <p>Read from standard input, the token stays out of the process list and the
 shell history; it is also accepted as the argument.</p>
@@ -5878,7 +5878,7 @@ shell history; it is also accepted as the argument.</p>
 change is not picked up while the agent is running.</p>
 <h3 id="verifying-license-status">Verifying License Status<a class="headerlink" href="#verifying-license-status" title="Permanent link">&para;</a></h3>
 <p>You can check the license status at any time:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>show
 </code></pre></div>
 <p>Or via the API:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
@@ -5923,9 +5923,10 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <h3 id="grace-period">Grace Period<a class="headerlink" href="#grace-period" title="Permanent link">&para;</a></h3>
 <p>When a license expires, there is a 7-day grace period during which premium probes continue to work. After the grace period, the agent reverts to free-tier probes only.</p>
 <h3 id="other-license-commands">Other License Commands<a class="headerlink" href="#other-license-commands" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>show<span class="w">                </span><span class="c1"># Show current license details</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w">              </span><span class="c1"># Remove license (reverts to free tier)</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force<span class="w">      </span><span class="c1"># Remove without confirmation prompt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>show<span class="w">            </span><span class="c1"># Show current license details</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>key<span class="w">             </span><span class="c1"># Print the agent key a licence is bound to</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w">          </span><span class="c1"># Remove license (reverts to free tier)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force<span class="w">  </span><span class="c1"># Remove without confirmation prompt</span>
 </code></pre></div>
 <h2 id="auto-update">Auto-Update<a class="headerlink" href="#auto-update" title="Permanent link">&para;</a></h2>
 <p>The agent can check for new versions and optionally install them automatically.</p>
@@ -5965,10 +5966,11 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 </tr>
 </tbody>
 </table>
-<p>Even with <code>enabled: false</code>, the agent checks for new versions at startup and logs a message if an update is available. Use <code>senhub-agent update --list</code> to see available versions and <code>senhub-agent update &lt;version&gt;</code> to install manually.</p>
+<p>Even with <code>enabled: false</code>, the agent checks for new versions at startup and logs a message if an update is available. Use <code>sudo /usr/local/bin/senhub-agent update --list</code> to see available versions and <code>sudo /usr/local/bin/senhub-agent update &lt;version&gt;</code> to install manually.</p>
 <h2 id="validating-configuration">Validating Configuration<a class="headerlink" href="#validating-configuration" title="Permanent link">&para;</a></h2>
 <p>Use the built-in configuration checker before deploying changes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>check<span class="w"> </span>agent-config.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>check
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>check<span class="w"> </span>/etc/senhub-agent/agent.yaml
 </code></pre></div>
 <p>This validates:
 - YAML syntax (with line-level error context for syntax errors)
@@ -5977,9 +5979,9 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 - Probe types and required parameters
 - Storage strategy names</p>
 <p>Example output:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Checking configuration: C:\SenHub\agent-config.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Checking configuration: /etc/senhub-agent/agent.yaml
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>  [OK]   config_version: 2
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>  [OK]   config_version: 3
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>  [OK]   agent.key: 550e8400-e29b-41d4-a716-446655440000
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>  [OK]   agent.license: tier=pro, expires=2031-04-14
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>  [OK]   License binding verified
@@ -5990,7 +5992,7 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>Configuration is valid.
 </code></pre></div></p>
 <h2 id="multi-file-configuration-layout">Multi-File Configuration Layout<a class="headerlink" href="#multi-file-configuration-layout" title="Permanent link">&para;</a></h2>
-<p>Starting from version 0.1.93, the configuration can be split across multiple files. This is optional: an existing monolithic <code>agent-config.yaml</code> continues to work unchanged.</p>
+<p>The multi-file layout is what <code>install</code>, <code>config init</code> and the Windows MSI generate. An existing monolithic <code>agent-config.yaml</code> continues to work unchanged, and <code>senhub-agent config migrate</code> converts it.</p>
 <h3 id="per-os-default-paths">Per-OS default paths<a class="headerlink" href="#per-os-default-paths" title="Permanent link">&para;</a></h3>
 <p>The agent looks for the multi-file layout in the <strong>same directory as <code>agent.yaml</code></strong> (or <code>agent-config.yaml</code>). The defaults match how the installer lays things out per OS:</p>
 <table>
@@ -6004,16 +6006,10 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 </thead>
 <tbody>
 <tr>
-<td><strong>Linux (systemd)</strong></td>
+<td><strong>Linux</strong></td>
 <td><code>/etc/senhub-agent/agent.yaml</code></td>
 <td><code>/etc/senhub-agent/probes.d/</code></td>
 <td><code>/etc/senhub-agent/strategies.d/</code></td>
-</tr>
-<tr>
-<td><strong>Linux (tarball)</strong></td>
-<td><code>/opt/senhub/bin/agent.yaml</code></td>
-<td><code>/opt/senhub/bin/probes.d/</code></td>
-<td><code>/opt/senhub/bin/strategies.d/</code></td>
 </tr>
 <tr>
 <td><strong>Windows (MSI)</strong></td>
@@ -6029,7 +6025,7 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 </tr>
 </tbody>
 </table>
-<p>Override any of these by passing <code>--config-path</code> to the agent — the directories <code>probes.d/</code> and <code>strategies.d/</code> are always resolved next to whichever <code>agent.yaml</code> is loaded.</p>
+<p>Override any of these by passing <code>--config-path</code> to the agent. An absolute path is used as given; a relative path resolves next to the binary. The directories <code>probes.d/</code> and <code>strategies.d/</code> are always resolved next to whichever <code>agent.yaml</code> is loaded.</p>
 <h3 id="layout">Layout<a class="headerlink" href="#layout" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>&lt;config dir&gt;/
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>├── agent.yaml                     # Global settings only (no probes/storage)
@@ -6050,7 +6046,7 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <li>Only files ending in <code>.yaml</code> or <code>.yml</code> are read. A copy taken before an edit (<code>otlp.yaml.bak</code>, <code>otlp.yaml.20260908</code>) is not loaded, and the agent names the files it left out at start, so a copy is never mistaken for a live fragment. Rename a file to <code>*.disabled</code> to set it aside on purpose.</li>
 </ul>
 <h3 id="agentyaml-example-global-only"><code>agent.yaml</code> example (global only)<a class="headerlink" href="#agentyaml-example-global-only" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nt">agent</span><span class="p">:</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">"550e8400-e29b-41d4-a716-446655440000"</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nt">cache</span><span class="p">:</span>
@@ -6134,13 +6130,13 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <p>A missing required reference (file not found, no default) <strong>aborts agent boot</strong> with the offending reference in the error message. An unset environment variable without a default substitutes to an empty string and does <strong>not</strong> abort — match POSIX shell behaviour.</p>
 <h2 id="inspecting-the-merged-configuration">Inspecting the merged configuration<a class="headerlink" href="#inspecting-the-merged-configuration" title="Permanent link">&para;</a></h2>
 <p>The <code>agent config show</code> command prints the final, merged configuration as YAML with map keys sorted alphabetically:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w">              </span><span class="c1"># default: --redact</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--redact<span class="w">     </span><span class="c1"># secrets masked with ***</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--resolved<span class="w">   </span><span class="c1"># references substituted, secrets in cleartext</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--raw<span class="w">        </span><span class="c1"># references preserved</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w">              </span><span class="c1"># default: --redact</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--redact<span class="w">     </span><span class="c1"># secrets masked with ***</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--resolved<span class="w">   </span><span class="c1"># references substituted, secrets in cleartext</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>show<span class="w"> </span>--raw<span class="w">        </span><span class="c1"># references preserved</span>
 </code></pre></div>
 <ul>
-<li><code>--redact</code> (default): resolved configuration, but with values that came from <code>${file:..}</code> and any value whose YAML key matches <code>(?i)(key|token|password|secret)</code> masked with <code>***</code>. Safe to copy into a support ticket or commit to source control.</li>
+<li><code>--redact</code> (default): resolved configuration, but with values that came from <code>${file:..}</code> or <code>${secret:..}</code>, and any value whose YAML key matches <code>(?i)(key|token|password|passphrase|secret|community|credential|authorization|bearer|license|jwt)</code>, masked with <code>***</code>. Safe to copy into a support ticket or commit to source control.</li>
 <li><code>--resolved</code>: the same configuration the agent boots with — <code>${env:..}</code> / <code>${file:..}</code> / <code>${secret:..}</code> resolved against the current environment, filesystem and secret store, secrets in cleartext. Ask for it explicitly.</li>
 <li><code>--raw</code>: the merged configuration BEFORE substitution. Useful for auditing the layout (which files contributed which entries) before comparing against the resolved output.</li>
 </ul>

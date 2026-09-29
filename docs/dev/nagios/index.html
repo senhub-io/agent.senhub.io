@@ -4243,11 +4243,17 @@ plugins. Nothing is installed on the Nagios side beyond a short command.</p>
 </ul>
 <h2 id="enable-the-endpoint">Enable the endpoint<a class="headerlink" href="#enable-the-endpoint" title="Permanent link">&para;</a></h2>
 <p>The <code>nagios</code> endpoint of the HTTP output must be listed. The installer
-lists it by default:</p>
+lists it by default, in <code>strategies.d/00-http.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
+<p>The installer binds the HTTP output to <code>127.0.0.1</code> unless HTTPS was
+enabled at install time. That address only answers requests made on the
+agent's own host, so a Nagios server elsewhere cannot reach it: set
+<code>bind_address</code> to <code>"0.0.0.0"</code>, or to the address of the interface Nagios
+reaches, and open the port in the firewall.</p>
 <p>Every URL below carries the agent key, printed by <code>senhub-agent key show</code>.
 See <a href="../http-https/">HTTP / HTTPS</a> for the port, TLS and the firewall.</p>
 <h2 id="call-the-agent-from-nagios">Call the agent from Nagios<a class="headerlink" href="#call-the-agent-from-nagios" title="Permanent link">&para;</a></h2>
