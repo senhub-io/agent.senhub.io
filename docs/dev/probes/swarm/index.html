@@ -4166,7 +4166,7 @@ you want per-container resource metrics as well.</p>
 <li>The agent must run on a <strong>manager</strong> node. On a worker the Engine answers 503
   to every cluster query, and the probe reports that explicitly rather than
   showing an empty, healthy-looking cluster.</li>
-<li>Read access to the Docker Engine: the socket <code>/var/run/docker.sock</code> on Linux and macOS, the named pipe <code>npipe://./pipe/docker_engine</code> on Windows.</li>
+<li>Read access to the Docker Engine: the socket <code>/var/run/docker.sock</code> on Linux and macOS, the named pipe <code>npipe://./pipe/docker_engine</code> on Windows. The socket is <code>root:docker</code> mode <code>0660</code>, and the Linux service runs as the <code>senhub</code> account: add it to the <code>docker</code> group (<code>usermod -aG docker senhub</code>, then restart the service) or put a read-only socket proxy in front of the engine, as described for the <a href="../docker/#running-without-access-to-the-docker-socket">Docker probe</a>. Unlike the Docker probe, the Swarm probe has no fallback without the socket: the cluster state exists only in the Engine API, so it reports <code>senhub.swarm.up = 0</code>.</li>
 </ul>
 <p>Pointed at a worker or at an engine that is not in swarm mode, the probe still
 emits <code>senhub.swarm.up 0</code> plus a state series naming the reason — <code>worker</code>,
@@ -4209,13 +4209,13 @@ wrong node, another is a machine that was never clustered.</p>
 </table>
 <!-- schema:params:end -->
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swarm</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swarm</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">socket_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/docker.sock</span><span class="w">   </span><span class="c1"># default</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w">                        </span><span class="c1"># seconds, default 60</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">                         </span><span class="c1"># seconds, default 10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/30-swarm.yaml: each file under probes.d/ is a YAML array of probes</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swarm</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">swarm</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">socket_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/docker.sock</span><span class="w">   </span><span class="c1"># default</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span><span class="w">                        </span><span class="c1"># seconds, default 60</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">                         </span><span class="c1"># seconds, default 10</span>
 </code></pre></div>
 <p>On Windows the pipe may also be written <code>\\.\pipe\docker_engine</code>.</p>
 <h2 id="what-it-reports">What it reports<a class="headerlink" href="#what-it-reports" title="Permanent link">&para;</a></h2>
@@ -4320,14 +4320,14 @@ series' tags.</p>
 <tr>
 <td><code>senhub.swarm.up</code></td>
 <td><code>senhub.swarm.up</code></td>
-<td>Senhub Up</td>
+<td>Swarm Manager Up</td>
 <td>#</td>
 <td>1 when this node is a swarm manager and answered; 0 for worker, non-swarm or unreachable — the state series says which</td>
 </tr>
 <tr>
 <td><code>senhub.swarm.node_role_state</code></td>
 <td><code>senhub.swarm.node_role_state</code></td>
-<td>Senhub Node_Role_State</td>
+<td state="state">Swarm Role</td>
 <td>#</td>
 <td>one-hot over manager / worker / not_in_swarm / unreachable: why the probe sees what it sees</td>
 </tr>
@@ -4383,161 +4383,161 @@ series' tags.</p>
 <tr>
 <td><code>swarm.node.ready</code></td>
 <td><code>swarm.node.ready</code></td>
-<td>Node Ready</td>
+<td>Node {swarm.node.name} Ready</td>
 <td>#</td>
 <td>1 when the node status is ready</td>
 </tr>
 <tr>
 <td><code>swarm.node.state</code></td>
 <td><code>swarm.node.state</code></td>
-<td>Node State</td>
+<td>Node {swarm.node.name} State {state}</td>
 <td>#</td>
 <td>one-hot over ready / down / unknown / disconnected</td>
 </tr>
 <tr>
 <td><code>swarm.node.availability</code></td>
 <td><code>swarm.node.availability</code></td>
-<td>Node Availability</td>
+<td>Node {swarm.node.name} Availability {availability}</td>
 <td>#</td>
 <td>one-hot over active / pause / drain — the operator's intent, as opposed to the node's actual state</td>
 </tr>
 <tr>
 <td><code>swarm.node.cpu.allocatable</code></td>
 <td><code>swarm.node.cpu.allocatable</code></td>
-<td>Node Cpu Allocatable</td>
+<td>Node {swarm.node.name} CPU Allocatable</td>
 <td>#</td>
 <td>CPU cores the node advertises to the scheduler</td>
 </tr>
 <tr>
 <td><code>swarm.node.memory.allocatable</code></td>
 <td><code>swarm.node.memory.allocatable</code></td>
-<td>Node Memory Allocatable</td>
+<td>Node {swarm.node.name} Memory Allocatable</td>
 <td>Bytes</td>
 <td>memory the node advertises to the scheduler</td>
 </tr>
 <tr>
 <td><code>swarm.node.manager.leader</code></td>
 <td><code>swarm.node.manager.leader</code></td>
-<td>Node Manager Leader</td>
+<td>Node {swarm.node.name} Leader</td>
 <td>#</td>
 <td>1 on the Raft leader</td>
 </tr>
 <tr>
 <td><code>swarm.node.manager.reachable</code></td>
 <td><code>swarm.node.manager.reachable</code></td>
-<td>Node Manager Reachable</td>
+<td>Node {swarm.node.name} Manager Reachable</td>
 <td>#</td>
 <td>1 when this manager is reachable by the leader</td>
 </tr>
 <tr>
 <td><code>swarm.node.manager.reachability</code></td>
 <td><code>swarm.node.manager.reachability</code></td>
-<td>Node Manager Reachability</td>
+<td>Node {swarm.node.name} Reachability {reachability}</td>
 <td>#</td>
 <td>one-hot over reachable / unreachable / unknown</td>
 </tr>
 <tr>
 <td><code>swarm.node.tasks.running</code></td>
 <td><code>swarm.node.tasks.running</code></td>
-<td>Node Tasks Running</td>
+<td>Node {swarm.node.id} Tasks Running</td>
 <td>#</td>
 <td>running tasks placed on this node</td>
 </tr>
 <tr>
 <td><code>swarm.service.replicas.desired</code></td>
 <td><code>swarm.service.replicas.desired</code></td>
-<td>Service Replicas Desired</td>
+<td>Service {swarm.service.name} Replicas Desired</td>
 <td>#</td>
 <td>replicas asked for; for a global service, the tasks Swarm intends to run</td>
 </tr>
 <tr>
 <td><code>swarm.service.replicas.running</code></td>
 <td><code>swarm.service.replicas.running</code></td>
-<td>Service Replicas Running</td>
+<td>Service {swarm.service.name} Replicas Running</td>
 <td>#</td>
 <td>replicas actually running, counted from tasks</td>
 </tr>
 <tr>
 <td><code>swarm.service.converged</code></td>
 <td><code>swarm.service.converged</code></td>
-<td>Service Converged</td>
+<td>Service {swarm.service.name} Converged</td>
 <td>#</td>
 <td>1 when running replicas have caught up with the declared count</td>
 </tr>
 <tr>
 <td><code>swarm.service.update.state</code></td>
 <td><code>swarm.service.update.state</code></td>
-<td>Service Update State</td>
+<td>Service {swarm.service.name} Update {state}</td>
 <td>#</td>
 <td>one-hot over the rolling-update lifecycle; a service stuck in paused is a deploy waiting for a human</td>
 </tr>
 <tr>
 <td><code>swarm.service.tasks.failed</code></td>
 <td><code>swarm.service.tasks.failed</code></td>
-<td>Service Tasks Failed</td>
+<td>Service {swarm.service.name} Tasks Failed</td>
 <td>#</td>
 <td>tasks in a terminal failure state (failed, rejected, orphaned)</td>
 </tr>
 <tr>
 <td><code>swarm.service.port.published</code></td>
 <td><code>swarm.service.port.published</code></td>
-<td>Service Port Published</td>
+<td>Service {swarm.service.name} Port {swarm.port.published}/{network.transport}</td>
 <td>#</td>
 <td>one series per published port; in ingress mode the port answers on every node, not only where the service runs</td>
 </tr>
 <tr>
 <td><code>swarm.task.state</code></td>
 <td><code>swarm.task.state</code></td>
-<td>Task State</td>
+<td>Service {swarm.service.name} Tasks {state}</td>
 <td>#</td>
 <td>tasks per service per lifecycle state; separates 'not there yet' from 'will never get there'</td>
 </tr>
 <tr>
 <td><code>swarm.service.network.attached</code></td>
 <td><code>swarm.service.network.attached</code></td>
-<td>Service Network Attached</td>
+<td>Service {swarm.service.name} On {swarm.network.name}</td>
 <td>#</td>
 <td>1 per (service, overlay) pair — the reachability map: two services share a segment or they cannot talk</td>
 </tr>
 <tr>
 <td><code>swarm.network.services</code></td>
 <td><code>swarm.network.services</code></td>
-<td>Network Services</td>
+<td>Network {swarm.network.name} Services</td>
 <td>#</td>
 <td>services attached to this overlay</td>
 </tr>
 <tr>
 <td><code>swarm.network.tasks</code></td>
 <td><code>swarm.network.tasks</code></td>
-<td>Network Tasks</td>
+<td>Network {swarm.network.name} Tasks</td>
 <td>#</td>
 <td>task attachments on this overlay</td>
 </tr>
 <tr>
 <td><code>swarm.network.ingress</code></td>
 <td><code>swarm.network.ingress</code></td>
-<td>Network Ingress</td>
+<td>Network {swarm.network.name} Ingress</td>
 <td>#</td>
 <td>1 on the routing-mesh segment that carries every published port</td>
 </tr>
 <tr>
 <td><code>swarm.network.attachable</code></td>
 <td><code>swarm.network.attachable</code></td>
-<td>Network Attachable</td>
+<td>Network {swarm.network.name} Attachable</td>
 <td>#</td>
 <td>1 when standalone containers may join this overlay</td>
 </tr>
 <tr>
 <td><code>swarm.network.internal</code></td>
 <td><code>swarm.network.internal</code></td>
-<td>Network Internal</td>
+<td>Network {swarm.network.name} Internal</td>
 <td>#</td>
 <td>1 when the overlay has no external route</td>
 </tr>
 <tr>
 <td><code>swarm.network.address.capacity</code></td>
 <td><code>swarm.network.address.capacity</code></td>
-<td>Network Address Capacity</td>
+<td>Network {swarm.network.name} Address Capacity</td>
 <td>#</td>
 <td>assignable addresses in the overlay subnet; an overlay running out refuses new tasks with an error naming neither</td>
 </tr>

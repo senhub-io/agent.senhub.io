@@ -1010,17 +1010,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#endpoint-returns-404-on-metrics-but-apikeyprometheusmetrics-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Endpoint returns 404 on /metrics but /api/{key}/prometheus/metrics works
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#a-probe-is-configured-but-its-metrics-are-missing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4345,17 +4334,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#endpoint-returns-404-on-metrics-but-apikeyprometheusmetrics-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Endpoint returns 404 on /metrics but /api/{key}/prometheus/metrics works
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#a-probe-is-configured-but-its-metrics-are-missing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4431,17 +4409,17 @@ The native <a href="../otlp/">OTLP push exporter</a> produces the <strong>same</
 without any query rewrite.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Enable the <code>prometheus</code> endpoint in your config:</li>
+<li>Enable the <code>prometheus</code> endpoint of the HTTP output, in
+   <code>strategies.d/00-http.yaml</code>:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">storage</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prtg</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">web</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prometheus</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># add "prometheus" to the list</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prtg</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">web</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prometheus</span><span class="p p-Indicator">]</span><span class="w">   </span><span class="c1"># add "prometheus" to the list</span>
 </code></pre></div>
 <ol>
-<li>Restart the agent. Two routes are now exposed:</li>
+<li>The agent reloads its configuration when the file changes; no
+   restart is needed. Two routes are now exposed:</li>
 </ol>
 <table>
 <thead>
@@ -4473,23 +4451,25 @@ headers.</p>
 <h2 id="configuration-block">Configuration block<a class="headerlink" href="#configuration-block" title="Permanent link">&para;</a></h2>
 <p>Beyond enabling the endpoint, an optional <code>prometheus:</code> sub-block tunes
 the behavior:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">storage</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prtg</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">web</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prometheus</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">prometheus</span><span class="p">:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">include_probe_tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">        </span><span class="c1"># default — propagate custom_tags as labels</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">expose_host_metrics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># default — expose cpu/memory/network/filesystem</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prtg</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">web</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prometheus</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">prometheus</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">include_probe_tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">        </span><span class="c1"># default — propagate custom_tags as labels</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">expose_host_metrics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">       </span><span class="c1"># default — expose cpu/memory/network/filesystem</span>
 </code></pre></div>
 <h3 id="include_probe_tags-default-true"><code>include_probe_tags</code> (default: <code>true</code>)<a class="headerlink" href="#include_probe_tags-default-true" title="Permanent link">&para;</a></h3>
 <p>When <code>true</code>, every <code>custom_tags</code> entry declared on a probe is propagated as a
 Prometheus label on that probe's metrics:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">probes</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">netscaler-prod-paris</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">netscaler</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">custom_tags</span><span class="p">:</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># probes.d/20-netscaler.yaml, a YAML array of probes</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">netscaler-prod-paris</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">netscaler</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">base_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://netscaler.example.com"</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"monitoring-user"</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:netscaler-prod-paris.password}</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">custom_tags</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris</span>
 </code></pre></div>
 <p>All series for this probe then carry <code>env="prod"</code> and <code>site="paris"</code>. Set to
 <code>false</code> if you'd rather keep the label set minimal and inject those
@@ -4570,8 +4550,15 @@ per possible state with value <code>1</code> (active) or <code>0</code> (inactiv
 <p>This matches the OTel spec for <code>hw.status</code> and lets you alert on
 <code>hw_state="failed"</code> directly without numeric-enum gymnastics.</p>
 <h2 id="agent-self-observability">Agent self-observability<a class="headerlink" href="#agent-self-observability" title="Permanent link">&para;</a></h2>
-<p>Nine metrics describe the agent's own state — always emitted when the
-endpoint is enabled:</p>
+<p>These metrics describe the agent's own state. Uptime, cache entries,
+the three probe gauges, the transformer fallback counter and
+<code>senhub_agent_build_info</code> are emitted on every scrape once the endpoint
+is enabled; <code>senhub_agent_collect_errors_total</code> and
+<code>senhub_agent_http_requests_total</code> carry one series per label set that
+has counted something, so a probe that never failed has no
+<code>collect_errors</code> series. The four <code>senhub_agent_otlp_receiver_*</code>
+counters appear only when an <code>otlp_receiver</code> probe runs and has taken
+traffic.</p>
 <table>
 <thead>
 <tr>
@@ -4626,8 +4613,35 @@ endpoint is enabled:</p>
 <td>gauge (=1)</td>
 <td><code>version</code> and <code>commit</code> labels</td>
 </tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_ingested_total</code></td>
+<td>counter</td>
+<td>Items accepted by the OTLP receiver, per <code>signal</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_received_total</code></td>
+<td>counter</td>
+<td>Records relayed by the OTLP receiver, by <code>signal</code>, <code>origin</code> and <code>service_name</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_received_without_host_id_total</code></td>
+<td>counter</td>
+<td>Relayed records that still had no <code>host.id</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_dropped_total</code></td>
+<td>counter</td>
+<td>Items the OTLP receiver discarded, by <code>signal</code> and <code>reason</code></td>
+</tr>
 </tbody>
 </table>
+<p>The exposition also carries the counters of the OTLP output
+(<code>senhub_agent_otlp_*</code>, at zero when no OTLP output is configured), the
+agent process metrics (<code>senhub_agent_process_*</code>), and series that
+appear only once they have something to report: per-reason drop,
+rejection and export-failure counters, a failed output, a refused
+licence, a configuration watch that is off. See the
+<a href="metrics-reference/#agent-self-observability">metrics reference</a>.</p>
 <p>Build-info usage example (for dashboard joins):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">senhub_agent_uptime_seconds</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="o">*</span><span class="w"> </span><span class="k">on</span><span class="o">(</span><span class="nv">instance</span><span class="o">)</span><span class="w"> </span><span class="k">group_left</span><span class="o">(</span><span class="nv">version</span><span class="o">)</span><span class="w"> </span><span class="nv">senhub_agent_build_info</span>
@@ -4671,55 +4685,64 @@ add <code>stream_parse: true</code> to keep memory bounded:</p>
 </code></pre></div>
 <h3 id="tls">TLS<a class="headerlink" href="#tls" title="Permanent link">&para;</a></h3>
 <p>When the agent is configured with <code>tls.enabled: true</code> (see
-<a href="../http-https/">HTTP/HTTPS</a>), prefix the target with
-<code>https://</code> and add a <code>scheme: https</code> to the scrape config (plus a CA file
-or <code>insecure_skip_verify: true</code> for self-signed certs).</p>
+<a href="../http-https/">HTTP/HTTPS</a>), set <code>scheme: https</code> on the scrape job
+and keep the target as <code>host:port</code>, without an <code>https://</code> prefix. Add a
+<code>tls_config</code> block for the certificate:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">scrape_configs</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">'senhub-agent'</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metrics</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">authorization</span><span class="p">:</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bearer</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">credentials_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/secrets/senhub-agent-key</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="nt">tls_config</span><span class="p">:</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/prometheus/senhub-agent-ca.pem</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="c1"># insecure_skip_verify: true   # lab only, for a self-signed certificate</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'agent.internal:8443'</span><span class="p p-Indicator">]</span>
+</code></pre></div>
 <h2 id="sample-promql-queries">Sample PromQL queries<a class="headerlink" href="#sample-promql-queries" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Agent uptime in hours</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">senhub_agent_uptime_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3600</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Per-core CPU utilization (Linux/Unix)</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nv">senhub_system_cpu_utilization_ratio</span><span class="p">{</span><span class="nl">cpu_mode</span><span class="o">!=</span><span class="p">""}</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Memory used percentage</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nv">senhub_system_memory_utilization_ratio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># Network throughput per interface (instantaneous gauge in By/s)</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">network_interface_name</span><span class="p">,</span><span class="w"> </span><span class="nv">network_io_direction</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">  </span><span class="nv">senhub_system_network_io_bytes_per_second</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="o">)</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="c1"># Filesystems above 80 % usage</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="nv">senhub_system_filesystem_utilization_ratio</span><span class="p">{</span><span class="nl">system_filesystem_state</span><span class="o">=</span><span class="p">"</span><span class="s">used</span><span class="p">"}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.8</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="c1"># Hardware health alarms (any drive/PSU/controller in failed state)</span>
-<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="nv">senhub_hw_status</span><span class="p">{</span><span class="nl">hw_state</span><span class="o">=</span><span class="p">"</span><span class="s">failed</span><span class="p">"}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
-<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="c1"># Veeam jobs that failed on last run</span>
-<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="nv">senhub_veeam_jobs_by_last_result</span><span class="p">{</span><span class="nl">senhub_veeam_job_last_result</span><span class="o">=</span><span class="p">"</span><span class="s">failed</span><span class="p">"}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>
-<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="c1"># NetScaler vServers DOWN</span>
-<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="nv">senhub_netscaler_lbvserver_status</span><span class="p">{</span><span class="nl">senhub_netscaler_lbvserver_state</span><span class="o">=</span><span class="p">"</span><span class="s">down</span><span class="p">"}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
-<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>
-<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="c1"># Agent collect-error rate (issues per minute, all probes/reasons)</span>
-<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">senhub_agent_collect_errors_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span>
-<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>
-<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="c1"># Break the same rate down by probe type and failure reason</span>
-<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">probe</span><span class="p">,</span><span class="w"> </span><span class="nv">reason</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">senhub_agent_collect_errors_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Agent uptime in hours</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">senhub_agent_uptime_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3600</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Per-core CPU utilization (Linux/Unix)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nv">senhub_system_cpu_utilization_ratio</span><span class="p">{</span><span class="nl">cpu_mode</span><span class="o">!=</span><span class="p">""}</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># Memory used percentage</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="nv">senhub_system_memory_utilization_ratio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># Network throughput per interface (instantaneous gauge in By/s)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">network_interface_name</span><span class="p">,</span><span class="w"> </span><span class="nv">network_io_direction</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span><span class="nv">senhub_system_network_io_bytes_per_second</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="o">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="c1"># Filesystems above 80 % usage</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="nv">senhub_system_filesystem_utilization_ratio</span><span class="p">{</span><span class="nl">system_filesystem_state</span><span class="o">=</span><span class="p">"</span><span class="s">used</span><span class="p">"}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.8</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="c1"># Hardware health alarms (any drive/PSU/controller in failed state)</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="nv">senhub_hw_status</span><span class="p">{</span><span class="nl">hw_state</span><span class="o">=</span><span class="p">"</span><span class="s">failed</span><span class="p">"}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="c1"># Veeam jobs that failed on last run</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="nv">senhub_veeam_jobs_by_last_result</span><span class="p">{</span><span class="nl">senhub_veeam_job_last_result</span><span class="o">=</span><span class="p">"</span><span class="s">failed</span><span class="p">"}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="c1"># NetScaler vServers DOWN</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="nv">senhub_netscaler_lbvserver_status</span><span class="p">{</span><span class="nl">senhub_netscaler_lbvserver_state</span><span class="o">=</span><span class="p">"</span><span class="s">down</span><span class="p">"}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="c1"># Agent collect-error rate (issues per minute, all probes/reasons)</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">senhub_agent_collect_errors_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="c1"># Break the same rate down by probe type and failure reason</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="o">(</span><span class="nv">probe</span><span class="p">,</span><span class="w"> </span><span class="nv">reason</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">senhub_agent_collect_errors_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span>
 </code></pre></div>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="endpoint-returns-401">Endpoint returns 401<a class="headerlink" href="#endpoint-returns-401" title="Permanent link">&para;</a></h3>
 <p>Make sure the <code>Authorization: Bearer …</code> header (or <code>?token=…</code> query
-parameter) carries the <strong>exact</strong> agent key from the agent's config
-(<code>agent.key</code>). Comparison is constant-time and case-sensitive.</p>
-<h3 id="endpoint-returns-404-on-metrics-but-apikeyprometheusmetrics-works">Endpoint returns 404 on <code>/metrics</code> but <code>/api/{key}/prometheus/metrics</code> works<a class="headerlink" href="#endpoint-returns-404-on-metrics-but-apikeyprometheusmetrics-works" title="Permanent link">&para;</a></h3>
-<p>The <code>prometheus</code> endpoint is enabled, but only the SenHub-style route
-was activated. The standard <code>/metrics</code> route is served alongside —
-verify the agent version is <strong>0.1.88-beta or newer</strong>.</p>
+parameter) carries the <strong>exact</strong> key printed by
+<code>senhub-agent key show</code>. Comparison is constant-time and case-sensitive.</p>
 <h3 id="a-probe-is-configured-but-its-metrics-are-missing">A probe is configured but its metrics are missing<a class="headerlink" href="#a-probe-is-configured-but-its-metrics-are-missing" title="Permanent link">&para;</a></h3>
 <p>Check the agent log for messages of the form:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>WRN Metric has no OTel mapping - not exposed in /metrics. Add an
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>otel: block to the probe YAML or otel.skip: true to silence.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>WRN Metric has no OTel mapping - not exposed in /metrics. Add an
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>otel: block to the probe YAML or otel.skip: true to silence.
 </code></pre></div>
 <p>This means the probe emitted a metric that has no <code>otel:</code> mapping in
 its YAML transformer definition. The agent <strong>never blocks</strong> on this — it
@@ -4727,13 +4750,13 @@ silently drops the unmapped metric and warns once per
 <code>(probe_type, metric_name)</code> pair. Add the mapping or skip directive in
 the relevant <code>definitions/&lt;probe&gt;.yaml</code> and restart.</p>
 <h3 id="host-level-metrics-are-missing">Host-level metrics are missing<a class="headerlink" href="#host-level-metrics-are-missing" title="Permanent link">&para;</a></h3>
-<p>Verify <code>expose_host_metrics: true</code> (default) under <code>storage[].params.prometheus</code>.
+<p>Verify <code>expose_host_metrics: true</code> (default) in the <code>prometheus</code> block of the <code>http</code> output.
 When set to <code>false</code>, all <code>cpu</code>, <code>memory</code>, <code>network</code> and <code>logicaldisk</code> probe
 metrics are filtered out — confirm this is what you want.</p>
 <h3 id="verify-the-format">Verify the format<a class="headerlink" href="#verify-the-format" title="Permanent link">&para;</a></h3>
 <p>The fastest way to confirm the exposition is well-formed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>-sf<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer KEY"</span><span class="w"> </span>http://agent:8080/metrics<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>promtool<span class="w"> </span>check<span class="w"> </span>metrics
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-sf<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer KEY"</span><span class="w"> </span>http://agent:8080/metrics<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>promtool<span class="w"> </span>check<span class="w"> </span>metrics
 </code></pre></div>
 <p>Any parse error will be reported. Our test suite also runs every emitted
 record through <code>expfmt.TextParser</code> (the canonical Prometheus parser) on

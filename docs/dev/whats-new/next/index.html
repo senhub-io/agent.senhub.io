@@ -3456,6 +3456,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#breaking-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3475,6 +3486,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opentelemetry-and-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenTelemetry and topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nagios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nagios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-console-and-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI, console and packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3482,6 +3554,17 @@
     <span class="md-ellipsis">
       
         Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal
       
     </span>
   </a>
@@ -3951,6 +4034,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#breaking-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3970,6 +4064,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zabbix-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zabbix output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opentelemetry-and-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenTelemetry and topology
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nagios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nagios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-console-and-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI, console and packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3977,6 +4132,17 @@
     <span class="md-ellipsis">
       
         Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#internal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal
       
     </span>
   </a>
@@ -4009,12 +4175,54 @@
 
 
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
-<p>Changes merged since 0.5.6, not yet released.</p>
-<p>The release brings the Zabbix output, proven side by side against the
-native Zabbix agent on a Linux and a Windows host, and closes the
-collection gaps that comparison exposed.</p>
+<p>0.6.0 adds a native <a href="../../zabbix/">Zabbix output</a>: an active agent with
+generated templates and autoregistration prepared by
+<code>senhub-agent zabbix setup</code>, for Zabbix 6.0, 7.0 and 8.0. It also
+introduces a separate administration key for the console and the
+configuration API, makes <code>service.instance.id</code> a UUID, and brings the
+fixes listed below.</p>
 <div class="rn-filter"></div>
 
+<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
+<p>Actions for an installation running 0.5.x. Each one is detailed under
+Breaking Changes or Fixes below.</p>
+<ol>
+<li><strong>Console bookmarks and configuration API scripts.</strong> A bookmarked
+   console address carries the agent key and now answers 401 (Unauthorized): open the
+   console with <code>senhub-agent console</code>, or get its address with
+   <code>senhub-agent console --print</code>. Scripts calling the configuration API
+   use the <code>admin_key</code>.</li>
+<li><strong><code>service.instance.id</code> changes once.</strong> Dashboards and queries keyed on
+   it start new series after the upgrade.</li>
+<li><strong>Unfiltered <code>process</code> probe.</strong> Add a <code>filter</code> to keep the
+   per-process series; without one, only the per-name roll-up remains.</li>
+<li><strong>Nagios thresholds.</strong> A value equal to the threshold is now OK;
+   review your thresholds. <code>nagios.yaml</code> is now read next to <code>agent.yaml</code>
+   (the former location remains a fallback).</li>
+<li><strong>Renamed ActiveMQ and Redfish metrics.</strong> Update the alert rules and
+   panels that use them.</li>
+<li><strong>Veeam protected objects.</strong> Discovered items are recreated once.</li>
+<li><strong>Windows hosts installed from a pre-release (beta) MSI.</strong> Copy
+   <code>C:\ProgramData\SenHub</code> aside, uninstall the beta MSI once (Settings &gt;
+   Apps, or <code>msiexec /x</code>), then install the release: the uninstall
+   removes the configuration directory.</li>
+<li><strong>Zabbix users of a 0.6.0 pre-release.</strong> Re-run <code>zabbix setup</code>, then
+   relink the templates (<strong>Mass update &gt; Templates</strong>) on the hosts that
+   registered before; see
+   <a href="../../zabbix/#a-host-already-registered-keeps-the-templates-it-was-given">Zabbix</a>.</li>
+<li><strong>Interface queries.</strong> SNMP interface series move from the label
+   <code>interface_name</code> to <code>network_interface_name</code>; interface entities are
+   replaced once.</li>
+<li><strong>PRTG sensors.</strong> Recreate the sensors of the <code>process</code> and <code>swarm</code>
+    probes: <code>process</code> no longer sends its per-process channels to PRTG,
+    and <code>swarm</code> channels are renamed after the node, service or network
+    they describe. PRTG keeps the old channels without values until the
+    sensor is recreated. On any probe, channels that used to share a name
+    now carry a suffix that sets them apart, and appear as new channels.</li>
+<li><strong>OTLP receiver counters.</strong> Queries on the sending service of
+    <code>senhub_agent_otlp_receiver_received_total</code> use the label
+    <code>senhub_otlp_receiver_sender_service_name</code> instead of <code>service_name</code>.</li>
+</ol>
 <h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
@@ -4029,25 +4237,23 @@ collection gaps that comparison exposed.</p>
 <p>The two surfaces are now told apart. <code>admin_key</code> on the <code>http</code>
 output opens the administration one, and it alone; the agent key
 reads and stops there. The administration key carries the read
-privilege too, so one key is enough to use the console.</p>
+privilege too, so one key is enough to use the
+<a href="../../web-interface/">web console</a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:agent.admin_key}"</span>
 </code></pre></div>
-<p><strong>Without it the administration surface is not served at all</strong> — its
-routes are not registered and answer 404, rather than asking for a
-key nobody has. An installation that exists to feed PRTG or Nagios
-never needed that surface and no longer carries it; its pollers are
-untouched.</p>
-<p><strong>You do not have to do anything.</strong> An agent that starts without an
-administration key generates one and writes it into its <code>http</code>
-output, where the next sealing pass moves it into the operating
-system's store like every other secret. <code>senhub-agent console</code>
-resolves it, so the Windows desktop and Start Menu shortcuts keep
-opening the console exactly as before — they name the binary, never
-the key.</p>
+<p><strong>You do not have to do anything.</strong> When the <code>http</code> output has no
+<code>admin_key</code>, the agent generates one at its first start and writes it
+into that output, where the next sealing pass moves it into the
+operating system's store like every other secret. Only if that
+generation fails are the administration routes left unregistered:
+they answer 404 until a key is set by hand. Pollers reading with the
+agent key are untouched. <code>senhub-agent console</code> resolves the key, so
+the Windows desktop and Start Menu shortcuts keep opening the console
+as before: they name the binary, never the key.</p>
 <p>What does change: an address you <strong>bookmarked</strong> carries the old key
-and now answers 404. Open the console from the shortcut, or run
+and now answers 401 (Unauthorized). Open the console from the shortcut, or run
 <code>senhub-agent console --print</code>, and bookmark that instead. Likewise
 for anything scripted against the configuration API with the agent
 key.</p>
@@ -4055,11 +4261,33 @@ key.</p>
 <li>
 <p><strong><code>service.instance.id</code> is now an RFC 4122 UUID.</strong> The OpenTelemetry
   semantic conventions ask for a UUID; the agent now derives one (version
-  5) from its key. Each agent's <code>service.instance.id</code> therefore changes
-  once at upgrade: series keyed on it start new, and the agent's
-  <code>service.instance</code> entity in a topology backend is replaced by a new one
-  (the old one expires). Setting <code>resource.service.instance.id</code> on the
-  OTLP output still overrides it.</p>
+  5) from its key. Each agent's
+  <code>service.instance.id</code> therefore changes once at upgrade: series keyed
+  on it start new, and the agent's <code>service.instance</code> entity in a
+  topology backend is replaced by a new one (the old one expires).
+  Setting <code>resource.service.instance.id</code> on the OTLP output still
+  overrides it.</p>
+</li>
+<li>
+<p><strong>Interfaces are keyed on <code>network.interface.name</code>.</strong> The attribute
+  that names a network interface, and identifies the <code>network.interface</code>
+  entity with its device or host, follows the OpenTelemetry name:
+  <code>interface.name</code> becomes <code>network.interface.name</code> on the entities, on
+  the SNMP interface metrics and on the host network metrics (Prometheus
+  label <code>network_interface_name</code>, which the host series already used).
+  Every interface entity in a topology backend is replaced once, and SNMP
+  interface series change label. On Windows, the host network metrics now
+  carry the connection name (<code>Ethernet 2</code>) in <code>network.interface.name</code>,
+  where the adapter description sat before; the description stays in the
+  <code>interface</code> attribute.</p>
+</li>
+<li>
+<p><strong>MAC addresses take the OpenTelemetry form.</strong> The entity attributes
+  and identities that carry a MAC (SNMP and host interfaces, LLDP
+  neighbours, the <code>mac:</code> device identity) render it in uppercase with
+  hyphens, <code>BC-24-11-1B-04-82</code>, instead of <code>bc:24:11:1b:04:82</code>. Metric
+  labels are unchanged: the Redfish and Wi-Fi probes pass on the MAC as
+  the device reports it.</p>
 </li>
 <li>
 <p><strong>The <code>process</code> probe no longer reports every process by default.</strong>
@@ -4092,7 +4320,7 @@ over the processes sharing a name. The detail is identified by the
 process id, so a named program that restarts leaves the items of its
 former workers behind on a sink that creates what it is sent. That
 is what watching a process one by one means, and the filter is what
-bounds it — which is why an unfiltered view reports the roll-up
+bounds it, which is why an unfiltered view reports the roll-up
 alone. (#910)</p>
 </li>
 <li>
@@ -4100,7 +4328,7 @@ alone. (#910)</p>
   last acceptable value: a value equal to it is OK, where the agent
   alerted on it. A metric is read as a health state only when its
   definition names its values, where any name containing <code>status</code> or a
-  small integer was read that way — a count of two failed Veeam jobs
+  small integer was read that way: a count of two failed Veeam jobs
   read CRITICAL against a warning threshold of five. Review the
   thresholds you wrote against the old reading.</p>
 <p>The operator's <code>nagios.yaml</code> is now read from the directory that
@@ -4108,7 +4336,8 @@ holds the agent configuration (<code>/etc/senhub-agent/</code> on Linux,
 <code>C:\ProgramData\SenHub\</code> on Windows), with the former location as a
 fallback. A file with a misspelt key, a threshold that is not a
 number or an unknown aggregation is refused and reported, where it
-was silently replaced by the shipped checks.</p>
+was silently replaced by the shipped checks. See
+<a href="../../nagios/">Nagios</a>.</p>
 </li>
 <li>
 <p><strong>Three metric names change.</strong> The per-destination ActiveMQ counts are
@@ -4123,38 +4352,22 @@ was silently replaced by the shipped checks.</p>
 <li>
 <p><strong>A Veeam protected object is identified by its id.</strong> A machine
   protected by several jobs comes back once per job, and keyed on its
-  name one entry overwrote the others: on a real server, 66 of 200
+  name one entry overwrote the others: on one server, a third of the
   objects reported a sibling's figures. The series gain the object id,
   so discovered items are recreated once.</p>
 </li>
 </ul>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h3 id="zabbix-output">Zabbix output<a class="headerlink" href="#zabbix-output" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong><code>license activate</code> reads the token from standard input.</strong>
-  <code>senhub-agent license activate - &lt; license.jwt</code> keeps the token out of
-  the process list and the shell history, as <code>secret set</code> already does
-  for secrets. The argument still works.</li>
 <li>
-<p><strong>The container sends entities by default.</strong> An agent started from the
-  image exported measurements and logs but no entities, so a topology
-  backend such as Toise never saw the host, the agent or what it
-  watches. The output the image writes now enables them;
-  <code>SENHUB_ENTITIES=false</code> turns them off.</p>
-</li>
-<li>
-<p><strong>The agent shows its instance id.</strong> <code>senhub-agent key instance-id</code>,
-  <code>senhub-agent status</code> and the <strong>Agent</strong> card of the web console show
-  the <code>service.instance.id</code> the agent's telemetry and entity carry, so
-  it can be found in a metrics store or a topology graph.</p>
-</li>
-<li>
-<p><strong>The Zabbix output</strong>, as a native active agent. It connects out to
-  port 10051, registers the host through autoregistration, asks which
-  items the server wants and pushes their values. Low-level discovery
-  finds the probe instances and the values each host actually feeds,
-  the templates are generated from the same definitions the keys come
-  from, and an optional listener answers the server's polls on 10050 in
-  both wire dialects.</p>
+<p><strong>The <a href="../../zabbix/">Zabbix output</a></strong>, as a native active agent. It
+  connects out to port 10051, registers the host through
+  autoregistration, asks which items the server wants and pushes their
+  values. Low-level discovery finds the probe instances and the values
+  each host actually feeds, the templates are generated from the same
+  definitions the keys come from, and an optional listener answers the
+  server's polls on 10050 in both wire dialects.</p>
 </li>
 <li>
 <p><strong>One command prepares the server.</strong> <code>senhub-agent zabbix setup</code>
@@ -4164,6 +4377,16 @@ was silently replaced by the shipped checks.</p>
   It is an administrator command run once; a deployed agent never holds
   an API token. Every step is idempotent, which is also how a template
   is refreshed after an upgrade.</p>
+</li>
+<li>
+<p><strong>Zabbix 6.0, 7.0 and 8.0.</strong> Every generated template imports into 7.0
+  and 8.0, and autoregistration, discovery, inventory, the polled port
+  and the proxy group redirection are tested on a server of each.
+  <code>zabbix setup</code> reads the server's version first: before 6.4 it sends
+  the API token in the request body, the only place those versions read
+  it, and from 6.4 on in the <code>Authorization</code> header that 8.0 requires;
+  before 6.2 it exports the templates in the 6.0 format with the matching
+  import rules, without <code>--version</code>.</p>
 </li>
 <li>
 <p><strong>Proxies and proxy groups.</strong> Point <code>server</code> at a proxy and nothing
@@ -4207,13 +4430,6 @@ was silently replaced by the shipped checks.</p>
   set on both directions by itself. (#903)</p>
 </li>
 <li>
-<p><strong>Zabbix 7.0 and 8.0.</strong> Every generated template imports into both
-  lines, and autoregistration, discovery, inventory, the polled port and
-  the proxy group redirection are measured on a server of each. On 8.0
-  the API wants its token in a header; <code>zabbix setup</code> has always sent
-  it there.</p>
-</li>
-<li>
 <p><strong>The agent says what it is to the server</strong>: its version, its session
   and the revision of the item list it holds. The server shows it in the
   host's agent columns and resends the list only when it changed, where
@@ -4238,10 +4454,55 @@ was silently replaced by the shipped checks.</p>
   Warning problem from the codes its lookup classes as an error or a
   warning, the classification PRTG and Nagios already read; processor,
   memory and disk usage raise a Warning and a High problem past
-  thresholds held in macros a site overrides per host or per group. A
-  template linked to a host used to collect everything and alert on
-  nothing. Items and triggers carry the <code>component</code> and <code>scope</code> tags the
-  native templates use.</p>
+  thresholds held in macros a site overrides per host or per group.
+  Items and triggers carry the <code>component</code> and <code>scope</code> tags the native
+  templates use.</p>
+</li>
+<li>
+<p><strong>A utilization reads as a percentage in Zabbix.</strong> The templates
+  multiply the OTel fraction by 100 on the server side and show it in
+  <code>%</code>, as the native agent does. The agent still sends the fraction,
+  under the same key.</p>
+</li>
+<li>
+<p><strong>The agent answers for itself.</strong> <code>agent.ping</code>, <code>agent.version</code> and
+  <code>agent.hostname</code> are served on both rails and declared in a template
+  of their own, so a host monitored actively has the availability line
+  a native agent gives for free.</p>
+</li>
+<li>
+<p><strong>An application's own metrics reach Zabbix without anyone declaring
+  them.</strong> Zabbix speaks no OpenTelemetry, so an agent that speaks both
+  is the bridge between an instrumented application and a Zabbix
+  server. A template ships for the OpenTelemetry semantic conventions,
+  HTTP server, JVM and database client, generated from the same
+  definitions as every other template. A host carrying it discovers the
+  applications relaying through the agent and creates their items, keyed
+  on the sender's <code>service.name</code> and on the attributes the convention
+  defines. Nothing is rewritten on the way: the name, the unit and the
+  value stay the application's.</p>
+<p>A duration arrives as a distribution, and a sink holding one value
+per item cannot hold one, so it is sent as its count and its sum
+under keys that say which is which. A metric outside the shipped
+conventions keeps the shorter key its own name gives it. An
+application exporting part of a dimension set gets items only for
+what it sends. (#922, #940)</p>
+</li>
+</ul>
+<h3 id="opentelemetry-and-topology">OpenTelemetry and topology<a class="headerlink" href="#opentelemetry-and-topology" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>The <a href="../../container/">container</a> sends entities by default.</strong> An
+  agent started from the image exported measurements and logs but no
+  entities, so a topology backend never saw the host, the agent or what
+  it watches. The output the image writes now enables them;
+  <code>SENHUB_ENTITIES=false</code> turns them off.</p>
+</li>
+<li>
+<p><strong>The agent shows its instance id.</strong> <code>senhub-agent key instance-id</code>,
+  <code>senhub-agent status</code> and the <strong>Agent</strong> card of the web console show
+  the <code>service.instance.id</code> the agent's telemetry and entity carry, so
+  it can be found in a metrics store or a topology graph.</p>
 </li>
 <li>
 <p><strong>Logs and traces from this machine carry its host identity.</strong> An
@@ -4254,56 +4515,41 @@ was silently replaced by the shipped checks.</p>
   itself a relay. Two counters,
   <code>senhub.agent.otlp_receiver.received</code> and
   <code>.received.without_host_id</code>, by signal, origin and service, make the
-  join's coverage measurable. Agreed with the topology consumer.</p>
+  join's coverage measurable.</p>
 </li>
 <li>
-<p><strong>A utilization reads as a percentage in Zabbix.</strong> The templates
-  multiply the OTel fraction by 100 on the server side and show it in
-  <code>%</code>, as the native agent does, where an operator read <code>0.9531</code> for a
-  processor at 95 %. The agent still sends the fraction, under the same
-  key.</p>
+<p><strong><code>config check</code> says when an OTLP output will send no entity event.</strong>
+  Entities are off unless enabled, and a host missing from the topology
+  had nothing anywhere saying why. (#938)</p>
 </li>
+</ul>
+<h3 id="nagios">Nagios<a class="headerlink" href="#nagios" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>A Nagios command calls one check.</strong> <code>GET
+  /api/{key}/nagios/check/{name}</code> runs one configured check and answers
+  in plugin format, <code>STATUS - message | perfdata</code>, with 404 for a check
+  that is not configured. Before, configured checks were reachable only
+  as JSON for all of them at once, which needed a wrapper script. The
+  Nagios output has its own page, <a href="../../nagios/">Nagios</a>, tested against
+  Nagios Core.</li>
+</ul>
+<h3 id="probes">Probes<a class="headerlink" href="#probes" title="Permanent link">&para;</a></h3>
+<ul>
 <li>
-<p><strong>The agent answers for itself.</strong> <code>agent.ping</code>, <code>agent.version</code> and
-  <code>agent.hostname</code> are served on both rails and declared in a template
-  of their own, so a host monitored actively has the availability line
-  a native agent gives for free.</p>
-</li>
-<li>
-<p><strong>The counters a native Zabbix agent reports and we did not.</strong> On
-  Linux: interrupts and context switches per second, the processor
-  count, the runnable process count, the guest and guest nice modes,
-  page faults, and the kernel's ceilings on open file descriptors and on
-  processes, which is what the counted ones are measured against. On
-  Windows: context switches, idle time, the processor count, the
-  negotiated link speed and the page file size. On both: the speed and
-  the operational state of a network interface, and the number of open
-  login sessions. On Linux, the <code>os_updates</code> probe also reports how many
-  packages are installed, which is what its pending count is measured
-  against. (#909)</p>
-</li>
-<li>
-<p><strong>An application's own metrics reach Zabbix without anyone declaring
-  them.</strong> Zabbix speaks no OpenTelemetry, so an agent that speaks both
-  is the only bridge between an instrumented application and a Zabbix
-  server — and the bridge was half built: the values arrived, the server
-  asked for none of them. A template now ships for the OpenTelemetry
-  semantic conventions, HTTP server, JVM and database client, generated
-  from the same definitions as every other template. A host carrying it
-  discovers the applications relaying through the agent and creates
-  their items, keyed on the sender and on the attributes the convention
-  defines. Nothing is rewritten on the way: the name, the unit and the
-  value stay the application's.</p>
-<p>A duration arrives as a distribution, and a sink holding one value
-per item cannot hold one, so it is sent as its count and its sum
-under keys that say which is which. A metric outside the shipped
-conventions keeps the shorter key its own name gives it. An
-application exporting part of a dimension set gets items only for
-what it sends. (#922, #940)</p>
+<p><strong>Counters a native Zabbix agent reports.</strong> On Linux: interrupts and
+  context switches per second, the processor count, the runnable process
+  count, the guest and guest nice modes, page faults, and the kernel's
+  ceilings on open file descriptors and on processes, which is what the
+  counted ones are measured against. On Windows: context switches, idle
+  time, the processor count, the negotiated link speed and the page file
+  size. On both: the speed and the operational state of a network
+  interface, and the number of open login sessions. On Linux, the
+  <code>os_updates</code> probe also reports how many packages are installed, which
+  is what its pending count is measured against. (#909)</p>
 </li>
 <li>
 <p><strong>A new probe watches Azure Container Apps jobs.</strong> The existing probe
-  follows applications, which run continuously; a job is discrete — an
+  follows applications, which run continuously; a job is discrete: an
   execution starts, ends and leaves a verdict. <code>azure_container_app_jobs</code>
   reports whether the last run worked, how long it took, how long it has
   been since one succeeded, and publishes the console output of each
@@ -4322,34 +4568,9 @@ last status for ever.</p>
   only what the credential may read.</p>
 </li>
 <li>
-<p><strong>The Windows shortcuts no longer go through a script.</strong> They ran
-  <code>wscript.exe</code> on a VBScript launcher whose only job was to open the
-  console without showing a terminal — the agent being a console
-  program, a shortcut aimed at it leaves a command window in front of
-  the browser for as long as it waits for the service, up to fifteen
-  seconds on a fresh install.</p>
-<p>VBScript is a feature-on-demand since Windows 11 24H2 and Microsoft
-has announced its removal; a scripting host launching a signed
-binary is a pattern endpoint protection flags; and the script was
-the one piece of executable content in the package our signing chain
-did not cover. It is replaced by <code>senhub-console.exe</code>, a small
-launcher built for the Windows graphical subsystem, so no terminal
-is ever created — and signed with everything else.</p>
-<p>Nothing to do: the shortcuts are rewritten by the installer.</p>
-</li>
-<li>
-<p><strong>The image publication scans before it pushes</strong>, and the dependency
-  scan runs in the development chain, with the scanner a customer
-  registry runs. A published release is also checked for completeness
-  rather than assumed finished.</p>
-</li>
-<li>
-<p><strong>A Nagios command calls one check.</strong> <code>GET
-  /api/{key}/nagios/check/{name}</code> runs one configured check and answers
-  in plugin format, <code>STATUS - message | perfdata</code>, with 404 for a check
-  that is not configured. Before, configured checks were reachable only
-  as JSON for all of them at once, which needed a wrapper script. The
-  Nagios output has its own page, proven against a real Nagios Core.</p>
+<p><strong>The Veeam probe says which protected objects get no job status</strong>,
+  per platform, so a backup missing from the consolidated sensor can be
+  explained from the Veeam console.</p>
 </li>
 <li>
 <p><strong>Every probe page lists every metric.</strong> A generated reference gives
@@ -4357,102 +4578,271 @@ is ever created — and signed with everything else.</p>
   its description. 303 of the 1314 metrics the probes emit were named
   nowhere, and the 93 IBM i metrics without a description now have one.</p>
 </li>
+</ul>
+<h3 id="cli-console-and-packaging">CLI, console and packaging<a class="headerlink" href="#cli-console-and-packaging" title="Permanent link">&para;</a></h3>
+<ul>
 <li>
-<p><strong>The Veeam probe says which protected objects get no job status</strong>,
-  per platform, so a backup missing from the consolidated sensor can be
-  explained from the customer's own console.</p>
+<p><strong><code>license activate</code> reads the token from standard input.</strong>
+  <code>senhub-agent license activate - &lt; license.jwt</code> keeps the token out of
+  the process list and the shell history, as <code>secret set</code> already does
+  for secrets. The argument still works.</p>
 </li>
 <li>
-<p><strong><code>config check</code> says when an OTLP output will send no entity event.</strong>
-  Entities are off unless enabled, and a host missing from the topology
-  had nothing anywhere saying why. (#938)</p>
+<p><strong>The Windows console shortcuts no longer run a VBScript.</strong> They ran
+  <code>wscript.exe</code> on a VBScript launcher whose only job was to open the
+  console without showing a terminal: the agent being a console
+  program, a shortcut aimed at it leaves a command window in front of
+  the browser for as long as it waits for the service, up to fifteen
+  seconds on a fresh install. VBScript is a feature-on-demand since
+  Windows 11 24H2 and is being removed, and a scripting host launching a
+  signed binary is a pattern endpoint protection flags. The console
+  launcher no longer uses it: <code>senhub-console.exe</code>, a signed launcher
+  built for the Windows graphical subsystem, opens the console without
+  a terminal window.</p>
+<p>Nothing to do: the shortcuts are rewritten by the installer.</p>
 </li>
 <li>
-<p><strong>The systemd-creds secret store wires itself into the unit.</strong>
-  <code>install</code> and <code>refresh-unit</code> write the credentials drop-in from
-  <code>creds.d/</code>, or remove it when the store is empty; <code>secret migrate
-  --wire-unit</code> wires what it has just sealed; <code>uninstall</code> removes it.
-  <code>secret wire-unit</code> was a step an operator had to know about. Proven
-  under systemd 252, 255 and 257. (#605)</p>
+<p><strong>The systemd-creds <a href="../../secret-store/">secret store</a> wires itself
+  into the unit.</strong> <code>install</code> and <code>refresh-unit</code> write the credentials
+  drop-in from <code>creds.d/</code>, or remove it when the store is empty;
+  <code>secret migrate --wire-unit</code> wires what it has just sealed;
+  <code>uninstall</code> removes it. <code>secret wire-unit</code> was a step an operator had
+  to know about. Tested under systemd 252, 255 and 257. (#605)</p>
 </li>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>A change made with <code>sudo</code> no longer stops a non-root service.</strong>
+<li>
+<p><strong><code>prometheus_scrape</code> no longer warns on every exporter.</strong> A target
+  ending in <code>/metrics</code> was taken for the agent's own endpoint, which
+  flagged node_exporter and almost any exporter, the probe's ordinary
+  use. Only the agent's legacy path, or <code>/metrics</code> on this host's
+  default agent port, is warned about now.</p>
+</li>
+<li>
+<p><strong>A <a href="../../probes/cassandra/">Cassandra</a> node without traffic is no
+  longer reported down.</strong> On a node that has served no read or no write,
+  the latency mean has no value yet and Jolokia returns it empty; the
+  probe failed its whole collection on it and published <code>up = 0</code>. It
+  now leaves that one measurement out. It also read an <code>Errors</code> counter
+  that Cassandra does not have, which failed every collection on a real
+  node: the errors metric is now the sum of failures, timeouts and
+  unavailables.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/activemq/">ActiveMQ</a> probe reaches a current
+  broker.</strong> ActiveMQ Classic 5.16 and later refuse a Jolokia request that
+  carries no <code>Origin</code> header (HTTP 403), which is every request the probe
+  made, so the probe stayed down on a default install. It now names the
+  broker's own address as the origin. The per-queue and per-topic
+  metrics were never collected either: the probe listed destinations
+  with a Jolokia request every broker rejects, and now searches for them.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/wildfly/">WildFly</a> probe authenticates on a
+  default install.</strong> The management interface asks for HTTP Digest and
+  refuses Basic, the only scheme the probe sent: every collection ended
+  on HTTP 401. The probe now answers the Digest challenge, and keeps
+  working against an interface set to Basic.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/clickhouse/">ClickHouse</a> probe collects on a
+  default install.</strong> It read the Prometheus <code>/metrics</code> page on port 8123,
+  which ClickHouse does not serve there (HTTP 404; the Prometheus endpoint
+  is off unless configured on a port of its own), so the probe reported
+  every server down. It now reads the system tables over the HTTP
+  interface with the configured user. Three metrics named counters that
+  ClickHouse does not have and were never emitted: connections is now
+  the sum of the TCP, HTTP, MySQL and PostgreSQL connections, active
+  parts reads <code>PartsActive</code>, and written data reads the bytes written to
+  MergeTree parts.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/vsphere_ha/">vSphere HA</a> probe connects with the
+  documented address.</strong> Given a bare <code>https://vcenter</code> host, as in the
+  documentation, it sent its requests to the root of the server instead
+  of the <code>/sdk</code> endpoint, and vCenter answered 404 on every collection.
+  The <code>/sdk</code> path, and <code>https://</code> when no scheme is given, are now
+  supplied.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/redfish/">Redfish</a> probe reads standard power
+  supplies and storage.</strong> A supply described as the Redfish schema
+  defines it (<code>InputRanges</code> as a list) failed to parse, so a conformant
+  BMC produced no power-supply metric; the storage collection requested
+  a doubled <code>Systems/Systems/...</code> path and got 404 on every generic
+  system; and any supply whose name contained the letter "a" was tagged
+  <code>controller=A</code>. Metrics that the probe emits without a definition are
+  still missing from the Prometheus and OTLP outputs (#954).</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/ceph/">Ceph</a> probe reports OSDs, monitors and pools
+  as they are.</strong> It read fields that the Manager dashboard API does not
+  return: every cluster showed 0 OSDs up and 0 in, which an OSD-down
+  alert fires on, and 0 monitors, and the pool statistics were never
+  requested, so objects, stored data and operations stayed at 0.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/netscaler/">NetScaler</a> probe reports service group
+  traffic.</strong> It asked NITRO for all bindings and all member statistics
+  at once, which NITRO refuses: every service group published 0
+  requests, responses, throughput and connections whatever its traffic,
+  and service groups were never tagged with their vServer. Bindings and
+  member statistics are now read per object; a group whose members
+  cannot all be read leaves its traffic metrics out rather than
+  publishing a wrong sum. The service group state read the
+  administrative flag (<code>ENABLED</code>) and showed UNKNOWN on every group, and
+  the member counts were always 0: the state now comes from the group's
+  effective state (<code>PARTIAL-UP</code> included) and the counts from its
+  members.</p>
+</li>
+<li>
+<p><strong>An OTLP output that sends no entities says so.</strong> A strategy file
+  written without <code>signals.entities.enabled: true</code> sent metrics and logs
+  but no entity, and a topology backend stayed empty with nothing in the
+  agent log to explain it. The agent now logs a warning at start naming
+  the setting.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/process/">process</a> roll-up no longer churns on
+  Linux kernel workers.</strong> Kernel workqueue threads rename themselves as
+  they pick up work and live seconds, so each became its own roll-up
+  series and, on the Zabbix output, an item left without data; the same
+  thread even changed name under one process id, so per-process Zabbix
+  items churned too. They are now reported as <code>kworker</code>, in the roll-up
+  and in the per-process detail.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/hyperv/">Hyper-V</a> probe collects.</strong> Its two WMI
+  queries named properties the Hyper-V classes do not have
+  (<code>NumberOfProcessors</code> on <code>Msvm_ComputerSystem</code>, <code>CPUUsage</code> on
+  <code>Msvm_SummaryInformation</code>), and WMI rejects a whole query for one
+  unknown property: every collection failed with "Invalid query", on any
+  host. The probe now reads the processor count and load where Hyper-V
+  publishes them.</p>
+</li>
+<li>
+<p><strong>The <a href="../../probes/pulsar/">Pulsar</a> probe reads the broker totals.</strong>
+  It looked only for the per-namespace series, which a broker publishes
+  once topics exist: a current broker without topics reported <code>up</code> and
+  nothing else, and one with topics reported per namespace. It now reads
+  the broker-level <code>pulsar_broker_*</code> aggregates, and falls back to the
+  per-namespace series on a broker that does not publish them.</p>
+</li>
+<li>
+<p><strong>The OTLP receiver's own counters stay the agent's.</strong>
+  <code>senhub.agent.otlp_receiver.received</code> and <code>…received.without_host_id</code>
+  named the sending service <code>service.name</code>, which overrode the
+  resource's <code>service.name=senhub-agent</code> in the backend: the agent's own
+  counters read as metrics of the service it relayed. The sender is now
+  <code>senhub.otlp_receiver.sender.service.name</code> (Prometheus
+  <code>senhub_otlp_receiver_sender_service_name</code>).</p>
+</li>
+<li>
+<p><strong>PRTG no longer merges channels that share a name.</strong> PRTG keeps one
+  value per channel name, and several series could reach it under the
+  same name: a scraped exporter's labels, the CPUs of a Redfish system,
+  two containers of a pod. They collapsed into one channel and the other
+  values were lost. On both the pull endpoint and the push output, names
+  that collide now carry the tags that set them apart, for example
+  <code>Node CPU Seconds (cpu=0, mode=idle)</code>.</p>
+</li>
+<li>
+<p><strong>The process probe no longer piles up PRTG channels.</strong> Its
+  per-process channels carried the process id, and PRTG keeps every
+  channel it has seen: each program restart left one more dead channel
+  on the sensor (163 for 75 live on the recette bench). PRTG now gets the
+  per-name roll-up; the per-process detail stays on the other outputs.
+  A definition marks such a metric with <code>prtg_skip</code>.</p>
+</li>
+<li>
+<p><strong>A syslog probe has a PRTG channel.</strong> The probe relays messages as
+  events and published no metric, so its PRTG sensor found no channel
+  and stayed down. Like the file-tail and journal probes, it now reports
+  <code>senhub.syslog.records_emitted</code>, the count of messages it has relayed.</p>
+</li>
+<li>
+<p><strong>Swarm channels name their node, service and network.</strong> The Swarm
+  display names were bare ("Node Ready", "Service Replicas Running",
+  "Senhub Node_Role_State"), so every node or service of a cluster
+  reached PRTG and Zabbix under the same name. They now carry the node,
+  service or network they describe, for example
+  <code>Service web Replicas Running</code>. PRTG sensors on the Swarm probe get
+  these channels as new ones; the old, merged channels stop updating.</p>
+</li>
+<li>
+<p><strong>The systemd probe leaves login sessions out.</strong> Each user login
+  creates <code>run-user-UID.mount</code> and <code>user-runtime-dir@UID.service</code>, removed
+  at logout; in the default view they became series, and PRTG channels,
+  that died with the session. They are left out unless <code>units</code> names
+  them.</p>
+</li>
+<li>
+<p><strong>A change made with <code>sudo</code> no longer stops a non-root service.</strong>
   <code>sudo senhub-agent config set ...</code>, <code>secret set ...</code> and
-  <code>license activate</code> rewrote the file as root with mode 0600. The Linux service runs as
-  <code>senhub</code> and could no longer read it: the reload was refused, and the
-  next restart failed to start. A file written by root in the
-  configuration directory now takes the owner of that directory.</li>
-<li><strong>The install tells you which binary to call.</strong> The closing line of a
+  <code>license activate</code> rewrote the file as root with mode 0600. The Linux
+  service runs as <code>senhub</code> and could no longer read it: the reload was
+  refused, and the next restart failed to start. A file written by root
+  in the configuration directory now takes the owner of that directory.</p>
+</li>
+<li>
+<p><strong>The install tells you which binary to call.</strong> The closing line of a
   Linux install repeated the path you ran the installer from, often a
   download directory. It now names the installed
   <code>/usr/local/bin/senhub-agent</code>, by its full path: on the RHEL family
   <code>sudo</code> does not search <code>/usr/local/bin</code>, and <code>sudo senhub-agent</code> is
-  "command not found" there.</li>
-<li><strong><code>zabbix setup</code> works on Zabbix 6.0.</strong> It sent the API token only as
-  an <code>Authorization: Bearer</code> header, which Zabbix reads from 6.4 on, so
-  a 6.0 LTS server refused every call with "Not authorized". The token
-  now travels where the server reads it, and a 6.0 server gets the 6.0
-  export format and import rules without <code>--version</code>.</li>
-<li><strong>A failed DNS lookup names the resolver it asked.</strong> With <code>resolvers</code>
+  "command not found" there.</p>
+</li>
+<li>
+<p><strong>A failed DNS lookup names the resolver it asked.</strong> With <code>resolvers</code>
   set, the query went to the named resolver, but the error still named
   the system one (<code>lookup x on 127.0.0.53:53</code>), which sent operators to
-  the wrong server. It now names the resolver that was queried.</li>
-<li><strong>Zabbix links every template to a host that runs several database
-  probes.</strong> The PostgreSQL, MySQL, SQL Server and Oracle templates
-  declared the same prototype keys (<code>senhub.db.up[{#PROBE}]</code> and five
-  more), and Zabbix refuses a set of templates that share a key: a host
-  monitoring PostgreSQL and MySQL registered with no template at all,
-  processor and memory included. Prototype keys now carry a macro named
-  after the probe type; the keys the agent sends are unchanged. Re-run
-  <code>zabbix setup</code> to import the corrected templates, then link them to
-  the hosts that registered without them (Mass update &gt; Templates).</li>
-<li><strong>A monitored database is not dropped at the first entity cycle.</strong> A
-  probe records the agent's <code>monitors</code> link when it collects, and the
-  agent's instance id was published only when entity detection started,
-  after the first collections. The first cycle, and the first one after
-  enabling entities from the console, dropped every remote database and
-  service as having no relation. The id is now known before any probe
-  runs.</li>
-<li><strong>The Docker and Swarm probes speak the API version the engine
+  the wrong server. It now names the resolver that was queried.</p>
+</li>
+<li>
+<p><strong>The Docker and Swarm probes speak the API version the engine
   serves.</strong> They called the Engine API at a fixed version 1.43. Docker
   Engine 29 refuses anything below 1.44, so the Docker probe fell back
   to reading cgroups, without container names, network or restart
   counts, and reported the socket as unreachable; Engine 20.10, which
   serves up to 1.41, refused it too. The probes now read the range the
-  engine serves and pick a version inside it.</li>
-<li><strong>The console describes a Zabbix output.</strong> The Outputs page had no
-  summary for it and listed its parameter names instead, so the card
-  read "server" where it should name the server; its badge was cut to
-  "ZABBI". It now shows the server, the encryption, the push cadence and
-  the polled port.</li>
-<li><strong>A target that goes down stops showing its last values.</strong> A probe
+  engine serves and pick a version inside it.</p>
+</li>
+<li>
+<p><strong>A target that goes down stops showing its last values.</strong> A probe
   whose target is down keeps running and reports only that it is down.
   Its other values were still inside the window during which the agent
   presents a value as current, so OTLP exported them with fresh
   timestamps, Zabbix received them, and PRTG, Nagios and Prometheus
   served them, for up to about two and a half minutes. A run of a probe
   now retires the series it no longer reports. Zabbix keeps them in
-  discovery, so its items are not disabled for the length of an outage.</li>
-<li><strong>Nagios checks read the same way throughout.</strong> A metric the check
+  discovery, so its items are not disabled for the length of an outage.</p>
+</li>
+<li>
+<p><strong>Nagios checks read the same way throughout.</strong> A metric the check
   aggregates, such as the processor in <code>system_health</code>, answered
   <code>OK - OK: cpu_usage_total 2.50% (aggregated from 1 metrics)</code> beside
   metrics written <code>cpu_user: OK 0.10%</code>. It now reads
   <code>cpu_usage_total: OK 2.50%</code>, and names the aggregation only when it
-  combined several series: <code>(max of 4 series)</code>.</li>
-<li><strong>An output that starts after entity detection receives the entities
+  combined several series: <code>(max of 4 series)</code>.</p>
+</li>
+<li>
+<p><strong>An output that starts after entity detection receives the entities
   at once.</strong> The OTLP output subscribes to entity events when it starts,
   which can be just after detection's first cycle: at agent start, or
   when the output is enabled or changed from the console. It then missed
   that cycle and waited for the next re-emission, up to ten minutes by
   default, before learning of the host. A new subscriber now triggers a
-  cycle that sends it the whole current state.</li>
-<li><strong>The container reaches a collector that listens in plain text.</strong> Its
-  variables had no way to turn TLS off, so a collector without TLS, such
-  as a sidecar on <code>localhost:4317</code>, could only be reached by mounting a
-  whole configuration; the export failed on "first record does not look
-  like a TLS handshake". <code>SENHUB_OTLP_TLS=false</code> now does it.</li>
+  cycle that sends it the whole current state.</p>
+</li>
+<li>
+<p><strong>The <a href="../../container/">container</a> reaches a collector that listens in
+  plain text.</strong> Its variables had no way to turn TLS off, so a collector
+  without TLS, such as a sidecar on <code>localhost:4317</code>, could only be
+  reached by mounting a whole configuration; the export failed on "first
+  record does not look like a TLS handshake". <code>SENHUB_OTLP_TLS=false</code>
+  now does it.</p>
+</li>
 <li>
 <p><strong>The free tier is described as it is.</strong> Without a licence the agent
   logged "using free tier (cpu, memory, logicaldisk, network)", four
@@ -4462,17 +4852,9 @@ is ever created — and signed with everything else.</p>
 <li>
 <p><strong>No colour codes in container logs.</strong> Run in the foreground, as a
   container runs it, the agent wrote its log lines with terminal colour
-  codes, which reached <code>docker logs</code> and log collectors as <code>[90m</code> and
-  <code>[32mINF[0m</code>. Colour is now used only when standard error is a
+  codes, which reached <code>docker logs</code> and log collectors as <code>ESC[90m</code> and
+  <code>ESC[32mINFESC[0m</code>. Colour is now used only when standard error is a
   terminal.</p>
-</li>
-<li>
-<p><strong><code>status</code> and <code>--help</code> no longer print a console link that answers
-  401.</strong> Both built the console address on the agent key, which since
-  the administration key was introduced only reads metrics. They now
-  name <code>senhub-agent console</code>, which opens the console, rather than an
-  address carrying the administration key into output that is often
-  pasted into a ticket.</p>
 </li>
 <li>
 <p><strong><code>status</code> answers inside a container.</strong> It asked the service manager
@@ -4480,55 +4862,57 @@ is ever created — and signed with everything else.</p>
   <code>"rc-service" failed</code> and nothing else. It now says there is no
   service manager and asks the running agent, as it does on a host.</p>
 </li>
-<li><strong>A configuration the agent cannot use no longer stops the output it
+<li>
+<p><strong>A configuration the agent cannot use no longer stops the output it
   replaces.</strong> An edited output was stopped first and then rebuilt; when
   the new configuration was refused (a key file the service cannot read,
   a value out of range) the agent was left without that output until a
   restart. The new configuration is now checked first: refused, it is
   reported in the log and on the console while the output keeps running
-  as before, and it is applied at the next change once fixed.</li>
-<li><strong>A listener refused its port says what to do.</strong> Syslog on 514 or
+  as before, and it is applied at the next change once fixed.</p>
+</li>
+<li>
+<p><strong>A listener refused its port says what to do.</strong> Syslog on 514 or
   traps on 162, their standard ports, fail under the non-root Linux
   service with a bare "bind: permission denied". The error now adds that
   the port is below 1024 and names the two ways out: the
-  <code>CAP_NET_BIND_SERVICE</code> capability in a unit drop-in, or a port above</li>
-<li>The syslog guide no longer suggests <code>setcap</code>, which the service
-  unit ignores.</li>
-<li><strong>A listener keeps listening when its configuration changes.</strong> Editing
+  <code>CAP_NET_BIND_SERVICE</code> capability in a unit drop-in, or a port above</p>
+</li>
+<li>
+<p>The syslog guide no longer suggests <code>setcap</code>, which the service
+  unit ignores.</p>
+</li>
+<li>
+<p><strong>A listener keeps listening when its configuration changes.</strong> Editing
   a syslog, trap or OTLP receiver probe started the new instance while
   the old one still held the port: the new one failed with "address
   already in use", the old one was then stopped, and nothing listened
   until the retry two minutes later. The old instance is now stopped
-  first.</li>
-<li><strong><code>config check</code> accepts a working syslog probe.</strong> It demanded a
-  <code>listen_address</code> parameter the probe has never read, and reported an
-  error on a configuration that ran; the probe's own schema, which
-  <code>config check</code> also applies, is what describes it.</li>
-<li><strong>Storing a first secret with systemd-creds no longer locks out the
+  first.</p>
+</li>
+<li>
+<p><strong>Storing a first secret with systemd-creds no longer locks out the
   others.</strong> On a host whose secrets live in the age store, one
   <code>secret set</code> with the systemd-creds backend switched the whole host to
   it: every age secret, the agent key among them, answered "secret not
   found", and the next start failed. While both stores exist the agent
   now reads both, which also makes moving from one to the other possible
-  one secret at a time.</li>
-<li><strong><code>config check</code> judges required parameters by the probe's schema.</strong>
+  one secret at a time. See <a href="../../secret-store/">Secret store</a>.</p>
+</li>
+<li>
+<p><strong><code>config check</code> judges required parameters by the probe's schema.</strong>
   A hand-written table beside the schemas had gone stale: it demanded a
   <code>listen_address</code> syslog has never read, a <code>destination</code> for
   <code>ping_gateway</code>, which takes no parameter, and a <code>password</code> from a
   NetScaler probe configured with an API key, and reported working
-  configurations in error.</li>
-<li><strong>A syslog or OTLP receiver probe is no longer CRITICAL in Nagios.</strong>
+  configurations in error.</p>
+</li>
+<li>
+<p><strong>A syslog or OTLP receiver probe is no longer CRITICAL in Nagios.</strong>
   These probes relay records and hold no metric, and the probe summary
   answered "No metrics available", CRITICAL, for as long as they ran.
   It now reports the probe's own state: OK while it runs and receives,
-  CRITICAL with the cause when it fails.</li>
-<li>
-<p><strong>The console shows the agent key, not the administration key.</strong> Its
-  licence card and the Settings page labelled "Agent key" the key the
-  console was opened with, which is the administration key, and checked
-  licence binding against it: a licence bound to this agent was reported
-  as issued for another one, and copying "the agent key" handed out the
-  key that changes the configuration. Both now use the agent key.</p>
+  CRITICAL with the cause when it fails.</p>
 </li>
 <li>
 <p><strong>Enabling entities takes effect on save.</strong> The console applies an
@@ -4617,10 +5001,17 @@ is ever created — and signed with everything else.</p>
   place, and names the command that seals them.</p>
 </li>
 <li>
-<p><strong>A value from a probe that runs less often than the push is exported
-  as current between two runs.</strong> A gauge from a probe running every 30
-  minutes gave one sample per run, so an alert with a short lookback
-  resolved while the condition still held. (#890)</p>
+<p><strong>A probe that runs less often than the push or the cache retention
+  stays visible between two runs.</strong> On OTLP, a gauge from a probe
+  running every 30 minutes gave one sample per run, so an alert with a
+  short lookback resolved while the condition still held (#890). The
+  pull outputs dropped a value five minutes after it was produced, and
+  the PRTG path held that limit in its own code whatever
+  <code>cache.retention_minutes</code> said: an hourly probe such as <code>os_updates</code>,
+  or an <code>exec</code> check every thirty minutes, answered an empty PRTG sensor
+  most of the time, and the Web UI listed it with no metric. A value is
+  now exported as current, and served on PRTG, Nagios and Prometheus,
+  until its probe's next run is due.</p>
 </li>
 <li>
 <p><strong><code>senhub-agent update</code> no longer needs the archive and the binary in
@@ -4631,11 +5022,6 @@ is ever created — and signed with everything else.</p>
 <p><strong><code>config check</code> names the environment variable behind an empty
   credential</strong>, instead of pointing at a configuration that may be
   correct. (#892)</p>
-</li>
-<li>
-<p><strong><code>config check</code> accepts every output compiled into the build.</strong> It
-  read a fixed list, so a <code>zabbix</code> output was reported as unknown on a
-  build that carries it.</p>
 </li>
 <li>
 <p><strong>Every application of a Container Apps collector reaches the pull
@@ -4650,57 +5036,6 @@ host published one user profile class and dropped the others, a
 syslog collector published one sending machine's event count and
 dropped every other machine's, and a Redfish collector polling
 several service processors mixed their drives together. (#915)</p>
-</li>
-<li>
-<p><strong>A third of a freshly registered Zabbix host's items no longer stay
-  empty.</strong> Several metrics collapse onto one OTel name and differ by the
-  value of one attribute, and a platform feeds only part of such a
-  family. The agent now discovers which values it really sends, so only
-  those become items. (#898)</p>
-</li>
-<li>
-<p><strong>A metric a platform never produces is no longer declared on it.</strong>
-  A Linux host carried the processor's deferred procedure calls and the
-  peak of a page file it does not have. (#908)</p>
-</li>
-<li>
-<p><strong>A metric's own dimensions replace the probe's rather than extend
-  them.</strong> Merging them gave the Windows drive metrics a device and a
-  mount point they do not have, and combined with the rule that skips a
-  series carrying none of its labels it dropped every filesystem from a
-  Linux host.</p>
-</li>
-<li>
-<p><strong>Two applications relaying the same metric name through one agent no
-  longer share a Zabbix item.</strong> The OTLP receiver relays what
-  applications send under the names they chose, and the agent describes
-  none of those names, so the key carried the receiving probe alone.
-  Two services reporting <code>http.server.request.duration</code> built the same
-  key, and the second value overwrote the first on an item that went on
-  looking healthy. The key now carries the sender's <code>service.name</code>, and
-  a discovery rule offers the senders seen. Nothing was lost in
-  practice, because no template declares those keys and a Zabbix server
-  asks for nothing else — but an operator creating the item by hand
-  walked straight into it.</p>
-</li>
-<li>
-<p><strong>The two libraries a registry scanner reports are raised</strong>, and the
-  image's base moves to a supported Alpine. (#900)</p>
-</li>
-<li>
-<p><strong>Naming a probe in <code>zabbix setup</code> no longer unlinks the others.</strong>
-  <code>--probe</code> replaced the templates every machine runs instead of adding
-  to them, although the command's own message says they are linked as
-  well: an operator adding one commercial template silently unlinked the
-  processor, the memory, the network and the disks from the
-  autoregistration action, and every host registering afterwards came up
-  with none of them.</p>
-</li>
-<li>
-<p><strong>The documentation deploy refuses to run from a branch that
-  publishes no line.</strong> It chose the version line by asking whether the
-  branch was master and published everything else as the development
-  line, so a manual run from a release branch overwrote it. (#913)</p>
 </li>
 <li>
 <p><strong>The legacy PRTG POST endpoint no longer merges instances into one
@@ -4727,32 +5062,8 @@ several service processors mixed their drives together. (#915)</p>
 <p><strong>Every metric declares the dimensions it carries</strong>, instead of
   inheriting the probe's union. On swarm, kubernetes, netscaler and
   memcached a cluster counter claimed a container name, and Zabbix
-  refused the resulting discovery rule. The memory probe declares which of its
-  metrics exist only on Windows or only on Unix.</p>
-</li>
-<li>
-<p><strong>Every generated Zabbix template imports into a real server.</strong> Eleven
-  were refused: a display name with a slash or an ampersand, and the
-  6.0 export format.</p>
-</li>
-<li>
-<p><strong>A probe that runs less often than the Zabbix push stays visible
-  between two runs.</strong> The output forgot a value after three push
-  intervals, so an hourly probe such as <code>os_updates</code> reached the server
-  ninety seconds an hour: a host registered in between waited an hour
-  for its first value, and the probe's discovery vanished until the next
-  run. The value is now kept until its probe's next run is due, as the
-  OTLP output does since #890.</p>
-</li>
-<li>
-<p><strong>A probe that runs less often than every five minutes stays visible
-  on PRTG, Nagios and Prometheus between two runs.</strong> The pull outputs
-  dropped a value five minutes after it was produced, and the PRTG path
-  held that limit in its own code whatever <code>cache.retention_minutes</code>
-  said. An hourly probe such as <code>os_updates</code>, or an <code>exec</code> check every
-  thirty minutes, answered an empty PRTG sensor most of the time, and
-  the Web UI listed it with no metric. The value is now served until its
-  probe's next run is due.</p>
+  refused the resulting discovery rule. The memory probe declares which
+  of its metrics exist only on Windows or only on Unix.</p>
 </li>
 <li>
 <p><strong>Redfish hardware health reads as a state on every output.</strong> The
@@ -4766,30 +5077,21 @@ several service processors mixed their drives together. (#915)</p>
   lookup that does not exist. (#931)</p>
 </li>
 <li>
-<p><strong>A Zabbix instance no longer gets items for metrics it never
-  sends.</strong> A discovery rule created every item of its dimension set for
-  every instance, so a virtual network card whose kernel reports no
-  speed carried a speed item that stayed empty for ever. The agent now
-  lists, per instance, the metrics it feeds, and the templates only
-  create those. (#940)</p>
-</li>
-<li>
 <p><strong>A probe that cannot start is no longer absent in silence.</strong> It was
-  logged once at start and then vanished: left out of the probe total,
-  so the agent reported nine healthy probes out of nine while a tenth,
-  whose password had expired, collected nothing for eight days. It now
-  counts in the total and never as healthy, the Web UI shows it failing
-  with the reason, and the agent tries it again every two minutes, so a
-  credential fixed afterwards is picked up without a restart. The error
-  of a probe's first collection, which the scheduler swallowed, is
-  logged too. (#935)</p>
+  logged once at start and then left out of the probe total, so the
+  agent reported every probe healthy while one, for instance with an
+  expired password, collected nothing. It now counts in the total and
+  never as healthy, the Web UI shows it failing with the reason, and the
+  agent tries it again every two minutes, so a credential fixed
+  afterwards is picked up without a restart. The error of a probe's
+  first collection, which the scheduler swallowed, is logged too. (#935)</p>
 </li>
 <li>
-<p><strong>A copied example host identity is refused.</strong> A bench container ran
-  with <code>SENHUB_HOST_ID=01234567-89ab-cdef-0123-456789abcdef</code>, the shape
-  of a documentation example; every host given it merges into one on
-  the topology graph, silently. The container now refuses such a value
-  at start, judged on its shape (all zeros, a long ascending run) rather
+<p><strong>A copied example host identity is refused.</strong> A container given
+  <code>SENHUB_HOST_ID=01234567-89ab-cdef-0123-456789abcdef</code>, the shape of a
+  documentation example, merged on the topology graph with every other
+  host given it, silently. The container now refuses such a value at
+  start, judged on its shape (all zeros, a long ascending run) rather
   than against a list; the agent logs an error when the machine itself
   reports one; and a host whose identity came from <code>SENHUB_HOST_ID</code>
   carries <code>senhub.host.id.source=configuration</code>, so a collision can be
@@ -4853,6 +5155,17 @@ several service processors mixed their drives together. (#915)</p>
   changed nothing. What the console hides is now kept, by the same rule
   that hides it, and the preview of the file shows it. (#856)</p>
 </li>
+</ul>
+<h2 id="internal">Internal<a class="headerlink" href="#internal" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The image publication scans before it pushes, and the dependency scan
+  runs in the development chain, with the scanner used by common
+  container registries; the two libraries it reported are raised and the
+  image's base moves to a supported Alpine (#900). A published release is
+  also checked for completeness rather than assumed finished.</li>
+<li>The documentation deploy refuses to run from a branch that publishes
+  no line; a manual run from a release branch overwrote the development
+  line. (#913)</li>
 </ul>
 
 

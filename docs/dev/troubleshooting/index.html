@@ -4523,7 +4523,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">status</span>
 </code></pre></div></p>
 <p><strong>Linux:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>status
 </code></pre></div></p>
 <p>The status command displays:</p>
 <ul>
@@ -4536,7 +4536,7 @@
 </ul>
 <p>You can also check the service directly using system commands:</p>
 <p><strong>Windows:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">Get-Service</span> <span class="s2">"SenHub Agent"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">Get-Service</span> <span class="n">senhub-agent</span>
 </code></pre></div></p>
 <p><strong>Linux:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>senhub-agent
@@ -4549,7 +4549,7 @@
 <p>Expected response:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5.5"</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6.0"</span><span class="p">,</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">"uptime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2h30m15s"</span><span class="p">,</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">"probes_active"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
@@ -4563,7 +4563,7 @@
 <p>Response:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"running"</span><span class="p">,</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5.5"</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6.0"</span><span class="p">,</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">"arch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span><span class="p">,</span>
@@ -4685,13 +4685,14 @@ setting says.</p>
 </code></pre></div>
 <h2 id="enabling-debug-logging">Enabling Debug Logging<a class="headerlink" href="#enabling-debug-logging" title="Permanent link">&para;</a></h2>
 <h3 id="runtime-debug-no-restart-required">Runtime Debug (No Restart Required)<a class="headerlink" href="#runtime-debug-no-restart-required" title="Permanent link">&para;</a></h3>
-<p>You can enable debug logging for specific modules at runtime via the API. This is the recommended approach as it does not require restarting the service:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
+<p>You can enable debug logging for specific modules at runtime via the API. This is the recommended approach as it does not require restarting the service.</p>
+<p>The <code>debug/logs</code> and <code>admin/cache/clear</code> routes belong to the administration surface: they answer only the administration key, written <code>{admin-key}</code> below, and refuse the agent key PRTG or Nagios read with. The administration key is the segment after <code>/web/</code> in the address <code>sudo /usr/local/bin/senhub-agent console --print</code> prints (on Windows, <code>senhub-agent.exe console --print</code> from an elevated prompt).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [{"module": "probe.citrix", "level": "debug"}]}'</span>
 </code></pre></div>
 <p>You can enable debug for multiple modules at once:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="s1">    {"module": "probe.citrix", "level": "debug"},</span>
@@ -4700,7 +4701,7 @@ setting says.</p>
 <a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="s1">  ]}'</span>
 </code></pre></div>
 <p>To check current log levels for all modules:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/debug/logs
 </code></pre></div>
 <p>Response:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span>
@@ -4713,14 +4714,14 @@ setting says.</p>
 <a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="p">}</span>
 </code></pre></div></p>
 <p>To revert a module to normal logging:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [{"module": "probe.citrix", "level": "info"}]}'</span>
 </code></pre></div>
 <h3 id="available-debug-modules">Available Debug Modules<a class="headerlink" href="#available-debug-modules" title="Permanent link">&para;</a></h3>
 <p>The agent prints its own list, one line per probe type it carries plus the
 agent's own modules:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>senhub-agent<span class="w"> </span>debug-modules-list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>debug-modules-list
 </code></pre></div>
 <p>Use that rather than a list written here: the probe entries are read from
 the registry, so they follow the build you are running, and a Pro binary
@@ -4735,10 +4736,10 @@ look at the line itself.</p>
 <h3 id="console-debug-mode">Console Debug Mode<a class="headerlink" href="#console-debug-mode" title="Permanent link">&para;</a></h3>
 <p>For troubleshooting startup issues or when the API is not available, run the agent interactively in verbose mode:</p>
 <p><strong>All modules (verbose):</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
 </code></pre></div></p>
 <p><strong>Specific modules only:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.citrix,strategy.http
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.citrix,strategy.http
 </code></pre></div></p>
 <p>This runs the agent in the foreground (not as a service) and outputs detailed logs to the console. Press Ctrl+C to stop. This is useful for:</p>
 <ul>
@@ -4783,11 +4784,11 @@ look at the line itself.</p>
 </tbody>
 </table>
 <h3 id="configuration-changes-not-applied">Configuration Changes Not Applied<a class="headerlink" href="#configuration-changes-not-applied" title="Permanent link">&para;</a></h3>
-<p><strong>Symptom:</strong> Changes to <code>agent-config.yaml</code> are not reflected in agent behavior.</p>
+<p><strong>Symptom:</strong> Changes to the configuration (<code>agent.yaml</code>, <code>probes.d/</code>, <code>strategies.d/</code>) are not reflected in agent behavior.</p>
 <p><strong>Possible causes and solutions:</strong></p>
 <ul>
 <li><strong>YAML syntax error in the modified section</strong>: The agent keeps the previous valid configuration when it encounters a syntax error. Check logs for configuration reload errors.</li>
-<li><strong>Config file path mismatch</strong>: Verify the agent is monitoring the correct file. Check with <code>senhub-agent status</code> or logs.</li>
+<li><strong>Config file path mismatch</strong>: Verify the agent is monitoring the correct file. Check with <code>sudo /usr/local/bin/senhub-agent status</code> or logs.</li>
 <li><strong>File not saved</strong>: Ensure the editor saved the file (some editors use temporary files).</li>
 </ul>
 <p>The agent detects file changes automatically within a few seconds. No restart is required.</p>
@@ -4821,7 +4822,7 @@ look at the line itself.</p>
 <tr>
 <td>License restriction</td>
 <td>Logs show "license" or "unauthorized probe"</td>
-<td>Check license: <code>senhub-agent license show</code></td>
+<td>Check license: <code>sudo /usr/local/bin/senhub-agent license show</code></td>
 </tr>
 <tr>
 <td>Missing required params</td>
@@ -4836,7 +4837,7 @@ look at the line itself.</p>
 </tbody>
 </table>
 <p>Enable debug logging for the specific probe module to get detailed error information:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [{"module": "probe.citrix", "level": "debug"}]}'</span>
 </code></pre></div>
@@ -4844,10 +4845,10 @@ look at the line itself.</p>
 <p><strong>Symptom:</strong> <code>curl http://localhost:8080/health</code> returns "Connection refused" or times out.</p>
 <p><strong>Possible causes and solutions:</strong></p>
 <ul>
-<li><strong>Service not running</strong>: Check with <code>senhub-agent status</code> and start if needed</li>
+<li><strong>Service not running</strong>: Check with <code>sudo /usr/local/bin/senhub-agent status</code> and start if needed</li>
 <li><strong>Firewall blocking the port</strong>: See Firewall Configuration in the <a href="../http-https/">HTTP/HTTPS section</a></li>
-<li><strong>Agent bound to a different interface</strong>: Check <code>bind_address</code> in the storage config. If set to <code>127.0.0.1</code>, the API is only accessible from localhost</li>
-<li><strong>Different port configured</strong>: Check the <code>port</code> in the storage config section of <code>agent-config.yaml</code></li>
+<li><strong>Agent bound to a different interface</strong>: Check <code>bind_address</code> in the <code>http</code> output (<code>strategies.d/</code>). If set to <code>127.0.0.1</code>, the API is only accessible from localhost</li>
+<li><strong>Different port configured</strong>: Check the <code>port</code> of the <code>http</code> output in <code>strategies.d/</code>, or run <code>sudo /usr/local/bin/senhub-agent config show</code></li>
 <li><strong>HTTPS enabled</strong>: If HTTPS is enabled, use <code>https://</code> instead of <code>http://</code></li>
 </ul>
 <h3 id="tls-https-errors">TLS / HTTPS Errors<a class="headerlink" href="#tls-https-errors" title="Permanent link">&para;</a></h3>
@@ -4883,7 +4884,7 @@ look at the line itself.</p>
 <p><strong>Symptom:</strong> A probe type is rejected with a license error, or premium probes are not available.</p>
 <p><strong>Possible causes and solutions:</strong></p>
 <ul>
-<li><strong>No license activated</strong>: Check with <code>senhub-agent license show</code>. Without a license the agent runs every Free-tier probe — the whole universal collection tier (OS/host, logs, network checks, application, database and broker probes); only the Pro probes need a license. Each page of the <a href="../probes/">probe catalog</a> shows the tier badge.</li>
+<li><strong>No license activated</strong>: Check with <code>sudo /usr/local/bin/senhub-agent license show</code>. Without a license the agent runs every Free-tier probe — the whole universal collection tier (OS/host, logs, network checks, application, database and broker probes); only the Pro probes need a license. Each page of the <a href="../probes/">probe catalog</a> shows the tier badge.</li>
 <li><strong>License expired</strong>: Check the expiration date. There is a 7-day grace period after expiration. Contact support for renewal.</li>
 <li><strong>Probe not in license tier</strong>: Verify the probe type is included in your tier. See the License Tiers table in the <a href="../configuration/">Configuration section</a>.</li>
 </ul>
@@ -4922,18 +4923,19 @@ look at the line itself.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>curl<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
 </code></pre></div></p>
 <p>Clear the cache if needed:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/admin/cache/clear
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/admin/cache/clear
 </code></pre></div></p>
+<p>This route answers only the administration key (see <a href="#runtime-debug-no-restart-required">Runtime Debug</a>).</p>
 <h2 id="diagnostic-checklist">Diagnostic Checklist<a class="headerlink" href="#diagnostic-checklist" title="Permanent link">&para;</a></h2>
 <p>When troubleshooting, follow these steps in order:</p>
 <ol>
-<li><strong>Service running?</strong> <code>senhub-agent status</code></li>
+<li><strong>Service running?</strong> <code>sudo /usr/local/bin/senhub-agent status</code></li>
 <li><strong>Health OK?</strong> <code>curl http://localhost:8080/health</code></li>
 <li><strong>Probes active?</strong> <code>curl http://localhost:8080/api/{key}/info/probes</code></li>
 <li><strong>Errors in logs?</strong> Check the last 50 lines of the log file for errors</li>
-<li><strong>Configuration valid?</strong> Validate YAML syntax</li>
+<li><strong>Configuration valid?</strong> <code>sudo /usr/local/bin/senhub-agent config check</code></li>
 <li><strong>Network reachable?</strong> Test connectivity from the agent host to target systems</li>
-<li><strong>License active?</strong> <code>senhub-agent license show</code></li>
+<li><strong>License active?</strong> <code>sudo /usr/local/bin/senhub-agent license show</code></li>
 <li><strong>Enable debug</strong> for the relevant module and check detailed logs</li>
 </ol>
 <h2 id="getting-support">Getting Support<a class="headerlink" href="#getting-support" title="Permanent link">&para;</a></h2>
@@ -4944,8 +4946,8 @@ look at the line itself.</p>
 <li>Agent version (<code>senhub-agent version</code>)</li>
 <li>Operating system and version</li>
 <li>Relevant log entries (last 50 lines with errors)</li>
-<li>Your <code>agent-config.yaml</code> (with passwords removed)</li>
-<li>The output of <code>senhub-agent status</code></li>
+<li>The output of <code>sudo /usr/local/bin/senhub-agent config show</code>, which masks secret values</li>
+<li>The output of <code>sudo /usr/local/bin/senhub-agent status</code></li>
 </ul>
 
 

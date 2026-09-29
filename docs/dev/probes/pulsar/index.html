@@ -4177,7 +4177,7 @@ reporting broker health, throughput, storage and backlog at the broker level.</p
 <ul>
 <li>The Pulsar admin port (default 8080) and metrics endpoint are on the same port.</li>
 <li>For TLS-secured brokers, use <code>https://</code> as the endpoint prefix.</li>
-<li>The probe scrapes broker-level aggregates from <code>/metrics</code> (Prometheus text); per-topic and per-namespace metrics require additional per-endpoint scrapes and are not covered in this tier.</li>
+<li>The probe reads the broker-level aggregates from <code>/metrics</code> (the <code>pulsar_broker_*</code> series), which a broker publishes even before any topic exists. A broker too old to publish them is read through its per-namespace series instead, one per namespace. Per-topic series are not read.</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the

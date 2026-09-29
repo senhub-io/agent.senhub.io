@@ -4062,7 +4062,7 @@ or observability tool you already operate.</p>
 the systems you want to monitor. A YAML file declares which probes
 the agent should run and where the values should go (PRTG / Nagios
 HTTP endpoints, Prometheus <code>/metrics</code> scrape page, a native Zabbix
-agent, OTLP/gRPC push).
+agent, OTLP push over gRPC or HTTP).
 The agent starts collecting on its own schedule and stays out of
 the way — restartable, observable, and runnable in air-gapped
 environments where no callback to the SenHub backend is allowed.</p>
@@ -4076,8 +4076,8 @@ environments where no callback to the SenHub backend is allowed.</p>
   a shared in-memory cache. From there the agent serves PRTG /
   Nagios HTTP endpoints, exposes a Prometheus <code>/metrics</code> scrape
   page, acts as a native Zabbix active agent, and natively pushes
-  OTLP/gRPC metrics and logs to any OpenTelemetry receiver — collector, vmagent, Tempo, Grafana
-  Cloud OTLP. <strong>Metric names, units and attributes match across
+  OTLP metrics and logs, over gRPC or HTTP, to any OpenTelemetry receiver (collector, vmagent, Tempo, Grafana
+  Cloud OTLP). <strong>Metric names, units and attributes match across
   all sinks</strong>, so a query that works in Grafana today keeps working
   in your PRTG sensor template tomorrow.</li>
 <li><strong>Tiered licensing.</strong> The free tier ships the whole universal
@@ -4118,17 +4118,17 @@ environments where no callback to the SenHub backend is allowed.</p>
 <tbody>
 <tr>
 <td><code>/api/{key}/prtg/metrics/{probe}</code></td>
-<td>HTTPS, JSON</td>
+<td>HTTP(S), JSON</td>
 <td>Native PRTG sensor templates (Sensor URLs tab of the console)</td>
 </tr>
 <tr>
 <td><code>/api/{key}/nagios/metrics/{probe}</code></td>
-<td>HTTPS, text</td>
+<td>HTTP(S), text</td>
 <td>NRPE / Nagios performance line</td>
 </tr>
 <tr>
 <td><code>/api/{key}/prometheus/metrics</code></td>
-<td>HTTPS, text exposition</td>
+<td>HTTP(S), text exposition</td>
 <td>Prometheus / VictoriaMetrics scrape</td>
 </tr>
 <tr>
@@ -4137,13 +4137,15 @@ environments where no callback to the SenHub backend is allowed.</p>
 <td>Push to a Zabbix server or proxy on 10051, autoregistration and discovery</td>
 </tr>
 <tr>
-<td>OTLP gRPC client</td>
-<td>gRPC, mTLS</td>
+<td>OTLP client</td>
+<td>gRPC or HTTP, TLS or mTLS</td>
 <td>Push to OTel collector, vmagent, Tempo, Grafana Cloud OTLP</td>
 </tr>
 </tbody>
 </table>
-<p>All five read from the same in-memory metric cache so the data is
+<p>The three HTTP paths are served by the agent's <code>http</code> output, over HTTP on
+port 8080 by default, or HTTPS when TLS is enabled; <code>{key}</code> is the agent
+key. All five read from the same in-memory metric cache so the data is
 consistent regardless of which sinks you enable.</p>
 <h2 id="where-to-next">Where to next<a class="headerlink" href="#where-to-next" title="Permanent link">&para;</a></h2>
 <ul>

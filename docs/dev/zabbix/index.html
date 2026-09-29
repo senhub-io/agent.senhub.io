@@ -770,6 +770,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zabbix-setup-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix setup options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#autoregistration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4400,6 +4411,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zabbix-setup-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zabbix setup options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#autoregistration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4460,7 +4482,9 @@ and pushes their latest values in batches. Nothing listens on the agent
 side; PRTG, Nagios and Prometheus keep working next to it.</p>
 <p>It is proven against Zabbix 7.0 and 8.0 on a Linux and a Windows host:
 every generated template imports into both lines, and encryption works
-both ways with a certificate or a pre-shared key.</p>
+both ways with a certificate or a pre-shared key. Zabbix 6.0 LTS is
+supported too: <code>zabbix setup</code> was measured on 6.0.48 and adapts to it on
+its own (see <a href="#versions">Versions</a>).</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># strategies.d/20-zabbix.yaml</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">zabbix</span><span class="p">:</span>
@@ -4517,7 +4541,7 @@ both ways with a certificate or a pre-shared key.</p>
 <tr>
 <td><code>heartbeat_interval</code></td>
 <td><code>60s</code></td>
-<td>Heartbeat cadence; the server declares the host unavailable after twice that.</td>
+<td>Heartbeat cadence; the server declares the host unavailable after twice that. A server before 6.2 answers that it does not know the request; the agent then stops sending it. A heartbeat that fails because the connection failed is sent again at the next beat.</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
@@ -4557,7 +4581,7 @@ both ways with a certificate or a pre-shared key.</p>
 <tr>
 <td><code>passive.tls.enabled</code></td>
 <td><code>false</code></td>
-<td>Encrypt what the server polls. Needs <code>cert_file</code> and <code>key_file</code>.</td>
+<td>Encrypt what the server polls. Needs <code>cert_file</code> and <code>key_file</code>, or <code>psk_identity</code> and <code>psk_file</code>.</td>
 </tr>
 <tr>
 <td><code>passive.tls.cert_file</code>, <code>passive.tls.key_file</code></td>
@@ -4713,9 +4737,12 @@ Zabbix refuses to link two templates that declare the same key, and a
 plain <code>{#PROBE}</code> made the PostgreSQL and MySQL templates both declare
 <code>senhub.db.up[{#PROBE}]</code>. The key the agent sends is the same either
 way, <code>senhub.db.up[production-postgres]</code>; item names keep <code>{#PROBE}</code>. The agent serves these discovery keys like any other item, so
-a host gets its items within one discovery interval (1 hour by default,
-<code>--delay</code> does not change it; edit the rule in Zabbix if you want faster
-discovery on a lab). An enum metric with a lookup gets a value map.</p>
+a host gets its items within one discovery interval. The generated
+templates set the discovery rules to 1 hour, and <code>--delay</code> does not
+change it. <code>zabbix setup</code> sets the rules of the templates it imports to
+5 minutes, so a new host fills within minutes; <code>--discovery-delay</code>
+chooses another interval, and <code>--no-discovery-delay</code> leaves the rules at
+the template's hour. An enum metric with a lookup gets a value map.</p>
 <p>An instance only gets the items of the metrics it sends. Each discovery
 row carries <code>{#SENHUB.FED}</code>, the list of metrics that instance feeds,
 and the rule holds every prototype to it: a virtual network card whose
@@ -4892,14 +4919,29 @@ certificate says who they are.</p>
 <p>On the Zabbix side, set the host's "Connections to host" to
 <em>Certificate</em>. A certificate that cannot be read stops the agent at
 start rather than leaving a listener that serves in clear.</p>
-<p>Pre-shared keys are not available here either, for the reason given
-above.</p>
+<p>The polled port also takes a pre-shared key, in place of the
+certificate:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">zabbix</span><span class="p">:</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">psk_identity</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-paris"</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">psk_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix.psk</span>
+</code></pre></div>
+<p>On the Zabbix side, set "Connections to host" to <em>PSK</em> with the same
+identity and key. A block takes a certificate or a pre-shared key, not
+both, and a key file that cannot be read or does not hold at least 16
+bytes in hexadecimal stops the agent at start.</p>
+<p>To restrict who may poll, without encryption:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h2 id="the-hosts-inventory-fills-itself">The host's inventory fills itself<a class="headerlink" href="#the-hosts-inventory-fills-itself" title="Permanent link">&para;</a></h2>
 <p>Beside the measurements, the agent knows what the machine <em>is</em>: its
@@ -4990,13 +5032,13 @@ the host is monitored actively or polled on the passive port.</p>
 changes: the agent registers through it, the server attaches the host to
 the proxy that relayed the registration, and the values travel the same
 way.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
 </code></pre></div>
 <p>A <strong>proxy group</strong> needs every member listed, separated by commas, the way
 a classic agent takes several <code>ServerActive</code> entries:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
 </code></pre></div>
 <p>The agent talks to the first member that answers. When the host is held
 by another member, that member replies with a redirection and the agent
@@ -5059,12 +5101,14 @@ the command reads the server's version and adapts to both, so
 <p><strong>The API no longer accepts the session token in the request body.</strong>
 Where 7.0 took <code>"auth": "&lt;token&gt;"</code> inside the JSON-RPC envelope, 8.0
 answers <code>unexpected parameter "auth"</code> and wants an
-<code>Authorization: Bearer</code> header. <code>senhub-agent zabbix setup</code> has always
-sent the header, so it works on both lines without a flag; a script of
-your own that drives the API may need changing.</p>
+<code>Authorization: Bearer</code> header. <code>senhub-agent zabbix setup</code> reads the
+server's version first and sends the header to 6.4 and later, the
+<code>auth</code> field inside the request to older servers, so it works on every
+line without a flag; a script of your own that drives the API may need
+changing.</p>
 <p><strong>The proxy group redirection is unchanged.</strong> A host assigned to a group
 makes the server answer the check-list request with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"redirect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proxy:10051"</span><span class="p">}}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"redirect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proxy:10051"</span><span class="p">}}</span>
 </code></pre></div>
 <p>which is the same shape 7.0 emits, and the agent follows it to the
 member holding the host. Two conditions have to be met for a group to
@@ -5076,6 +5120,82 @@ once with <code>host ... is monitored by a proxy</code> and no redirect; the age
 logs it and the next request is redirected normally.</p>
 <p>The templates are exported in the 7.0 format and import into 8.0 as they
 are; <code>--version 8.0</code> is not needed and does not exist.</p>
+<h2 id="zabbix-setup-options"><code>zabbix setup</code> options<a class="headerlink" href="#zabbix-setup-options" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent zabbix setup --url &lt;frontend&gt; [--token-file &lt;path&gt;]
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>                          [--group &lt;name&gt;] [--metadata &lt;string&gt;]
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>                          [--action-name &lt;name&gt;] [--probe &lt;type&gt; ...]
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>                          [--discovery-delay &lt;interval&gt; | --no-discovery-delay]
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>                          [--prefix &lt;key prefix&gt;] [--version 6.0|7.0] [--dry-run]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--url</code></td>
+<td>required</td>
+<td>The Zabbix frontend, for example <code>https://zabbix.example.com</code>; <code>/api_jsonrpc.php</code> is appended</td>
+</tr>
+<tr>
+<td><code>--token-file</code>, <code>--token</code></td>
+<td></td>
+<td>API token. Read from <code>--token-file</code>, then <code>--token</code>, then the environment variable <code>SENHUB_ZABBIX_TOKEN</code>. Prefer a file: a token on the command line is visible to every process on the machine</td>
+</tr>
+<tr>
+<td><code>--group</code></td>
+<td><code>SenHub Agents</code></td>
+<td>Host group new hosts are put in</td>
+</tr>
+<tr>
+<td><code>--metadata</code></td>
+<td><code>senhub-agent</code></td>
+<td>Host metadata the autoregistration action matches; must match the output's <code>host_metadata</code></td>
+</tr>
+<tr>
+<td><code>--action-name</code></td>
+<td><code>Autoregistration — SenHub Agent</code></td>
+<td>Name of the autoregistration action</td>
+</tr>
+<tr>
+<td><code>--probe</code></td>
+<td>the probes every machine runs</td>
+<td>Also import and link the template of this probe type; repeat for several</td>
+</tr>
+<tr>
+<td><code>--discovery-delay</code></td>
+<td><code>5m</code></td>
+<td>Interval set on the discovery rules of the imported templates</td>
+</tr>
+<tr>
+<td><code>--no-discovery-delay</code></td>
+<td></td>
+<td>Leave the discovery rules at the template's interval (1 hour)</td>
+</tr>
+<tr>
+<td><code>--prefix</code></td>
+<td><code>senhub</code></td>
+<td>Key prefix; must match the output's <code>key_prefix</code></td>
+</tr>
+<tr>
+<td><code>--version</code></td>
+<td><code>7.0</code>, or <code>6.0</code> on a server before 6.2</td>
+<td>Template export format, <code>6.0</code> or <code>7.0</code></td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td></td>
+<td>Print what would be done without changing the server; without a token it describes the steps without reading the server</td>
+</tr>
+</tbody>
+</table>
+<p>Run it once, as a Zabbix administrator; a deployed agent never holds an
+API token. Every step is idempotent, so re-running it is safe and is
+how templates are refreshed after an upgrade.</p>
 <h2 id="autoregistration">Autoregistration<a class="headerlink" href="#autoregistration" title="Permanent link">&para;</a></h2>
 <p>Create an action under <strong>Alerts &gt; Actions &gt; Autoregistration actions</strong>
 with a condition on the host metadata (<code>contains senhub-agent</code>, or

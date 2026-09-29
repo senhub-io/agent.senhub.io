@@ -4172,14 +4172,20 @@ polling is the backbone of network monitoring and the agent ships
 it without a license key.</p>
 </div>
 <h1 id="snmp-poll-probe">SNMP Poll Probe<a class="headerlink" href="#snmp-poll-probe" title="Permanent link">&para;</a></h1>
-<p>The <code>snmp_poll</code> probe polls a network device over SNMPv2c and turns
-standard MIB objects into typed metrics: system uptime, per-interface
-traffic, errors, discards, speed and status. Custom OID mappings
-cover the vendor-specific long tail. An optional discovery mode
-crawls the network topology from seed devices (LLDP) and reports
-devices and links as entities.</p>
-<p>One probe instance polls one device; declare one instance per device
-(or use discovery to enumerate them).</p>
+<p>The <code>snmp_poll</code> probe polls a network device over SNMP v2c or v3 and
+turns standard MIB objects into typed metrics: system uptime,
+per-interface traffic, errors, discards, speed and status. Custom OID
+mappings cover the vendor-specific long tail.</p>
+<p>The probe also reads the LLDP neighbor table of each polled device and
+reports its links. A link is reported when the neighbor advertises a
+named port (LLDP port ID subtype interface name or locally assigned);
+a port known only by its MAC address is not linked.</p>
+<p>A discovery mode that crawls the network outward from seed devices is
+accepted in the configuration but not active yet
+(<a href="https://github.com/senhub-io/senhub-agent/issues/953">#953</a>): the
+<code>discovery</code> block is validated and ignored. The crawl profile is v2c
+only.</p>
+<p>One probe instance polls one device; declare one instance per device.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-snmp-poll.yaml — each file under probes.d/ is a YAML array of probes</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core-switch</span>
@@ -4195,7 +4201,7 @@ one series per interface (<code>if_index</code> tag).</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:349ba218b9a06eb7fbae5d46cfeaa6997fba0cb192d28e82d585e7881ee594fb -->
+<!-- sha256:adde5eb861b0941dfd012fb4747a317fe2492e3b9686227e2f76a82db71ec2c8 -->
 
 <table>
 <thead>
@@ -4337,7 +4343,7 @@ one series per interface (<code>if_index</code> tag).</p>
 <td><code>discovery</code></td>
 <td>No</td>
 <td>-</td>
-<td>Topology crawl from seed devices</td>
+<td>Topology crawl from seed devices. Not active yet (#953): the block is validated and ignored</td>
 </tr>
 <tr>
 <td><code>discovery.seeds</code></td>
@@ -4616,7 +4622,7 @@ beyond a startup warning. It is documented here because the
 configuration shape is final. Per-device topology (LLDP
 neighbors, routes, bridge tables of the polled <code>target</code>) is
 active and independent of this block. Tracking:
-<a href="https://github.com/senhub-io/senhub-agent/issues/156">#156</a>.</p>
+<a href="https://github.com/senhub-io/senhub-agent/issues/953">#953</a>.</p>
 </div>
 <p>When the crawl ships, a <code>discovery</code> block will make the probe crawl
 outward from seed devices using LLDP neighbor tables, bounded by
@@ -4733,7 +4739,7 @@ a probe failure — the agent keeps polling.</p>
   else goes through <code>custom_mappings</code>.</li>
 <li><strong>Two rails, two cadences.</strong> Metrics poll at <code>interval</code>; topology
   and entity sweeps run at the slower <code>topology_interval</code> so a dense
-  crawl never delays traffic counters.</li>
+  sweep never delays traffic counters.</li>
 <li><strong>Counters are raw.</strong> <code>in_octets</code> and friends are emitted as
   counters; compute rates in the backend
   (<code>rate(snmp_interface_in_octets[5m])</code> in VictoriaMetrics).</li>

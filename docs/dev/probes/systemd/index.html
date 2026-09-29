@@ -4142,8 +4142,14 @@ series per cycle.</p>
 </table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
+<li>Without <code>units</code>, the probe watches every loaded unit of the included
+  types, except the units systemd creates for each user login and removes
+  at logout (<code>run-user-*.mount</code>, <code>user@*.service</code>,
+  <code>user-runtime-dir@*.service</code>). Services started on demand (packagekit,
+  systemd-oomd) also leave systemd's list when they stop. With a PRTG
+  sensor, which keeps every channel it has seen, name the units to watch
+  in <code>units</code> so the channel list stays stable.</li>
 <li>The probe reads from the local system D-Bus socket. No special privileges are needed beyond D-Bus access, which is granted to root by default.</li>
-<li>Transient units (runtime-generated, without a unit file) are excluded.</li>
 <li>The <code>systemd.unit.type</code> tag carries the unit type suffix (service, socket, mount, timer, …).</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>

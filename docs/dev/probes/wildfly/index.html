@@ -4127,75 +4127,16 @@ metrics.</p>
 <!-- schema:params:end -->
 
 <h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.wildfly.up</code></td>
-<td>1</td>
-<td>1 when the Management API responded</td>
-</tr>
-<tr>
-<td><code>jvm.memory.heap.used</code></td>
-<td>By</td>
-<td>JVM heap memory currently used</td>
-</tr>
-<tr>
-<td><code>jvm.memory.heap.max</code></td>
-<td>By</td>
-<td>JVM maximum heap size</td>
-</tr>
-<tr>
-<td><code>jvm.gc.collections.count</code></td>
-<td>{collection}</td>
-<td>GC collections by collector, tagged with <code>collector</code></td>
-</tr>
-<tr>
-<td><code>wildfly.request.count</code></td>
-<td>{request}</td>
-<td>HTTP requests processed by Undertow</td>
-</tr>
-<tr>
-<td><code>wildfly.error.count</code></td>
-<td>{error}</td>
-<td>HTTP request errors</td>
-</tr>
-<tr>
-<td><code>wildfly.datasource.connections.active</code></td>
-<td>#</td>
-<td>In-use connections in the datasource pool</td>
-</tr>
-<tr>
-<td><code>wildfly.transaction.committed</code></td>
-<td>{transaction}</td>
-<td>JTA transactions committed</td>
-</tr>
-<tr>
-<td><code>wildfly.transaction.rolledback</code></td>
-<td>{transaction}</td>
-<td>JTA transactions rolled back</td>
-</tr>
-<tr>
-<td><code>wildfly.datasource.connections.active</code></td>
-<td>{connection}</td>
-<td>Active JDBC pool connections per datasource, tagged with <code>datasource</code></td>
-</tr>
-<tr>
-<td><code>wildfly.datasource.connections.available</code></td>
-<td>{connection}</td>
-<td>Available connections in the JDBC pool</td>
-</tr>
-</tbody>
-</table>
+<p>JVM heap (used, committed, max), Undertow request, error and byte
+counters, JTA committed and rolled-back transactions, and the active and
+available connections of each datasource pool. The full list is in the
+<a href="#metric-reference">metric reference</a> below.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Create a dedicated management user with the <code>Monitor</code> role: <code>bin/add-user.sh -u monitor -p password -g Monitor</code>.</li>
+<li>The management interface authenticates with HTTP Digest by default
+  (<code>ManagementRealm</code>); the probe answers the Digest challenge, and still
+  works with an interface configured for Basic.</li>
 <li>For WildFly domain mode, point the endpoint at the domain controller (port 9990).</li>
 <li>The probe uses the WildFly HTTP Management API (JSON over HTTP), not Jolokia — Jolokia is not required.</li>
 </ul>
