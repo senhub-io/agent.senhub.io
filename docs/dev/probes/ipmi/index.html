@@ -4289,14 +4289,14 @@ series' tags.</p>
 <td><code>hardware.power_supply.status</code></td>
 <td hardware.component="hardware.component">PSU Status</td>
 <td>#</td>
-<td>Power supply status: 1 = ok, 0 = fault or not available</td>
+<td>Power supply status: 1 = ok, 0 = fault. A supply the BMC has no reading for emits no value</td>
 </tr>
 <tr>
 <td><code>hw.status</code></td>
 <td><code>hardware.sensor.status</code></td>
 <td hardware.component="hardware.component">Sensor</td>
 <td>#</td>
-<td>Generic BMC sensor status: 1 = ok or non-critical, 0 = critical or non-recoverable</td>
+<td>Generic BMC sensor status: 1 = ok or non-critical, 0 = critical or non-recoverable. A sensor with no reading (ns) emits no value</td>
 </tr>
 <tr>
 <td><code>senhub.ipmi.up</code></td>
