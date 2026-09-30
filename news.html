@@ -222,11 +222,50 @@
 
     <div class="entry current">
       <div class="side">
+        <div class="ver">0.6.1</div>
+        <div class="date">2026-09-30</div>
+      </div>
+      <div class="body">
+        <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">Fixed</span></div>
+        <h2>Metric names and units follow the conventions</h2>
+        <p>
+          A corrective release, but one that renames series. <code>promtool check
+          metrics</code> flagged 0.6.0: some were exported in milliseconds,
+          microseconds, hours or bits per second, where both the Prometheus and the
+          OpenTelemetry rules ask for seconds and bytes.
+        </p>
+        <ul class="pts">
+          <li><b>Durations are now in seconds, throughputs in bytes per second</b>, and
+            a list of gauges loses its <code>.total</code> suffix. Dashboards, alerts
+            and recording rules on the old names need updating — the note carries the
+            full table.</li>
+          <li><b>Zabbix item keys follow the metric names.</b> Re-run
+            <code>zabbix setup</code> to refresh the templates; items under the old
+            keys stop receiving data and keep their history.</li>
+          <li><b>The Zabbix server is set at install time</b> — <code>ZABBIX_SERVER</code>
+            for the MSI, <code>--zabbix-server</code> for <code>config init</code>, an
+            environment variable for the container. A new host registers and fills in
+            by itself.</li>
+          <li><b>Topology.</b> A route is identified by its destination and its next
+            hop, interfaces carry their subnets and addresses, Windows hosts publish
+            their routes, and SNMP devices no longer flicker.</li>
+          <li><b>The console reports measured values.</b> Resident memory and CPU are
+            now the real figures, with the Go heap shown beside them.</li>
+          <li><b>Watch out on Linux:</b> <code>senhub-agent update</code> run <i>by
+            0.6.0</i> installs the new binary without restarting the service — finish
+            with <code>sudo systemctl restart senhub-agent</code>.</li>
+        </ul>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.1/">Full release note, with the renamed metrics table →</a></p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="side">
         <div class="ver">0.6.0</div>
         <div class="date">2026-09-29</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag now">Latest</span><span class="tag">New</span><span class="tag brk">Breaking</span></div>
+        <div class="tags"><span class="tag">New</span><span class="tag brk">Breaking</span></div>
         <h2>Native Zabbix, a separate administration key, and entities by default</h2>
         <p>
           The largest release so far. Read the upgrade list before you take it: ten
