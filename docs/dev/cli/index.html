@@ -4963,8 +4963,9 @@
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>otlp.example.com:4317
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--otlp-endpoint<span class="w"> </span>vm.example.com:4318<span class="w"> </span>--otlp-protocol<span class="w"> </span>http
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--http-port<span class="w"> </span><span class="m">9080</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license-file<span class="w"> </span>/tmp/customer.jwt
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license-dir<span class="w"> </span>/mnt/install
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--zabbix-server<span class="w"> </span>zabbix.example.com:10051
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license-file<span class="w"> </span>/tmp/customer.jwt
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--license-dir<span class="w"> </span>/mnt/install
 </code></pre></div>
 <p>Before writing anything, <code>config init</code> binds the HTTP port it is about to configure and releases it. A port already in use is refused with the reason and the command exits non-zero, so an unattended install fails visibly instead of leaving a service that runs and answers nothing.</p>
 <table>
@@ -4982,6 +4983,10 @@
 <tr>
 <td><code>--http-port PORT</code></td>
 <td>Port of the local HTTP endpoints, PRTG / Web UI / Nagios (default <code>8080</code>)</td>
+</tr>
+<tr>
+<td><code>--http-bind ADDRESS</code></td>
+<td>Address the HTTP endpoints listen on (default <code>127.0.0.1</code>; the container image passes <code>0.0.0.0</code>)</td>
 </tr>
 <tr>
 <td><code>--license JWT</code></td>
@@ -5006,6 +5011,14 @@
 <tr>
 <td><code>--otlp-protocol grpc\|http</code></td>
 <td>OTLP transport (default <code>grpc</code>; use <code>http</code> for a native VictoriaMetrics / Grafana Alloy OTLP/HTTP endpoint)</td>
+</tr>
+<tr>
+<td><code>--zabbix-server HOST:PORT</code></td>
+<td>Provision the Zabbix output (<code>strategies.d/20-zabbix.yaml</code>); several addresses separated by commas name a proxy group. With a server prepared by <code>zabbix setup</code>, the host registers at its first contact</td>
+</tr>
+<tr>
+<td><code>--zabbix-host-metadata TEXT</code></td>
+<td>Host metadata the autoregistration action matches (default <code>senhub-agent</code>); needs <code>--zabbix-server</code></td>
 </tr>
 </tbody>
 </table>
@@ -5168,7 +5181,7 @@
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--dry-run
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--registry-url<span class="w"> </span>https://releases.example.com
 </code></pre></div>
-<p>Downloads and installs the specified version. Restart the service to apply. Updating replaces the binary and needs the same privileges as the service commands.</p>
+<p>Downloads and installs the specified version. On Linux, when the systemd service is running, it is then restarted and the command checks that the new process runs the binary just installed, printing the version it runs; if it does not, the command fails. Updating replaces the binary and needs the same privileges as the service commands. On Windows, the MSI restarts the service itself.</p>
 <table>
 <thead>
 <tr>
@@ -5184,6 +5197,10 @@
 <tr>
 <td><code>--registry-url URL</code></td>
 <td>Release registry to download from, instead of the built-in one</td>
+</tr>
+<tr>
+<td><code>--no-restart</code></td>
+<td>Install the binary and leave the running service as it is, for a script that restarts it itself. Until the service restarts it keeps running the previous version, whatever <code>senhub-agent version</code> says: that command reads the file on disk</td>
 </tr>
 <tr>
 <td><code>--verbose</code>, <code>-v</code></td>

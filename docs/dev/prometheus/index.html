@@ -4437,8 +4437,9 @@ The native <a href="../otlp/">OTLP push exporter</a> produces the <strong>same</
 without any query rewrite.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Enable the <code>prometheus</code> endpoint of the HTTP output, in
-   <code>strategies.d/00-http.yaml</code>:</li>
+<li>The <code>prometheus</code> endpoint is on in a configuration written by an
+   installer from 0.6.1. An older configuration keeps the list it was
+   written with: add <code>prometheus</code> to it, in <code>strategies.d/00-http.yaml</code>:</li>
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">http</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"0.0.0.0"</span>

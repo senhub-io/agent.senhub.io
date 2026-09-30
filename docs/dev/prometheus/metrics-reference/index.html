@@ -5989,12 +5989,14 @@ possible <code>hw_state</code>, value <code>1</code> if active else <code>0</cod
 <tr>
 <td><code>senhub_hw_status</code></td>
 <td><code>power_supply</code>, <code>physical_disk</code>, <code>logical_disk</code>, <code>disk_controller</code>, <code>enclosure</code></td>
-<td><code>ok</code>, <code>degraded</code>, <code>failed</code>, <code>predicted_failure</code>, <code>unknown</code></td>
+<td><code>ok</code>, <code>degraded</code>, <code>failed</code>, <code>predicted_failure</code></td>
 </tr>
 </tbody>
 </table>
 <p>Drive failure prediction is encoded as <code>hw_state="predicted_failure"</code> on
-the same metric (independent of overall health).</p>
+the same metric (independent of overall health). A component whose health
+the BMC does not report has every state at <code>0</code>: the convention defines no
+<code>unknown</code> state. An IPMI sensor emits the <code>ok</code> series only.</p>
 <h3 id="drives-volumes-pools-capacity-io">Drives, volumes, pools (capacity &amp; I/O)<a class="headerlink" href="#drives-volumes-pools-capacity-io" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -6149,7 +6151,7 @@ the same metric (independent of overall health).</p>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_veeam_jobs_total</code></td>
+<td><code>senhub_veeam_job_count</code></td>
 <td>gauge</td>
 <td><code>senhub_veeam_job_type</code></td>
 </tr>
@@ -6304,7 +6306,7 @@ the same metric (independent of overall health).</p>
 <td connected_="connected," disconnected="disconnected"><code>senhub_citrix_session_state</code> ∈</td>
 </tr>
 <tr>
-<td><code>senhub_citrix_machines_total</code></td>
+<td><code>senhub_citrix_machine_count</code></td>
 <td>gauge</td>
 <td>–</td>
 </tr>
@@ -6403,7 +6405,7 @@ the same metric (independent of overall health).</p>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_citrix_connection_failures_total</code></td>
+<td><code>senhub_citrix_connection_failure_count</code></td>
 <td>gauge</td>
 <td>–</td>
 </tr>

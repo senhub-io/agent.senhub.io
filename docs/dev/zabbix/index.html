@@ -542,6 +542,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#deploying" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploying
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4211,6 +4222,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#deploying" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploying
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4513,6 +4535,41 @@ every generated template imports into both lines, and encryption works
 both ways with a certificate or a pre-shared key. Zabbix 6.0 LTS is
 supported too: <code>zabbix setup</code> was measured on 6.0.48 and adapts to it on
 its own (see <a href="#versions">Versions</a>).</p>
+<h2 id="deploying">Deploying<a class="headerlink" href="#deploying" title="Permanent link">&para;</a></h2>
+<p>Prepare the Zabbix server once with <a href="#zabbix-setup-options"><code>zabbix setup</code></a>:
+it imports the templates and creates the autoregistration actions. Then
+give every agent the server's address when you install it; nothing else
+is set, on the agent or in the Zabbix interface:</p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>msiexec /i senhub-agent-&lt;version&gt;-amd64.msi /qn ZABBIX_SERVER=zabbix.example.com:10051</code></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>after <code>install</code>: <code>sudo /usr/local/bin/senhub-agent config init --zabbix-server zabbix.example.com:10051</code></td>
+</tr>
+<tr>
+<td>Container</td>
+<td><code>SENHUB_ZABBIX_SERVER=zabbix.example.com:10051</code></td>
+</tr>
+</tbody>
+</table>
+<p>The agent asks the server for its items; the server does not know the
+host and runs its autoregistration action, which creates it, puts it in
+the SenHub group and links the templates of its platform. Discovery then
+creates the items: on a Zabbix 8.0 server prepared by <code>zabbix setup</code>, a
+new host appeared within a minute and had its items within five, with no
+step on the Zabbix side. A machine already configured gets the output
+the same way: <code>config init</code> adds the Zabbix file to an existing
+configuration and the running agent picks it up.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># strategies.d/20-zabbix.yaml</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">zabbix</span><span class="p">:</span>
