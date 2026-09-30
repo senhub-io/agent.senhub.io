@@ -4311,10 +4311,28 @@ present (see <a href="#bringing-your-own-configuration">Bringing your own config
 <td>Tags on every metric, as <code>key=value,key2=value2</code></td>
 </tr>
 <tr>
+<td><code>SENHUB_ZABBIX_SERVER</code></td>
+<td>No</td>
+<td>-</td>
+<td>Zabbix server or proxy, <code>host:port</code>: writes the Zabbix output, and the container registers in Zabbix at its first contact</td>
+</tr>
+<tr>
+<td><code>SENHUB_ZABBIX_HOST_METADATA</code></td>
+<td>No</td>
+<td><code>senhub-agent</code></td>
+<td>Host metadata the Zabbix autoregistration action matches</td>
+</tr>
+<tr>
 <td><code>SENHUB_HTTP_PORT</code></td>
 <td>No</td>
 <td><code>8080</code></td>
 <td>Port of the console and of the PRTG, Nagios and Prometheus endpoints</td>
+</tr>
+<tr>
+<td><code>SENHUB_HTTP_BIND</code></td>
+<td>No</td>
+<td><code>0.0.0.0</code></td>
+<td>Address the console and the PRTG, Nagios and Prometheus endpoints listen on. The container's own loopback is reachable by no one, so the image listens on every address and relies on the container network; <code>127.0.0.1</code> keeps them inside the container</td>
 </tr>
 <tr>
 <td><code>SENHUB_CONFIG_DIR</code></td>

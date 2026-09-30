@@ -4261,6 +4261,14 @@ Breaking Changes or Fixes below.</p>
     Give the file back before or after upgrading:
     <code>sudo chown senhub:senhub /etc/senhub-agent/secrets.age</code>. From 0.6.0,
     files written with sudo keep the owner of their directory.</li>
+<li><strong>Hosts upgrading from 0.5.3 or earlier.</strong> Since 0.5.4, state and
+    up/down series reach Prometheus without the <code>_ratio</code> suffix the OTel
+    naming rule used to append: <code>senhub_nginx_up_ratio</code> became
+    <code>senhub_nginx_up</code>, and likewise the other <code>*_up</code> series (php-fpm,
+    memcached, databases, DNS, TCP dial, HTTP check), <code>systemd_unit_*_state</code>,
+    <code>senhub_os_updates_*</code>, <code>senhub_exec_timeout</code> and
+    <code>senhub_agent_otlp_active_endpoint_index</code>. A rule written against the
+    <code>_ratio</code> name stops matching without any error: update it.</li>
 </ol>
 <h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
 <ul>
