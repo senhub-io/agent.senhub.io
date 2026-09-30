@@ -4112,8 +4112,10 @@ Breaking Changes, Features or Fixes below.</p>
    Compare the number of series an alert reads before and after the
    upgrade. Convert the threshold as well: on a fleet that mixes both
    versions, bring both forms to one unit before comparing, for instance
-   <code>min by (instance, httpcheck_target) (senhub_httpcheck_tls_expiry_seconds / 86400
-   or senhub_httpcheck_tls_expiry_days) &lt; 14</code>.</li>
+   <code>min by (httpcheck_target) (senhub_httpcheck_tls_expiry_seconds / 86400
+   or senhub_httpcheck_tls_expiry_days) &lt; 14</code>. The aggregation matters:
+   for a few minutes after the restart both forms are still current, and
+   without it each target would fire twice.</li>
 <li><strong>Zabbix.</strong> Item keys follow the metric names: re-run <code>zabbix setup</code>
    to refresh the templates. Items under the old keys stop receiving data
    and keep their history.</li>
