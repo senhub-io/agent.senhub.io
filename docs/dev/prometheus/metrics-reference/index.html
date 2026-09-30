@@ -5083,7 +5083,7 @@ the OTLP receiver counters once that probe has received traffic.</p>
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_agent_probes_total</code></td>
+<td><code>senhub_agent_probe_count</code></td>
 <td>gauge</td>
 <td>Configured probes currently running</td>
 <td>–</td>
@@ -5842,9 +5842,9 @@ backend (<code>rate(...[5m])</code>).</p>
 <td><code>snmp_target</code>, <code>network_interface_index</code></td>
 </tr>
 <tr>
-<td><code>senhub_snmp_interface_speed_bits_per_second</code></td>
+<td><code>senhub_snmp_interface_speed_bytes_per_second</code></td>
 <td>gauge</td>
-<td>bit/s</td>
+<td>By/s</td>
 <td><code>snmp_target</code>, <code>network_interface_index</code></td>
 </tr>
 <tr>
@@ -6075,10 +6075,10 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td><code>disk_io_direction</code></td>
 </tr>
 <tr>
-<td><code>senhub_hardware_physical_disk_link_speed_bits_per_second</code></td>
+<td><code>senhub_hardware_physical_disk_link_speed_bytes_per_second</code></td>
 <td>gauge</td>
-<td>bit/s</td>
-<td>per drive (Gbps × 1e9)</td>
+<td>By/s</td>
+<td>per drive (Gbps × 1e9 / 8)</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_physical_disk_block_size_bytes</code></td>
@@ -6230,8 +6230,8 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td expired_="expired," invalid="invalid" valid_="valid,">expand: <code>senhub_veeam_license_state</code> ∈</td>
 </tr>
 <tr>
-<td><code>senhub_veeam_license_days_remaining</code></td>
-<td>gauge</td>
+<td><code>senhub_veeam_license_expiry_seconds</code></td>
+<td>gauge (s)</td>
 <td>–</td>
 </tr>
 <tr>
@@ -6321,7 +6321,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_citrix_machines_multi_session_fault_total</code></td>
+<td><code>senhub_citrix_machine_multi_session_fault_count</code></td>
 <td>gauge</td>
 <td>–</td>
 </tr>
@@ -6520,10 +6520,10 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_netscaler_system_network_throughput_bits_per_second</code></td>
+<td><code>senhub_netscaler_system_network_throughput_bytes_per_second</code></td>
 <td>gauge</td>
-<td>bit/s</td>
-<td><code>network_io_direction</code> (Mbps × 1e6)</td>
+<td>By/s</td>
+<td><code>network_io_direction</code> (Mbps × 1e6 / 8)</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_system_http_messages_rate_per_second</code></td>
@@ -6538,9 +6538,9 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 <td client_="client," server="server"><code>senhub_netscaler_tcp_side</code> ∈</td>
 </tr>
 <tr>
-<td><code>senhub_netscaler_ns_throughput_bits_per_second</code></td>
+<td><code>senhub_netscaler_ns_throughput_bytes_per_second</code></td>
 <td>gauge</td>
-<td>bit/s</td>
+<td>By/s</td>
 <td http="http" total_="total,"><code>senhub_netscaler_traffic_type</code> ∈</td>
 </tr>
 <tr>
