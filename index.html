@@ -395,7 +395,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Open source · 0.6.0</div>
+    <div class="eyebrow">Open source · 0.6.1</div>
     <h1>OpenTelemetry-native agent for <em>hosts and infrastructure</em>.</h1>
     <p class="lede">
       Free and Apache-2.0. Collects host, network, container and vendor metrics
@@ -520,13 +520,14 @@
 
 <section class="band">
   <div class="wrap">
-    <div class="badge">New in 0.6.0</div>
+    <div class="badge">Since 0.6.0</div>
     <h2>Zabbix support</h2>
     <p>
-      New in 0.6.0. The agent speaks the Zabbix protocol in both directions, and
+      The agent speaks the Zabbix protocol in both directions, and
       <strong>generates the Zabbix templates from its own probe definitions</strong>
       — the part a third-party agent normally leaves you to model by hand in the
-      front end.
+      front end. Give it the server address at install time and a new host registers
+      and fills in on its own.
     </p>
     <div class="zx">
       <div class="card">
@@ -646,19 +647,22 @@
     </p>
     <div class="news">
       <div class="item now">
-        <div class="ver">0.6.0<small>current</small></div>
+        <div class="ver">0.6.1<small>current</small></div>
+        <div>
+          <h3>Metric names and units follow the conventions</h3>
+          <p>Durations in seconds, throughputs in bytes per second, gauges without
+             their <code>.total</code> suffix. <b>Dashboards, alerts and Zabbix
+             templates on the old names need updating.</b> The Zabbix server can now
+             be set at install time.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ver">0.6.0</div>
         <div>
           <h3>Native Zabbix, both directions</h3>
           <p>Active and passive, encrypted with PSK or a certificate, templates
              generated from the probe definitions, and a <code>zabbix setup</code>
              command that prepares the server. Verified on 7.0 and 8.0.</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ver">0.5.6</div>
-        <div>
-          <h3>Container image fixes</h3>
-          <p>Corrections to the official image published the release before.</p>
         </div>
       </div>
       <div class="item">
