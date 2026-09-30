@@ -4087,34 +4087,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    0.6.1
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../whats-new/0.6.0/" class="md-nav__link">
         
   
@@ -5867,10 +5839,6 @@ The probe uses automatic format detection (RFC 3164/5424):</p>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>Example:
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>&lt;13&gt;Oct 13 14:23:45 server01 sshd[1234]: Connection from 192.168.1.100
 </code></pre></div>
-<p>The RFC 3164 timestamp carries no time zone. The probe reads it in the
-agent host's zone, which is right when the senders and the agent share one;
-a sender set to another zone arrives shifted by the difference. RFC 5424
-timestamps carry their offset and are kept as sent.</p>
 <h3 id="rfc-5424-ietf-syslog">RFC 5424 (IETF Syslog)<a class="headerlink" href="#rfc-5424-ietf-syslog" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>&lt;PRI&gt;VERSION TIMESTAMP HOSTNAME APP-NAME PROCID MSGID [STRUCTURED-DATA] MESSAGE
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>

@@ -4004,34 +4004,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    0.6.1
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../whats-new/0.6.0/" class="md-nav__link">
         
   
@@ -5111,7 +5083,7 @@ the OTLP receiver counters once that probe has received traffic.</p>
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_agent_probe_count</code></td>
+<td><code>senhub_agent_probes_total</code></td>
 <td>gauge</td>
 <td>Configured probes currently running</td>
 <td>–</td>
@@ -5870,9 +5842,9 @@ backend (<code>rate(...[5m])</code>).</p>
 <td><code>snmp_target</code>, <code>network_interface_index</code></td>
 </tr>
 <tr>
-<td><code>senhub_snmp_interface_speed_bytes_per_second</code></td>
+<td><code>senhub_snmp_interface_speed_bits_per_second</code></td>
 <td>gauge</td>
-<td>By/s</td>
+<td>bit/s</td>
 <td><code>snmp_target</code>, <code>network_interface_index</code></td>
 </tr>
 <tr>
@@ -6017,14 +5989,12 @@ possible <code>hw_state</code>, value <code>1</code> if active else <code>0</cod
 <tr>
 <td><code>senhub_hw_status</code></td>
 <td><code>power_supply</code>, <code>physical_disk</code>, <code>logical_disk</code>, <code>disk_controller</code>, <code>enclosure</code></td>
-<td><code>ok</code>, <code>degraded</code>, <code>failed</code>, <code>predicted_failure</code></td>
+<td><code>ok</code>, <code>degraded</code>, <code>failed</code>, <code>predicted_failure</code>, <code>unknown</code></td>
 </tr>
 </tbody>
 </table>
 <p>Drive failure prediction is encoded as <code>hw_state="predicted_failure"</code> on
-the same metric (independent of overall health). A component whose health
-the BMC does not report has every state at <code>0</code>: the convention defines no
-<code>unknown</code> state. An IPMI sensor emits the <code>ok</code> series only.</p>
+the same metric (independent of overall health).</p>
 <h3 id="drives-volumes-pools-capacity-io">Drives, volumes, pools (capacity &amp; I/O)<a class="headerlink" href="#drives-volumes-pools-capacity-io" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -6103,10 +6073,10 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td><code>disk_io_direction</code></td>
 </tr>
 <tr>
-<td><code>senhub_hardware_physical_disk_link_speed_bytes_per_second</code></td>
+<td><code>senhub_hardware_physical_disk_link_speed_bits_per_second</code></td>
 <td>gauge</td>
-<td>By/s</td>
-<td>per drive (Gbps × 1e9 / 8)</td>
+<td>bit/s</td>
+<td>per drive (Gbps × 1e9)</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_physical_disk_block_size_bytes</code></td>
@@ -6179,7 +6149,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_veeam_job_count</code></td>
+<td><code>senhub_veeam_jobs_total</code></td>
 <td>gauge</td>
 <td><code>senhub_veeam_job_type</code></td>
 </tr>
@@ -6258,8 +6228,8 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td expired_="expired," invalid="invalid" valid_="valid,">expand: <code>senhub_veeam_license_state</code> ∈</td>
 </tr>
 <tr>
-<td><code>senhub_veeam_license_expiry_seconds</code></td>
-<td>gauge (s)</td>
+<td><code>senhub_veeam_license_days_remaining</code></td>
+<td>gauge</td>
 <td>–</td>
 </tr>
 <tr>
@@ -6334,7 +6304,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td connected_="connected," disconnected="disconnected"><code>senhub_citrix_session_state</code> ∈</td>
 </tr>
 <tr>
-<td><code>senhub_citrix_machine_count</code></td>
+<td><code>senhub_citrix_machines_total</code></td>
 <td>gauge</td>
 <td>–</td>
 </tr>
@@ -6349,7 +6319,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_citrix_machine_multi_session_fault_count</code></td>
+<td><code>senhub_citrix_machines_multi_session_fault_total</code></td>
 <td>gauge</td>
 <td>–</td>
 </tr>
@@ -6433,7 +6403,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 </thead>
 <tbody>
 <tr>
-<td><code>senhub_citrix_connection_failure_count</code></td>
+<td><code>senhub_citrix_connection_failures_total</code></td>
 <td>gauge</td>
 <td>–</td>
 </tr>
@@ -6548,10 +6518,10 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 <td>–</td>
 </tr>
 <tr>
-<td><code>senhub_netscaler_system_network_throughput_bytes_per_second</code></td>
+<td><code>senhub_netscaler_system_network_throughput_bits_per_second</code></td>
 <td>gauge</td>
-<td>By/s</td>
-<td><code>network_io_direction</code> (Mbps × 1e6 / 8)</td>
+<td>bit/s</td>
+<td><code>network_io_direction</code> (Mbps × 1e6)</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_system_http_messages_rate_per_second</code></td>
@@ -6566,9 +6536,9 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 <td client_="client," server="server"><code>senhub_netscaler_tcp_side</code> ∈</td>
 </tr>
 <tr>
-<td><code>senhub_netscaler_ns_throughput_bytes_per_second</code></td>
+<td><code>senhub_netscaler_ns_throughput_bits_per_second</code></td>
 <td>gauge</td>
-<td>By/s</td>
+<td>bit/s</td>
 <td http="http" total_="total,"><code>senhub_netscaler_traffic_type</code> ∈</td>
 </tr>
 <tr>

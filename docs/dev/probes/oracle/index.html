@@ -3526,34 +3526,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    0.6.1
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../whats-new/0.6.0/" class="md-nav__link">
         
   
@@ -4209,12 +4181,12 @@ deadlock counts. Metric set targets parity with the community <code>oracledb_exp
 <td>Maximum allowed sessions</td>
 </tr>
 <tr>
-<td><code>oracle.sga.size</code></td>
+<td><code>oracle.sga.total</code></td>
 <td>By</td>
 <td>System Global Area total size</td>
 </tr>
 <tr>
-<td><code>oracle.pga.size</code></td>
+<td><code>oracle.pga.total</code></td>
 <td>By</td>
 <td>PGA memory currently allocated</td>
 </tr>
@@ -4229,7 +4201,7 @@ deadlock counts. Metric set targets parity with the community <code>oracledb_exp
 <td>Tablespace space used per tablespace, tagged with <code>tablespace</code></td>
 </tr>
 <tr>
-<td><code>oracle.tablespace.limit</code></td>
+<td><code>oracle.tablespace.total</code></td>
 <td>By</td>
 <td>Tablespace total capacity</td>
 </tr>
@@ -4341,14 +4313,14 @@ series' tags.</p>
 <td>1 - physical reads / (consistent gets + db block gets), derived from v$sysstat</td>
 </tr>
 <tr>
-<td><code>oracle.sga.size</code></td>
+<td><code>oracle.sga.total</code></td>
 <td><code>oracle.sga.total</code></td>
 <td>SGA Total</td>
 <td>B</td>
 <td>Total SGA allocated in bytes (SUM(bytes) over v$sgastat)</td>
 </tr>
 <tr>
-<td><code>oracle.pga.size</code></td>
+<td><code>oracle.pga.total</code></td>
 <td><code>oracle.pga.total</code></td>
 <td>PGA Total</td>
 <td>B</td>
@@ -4362,7 +4334,7 @@ series' tags.</p>
 <td>Used space per tablespace in bytes (dba_tablespace_usage_metrics)</td>
 </tr>
 <tr>
-<td><code>oracle.tablespace.limit</code></td>
+<td><code>oracle.tablespace.total</code></td>
 <td><code>oracle.tablespace.total</code></td>
 <td>Tablespace {tablespace} Total</td>
 <td>B</td>
