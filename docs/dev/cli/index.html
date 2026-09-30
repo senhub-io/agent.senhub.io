@@ -4955,7 +4955,7 @@
 </tr>
 </tbody>
 </table>
-<p>Changing <code>http.port</code> moves the web console and the PRTG / Nagios endpoints to the new port; reconnect on the new address.</p>
+<p>Changing <code>http.port</code> moves the web console and the PRTG / Nagios / Prometheus endpoints to the new port; reconnect on the new address.</p>
 <h3 id="config-init">config init<a class="headerlink" href="#config-init" title="Permanent link">&para;</a></h3>
 <p>Creates the default configuration for an unattended install (for example a silent MSI install or a scripted provisioning step), then applies the fields an installer can pass. It is idempotent: if a configuration already exists at the target path it is left untouched.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>senhub-agent<span class="w"> </span>config<span class="w"> </span>init
@@ -4982,7 +4982,7 @@
 </tr>
 <tr>
 <td><code>--http-port PORT</code></td>
-<td>Port of the local HTTP endpoints, PRTG / Web UI / Nagios (default <code>8080</code>)</td>
+<td>Port of the local HTTP endpoints, PRTG / Web UI / Nagios / Prometheus (default <code>8080</code>)</td>
 </tr>
 <tr>
 <td><code>--http-bind ADDRESS</code></td>

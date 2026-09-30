@@ -4234,7 +4234,7 @@ Metric parity with the OpenTelemetry Collector contrib <code>kafkametricsreceive
 <td>Lag per group/topic/partition, tagged with <code>group</code>/<code>topic</code>/<code>partition</code></td>
 </tr>
 <tr>
-<td><code>kafka.consumer_group.lag_sum</code></td>
+<td><code>kafka.consumer_group.topic.lag</code></td>
 <td>{message}</td>
 <td>Total lag summed across partitions per group/topic</td>
 </tr>
@@ -4336,7 +4336,7 @@ series' tags.</p>
 <td>Current approximate lag of consumer group at partition of a Kafka topic</td>
 </tr>
 <tr>
-<td><code>kafka.consumer_group.lag_sum</code></td>
+<td><code>kafka.consumer_group.topic.lag</code></td>
 <td><code>kafka.consumer_group.lag_sum</code></td>
 <td>Kafka {group}/{topic} Lag Sum</td>
 <td>{item}</td>
