@@ -3526,6 +3526,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.6.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.6.0/" class="md-nav__link">
         
   
@@ -4179,9 +4207,9 @@ sudoers rule for <code>smartctl</code>.</p>
 <td>Reallocated sector count (SATA/SAS) — non-zero indicates drive degradation</td>
 </tr>
 <tr>
-<td><code>smart.disk.power_on_hours</code></td>
-<td>h</td>
-<td>Cumulative power-on hours</td>
+<td><code>smart.disk.power_on.time</code></td>
+<td>s</td>
+<td>Cumulative power-on time (the drive reports hours; exported as seconds over OTel)</td>
 </tr>
 <tr>
 <td><code>smart.disk.temperature</code></td>
@@ -4298,7 +4326,7 @@ series' tags.</p>
 <td>Offline uncorrectable sectors (attribute 198); persistent read failures</td>
 </tr>
 <tr>
-<td><code>smart.disk.power_on_hours</code></td>
+<td><code>smart.disk.power_on.time</code></td>
 <td><code>smart.disk.power_on_hours</code></td>
 <td smart.device="smart.device">Power-On Hours</td>
 <td>h</td>
