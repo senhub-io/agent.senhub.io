@@ -4003,19 +4003,35 @@ something outside the default set, or to deliberately collect less.</p>
 <div class="admonition warning">
 <p class="admonition-title"><code>collections</code> replaces the defaults, it does not filter them</p>
 <p>The moment this key is present, the six defaults are <strong>discarded</strong> and
-only what you list is collected. It is a replacement, not a filter.</p>
+only what you list is collected. It is a replacement, not a filter.
+This is deliberate: it is the only way to collect less, which is what
+you want against a slow BMC.</p>
 <p>So this configuration does <strong>not</strong> mean "everything except storage":</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">collections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"system"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"power"</span><span class="p p-Indicator">]</span><span class="w">     </span><span class="c1"># thermal, processor, memory</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">                                     </span><span class="c1"># and storage are ALL off</span>
 </code></pre></div>
 <p>It means the probe collects system and power, and nothing else. The
-sensor still reports OK — with far fewer channels than before, every
-one of them healthy. There is no error and no warning.</p>
+sensor still reports OK, with far fewer channels than before, every
+one of them healthy. The agent now says so when the probe starts, at
+Info level:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>redfish: 'collections' replaces the default set; these default
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>subsystems are NOT collected  collections=[system power]
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>disabled_defaults=[thermal processor memory storage]
+</code></pre></div>
 <p>If you are turning one subsystem off, write out every subsystem you
 still want:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">collections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"system"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"thermal"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"power"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"processor"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"memory"</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">collections</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"system"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"thermal"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"power"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"processor"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"memory"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
+<p>A configuration that lists all six defaults behaves exactly as if the
+key were absent.</p>
 </div>
+<p>The list is checked when the probe loads. An unknown name, a value that
+is not a string, or an empty list stops the probe with an error that
+names the accepted values; names are case-insensitive and a repeated name
+is ignored. The <code>Redfish probe initialized</code> line logged at start carries
+the final <code>collections</code> list, and a collection the detected BMC cannot
+serve (for example <code>drives</code> on a generic BMC) is logged as a warning
+instead of yielding nothing quietly.</p>
 <h3 id="accepted-values">Accepted values<a class="headerlink" href="#accepted-values" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4058,12 +4074,12 @@ still want:</p>
 </tr>
 <tr>
 <td><code>drives</code></td>
-<td>Physical drives on their own</td>
+<td>Physical drives on their own; Dell, HPE, Cisco, Lenovo and storage-system collectors only (a generic BMC logs a warning)</td>
 <td><strong>No</strong></td>
 </tr>
 <tr>
 <td><code>network</code></td>
-<td>Network interface health and link state</td>
+<td>Accepted, but no collector serves it today (logged as a warning at start); use <code>networkadapter</code></td>
 <td><strong>No</strong></td>
 </tr>
 <tr>
@@ -4076,11 +4092,6 @@ still want:</p>
 <p>The last three are <strong>never collected unless you list them</strong> — a default
 configuration does not include them. Listing them means also re-listing
 the defaults you want, per the warning above.</p>
-<p>A value that is not in this table is accepted at load time and fails on
-every collection cycle instead. A typo — <code>cpu</code> for <code>processor</code>, <code>disk</code>
-for <code>storage</code> — silently collects nothing from that subsystem. Check the
-spelling against the table, and see
-<a href="#missing-channels-in-prtg-or-nagios">Missing channels</a> below.</p>
 <h2 id="interval-and-the-prtg-ttl">Interval and the PRTG TTL<a class="headerlink" href="#interval-and-the-prtg-ttl" title="Permanent link">&para;</a></h2>
 <p>The PRTG format serves what is in the agent's cache and drops any value
 older than <strong>5 minutes</strong>. That bound is fixed — it is not the
@@ -4096,24 +4107,24 @@ OTLP, both of which serve the cache without that age limit.</p>
 affected.</p>
 <h2 id="multiple-servers">Multiple Servers<a class="headerlink" href="#multiple-servers" title="Permanent link">&para;</a></h2>
 <p>Monitor multiple hardware targets with separate probe instances:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># probes.d/10-redfish.yaml</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"dell-storage-me5024"</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://dell-me5024.company.com"</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"admin"</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:dell-storage-me5024.password}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"hpe-proliant-dl380"</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://ilo-dl380.company.com"</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"monitoring"</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:hpe-proliant-dl380.password}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># probes.d/10-redfish.yaml</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"dell-storage-me5024"</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://dell-me5024.company.com"</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"admin"</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:dell-storage-me5024.password}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"hpe-proliant-dl380"</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redfish</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">"https://ilo-dl380.company.com"</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"monitoring"</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:hpe-proliant-dl380.password}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <h1 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h1>
 <!-- schema:params:start -->
@@ -4570,6 +4581,14 @@ affected.</p>
 </table>
 <h1 id="tags">Tags<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h1>
 <p>All metrics include contextual tags for filtering and grouping.</p>
+<div class="admonition note">
+<p class="admonition-title">Names keep the BMC's own text in OTLP, Prometheus and Zabbix</p>
+<p><code>hw.name</code> and the other name attributes carry the value exactly as the
+BMC reports it, for example <code>Lab drive 1 (failure predicted)</code>. The PRTG
+channel names and the URL filters are built from a cleaned copy with
+<code>, ; ( ) [ ] { } &lt; &gt; | \ " '</code> # &amp; ? =<code>removed (</code>Lab drive 1 failure
+predicted`), which is what they always used; they are unchanged.</p>
+</div>
 <h2 id="controller-tags">Controller Tags<a class="headerlink" href="#controller-tags" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4871,7 +4890,7 @@ affected.</p>
 <p><strong>Symptom:</strong> Cannot connect to the Redfish endpoint</p>
 <p><strong>Diagnosis:</strong>
 1. Verify the BMC/iDRAC/iLO management interface is reachable from the agent host:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://idrac-server01.company.com/redfish/v1/
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-k<span class="w"> </span>https://idrac-server01.company.com/redfish/v1/
 </code></pre></div>
 2. Verify the management interface is powered on and network-connected
 3. Check for firewall rules blocking HTTPS (port 443) between the agent and the BMC</p>
@@ -4879,8 +4898,8 @@ affected.</p>
 <p><strong>Symptom:</strong> TLS handshake failures or certificate errors</p>
 <p><strong>Resolution:</strong>
 BMC management interfaces typically use self-signed certificates. Set <code>verify_ssl: false</code> in the probe configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">verify_ssl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>If your environment uses properly signed certificates, ensure the CA chain is trusted by the system running the agent.</p>
 <h2 id="authentication-failures">Authentication Failures<a class="headerlink" href="#authentication-failures" title="Permanent link">&para;</a></h2>
@@ -4903,11 +4922,13 @@ no drives.</p>
    only the subsystems it lists are collected — the defaults are gone.
    This is the usual cause. See
    <a href="#choosing-what-to-collect-collections">Choosing what to collect</a>.</li>
-<li><strong>Spelling of each value</strong>, against the table in that section. An
-   unrecognised value is accepted at load and fails per cycle:</li>
+<li><strong>The start-up log.</strong> The agent logs which default subsystems the
+   list turned off, and warns about a collection the BMC cannot serve:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>senhub-agent<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"unsupported collection type"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>senhub-agent<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"collections.*replaces|not supported by this vendor"</span>
 </code></pre></div>
+<p>An unrecognised value no longer gets this far: the probe refuses to
+   start and the error names the accepted values.</p>
 <ol>
 <li><strong><code>interval</code> above 300 seconds</strong>, if you read the probe through
    PRTG — channels then disappear between scrapes. See
@@ -4918,13 +4939,13 @@ no drives.</p>
 </ol>
 <h2 id="debug-logging">Debug Logging<a class="headerlink" href="#debug-logging" title="Permanent link">&para;</a></h2>
 <p>Enable debug logging for the Redfish probe:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Runtime log level change</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [{"module": "probe.redfish", "level": "debug"}]}'</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Or start agent with verbose logging</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.redfish
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Runtime log level change</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8080/api/<span class="o">{</span>key<span class="o">}</span>/debug/logs<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"module_levels": [{"module": "probe.redfish", "level": "debug"}]}'</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Or start agent with verbose logging</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.redfish
 </code></pre></div>
 <h2 id="license-requirements">License Requirements<a class="headerlink" href="#license-requirements" title="Permanent link">&para;</a></h2>
 <p>The Redfish probe requires a <strong>Pro</strong> or <strong>Enterprise</strong> license.</p>
@@ -5298,6 +5319,706 @@ series' tags.</p>
 <td>{redundancy_group} Controllers Max</td>
 <td>#</td>
 <td>Maximum number of storage controllers supported</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>hardware.cpu.health</code></td>
+<td>CPU Health</td>
+<td>#</td>
+<td>Processor health status</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.cores</code></td>
+<td><code>hardware.cpu.cores</code></td>
+<td>CPU Cores</td>
+<td>#</td>
+<td>Physical cores of the processor</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.threads</code></td>
+<td><code>hardware.cpu.threads</code></td>
+<td>CPU Threads</td>
+<td>#</td>
+<td>Hardware threads of the processor</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.speed</code></td>
+<td><code>hardware.cpu.max_speed</code></td>
+<td>CPU Max Speed</td>
+<td>MHz</td>
+<td>Maximum processor speed</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.speed</code></td>
+<td><code>hardware.cpu.current_speed</code></td>
+<td>CPU Current Speed</td>
+<td>MHz</td>
+<td>Current processor speed</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.speed</code></td>
+<td><code>hardware.cpu.average_frequency</code></td>
+<td>CPU Average Frequency</td>
+<td>MHz</td>
+<td>Average processor frequency</td>
+</tr>
+<tr>
+<td><code>hw.temperature</code></td>
+<td><code>hardware.cpu.temperature</code></td>
+<td>CPU Temperature</td>
+<td>°C</td>
+<td>Processor temperature</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.throttling_temperature</code></td>
+<td><code>hardware.cpu.throttling_temperature</code></td>
+<td>CPU Throttling Temperature</td>
+<td>°C</td>
+<td>Temperature at which the processor throttles</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.thermal_margin</code></td>
+<td><code>hardware.cpu.thermal_margin</code></td>
+<td>CPU Thermal Margin</td>
+<td>°C</td>
+<td>Margin between the processor temperature and its throttling temperature</td>
+</tr>
+<tr>
+<td><code>hw.power</code></td>
+<td><code>hardware.cpu.power_consumption</code></td>
+<td>CPU Power Consumption</td>
+<td>W</td>
+<td>Power drawn by the processor</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.power_limit</code></td>
+<td><code>hardware.cpu.power_limit</code></td>
+<td>CPU Power Limit</td>
+<td>W</td>
+<td>Power cap applied to the processor</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.utilization</code></td>
+<td><code>hardware.cpu.utilization</code></td>
+<td>CPU Utilization</td>
+<td>%</td>
+<td>Processor utilization reported by the BMC</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.utilization</code></td>
+<td><code>hardware.cpu.user_percent</code></td>
+<td>CPU User Percent</td>
+<td>%</td>
+<td>Processor time spent in user mode</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.utilization</code></td>
+<td><code>hardware.cpu.kernel_percent</code></td>
+<td>CPU Kernel Percent</td>
+<td>%</td>
+<td>Processor time spent in kernel mode</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.utilization</code></td>
+<td><code>hardware.cpu.io_wait_percent</code></td>
+<td>CPU IO Wait Percent</td>
+<td>%</td>
+<td>Processor time spent waiting for I/O</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.utilization</code></td>
+<td><code>hardware.cpu.utilization.dell</code></td>
+<td>CPU Utilization Dell</td>
+<td>%</td>
+<td>Processor utilization from the Dell OEM metrics</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.utilization</code></td>
+<td><code>hardware.cpu.utilization.hpe</code></td>
+<td>CPU Utilization Hpe</td>
+<td>%</td>
+<td>Processor utilization from the HPE OEM metrics</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.cache.usage</code></td>
+<td><code>hardware.cpu.cache.occupancy</code></td>
+<td>CPU Cache Occupancy</td>
+<td>Bytes</td>
+<td>Bytes held in the processor cache</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.cpu.cache.hit_ratio</code></td>
+<td><code>hardware.cpu.cache.hit_ratio</code></td>
+<td>CPU Cache Hit Ratio</td>
+<td>ratio</td>
+<td>Processor cache hit ratio</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>hardware.memory.health</code></td>
+<td>Memory Health</td>
+<td>#</td>
+<td>Memory module health status</td>
+</tr>
+<tr>
+<td><code>hw.memory.size</code></td>
+<td><code>hardware.memory.capacity</code></td>
+<td>Memory Capacity</td>
+<td>MiB</td>
+<td>Memory module capacity</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.logical_size</code></td>
+<td><code>hardware.memory.logical_size</code></td>
+<td>Memory Logical Size</td>
+<td>MiB</td>
+<td>Memory module logical size</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.cache_size</code></td>
+<td><code>hardware.memory.cache_size</code></td>
+<td>Memory Cache Size</td>
+<td>MiB</td>
+<td>Cache size of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.speed</code></td>
+<td><code>hardware.memory.speed</code></td>
+<td>Memory Speed</td>
+<td>MHz</td>
+<td>Operating speed of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.speed</code></td>
+<td><code>hardware.memory.configured_speed</code></td>
+<td>Memory Configured Speed</td>
+<td>MHz</td>
+<td>Configured speed of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.width</code></td>
+<td><code>hardware.memory.bus_width</code></td>
+<td>Memory Bus Width</td>
+<td>bits</td>
+<td>Total bus width of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.width</code></td>
+<td><code>hardware.memory.data_width</code></td>
+<td>Memory Data Width</td>
+<td>bits</td>
+<td>Data width of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.ranks</code></td>
+<td><code>hardware.memory.rank_count</code></td>
+<td>Memory Rank Count</td>
+<td>#</td>
+<td>Ranks of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.max_tdp</code></td>
+<td><code>hardware.memory.max_tdp</code></td>
+<td>Memory Max Tdp</td>
+<td>mW</td>
+<td>Maximum thermal design power of the memory module</td>
+</tr>
+<tr>
+<td><code>hw.power</code></td>
+<td><code>hardware.memory.power_consumption</code></td>
+<td>Memory Power Consumption</td>
+<td>W</td>
+<td>Power drawn by the memory module</td>
+</tr>
+<tr>
+<td><code>hw.temperature</code></td>
+<td><code>hardware.memory.temperature</code></td>
+<td>Memory Temperature</td>
+<td>°C</td>
+<td>Memory module temperature</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.thermal_margin</code></td>
+<td><code>hardware.memory.thermal_margin</code></td>
+<td>Memory Thermal Margin</td>
+<td>°C</td>
+<td>Margin between the memory module temperature and its limit</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.bandwidth.utilization</code></td>
+<td><code>hardware.memory.bandwidth_utilization</code></td>
+<td>Memory Bandwidth Utilization</td>
+<td>%</td>
+<td>Memory bandwidth utilization</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.block_size</code></td>
+<td><code>hardware.memory.block_size</code></td>
+<td>Memory Block Size</td>
+<td>Bytes</td>
+<td>Block size of the memory module</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.errors</code></td>
+<td><code>hardware.memory.correctable_ecc_errors</code></td>
+<td>Memory Correctable Ecc Errors</td>
+<td>#</td>
+<td>Correctable ECC errors since the module was installed</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.errors</code></td>
+<td><code>hardware.memory.uncorrectable_ecc_errors</code></td>
+<td>Memory Uncorrectable Ecc Errors</td>
+<td>#</td>
+<td>Uncorrectable ECC errors since the module was installed</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.throttled_cycles</code></td>
+<td><code>hardware.memory.throttled_cycles</code></td>
+<td>Memory Throttled Cycles</td>
+<td>#</td>
+<td>Cycles the memory module spent throttled</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.alarm</code></td>
+<td><code>hardware.memory.alarm.temperature</code></td>
+<td>Memory Alarm Temperature</td>
+<td>#</td>
+<td>Memory temperature alarm raised</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.alarm</code></td>
+<td><code>hardware.memory.alarm.spares</code></td>
+<td>Memory Alarm Spares</td>
+<td>#</td>
+<td>Memory spares alarm raised</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.alarm</code></td>
+<td><code>hardware.memory.alarm.correctable_ecc</code></td>
+<td>Memory Alarm Correctable Ecc</td>
+<td>#</td>
+<td>Correctable ECC alarm raised</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.alarm</code></td>
+<td><code>hardware.memory.alarm.uncorrectable</code></td>
+<td>Memory Alarm Uncorrectable</td>
+<td>#</td>
+<td>Uncorrectable ECC alarm raised</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.period.blocks</code></td>
+<td><code>hardware.memory.current_period.blocks_read</code></td>
+<td>Memory Current Period Blocks Read</td>
+<td>#</td>
+<td>Blocks read in the current period</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.period.blocks</code></td>
+<td><code>hardware.memory.current_period.blocks_written</code></td>
+<td>Memory Current Period Blocks Written</td>
+<td>#</td>
+<td>Blocks written in the current period</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.blocks</code></td>
+<td><code>hardware.memory.lifetime.blocks_read</code></td>
+<td>Memory Lifetime Blocks Read</td>
+<td>#</td>
+<td>Blocks read over the module lifetime</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.blocks</code></td>
+<td><code>hardware.memory.lifetime.blocks_written</code></td>
+<td>Memory Lifetime Blocks Written</td>
+<td>#</td>
+<td>Blocks written over the module lifetime</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.spares</code></td>
+<td><code>hardware.memory.dell.remaining_spares</code></td>
+<td>Memory Dell Remaining Spares</td>
+<td>#</td>
+<td>Dell OEM: spare memory still available</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.memory.spares</code></td>
+<td><code>hardware.memory.dell.used_spares</code></td>
+<td>Memory Dell Used Spares</td>
+<td>#</td>
+<td>Dell OEM: spare memory already used</td>
+</tr>
+<tr>
+<td><code>hw.voltage</code></td>
+<td><code>hardware.memory.hpe.current_voltage</code></td>
+<td>Memory Hpe Current Voltage</td>
+<td>mV</td>
+<td>HPE OEM: current operating voltage of the memory module</td>
+</tr>
+<tr>
+<td><code>hw.voltage</code></td>
+<td><code>hardware.memory.hpe.min_voltage</code></td>
+<td>Memory Hpe Min Voltage</td>
+<td>mV</td>
+<td>HPE OEM: min operating voltage of the memory module</td>
+</tr>
+<tr>
+<td><code>hw.voltage</code></td>
+<td><code>hardware.memory.hpe.max_voltage</code></td>
+<td>Memory Hpe Max Voltage</td>
+<td>mV</td>
+<td>HPE OEM: max operating voltage of the memory module</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>hardware.network.health</code></td>
+<td>Network Health</td>
+<td>#</td>
+<td>Network adapter health status</td>
+</tr>
+<tr>
+<td><code>hw.network.up</code></td>
+<td><code>hardware.network.link_up</code></td>
+<td>Network Link Up</td>
+<td>#</td>
+<td>Network adapter link state (1 up, 0 down)</td>
+</tr>
+<tr>
+<td><code>hw.network.bandwidth.limit</code></td>
+<td><code>hardware.network.speed_mbps</code></td>
+<td>Network Speed Mbps</td>
+<td>Mbps</td>
+<td>Negotiated link speed of the network adapter</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>network.adapter.health</code></td>
+<td>Network Adapter Health</td>
+<td>#</td>
+<td>Network adapter health status</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>network.port.health</code></td>
+<td>Network Port Health</td>
+<td>#</td>
+<td>Network port health status</td>
+</tr>
+<tr>
+<td><code>hw.network.up</code></td>
+<td><code>network.port.link_up</code></td>
+<td>Network Port Link Up</td>
+<td>#</td>
+<td>Network port link state (1 up, 0 down)</td>
+</tr>
+<tr>
+<td><code>hw.network.bandwidth.limit</code></td>
+<td><code>network.port.speed_gbps</code></td>
+<td>Network Port Speed Gbps</td>
+<td>Gbps</td>
+<td>Negotiated link speed of the network port</td>
+</tr>
+<tr>
+<td><code>hw.power</code></td>
+<td><code>hardware.power.usage</code></td>
+<td>Usage</td>
+<td>W</td>
+<td>Power delivered by the power supply</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.power_supply.limit</code></td>
+<td><code>hardware.power.limit</code></td>
+<td>Limit</td>
+<td>W</td>
+<td>Rated output of the power supply</td>
+</tr>
+<tr>
+<td><code>hw.voltage</code></td>
+<td><code>hardware.power.input_voltage</code></td>
+<td>Input Voltage</td>
+<td>Volts</td>
+<td>Line input voltage of the power supply</td>
+</tr>
+<tr>
+<td><code>hw.power</code></td>
+<td><code>hardware.power.consumption</code></td>
+<td>Consumption</td>
+<td>W</td>
+<td>Power drawn by the chassis</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.enclosure.power.capacity</code></td>
+<td><code>hardware.power.capacity</code></td>
+<td>Capacity</td>
+<td>W</td>
+<td>Power the chassis can draw</td>
+</tr>
+<tr>
+<td><code>hw.temperature</code></td>
+<td><code>thermal.temperature</code></td>
+<td>Temperature</td>
+<td>°C</td>
+<td>Temperature sensor reading</td>
+</tr>
+<tr>
+<td><code>hw.fan.speed_ratio</code></td>
+<td><code>thermal.fan_speed_percent</code></td>
+<td>Fan Speed Percent</td>
+<td>%</td>
+<td>Fan speed as a share of its maximum</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.system.cpu.count</code></td>
+<td><code>hardware.system.cpu.count</code></td>
+<td>System CPU Count</td>
+<td>#</td>
+<td>Processors installed in the system</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.system.cpu.status</code></td>
+<td><code>hardware.system.cpu.health</code></td>
+<td>System CPU Health</td>
+<td>#</td>
+<td>Health of the system's processors as a whole</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.system.memory.size</code></td>
+<td><code>hardware.system.memory.size</code></td>
+<td>System Memory Size</td>
+<td>GiB</td>
+<td>Total system memory</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.system.memory.status</code></td>
+<td><code>hardware.system.memory.health</code></td>
+<td>System Memory Health</td>
+<td>#</td>
+<td>Health of the system's memory as a whole</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.firmware.info</code></td>
+<td><code>system.idrac_firmware</code></td>
+<td>System Idrac Firmware</td>
+<td>#</td>
+<td>Presence marker (always 1) carrying the idrac firmware version as an attribute</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.firmware.info</code></td>
+<td><code>system.lifecycle_controller</code></td>
+<td>System Lifecycle Controller</td>
+<td>#</td>
+<td>Presence marker (always 1) carrying the lifecycle_controller firmware version as an attribute</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.firmware.info</code></td>
+<td><code>system.ilo_firmware</code></td>
+<td>System Ilo Firmware</td>
+<td>#</td>
+<td>Presence marker (always 1) carrying the ilo firmware version as an attribute</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.firmware.info</code></td>
+<td><code>system.cimc_firmware</code></td>
+<td>System Cimc Firmware</td>
+<td>#</td>
+<td>Presence marker (always 1) carrying the cimc firmware version as an attribute</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.firmware.info</code></td>
+<td><code>system.xcc_firmware</code></td>
+<td>System Xcc Firmware</td>
+<td>#</td>
+<td>Presence marker (always 1) carrying the xcc firmware version as an attribute</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.eventservice.subscriptions</code></td>
+<td><code>hardware.eventservice.subscriptions</code></td>
+<td>Eventservice Subscriptions</td>
+<td>#</td>
+<td>Event subscriptions registered on the BMC</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.log.entries</code></td>
+<td><code>hardware.logs.entries.total</code></td>
+<td>Logs Entries Total</td>
+<td>#</td>
+<td>Entries in the BMC event log</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.log.entries</code></td>
+<td><code>hardware.logs.entries.critical</code></td>
+<td>Logs Entries Critical</td>
+<td>#</td>
+<td>Critical entries in the BMC event log</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.log.entries</code></td>
+<td><code>hardware.logs.entries.warning</code></td>
+<td>Logs Entries Warning</td>
+<td>#</td>
+<td>Warning entries in the BMC event log</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.log.entries</code></td>
+<td><code>hardware.logs.entries.info</code></td>
+<td>Logs Entries Info</td>
+<td>#</td>
+<td>Informational entries in the BMC event log</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.log.entries</code></td>
+<td><code>hardware.logs.entries.last_24h</code></td>
+<td>Logs Entries Last 24h</td>
+<td>#</td>
+<td>Entries logged in the last 24 hours</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.log.entries</code></td>
+<td><code>hardware.logs.entries.last_7d</code></td>
+<td>Logs Entries Last 7d</td>
+<td>#</td>
+<td>Entries logged in the last 7 days</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.storage.status</code></td>
+<td><code>hardware.storage.health</code></td>
+<td>Health</td>
+<td>#</td>
+<td>Health of the storage subsystem</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>hardware.storage.controller.health</code></td>
+<td>Controller Health</td>
+<td>#</td>
+<td>Storage controller health status</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>storage.controller.health</code></td>
+<td>Controller Health</td>
+<td>#</td>
+<td>Storage controller health status</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.disk_controller.link_speed</code></td>
+<td><code>hardware.storage.controller.speed_gbps</code></td>
+<td>Controller Speed Gbps</td>
+<td>Gbps</td>
+<td>Link speed of the storage controller</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>storage.drive.health</code></td>
+<td>Drive Health</td>
+<td>#</td>
+<td>Drive health status</td>
+</tr>
+<tr>
+<td><code>hw.physical_disk.size</code></td>
+<td><code>hardware.storage.drive.capacity_bytes</code></td>
+<td>Drive Capacity Bytes</td>
+<td>Bytes</td>
+<td>Total drive capacity</td>
+</tr>
+<tr>
+<td><code>hw.physical_disk.size</code></td>
+<td><code>storage.drive.capacity_gb</code></td>
+<td>Drive Capacity Gb</td>
+<td>GB</td>
+<td>Total drive capacity</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.physical_disk.hotspare</code></td>
+<td><code>hardware.storage.drive.hotspare</code></td>
+<td>Drive Hotspare</td>
+<td>#</td>
+<td>Drive configured as a hot spare (1) or not (0)</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.physical_disk.media_life_remaining</code></td>
+<td><code>storage.drive.media_life_percent</code></td>
+<td>Drive Media Life Percent</td>
+<td>%</td>
+<td>Predicted media life left on the drive</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.physical_disk.rotation_speed</code></td>
+<td><code>storage.drive.rotation_rpm</code></td>
+<td>Drive Rotation Rpm</td>
+<td>RPM</td>
+<td>Rotation speed of the drive</td>
+</tr>
+<tr>
+<td><code>hw.status</code></td>
+<td><code>storage.volume.health</code></td>
+<td>Volume Health</td>
+<td>#</td>
+<td>Volume health status</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.limit</code></td>
+<td><code>storage.volume.capacity_gb</code></td>
+<td>Volume Capacity Gb</td>
+<td>GB</td>
+<td>Total volume capacity</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.logical_disk.reserved</code></td>
+<td><code>hardware.storage.volume.capacity.reserved</code></td>
+<td>Volume Capacity Reserved</td>
+<td>Bytes</td>
+<td>Capacity reserved on the volume</td>
+</tr>
+<tr>
+<td>-</td>
+<td><code>hardware.storage.volume.io.read.latency</code></td>
+<td>Volume IO Read Latency</td>
+<td>#</td>
+<td>Volume read latency</td>
+</tr>
+<tr>
+<td>-</td>
+<td><code>hardware.storage.volume.io.write.latency</code></td>
+<td>Volume IO Write Latency</td>
+<td>#</td>
+<td>Volume write latency</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.storage.pool.usage</code></td>
+<td><code>hardware.storage.pool.capacity.free</code></td>
+<td>Pool Capacity Free</td>
+<td>Bytes</td>
+<td>Free pool capacity</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.storage.pool.usage</code></td>
+<td><code>hardware.storage.pool.capacity.committed</code></td>
+<td>Pool Capacity Committed</td>
+<td>Bytes</td>
+<td>Capacity committed on the pool</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.storage.pool.usage</code></td>
+<td><code>hardware.storage.pool.capacity.overcommit</code></td>
+<td>Pool Capacity Overcommit</td>
+<td>Bytes</td>
+<td>Capacity over-committed on the pool</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.storage.pool.usage</code></td>
+<td><code>hardware.storage.pool.capacity.snapshots</code></td>
+<td>Pool Capacity Snapshots</td>
+<td>Bytes</td>
+<td>Pool capacity taken by snapshots</td>
+</tr>
+<tr>
+<td><code>senhub.hardware.storage.pool.usage</code></td>
+<td><code>hardware.storage.pool.capacity.volumes</code></td>
+<td>Pool Capacity Volumes</td>
+<td>Bytes</td>
+<td>Pool capacity taken by volumes</td>
 </tr>
 </tbody>
 </table>

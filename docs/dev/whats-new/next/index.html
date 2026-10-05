@@ -4118,7 +4118,27 @@
 
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Linux host security signals in the <code>process</code> probe.</strong> Three new
+<li><strong>Redfish: the whole probe now reaches Prometheus and OTLP.</strong> 100 of the
+  139 metrics the probe can emit had no definition and were dropped by
+  those outputs (processors, memory modules, network, power, firmware,
+  event-log counters, vendor storage readings). They are now declared with
+  OTel names, units and types, and a test fails when the probe starts to
+  emit a name that has none. PRTG channel names are unchanged. Memory
+  modules, adapters, ports and cache levels also become separate series on
+  the pull sinks instead of overwriting each other.</li>
+<li><strong>Redfish: <code>collections</code> is validated and says what it turns off.</strong> The
+  list still replaces the default set, but an unknown name or an empty list
+  now stops the probe at load with the accepted values, and the start-up
+  log names the default subsystems the list disabled. A configuration that
+  lists the six defaults is unchanged.</li>
+<li>
+<p><strong>Redfish: names keep the BMC's own text.</strong> <code>hw.name</code> and the other
+  name attributes in OTLP, Prometheus and Zabbix are no longer stripped of
+  <code>, ; ( ) [ ] { } &lt; &gt; | \ " '</code> # &amp; ? =`. PRTG channel names and URL
+  filters keep their cleaned form.</p>
+</li>
+<li>
+<p><strong>Linux host security signals in the <code>process</code> probe.</strong> Three new
   machine-wide metrics on Linux: <code>senhub.system.kernel.open_files</code> (file
   handles allocated, from <code>/proc/sys/fs/file-nr</code>, to read against the
   existing <code>senhub.system.kernel.max_files</code>), <code>senhub.system.passwd.checksum</code>
@@ -4127,7 +4147,8 @@
   The generated Zabbix template for the probe carries a warning trigger
   that fires when the checksum changes, <code>change(...)&lt;&gt;0</code>. Re-run
   <code>zabbix setup</code> to refresh the templates. Other platforms emit nothing
-  new.</li>
+  new.</p>
+</li>
 </ul>
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
