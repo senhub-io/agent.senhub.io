@@ -3405,6 +3405,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -3421,6 +3439,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -3930,6 +3989,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3954,10 +4043,38 @@
 
 
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
-<p>Nothing released yet since 0.6.1. Changes land here as they are merged to <code>dev</code>.</p>
+<p>Changes land here as they are merged to <code>dev</code>.</p>
 <div class="rn-filter"></div>
 
+<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Exit codes of the command line are a contract.</strong> <code>0</code> done, <code>1</code>
+  warning, <code>2</code> failure, <code>3</code> unchanged. Failures that exited <code>1</code> now exit
+  <code>2</code>, and <code>config check</code> exits <code>1</code> when it found warnings only (running
+  without a licence is the free tier, reported as information) and <code>status</code> exits <code>1</code> when the service is stopped, the
+  agent does not answer, it reports itself unhealthy or a probe is in
+  error. A script that
+  tests for any non-zero code is unaffected; one that compares with <code>1</code>
+  must follow. The container image and the Windows installer are updated
+  to match. See <a href="../../cli/#exit-codes">Exit codes</a>.</li>
+</ul>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>doctor</code> diagnoses an install in one pass.</strong> It aggregates the
+  service state, the systemd unit and binary comparison, <code>config check</code>,
+  the secret store, the licence expiry, the HTTP port, the connection
+  test of every output, the probes' last cycle and the disk, prints a
+  <code>fix</code> for each problem, and exits <code>1</code> on a warning and <code>2</code> on a
+  failure. It needs no root and works with the service stopped.
+  <code>--json</code> prints <code>senhub.cli.doctor/v1</code>. See <a href="../../cli/#doctor">Doctor</a>.</li>
+<li><strong><code>--json</code> output.</strong> <code>version</code>, <code>status</code>, <code>config check</code>, <code>config
+  show</code>, <code>config set</code>, <code>config init</code> and <code>secret status</code> print one JSON
+  object with a <code>senhub.cli.&lt;command&gt;/v1</code> schema identifier. Failures
+  are JSON objects too. See <a href="../../cli/#json-output">JSON output</a>.</li>
+<li><strong>Idempotent provisioning commands.</strong> <code>config init</code>, <code>config set</code> and
+  <code>install</code> run again on a machine already in the requested state write
+  nothing and exit <code>3</code>. <code>config init --ok-if-unchanged</code> exits <code>0</code> in that
+  case, for installers that treat any other code as a failure.</li>
 <li><strong>filetail reports where each tail stands.</strong> For every file followed, <code>senhub.filetail.read_offset</code> and <code>senhub.filetail.file_size</code> (Prometheus <code>senhub_filetail_read_offset_bytes</code> and <code>senhub_filetail_file_size_bytes</code>, attribute <code>log.file.path</code>) let a rule detect a frozen tail: the file grew and the offset did not move.</li>
 </ul>
 
