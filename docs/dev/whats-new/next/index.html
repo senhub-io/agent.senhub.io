@@ -4145,6 +4145,13 @@
 
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Two agents on one host no longer describe each other twice.</strong> Each agent
+  writes its own <code>service.instance.id</code> to <code>instance.id</code> in its state
+  directory (<code>/var/lib/senhub-agent</code>, <code>C:\ProgramData\SenHub</code>), readable by
+  other accounts only when the agent key is a random UUID, and by its owner
+  alone otherwise. An agent that finds another agent's process listening on
+  the host reuses that id instead of creating a second <code>service.instance</code>.
+  When the file cannot be read, the previous behaviour applies.</li>
 <li><strong>Redfish: the whole probe now reaches Prometheus and OTLP.</strong> 100 of the
   139 metrics the probe can emit had no definition and were dropped by
   those outputs (processors, memory modules, network, power, firmware,
@@ -4179,6 +4186,15 @@
 </ul>
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Three entity identities change once.</strong> The <code>unifi</code>, <code>kubernetes</code> and
+  <code>systemd</code> probes no longer key their entities on an address or a hostname.
+  A UniFi controller is identified by the UUID it reports about itself (or
+  <code>unifi@&lt;host.id&gt;</code> when it runs on the agent's host); a controller that is
+  remote and whose UUID the account cannot read has no entity. A Kubernetes
+  cluster is identified by its <code>kube-system</code> namespace UID alone, so a
+  cluster whose UID is unreadable has no cluster entity. A systemd unit is
+  <code>systemd://&lt;host.id&gt;/&lt;unit&gt;</code>. The old entities are retired once: a
+  consumer sees one disappearance, then the new identity.</li>
 <li><strong>Zabbix counter items become rates.</strong> In the generated templates, every
   item built from a cumulative counter (network bytes and packets, disk
   I/O, CPU time, request totals) now carries the Change per second
