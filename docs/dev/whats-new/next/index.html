@@ -4145,6 +4145,7 @@
 
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong><code>status</code> works on every install.</strong> The agent now answers <code>senhub-agent status</code> on a local channel (a Unix socket in its state directory, readable by the service account and root only; a named pipe restricted to administrators on Windows), whether or not the HTTP output is enabled. Hosts installed before the HTTP output was on by default used to get a degraded view computed by the command itself. <code>status</code> asks the local channel first and falls back to the HTTP output. The channel is read-only: it sends the status and reads nothing. It reports probe health and failed outputs but not the per-probe metric counts, which only the HTTP cache holds.</li>
 <li><strong>Two agents on one host no longer describe each other twice.</strong> Each agent
   writes its own <code>service.instance.id</code> to <code>instance.id</code> in its state
   directory (<code>/var/lib/senhub-agent</code>, <code>C:\ProgramData\SenHub</code>), readable by
