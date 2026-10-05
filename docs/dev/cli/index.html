@@ -4940,11 +4940,12 @@
 <td><code>install</code></td>
 <td></td>
 <td>any error</td>
-<td>service already installed, configuration present, binary current</td>
+<td>service installed and enabled, unit as <code>install</code> writes it, configuration present, binary current</td>
 </tr>
 </tbody>
 </table>
 <p>Any other command exits <code>0</code> on success and <code>2</code> on failure. Before this contract, failures exited <code>1</code>; a script that tests only for a non-zero code is unaffected, one that compares with <code>1</code> must now compare with <code>2</code>.</p>
+<p><code>install</code> also takes <code>--json</code> (<code>status</code>, <code>exit_code</code>, <code>changed</code>, <code>config_path</code>, <code>written</code>); its progress text then goes to stderr. A service that is installed but whose unit drifted, or that no longer starts at boot, is not "unchanged": <code>install</code> rewrites the unit and enables the service, exits <code>0</code>, and restarts nothing (restart the service to apply a changed unit). A unit owned by the <code>.deb</code>/<code>.rpm</code> package is never rewritten; the package manager updates it. On Windows the service registration and the single binary are the state.</p>
 <p>A command that exits <code>3</code> has written nothing: no file is rewritten, and its modification time is unchanged. A script that provisions a machine can run <code>config init</code>, <code>config set</code> and <code>install</code> again and treat <code>0</code> and <code>3</code> as success.</p>
 <h2 id="json-output">JSON output<a class="headerlink" href="#json-output" title="Permanent link">&para;</a></h2>
 <p><code>version</code>, <code>status</code>, <code>doctor</code>, <code>config check</code>, <code>config show</code>, <code>config set</code>, <code>config init</code> and <code>secret status</code> accept <code>--json</code>. The command then prints a single JSON object on stdout and nothing else there; diagnostics still go to stderr. Without the flag the output is the text described below.</p>
