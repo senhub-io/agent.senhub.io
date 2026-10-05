@@ -3456,6 +3456,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#before-you-upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3467,7 +3478,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#features_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Features
@@ -3489,7 +3500,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features_1" class="md-nav__link">
+  <a href="#features_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Features
@@ -4018,6 +4029,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#before-you-upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4029,7 +4051,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#features_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Features
@@ -4051,7 +4073,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features_1" class="md-nav__link">
+  <a href="#features_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Features
@@ -4090,6 +4112,19 @@
 <p>Changes land here as they are merged to <code>dev</code>.</p>
 <div class="rn-filter"></div>
 
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Linux host security signals in the <code>process</code> probe.</strong> Three new
+  machine-wide metrics on Linux: <code>senhub.system.kernel.open_files</code> (file
+  handles allocated, from <code>/proc/sys/fs/file-nr</code>, to read against the
+  existing <code>senhub.system.kernel.max_files</code>), <code>senhub.system.passwd.checksum</code>
+  (CRC32 of <code>/etc/passwd</code> as a number that changes when the file changes)
+  and <code>senhub.system.passwd.modified_timestamp</code> (its modification time).
+  The generated Zabbix template for the probe carries a warning trigger
+  that fires when the checksum changes, <code>change(...)&lt;&gt;0</code>. Re-run
+  <code>zabbix setup</code> to refresh the templates. Other platforms emit nothing
+  new.</li>
+</ul>
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Zabbix counter items become rates.</strong> In the generated templates, every
@@ -4103,7 +4138,7 @@
   triggers and calculated items you wrote against these items to compare
   a rate.</li>
 </ul>
-<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h2 id="features_1">Features<a class="headerlink" href="#features_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Linux disk I/O.</strong> The <code>logicaldisk</code> probe now reports, per whole block
   device, the bytes and operations read and written and the time spent on
@@ -4129,7 +4164,7 @@
   must follow. The container image and the Windows installer are updated
   to match. See <a href="../../cli/#exit-codes">Exit codes</a>.</li>
 </ul>
-<h2 id="features_1">Features<a class="headerlink" href="#features_1" title="Permanent link">&para;</a></h2>
+<h2 id="features_2">Features<a class="headerlink" href="#features_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>doctor</code> diagnoses an install in one pass.</strong> It aggregates the
   service state, the systemd unit and binary comparison, <code>config check</code>,
