@@ -4417,6 +4417,10 @@
 </tr>
 </tbody>
 </table>
+<p>The per-job CPU, disk and page-fault values describe the collection
+interval: the probe asks IBM i to reset the elapsed statistics on every
+collection. The first collection after the probe starts reports the
+aggregates only, and the per-job series start on the second.</p>
 <p>The per-job series are not sent to PRTG. A job's name carries its number
 (<code>851034/QUSER/QP0ZSPWT</code>), which changes at every run, and PRTG keeps every
 channel it has seen: each run would leave a dead channel on the sensor, and
@@ -4857,7 +4861,9 @@ message remains visible there through the jobs-by-status count.</p>
 <p>The <code>message_queue</code> (QSYSOPR), <code>history_log</code> (QHST), <code>audit_journal</code> (QAUDJRN)
 and <code>msgw_job</code> (message-wait jobs) collectors relay operational events rather
 than numeric metrics. They are not exported to OTLP/Prometheus; a future
-release will export them as OTLP logs.</p>
+release will export them as OTLP logs. Their timestamps are the
+partition's own: the probe reads the partition's clock and zone, so an
+agent and a partition in different zones report the same instants.</p>
 </div>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
@@ -5087,6 +5093,27 @@ series' tags.</p>
 <td>Threshold at which this ASP raises a storage warning, as configured — not a measurement</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.asp.disk_units</code></td>
+<td><code>ibmi.asp.disk_units_count</code></td>
+<td>ASP Disk Units ({asp_number})</td>
+<td>#</td>
+<td>Disk units that make up this ASP</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.asp.available</code></td>
+<td><code>ibmi.asp.available_capacity_mb</code></td>
+<td>ASP Available Capacity ({asp_number})</td>
+<td>MB</td>
+<td>Capacity of this ASP not yet in use</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.asp.overflow</code></td>
+<td><code>ibmi.asp.overflow_storage_mb</code></td>
+<td>ASP Overflow Storage ({asp_number})</td>
+<td>MB</td>
+<td>Storage of this ASP that overflowed into the system ASP; a non-zero value is an alarm</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.job.count</code></td>
 <td><code>ibmi.jobs.total_count</code></td>
 <td>Jobs Total</td>
@@ -5126,14 +5153,14 @@ series' tags.</p>
 <td><code>ibmi.job.elapsed_cpu_percent</code></td>
 <td job_name="job_name">CPU % —</td>
 <td>%</td>
-<td>Share of CPU attributed to this job since the statistics baseline — set on the first query of the connection, not per collection (senhub-agent-enterprise#90)</td>
+<td>Share of CPU attributed to this job since the previous collection; the statistics are reset on every collection, so this is the collection interval and not the time since the connection opened</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.cpu.elapsed_time</code></td>
 <td><code>ibmi.job.elapsed_cpu_ms</code></td>
 <td job_name="job_name">Elapsed CPU —</td>
 <td>ms</td>
-<td>CPU time this job used since the statistics baseline; same window as elapsed_cpu_percent</td>
+<td>CPU time this job used since the previous collection; same window as elapsed_cpu_percent</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.cpu.cumulative_time</code></td>
@@ -5175,14 +5202,14 @@ series' tags.</p>
 <td><code>ibmi.job.elapsed_total_disk_io</code></td>
 <td job_name="job_name">Disk I/O (elapsed) —</td>
 <td>#</td>
-<td>Disk I/O since the statistics baseline; same window as the other elapsed values</td>
+<td>Disk I/O since the previous collection; same window as the other elapsed values</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.page_faults</code></td>
 <td><code>ibmi.job.elapsed_page_faults</code></td>
 <td job_name="job_name">Page Faults —</td>
 <td>#</td>
-<td>Page faults since the statistics baseline; sustained faults point at an undersized memory pool</td>
+<td>Page faults since the previous collection; sustained faults point at an undersized memory pool</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.threads</code></td>
@@ -5241,6 +5268,41 @@ series' tags.</p>
 <td>Job queues holding at least one job</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.job_queues.depth</code></td>
+<td><code>ibmi.job_queue.jobs_sum</code></td>
+<td>Job Queues Jobs</td>
+<td>#</td>
+<td>Jobs waiting in all non-empty job queues; the sum of the per-queue series</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.job_queues.active</code></td>
+<td><code>ibmi.job_queue.active_sum</code></td>
+<td>Job Queues Active Jobs</td>
+<td>#</td>
+<td>Active jobs of all non-empty job queues; the sum of the per-queue series</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.job_queues.held</code></td>
+<td><code>ibmi.job_queue.held_sum</code></td>
+<td>Job Queues Held Jobs</td>
+<td>#</td>
+<td>Held jobs of all non-empty job queues; the sum of the per-queue series</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.job_queues.released</code></td>
+<td><code>ibmi.job_queue.released_sum</code></td>
+<td>Job Queues Released Jobs</td>
+<td>#</td>
+<td>Released jobs of all non-empty job queues; the sum of the per-queue series</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.job_queues.scheduled</code></td>
+<td><code>ibmi.job_queue.scheduled_sum</code></td>
+<td>Job Queues Scheduled Jobs</td>
+<td>#</td>
+<td>Scheduled jobs of all non-empty job queues; the sum of the per-queue series</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.scheduled_job.count</code></td>
 <td><code>ibmi.scheduled_job.total</code></td>
 <td>Scheduled Jobs</td>
@@ -5255,6 +5317,13 @@ series' tags.</p>
 <td>Time since this scheduled job last ran; the metric to alert on, an entry that stops firing keeps a healthy last status</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.scheduled_job.by_status</code></td>
+<td><code>ibmi.scheduled_job.count_by_status</code></td>
+<td status="status">Scheduled Jobs</td>
+<td>#</td>
+<td>Scheduled job entries in this status</td>
+</tr>
+<tr>
 <td>-</td>
 <td><code>ibmi.msgw_job.event</code></td>
 <td job_name="job_name">MSGW —</td>
@@ -5263,10 +5332,17 @@ series' tags.</p>
 </tr>
 <tr>
 <td><code>senhub.ibmi.subsystem.active_jobs</code></td>
-<td><code>ibmi.subsystem.active_jobs</code></td>
+<td><code>ibmi.subsystem.active_jobs_count</code></td>
 <td subsystem="subsystem">Active Jobs in</td>
 <td>#</td>
 <td>Active jobs in this subsystem</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.subsystem.max_active_jobs</code></td>
+<td><code>ibmi.subsystem.max_active_jobs</code></td>
+<td subsystem="subsystem">Max Active Jobs in</td>
+<td>#</td>
+<td>Active jobs this subsystem accepts, as configured — not a measurement</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.memory_pool.size</code></td>
@@ -5290,39 +5366,53 @@ series' tags.</p>
 <td>Threads waiting for an activation slot in this pool; a rising count means the pool's activity level is too low for the work</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.memory_pool.current_size</code></td>
+<td><code>ibmi.memory_pool.current_size_mb</code></td>
+<td pool_name="pool_name">Pool Current Size —</td>
+<td>MB</td>
+<td>Storage this pool holds now</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.memory_pool.reserved_size</code></td>
+<td><code>ibmi.memory_pool.reserved_size_mb</code></td>
+<td pool_name="pool_name">Pool Reserved Size —</td>
+<td>MB</td>
+<td>Storage of this pool reserved for the system</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.disk.utilization</code></td>
 <td><code>ibmi.disk.percent_busy</code></td>
 <td unit_number="unit_number">Disk Busy — unit</td>
 <td>%</td>
-<td>Share of time this disk unit was busy since the statistics baseline</td>
+<td>Share of time this disk unit was busy since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.read</code></td>
 <td><code>ibmi.disk.data_read_bytes</code></td>
 <td unit_number="unit_number">Disk Read — unit</td>
 <td>B</td>
-<td>Bytes read from this disk unit since the statistics baseline</td>
+<td>Bytes read from this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.write</code></td>
 <td><code>ibmi.disk.data_written_bytes</code></td>
 <td unit_number="unit_number">Disk Write — unit</td>
 <td>B</td>
-<td>Bytes written to this disk unit since the statistics baseline</td>
+<td>Bytes written to this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.operations</code></td>
 <td><code>ibmi.disk.read_requests</code></td>
 <td unit_number="unit_number">Disk Read Requests — unit</td>
 <td>#</td>
-<td>Read requests served by this disk unit since the statistics baseline</td>
+<td>Read requests served by this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.operations</code></td>
 <td><code>ibmi.disk.write_requests</code></td>
 <td unit_number="unit_number">Disk Write Requests — unit</td>
 <td>#</td>
-<td>Write requests served by this disk unit since the statistics baseline</td>
+<td>Write requests served by this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.capacity</code></td>
@@ -5367,6 +5457,20 @@ series' tags.</p>
 <td>Spooled files across every output queue</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.output_queue.nonempty</code></td>
+<td><code>ibmi.output_queue.nonempty_total</code></td>
+<td>Output Queues Non-empty</td>
+<td>#</td>
+<td>Output queues holding at least one spooled file</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.output_queue.writers</code></td>
+<td><code>ibmi.output_queue.writers_count</code></td>
+<td queue_name="queue_name">Output Queue Writers —</td>
+<td>#</td>
+<td>Writers started against this output queue</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.spooled_file.count</code></td>
 <td><code>ibmi.spooled_file.total</code></td>
 <td>Spooled Files</td>
@@ -5379,6 +5483,20 @@ series' tags.</p>
 <td>Oldest Spool Age</td>
 <td>s</td>
 <td>Age of the oldest spooled file; output nobody collects accumulates here and consumes ASP</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.spooled_file.by_status</code></td>
+<td><code>ibmi.spooled_file.count_by_status</code></td>
+<td status="status">Spooled Files</td>
+<td>#</td>
+<td>Spooled files in this status</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.spooled_file.oldest_age_by_status</code></td>
+<td><code>ibmi.spooled_file.oldest_age_seconds_by_status</code></td>
+<td status="status">Oldest Spooled File —</td>
+<td>s</td>
+<td>Age of the oldest spooled file in this status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_storage.used</code></td>
@@ -5409,6 +5527,27 @@ series' tags.</p>
 <td>User profiles past 80% of their storage quota</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.user_storage.total_used</code></td>
+<td><code>ibmi.user_storage.used_total_kb</code></td>
+<td>User Storage Used Total</td>
+<td>KB</td>
+<td>Storage used by the users covered by the per-user series</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.user_storage.users</code></td>
+<td><code>ibmi.user_storage.users_total</code></td>
+<td>Users With Storage</td>
+<td>#</td>
+<td>Users holding storage</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.user_storage.users_with_quota</code></td>
+<td><code>ibmi.user_storage.users_with_quota</code></td>
+<td>Users With Storage Quota</td>
+<td>#</td>
+<td>Users whose storage is capped (a maximum other than *NOMAX)</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.table.rows</code></td>
 <td><code>ibmi.table.rows_count</code></td>
 <td>Rows — {schema}.{table_name}</td>
@@ -5435,6 +5574,41 @@ series' tags.</p>
 <td>Deleted Rows — {schema}.{table_name}</td>
 <td>#</td>
 <td>Rows deleted but not yet reorganised; space a REORG would reclaim</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.table.data_size</code></td>
+<td><code>ibmi.table.data_size_bytes</code></td>
+<td table_name="table_name">Table Data Size —</td>
+<td>B</td>
+<td>Data stored in this table</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.table.inserts</code></td>
+<td><code>ibmi.table.inserts_total</code></td>
+<td table_name="table_name">Table Inserts —</td>
+<td>#</td>
+<td>Rows inserted into this table since the statistics started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.table.deletes</code></td>
+<td><code>ibmi.table.deletes_total</code></td>
+<td table_name="table_name">Table Deletes —</td>
+<td>#</td>
+<td>Rows deleted from this table since the statistics started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.table.sampled</code></td>
+<td><code>ibmi.table.top_count</code></td>
+<td>Tables Sampled</td>
+<td>#</td>
+<td>Tables the per-table series cover (the sample is capped at 30 user tables)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.table.sampled_data_size</code></td>
+<td><code>ibmi.table.top_data_size_sum_bytes</code></td>
+<td>Sampled Tables Data Size</td>
+<td>B</td>
+<td>Data stored in the sampled tables</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.index_advisor.times_advised</code></td>
@@ -5493,6 +5667,41 @@ series' tags.</p>
 <td>Estimated delay of the remote journal behind the local one — an estimate, not a value the system reports</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.journal.receivers</code></td>
+<td><code>ibmi.journal.receivers_count</code></td>
+<td journal="journal">Journal Receivers —</td>
+<td>#</td>
+<td>Receivers attached to this journal over its life</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.journal.remote_journals</code></td>
+<td><code>ibmi.journal.remote_journals_count</code></td>
+<td journal="journal">Remote Journals —</td>
+<td>#</td>
+<td>Remote journals fed by this journal</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.journal.remote_lag_maximum</code></td>
+<td><code>ibmi.journal.remote_lag_maximum_seconds</code></td>
+<td journal="journal">Remote Journal Max Lag —</td>
+<td>s</td>
+<td>Longest time a remote journal of this journal has been behind</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.journal.by_state</code></td>
+<td><code>ibmi.journal.count_by_state</code></td>
+<td state="state">Journals</td>
+<td>#</td>
+<td>Journals in this state</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.journal.count</code></td>
+<td><code>ibmi.journal.total</code></td>
+<td>Journals Total</td>
+<td>#</td>
+<td>Journals defined on the partition</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.journal_receiver.size</code></td>
 <td><code>ibmi.journal_receiver.size_kb</code></td>
 <td receiver="receiver">Receiver Size —</td>
@@ -5507,11 +5716,88 @@ series' tags.</p>
 <td>Journal receivers currently attached</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.journal_receiver.threshold</code></td>
+<td><code>ibmi.journal_receiver.threshold_kb</code></td>
+<td receiver="receiver">Receiver Threshold —</td>
+<td>KB</td>
+<td>Size at which the system raises the receiver threshold message, as configured — not a measurement</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.journal_receiver.entries</code></td>
+<td><code>ibmi.journal_receiver.entries_count</code></td>
+<td receiver="receiver">Receiver Entries —</td>
+<td>#</td>
+<td>Journal entries held by this attached receiver</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.journal_receiver.pending_transactions</code></td>
+<td><code>ibmi.journal_receiver.pending_transactions</code></td>
+<td receiver="receiver">Receiver Pending Transactions —</td>
+<td>#</td>
+<td>Transactions still open against this attached receiver</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.tcp.connections.established</code></td>
 <td><code>ibmi.tcp.connections_established</code></td>
 <td>TCP Connections Established</td>
 <td>#</td>
 <td>TCP connections currently established</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.active_opens</code></td>
+<td><code>ibmi.tcp.active_opens_total</code></td>
+<td>TCP Active Opens</td>
+<td>#</td>
+<td>Connections the partition opened since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.passive_opens</code></td>
+<td><code>ibmi.tcp.passive_opens_total</code></td>
+<td>TCP Passive Opens</td>
+<td>#</td>
+<td>Connections the partition accepted since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.failed_opens</code></td>
+<td><code>ibmi.tcp.failed_opens_total</code></td>
+<td>TCP Failed Opens</td>
+<td>#</td>
+<td>Connection attempts that failed since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.established_resets</code></td>
+<td><code>ibmi.tcp.established_reset_total</code></td>
+<td>TCP Established Resets</td>
+<td>#</td>
+<td>Established connections that were then reset since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.segments_sent</code></td>
+<td><code>ibmi.tcp.segments_sent_total</code></td>
+<td>TCP Segments Sent</td>
+<td>#</td>
+<td>Segments sent since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.segments_received</code></td>
+<td><code>ibmi.tcp.segments_received_total</code></td>
+<td>TCP Segments Received</td>
+<td>#</td>
+<td>Segments received since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.segments_retransmitted</code></td>
+<td><code>ibmi.tcp.segments_retransmitted_total</code></td>
+<td>TCP Segments Retransmitted</td>
+<td>#</td>
+<td>Segments retransmitted since the TCP stack started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.tcp.segments_reset</code></td>
+<td><code>ibmi.tcp.segments_reset_total</code></td>
+<td>TCP Segments Reset</td>
+<td>#</td>
+<td>Segments sent with the reset flag since the TCP stack started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.netstat.connections</code></td>
@@ -5563,6 +5849,13 @@ series' tags.</p>
 <td>MTU configured on this interface</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.netstat.interface.by_status</code></td>
+<td><code>ibmi.netstat.interface_count_by_status</code></td>
+<td status="status">Interfaces</td>
+<td>#</td>
+<td>Network interfaces in this status</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.http_server.threads.active</code></td>
 <td><code>ibmi.http_server.active_threads</code></td>
 <td server_name="server_name">HTTP Active Threads —</td>
@@ -5582,6 +5875,41 @@ series' tags.</p>
 <td server_name="server_name">HTTP Responses —</td>
 <td>#</td>
 <td>Responses this HTTP server has sent since it started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.http_server.instances</code></td>
+<td><code>ibmi.http_server.instances_total</code></td>
+<td>HTTP Server Instances</td>
+<td>#</td>
+<td>HTTP server instances running on the partition</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.http_server.connections.normal</code></td>
+<td><code>ibmi.http_server.normal_connections</code></td>
+<td server_name="server_name">HTTP Normal Connections —</td>
+<td>#</td>
+<td>Plain (non-SSL) connections of this server (SERVER_NORMAL_CONNECTIONS)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.http_server.connections.ssl</code></td>
+<td><code>ibmi.http_server.ssl_connections</code></td>
+<td server_name="server_name">HTTP SSL Connections —</td>
+<td>#</td>
+<td>SSL connections of this server (SERVER_SSL_CONNECTIONS)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.http_server.requests</code></td>
+<td><code>ibmi.http_server.total_requests</code></td>
+<td server_name="server_name">HTTP Requests —</td>
+<td>#</td>
+<td>Requests this server has received since it started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.http_server.rejected</code></td>
+<td><code>ibmi.http_server.rejected_requests</code></td>
+<td server_name="server_name">HTTP Rejected Requests —</td>
+<td>#</td>
+<td>Requests this server has rejected since it started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.hardware.count</code></td>
@@ -5633,6 +5961,34 @@ series' tags.</p>
 <td>User profiles carrying at least one failed sign-on attempt</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.user_profile.no_password</code></td>
+<td><code>ibmi.user_profile.no_password_total</code></td>
+<td>Users Without Password</td>
+<td>#</td>
+<td>User profiles with no password</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.user_profile.password_expiring</code></td>
+<td><code>ibmi.user_profile.password_expiring_30d</code></td>
+<td>Passwords Expiring in 30 Days</td>
+<td>#</td>
+<td>User profiles whose password expires within 30 days</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.user_profile.by_special_authority</code></td>
+<td><code>ibmi.user_profile.count_by_special_auth</code></td>
+<td special_auth="special_auth">Users With</td>
+<td>#</td>
+<td>User profiles holding this special authority; a profile holding several counts once for each</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.user_profile.privileged</code></td>
+<td><code>ibmi.user_profile.privileged_status</code></td>
+<td user_name="user_name">Privileged User —</td>
+<td>#</td>
+<td>1 when this profile holds <em>ALLOBJ, </em>SECADM, <em>SECOFR or </em>AUDIT and is enabled, 0 when disabled, -1 for any other status</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.sysval.security_level</code></td>
 <td><code>ibmi.sysval.security_level</code></td>
 <td>QSECURITY</td>
@@ -5647,11 +6003,137 @@ series' tags.</p>
 <td>QAUDLVL as a numeric code; 0 means auditing is off</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.sysval.max_signon_attempts</code></td>
+<td><code>ibmi.sysval.max_signon_attempts</code></td>
+<td>System Value QMAXSIGN</td>
+<td>#</td>
+<td>Setting of system value QMAXSIGN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.password_expiration</code></td>
+<td><code>ibmi.sysval.password_expiration_days</code></td>
+<td>System Value QPWDEXPITV</td>
+<td>d</td>
+<td>Setting of system value QPWDEXPITV: days a password stays valid, 0 for no expiry. A configuration value, not a measurement; the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.password_min_length</code></td>
+<td><code>ibmi.sysval.password_min_length</code></td>
+<td>System Value QPWDMINLEN</td>
+<td>#</td>
+<td>Setting of system value QPWDMINLEN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.password_max_length</code></td>
+<td><code>ibmi.sysval.password_max_length</code></td>
+<td>System Value QPWDMAXLEN</td>
+<td>#</td>
+<td>Setting of system value QPWDMAXLEN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.password_level</code></td>
+<td><code>ibmi.sysval.password_level</code></td>
+<td>System Value QPWDLVL</td>
+<td>#</td>
+<td>Setting of system value QPWDLVL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.password_required_difference</code></td>
+<td><code>ibmi.sysval.password_required_difference</code></td>
+<td>System Value QPWDRQDDIF</td>
+<td>#</td>
+<td>Setting of system value QPWDRQDDIF. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.limit_security_officer</code></td>
+<td><code>ibmi.sysval.limit_security_officer</code></td>
+<td>System Value QLMTSECOFR</td>
+<td>#</td>
+<td>Setting of system value QLMTSECOFR. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.limit_device_sessions</code></td>
+<td><code>ibmi.sysval.limit_device_sessions</code></td>
+<td>System Value QLMTDEVSSN</td>
+<td>#</td>
+<td>Setting of system value QLMTDEVSSN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.auto_config</code></td>
+<td><code>ibmi.sysval.auto_config</code></td>
+<td>System Value QAUTOCFG</td>
+<td>#</td>
+<td>Setting of system value QAUTOCFG. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.auto_virtual_devices</code></td>
+<td><code>ibmi.sysval.auto_virtual_devices</code></td>
+<td>System Value QAUTOVRT</td>
+<td>#</td>
+<td>Setting of system value QAUTOVRT. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.create_default_auth</code></td>
+<td><code>ibmi.sysval.create_default_auth</code></td>
+<td>System Value QCRTAUT</td>
+<td>#</td>
+<td>Setting of system value QCRTAUT. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.display_signon_info</code></td>
+<td><code>ibmi.sysval.display_signon_info</code></td>
+<td>System Value QDSPSGNINF</td>
+<td>#</td>
+<td>Setting of system value QDSPSGNINF. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.remote_signon</code></td>
+<td><code>ibmi.sysval.remote_signon</code></td>
+<td>System Value QRMTSIGN</td>
+<td>#</td>
+<td>Setting of system value QRMTSIGN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.shared_memory_control</code></td>
+<td><code>ibmi.sysval.shared_memory_control</code></td>
+<td>System Value QSHRMEMCTL</td>
+<td>#</td>
+<td>Setting of system value QSHRMEMCTL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.retain_server_security</code></td>
+<td><code>ibmi.sysval.retain_server_security</code></td>
+<td>System Value QRETSVRSEC</td>
+<td>#</td>
+<td>Setting of system value QRETSVRSEC. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.sysval.audit_control</code></td>
+<td><code>ibmi.sysval.audit_control</code></td>
+<td>System Value QAUDCTL</td>
+<td>#</td>
+<td>Setting of system value QAUDCTL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.library_list.position</code></td>
 <td><code>ibmi.library_list.position</code></td>
 <td>Library {schema} ({type})</td>
 <td>#</td>
 <td>Position of this library in the list, in order of search</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.library_list.by_type</code></td>
+<td><code>ibmi.library_list.count_by_type</code></td>
+<td type="type">Libraries</td>
+<td>#</td>
+<td>Libraries of this type in the library list</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.library_list.count</code></td>
+<td><code>ibmi.library_list.total</code></td>
+<td>Library List Size</td>
+<td>#</td>
+<td>Libraries in the library list</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.license.licensed_users</code></td>
@@ -5668,6 +6150,27 @@ series' tags.</p>
 <td>Users this product's licence allows</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.license.usage</code></td>
+<td><code>ibmi.license.usage_count</code></td>
+<td>License Usage — {product_id} {feature_id}</td>
+<td>#</td>
+<td>Licences of this product feature currently in use</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.license.peak_usage</code></td>
+<td><code>ibmi.license.peak_usage</code></td>
+<td>License Peak Usage — {product_id} {feature_id}</td>
+<td>#</td>
+<td>Highest licence usage this product feature has reached</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.license.products</code></td>
+<td><code>ibmi.license.products_installed</code></td>
+<td>Licensed Products Installed</td>
+<td>#</td>
+<td>Licensed product features installed on the partition</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.ptf_group.installed</code></td>
 <td><code>ibmi.ptf_group.installed</code></td>
 <td group="group">PTF Group —</td>
@@ -5682,11 +6185,221 @@ series' tags.</p>
 <td>Level of this PTF group as installed; compare against the level IBM publishes</td>
 </tr>
 <tr>
+<td><code>senhub.ibmi.ptf_group.by_status</code></td>
+<td><code>ibmi.ptf_group.count_by_status</code></td>
+<td status="status">PTF Groups</td>
+<td>#</td>
+<td>PTF groups in this status</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.ptf_group.count</code></td>
+<td><code>ibmi.ptf_group.total</code></td>
+<td>PTF Groups Total</td>
+<td>#</td>
+<td>PTF groups known to the partition</td>
+</tr>
+<tr>
 <td><code>senhub.ibmi.watch.session_active</code></td>
 <td><code>ibmi.watch.session_active</code></td>
 <td session_id="session_id">Watch Session —</td>
 <td>#</td>
 <td>1 when this watch session is running</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.watch.sessions</code></td>
+<td><code>ibmi.watch.active_total</code></td>
+<td>Watch Sessions</td>
+<td>#</td>
+<td>Watch sessions active on the partition</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.watch.session_age</code></td>
+<td><code>ibmi.watch.session_age_seconds</code></td>
+<td session_id="session_id">Watch Session Age —</td>
+<td>s</td>
+<td>Time since this watch session started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.authority_collection.entries</code></td>
+<td><code>ibmi.authority_collection.entries_total</code></td>
+<td>Authority Collection Entries</td>
+<td>#</td>
+<td>Authority checks recorded in the collection table; the table is emptied by the administrator, so the value can fall</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.authority_collection.failed_checks</code></td>
+<td><code>ibmi.authority_collection.failed_checks_total</code></td>
+<td>Authority Collection Failed Checks</td>
+<td>#</td>
+<td>Recorded authority checks the user did not pass (CHECK_ANY = NO)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.authority_collection.user_entries</code></td>
+<td><code>ibmi.authority_collection.entries_by_user</code></td>
+<td user="user">Authority Entries —</td>
+<td>#</td>
+<td>Authority checks recorded for this user (top 200 users)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.authority_collection.user_failed_checks</code></td>
+<td><code>ibmi.authority_collection.failed_checks_by_user</code></td>
+<td user="user">Authority Failed Checks —</td>
+<td>#</td>
+<td>Recorded authority checks this user did not pass (top 200 users)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.instances</code></td>
+<td><code>ibmi.jvm.instances_total</code></td>
+<td>JVM Instances</td>
+<td>#</td>
+<td>Java virtual machines running on the partition</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.threads</code></td>
+<td><code>ibmi.jvm.thread_count</code></td>
+<td job_name="job_name">JVM Threads —</td>
+<td>#</td>
+<td>Java threads of this JVM</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.gc.cumulative_time</code></td>
+<td><code>ibmi.jvm.gc_time_ms</code></td>
+<td job_name="job_name">JVM GC Time —</td>
+<td>ms</td>
+<td>Time this JVM has spent in garbage collection since it started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.gc.cycles</code></td>
+<td><code>ibmi.jvm.gc_cycles_total</code></td>
+<td job_name="job_name">JVM GC Cycles —</td>
+<td>#</td>
+<td>Garbage collection cycles this JVM has run since it started</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.heap.initial</code></td>
+<td><code>ibmi.jvm.heap_initial_bytes</code></td>
+<td job_name="job_name">JVM Initial Heap —</td>
+<td>B</td>
+<td>Heap size this JVM started with, as configured — not a measurement</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.heap.current</code></td>
+<td><code>ibmi.jvm.heap_current_bytes</code></td>
+<td job_name="job_name">JVM Current Heap —</td>
+<td>B</td>
+<td>Heap this JVM currently has allocated</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.heap.used</code></td>
+<td><code>ibmi.jvm.heap_in_use_bytes</code></td>
+<td job_name="job_name">JVM Heap In Use —</td>
+<td>B</td>
+<td>Heap this JVM currently uses</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.heap.max</code></td>
+<td><code>ibmi.jvm.heap_max_bytes</code></td>
+<td job_name="job_name">JVM Max Heap —</td>
+<td>B</td>
+<td>Largest heap this JVM may grow to, as configured — not a measurement</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.jvm.malloc</code></td>
+<td><code>ibmi.jvm.malloc_bytes</code></td>
+<td job_name="job_name">JVM Native Memory —</td>
+<td>B</td>
+<td>Native memory this JVM has allocated outside its heap</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.media_library.device.up</code></td>
+<td><code>ibmi.media_library.device_up</code></td>
+<td device_name="device_name">Media Device Up —</td>
+<td>#</td>
+<td>1 when this media library device is varied on or active, 0 otherwise</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.media_library.devices</code></td>
+<td><code>ibmi.media_library.devices_total</code></td>
+<td>Media Library Devices</td>
+<td>#</td>
+<td>Media library devices known to the partition</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.ptf.by_status</code></td>
+<td><code>ibmi.ptf.count_by_status</code></td>
+<td status="status">PTFs</td>
+<td>#</td>
+<td>PTFs in this loaded status</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.ptf.count</code></td>
+<td><code>ibmi.ptf.total</code></td>
+<td>PTFs Total</td>
+<td>#</td>
+<td>PTFs known to the partition</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.query_supervisor.active</code></td>
+<td><code>ibmi.query_supervisor.active_total</code></td>
+<td>Active Queries</td>
+<td>#</td>
+<td>Queries running now across the partition (the per-query series cover the 20 oldest)</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.query_supervisor.user_active</code></td>
+<td><code>ibmi.query_supervisor.active_by_user</code></td>
+<td user="user">Active Queries —</td>
+<td>#</td>
+<td>Queries this user has among the 20 oldest running now</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.query_supervisor.elapsed</code></td>
+<td><code>ibmi.query_supervisor.elapsed_seconds</code></td>
+<td job_name="job_name">Query Elapsed —</td>
+<td>s</td>
+<td>Time this query has been open</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.query_supervisor.rows_fetched</code></td>
+<td><code>ibmi.query_supervisor.rows_fetched</code></td>
+<td job_name="job_name">Query Rows Fetched —</td>
+<td>#</td>
+<td>Rows this running query has fetched so far</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.query_supervisor.temp_storage</code></td>
+<td><code>ibmi.query_supervisor.temp_storage_mb</code></td>
+<td job_name="job_name">Query Temp Storage —</td>
+<td>MB</td>
+<td>Temporary storage this running query holds</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.service_agent.activated</code></td>
+<td><code>ibmi.service_agent.activated</code></td>
+<td>Service Agent Activated</td>
+<td>#</td>
+<td>1 when the Electronic Service Agent is activated, 0 otherwise</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.service_agent.last_inventory_age</code></td>
+<td><code>ibmi.service_agent.last_inventory_age_seconds</code></td>
+<td>Service Agent Inventory Age</td>
+<td>s</td>
+<td>Time since the last inventory collection</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.service_agent.last_hw_problem_send_age</code></td>
+<td><code>ibmi.service_agent.last_hw_problem_send_age_seconds</code></td>
+<td>Service Agent Hardware Problem Send Age</td>
+<td>s</td>
+<td>Time since the last hardware problem report sent to IBM</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.service_agent.last_sw_problem_send_age</code></td>
+<td><code>ibmi.service_agent.last_sw_problem_send_age_seconds</code></td>
+<td>Service Agent Software Problem Send Age</td>
+<td>s</td>
+<td>Time since the last software problem report sent to IBM</td>
 </tr>
 <tr>
 <td>-</td>
