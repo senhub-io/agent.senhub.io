@@ -3510,6 +3510,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4083,6 +4094,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4212,6 +4234,15 @@
   nothing and exit <code>3</code>. <code>config init --ok-if-unchanged</code> exits <code>0</code> in that
   case, for installers that treat any other code as a failure.</li>
 <li><strong>filetail reports where each tail stands.</strong> For every file followed, <code>senhub.filetail.read_offset</code> and <code>senhub.filetail.file_size</code> (Prometheus <code>senhub_filetail_read_offset_bytes</code> and <code>senhub_filetail_file_size_bytes</code>, attribute <code>log.file.path</code>) let a rule detect a frozen tail: the file grew and the offset did not move.</li>
+</ul>
+<h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Oracle 23ai: login with a password longer than 30 characters.</strong> The
+  <code>oracle</code> probe could not log in to Oracle Database 23ai with a password of
+  more than 30 characters: every cycle reported <code>senhub.db.up = 0</code> with
+  <code>ORA-01017</code>, while SQL*Plus accepted the same credentials. The driver does
+  not announce long password support, which 23ai requires; the probe now does.
+  Passwords of 30 characters or fewer were never affected.</li>
 <li><strong>Zabbix links the host probes of each platform by default.</strong> <code>zabbix setup</code> linked five templates whatever the platform, so a Windows host collecting its services or its event log counter got no item for them. The probes marked <code>universal</code> in their definition (on Windows, <code>winservices</code> and <code>windows_eventlog</code> join the five) are linked per platform, <code>--all-probes</code> links every template, and a guard fails the build if a registered probe emits metrics and no template declares them (ent#109).</li>
 <li><strong>Zabbix templates ship graphs and dashboards.</strong> The CPU, memory, logical disk and network templates carry graph prototypes (utilization, load, throughput, operations, queue, errors, per instance) declared in the probe definitions under <code>graphs:</code>, and a dashboard of their own graphs per template, listed under the host's Dashboards menu (7.0 export; the 6.0 export keeps the graphs only) (ent#110).</li>
 <li><strong>Windows services are discovered in Zabbix, with an "automatic service not running" trigger.</strong> The <code>winservices</code> probe now reports each service's start type (<code>windows.service.start_type</code>); the template creates the state, status and start type of every service by discovery and raises a problem when a service set to start automatically has not been running for <code>{$SENHUB.WINSERVICES.GRACE}</code> (5 minutes). Discovery is filtered by <code>{$SENHUB.WINSERVICES.MATCHES}</code> and <code>{$SENHUB.WINSERVICES.NOT_MATCHES}</code>. The probe's own heartbeat is no longer declared once per service (ent#114).</li>
