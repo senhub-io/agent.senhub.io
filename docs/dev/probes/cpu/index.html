@@ -5055,8 +5055,18 @@
 <td>Software interrupt time</td>
 <td>All platforms</td>
 </tr>
+<tr>
+<td><code>system_time</code></td>
+<td>Host clock, in seconds since the Unix epoch (OTel name <code>senhub.system.time</code>); not exposed to PRTG</td>
+<td>Linux, Windows</td>
+</tr>
 </tbody>
 </table>
+<p><code>system_time</code> lets a monitoring server check clock drift. Prometheus reads it
+with <code>time() - senhub_system_time_seconds</code>; the Zabbix template shows it as a
+date and raises a trigger when it differs from the server's time by more than
+<code>{$SENHUB.CLOCK.DRIFT.MAX}</code> (60 seconds by default). The value is the time of
+the last collection, so a reading is up to one collection interval old.</p>
 <h3 id="unixlinuxmacos-specific">Unix/Linux/macOS Specific<a class="headerlink" href="#unixlinuxmacos-specific" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -5584,6 +5594,13 @@ series' tags.</p>
 <td>Processes Total</td>
 <td>#</td>
 <td>Total number of processes on the host.</td>
+</tr>
+<tr>
+<td><code>senhub.system.time</code></td>
+<td><code>system_time</code></td>
+<td>Host Clock</td>
+<td>s</td>
+<td>Current time of the host clock, in seconds since the Unix epoch, sampled at collection</td>
 </tr>
 </tbody>
 </table>

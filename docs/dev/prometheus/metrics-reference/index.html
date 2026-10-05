@@ -5409,6 +5409,12 @@ lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
 <td>{process}</td>
 <td>–</td>
 </tr>
+<tr>
+<td><code>senhub_system_time_seconds</code></td>
+<td>gauge</td>
+<td>s</td>
+<td>– (host clock as a Unix timestamp; <code>time() - senhub_system_time_seconds</code> gives the drift)</td>
+</tr>
 </tbody>
 </table>
 <p>Notes (since 0.1.91):
@@ -5585,6 +5591,24 @@ but the metrics it emits use the OTel <code>system.filesystem.*</code> conventio
 <td>gauge</td>
 <td>{operation}</td>
 <td>(Windows)</td>
+</tr>
+<tr>
+<td><code>senhub_system_disk_io_bytes_total</code></td>
+<td>counter</td>
+<td>By</td>
+<td><code>disk_io_direction</code> ∈ {read, write}, <code>system_device</code> (Linux, whole block devices)</td>
+</tr>
+<tr>
+<td><code>senhub_system_disk_operations_total</code></td>
+<td>counter</td>
+<td>{operation}</td>
+<td><code>disk_io_direction</code> ∈ {read, write}, <code>system_device</code> (Linux)</td>
+</tr>
+<tr>
+<td><code>senhub_system_disk_io_time_seconds_total</code></td>
+<td>counter</td>
+<td>s</td>
+<td><code>system_device</code> (Linux)</td>
 </tr>
 </tbody>
 </table>
