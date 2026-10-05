@@ -631,6 +631,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#windows-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphs-and-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graphs and dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -744,6 +766,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="One template set per platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-probes-are-linked-without-being-named" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which probes are linked without being named
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4339,6 +4378,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#windows-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphs-and-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graphs and dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4452,6 +4513,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="One template set per platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-probes-are-linked-without-being-named" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which probes are linked without being named
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4944,35 +5022,191 @@ without anyone writing an expression.</p>
 </tbody>
 </table>
 <ul>
+<li><strong>More thresholds.</strong> The processor queue or load, paging, disk queue
+  or busy time, inodes, interface errors and discards, and a recent
+  restart raise a <em>Warning</em> when every value over the last five minutes
+  is past the limit (the restart one while the uptime is under its
+  window). They are declared in the probe definitions under <code>triggers:</code>
+  and carry the macros below; a trigger over a metric a platform does not
+  produce is left out of that platform's template.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Macro</th>
+<th>Default</th>
+<th>Watches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{$SENHUB.CPU_QUEUE.PER_CORE}</code></td>
+<td>3</td>
+<td>Processor queue length per logical processor (Windows)</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.CPU_LOAD.PER_CORE}</code></td>
+<td>1.5</td>
+<td>5 minute load average per logical processor (Linux)</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.PAGING_USED_PERCENT.WARN}</code></td>
+<td>80</td>
+<td>Swap or pagefile usage, in percent</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.DISK_QUEUE.MAX}</code></td>
+<td>5</td>
+<td>Disk queue length per drive (Windows)</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.DISK_BUSY.MAX}</code></td>
+<td>0.9</td>
+<td>Fraction of time a device has I/O in flight (Linux)</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.FS_INODES_USED_PERCENT.WARN}</code></td>
+<td>90</td>
+<td>Inode usage, in percent (Linux)</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.NET_ERRORS.MAX}</code></td>
+<td>2</td>
+<td>Interface errors per second, either direction</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.NET_DISCARDS.MAX}</code></td>
+<td>10</td>
+<td>Interface discards per second, either direction</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.UPTIME.RESTART_WINDOW}</code></td>
+<td>10m</td>
+<td>How long after a boot the restart problem stays open</td>
+</tr>
+</tbody>
+</table>
+<p>The host's uptime comes from <code>system.uptime</code>, sent by the <code>cpu</code> probe
+  (not a PRTG channel). The Windows services trigger and its macros are
+  <a href="#windows-services">below</a>. No disk latency trigger exists: no probe
+  reports a latency yet, only throughput, operations, queue and busy time.</p>
+<ul>
 <li><strong>Clock drift.</strong> The CPU template carries the host's clock as an item
   shown as a date, and a <em>Warning</em> trigger, <code>fuzzytime()</code>, that fires when
   the host's time is further from the server's than <code>{$SENHUB.CLOCK.DRIFT.MAX}</code>.
   It works the same on Zabbix 6.0 and 7.0.</li>
 </ul>
+<p>Taken together, a Windows host linked to the generated templates is
+watched for processor, memory and paging use, disk space, disk queue,
+interface errors, services and restarts, each limit a macro.</p>
 <p>Items and triggers are tagged the way the native templates are: every
 item carries <code>component</code> (the probe type, or <code>agent</code> and <code>inventory</code> on
 the agent's own items), and every trigger carries <code>scope</code>:
 <code>availability</code> for a state, <code>performance</code> for the processor, <code>capacity</code>
 for memory and disks. Filter problem views and actions on them.</p>
+<h3 id="windows-services">Windows services<a class="headerlink" href="#windows-services" title="Permanent link">&para;</a></h3>
+<p>The <code>winservices</code> template discovers every service the agent reports,
+one set of items per service name (<code>{#WINDOWS_SERVICE_NAME}</code>): whether it
+runs, its Service Control Manager state, and its start type, each with a
+value map. One trigger, <em>Service ... is set to start automatically and
+is not running</em> (Average), fires when a service configured to start
+automatically, delayed or not, has not been running for the whole grace
+period. A manual or disabled service that is stopped raises nothing.</p>
+<table>
+<thead>
+<tr>
+<th>Macro</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{$SENHUB.WINSERVICES.GRACE}</code></td>
+<td><code>5m</code></td>
+<td>How long the service must have been stopped, which covers a restart and the delayed start after a boot</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.WINSERVICES.MATCHES}</code></td>
+<td><code>.*</code></td>
+<td>A service is discovered only if its short name matches</td>
+</tr>
+<tr>
+<td><code>{$SENHUB.WINSERVICES.NOT_MATCHES}</code></td>
+<td><code>^(sppsvc\|clr_optimization_.*\|gupdate\|gupdatem\|edgeupdate\|edgeupdatem\|MapsBroker\|TrustedInstaller\|RemoteRegistry\|.*_[0-9a-f]{4,8})$</code></td>
+<td>A service whose short name matches is not discovered: services Windows starts on demand, and the per-session copies whose name changes at every logon</td>
+</tr>
+</tbody>
+</table>
+<p>Override the macros on a host or a host group. The probe's <code>services</code>
+parameter narrows what the agent reports at the source; the macros narrow
+what the server creates.</p>
+<h3 id="graphs-and-dashboards">Graphs and dashboards<a class="headerlink" href="#graphs-and-dashboards" title="Permanent link">&para;</a></h3>
+<p>The host probes' templates draw their metrics. A graph prototype under
+the discovery rule of the metrics it plots gives every discovered
+instance its own graph, named with the rule's macros:</p>
+<table>
+<thead>
+<tr>
+<th>Template</th>
+<th>Graphs (per instance)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>utilization; load average (Linux); run queue (Windows); interrupts and context switches</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>utilization; swap or pagefile utilization; page faults; pages in and out (Windows)</td>
+</tr>
+<tr>
+<td>Logical disk</td>
+<td>filesystem or drive utilization (per mount point or drive); throughput and operations (per device or drive and direction); busy time (Linux); queue length (Windows)</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>traffic, packets, errors and discards (per interface and direction)</td>
+</tr>
+</tbody>
+</table>
+<p>Each of these templates also carries a dashboard of its own graphs, two
+to a row, which Zabbix lists under the host's <strong>Dashboards</strong> menu, one
+entry per linked template. Zabbix resolves a dashboard widget against
+the graphs of the template that holds the dashboard and of no other, so
+there is no single combined page; the entries are the host overview.</p>
+<p>The charts are declared in the probe definition, under <code>graphs:</code>, as a
+name and the metrics to plot, by metric name:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">graphs</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"Disk</span><span class="nv"> </span><span class="s">throughput"</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">series</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">diskio_read_bytes</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">diskio_write_bytes</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">disk_read_bytes_sec</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">disk_write_bytes_sec</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>A metric the platform does not produce is left out, so one declaration
+serves Linux and Windows, and a chart with no series on a platform is
+not written. Two metrics of different discovery rules (a Linux and a
+Windows variant of the same fact) give one chart per rule. The 6.0
+export carries the graphs but not the dashboards, whose widgets that
+format writes differently.</p>
 <h2 id="encryption">Encryption<a class="headerlink" href="#encryption" title="Permanent link">&para;</a></h2>
 <p>The agent encrypts with <strong>certificates</strong> or with a <strong>pre-shared key</strong>,
 in both directions, which is the same choice a native Zabbix agent
 offers.</p>
 <h3 id="with-a-pre-shared-key">With a pre-shared key<a class="headerlink" href="#with-a-pre-shared-key" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">psk_identity</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-paris"</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">psk_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix.psk</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">psk_identity</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-paris"</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">psk_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix.psk</span>
 </code></pre></div>
 <p><code>psk_file</code> holds the key hex-encoded, exactly as Zabbix writes it, and
 is the only place it appears: nothing carries it in the configuration,
 so <code>config show</code> has nothing to redact and the file's permissions are
 the protection. Generate one the way Zabbix documents:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>openssl<span class="w"> </span>rand<span class="w"> </span>-hex<span class="w"> </span><span class="m">32</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/senhub-agent/zabbix.psk
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/senhub-agent/zabbix.psk
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>chown<span class="w"> </span>senhub:senhub<span class="w"> </span>/etc/senhub-agent/zabbix.psk<span class="w">   </span><span class="c1"># the service account reads it</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>openssl<span class="w"> </span>rand<span class="w"> </span>-hex<span class="w"> </span><span class="m">32</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/senhub-agent/zabbix.psk
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/senhub-agent/zabbix.psk
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>chown<span class="w"> </span>senhub:senhub<span class="w"> </span>/etc/senhub-agent/zabbix.psk<span class="w">   </span><span class="c1"># the service account reads it</span>
 </code></pre></div>
 <p>On the Zabbix side, set the same identity and key on the host, or in
 <strong>Administration &gt; General &gt; Autoregistration</strong> for agents that register
@@ -4983,12 +5217,12 @@ certificate <strong>or</strong> a pre-shared key, never both: Zabbix picks one
 encryption per connection, and configuring both would leave the agent
 choosing silently which secret proves it.</p>
 <h3 id="with-a-certificate">With a certificate<a class="headerlink" href="#with-a-certificate" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix-ca.crt</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/agent.crt</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/agent.key</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix-ca.crt</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/agent.crt</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/agent.key</span>
 </code></pre></div>
 <p>See <a href="#encrypting-the-polled-port">Encrypting the polled port</a> for the
 listener's own block.</p>
@@ -5030,26 +5264,26 @@ agent interface on it.</p>
 the translation and not somewhere it can poll. <code>passive.advertise</code> names
 the address instead: a name creates a DNS interface, an address creates
 an IP one.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">advertise</span><span class="p">:</span><span class="w"> </span><span class="s">"web-01.example.com"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nt">advertise</span><span class="p">:</span><span class="w"> </span><span class="s">"web-01.example.com"</span>
 </code></pre></div>
 <h3 id="encrypting-the-polled-port">Encrypting the polled port<a class="headerlink" href="#encrypting-the-polled-port" title="Permanent link">&para;</a></h3>
 <p>The listener takes its own <code>tls</code> block, apart from the one on the
 outbound connection, because the two are opposite roles: there the agent
 checks a server, here it presents itself to one.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">      </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.crt</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">      </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.key</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/zabbix-ca.crt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.crt</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/agent.key</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub/zabbix-ca.crt</span>
 </code></pre></div>
 <p>With <code>cert_file</code> and <code>key_file</code> alone, the agent encrypts what it serves
 and anyone the allow list admits may read it. Add <code>ca_file</code> and the
@@ -5061,27 +5295,27 @@ certificate says who they are.</p>
 start rather than leaving a listener that serves in clear.</p>
 <p>The polled port also takes a pre-shared key, in place of the
 certificate:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">psk_identity</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-paris"</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">psk_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix.psk</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">psk_identity</span><span class="p">:</span><span class="w"> </span><span class="s">"senhub-paris"</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="nt">psk_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/senhub-agent/zabbix.psk</span>
 </code></pre></div>
 <p>On the Zabbix side, set "Connections to host" to <em>PSK</em> with the same
 identity and key. A block takes a certificate or a pre-shared key, not
 both, and a key file that cannot be read or does not hold at least 16
 bytes in hexadecimal stops the agent at start.</p>
 <p>To restrict who may poll, without encryption:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix.example.com:10051"</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">passive</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10050</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="nt">allow</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.20.0.0/24"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h2 id="the-hosts-inventory-fills-itself">The host's inventory fills itself<a class="headerlink" href="#the-hosts-inventory-fills-itself" title="Permanent link">&para;</a></h2>
 <p>Beside the measurements, the agent knows what the machine <em>is</em>: its
@@ -5149,6 +5383,20 @@ system to the host metadata it registers with, and <code>zabbix setup</code>
 creates one autoregistration action per platform matching on it, so a
 Linux host is linked to the Linux templates and a Windows host to the
 Windows ones by itself.</p>
+<h3 id="which-probes-are-linked-without-being-named">Which probes are linked without being named<a class="headerlink" href="#which-probes-are-linked-without-being-named" title="Permanent link">&para;</a></h3>
+<p>A probe is linked by default when its definition marks it <code>universal</code>
+and it has an item on the platform: the processor, memory, network,
+disks and processes everywhere, and on Windows the services
+(<code>winservices</code>) and the event log counter (<code>windows_eventlog</code>). The
+other probes depend on what the host runs (<code>hyperv</code> on a Hyper-V host,
+<code>mssql</code> beside an SQL Server, any vendor probe), so you name them with
+<code>--probe</code>, or link everything with <code>--all-probes</code>. A template with
+nothing to send on a platform, such as <code>winservices</code> on Linux, is not
+imported for it.</p>
+<p><code>windows_eventlog</code> sends its records on the log rail, which the Zabbix
+output does not carry, so what a Zabbix host gets from it is its
+throughput counter, <code>senhub.windows_eventlog.records_emitted</code>, as a
+rate. The records themselves go to an OTLP output.</p>
 <p>Only the published platforms have an action. An agent built for macOS,
 which is a development target and not a release, registers as
 <code>... darwin</code>, matches nothing and waits for an autoregistration that
@@ -5172,13 +5420,13 @@ the host is monitored actively or polled on the passive port.</p>
 changes: the agent registers through it, the server attaches the host to
 the proxy that relayed the registration, and the values travel the same
 way.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"zabbix-proxy-paris.example.com:10051"</span>
 </code></pre></div>
 <p>A <strong>proxy group</strong> needs every member listed, separated by commas, the way
 a classic agent takes several <code>ServerActive</code> entries:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">zabbix</span><span class="p">:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s">"proxy-a.example.com,proxy-b.example.com,proxy-c.example.com"</span>
 </code></pre></div>
 <p>The agent talks to the first member that answers. When the host is held
 by another member, that member replies with a redirection and the agent
@@ -5248,7 +5496,7 @@ line without a flag; a script of your own that drives the API may need
 changing.</p>
 <p><strong>The proxy group redirection is unchanged.</strong> A host assigned to a group
 makes the server answer the check-list request with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"redirect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proxy:10051"</span><span class="p">}}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"redirect"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proxy:10051"</span><span class="p">}}</span>
 </code></pre></div>
 <p>which is the same shape 7.0 emits, and the agent follows it to the
 member holding the host. Two conditions have to be met for a group to
@@ -5261,11 +5509,11 @@ logs it and the next request is redirected normally.</p>
 <p>The templates are exported in the 7.0 format and import into 8.0 as they
 are; <code>--version 8.0</code> is not needed and does not exist.</p>
 <h2 id="zabbix-setup-options"><code>zabbix setup</code> options<a class="headerlink" href="#zabbix-setup-options" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>senhub-agent zabbix setup --url &lt;frontend&gt; [--token-file &lt;path&gt;]
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>                          [--group &lt;name&gt;] [--metadata &lt;string&gt;]
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>                          [--action-name &lt;name&gt;] [--probe &lt;type&gt; ...]
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>                          [--discovery-delay &lt;interval&gt; | --no-discovery-delay]
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>                          [--prefix &lt;key prefix&gt;] [--version 6.0|7.0] [--dry-run]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>senhub-agent zabbix setup --url &lt;frontend&gt; [--token-file &lt;path&gt;]
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>                          [--group &lt;name&gt;] [--metadata &lt;string&gt;]
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>                          [--action-name &lt;name&gt;] [--probe &lt;type&gt; ...] [--all-probes]
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>                          [--discovery-delay &lt;interval&gt; | --no-discovery-delay]
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>                          [--prefix &lt;key prefix&gt;] [--version 6.0|7.0] [--dry-run]
 </code></pre></div>
 <table>
 <thead>
@@ -5304,7 +5552,12 @@ are; <code>--version 8.0</code> is not needed and does not exist.</p>
 <tr>
 <td><code>--probe</code></td>
 <td>the probes every machine runs</td>
-<td>Also import and link the template of this probe type; repeat for several</td>
+<td>Also import and link the template of this probe type; repeat for several. <code>hyperv</code> and <code>mssql</code> are linked this way, since only some hosts run them</td>
+</tr>
+<tr>
+<td><code>--all-probes</code></td>
+<td></td>
+<td>Import and link every template that carries an item on the platform</td>
 </tr>
 <tr>
 <td><code>--discovery-delay</code></td>
