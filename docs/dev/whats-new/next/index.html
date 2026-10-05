@@ -4249,7 +4249,9 @@
 <li><strong>Idempotent provisioning commands.</strong> <code>config init</code>, <code>config set</code> and
   <code>install</code> run again on a machine already in the requested state write
   nothing and exit <code>3</code>. <code>config init --ok-if-unchanged</code> exits <code>0</code> in that
-  case, for installers that treat any other code as a failure.</li>
+  case, for installers that treat any other code as a failure. <code>install</code>
+  also repairs a drifted unit or a disabled service in place (exit <code>0</code>, no
+  restart) and takes <code>--json</code> with a <code>changed</code> field.</li>
 <li><strong>filetail reports where each tail stands.</strong> For every file followed, <code>senhub.filetail.read_offset</code> and <code>senhub.filetail.file_size</code> (Prometheus <code>senhub_filetail_read_offset_bytes</code> and <code>senhub_filetail_file_size_bytes</code>, attribute <code>log.file.path</code>) let a rule detect a frozen tail: the file grew and the offset did not move.</li>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
