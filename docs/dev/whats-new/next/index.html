@@ -3456,6 +3456,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#breaking-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3467,7 +3478,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#features_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Features
@@ -3996,6 +4007,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#breaking-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4007,7 +4029,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#features_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Features
@@ -4046,6 +4068,20 @@
 <p>Changes land here as they are merged to <code>dev</code>.</p>
 <div class="rn-filter"></div>
 
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Linux disk I/O.</strong> The <code>logicaldisk</code> probe now reports, per whole block
+  device, the bytes and operations read and written and the time spent on
+  I/O (<code>system.disk.io</code>, <code>system.disk.operations</code>, <code>system.disk.io_time</code>),
+  as cumulative counters, until now a Windows-only measurement. Partitions
+  and <code>loop</code>, <code>ram</code>, <code>zram</code>, <code>fd</code> and <code>sr</code> devices are left out. They reach
+  Prometheus, OTLP and Zabbix, which discovers one set of items per device.</li>
+<li><strong>Host clock.</strong> The <code>cpu</code> probe reports the host's time
+  (<code>senhub.system.time</code>, seconds since the Unix epoch) on Linux and Windows,
+  so a monitoring server can check clock drift: <code>time() - senhub_system_time_seconds</code>
+  in Prometheus, and in Zabbix a <code>fuzzytime()</code> trigger whose tolerance is
+  <code>{$SENHUB.CLOCK.DRIFT.MAX}</code> (60 seconds by default).</li>
+</ul>
 <h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Exit codes of the command line are a contract.</strong> <code>0</code> done, <code>1</code>
@@ -4058,7 +4094,7 @@
   must follow. The container image and the Windows installer are updated
   to match. See <a href="../../cli/#exit-codes">Exit codes</a>.</li>
 </ul>
-<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h2 id="features_1">Features<a class="headerlink" href="#features_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>doctor</code> diagnoses an install in one pass.</strong> It aggregates the
   service state, the systemd unit and binary comparison, <code>config check</code>,

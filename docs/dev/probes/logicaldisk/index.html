@@ -5238,8 +5238,28 @@
 <td>Current disk queue length</td>
 <td>Windows</td>
 </tr>
+<tr>
+<td><code>diskio_read_bytes</code>, <code>diskio_write_bytes</code></td>
+<td>Bytes read and written since boot (cumulative, OTel <code>system.disk.io</code>, <code>disk.io.direction</code>)</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td><code>diskio_read_ops</code>, <code>diskio_write_ops</code></td>
+<td>Read and write operations since boot (cumulative, OTel <code>system.disk.operations</code>)</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td><code>diskio_busy_seconds</code></td>
+<td>Time the device had I/O in flight since boot (cumulative, OTel <code>system.disk.io_time</code>)</td>
+<td>Linux</td>
+</tr>
 </tbody>
 </table>
+<p>On Linux the I/O counters are read from <code>/proc/diskstats</code>, one series per
+whole block device (<code>sda</code>, <code>nvme0n1</code>, <code>vda</code>, <code>dm-0</code>, <code>md0</code>). Partitions
+(<code>sda1</code>, <code>nvme0n1p1</code>) and <code>loop</code>, <code>ram</code>, <code>zram</code>, <code>fd</code> and <code>sr</code> devices are
+not reported. The values only grow: Prometheus reads a throughput with
+<code>rate()</code>. They are on by default, with no parameter to set.</p>
 <h3 id="unixlinuxmacos-specific">Unix/Linux/macOS Specific<a class="headerlink" href="#unixlinuxmacos-specific" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -5829,6 +5849,41 @@ series' tags.</p>
 <td>Used Percent ({mount_point})</td>
 <td>%</td>
 <td>Percentage of filesystem capacity currently in use</td>
+</tr>
+<tr>
+<td><code>system.disk.io</code></td>
+<td><code>diskio_read_bytes</code></td>
+<td>Disk I/O Read Bytes ({device})</td>
+<td>bytes</td>
+<td>Bytes transferred by the block device since boot, by direction</td>
+</tr>
+<tr>
+<td><code>system.disk.io</code></td>
+<td><code>diskio_write_bytes</code></td>
+<td>Disk I/O Write Bytes ({device})</td>
+<td>bytes</td>
+<td>Bytes transferred by the block device since boot, by direction</td>
+</tr>
+<tr>
+<td><code>system.disk.operations</code></td>
+<td><code>diskio_read_ops</code></td>
+<td>Disk Operations Read ({device})</td>
+<td>#</td>
+<td>Operations completed by the block device since boot, by direction</td>
+</tr>
+<tr>
+<td><code>system.disk.operations</code></td>
+<td><code>diskio_write_ops</code></td>
+<td>Disk Operations Write ({device})</td>
+<td>#</td>
+<td>Operations completed by the block device since boot, by direction</td>
+</tr>
+<tr>
+<td><code>system.disk.io_time</code></td>
+<td><code>diskio_busy_seconds</code></td>
+<td>Disk I/O Time ({device})</td>
+<td>s</td>
+<td>Time the block device spent with I/O in flight since boot</td>
 </tr>
 <tr>
 <td><code>senhub.system.filesystem.inode.limit</code></td>
