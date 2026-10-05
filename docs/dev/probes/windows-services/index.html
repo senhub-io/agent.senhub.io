@@ -4184,6 +4184,11 @@ than failing the whole collection.</p>
 <td>1</td>
 <td>Raw SCM service status code (1=Stopped, 2=Start Pending, 3=Stop Pending, 4=Running, …) per service</td>
 </tr>
+<tr>
+<td><code>windows.service.start_type</code></td>
+<td>1</td>
+<td>How the service is configured to start: 0 boot, 1 system, 2 automatic, 3 manual, 4 disabled, 5 automatic with delayed start. Absent for a service whose configuration cannot be read. Not a PRTG channel</td>
+</tr>
 </tbody>
 </table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
@@ -4232,6 +4237,13 @@ series' tags.</p>
 <td>Service {windows.service.name} Status</td>
 <td>#</td>
 <td>Numeric SCM state of the service: 1=stopped 2=start_pending 3=stop_pending 4=running 5=continue_pending 6=pause_pending 7=paused</td>
+</tr>
+<tr>
+<td><code>windows.service.start_type</code></td>
+<td><code>windows.service.start_type</code></td>
+<td>Service {windows.service.name} Start Type</td>
+<td>#</td>
+<td>How the service is configured to start: 0=boot 1=system 2=automatic 3=manual 4=disabled 5=automatic (delayed start)</td>
 </tr>
 </tbody>
 </table>
