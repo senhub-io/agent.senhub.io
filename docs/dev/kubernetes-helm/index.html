@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/tcp-dial/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/kubernetes-helm/">
       
       
-        <link rel="prev" href="../http-check/">
+        <link rel="prev" href="../container/">
       
       
-        <link rel="next" href="../dns-latency/">
+        <link rel="next" href="../ansible/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/favicon.svg">
+      <link rel="icon" href="../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>TCP dial - SenHub Agent</title>
+        <title>Kubernetes (Helm) - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tcp_dial-tcp-connect-latency" class="md-skip">
+        <a href="#kubernetes-helm" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TCP dial
+              Kubernetes (Helm)
             
           </span>
         </div>
@@ -239,7 +239,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -266,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../presentation/" class="md-nav__link">
+      <a href="../presentation/" class="md-nav__link">
         
   
   
@@ -320,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -347,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/" class="md-nav__link">
+      <a href="../releases/" class="md-nav__link">
         
   
   
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../container/" class="md-nav__link">
+      <a href="../container/" class="md-nav__link">
         
   
   
@@ -398,10 +398,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../kubernetes-helm/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes (Helm)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -417,6 +444,158 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-the-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring the node
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring the cluster
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-the-http-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening the HTTP output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-one-replica-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why one replica (Deployment)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-chart-does-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the chart does not do
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -428,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ansible/" class="md-nav__link">
+      <a href="../ansible/" class="md-nav__link">
         
   
   
@@ -455,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -482,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secret-store/" class="md-nav__link">
+      <a href="../secret-store/" class="md-nav__link">
         
   
   
@@ -509,7 +688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http-https/" class="md-nav__link">
+      <a href="../http-https/" class="md-nav__link">
         
   
   
@@ -536,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nagios/" class="md-nav__link">
+      <a href="../nagios/" class="md-nav__link">
         
   
   
@@ -563,7 +742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zabbix/" class="md-nav__link">
+      <a href="../zabbix/" class="md-nav__link">
         
   
   
@@ -590,7 +769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web-interface/" class="md-nav__link">
+      <a href="../web-interface/" class="md-nav__link">
         
   
   
@@ -669,7 +848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/" class="md-nav__link">
+      <a href="../license/" class="md-nav__link">
         
   
   
@@ -697,7 +876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-fr/" class="md-nav__link">
+      <a href="../license/agreement-fr/" class="md-nav__link">
         
   
   
@@ -725,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-en/" class="md-nav__link">
+      <a href="../license/agreement-en/" class="md-nav__link">
         
   
   
@@ -753,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/third-party/" class="md-nav__link">
+      <a href="../license/third-party/" class="md-nav__link">
         
   
   
@@ -840,7 +1019,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/" class="md-nav__link">
+      <a href="../prometheus/" class="md-nav__link">
         
   
   
@@ -868,7 +1047,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -903,7 +1082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -930,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../otlp/" class="md-nav__link">
+      <a href="../otlp/" class="md-nav__link">
         
   
   
@@ -954,8 +1133,6 @@
       
   
   
-    
-  
   
   
     
@@ -968,11 +1145,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
         
           
           <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
@@ -993,7 +1170,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1011,7 +1188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../probes/" class="md-nav__link">
         
   
   
@@ -1039,7 +1216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cpu/" class="md-nav__link">
+      <a href="../probes/cpu/" class="md-nav__link">
         
   
   
@@ -1067,7 +1244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory/" class="md-nav__link">
+      <a href="../probes/memory/" class="md-nav__link">
         
   
   
@@ -1095,7 +1272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../network/" class="md-nav__link">
+      <a href="../probes/network/" class="md-nav__link">
         
   
   
@@ -1123,7 +1300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logicaldisk/" class="md-nav__link">
+      <a href="../probes/logicaldisk/" class="md-nav__link">
         
   
   
@@ -1151,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linux-logs/" class="md-nav__link">
+      <a href="../probes/linux-logs/" class="md-nav__link">
         
   
   
@@ -1179,7 +1356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-eventlog/" class="md-nav__link">
+      <a href="../probes/windows-eventlog/" class="md-nav__link">
         
   
   
@@ -1207,7 +1384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../filetail/" class="md-nav__link">
+      <a href="../probes/filetail/" class="md-nav__link">
         
   
   
@@ -1235,7 +1412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process/" class="md-nav__link">
+      <a href="../probes/process/" class="md-nav__link">
         
   
   
@@ -1263,7 +1440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../systemd/" class="md-nav__link">
+      <a href="../probes/systemd/" class="md-nav__link">
         
   
   
@@ -1291,7 +1468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-services/" class="md-nav__link">
+      <a href="../probes/windows-services/" class="md-nav__link">
         
   
   
@@ -1319,7 +1496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../chrony/" class="md-nav__link">
+      <a href="../probes/chrony/" class="md-nav__link">
         
   
   
@@ -1347,7 +1524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ntp/" class="md-nav__link">
+      <a href="../probes/ntp/" class="md-nav__link">
         
   
   
@@ -1375,7 +1552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../os-updates/" class="md-nav__link">
+      <a href="../probes/os-updates/" class="md-nav__link">
         
   
   
@@ -1403,7 +1580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smart/" class="md-nav__link">
+      <a href="../probes/smart/" class="md-nav__link">
         
   
   
@@ -1431,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ipmi/" class="md-nav__link">
+      <a href="../probes/ipmi/" class="md-nav__link">
         
   
   
@@ -1459,7 +1636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nvidia/" class="md-nav__link">
+      <a href="../probes/nvidia/" class="md-nav__link">
         
   
   
@@ -1487,7 +1664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../modbus/" class="md-nav__link">
+      <a href="../probes/modbus/" class="md-nav__link">
         
   
   
@@ -1515,7 +1692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../icmp-check/" class="md-nav__link">
+      <a href="../probes/icmp-check/" class="md-nav__link">
         
   
   
@@ -1543,7 +1720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http-check/" class="md-nav__link">
+      <a href="../probes/http-check/" class="md-nav__link">
         
   
   
@@ -1568,37 +1745,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    TCP dial
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../probes/tcp-dial/" class="md-nav__link">
         
   
   
@@ -1614,70 +1764,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metric-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metric reference
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1690,7 +1776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dns-latency/" class="md-nav__link">
+      <a href="../probes/dns-latency/" class="md-nav__link">
         
   
   
@@ -1718,7 +1804,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-poll/" class="md-nav__link">
+      <a href="../probes/snmp-poll/" class="md-nav__link">
         
   
   
@@ -1746,7 +1832,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-trap/" class="md-nav__link">
+      <a href="../probes/snmp-trap/" class="md-nav__link">
         
   
   
@@ -1774,7 +1860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../otlp-receiver/" class="md-nav__link">
+      <a href="../probes/otlp-receiver/" class="md-nav__link">
         
   
   
@@ -1802,7 +1888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus-scrape/" class="md-nav__link">
+      <a href="../probes/prometheus-scrape/" class="md-nav__link">
         
   
   
@@ -1830,7 +1916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exec/" class="md-nav__link">
+      <a href="../probes/exec/" class="md-nav__link">
         
   
   
@@ -1858,7 +1944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../citrix/" class="md-nav__link">
+      <a href="../probes/citrix/" class="md-nav__link">
         
   
   
@@ -1886,7 +1972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netscaler/" class="md-nav__link">
+      <a href="../probes/netscaler/" class="md-nav__link">
         
   
   
@@ -1914,7 +2000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redfish/" class="md-nav__link">
+      <a href="../probes/redfish/" class="md-nav__link">
         
   
   
@@ -1942,7 +2028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../powerstore/" class="md-nav__link">
+      <a href="../probes/powerstore/" class="md-nav__link">
         
   
   
@@ -1970,7 +2056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ibmi/" class="md-nav__link">
+      <a href="../probes/ibmi/" class="md-nav__link">
         
   
   
@@ -1998,7 +2084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql_ha/" class="md-nav__link">
+      <a href="../probes/mssql_ha/" class="md-nav__link">
         
   
   
@@ -2026,7 +2112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle_enterprise/" class="md-nav__link">
+      <a href="../probes/oracle_enterprise/" class="md-nav__link">
         
   
   
@@ -2054,7 +2140,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv_ha/" class="md-nav__link">
+      <a href="../probes/hyperv_ha/" class="md-nav__link">
         
   
   
@@ -2082,7 +2168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vsphere_ha/" class="md-nav__link">
+      <a href="../probes/vsphere_ha/" class="md-nav__link">
         
   
   
@@ -2110,7 +2196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_hybrid/" class="md-nav__link">
+      <a href="../probes/ad_hybrid/" class="md-nav__link">
         
   
   
@@ -2138,7 +2224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exchange_online/" class="md-nav__link">
+      <a href="../probes/exchange_online/" class="md-nav__link">
         
   
   
@@ -2166,7 +2252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_apps/" class="md-nav__link">
+      <a href="../probes/azure_container_apps/" class="md-nav__link">
         
   
   
@@ -2194,7 +2280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_app_jobs/" class="md-nav__link">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
         
   
   
@@ -2222,7 +2308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../syslog/" class="md-nav__link">
+      <a href="../probes/syslog/" class="md-nav__link">
         
   
   
@@ -2250,7 +2336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../event/" class="md-nav__link">
+      <a href="../probes/event/" class="md-nav__link">
         
   
   
@@ -2278,7 +2364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-webapp/" class="md-nav__link">
+      <a href="../probes/ping-webapp/" class="md-nav__link">
         
   
   
@@ -2306,7 +2392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../load-webapp/" class="md-nav__link">
+      <a href="../probes/load-webapp/" class="md-nav__link">
         
   
   
@@ -2334,7 +2420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-gateway/" class="md-nav__link">
+      <a href="../probes/ping-gateway/" class="md-nav__link">
         
   
   
@@ -2362,7 +2448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wifi-signal-strength/" class="md-nav__link">
+      <a href="../probes/wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -2390,7 +2476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../veeam/" class="md-nav__link">
+      <a href="../probes/veeam/" class="md-nav__link">
         
   
   
@@ -2418,7 +2504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../probes/mysql/" class="md-nav__link">
         
   
   
@@ -2446,7 +2532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../postgresql/" class="md-nav__link">
+      <a href="../probes/postgresql/" class="md-nav__link">
         
   
   
@@ -2474,7 +2560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql/" class="md-nav__link">
+      <a href="../probes/mssql/" class="md-nav__link">
         
   
   
@@ -2502,7 +2588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mongodb/" class="md-nav__link">
+      <a href="../probes/mongodb/" class="md-nav__link">
         
   
   
@@ -2530,7 +2616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle/" class="md-nav__link">
+      <a href="../probes/oracle/" class="md-nav__link">
         
   
   
@@ -2558,7 +2644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redis/" class="md-nav__link">
+      <a href="../probes/redis/" class="md-nav__link">
         
   
   
@@ -2586,7 +2672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cassandra/" class="md-nav__link">
+      <a href="../probes/cassandra/" class="md-nav__link">
         
   
   
@@ -2614,7 +2700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../couchdb/" class="md-nav__link">
+      <a href="../probes/couchdb/" class="md-nav__link">
         
   
   
@@ -2642,7 +2728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clickhouse/" class="md-nav__link">
+      <a href="../probes/clickhouse/" class="md-nav__link">
         
   
   
@@ -2670,7 +2756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../elasticsearch/" class="md-nav__link">
+      <a href="../probes/elasticsearch/" class="md-nav__link">
         
   
   
@@ -2698,7 +2784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../opensearch/" class="md-nav__link">
+      <a href="../probes/opensearch/" class="md-nav__link">
         
   
   
@@ -2726,7 +2812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../solr/" class="md-nav__link">
+      <a href="../probes/solr/" class="md-nav__link">
         
   
   
@@ -2754,7 +2840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../influxdb/" class="md-nav__link">
+      <a href="../probes/influxdb/" class="md-nav__link">
         
   
   
@@ -2782,7 +2868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memcached/" class="md-nav__link">
+      <a href="../probes/memcached/" class="md-nav__link">
         
   
   
@@ -2810,7 +2896,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../apache/" class="md-nav__link">
+      <a href="../probes/apache/" class="md-nav__link">
         
   
   
@@ -2838,7 +2924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx/" class="md-nav__link">
+      <a href="../probes/nginx/" class="md-nav__link">
         
   
   
@@ -2866,7 +2952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../haproxy/" class="md-nav__link">
+      <a href="../probes/haproxy/" class="md-nav__link">
         
   
   
@@ -2894,7 +2980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy/" class="md-nav__link">
+      <a href="../probes/envoy/" class="md-nav__link">
         
   
   
@@ -2922,7 +3008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../php-fpm/" class="md-nav__link">
+      <a href="../probes/php-fpm/" class="md-nav__link">
         
   
   
@@ -2950,7 +3036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../varnish/" class="md-nav__link">
+      <a href="../probes/varnish/" class="md-nav__link">
         
   
   
@@ -2978,7 +3064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tomcat/" class="md-nav__link">
+      <a href="../probes/tomcat/" class="md-nav__link">
         
   
   
@@ -3006,7 +3092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wildfly/" class="md-nav__link">
+      <a href="../probes/wildfly/" class="md-nav__link">
         
   
   
@@ -3034,7 +3120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kafka/" class="md-nav__link">
+      <a href="../probes/kafka/" class="md-nav__link">
         
   
   
@@ -3062,7 +3148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
+      <a href="../probes/rabbitmq/" class="md-nav__link">
         
   
   
@@ -3090,7 +3176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../activemq/" class="md-nav__link">
+      <a href="../probes/activemq/" class="md-nav__link">
         
   
   
@@ -3118,7 +3204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nats/" class="md-nav__link">
+      <a href="../probes/nats/" class="md-nav__link">
         
   
   
@@ -3146,7 +3232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pulsar/" class="md-nav__link">
+      <a href="../probes/pulsar/" class="md-nav__link">
         
   
   
@@ -3174,7 +3260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker/" class="md-nav__link">
+      <a href="../probes/docker/" class="md-nav__link">
         
   
   
@@ -3202,7 +3288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/" class="md-nav__link">
+      <a href="../probes/kubernetes/" class="md-nav__link">
         
   
   
@@ -3230,7 +3316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../swarm/" class="md-nav__link">
+      <a href="../probes/swarm/" class="md-nav__link">
         
   
   
@@ -3258,7 +3344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../proxmox/" class="md-nav__link">
+      <a href="../probes/proxmox/" class="md-nav__link">
         
   
   
@@ -3286,7 +3372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv/" class="md-nav__link">
+      <a href="../probes/hyperv/" class="md-nav__link">
         
   
   
@@ -3314,7 +3400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ceph/" class="md-nav__link">
+      <a href="../probes/ceph/" class="md-nav__link">
         
   
   
@@ -3342,7 +3428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../consul/" class="md-nav__link">
+      <a href="../probes/consul/" class="md-nav__link">
         
   
   
@@ -3370,7 +3456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zookeeper/" class="md-nav__link">
+      <a href="../probes/zookeeper/" class="md-nav__link">
         
   
   
@@ -3398,7 +3484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jenkins/" class="md-nav__link">
+      <a href="../probes/jenkins/" class="md-nav__link">
         
   
   
@@ -3426,7 +3512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unifi/" class="md-nav__link">
+      <a href="../probes/unifi/" class="md-nav__link">
         
   
   
@@ -3461,7 +3547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/" class="md-nav__link">
+      <a href="../troubleshooting/" class="md-nav__link">
         
   
   
@@ -3540,7 +3626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/" class="md-nav__link">
+      <a href="../whats-new/" class="md-nav__link">
         
   
   
@@ -3568,7 +3654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/next/" class="md-nav__link">
+      <a href="../whats-new/next/" class="md-nav__link">
         
   
   
@@ -3596,7 +3682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.1/" class="md-nav__link">
+      <a href="../whats-new/0.6.1/" class="md-nav__link">
         
   
   
@@ -3624,7 +3710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.0/" class="md-nav__link">
+      <a href="../whats-new/0.6.0/" class="md-nav__link">
         
   
   
@@ -3652,7 +3738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.6/" class="md-nav__link">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
         
   
   
@@ -3680,7 +3766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.5/" class="md-nav__link">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
         
   
   
@@ -3708,7 +3794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+      <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
   
@@ -3736,7 +3822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.3/" class="md-nav__link">
+      <a href="../whats-new/0.5.3/" class="md-nav__link">
         
   
   
@@ -3764,7 +3850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.2/" class="md-nav__link">
+      <a href="../whats-new/0.5.2/" class="md-nav__link">
         
   
   
@@ -3792,7 +3878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+      <a href="../whats-new/0.5.1/" class="md-nav__link">
         
   
   
@@ -3820,7 +3906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+      <a href="../whats-new/0.5.0/" class="md-nav__link">
         
   
   
@@ -3848,7 +3934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.2/" class="md-nav__link">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
         
   
   
@@ -3876,7 +3962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.1/" class="md-nav__link">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
         
   
   
@@ -3904,7 +3990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.0/" class="md-nav__link">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
         
   
   
@@ -3932,7 +4018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.3.2/" class="md-nav__link">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
         
   
   
@@ -3960,7 +4046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+      <a href="../whats-new/0.2.3/" class="md-nav__link">
         
   
   
@@ -3988,7 +4074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.2/" class="md-nav__link">
+      <a href="../whats-new/0.2.2/" class="md-nav__link">
         
   
   
@@ -4016,7 +4102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.1/" class="md-nav__link">
+      <a href="../whats-new/0.2.1/" class="md-nav__link">
         
   
   
@@ -4044,7 +4130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.0/" class="md-nav__link">
+      <a href="../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -4099,10 +4185,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#install" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick start
+        Install
       
     </span>
   </a>
@@ -4110,10 +4196,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#monitoring-the-node" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        Monitoring the node
       
     </span>
   </a>
@@ -4121,10 +4207,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#monitoring-the-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        Monitoring the cluster
       
     </span>
   </a>
@@ -4132,10 +4218,98 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metric-reference" class="md-nav__link">
+  <a href="#configuring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metric reference
+        Configuring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-the-http-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening the HTTP output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-one-replica-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why one replica (Deployment)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-chart-does-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the chart does not do
       
     </span>
   </a>
@@ -4159,7 +4333,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/tcp-dial.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/kubernetes-helm.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -4167,118 +4341,352 @@
   
 
 
-<p><img src="../../assets/probe-logos/tcp-dial.svg" alt="" class="probe-page-logo probe-page-logo-mdi"></p>
-<h1 id="tcp_dial-tcp-connect-latency">tcp_dial — TCP connect latency<a class="headerlink" href="#tcp_dial-tcp-connect-latency" title="Permanent link">&para;</a></h1>
-<p>Free tier. Measures the time for a raw TCP <code>connect()</code> to complete
-against <code>host:port</code> targets. For a load-balancer VIP, a Citrix broker,
-a domain controller or a fileserver, a measured dial is faster and more
-dependable than an HTTP round trip.</p>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/40-dial.yaml</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dial-core</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp_dial</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.0.0.10:443"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"dc01.lan:389"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"files.lan:445"</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<h1 id="kubernetes-helm">Kubernetes (Helm)<a class="headerlink" href="#kubernetes-helm" title="Permanent link">&para;</a></h1>
+<p>A Helm chart runs the agent in a Kubernetes cluster: by default one agent
+on every node (a DaemonSet), the <a href="../container/">container image</a>, an
+identity of its own on each node, and, when you ask for it, read-only
+monitoring of the cluster itself through the
+<a href="../probes/kubernetes/"><code>kubernetes</code> probe</a>.</p>
+<p>The chart lives in the agent's repository under <code>charts/senhub-agent</code>
+and is installed from there for now. Publishing it to an OCI registry,
+so that <code>helm install oci://...</code> works without a clone, is a later step.</p>
+<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/senhub-io/senhub-agent.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>senhub
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># The agent monitors the node it runs on (host namespaces, see below):</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># the namespace must allow the privileged Pod Security level.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>senhub<span class="w"> </span>pod-security.kubernetes.io/enforce<span class="o">=</span>privileged
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Credentials live in a Secret; its keys become environment variables.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>senhub-agent-credentials<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span>--from-literal<span class="o">=</span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span><span class="s1">'&lt;your token&gt;'</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>helm<span class="w"> </span>install<span class="w"> </span>senhub-agent<span class="w"> </span>./senhub-agent/charts/senhub-agent<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span>--set<span class="w"> </span>secrets.existingSecret<span class="o">=</span>senhub-agent-credentials
 </code></pre></div>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<!-- schema:params:start -->
-<!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:dea337311944aa3f5b7d916fc1366d454d2237c770e16485438cc69ceb628cee -->
-
+<p>That is a first run: the agent watches the node it runs on and pushes to
+SenHub. It needs no licence: the free tier collects everything except the
+Pro probes.</p>
+<p>To use a Pro probe, add the licence to the same Secret and restart the
+pod:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>senhub-agent-credentials<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--from-literal<span class="o">=</span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span><span class="s1">'&lt;your token&gt;'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--from-literal<span class="o">=</span><span class="nv">SENHUB_LICENSE</span><span class="o">=</span><span class="s1">'&lt;licence JWT&gt;'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deployment/senhub-agent
+</code></pre></div>
+<p><code>--set edition=oss</code> selects the free build of the image, which does not
+contain the Pro probes at all.</p>
+<p>Check it started, and read the lines the entrypoint writes about the
+configuration it built:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>logs<span class="w"> </span>deploy/senhub-agent<span class="w"> </span>-c<span class="w"> </span>agent
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>port-forward<span class="w"> </span>svc/senhub-agent<span class="w"> </span><span class="m">8080</span>:8080
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>curl<span class="w"> </span>http://127.0.0.1:8080/health
+</code></pre></div>
+<h2 id="monitoring-the-node">Monitoring the node<a class="headerlink" href="#monitoring-the-node" title="Permanent link">&para;</a></h2>
+<p><code>hostMonitoring.enabled</code> is <code>true</code> by default, and the chart then
+installs a <strong>DaemonSet</strong>: one agent on each node, monitoring that node.
+(<code>kind: Deployment</code> keeps a single agent for the release, for container
+scope, a single node or remote targets only.)</p>
+<p>The pod runs in the node's PID and network namespaces
+(<code>hostPID</code>, <code>hostNetwork</code>) and mounts the node's <code>/</code> read-only at
+<code>/host</code>, with propagation so the node's other mounts appear under it.
+Disks, network interfaces and processes are then the node's: the disk
+probe lists the node's mounts (without the <code>/host</code> prefix, and without
+the bind mounts of the container runtime and the kubelet), the network
+probe the node's interfaces, the process probe every process of the
+node, and the OS release, boot time and host identity (<code>machine-id</code>) are
+the node's.</p>
+<p>Without it (<code>hostMonitoring.enabled=false</code>), the pod's CPU and memory
+figures are still the node's, because <code>/proc</code> is not isolated for those
+counters, but the disks are the container's overlay, the network is the
+pod's single interface and the processes are the pod's own. That is half
+a node, which is why the default is the node.</p>
+<div class="admonition warning">
+<p class="admonition-title">What you accept</p>
+<ul>
+<li>The pod shares the node's PID and network namespaces and can read
+  the whole node filesystem. It stays read-only, uid 10001, with no
+  capability and no privilege escalation, so it reads what any user
+  can, not root-only files. Kubernetes' <code>baseline</code> level forbids
+  host namespaces and hostPath: label the namespace
+  <code>pod-security.kubernetes.io/enforce=privileged</code>.</li>
+<li>The pods share the node's network, so the HTTP output would be
+  reachable on every address of the node, without TLS. In the
+  DaemonSet it therefore listens on the node's loopback
+  (<code>127.0.0.1</code>) until you open it, and the kubelet probes follow it.
+  See <a href="#opening-the-http-output">Opening the HTTP output</a>.</li>
+<li>
+<p>The DaemonSet runs on the nodes it tolerates: not the control-plane
+  nodes by default, since they carry a <code>NoSchedule</code> taint. Add the
+  toleration to monitor them:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">tolerations</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node-role.kubernetes.io/control-plane</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exists</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NoSchedule</span>
+</code></pre></div>
+</li>
+</ul>
+<p><code>nodeSelector</code> narrows it to some nodes. Updates roll one node at
+  a time (<code>maxUnavailable: 1</code>).
+- Each agent keeps its identity on its node, see <a href="#identity">Identity</a>.
+  The host identity is the node's <code>machine-id</code>, and the agent key is
+  generated at the node's first start.</p>
+</div>
+<p>The cluster probe runs once for the whole cluster, not once per node, so
+it is not available in the DaemonSet (the chart refuses to render the
+two together). Install a second release for it:
+<code>--set hostMonitoring.enabled=false --set kubernetesProbe.enabled=true --set rbac.kubernetesProbe.enabled=true</code>
+(a Deployment). The same goes for a <code>ServiceMonitor</code> and for a whole
+<code>config.agent</code>, which carry one key for every agent.</p>
+<h2 id="monitoring-the-cluster">Monitoring the cluster<a class="headerlink" href="#monitoring-the-cluster" title="Permanent link">&para;</a></h2>
+<p>Two values turn it on: one adds the probe, the other the read-only
+permissions it needs. It lives in its own release, a Deployment, next to
+the node agents:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>helm<span class="w"> </span>install<span class="w"> </span>senhub-cluster<span class="w"> </span>./senhub-agent/charts/senhub-agent<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--set<span class="w"> </span>secrets.existingSecret<span class="o">=</span>senhub-agent-credentials<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--set<span class="w"> </span>hostMonitoring.enabled<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>--set<span class="w"> </span>kubernetesProbe.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>--set<span class="w"> </span>rbac.kubernetesProbe.enabled<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<p>The ClusterRole grants what the probe calls and nothing else:</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Must set</th>
-<th>Default</th>
-<th>Description</th>
+<th>API group</th>
+<th>Resources</th>
+<th>Verbs</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>targets</code></td>
-<td>Yes</td>
-<td>-</td>
-<td>host:port pairs to dial. Example: <code>10.0.0.10:443, dc01.lan:389</code></td>
+<td>core</td>
+<td><code>namespaces</code></td>
+<td><code>get</code> (the <code>kube-system</code> namespace, whose UID identifies the cluster), <code>list</code></td>
 </tr>
 <tr>
-<td><code>timeout</code></td>
-<td>No</td>
-<td><code>5</code></td>
-<td>Connect budget in seconds per target</td>
+<td>core</td>
+<td><code>nodes</code>, <code>pods</code>, <code>persistentvolumes</code>, <code>persistentvolumeclaims</code>, <code>resourcequotas</code>, <code>events</code></td>
+<td><code>list</code></td>
 </tr>
 <tr>
-<td><code>interval</code></td>
-<td>No</td>
-<td><code>60</code></td>
-<td>Seconds between cycles</td>
+<td>apps</td>
+<td><code>deployments</code>, <code>statefulsets</code>, <code>daemonsets</code>, <code>replicasets</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td>batch</td>
+<td><code>jobs</code>, <code>cronjobs</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td>autoscaling</td>
+<td><code>horizontalpodautoscalers</code></td>
+<td><code>list</code></td>
 </tr>
 </tbody>
 </table>
-<!-- schema:params:end -->
-
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.tcpdial.up</code></td>
-<td>bool</td>
-<td>Connect completed within the timeout</td>
-</tr>
-<tr>
-<td><code>senhub.tcpdial.duration</code></td>
-<td>s</td>
-<td>Three-way-handshake time (emitted only when up)</td>
-</tr>
-</tbody>
-</table>
-<p>A refused or timed out target is a measurement (<code>up = 0</code>), never a
-probe failure.</p>
-<h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
-<p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
-OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
-<a href="../../nagios/">Nagios check</a> and the API <code>metrics=</code> filter match.
-<strong>PRTG channel</strong> is the label PRTG shows, placeholders filled from the
-series' tags.</p>
-<!-- schema:metrics:start -->
-<!-- Generated from the probe's definition. Run `make docs-metrics` after changing it. -->
-
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Name</th>
-<th>PRTG channel</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.tcpdial.up</code></td>
-<td><code>senhub.tcpdial.up</code></td>
-<td>TCP {target} Up</td>
-<td>#</td>
-<td>1 when the TCP connect completed within the timeout</td>
-</tr>
-<tr>
-<td><code>senhub.tcpdial.duration</code></td>
-<td><code>senhub.tcpdial.duration</code></td>
-<td>TCP {target} Connect Time</td>
-<td>ms</td>
-<td>Time for the TCP three-way handshake to complete</td>
-</tr>
-</tbody>
-</table>
-<!-- schema:metrics:end -->
+<p>No <code>watch</code>, no write, and neither Secrets nor ConfigMaps. The service
+account token is mounted only when this is on: nothing else in the agent
+talks to the API server.</p>
+<p>The probe's own settings go in <code>kubernetesProbe.params</code>, with the
+parameters of the <a href="../probes/kubernetes/">probe page</a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">kubernetesProbe</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">namespaces</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">kube-system</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">kube-public</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">collect</span><span class="p">:</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="nt">replicasets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<h2 id="configuring">Configuring<a class="headerlink" href="#configuring" title="Permanent link">&para;</a></h2>
+<p>Everything is a value; the full list is in the chart's <code>README.md</code> and
+<code>values.yaml</code>. Three kinds of setting, which combine.</p>
+<p><strong>The variables of the image.</strong> <code>env</code> carries the settings the
+<a href="../container/#variables">entrypoint</a> turns into a configuration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">otlpEndpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otel-collector.observability.svc:4317</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">otlpTLS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">zabbixServer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zabbix-server.monitoring.svc:10051</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">tags</span><span class="p">:</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris-1</span>
+</code></pre></div>
+<p><strong>Probes and outputs.</strong> <code>config.probes</code> and <code>config.strategies</code> are
+written into the configuration as <code>probes.d/60-&lt;key&gt;.yaml</code> and
+<code>strategies.d/60-&lt;key&gt;.yaml</code> before the agent starts. A probe entry is a
+list of probes, as a <code>probes.d</code> file holds; an output entry is the
+settings of the output its key names:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">config</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">databases</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orders-db</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">          </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orders-db.shop.svc</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">"${env:ORDERS_DB_PASSWORD}"</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="nt">strategies</span><span class="p">:</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="nt">zabbix</span><span class="p">:</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">      </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zabbix-server.monitoring.svc:10051</span>
+</code></pre></div>
+<p><strong>Secrets.</strong> A credential never goes in these values: they end up in a
+ConfigMap. It goes in a Secret whose keys become environment variables,
+and the configuration refers to it with <code>${env:NAME}</code>, which the agent
+resolves at every start. Either name an existing Secret, as in the
+install above, or let the chart create one from a values file you keep
+out of version control:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">secrets</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">values</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">ORDERS_DB_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">"..."</span>
+</code></pre></div>
+<p>The configuration is built once for each pod. Changing a value rolls
+the pod; changing an existing Secret does not, so restart it:
+<code>kubectl -n senhub rollout restart deployment/senhub-agent</code>. A change
+made from the web console lasts until the pod is replaced: the values
+are the configuration.</p>
+<p><strong>A whole configuration.</strong> <code>config.agent</code> replaces the generated
+<code>agent.yaml</code>. The entrypoint then writes nothing and every <code>env</code> value
+is ignored, exactly as with a <a href="../container/#bringing-your-own-configuration">mounted configuration</a>.
+The chart still points <code>agent.key</code> at the identity below and adds the
+HTTP output on <code>http.port</code>, without the web console, which needs an
+administration key you then provide in <code>config.strategies.http</code>.</p>
+<h2 id="identity">Identity<a class="headerlink" href="#identity" title="Permanent link">&para;</a></h2>
+<p><strong>DaemonSet.</strong> Each node has its own identity, kept in the state
+directory of that node, <code>/var/lib/senhub-agent</code> (<code>daemonSet.stateHostPath</code>),
+a hostPath created if missing and handed to uid 10001 by an init
+container with <code>CAP_CHOWN</code> (<code>fsGroup</code> does not apply to a hostPath).
+The agent key is generated at the node's first start and restored at
+every later one, so it survives pod restarts and upgrades. The host
+identity is the node's own <code>machine-id</code>. There is no shared Secret and
+no volume claim: one identity for all nodes would make them one agent.
+Read a node's key, for PRTG or Nagios, from its pod:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;pod&gt;<span class="w"> </span>-c<span class="w"> </span>agent<span class="w"> </span>--<span class="w"> </span>cat<span class="w"> </span>/var/lib/senhub-agent/agent.key
+</code></pre></div>
+<p>If another agent runs on the node as a service, it uses the same default
+directory: change <code>daemonSet.stateHostPath</code>.</p>
+<p><strong>Deployment.</strong> One identity for the release, as follows. It is kept in
+the Secret <code>&lt;release&gt;-identity</code>, which <code>helm uninstall</code> leaves in place
+(<code>helm.sh/resource-policy: keep</code>); the state claim <code>&lt;release&gt;-state</code>,
+when <code>persistence</code> is on, is kept the same way. Delete both to start
+over (see <a href="#state">State</a>).</p>
+<p>The agent key (what PRTG, Nagios and a Prometheus scrape read with, and
+what tells two agents apart downstream) and the host identity are
+generated at first install and kept in the Secret
+<code>&lt;release&gt;-identity</code>. The pod receives them as <code>SENHUB_AGENT_KEY</code> and
+<code>SENHUB_HOST_ID</code>, and the host identity is also mounted as
+<code>/etc/machine-id</code>, where the agent reads it (with host monitoring, the
+agent reads the node's own <code>machine-id</code> instead). A pod replaced, rescheduled
+on another node or upgraded to a new image is the same host and the same
+agent.</p>
+<p>A Secret rather than a volume, because it follows the pod to any node
+and any zone and needs no storage class. The Secret is kept when the
+release is uninstalled, so reinstalling under the same name in the same
+namespace brings the same agent back; delete it to start over:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>delete<span class="w"> </span>secret<span class="w"> </span>senhub-agent-identity
+</code></pre></div>
+<p>Read the agent key, for PRTG or Nagios:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>senhub-agent-identity<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.data.agent-key}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">GitOps</p>
+<p>Generation reads the Secret already in the cluster to keep its
+values. A tool that renders the chart with <code>helm template</code>, such as
+Argo CD, cannot read it and would mint a new identity at each sync.
+With such a tool, set <code>identity.hostId</code> (32 hexadecimal characters)
+and <code>identity.agentKey</code> (a UUID), or <code>identity.existingSecret</code>
+naming a Secret with the keys <code>host-id</code> and <code>agent-key</code>. One value
+per installation: two agents sharing an identity are one agent to
+everything downstream.</p>
+</div>
+<p>The host <em>name</em> is the node's with host monitoring; otherwise the pod's
+host name, set to the release name so it does not change at every
+rollout (<code>hostname</code> sets another).</p>
+<h2 id="opening-the-http-output">Opening the HTTP output<a class="headerlink" href="#opening-the-http-output" title="Permanent link">&para;</a></h2>
+<p>PRTG, Nagios and a Prometheus scrape reach a node's agent on
+<code>&lt;node address&gt;:8080</code>, which needs the output to listen beyond the
+loopback. Open it deliberately, and turn TLS on, since the agent key
+travels in every request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">config</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">strategies</span><span class="p">:</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0.0.0</span><span class="w">     </span><span class="c1"># or the node address your monitoring reaches</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"prometheus"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">tls</span><span class="p">:</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">           </span><span class="c1"># self-signed pair generated at first start,</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">                                </span><span class="c1"># see HTTP / HTTPS to bring your own</span>
+</code></pre></div>
+<p>Restrict who may connect with the node's firewall or a network policy of
+your CNI (host-network pods are often outside <code>NetworkPolicy</code>, so the
+firewall is the reliable place). <code>http.bind: 0.0.0.0</code> alone opens it
+without TLS: do that only on a trusted network. A Deployment, whose pod
+network is the isolation, listens on every address by default.</p>
+<h2 id="reading-the-agent">Reading the agent<a class="headerlink" href="#reading-the-agent" title="Permanent link">&para;</a></h2>
+<p>In the DaemonSet there is no Service: each agent answers on its node,
+<code>http://&lt;node address&gt;:8080</code> (the pods use the host network), with that
+node's key. Point PRTG or Nagios at the node.</p>
+<p>With a Deployment, the Service <code>&lt;release&gt;</code> exposes the HTTP output on port 8080: PRTG,
+Nagios, Prometheus and the console, at the same paths as on any host
+(<a href="../http-https/">HTTP / HTTPS</a>). PRTG and Nagios outside the cluster
+reach it through whatever you already use to expose a Service: a
+<code>NodePort</code> (<code>service.type</code>), a load balancer or an ingress.</p>
+<p>With the Prometheus Operator, <code>serviceMonitor.enabled=true</code> adds a
+ServiceMonitor that scrapes <code>/metrics</code> with the agent key as its Bearer
+token, read from the identity Secret. The chart refuses to render one on
+a cluster without the ServiceMonitor CRD; with <code>helm template</code>, pass
+<code>--api-versions monitoring.coreos.com/v1/ServiceMonitor</code>. Set
+<code>serviceMonitor.labels</code> to what your Prometheus selects on, often
+<code>release: &lt;prometheus release&gt;</code>.</p>
+<h2 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h2>
+<p>With a DaemonSet the state is on each node (see <a href="#identity">Identity</a>),
+and <code>persistence</code> does not apply. It stays on the nodes after
+<code>helm uninstall</code>, so a reinstall brings each node's agent back. To start
+over, delete the directory on every node:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/senhub-agent
+</code></pre></div>
+<p>With a Deployment, <code>/var/lib/senhub-agent</code> holds the bookmarks of the log probes. By
+default it is an <code>emptyDir</code>: when the pod is replaced, a file probe
+starts again at the end of each file and a Container Apps stream
+re-sends its recent lines. <code>persistence.enabled=true</code> puts it on a
+volume. The identity does not depend on it.</p>
+<p>The claim <code>&lt;release&gt;-state</code> is kept when the release is uninstalled
+(<code>helm.sh/resource-policy: keep</code>), like the identity Secret, so that a
+reinstall finds its bookmarks. To remove it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>senhub-agent<span class="w"> </span>-n<span class="w"> </span>senhub
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>senhub<span class="w"> </span>delete<span class="w"> </span>pvc<span class="w"> </span>senhub-agent-state
+</code></pre></div>
+<h2 id="log-level">Log level<a class="headerlink" href="#log-level" title="Permanent link">&para;</a></h2>
+<p><code>logLevel: debug</code> starts the agent with <code>--verbose</code>; <code>logFilter: probe</code>
+(a module name prefix) limits the debug lines to those modules. Read
+them with <code>kubectl logs</code>.</p>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<p>The pod runs as uid 10001, non-root, with a read-only root filesystem,
+no privilege escalation, every capability dropped and the runtime's
+default seccomp profile. Host monitoring adds host namespaces and a
+read-only mount of the node's root, described <a href="#monitoring-the-node">above</a>. The directories the entrypoint and the agent
+write to (configuration, state, logs, <code>/tmp</code>) are volumes.</p>
+<h2 id="why-one-replica-deployment">Why one replica (Deployment)<a class="headerlink" href="#why-one-replica-deployment" title="Permanent link">&para;</a></h2>
+<p><code>replicas</code> is not a value. Each replica would carry the same identity
+and run the same probes against the same targets: every measurement,
+log line and Kubernetes event would be sent once per replica, under one
+agent key. For more targets, or another cluster, install the chart
+again under another release name; each release has its own identity.
+The Deployment uses the <code>Recreate</code> strategy for the same reason: the old
+pod stops before the new one starts.</p>
+<h2 id="what-the-chart-does-not-do">What the chart does not do<a class="headerlink" href="#what-the-chart-does-not-do" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>No cluster probe in the DaemonSet.</strong> It would collect the whole
+  cluster once per node. Use a second, Deployment release.</li>
+<li><strong>No registry.</strong> The chart is installed from the repository for now.</li>
+<li><strong>No auto-update.</strong> A new version is a new image tag: <code>image.tag</code>, or
+  the chart's <code>appVersion</code>.</li>
+<li><strong>No console-made configuration survives a new pod.</strong> See
+  <a href="#configuring">Configuring</a>.</li>
+</ul>
 
 
 
@@ -4314,7 +4722,7 @@ series' tags.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../http-check/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HTTP check">
+          <a href="../container/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Container">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4324,20 +4732,20 @@ series' tags.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                HTTP check
+                Container
               </div>
             </div>
           </a>
         
         
           
-          <a href="../dns-latency/" class="md-footer__link md-footer__link--next" aria-label="Next: DNS latency">
+          <a href="../ansible/" class="md-footer__link md-footer__link--next" aria-label="Next: Ansible">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                DNS latency
+                Ansible
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -4400,14 +4808,14 @@ series' tags.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../javascripts/rn-filter.js"></script>
+        <script src="../javascripts/rn-filter.js"></script>
       
-        <script src="../../javascripts/dev-banner.js"></script>
+        <script src="../javascripts/dev-banner.js"></script>
       
     
   </body>
