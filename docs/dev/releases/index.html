@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/envoy/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/releases/">
       
       
-        <link rel="prev" href="../haproxy/">
+        <link rel="prev" href="../installation/">
       
       
-        <link rel="next" href="../php-fpm/">
+        <link rel="next" href="../container/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/favicon.svg">
+      <link rel="icon" href="../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Envoy Proxy - SenHub Agent</title>
+        <title>Downloading and verifying releases - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#envoy-proxy" class="md-skip">
+        <a href="#downloading-and-verifying-releases" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Envoy Proxy
+              Downloading and verifying releases
             
           </span>
         </div>
@@ -239,7 +239,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -266,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../presentation/" class="md-nav__link">
+      <a href="../presentation/" class="md-nav__link">
         
   
   
@@ -320,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -344,10 +344,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../releases/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downloading and verifying releases
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -363,6 +390,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The addresses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-manifest-holds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a manifest holds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-published-and-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is published, and when
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-and-verifying-the-right-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding and verifying the right file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-image-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container image tags
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -374,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../container/" class="md-nav__link">
+      <a href="../container/" class="md-nav__link">
         
   
   
@@ -401,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -428,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secret-store/" class="md-nav__link">
+      <a href="../secret-store/" class="md-nav__link">
         
   
   
@@ -455,7 +557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http-https/" class="md-nav__link">
+      <a href="../http-https/" class="md-nav__link">
         
   
   
@@ -482,7 +584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nagios/" class="md-nav__link">
+      <a href="../nagios/" class="md-nav__link">
         
   
   
@@ -509,7 +611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zabbix/" class="md-nav__link">
+      <a href="../zabbix/" class="md-nav__link">
         
   
   
@@ -536,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web-interface/" class="md-nav__link">
+      <a href="../web-interface/" class="md-nav__link">
         
   
   
@@ -615,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/" class="md-nav__link">
+      <a href="../license/" class="md-nav__link">
         
   
   
@@ -643,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-fr/" class="md-nav__link">
+      <a href="../license/agreement-fr/" class="md-nav__link">
         
   
   
@@ -671,7 +773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-en/" class="md-nav__link">
+      <a href="../license/agreement-en/" class="md-nav__link">
         
   
   
@@ -699,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/third-party/" class="md-nav__link">
+      <a href="../license/third-party/" class="md-nav__link">
         
   
   
@@ -786,7 +888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/" class="md-nav__link">
+      <a href="../prometheus/" class="md-nav__link">
         
   
   
@@ -814,7 +916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -849,7 +951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -876,7 +978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../otlp/" class="md-nav__link">
+      <a href="../otlp/" class="md-nav__link">
         
   
   
@@ -900,8 +1002,6 @@
       
   
   
-    
-  
   
   
     
@@ -914,11 +1014,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
         
           
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="">
@@ -939,7 +1039,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             
@@ -957,7 +1057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../probes/" class="md-nav__link">
         
   
   
@@ -985,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cpu/" class="md-nav__link">
+      <a href="../probes/cpu/" class="md-nav__link">
         
   
   
@@ -1013,7 +1113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory/" class="md-nav__link">
+      <a href="../probes/memory/" class="md-nav__link">
         
   
   
@@ -1041,7 +1141,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../network/" class="md-nav__link">
+      <a href="../probes/network/" class="md-nav__link">
         
   
   
@@ -1069,7 +1169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logicaldisk/" class="md-nav__link">
+      <a href="../probes/logicaldisk/" class="md-nav__link">
         
   
   
@@ -1097,7 +1197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linux-logs/" class="md-nav__link">
+      <a href="../probes/linux-logs/" class="md-nav__link">
         
   
   
@@ -1125,7 +1225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-eventlog/" class="md-nav__link">
+      <a href="../probes/windows-eventlog/" class="md-nav__link">
         
   
   
@@ -1153,7 +1253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../filetail/" class="md-nav__link">
+      <a href="../probes/filetail/" class="md-nav__link">
         
   
   
@@ -1181,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process/" class="md-nav__link">
+      <a href="../probes/process/" class="md-nav__link">
         
   
   
@@ -1209,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../systemd/" class="md-nav__link">
+      <a href="../probes/systemd/" class="md-nav__link">
         
   
   
@@ -1237,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-services/" class="md-nav__link">
+      <a href="../probes/windows-services/" class="md-nav__link">
         
   
   
@@ -1265,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../chrony/" class="md-nav__link">
+      <a href="../probes/chrony/" class="md-nav__link">
         
   
   
@@ -1293,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ntp/" class="md-nav__link">
+      <a href="../probes/ntp/" class="md-nav__link">
         
   
   
@@ -1321,7 +1421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../os-updates/" class="md-nav__link">
+      <a href="../probes/os-updates/" class="md-nav__link">
         
   
   
@@ -1349,7 +1449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smart/" class="md-nav__link">
+      <a href="../probes/smart/" class="md-nav__link">
         
   
   
@@ -1377,7 +1477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ipmi/" class="md-nav__link">
+      <a href="../probes/ipmi/" class="md-nav__link">
         
   
   
@@ -1405,7 +1505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nvidia/" class="md-nav__link">
+      <a href="../probes/nvidia/" class="md-nav__link">
         
   
   
@@ -1433,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../modbus/" class="md-nav__link">
+      <a href="../probes/modbus/" class="md-nav__link">
         
   
   
@@ -1461,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../icmp-check/" class="md-nav__link">
+      <a href="../probes/icmp-check/" class="md-nav__link">
         
   
   
@@ -1489,7 +1589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http-check/" class="md-nav__link">
+      <a href="../probes/http-check/" class="md-nav__link">
         
   
   
@@ -1517,7 +1617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tcp-dial/" class="md-nav__link">
+      <a href="../probes/tcp-dial/" class="md-nav__link">
         
   
   
@@ -1545,7 +1645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dns-latency/" class="md-nav__link">
+      <a href="../probes/dns-latency/" class="md-nav__link">
         
   
   
@@ -1573,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-poll/" class="md-nav__link">
+      <a href="../probes/snmp-poll/" class="md-nav__link">
         
   
   
@@ -1601,7 +1701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-trap/" class="md-nav__link">
+      <a href="../probes/snmp-trap/" class="md-nav__link">
         
   
   
@@ -1629,7 +1729,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../otlp-receiver/" class="md-nav__link">
+      <a href="../probes/otlp-receiver/" class="md-nav__link">
         
   
   
@@ -1657,7 +1757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus-scrape/" class="md-nav__link">
+      <a href="../probes/prometheus-scrape/" class="md-nav__link">
         
   
   
@@ -1685,7 +1785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exec/" class="md-nav__link">
+      <a href="../probes/exec/" class="md-nav__link">
         
   
   
@@ -1713,7 +1813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../citrix/" class="md-nav__link">
+      <a href="../probes/citrix/" class="md-nav__link">
         
   
   
@@ -1741,7 +1841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netscaler/" class="md-nav__link">
+      <a href="../probes/netscaler/" class="md-nav__link">
         
   
   
@@ -1769,7 +1869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redfish/" class="md-nav__link">
+      <a href="../probes/redfish/" class="md-nav__link">
         
   
   
@@ -1797,7 +1897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../powerstore/" class="md-nav__link">
+      <a href="../probes/powerstore/" class="md-nav__link">
         
   
   
@@ -1825,7 +1925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ibmi/" class="md-nav__link">
+      <a href="../probes/ibmi/" class="md-nav__link">
         
   
   
@@ -1853,7 +1953,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql_ha/" class="md-nav__link">
+      <a href="../probes/mssql_ha/" class="md-nav__link">
         
   
   
@@ -1881,7 +1981,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle_enterprise/" class="md-nav__link">
+      <a href="../probes/oracle_enterprise/" class="md-nav__link">
         
   
   
@@ -1909,7 +2009,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv_ha/" class="md-nav__link">
+      <a href="../probes/hyperv_ha/" class="md-nav__link">
         
   
   
@@ -1937,7 +2037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vsphere_ha/" class="md-nav__link">
+      <a href="../probes/vsphere_ha/" class="md-nav__link">
         
   
   
@@ -1965,7 +2065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_hybrid/" class="md-nav__link">
+      <a href="../probes/ad_hybrid/" class="md-nav__link">
         
   
   
@@ -1993,7 +2093,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exchange_online/" class="md-nav__link">
+      <a href="../probes/exchange_online/" class="md-nav__link">
         
   
   
@@ -2021,7 +2121,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_apps/" class="md-nav__link">
+      <a href="../probes/azure_container_apps/" class="md-nav__link">
         
   
   
@@ -2049,7 +2149,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_app_jobs/" class="md-nav__link">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
         
   
   
@@ -2077,7 +2177,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../syslog/" class="md-nav__link">
+      <a href="../probes/syslog/" class="md-nav__link">
         
   
   
@@ -2105,7 +2205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../event/" class="md-nav__link">
+      <a href="../probes/event/" class="md-nav__link">
         
   
   
@@ -2133,7 +2233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-webapp/" class="md-nav__link">
+      <a href="../probes/ping-webapp/" class="md-nav__link">
         
   
   
@@ -2161,7 +2261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../load-webapp/" class="md-nav__link">
+      <a href="../probes/load-webapp/" class="md-nav__link">
         
   
   
@@ -2189,7 +2289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-gateway/" class="md-nav__link">
+      <a href="../probes/ping-gateway/" class="md-nav__link">
         
   
   
@@ -2217,7 +2317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wifi-signal-strength/" class="md-nav__link">
+      <a href="../probes/wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -2245,7 +2345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../veeam/" class="md-nav__link">
+      <a href="../probes/veeam/" class="md-nav__link">
         
   
   
@@ -2273,7 +2373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../probes/mysql/" class="md-nav__link">
         
   
   
@@ -2301,7 +2401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../postgresql/" class="md-nav__link">
+      <a href="../probes/postgresql/" class="md-nav__link">
         
   
   
@@ -2329,7 +2429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql/" class="md-nav__link">
+      <a href="../probes/mssql/" class="md-nav__link">
         
   
   
@@ -2357,7 +2457,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mongodb/" class="md-nav__link">
+      <a href="../probes/mongodb/" class="md-nav__link">
         
   
   
@@ -2385,7 +2485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle/" class="md-nav__link">
+      <a href="../probes/oracle/" class="md-nav__link">
         
   
   
@@ -2413,7 +2513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redis/" class="md-nav__link">
+      <a href="../probes/redis/" class="md-nav__link">
         
   
   
@@ -2441,7 +2541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cassandra/" class="md-nav__link">
+      <a href="../probes/cassandra/" class="md-nav__link">
         
   
   
@@ -2469,7 +2569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../couchdb/" class="md-nav__link">
+      <a href="../probes/couchdb/" class="md-nav__link">
         
   
   
@@ -2497,7 +2597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clickhouse/" class="md-nav__link">
+      <a href="../probes/clickhouse/" class="md-nav__link">
         
   
   
@@ -2525,7 +2625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../elasticsearch/" class="md-nav__link">
+      <a href="../probes/elasticsearch/" class="md-nav__link">
         
   
   
@@ -2553,7 +2653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../opensearch/" class="md-nav__link">
+      <a href="../probes/opensearch/" class="md-nav__link">
         
   
   
@@ -2581,7 +2681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../solr/" class="md-nav__link">
+      <a href="../probes/solr/" class="md-nav__link">
         
   
   
@@ -2609,7 +2709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../influxdb/" class="md-nav__link">
+      <a href="../probes/influxdb/" class="md-nav__link">
         
   
   
@@ -2637,7 +2737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memcached/" class="md-nav__link">
+      <a href="../probes/memcached/" class="md-nav__link">
         
   
   
@@ -2665,7 +2765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../apache/" class="md-nav__link">
+      <a href="../probes/apache/" class="md-nav__link">
         
   
   
@@ -2693,7 +2793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx/" class="md-nav__link">
+      <a href="../probes/nginx/" class="md-nav__link">
         
   
   
@@ -2721,7 +2821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../haproxy/" class="md-nav__link">
+      <a href="../probes/haproxy/" class="md-nav__link">
         
   
   
@@ -2746,37 +2846,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Envoy Proxy
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../probes/envoy/" class="md-nav__link">
         
   
   
@@ -2792,81 +2865,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metric-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metric reference
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2879,7 +2877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../php-fpm/" class="md-nav__link">
+      <a href="../probes/php-fpm/" class="md-nav__link">
         
   
   
@@ -2907,7 +2905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../varnish/" class="md-nav__link">
+      <a href="../probes/varnish/" class="md-nav__link">
         
   
   
@@ -2935,7 +2933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tomcat/" class="md-nav__link">
+      <a href="../probes/tomcat/" class="md-nav__link">
         
   
   
@@ -2963,7 +2961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wildfly/" class="md-nav__link">
+      <a href="../probes/wildfly/" class="md-nav__link">
         
   
   
@@ -2991,7 +2989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kafka/" class="md-nav__link">
+      <a href="../probes/kafka/" class="md-nav__link">
         
   
   
@@ -3019,7 +3017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
+      <a href="../probes/rabbitmq/" class="md-nav__link">
         
   
   
@@ -3047,7 +3045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../activemq/" class="md-nav__link">
+      <a href="../probes/activemq/" class="md-nav__link">
         
   
   
@@ -3075,7 +3073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nats/" class="md-nav__link">
+      <a href="../probes/nats/" class="md-nav__link">
         
   
   
@@ -3103,7 +3101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pulsar/" class="md-nav__link">
+      <a href="../probes/pulsar/" class="md-nav__link">
         
   
   
@@ -3131,7 +3129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker/" class="md-nav__link">
+      <a href="../probes/docker/" class="md-nav__link">
         
   
   
@@ -3159,7 +3157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/" class="md-nav__link">
+      <a href="../probes/kubernetes/" class="md-nav__link">
         
   
   
@@ -3187,7 +3185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../swarm/" class="md-nav__link">
+      <a href="../probes/swarm/" class="md-nav__link">
         
   
   
@@ -3215,7 +3213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../proxmox/" class="md-nav__link">
+      <a href="../probes/proxmox/" class="md-nav__link">
         
   
   
@@ -3243,7 +3241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv/" class="md-nav__link">
+      <a href="../probes/hyperv/" class="md-nav__link">
         
   
   
@@ -3271,7 +3269,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ceph/" class="md-nav__link">
+      <a href="../probes/ceph/" class="md-nav__link">
         
   
   
@@ -3299,7 +3297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../consul/" class="md-nav__link">
+      <a href="../probes/consul/" class="md-nav__link">
         
   
   
@@ -3327,7 +3325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zookeeper/" class="md-nav__link">
+      <a href="../probes/zookeeper/" class="md-nav__link">
         
   
   
@@ -3355,7 +3353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jenkins/" class="md-nav__link">
+      <a href="../probes/jenkins/" class="md-nav__link">
         
   
   
@@ -3383,7 +3381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unifi/" class="md-nav__link">
+      <a href="../probes/unifi/" class="md-nav__link">
         
   
   
@@ -3418,7 +3416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/" class="md-nav__link">
+      <a href="../troubleshooting/" class="md-nav__link">
         
   
   
@@ -3497,7 +3495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/" class="md-nav__link">
+      <a href="../whats-new/" class="md-nav__link">
         
   
   
@@ -3525,7 +3523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/next/" class="md-nav__link">
+      <a href="../whats-new/next/" class="md-nav__link">
         
   
   
@@ -3553,7 +3551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.1/" class="md-nav__link">
+      <a href="../whats-new/0.6.1/" class="md-nav__link">
         
   
   
@@ -3581,7 +3579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.0/" class="md-nav__link">
+      <a href="../whats-new/0.6.0/" class="md-nav__link">
         
   
   
@@ -3609,7 +3607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.6/" class="md-nav__link">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
         
   
   
@@ -3637,7 +3635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.5/" class="md-nav__link">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
         
   
   
@@ -3665,7 +3663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+      <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
   
@@ -3693,7 +3691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.3/" class="md-nav__link">
+      <a href="../whats-new/0.5.3/" class="md-nav__link">
         
   
   
@@ -3721,7 +3719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.2/" class="md-nav__link">
+      <a href="../whats-new/0.5.2/" class="md-nav__link">
         
   
   
@@ -3749,7 +3747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+      <a href="../whats-new/0.5.1/" class="md-nav__link">
         
   
   
@@ -3777,7 +3775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+      <a href="../whats-new/0.5.0/" class="md-nav__link">
         
   
   
@@ -3805,7 +3803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.2/" class="md-nav__link">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
         
   
   
@@ -3833,7 +3831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.1/" class="md-nav__link">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
         
   
   
@@ -3861,7 +3859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.0/" class="md-nav__link">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
         
   
   
@@ -3889,7 +3887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.3.2/" class="md-nav__link">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
         
   
   
@@ -3917,7 +3915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+      <a href="../whats-new/0.2.3/" class="md-nav__link">
         
   
   
@@ -3945,7 +3943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.2/" class="md-nav__link">
+      <a href="../whats-new/0.2.2/" class="md-nav__link">
         
   
   
@@ -3973,7 +3971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.1/" class="md-nav__link">
+      <a href="../whats-new/0.2.1/" class="md-nav__link">
         
   
   
@@ -4001,7 +3999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.0/" class="md-nav__link">
+      <a href="../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -4056,10 +4054,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#the-addresses" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick start
+        The addresses
       
     </span>
   </a>
@@ -4067,10 +4065,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#what-a-manifest-holds" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        What a manifest holds
       
     </span>
   </a>
@@ -4078,10 +4076,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#what-is-published-and-when" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        What is published, and when
       
     </span>
   </a>
@@ -4089,10 +4087,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
+  <a href="#finding-and-verifying-the-right-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operational notes
+        Finding and verifying the right file
       
     </span>
   </a>
@@ -4100,10 +4098,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metric-reference" class="md-nav__link">
+  <a href="#container-image-tags" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metric reference
+        Container image tags
       
     </span>
   </a>
@@ -4127,7 +4125,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/envoy.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/releases.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -4135,211 +4133,241 @@
   
 
 
-<p><img src="../../assets/probe-logos/envoy.svg" alt="" class="probe-page-logo probe-page-logo-wm"></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p><strong>License: Free</strong> — part of the universal collection tier.</p>
+<h1 id="downloading-and-verifying-releases">Downloading and verifying releases<a class="headerlink" href="#downloading-and-verifying-releases" title="Permanent link">&para;</a></h1>
+<p>A script, an Ansible role or a Dockerfile that installs the agent needs
+four things: which version is current, the URL of the right file, its
+checksum, and its signature. Each release publishes a <strong>manifest</strong> that
+holds them, so none of this means reading the GitHub page.</p>
+<h2 id="the-addresses">The addresses<a class="headerlink" href="#the-addresses" title="Permanent link">&para;</a></h2>
+<p>Everything is served from <code>https://packages.senhub.io</code>, the site that
+also hosts the <a href="../installation/#install-from-the-package-repositories">package repositories</a>.</p>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Newest stable release</td>
+<td><code>https://packages.senhub.io/releases/stable/latest.json</code></td>
+</tr>
+<tr>
+<td>Newest beta</td>
+<td><code>https://packages.senhub.io/releases/beta/latest.json</code></td>
+</tr>
+<tr>
+<td>One release, forever</td>
+<td><code>https://packages.senhub.io/releases/&lt;version&gt;/manifest.json</code></td>
+</tr>
+<tr>
+<td>Every release, per channel</td>
+<td><code>https://packages.senhub.io/releases/index.json</code></td>
+</tr>
+<tr>
+<td>The schema</td>
+<td><code>https://packages.senhub.io/releases/manifest.schema.json</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>&lt;version&gt;</code> is the release tag, without a <code>v</code> (<code>0.6.2</code>, <code>0.6.2-beta.1</code>).</p>
+<p><code>latest.json</code> is a copy of the manifest of the highest version of its
+channel. A beta never appears in <code>stable</code>, and <code>beta</code> follows betas only:
+a machine that wants "the newest beta, or the final release once it is
+out" reads both and picks the higher <code>version</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Why not GitHub's <code>/releases/latest/download/</code></p>
+<p>That address ignores pre-releases, knows nothing of channels, and can
+only redirect to one file name, so it cannot tell you a checksum or a
+signature, nor that the Windows files are still waiting to be signed.
+The manifest carries all of that and is the same for a script and for a
+person.</p>
 </div>
-<h1 id="envoy-proxy">Envoy Proxy<a class="headerlink" href="#envoy-proxy" title="Permanent link">&para;</a></h1>
-<p>The <code>envoy</code> probe monitors Envoy by scraping its admin interface
-(<code>/stats?format=prometheus</code>), surfacing server health, listener downstream
-connections and requests, and per-cluster upstream metrics.</p>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-envoy.yaml — each file under probes.d/ is a YAML array of probes</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envoy</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envoy</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:9901</span>
+<h2 id="what-a-manifest-holds">What a manifest holds<a class="headerlink" href="#what-a-manifest-holds" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6.2-beta.1"</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-10-06T08:05:15Z"</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aac44564b4536f978a79d63d4492ebe52a53c408"</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">"complete"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">"signing_pending"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"senhub-agent-windows-amd64.zip"</span><span class="p">,</span><span class="w"> </span><span class="s2">"senhub-agent-oss-windows-amd64.zip"</span><span class="p">],</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"senhub-agent-linux-amd64.zip"</span><span class="p">,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="nt">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="nt">"arch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span><span class="w"> </span><span class="nt">"edition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"full"</span><span class="p">,</span><span class="w"> </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zip"</span><span class="p">,</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/senhub-io/senhub-agent/releases/download/0.6.2-beta.1/senhub-agent-linux-amd64.zip"</span><span class="p">,</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="nt">"sha256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f8ecc56d046e4e6587b1c6422c64ff2ff2286c1235d069919c91e24ddebca957"</span><span class="p">,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">28994471</span><span class="p">,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">      </span><span class="nt">"minisig_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/senhub-io/senhub-agent/releases/download/0.6.2-beta.1/senhub-agent-linux-amd64.zip.minisig"</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">  </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">      </span><span class="nt">"repo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ghcr.io/senhub-io/senhub-agent"</span><span class="p">,</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">      </span><span class="nt">"edition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"full"</span><span class="p">,</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">      </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6.2"</span><span class="p">,</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">      </span><span class="nt">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:..."</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<!-- schema:params:start -->
-<!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:cbaa2223c32e503bcf78b854bdcc473d53217b112e375bf527c6038714d5b8d8 -->
-
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Must set</th>
-<th>Default</th>
-<th>Description</th>
+<th>Field</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>endpoint</code></td>
-<td>In practice</td>
-<td><code>http://localhost:9901</code></td>
-<td>Base URL of the admin interface</td>
+<td><code>version</code>, <code>channel</code></td>
+<td>The release tag, and <code>stable</code> or <code>beta</code>.</td>
 </tr>
 <tr>
-<td><code>interval</code></td>
-<td>No</td>
-<td><code>30</code></td>
-<td>Seconds between collections</td>
+<td><code>date</code></td>
+<td>When the release was published, UTC.</td>
 </tr>
 <tr>
-<td><code>timeout</code></td>
-<td>No</td>
-<td><code>10</code></td>
-<td>Request timeout in seconds</td>
+<td><code>commit</code></td>
+<td>The commit of the open source repository the release is tagged at.</td>
 </tr>
 <tr>
-<td><code>instance_name</code></td>
-<td>No</td>
-<td>-</td>
-<td>Stable identity of this proxy; set it when two envoy probes run on one host</td>
+<td><code>complete</code></td>
+<td><code>true</code> when every ZIP and MSI carries its signature and, on a stable release, both MSIs are there.</td>
+</tr>
+<tr>
+<td><code>signing_pending</code></td>
+<td>The ZIPs and MSIs that have no signature yet.</td>
+</tr>
+<tr>
+<td><code>artifacts[].kind</code></td>
+<td><code>zip</code> (the archive the auto-updater reads), <code>msi</code>, <code>deb</code>, <code>rpm</code>.</td>
+</tr>
+<tr>
+<td><code>artifacts[].edition</code></td>
+<td><code>full</code> or <code>oss</code>.</td>
+</tr>
+<tr>
+<td><code>artifacts[].os</code>, <code>arch</code></td>
+<td><code>linux</code> or <code>windows</code>; <code>amd64</code> or <code>arm64</code> (an RPM built for <code>x86_64</code> or <code>aarch64</code> is listed as <code>amd64</code> or <code>arm64</code>).</td>
+</tr>
+<tr>
+<td><code>artifacts[].url</code></td>
+<td>The GitHub release asset.</td>
+</tr>
+<tr>
+<td><code>artifacts[].sha256</code>, <code>size</code></td>
+<td>Checksum and size in bytes, as GitHub computed them at upload.</td>
+</tr>
+<tr>
+<td><code>artifacts[].minisig_url</code></td>
+<td>The detached signature, or <code>null</code>.</td>
+</tr>
+<tr>
+<td><code>images[]</code></td>
+<td>The container images of this exact version, with the digest to pull by.</td>
 </tr>
 </tbody>
 </table>
-<!-- schema:params:end -->
-
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.envoy.up</code></td>
-<td>1</td>
-<td>1 when the admin <code>/stats</code> endpoint responded successfully</td>
-</tr>
-<tr>
-<td><code>envoy.server.uptime</code></td>
-<td>s</td>
-<td>Time since the Envoy process started</td>
-</tr>
-<tr>
-<td><code>envoy.server.memory.allocated</code></td>
-<td>By</td>
-<td>Memory currently allocated by the Envoy process</td>
-</tr>
-<tr>
-<td><code>envoy.listener.downstream.connections.active</code></td>
-<td>#</td>
-<td>Downstream connections currently active across all listeners</td>
-</tr>
-<tr>
-<td><code>envoy.listener.downstream.connections.active</code></td>
-<td>{connection}</td>
-<td>Active downstream connections per listener</td>
-</tr>
-<tr>
-<td><code>envoy.cluster.upstream.requests.total</code></td>
-<td>#</td>
-<td>Upstream requests dispatched to cluster members (cumulative)</td>
-</tr>
-<tr>
-<td><code>envoy.cluster.upstream.connections.total</code></td>
-<td>#</td>
-<td>Upstream connections opened to cluster members (cumulative)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<p>Three things worth knowing:</p>
 <ul>
-<li>The Envoy admin interface is typically bound to <code>127.0.0.1:9901</code>. If the agent runs on the same host, the default endpoint works without changes.</li>
-<li>The admin interface should <strong>not</strong> be exposed to untrusted networks — it provides access to configuration and health state without authentication.</li>
-<li>Cluster-level metrics are tagged with <code>cluster</code> (derived from the <code>envoy_cluster_name</code> Prometheus label).</li>
+<li><strong>A Windows file has no signature until the signing round has run.</strong>
+  The manifest published with a release reads <code>"complete": false</code>; it is
+  rebuilt when the Windows ZIPs are signed and again when the MSIs are.
+  Do not install a Windows file from a manifest that is not <code>complete</code>.</li>
+<li><strong><code>.deb</code> and <code>.rpm</code> have <code>"minisig_url": null</code> by design.</strong> They are
+  signed with the repository key (<code>https://packages.senhub.io/gpg.key</code>); install them from the
+  <a href="../installation/#install-from-the-package-repositories">package repositories</a>,
+  where the package manager does the verification.</li>
+<li><strong>There is no <code>min_upgrade_from</code>.</strong> The agent has no rule that refuses an
+  upgrade from an older version, so the manifest does not pretend to know
+  of a minimum. If one appears, it will be a new field of the same schema
+  version.</li>
 </ul>
-<h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
-<p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
-OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
-<a href="../../nagios/">Nagios check</a> and the API <code>metrics=</code> filter match.
-<strong>PRTG channel</strong> is the label PRTG shows, placeholders filled from the
-series' tags.</p>
-<!-- schema:metrics:start -->
-<!-- Generated from the probe's definition. Run `make docs-metrics` after changing it. -->
-
+<p>The schema may gain fields without a version change: ignore the ones you
+do not know. A rename, a removal or a change of meaning raises
+<code>schema_version</code>.</p>
+<p>The images list is filled by the release itself: the release publishes
+both images, waits for them, then builds the manifest.</p>
+<h2 id="what-is-published-and-when">What is published, and when<a class="headerlink" href="#what-is-published-and-when" title="Permanent link">&para;</a></h2>
+<p>Cutting a release publishes everything, in this order, with no step to
+remember: the ZIPs and their signatures, the <code>.deb</code> and <code>.rpm</code> packages and
+repositories, the container images of both editions (and the minor tag of
+a stable release), then the manifest. The only manual step left is the
+Authenticode signing of the Windows files; the manifest is rebuilt after
+the Windows ZIPs are signed and again after the MSIs, and says
+<code>"complete": false</code> until then.</p>
+<p>If a step fails (a package build, an image scan), the run fails and names
+it, and the manifest still lists what exists. Running the "Publish
+release manifest" workflow again for the tag completes it.</p>
+<h2 id="finding-and-verifying-the-right-file">Finding and verifying the right file<a class="headerlink" href="#finding-and-verifying-the-right-file" title="Permanent link">&para;</a></h2>
+<p>The public key below is the one the agent embeds to verify its own
+updates. It is the same for every release.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">CHANNEL</span><span class="o">=</span>stable<span class="w">          </span><span class="c1"># or: beta</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">EDITION</span><span class="o">=</span>oss<span class="w">             </span><span class="c1"># or: full</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">OS</span><span class="o">=</span>linux<span class="w"> </span><span class="nv">ARCH</span><span class="o">=</span>amd64
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">KEY</span><span class="o">=</span>RWRlfkyeLpjI0MjTSfuvT/bDNHHaVJhRirQN8Z8LTAM+n4LKVbpjrlRh
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">manifest</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span><span class="s2">"https://packages.senhub.io/releases/</span><span class="nv">$CHANNEL</span><span class="s2">/latest.json"</span><span class="k">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># Refuse a release whose signing round is not finished.</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span>.complete<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$manifest</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"release not complete yet"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="nv">file</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-c<span class="w"> </span>--arg<span class="w"> </span>e<span class="w"> </span><span class="s2">"</span><span class="nv">$EDITION</span><span class="s2">"</span><span class="w"> </span>--arg<span class="w"> </span>o<span class="w"> </span><span class="s2">"</span><span class="nv">$OS</span><span class="s2">"</span><span class="w"> </span>--arg<span class="w"> </span>a<span class="w"> </span><span class="s2">"</span><span class="nv">$ARCH</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="s1">'.artifacts[] | select(.kind == "zip" and .edition == $e and .os == $o and .arch == $a)'</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$manifest</span><span class="s2">"</span><span class="k">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nv">name</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span>.name<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="k">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>curl<span class="w"> </span>-fsSLo<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w">          </span><span class="s2">"</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span>.url<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>curl<span class="w"> </span>-fsSLo<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">.minisig"</span><span class="w">  </span><span class="s2">"</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span>.minisig_url<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span>.sha256<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="k">)</span><span class="s2">  </span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sha256sum<span class="w"> </span>-c<span class="w"> </span>-<span class="w">     </span><span class="c1"># shasum -a 256 -c - on macOS</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>minisign<span class="w"> </span>-Vm<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>-P<span class="w"> </span><span class="s2">"</span><span class="nv">$KEY</span><span class="s2">"</span>
+</code></pre></div>
+<p>The checksum catches a corrupted download; the signature proves the file
+was built and signed by SenHub. Do both: the manifest and the file come
+from different hosts, and the signature is what ties them.</p>
+<p>To stay on one minor line, take the newest of it from the index:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://packages.senhub.io/releases/index.json<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'.channels.stable.releases[] | select(.version | startswith("0.6.")) | .version'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<p>(the list is newest first).</p>
+<p>To pin a release in an Ansible role or a Dockerfile, read
+<code>https://packages.senhub.io/releases/&lt;version&gt;/manifest.json</code> instead of
+<code>latest.json</code>: it never changes except to gain a signature or an image.</p>
+<h2 id="container-image-tags">Container image tags<a class="headerlink" href="#container-image-tags" title="Permanent link">&para;</a></h2>
+<p>Images are published to <code>ghcr.io/senhub-io/senhub-agent</code> (full edition)
+and <code>ghcr.io/senhub-io/senhub-agent-oss</code> (open source edition).</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Name</th>
-<th>PRTG channel</th>
-<th>Unit</th>
-<th>Description</th>
+<th>Tag</th>
+<th>Moves?</th>
+<th>Use it for</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub.envoy.up</code></td>
-<td><code>senhub.envoy.up</code></td>
-<td>Envoy Up</td>
-<td>#</td>
-<td>1 when the Envoy admin interface answered /stats?format=prometheus successfully</td>
+<td><code>0.6.2</code></td>
+<td>Never</td>
+<td>A reproducible deployment.</td>
 </tr>
 <tr>
-<td><code>envoy.server.uptime</code></td>
-<td><code>envoy.server.uptime</code></td>
-<td>Envoy Server Uptime</td>
-<td>s</td>
-<td>Time since the Envoy process started (seconds)</td>
+<td><code>0.6</code></td>
+<td>To each new patch of that minor line, stable releases only</td>
+<td>Following the fixes of one minor line.</td>
 </tr>
 <tr>
-<td><code>envoy.server.memory.allocated</code></td>
-<td><code>envoy.server.memory.allocated</code></td>
-<td>Envoy Memory Allocated</td>
-<td>B</td>
-<td>Current memory allocated by the Envoy process</td>
-</tr>
-<tr>
-<td><code>envoy.server.memory.heap_size</code></td>
-<td><code>envoy.server.memory.heap_size</code></td>
-<td>Envoy Memory Heap Size</td>
-<td>B</td>
-<td>Current heap size reported by the Envoy process</td>
-</tr>
-<tr>
-<td><code>envoy.listener.downstream.connections.total</code></td>
-<td><code>envoy.listener.downstream.connections.total</code></td>
-<td>Envoy Downstream Connections Total</td>
-<td>#</td>
-<td>Total downstream connections accepted across all listeners (cumulative)</td>
-</tr>
-<tr>
-<td><code>envoy.listener.downstream.connections.active</code></td>
-<td><code>envoy.listener.downstream.connections.active</code></td>
-<td>Envoy Downstream Connections Active</td>
-<td>#</td>
-<td>Currently active downstream connections across all listeners</td>
-</tr>
-<tr>
-<td><code>envoy.http.downstream.requests.total</code></td>
-<td><code>envoy.http.downstream.requests.total</code></td>
-<td>Envoy HTTP Requests Total</td>
-<td>#</td>
-<td>Total HTTP downstream requests received across all HTTP connection managers (cumulative)</td>
-</tr>
-<tr>
-<td><code>envoy.cluster.upstream.connections.total</code></td>
-<td><code>envoy.cluster.upstream.connections.total</code></td>
-<td>Envoy Cluster {cluster} Upstream Connections Total</td>
-<td>#</td>
-<td>Total upstream connections opened to cluster members (cumulative)</td>
-</tr>
-<tr>
-<td><code>envoy.cluster.upstream.requests.total</code></td>
-<td><code>envoy.cluster.upstream.requests.total</code></td>
-<td>Envoy Cluster {cluster} Upstream Requests Total</td>
-<td>#</td>
-<td>Total upstream requests dispatched to cluster members (cumulative)</td>
-</tr>
-<tr>
-<td><code>envoy.cluster.upstream.requests.time</code></td>
-<td><code>envoy.cluster.upstream.requests.time</code></td>
-<td>Envoy Cluster {cluster} Upstream Request Time</td>
-<td>ms</td>
-<td>Cumulative upstream request latency across all requests to cluster members</td>
+<td><code>0.6.2-beta.1</code></td>
+<td>Never</td>
+<td>Testing a beta. A beta never moves <code>0.6</code>.</td>
 </tr>
 </tbody>
 </table>
-<!-- schema:metrics:end -->
+<p>There is no <code>latest</code> tag: it would cross minor lines without notice.
+For a deployment that must be immune even to a moved tag, pull by the
+digest that the manifest lists under <code>images</code>.</p>
 
 
 
@@ -4375,7 +4403,7 @@ series' tags.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../haproxy/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HAProxy">
+          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4385,20 +4413,20 @@ series' tags.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                HAProxy
+                Installation
               </div>
             </div>
           </a>
         
         
           
-          <a href="../php-fpm/" class="md-footer__link md-footer__link--next" aria-label="Next: PHP-FPM">
+          <a href="../container/" class="md-footer__link md-footer__link--next" aria-label="Next: Container">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                PHP-FPM
+                Container
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -4461,14 +4489,14 @@ series' tags.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../javascripts/rn-filter.js"></script>
+        <script src="../javascripts/rn-filter.js"></script>
       
-        <script src="../../javascripts/dev-banner.js"></script>
+        <script src="../javascripts/dev-banner.js"></script>
       
     
   </body>
