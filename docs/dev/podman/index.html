@@ -4401,7 +4401,7 @@ is one edit away. The plain <code>podman run</code> below is a container scope.<
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.1
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6
 </code></pre></div>
 <p>Use the full image name. A short name such as <code>senhub-agent:0.6.1</code>
 makes Podman search its configured registries, or ask which one to use.</p>
@@ -4639,24 +4639,25 @@ under the unit:</p>
 <p>The agent's own auto-update is off in a container: it would replace a
 binary in a layer the next container discards. Updating means running a
 new image.</p>
-<p>Two ways to hold the image, and the unit uses the first:</p>
+<p>Three ways to hold the image; the unit uses the first:</p>
 <ul>
-<li><strong>An exact version with <code>AutoUpdate=registry</code>.</strong> The tags are exact
-  versions (<code>0.6.1</code>); there is no <code>latest</code> and no minor tag such as
-  <code>0.6</code>, so <code>podman auto-update</code> pulls the same tag again and restarts
-  the unit only when the registry serves another image under it, for
-  instance a republished build of that version. It never moves to a new
-  version: that is an edit of the <code>Image=</code> line, then
+<li><strong>The minor line tag with <code>AutoUpdate=registry</code>.</strong> <code>:0.6</code> follows the
+  stable patch releases of the 0.6 line (published from 0.6.2 on; betas
+  never carry it, and there is no <code>latest</code>). <code>podman auto-update</code> pulls
+  it again and restarts the unit when a new 0.6.x is published, with the
+  agent key and data kept on the state volume. Moving to 0.7 is an edit
+  of the <code>Image=</code> line.</li>
+<li><strong>An exact version with <code>AutoUpdate=registry</code>.</strong> <code>:0.6.2</code> never moves
+  to another version: auto-update only picks up a republished build of
+  that same version. Moving on is an edit of the <code>Image=</code> line, then
   <code>systemctl daemon-reload</code> and <code>systemctl restart senhub-agent</code>.</li>
 <li><strong>A digest, without auto-update.</strong> <code>Image=ghcr.io/senhub-io/senhub-agent@sha256:&lt;digest&gt;</code>
-  runs exactly that image, whatever happens to the tag. Delete the
-  <code>AutoUpdate=</code> line: there is nothing for it to follow. Moving to a
-  new image is an edit of the digest. Choose this where the image must
-  be reviewed before it runs.</li>
+  runs exactly that image, whatever happens to the tags. Delete the
+  <code>AutoUpdate=</code> line: there is nothing for it to follow. Choose this
+  where the image must be reviewed before it runs.</li>
 </ul>
-<p>Following a minor line (<code>0.6</code>) with <code>AutoUpdate=registry</code> would give
-patch updates without an edit, but needs the registry to publish that
-tag; it does not today.</p>
+<p>To try a beta, use its exact tag (<code>:0.6.2-beta.1</code>): betas are not on the
+minor line tag.</p>
 <p>To run auto-update daily (first way):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman-auto-update.timer<span class="w">   </span><span class="c1"># rootful</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman-auto-update.timer<span class="w"> </span><span class="c1"># rootless</span>
