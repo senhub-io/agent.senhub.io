@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/probes/windows-services/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/podman/">
       
       
-        <link rel="prev" href="../systemd/">
+        <link rel="prev" href="../container/">
       
       
-        <link rel="next" href="../chrony/">
+        <link rel="next" href="../kubernetes-helm/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/favicon.svg">
+      <link rel="icon" href="../assets/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Windows Services - SenHub Agent</title>
+        <title>Podman - SenHub Agent</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#windows-services" class="md-skip">
+        <a href="#running-the-agent-with-podman" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Windows Services
+              Podman
             
           </span>
         </div>
@@ -239,7 +239,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
       
-  <img src="../../assets/logo.svg" alt="logo">
+  <img src="../assets/logo.svg" alt="logo">
 
     </a>
     SenHub Agent
@@ -266,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../presentation/" class="md-nav__link">
+      <a href="../presentation/" class="md-nav__link">
         
   
   
@@ -320,7 +320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   
@@ -347,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/" class="md-nav__link">
+      <a href="../releases/" class="md-nav__link">
         
   
   
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../container/" class="md-nav__link">
+      <a href="../container/" class="md-nav__link">
         
   
   
@@ -398,10 +398,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../podman/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Podman
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -417,6 +444,164 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-agent-monitors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the agent monitors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One command
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#as-a-systemd-service-quadlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        As a systemd service: Quadlet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="As a systemd service: Quadlet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stopping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stopping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-the-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking the unit
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -428,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes-helm/" class="md-nav__link">
+      <a href="../kubernetes-helm/" class="md-nav__link">
         
   
   
@@ -455,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ansible/" class="md-nav__link">
+      <a href="../ansible/" class="md-nav__link">
         
   
   
@@ -482,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -509,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secret-store/" class="md-nav__link">
+      <a href="../secret-store/" class="md-nav__link">
         
   
   
@@ -536,7 +721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http-https/" class="md-nav__link">
+      <a href="../http-https/" class="md-nav__link">
         
   
   
@@ -563,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nagios/" class="md-nav__link">
+      <a href="../nagios/" class="md-nav__link">
         
   
   
@@ -590,7 +775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zabbix/" class="md-nav__link">
+      <a href="../zabbix/" class="md-nav__link">
         
   
   
@@ -617,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../web-interface/" class="md-nav__link">
+      <a href="../web-interface/" class="md-nav__link">
         
   
   
@@ -696,7 +881,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/" class="md-nav__link">
+      <a href="../license/" class="md-nav__link">
         
   
   
@@ -724,7 +909,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-fr/" class="md-nav__link">
+      <a href="../license/agreement-fr/" class="md-nav__link">
         
   
   
@@ -752,7 +937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/agreement-en/" class="md-nav__link">
+      <a href="../license/agreement-en/" class="md-nav__link">
         
   
   
@@ -780,7 +965,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../license/third-party/" class="md-nav__link">
+      <a href="../license/third-party/" class="md-nav__link">
         
   
   
@@ -867,7 +1052,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/" class="md-nav__link">
+      <a href="../prometheus/" class="md-nav__link">
         
   
   
@@ -895,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+      <a href="../prometheus/metrics-reference/" class="md-nav__link">
         
   
   
@@ -930,7 +1115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
+      <a href="../cli/" class="md-nav__link">
         
   
   
@@ -957,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../otlp/" class="md-nav__link">
+      <a href="../otlp/" class="md-nav__link">
         
   
   
@@ -981,8 +1166,6 @@
       
   
   
-    
-  
   
   
     
@@ -995,11 +1178,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
         
           
           <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
@@ -1020,7 +1203,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1038,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../probes/" class="md-nav__link">
         
   
   
@@ -1066,7 +1249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cpu/" class="md-nav__link">
+      <a href="../probes/cpu/" class="md-nav__link">
         
   
   
@@ -1094,7 +1277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory/" class="md-nav__link">
+      <a href="../probes/memory/" class="md-nav__link">
         
   
   
@@ -1122,7 +1305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../network/" class="md-nav__link">
+      <a href="../probes/network/" class="md-nav__link">
         
   
   
@@ -1150,7 +1333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../logicaldisk/" class="md-nav__link">
+      <a href="../probes/logicaldisk/" class="md-nav__link">
         
   
   
@@ -1178,7 +1361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linux-logs/" class="md-nav__link">
+      <a href="../probes/linux-logs/" class="md-nav__link">
         
   
   
@@ -1206,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../windows-eventlog/" class="md-nav__link">
+      <a href="../probes/windows-eventlog/" class="md-nav__link">
         
   
   
@@ -1234,7 +1417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../filetail/" class="md-nav__link">
+      <a href="../probes/filetail/" class="md-nav__link">
         
   
   
@@ -1262,7 +1445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process/" class="md-nav__link">
+      <a href="../probes/process/" class="md-nav__link">
         
   
   
@@ -1290,7 +1473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../systemd/" class="md-nav__link">
+      <a href="../probes/systemd/" class="md-nav__link">
         
   
   
@@ -1315,37 +1498,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Windows Services
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../probes/windows-services/" class="md-nav__link">
         
   
   
@@ -1361,81 +1517,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Operational notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metric-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metric reference
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1448,7 +1529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../chrony/" class="md-nav__link">
+      <a href="../probes/chrony/" class="md-nav__link">
         
   
   
@@ -1476,7 +1557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ntp/" class="md-nav__link">
+      <a href="../probes/ntp/" class="md-nav__link">
         
   
   
@@ -1504,7 +1585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../os-updates/" class="md-nav__link">
+      <a href="../probes/os-updates/" class="md-nav__link">
         
   
   
@@ -1532,7 +1613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../smart/" class="md-nav__link">
+      <a href="../probes/smart/" class="md-nav__link">
         
   
   
@@ -1560,7 +1641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ipmi/" class="md-nav__link">
+      <a href="../probes/ipmi/" class="md-nav__link">
         
   
   
@@ -1588,7 +1669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nvidia/" class="md-nav__link">
+      <a href="../probes/nvidia/" class="md-nav__link">
         
   
   
@@ -1616,7 +1697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../modbus/" class="md-nav__link">
+      <a href="../probes/modbus/" class="md-nav__link">
         
   
   
@@ -1644,7 +1725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../icmp-check/" class="md-nav__link">
+      <a href="../probes/icmp-check/" class="md-nav__link">
         
   
   
@@ -1672,7 +1753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http-check/" class="md-nav__link">
+      <a href="../probes/http-check/" class="md-nav__link">
         
   
   
@@ -1700,7 +1781,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tcp-dial/" class="md-nav__link">
+      <a href="../probes/tcp-dial/" class="md-nav__link">
         
   
   
@@ -1728,7 +1809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dns-latency/" class="md-nav__link">
+      <a href="../probes/dns-latency/" class="md-nav__link">
         
   
   
@@ -1756,7 +1837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-poll/" class="md-nav__link">
+      <a href="../probes/snmp-poll/" class="md-nav__link">
         
   
   
@@ -1784,7 +1865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../snmp-trap/" class="md-nav__link">
+      <a href="../probes/snmp-trap/" class="md-nav__link">
         
   
   
@@ -1812,7 +1893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../otlp-receiver/" class="md-nav__link">
+      <a href="../probes/otlp-receiver/" class="md-nav__link">
         
   
   
@@ -1840,7 +1921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prometheus-scrape/" class="md-nav__link">
+      <a href="../probes/prometheus-scrape/" class="md-nav__link">
         
   
   
@@ -1868,7 +1949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exec/" class="md-nav__link">
+      <a href="../probes/exec/" class="md-nav__link">
         
   
   
@@ -1896,7 +1977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../citrix/" class="md-nav__link">
+      <a href="../probes/citrix/" class="md-nav__link">
         
   
   
@@ -1924,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netscaler/" class="md-nav__link">
+      <a href="../probes/netscaler/" class="md-nav__link">
         
   
   
@@ -1952,7 +2033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redfish/" class="md-nav__link">
+      <a href="../probes/redfish/" class="md-nav__link">
         
   
   
@@ -1980,7 +2061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../powerstore/" class="md-nav__link">
+      <a href="../probes/powerstore/" class="md-nav__link">
         
   
   
@@ -2008,7 +2089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ibmi/" class="md-nav__link">
+      <a href="../probes/ibmi/" class="md-nav__link">
         
   
   
@@ -2036,7 +2117,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql_ha/" class="md-nav__link">
+      <a href="../probes/mssql_ha/" class="md-nav__link">
         
   
   
@@ -2064,7 +2145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle_enterprise/" class="md-nav__link">
+      <a href="../probes/oracle_enterprise/" class="md-nav__link">
         
   
   
@@ -2092,7 +2173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv_ha/" class="md-nav__link">
+      <a href="../probes/hyperv_ha/" class="md-nav__link">
         
   
   
@@ -2120,7 +2201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vsphere_ha/" class="md-nav__link">
+      <a href="../probes/vsphere_ha/" class="md-nav__link">
         
   
   
@@ -2148,7 +2229,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_hybrid/" class="md-nav__link">
+      <a href="../probes/ad_hybrid/" class="md-nav__link">
         
   
   
@@ -2176,7 +2257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exchange_online/" class="md-nav__link">
+      <a href="../probes/exchange_online/" class="md-nav__link">
         
   
   
@@ -2204,7 +2285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_apps/" class="md-nav__link">
+      <a href="../probes/azure_container_apps/" class="md-nav__link">
         
   
   
@@ -2232,7 +2313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../azure_container_app_jobs/" class="md-nav__link">
+      <a href="../probes/azure_container_app_jobs/" class="md-nav__link">
         
   
   
@@ -2260,7 +2341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../syslog/" class="md-nav__link">
+      <a href="../probes/syslog/" class="md-nav__link">
         
   
   
@@ -2288,7 +2369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../event/" class="md-nav__link">
+      <a href="../probes/event/" class="md-nav__link">
         
   
   
@@ -2316,7 +2397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-webapp/" class="md-nav__link">
+      <a href="../probes/ping-webapp/" class="md-nav__link">
         
   
   
@@ -2344,7 +2425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../load-webapp/" class="md-nav__link">
+      <a href="../probes/load-webapp/" class="md-nav__link">
         
   
   
@@ -2372,7 +2453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ping-gateway/" class="md-nav__link">
+      <a href="../probes/ping-gateway/" class="md-nav__link">
         
   
   
@@ -2400,7 +2481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wifi-signal-strength/" class="md-nav__link">
+      <a href="../probes/wifi-signal-strength/" class="md-nav__link">
         
   
   
@@ -2428,7 +2509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../veeam/" class="md-nav__link">
+      <a href="../probes/veeam/" class="md-nav__link">
         
   
   
@@ -2456,7 +2537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../probes/mysql/" class="md-nav__link">
         
   
   
@@ -2484,7 +2565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../postgresql/" class="md-nav__link">
+      <a href="../probes/postgresql/" class="md-nav__link">
         
   
   
@@ -2512,7 +2593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mssql/" class="md-nav__link">
+      <a href="../probes/mssql/" class="md-nav__link">
         
   
   
@@ -2540,7 +2621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mongodb/" class="md-nav__link">
+      <a href="../probes/mongodb/" class="md-nav__link">
         
   
   
@@ -2568,7 +2649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oracle/" class="md-nav__link">
+      <a href="../probes/oracle/" class="md-nav__link">
         
   
   
@@ -2596,7 +2677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../redis/" class="md-nav__link">
+      <a href="../probes/redis/" class="md-nav__link">
         
   
   
@@ -2624,7 +2705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cassandra/" class="md-nav__link">
+      <a href="../probes/cassandra/" class="md-nav__link">
         
   
   
@@ -2652,7 +2733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../couchdb/" class="md-nav__link">
+      <a href="../probes/couchdb/" class="md-nav__link">
         
   
   
@@ -2680,7 +2761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../clickhouse/" class="md-nav__link">
+      <a href="../probes/clickhouse/" class="md-nav__link">
         
   
   
@@ -2708,7 +2789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../elasticsearch/" class="md-nav__link">
+      <a href="../probes/elasticsearch/" class="md-nav__link">
         
   
   
@@ -2736,7 +2817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../opensearch/" class="md-nav__link">
+      <a href="../probes/opensearch/" class="md-nav__link">
         
   
   
@@ -2764,7 +2845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../solr/" class="md-nav__link">
+      <a href="../probes/solr/" class="md-nav__link">
         
   
   
@@ -2792,7 +2873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../influxdb/" class="md-nav__link">
+      <a href="../probes/influxdb/" class="md-nav__link">
         
   
   
@@ -2820,7 +2901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memcached/" class="md-nav__link">
+      <a href="../probes/memcached/" class="md-nav__link">
         
   
   
@@ -2848,7 +2929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../apache/" class="md-nav__link">
+      <a href="../probes/apache/" class="md-nav__link">
         
   
   
@@ -2876,7 +2957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nginx/" class="md-nav__link">
+      <a href="../probes/nginx/" class="md-nav__link">
         
   
   
@@ -2904,7 +2985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../haproxy/" class="md-nav__link">
+      <a href="../probes/haproxy/" class="md-nav__link">
         
   
   
@@ -2932,7 +3013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../envoy/" class="md-nav__link">
+      <a href="../probes/envoy/" class="md-nav__link">
         
   
   
@@ -2960,7 +3041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../php-fpm/" class="md-nav__link">
+      <a href="../probes/php-fpm/" class="md-nav__link">
         
   
   
@@ -2988,7 +3069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../varnish/" class="md-nav__link">
+      <a href="../probes/varnish/" class="md-nav__link">
         
   
   
@@ -3016,7 +3097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tomcat/" class="md-nav__link">
+      <a href="../probes/tomcat/" class="md-nav__link">
         
   
   
@@ -3044,7 +3125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wildfly/" class="md-nav__link">
+      <a href="../probes/wildfly/" class="md-nav__link">
         
   
   
@@ -3072,7 +3153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kafka/" class="md-nav__link">
+      <a href="../probes/kafka/" class="md-nav__link">
         
   
   
@@ -3100,7 +3181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rabbitmq/" class="md-nav__link">
+      <a href="../probes/rabbitmq/" class="md-nav__link">
         
   
   
@@ -3128,7 +3209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../activemq/" class="md-nav__link">
+      <a href="../probes/activemq/" class="md-nav__link">
         
   
   
@@ -3156,7 +3237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nats/" class="md-nav__link">
+      <a href="../probes/nats/" class="md-nav__link">
         
   
   
@@ -3184,7 +3265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pulsar/" class="md-nav__link">
+      <a href="../probes/pulsar/" class="md-nav__link">
         
   
   
@@ -3212,7 +3293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker/" class="md-nav__link">
+      <a href="../probes/docker/" class="md-nav__link">
         
   
   
@@ -3240,7 +3321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/" class="md-nav__link">
+      <a href="../probes/kubernetes/" class="md-nav__link">
         
   
   
@@ -3268,7 +3349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../swarm/" class="md-nav__link">
+      <a href="../probes/swarm/" class="md-nav__link">
         
   
   
@@ -3296,7 +3377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../proxmox/" class="md-nav__link">
+      <a href="../probes/proxmox/" class="md-nav__link">
         
   
   
@@ -3324,7 +3405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyperv/" class="md-nav__link">
+      <a href="../probes/hyperv/" class="md-nav__link">
         
   
   
@@ -3352,7 +3433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ceph/" class="md-nav__link">
+      <a href="../probes/ceph/" class="md-nav__link">
         
   
   
@@ -3380,7 +3461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../consul/" class="md-nav__link">
+      <a href="../probes/consul/" class="md-nav__link">
         
   
   
@@ -3408,7 +3489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zookeeper/" class="md-nav__link">
+      <a href="../probes/zookeeper/" class="md-nav__link">
         
   
   
@@ -3436,7 +3517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../jenkins/" class="md-nav__link">
+      <a href="../probes/jenkins/" class="md-nav__link">
         
   
   
@@ -3464,7 +3545,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unifi/" class="md-nav__link">
+      <a href="../probes/unifi/" class="md-nav__link">
         
   
   
@@ -3499,7 +3580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/" class="md-nav__link">
+      <a href="../troubleshooting/" class="md-nav__link">
         
   
   
@@ -3578,7 +3659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/" class="md-nav__link">
+      <a href="../whats-new/" class="md-nav__link">
         
   
   
@@ -3606,7 +3687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/next/" class="md-nav__link">
+      <a href="../whats-new/next/" class="md-nav__link">
         
   
   
@@ -3634,7 +3715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.1/" class="md-nav__link">
+      <a href="../whats-new/0.6.1/" class="md-nav__link">
         
   
   
@@ -3662,7 +3743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.6.0/" class="md-nav__link">
+      <a href="../whats-new/0.6.0/" class="md-nav__link">
         
   
   
@@ -3690,7 +3771,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.6/" class="md-nav__link">
+      <a href="../whats-new/0.5.6/" class="md-nav__link">
         
   
   
@@ -3718,7 +3799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.5/" class="md-nav__link">
+      <a href="../whats-new/0.5.5/" class="md-nav__link">
         
   
   
@@ -3746,7 +3827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.4/" class="md-nav__link">
+      <a href="../whats-new/0.5.4/" class="md-nav__link">
         
   
   
@@ -3774,7 +3855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.3/" class="md-nav__link">
+      <a href="../whats-new/0.5.3/" class="md-nav__link">
         
   
   
@@ -3802,7 +3883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.2/" class="md-nav__link">
+      <a href="../whats-new/0.5.2/" class="md-nav__link">
         
   
   
@@ -3830,7 +3911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.1/" class="md-nav__link">
+      <a href="../whats-new/0.5.1/" class="md-nav__link">
         
   
   
@@ -3858,7 +3939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.5.0/" class="md-nav__link">
+      <a href="../whats-new/0.5.0/" class="md-nav__link">
         
   
   
@@ -3886,7 +3967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.2/" class="md-nav__link">
+      <a href="../whats-new/0.4.2/" class="md-nav__link">
         
   
   
@@ -3914,7 +3995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.1/" class="md-nav__link">
+      <a href="../whats-new/0.4.1/" class="md-nav__link">
         
   
   
@@ -3942,7 +4023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.4.0/" class="md-nav__link">
+      <a href="../whats-new/0.4.0/" class="md-nav__link">
         
   
   
@@ -3970,7 +4051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.3.2/" class="md-nav__link">
+      <a href="../whats-new/0.3.2/" class="md-nav__link">
         
   
   
@@ -3998,7 +4079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.3/" class="md-nav__link">
+      <a href="../whats-new/0.2.3/" class="md-nav__link">
         
   
   
@@ -4026,7 +4107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.2/" class="md-nav__link">
+      <a href="../whats-new/0.2.2/" class="md-nav__link">
         
   
   
@@ -4054,7 +4135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.1/" class="md-nav__link">
+      <a href="../whats-new/0.2.1/" class="md-nav__link">
         
   
   
@@ -4082,7 +4163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../whats-new/0.2.0/" class="md-nav__link">
+      <a href="../whats-new/0.2.0/" class="md-nav__link">
         
   
   
@@ -4137,10 +4218,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#what-the-agent-monitors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick start
+        What the agent monitors
       
     </span>
   </a>
@@ -4148,10 +4229,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#one-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        One command
       
     </span>
   </a>
@@ -4159,10 +4240,104 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#as-a-systemd-service-quadlet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
+        As a systemd service: Quadlet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="As a systemd service: Quadlet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stopping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stopping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updates
       
     </span>
   </a>
@@ -4170,21 +4345,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#operational-notes" class="md-nav__link">
+  <a href="#checking-the-unit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operational notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metric-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metric reference
+        Checking the unit
       
     </span>
   </a>
@@ -4208,7 +4372,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/probes/windows-services.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/podman.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -4216,146 +4380,297 @@
   
 
 
-<p><img src="../../assets/probe-logos/windows-services.svg" alt="" class="probe-page-logo probe-page-logo-si"></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p><strong>License: Free</strong> — part of the universal collection tier.</p>
-</div>
-<h1 id="windows-services">Windows Services<a class="headerlink" href="#windows-services" title="Permanent link">&para;</a></h1>
-<p>The <code>winservices</code> probe enumerates Windows services via the Service Control
-Manager and reports the running/stopped state and raw SCM status code per
-service. It is the Windows counterpart of the <code>systemd</code> probe on Linux.</p>
-<p><strong>Windows only.</strong> The probe does not start on Linux or macOS.</p>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/10-winservices.yaml — each file under probes.d/ is a YAML array of probes</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">winservices</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">winservices</span>
+<h1 id="running-the-agent-with-podman">Running the agent with Podman<a class="headerlink" href="#running-the-agent-with-podman" title="Permanent link">&para;</a></h1>
+<p>The image is the one described in <a href="../container/">Running the agent in a container</a>,
+and everything on that page holds under Podman: the variables, the state
+volume, the identities. This page covers what differs, and the Quadlet
+unit that runs the agent as a systemd service.</p>
+<h2 id="what-the-agent-monitors">What the agent monitors<a class="headerlink" href="#what-the-agent-monitors" title="Permanent link">&para;</a></h2>
+<p>An agent started in a plain container reports half a host. CPU and
+memory are the host's, because <code>/proc</code> is not isolated for those
+counters, but the disks are the container's overlay, the network is its
+single <code>eth0</code> and the process list is its own few processes.</p>
+<p>The unit shipped for Quadlet therefore monitors <strong>the host</strong> (host
+scope): the host's network and PID namespaces, and the host's <code>/</code>
+mounted read-only at <code>/host</code>. Disks, interfaces, processes, OS release
+and <code>machine-id</code> are the host's. A <a href="#container-scope">container scope</a>
+is one edit away. The plain <code>podman run</code> below is a container scope.</p>
+<h2 id="one-command">One command<a class="headerlink" href="#one-command" title="Permanent link">&para;</a></h2>
+<p>The <code>docker run</code> lines work as they are with <code>podman run</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.1
 </code></pre></div>
-<p>All services visible to the SCM are monitored by default. Use <code>services</code> to
-restrict to a subset.</p>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<!-- schema:params:start -->
-<!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:bbd70d969aadcd3e95a5789062ca61c7d63aa9cefae3a0eae290ce6a45adfbd1 -->
-
+<p>Use the full image name. A short name such as <code>senhub-agent:0.6.1</code>
+makes Podman search its configured registries, or ask which one to use.</p>
+<p>Three things behave differently from Docker.</p>
+<p><strong>Rootless ports and networking.</strong> Run as an ordinary user, Podman
+cannot publish a host port below 1024. Keep the default 8080, or lower
+the limit on the host with the <code>net.ipv4.ip_unprivileged_port_start</code>
+sysctl. A rootless container that publishes a port also needs a
+user-space network helper: <code>slirp4netns</code> on Podman 4.x, <code>passt</code> (which
+provides <code>pasta</code>) from Podman 5. Install the package before the first
+start, or <code>podman run -p</code> fails. Host networking (<code>--network host</code>)
+needs neither.</p>
+<p><strong>SELinux.</strong> On Fedora, RHEL and their derivatives, a host directory
+mounted into the container is refused by SELinux until it carries a
+container label. Add <code>:Z</code> to the mount to relabel it for this container
+alone:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>-v<span class="w"> </span>/srv/senhub-agent/probes.d:/etc/senhub-agent/probes.d:Z
+</code></pre></div>
+<p>Named volumes (<code>senhub-state</code> above) need no label.</p>
+<p><strong>User namespaces.</strong> The agent runs as the image's fixed uid 10001.
+Rootful, that is uid 10001 on the host. Rootless, it is a uid taken from
+your range in <code>/etc/subuid</code>, so the range must hold at least 10002
+entries (the default 65536 does). A named volume is created with the
+right owner on its own: Podman copies the image's directory into it,
+ownership included. A host directory is not: add <code>U</code> to the mount and
+Podman hands it to the container's uid, rootful or rootless.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>-v<span class="w"> </span>/srv/senhub-agent/probes.d:/etc/senhub-agent/probes.d:Z,U
+</code></pre></div>
+<p><code>--userns=keep-id</code> is of no help with this image. It maps your own uid
+into the container, and the agent does not run as your uid. Prefer named
+volumes, or <code>U</code> on a host directory.</p>
+<h2 id="as-a-systemd-service-quadlet">As a systemd service: Quadlet<a class="headerlink" href="#as-a-systemd-service-quadlet" title="Permanent link">&para;</a></h2>
+<p>Quadlet, part of Podman since 4.4, turns a <code>.container</code> file into a
+systemd service. The repository ships one in
+<a href="https://github.com/senhub-io/senhub-agent/tree/master/packaging/podman"><code>packaging/podman/</code></a>,
+with an environment file beside it. The unit needs Podman 4.6 or later;
+on 4.4 and 4.5, replace its <code>AutoUpdate=registry</code> line with
+<code>Label=io.containers.autoupdate=registry</code>.</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Must set</th>
-<th>Default</th>
-<th>Description</th>
+<th>File</th>
+<th>What it holds</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>services</code></td>
-<td>No</td>
-<td>-</td>
-<td>Service short names to monitor; empty means every service. Example: <code>wuauserv, Spooler</code></td>
+<td><code>senhub-agent.container</code></td>
+<td>The unit: image, host scope, volumes, health check, restart policy, secrets</td>
 </tr>
 <tr>
-<td><code>interval</code></td>
-<td>No</td>
-<td><code>30s</code></td>
-<td>Collection interval</td>
+<td><code>senhub-agent.env</code></td>
+<td>The <code>SENHUB_*</code> variables, all commented out. No secret goes there</td>
 </tr>
 </tbody>
 </table>
-<!-- schema:params:end -->
-
-<p><code>interval</code> accepts a number of seconds or a duration such as <code>1m</code>. A listed
-service that cannot be opened or queried is skipped for that cycle rather
-than failing the whole collection.</p>
-<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>senhub.winservices.up</code></td>
-<td>1</td>
-<td>1 when the SCM is reachable and the probe completed its cycle</td>
-</tr>
-<tr>
-<td><code>windows.service.state</code></td>
-<td>1</td>
-<td>1 when the service is in the Running state, 0 otherwise, tagged with <code>windows.service.name</code></td>
-</tr>
-<tr>
-<td><code>windows.service.status</code></td>
-<td>1</td>
-<td>Raw SCM service status code (1=Stopped, 2=Start Pending, 3=Stop Pending, 4=Running, …) per service</td>
-</tr>
-<tr>
-<td><code>windows.service.start_type</code></td>
-<td>1</td>
-<td>How the service is configured to start: 0 boot, 1 system, 2 automatic, 3 manual, 4 disabled, 5 automatic with delayed start. Absent for a service whose configuration cannot be read. Not a PRTG channel</td>
-</tr>
-</tbody>
-</table>
-<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
+<h3 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h3>
+<p>Create the bearer token as a Podman secret first (the unit names it, and
+refuses to start without it; to run without exporting to SenHub, delete
+the <code>Secret=senhub-otlp-token</code> line instead):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TOKEN</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>podman<span class="w"> </span>secret<span class="w"> </span>create<span class="w"> </span>senhub-otlp-token<span class="w"> </span>-
+</code></pre></div>
+<p>No licence is needed: the free tier collects everything but the Pro
+probes. Add one later, as shown under <a href="#secrets">Secrets</a>.</p>
+<p>Host scope is a <strong>rootful</strong> setup. Rootful, the files go in <code>/etc/containers/systemd/</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>senhub-agent.container<span class="w"> </span>senhub-agent.env<span class="w"> </span>/etc/containers/systemd/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>senhub-agent
+</code></pre></div>
+<p>Rootless is the <a href="#container-scope">container scope</a>: the host block
+(<code>--pid=host</code>, <code>Network=host</code>, the read of <code>/</code>) has been exercised
+rootful only, and what an unprivileged user can see of the host through
+it is not established, so it is not a supported rootless setup. Rootless,
+delete the host block, then copy to
+<code>~/.config/containers/systemd/</code>, and every <code>systemctl</code> takes <code>--user</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config/containers/systemd
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>cp<span class="w"> </span>senhub-agent.container<span class="w"> </span>senhub-agent.env<span class="w"> </span>~/.config/containers/systemd/
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reload
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>start<span class="w"> </span>senhub-agent
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>sudo<span class="w"> </span>loginctl<span class="w"> </span>enable-linger<span class="w"> </span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>
+</code></pre></div>
+<p>The last line keeps your services running when you are not logged in,
+and starts them at boot.</p>
+<p>There is no <code>systemctl enable</code> step: a Quadlet unit is generated at
+every <code>daemon-reload</code>, and its <code>[Install]</code> section is what starts it at
+boot. The first start pulls the image, which is why the unit allows it
+fifteen minutes.</p>
+<p>If <code>systemctl start</code> answers that the unit does not exist, Quadlet
+refused the file. It says why:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/usr/lib/systemd/system-generators/podman-system-generator<span class="w"> </span>--dryrun<span class="w">         </span><span class="c1"># rootful</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>/usr/lib/systemd/system-generators/podman-system-generator<span class="w"> </span>--user<span class="w"> </span>--dryrun<span class="w">  </span><span class="c1"># rootless</span>
+</code></pre></div>
+<h3 id="container-scope">Container scope<a class="headerlink" href="#container-scope" title="Permanent link">&para;</a></h3>
+<p>To monitor the container instead of the host, delete every line between
+<code># &gt;&gt;&gt; host scope</code> and <code># &lt;&lt;&lt; host scope</code> in the unit, and uncomment
+<code>PublishPort=8080:8080</code> (and <code>HostName=</code>, to keep a stable name). The
+agent then reports the container's overlay, its own interface and its
+own processes; CPU and memory are still the host's. This is what a
+rootless unit runs, and it needs no host access at all.</p>
+<p>What the host scope accepts, to know before choosing it:</p>
 <ul>
-<li>The agent must run with sufficient privileges to query the SCM. Administrator or LocalSystem is required for full enumeration.</li>
-<li>When <code>services</code> is empty, every service the SCM enumerates is reported — this can generate a large number of PRTG channels on busy servers. Restrict with an explicit list for PRTG deployments.</li>
-<li>Service names are the short internal names used by <code>sc query</code> and <code>Get-Service</code>, not display names (e.g. <code>wuauserv</code> not "Windows Update").</li>
+<li>The container shares the host's PID and network namespaces and can
+  read the whole host filesystem, read-only. It runs as the image's
+  uid 10001 and drops nothing from Podman's default capabilities, so it
+  reads what any user reads, not root-only files.</li>
+<li>The HTTP output opens <code>SENHUB_HTTP_PORT</code> (8080) on the host's own
+  addresses. Free it, and close it in the firewall if it should not be
+  reachable.</li>
+<li>The host identity is the host's own <code>machine-id</code>, read under
+  <code>/host/etc</code>; the agent key stays in the state volume.</li>
+<li>On SELinux hosts, uncomment <code>SecurityLabelDisable=true</code>. Never put
+  <code>:Z</code> on the <code>/</code> volume: it would relabel the host's root.</li>
 </ul>
-<h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
-<p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
-OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
-<a href="../../nagios/">Nagios check</a> and the API <code>metrics=</code> filter match.
-<strong>PRTG channel</strong> is the label PRTG shows, placeholders filled from the
-series' tags.</p>
-<!-- schema:metrics:start -->
-<!-- Generated from the probe's definition. Run `make docs-metrics` after changing it. -->
-
+<h3 id="configure">Configure<a class="headerlink" href="#configure" title="Permanent link">&para;</a></h3>
+<p>Edit <code>senhub-agent.env</code> before the first start. Podman reads it
+literally: one <code>KEY=value</code> per line, no quotes, no value on several
+lines. <code>SENHUB_PROBES</code> and <code>SENHUB_OUTPUT</code> carry multi-line YAML and so
+cannot go there; mount a <code>probes.d</code> directory instead, as the commented
+<code>Volume=</code> line of the unit shows.</p>
+<p>The unit keeps two named volumes:</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Name</th>
-<th>PRTG channel</th>
-<th>Unit</th>
-<th>Description</th>
+<th>Volume</th>
+<th>Mounted on</th>
+<th>Holds</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>senhub.winservices.up</code></td>
-<td><code>senhub.winservices.up</code></td>
-<td>Windows Services SCM Up</td>
-<td>#</td>
-<td>1 when the Service Control Manager is reachable and the probe completed its cycle</td>
+<td><code>senhub-agent-state</code></td>
+<td><code>/var/lib/senhub-agent</code></td>
+<td>Host identity, agent key, log bookmarks</td>
 </tr>
 <tr>
-<td><code>windows.service.state</code></td>
-<td><code>windows.service.state</code></td>
-<td>Service {windows.service.name} Running</td>
-<td>#</td>
-<td>1 when the service is in the Running state, 0 otherwise</td>
-</tr>
-<tr>
-<td><code>windows.service.status</code></td>
-<td><code>windows.service.status</code></td>
-<td>Service {windows.service.name} Status</td>
-<td>#</td>
-<td>Numeric SCM state of the service: 1=stopped 2=start_pending 3=stop_pending 4=running 5=continue_pending 6=pause_pending 7=paused</td>
-</tr>
-<tr>
-<td><code>windows.service.start_type</code></td>
-<td><code>windows.service.start_type</code></td>
-<td>Service {windows.service.name} Start Type</td>
-<td>#</td>
-<td>How the service is configured to start: 0=boot 1=system 2=automatic 3=manual 4=disabled 5=automatic (delayed start)</td>
+<td><code>senhub-agent-config</code></td>
+<td><code>/etc/senhub-agent</code></td>
+<td>The configuration written on first start, and every change made from the console since</td>
 </tr>
 </tbody>
 </table>
-<!-- schema:metrics:end -->
+<p>Because the configuration is kept, <strong>the variables are read on the
+first start only</strong>. The entrypoint writes <code>agent.yaml</code> from them, and at
+every later start it finds that file and ignores them, which it says in
+the log. To rebuild the configuration from a changed environment file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>senhub-agent
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>podman<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>senhub-agent-config
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>senhub-agent
+</code></pre></div>
+<p>The identity lives in the other volume, so the agent comes back as the
+same host and the same agent. Rootless, drop <code>sudo</code> and add <code>--user</code> to
+<code>systemctl</code>.</p>
+<p>To change the HTTP port, set <code>SENHUB_HTTP_PORT</code> and change the port in
+both <code>PublishPort=</code> and <code>HealthCmd=</code> in the unit: the health command
+names the port literally, since systemd would read a <code>${...}</code> variable
+in it as one of its own.</p>
+<h3 id="secrets">Secrets<a class="headerlink" href="#secrets" title="Permanent link">&para;</a></h3>
+<p>The bearer token and the licence belong in Podman's secret store, and
+<strong>not</strong> in <code>Environment=</code> or the environment file. <code>podman inspect</code>
+prints the value of every environment variable in clear, to anyone who
+can run it, and that includes a secret handed over as an environment
+variable (<code>type=env</code>): it ends up in <code>Config.Env</code> like any other. The
+unit therefore mounts each secret as a <strong>file</strong> under <code>/run/secrets</code>,
+owned by the agent's uid 10001 and readable by it alone. <code>podman
+inspect</code> shows the mount, not its content.</p>
+<p>Create each secret as the user that runs the unit (root for a rootful
+unit), reading the value from standard input so that it appears in no
+command line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TOKEN</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>podman<span class="w"> </span>secret<span class="w"> </span>create<span class="w"> </span>senhub-otlp-token<span class="w"> </span>-
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LICENSE</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>podman<span class="w"> </span>secret<span class="w"> </span>create<span class="w"> </span>senhub-license<span class="w"> </span>-
+</code></pre></div>
+<p>The token's lines are active in the unit; the licence, which only the
+Pro probes need, ships commented. Uncomment its two lines once the
+secret exists:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="na">Secret</span><span class="o">=</span><span class="s">senhub-otlp-token,type=mount,target=/run/secrets/senhub-otlp-token,mode=0400,uid=10001</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="na">Environment</span><span class="o">=</span><span class="s">OTLP_BEARER_TOKEN_FILE=/run/secrets/senhub-otlp-token</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="na">Secret</span><span class="o">=</span><span class="s">senhub-license,type=mount,target=/run/secrets/senhub-license,mode=0400,uid=10001</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="na">Environment</span><span class="o">=</span><span class="s">SENHUB_LICENSE_FILE=/run/secrets/senhub-license</span>
+</code></pre></div>
+<p>and run <code>systemctl daemon-reload</code> before the next start. A unit naming a
+secret that does not exist fails to start, which is why the licence
+lines ship commented out. The variables name a path, not a value, so
+<code>Environment=</code> is the right place for them.</p>
+<p>What becomes of each:</p>
+<ul>
+<li>The token stays a reference. The OTLP output holds
+  <code>Authorization: "Bearer ${file:/run/secrets/senhub-otlp-token}"</code> and
+  the agent reads the file at every start (a trailing newline is
+  trimmed), so replacing the secret and restarting is enough:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>podman<span class="w"> </span>secret<span class="w"> </span>rm<span class="w"> </span>senhub-otlp-token
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$NEW_TOKEN</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>podman<span class="w"> </span>secret<span class="w"> </span>create<span class="w"> </span>senhub-otlp-token<span class="w"> </span>-
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
+</code></pre></div>
+<ul>
+<li>The licence is read once. On first start the agent keeps it in
+  <code>license.jwt</code>, in the configuration volume, like any installation
+  does. A later licence is activated inside the running container, then
+  the unit restarted, or the configuration volume is rebuilt as shown
+  above:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$NEW_LICENSE</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>senhub-agent<span class="w"> </span>license<span class="w"> </span>activate<span class="w"> </span>--config-path<span class="w"> </span>/etc/senhub-agent/agent.yaml<span class="w"> </span>-
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
+</code></pre></div>
+<ul>
+<li>The Azure client secret of the Container Apps shorthand is the
+  exception: it is read as an environment variable
+  (<code>SENHUB_AZURE_CLIENT_SECRET</code>), so a <code>type=env</code> secret keeps it out of
+  the unit but not out of <code>podman inspect</code>. Use a <code>probes.d</code> file with a
+  <code>${file:...}</code> reference where that matters.</li>
+</ul>
+<h3 id="stopping">Stopping<a class="headerlink" href="#stopping" title="Permanent link">&para;</a></h3>
+<p>The unit gives the agent thirty seconds to stop (<code>--stop-timeout=30</code>;
+Podman's default is ten, after which it sends SIGKILL and the unit ends
+as failed with exit 137). The agent itself bounds its final flush to a
+few seconds when the collector does not answer, and logs what it
+dropped.</p>
+<h3 id="health">Health<a class="headerlink" href="#health" title="Permanent link">&para;</a></h3>
+<p>The unit restates the image's health check, a request to the console's
+<code>/health</code>, so that it applies whatever format the image was pulled in.
+It answers once the HTTP output is listening. After three failed checks
+Podman stops the container and systemd starts it again
+(<code>HealthOnFailure=kill</code> with <code>Restart=always</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>podman<span class="w"> </span>healthcheck<span class="w"> </span>run<span class="w"> </span>senhub-agent<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>healthy
+</code></pre></div>
+<h3 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h3>
+<p>The agent writes to the container's output, which lands in the journal
+under the unit:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>senhub-agent<span class="w"> </span>-f<span class="w">            </span><span class="c1"># rootful</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>journalctl<span class="w"> </span>--user<span class="w"> </span>-u<span class="w"> </span>senhub-agent<span class="w"> </span>-f<span class="w">     </span><span class="c1"># rootless</span>
+</code></pre></div>
+<p><code>podman logs senhub-agent</code> shows the same lines.</p>
+<h2 id="updates">Updates<a class="headerlink" href="#updates" title="Permanent link">&para;</a></h2>
+<p>The agent's own auto-update is off in a container: it would replace a
+binary in a layer the next container discards. Updating means running a
+new image.</p>
+<p>Two ways to hold the image, and the unit uses the first:</p>
+<ul>
+<li><strong>An exact version with <code>AutoUpdate=registry</code>.</strong> The tags are exact
+  versions (<code>0.6.1</code>); there is no <code>latest</code> and no minor tag such as
+  <code>0.6</code>, so <code>podman auto-update</code> pulls the same tag again and restarts
+  the unit only when the registry serves another image under it, for
+  instance a republished build of that version. It never moves to a new
+  version: that is an edit of the <code>Image=</code> line, then
+  <code>systemctl daemon-reload</code> and <code>systemctl restart senhub-agent</code>.</li>
+<li><strong>A digest, without auto-update.</strong> <code>Image=ghcr.io/senhub-io/senhub-agent@sha256:&lt;digest&gt;</code>
+  runs exactly that image, whatever happens to the tag. Delete the
+  <code>AutoUpdate=</code> line: there is nothing for it to follow. Moving to a
+  new image is an edit of the digest. Choose this where the image must
+  be reviewed before it runs.</li>
+</ul>
+<p>Following a minor line (<code>0.6</code>) with <code>AutoUpdate=registry</code> would give
+patch updates without an edit, but needs the registry to publish that
+tag; it does not today.</p>
+<p>To run auto-update daily (first way):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman-auto-update.timer<span class="w">   </span><span class="c1"># rootful</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman-auto-update.timer<span class="w"> </span><span class="c1"># rootless</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>podman<span class="w"> </span>auto-update<span class="w"> </span>--dry-run<span class="w">                           </span><span class="c1"># what it would do now</span>
+</code></pre></div>
+<p>Both volumes survive an update, so the agent keeps its identity and its
+configuration.</p>
+<h2 id="checking-the-unit">Checking the unit<a class="headerlink" href="#checking-the-unit" title="Permanent link">&para;</a></h2>
+<p><code>packaging/podman/check-quadlet.sh</code> hands the unit to the Quadlet
+generator in dry-run mode, rootful and rootless, as shipped and with
+every optional line enabled, and fails on any key or value the installed
+Podman does not accept. It installs and starts nothing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sh<span class="w"> </span>packaging/podman/check-quadlet.sh
+</code></pre></div>
 
 
 
@@ -4391,7 +4706,7 @@ series' tags.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../systemd/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Systemd Units">
+          <a href="../container/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Container">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4401,20 +4716,20 @@ series' tags.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Systemd Units
+                Container
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chrony/" class="md-footer__link md-footer__link--next" aria-label="Next: Chrony (NTP)">
+          <a href="../kubernetes-helm/" class="md-footer__link md-footer__link--next" aria-label="Next: Kubernetes (Helm)">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Chrony (NTP)
+                Kubernetes (Helm)
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -4477,14 +4792,14 @@ series' tags.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../javascripts/rn-filter.js"></script>
+        <script src="../javascripts/rn-filter.js"></script>
       
-        <script src="../../javascripts/dev-banner.js"></script>
+        <script src="../javascripts/dev-banner.js"></script>
       
     
   </body>
