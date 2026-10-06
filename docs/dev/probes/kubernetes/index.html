@@ -401,6 +401,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../kubernetes-helm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes (Helm)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ansible/" class="md-nav__link">
         
   
@@ -603,10 +630,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
         
           
-          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
             
   
   
@@ -624,8 +651,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_13">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -774,10 +801,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
-          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
             
   
   
@@ -795,8 +822,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_14">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -945,10 +972,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -966,8 +993,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3496,10 +3523,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3517,8 +3544,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4453,7 +4480,7 @@ start would deliver an hour of past incidents as though they were happening
 now.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>For in-cluster operation, create a <code>ClusterRole</code> granting <code>get</code>/<code>list</code>/<code>watch</code> on <code>nodes</code>, <code>pods</code>, <code>deployments</code>, <code>statefulsets</code>, <code>daemonsets</code>, <code>replicasets</code>, <code>jobs</code>, <code>cronjobs</code>, <code>persistentvolumes</code>, <code>persistentvolumeclaims</code>, <code>resourcequotas</code>, <code>horizontalpodautoscalers</code> and <code>events</code>, and bind it to the agent's ServiceAccount. A missing permission disables that collector only — the others keep reporting, and the gap is logged rather than presenting as an empty cluster.</li>
+<li>For in-cluster operation, create a <code>ClusterRole</code> granting <code>list</code> on <code>nodes</code>, <code>pods</code>, <code>deployments</code>, <code>statefulsets</code>, <code>daemonsets</code>, <code>replicasets</code>, <code>jobs</code>, <code>cronjobs</code>, <code>persistentvolumes</code>, <code>persistentvolumeclaims</code>, <code>resourcequotas</code>, <code>horizontalpodautoscalers</code>, <code>events</code> and <code>namespaces</code>, and bind it to the agent's ServiceAccount. The probe lists and never watches. <code>list</code> on <code>namespaces</code> is what finds the namespaces to read when <code>namespaces.include</code> is empty, the default: without it every namespaced collector fails. The <a href="../../kubernetes-helm/#monitoring-the-cluster">Helm chart</a> creates exactly this role with <code>rbac.kubernetesProbe.enabled</code>. A missing permission disables that collector only — the others keep reporting, and the gap is logged rather than presenting as an empty cluster.</li>
 <li>Also grant <code>get</code> on the <code>kube-system</code> <strong>namespace</strong>. The cluster entity is keyed on that namespace's UID, which is the only identifier the cluster reports about itself. Without it the identity falls back to the API server address, which re-keys the cluster in the graph on any endpoint change and collides between clusters sharing an address.</li>
 <li>The <code>kube-system</code> namespace is excluded by default. Override with <code>namespaces.include</code> / <code>namespaces.exclude</code> as needed.</li>
 <li>Metric names follow the <code>k8s.*</code> OTel semantic conventions aligned with the OpenTelemetry Kubernetes specification.</li>
