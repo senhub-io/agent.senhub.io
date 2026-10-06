@@ -461,6 +461,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#helm-chart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Helm chart
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4419,6 +4430,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#helm-chart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Helm chart
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4580,6 +4602,10 @@ person.</p>
 <td><code>images[]</code></td>
 <td>The container images of this exact version, with the digest to pull by.</td>
 </tr>
+<tr>
+<td><code>charts[]</code></td>
+<td>The Helm chart of this exact version (<code>repo</code>, <code>version</code>, <code>digest</code>), published as an OCI artifact; empty when it is not published yet.</td>
+</tr>
 </tbody>
 </table>
 <p>Three things worth knowing:</p>
@@ -4600,13 +4626,14 @@ person.</p>
 <p>The schema may gain fields without a version change: ignore the ones you
 do not know. A rename, a removal or a change of meaning raises
 <code>schema_version</code>.</p>
-<p>The images list is filled by the release itself: the release publishes
-both images, waits for them, then builds the manifest.</p>
+<p>The images and charts lists are filled by the release itself: the release
+publishes both images and the Helm chart, waits for them, then builds the
+manifest.</p>
 <h2 id="what-is-published-and-when">What is published, and when<a class="headerlink" href="#what-is-published-and-when" title="Permanent link">&para;</a></h2>
 <p>Cutting a release publishes everything, in this order, with no step to
 remember: the ZIPs and their signatures, the <code>.deb</code> and <code>.rpm</code> packages and
 repositories, the container images of both editions (and the minor tag of
-a stable release), then the manifest. The only manual step left is the
+a stable release), the Helm chart, then the manifest. The only manual step left is the
 Authenticode signing of the Windows files; the manifest is rebuilt after
 the Windows ZIPs are signed and again after the MSIs, and says
 <code>"complete": false</code> until then.</p>
@@ -4679,6 +4706,11 @@ and <code>ghcr.io/senhub-io/senhub-agent-oss</code> (open source edition).</p>
 <p>There is no <code>latest</code> tag: it would cross minor lines without notice.
 For a deployment that must be immune even to a moved tag, pull by the
 digest that the manifest lists under <code>images</code>.</p>
+<h2 id="helm-chart">Helm chart<a class="headerlink" href="#helm-chart" title="Permanent link">&para;</a></h2>
+<p>The chart is published to <code>oci://ghcr.io/senhub-io/charts/senhub-agent</code>
+by the release, with the release version as its version (<code>0.6.2</code>,
+<code>0.6.2-beta.1</code>). A beta is only installed with an explicit <code>--version</code>.
+See <a href="../kubernetes-helm/">Kubernetes (Helm)</a>.</p>
 
 
 
