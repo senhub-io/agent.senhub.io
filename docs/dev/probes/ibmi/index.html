@@ -4857,13 +4857,70 @@ message remains visible there through the jobs-by-status count.</p>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">Event conduits</p>
-<p>The <code>message_queue</code> (QSYSOPR), <code>history_log</code> (QHST), <code>audit_journal</code> (QAUDJRN)
-and <code>msgw_job</code> (message-wait jobs) collectors relay operational events rather
-than numeric metrics. They are not exported to OTLP/Prometheus; a future
-release will export them as OTLP logs. Their timestamps are the
-partition's own: the probe reads the partition's clock and zone, so an
-agent and a partition in different zones report the same instants.</p>
+<p class="admonition-title">Events as logs</p>
+<p>The <code>message_queue</code> (QSYSOPR), <code>history_log</code> (QHST) and <code>audit_journal</code>
+(QAUDJRN) collectors relay operational events rather than numeric metrics.
+They are not exported as OTLP or Prometheus metrics; each event is sent as
+an OpenTelemetry log record on the agent's log rail, the same path as the
+<code>filetail</code>, <code>syslog</code> and <code>windows_eventlog</code> probes, so it reaches the logs
+backend of the OTLP output (and honours the probe's <code>log_strategies</code>). The
+<code>msgw_job</code> collector (jobs in message wait) stays a metric-side
+condition: it re-reports the same job every cycle, which is a state, not a
+log. A collector that is not enabled sends nothing.</p>
+<p>A log record carries:</p>
+<ul>
+<li><strong>Body</strong>: the message text (for the audit journal, <code>QAUDJRN &lt;type&gt;: user=... object=lib/name/type</code>).</li>
+<li><strong>Timestamp</strong>: the event's own time on the partition, converted to UTC
+  with the partition's clock and zone, so an agent and a partition in
+  different zones report the same instants.</li>
+<li><strong>Severity</strong>: the IBM i severity (0-99) mapped to an OTel severity, with
+  the original number kept in <code>ibmi.severity</code>.</li>
+<li><strong>Attributes</strong>: <code>ibmi.event.source</code> (<code>history_log</code>, <code>message_queue</code> or
+  <code>audit_journal</code>), <code>server.address</code> (the partition's host), <code>ibmi.severity</code>,
+  <code>ibmi.message.id</code>, <code>ibmi.message.type</code>, <code>ibmi.from.user</code>, <code>ibmi.from.job</code>
+  and <code>ibmi.from.program</code> (history log and message queue; no program for the
+  queue), <code>ibmi.queue.name</code> and <code>ibmi.queue.library</code> (message queue),
+  <code>ibmi.audit.entry_type</code>, <code>ibmi.object.name</code>, <code>ibmi.object.library</code>,
+  <code>ibmi.object.type</code>, <code>ibmi.job.name</code> and <code>ibmi.user.name</code> (audit journal),
+  plus <code>senhub.probe.name</code> and <code>senhub.probe.type</code>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>IBM i severity</th>
+<th>OTel severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-29 (information, notification)</td>
+<td><code>INFO</code> (9)</td>
+</tr>
+<tr>
+<td>30-39 (warning)</td>
+<td><code>WARN</code> (13)</td>
+</tr>
+<tr>
+<td>40-59 (error)</td>
+<td><code>ERROR</code> (17)</td>
+</tr>
+<tr>
+<td>60-79 (severe error)</td>
+<td><code>ERROR3</code> (19)</td>
+</tr>
+<tr>
+<td>80-99 (abnormal end of job or system)</td>
+<td><code>FATAL</code> (21)</td>
+</tr>
+</tbody>
+</table>
+<p>The volume lever is the <code>history_log_min_severity</code> parameter (0-99, default 0): a partition such as PUB400
+logs thousands of QHST messages a minute, and the floor is applied on the
+server, so messages below it neither cross the bridge nor reach the log
+rail. For a message queue the equivalent is <code>message_queues[].min_severity</code>.
+The audit journal reads the entry types AF, CA, CO, CP, DO, OR, OW, PA, PW,
+SV and ZC only, with the severity 60 for AF and PW, 50 for SV, CA and OW, and
+30 otherwise.</p>
 </div>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
@@ -6449,6 +6506,41 @@ series' tags.</p>
 <td collector="collector">Collector Last Success —</td>
 <td>s</td>
 <td>Unix time of this collector's last successful run</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.collector.window_lag</code></td>
+<td><code>ibmi.collector.window_lag</code></td>
+<td collector="collector">Collector Window Lag —</td>
+<td>s</td>
+<td>How far the collector's read position trails the partition's clock at the end of the cycle; it grows while the collector cannot keep up</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.collector.read_duration</code></td>
+<td><code>ibmi.collector.read_duration</code></td>
+<td collector="collector">Collector Read Span —</td>
+<td>s</td>
+<td>Seconds of log this cycle covered, from the start of the first window read to the read position at the end of the cycle</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.collector.lost</code></td>
+<td><code>ibmi.collector.lost</code></td>
+<td collector="collector">Collector Lost —</td>
+<td>s</td>
+<td>Seconds of backlog skipped because the collector fell more than its maximum window behind the partition's clock; the events logged in them are not collected</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.collector.slices</code></td>
+<td><code>ibmi.collector.slices</code></td>
+<td collector="collector">Collector Queries —</td>
+<td>#</td>
+<td>Queries issued by this collector during the last cycle</td>
+</tr>
+<tr>
+<td><code>senhub.ibmi.collector.clock_offset</code></td>
+<td><code>ibmi.collector.clock_offset</code></td>
+<td collector="collector">Collector Clock Offset —</td>
+<td>s</td>
+<td>Agent clock minus the partition's clock, after the partition's UTC offset is removed; a clock skew between the two machines, not a time zone</td>
 </tr>
 </tbody>
 </table>
