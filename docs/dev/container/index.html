@@ -4375,7 +4375,25 @@ reads them, so they apply with a configuration of your own too (see
 <td><code>SENHUB_STATE_DIR</code></td>
 <td>No</td>
 <td><code>/var/lib/senhub-agent</code></td>
-<td>Where the identity, the key and the bookmarks live</td>
+<td>Where the identity, the key, the bookmarks and the logs queue (<code>otlp-queue/</code>) live</td>
+</tr>
+<tr>
+<td><code>SENHUB_LOG_QUEUE</code></td>
+<td>No</td>
+<td><code>true</code></td>
+<td><code>false</code> stops the agent keeping failed log batches on disk during an OTLP outage</td>
+</tr>
+<tr>
+<td><code>SENHUB_LOG_QUEUE_RETENTION</code></td>
+<td>No</td>
+<td><code>24h</code></td>
+<td>Age after which a queued log batch is dropped; <code>0</code> = no limit</td>
+</tr>
+<tr>
+<td><code>SENHUB_LOG_QUEUE_MAX_BYTES</code></td>
+<td>No</td>
+<td><code>134217728</code> (128 MiB)</td>
+<td>Disk cap of the logs queue, in bytes or with a suffix (<code>64MiB</code>). The queue lives in the state directory: put it on a persistent volume (a File Share on Container Apps) for logs to survive a restart; see <a href="../otlp/#logs-survive-an-outage">Logs survive an outage</a></td>
 </tr>
 <tr>
 <td><code>SENHUB_HOST_ID</code></td>
