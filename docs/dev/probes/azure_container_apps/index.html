@@ -3961,7 +3961,7 @@
 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
 <p>The Azure Container Apps probe reads the console log stream of an application hosted on Azure Container Apps: the standard output and standard error of every container of every replica, as they are written. It is the same stream <code>az containerapp logs show --follow</code> reads, obtained through Azure Resource Manager with an Entra ID app registration. Nothing changes in the container: no volume, no sidecar, no logging library.</p>
 <p>Lines ride the agent's log rail exactly like lines read by <code>filetail</code>: the same parsers (raw, regex, json, logfmt), the same multiline folding for stack traces, and the same outputs (OTLP logs first). Each record carries the application, revision, replica and container it came from, so one stream never blends into another.</p>
-<p>One probe instance follows one application, or every application of a subscription when a <code>discovery</code> block is set (see <a href="#following-a-whole-subscription">Following a whole subscription</a>). To follow a chosen few, declare one instance per application, each with its own <code>name</code> and its own <code>bookmark_path</code>. Two instances sharing a bookmark would overwrite each other's position and replay or skip lines after a restart. In the container image the <code>SENHUB_AZURE_APP</code> variable takes a comma-separated list and writes those instances for you, see <a href="../../container/#reading-azure-container-apps">Container image</a>.</p>
+<p>One probe instance follows one application, or every application of a subscription when a <code>discovery</code> block is set (see <a href="#following-a-whole-subscription">Following a whole subscription</a>). To follow a chosen few, declare one instance per application, each with its own <code>name</code> and its own <code>bookmark_path</code>. Two instances sharing a bookmark would overwrite each other's position and replay or skip lines after a restart. With the environment variables of the agent, each instance is a few <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> variables, see <a href="#from-environment-variables">From environment variables</a>.</p>
 <p>Replicas that appear with a scale-out or a new revision are attached on the next scan; replicas that disappear are released.</p>
 <p><strong>Collected data:</strong></p>
 <ul>
@@ -4049,6 +4049,29 @@
 </ul>
 <p>An application that appears is picked up at the next discovery; one that disappears has its streams released and its bookmark pruned, exactly as a replica does. Nothing has to be edited when a deployment adds or removes an application.</p>
 <p>When several applications are followed, what describes an application is published per application, carrying its name and its resource group, while the collector's own counters stay whole: an operator watching the collector should not have to sum, and a series about an application must be readable back to it.</p>
+<h1 id="from-environment-variables">From environment variables<a class="headerlink" href="#from-environment-variables" title="Permanent link">&para;</a></h1>
+<p>Where placing a file is harder than setting a variable (a container platform, a Helm chart), the probe is declared by the agent's <a href="../../configuration/#configuring-probes-from-environment-variables">environment rule</a>. The probe name is yours; the application name goes in <code>APP</code>, and a name with a hyphen (<code>squash-tm</code>) is a value there, not part of a variable.</p>
+<p>One probe per application (list mode), the credentials repeated for each:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">SENHUB_PROBE_OLTP_TYPE</span><span class="o">=</span>azure_container_apps
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">SENHUB_PROBE_OLTP_APP</span><span class="o">=</span>oltp
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">SENHUB_PROBE_OLTP_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">SENHUB_PROBE_OLTP_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nv">SENHUB_PROBE_OLTP_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/aca_client_secret
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nv">SENHUB_PROBE_OLTP_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nv">SENHUB_PROBE_OLTP_RESOURCE_GROUP</span><span class="o">=</span>rg-squash
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nv">SENHUB_PROBE_OLTP_BOOKMARK_PATH</span><span class="o">=</span>/var/lib/senhub-agent/oltp.bookmark
+</code></pre></div>
+<p>The whole subscription (discovery mode), one probe:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">SENHUB_PROBE_ACA_TYPE</span><span class="o">=</span>azure_container_apps
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">SENHUB_PROBE_ACA_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">SENHUB_PROBE_ACA_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">SENHUB_PROBE_ACA_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/aca_client_secret
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nv">SENHUB_PROBE_ACA_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nv">SENHUB_PROBE_ACA_DISCOVERY__INTERVAL</span><span class="o">=</span><span class="m">300</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nv">SENHUB_PROBE_ACA_DISCOVERY__EXCLUDE</span><span class="o">=</span>*-preview
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nv">SENHUB_PROBE_ACA_BOOKMARK_PATH</span><span class="o">=</span>/var/lib/senhub-agent/aca.bookmark
+</code></pre></div>
+<p>Each instance keeps its own <code>bookmark_path</code>, under the agent's state directory, which should be a volume.</p>
 <h1 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h1>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
@@ -4438,8 +4461,8 @@ ten minutes: that is normal.</p>
 </div>
 <h1 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">&para;</a></h1>
 <p>Log records are delivered to the outputs that consume logs, OTLP first; restrict them with the per-probe <code>log_strategies</code> key if needed. The state metrics are available through every configured output; for PRTG and Nagios, query the probe by its configured <code>name</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/squash-logs"</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/nagios/metrics/squash-logs"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/squash-logs"</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/nagios/metrics/squash-logs"</span>
 </code></pre></div>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the

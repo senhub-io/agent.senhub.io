@@ -474,10 +474,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reading-azure-container-apps" class="md-nav__link">
+  <a href="#probes-from-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading Azure Container Apps
+        Probes from variables
       
     </span>
   </a>
@@ -4155,10 +4155,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reading-azure-container-apps" class="md-nav__link">
+  <a href="#probes-from-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading Azure Container Apps
+        Probes from variables
       
     </span>
   </a>
@@ -4285,7 +4285,10 @@ unless you choose otherwise, and the log file is written to
 needs to export to SenHub; the rest have defaults or are only read when
 the feature they configure is wanted. These variables are read only when
 the entrypoint writes the configuration, that is when no <code>agent.yaml</code> is
-present (see <a href="#bringing-your-own-configuration">Bringing your own configuration</a>).</p>
+present (see <a href="#bringing-your-own-configuration">Bringing your own configuration</a>).
+The <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> variables are the exception: the agent itself
+reads them, so they apply with a configuration of your own too (see
+<a href="#probes-from-variables">Probes from variables</a>).</p>
 <table>
 <thead>
 <tr>
@@ -4390,7 +4393,7 @@ present (see <a href="#bringing-your-own-configuration">Bringing your own config
 <td><code>SENHUB_PROBES</code></td>
 <td>No</td>
 <td>-</td>
-<td>YAML of the probes to run, as a <code>probes.d</code> file would hold it. Not merged with <code>SENHUB_AZURE_APP</code>, see <a href="#reading-azure-container-apps">Reading Azure Container Apps</a></td>
+<td>YAML of the probes to run, as a <code>probes.d</code> file would hold it. For one probe at a time, the <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> variables are shorter, see <a href="#probes-from-variables">Probes from variables</a></td>
 </tr>
 <tr>
 <td><code>SENHUB_OUTPUT</code></td>
@@ -4409,7 +4412,7 @@ belongs to all of its instances at once.</p>
 <h2 id="starting-other-probes">Starting other probes<a class="headerlink" href="#starting-other-probes" title="Permanent link">&para;</a></h2>
 <p>The variables above configure the agent. The probes are configuration of
 their own, and there are sixty-six types of them, so they are not each
-given a variable. Three ways in, from the least to the most work:</p>
+given a variable each. Three ways in, from the least to the most work, and a fourth that adds to any of them:</p>
 <h3 id="a-variable-carrying-the-fragment">A variable carrying the fragment<a class="headerlink" href="#a-variable-carrying-the-fragment" title="Permanent link">&para;</a></h3>
 <p><code>SENHUB_PROBES</code> holds the same YAML a file in <code>probes.d</code> would. It is
 the way in on a platform where placing a file is harder than setting a
@@ -4442,72 +4445,23 @@ of its own when the same directory serves several instances: see
 <p>Whichever you choose, the configuration is checked before the agent
 starts: a container whose variables produce a file the agent would
 refuse stops with the reason rather than restarting in a loop.</p>
-<h3 id="reading-azure-container-apps">Reading Azure Container Apps<a class="headerlink" href="#reading-azure-container-apps" title="Permanent link">&para;</a></h3>
-<p>This is a shorthand for the fragment <code>SENHUB_PROBES</code> would carry, kept
-because it is the probe this image is most often asked for. Set the
-applications and their credentials, and the agent reads the console log
-stream of each one. Setting <code>SENHUB_AZURE_APP</code> without the rest stops
-the container with the list of what is missing, rather than starting
-half configured.</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>SENHUB_AZURE_APP</code></td>
-<td>Names of the Container Apps to read, comma-separated</td>
-</tr>
-<tr>
-<td><code>SENHUB_AZURE_TENANT_ID</code></td>
-<td>Entra tenant of the app registration</td>
-</tr>
-<tr>
-<td><code>SENHUB_AZURE_CLIENT_ID</code></td>
-<td>Application (client) ID</td>
-</tr>
-<tr>
-<td><code>SENHUB_AZURE_CLIENT_SECRET</code></td>
-<td>Client secret</td>
-</tr>
-<tr>
-<td><code>SENHUB_AZURE_SUBSCRIPTION_ID</code></td>
-<td>Subscription holding the Container App</td>
-</tr>
-<tr>
-<td><code>SENHUB_AZURE_RESOURCE_GROUP</code></td>
-<td>Its resource group</td>
-</tr>
-</tbody>
-</table>
-<p>None of these credentials is written to a file: the configuration holds
-a reference and the agent reads the value from the environment at every
-start.</p>
-<p>One probe instance follows one application, so <code>SENHUB_AZURE_APP</code> takes
-a list and writes one instance per name, each with its own bookmark:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">SENHUB_AZURE_APP</span><span class="p">:</span><span class="w"> </span><span class="s">"oltp,billing,web"</span>
+<h3 id="probes-from-variables">Probes from variables<a class="headerlink" href="#probes-from-variables" title="Permanent link">&para;</a></h3>
+<p><code>SENHUB_PROBE_&lt;NAME&gt;_TYPE</code> declares a probe and <code>SENHUB_PROBE_&lt;NAME&gt;_&lt;PARAM&gt;</code> sets
+its parameters, one variable each, typed from the probe's schema. It is a
+rule of the agent, not of the image: it applies the same way under systemd,
+Helm or Podman, and it applies <strong>even when you mount your own
+configuration</strong>, where it adjusts the probes of your files instead of being
+ignored. A secret is read from a file with the <code>_FILE</code> suffix, as Docker
+and Kubernetes deliver them.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">SENHUB_PROBE_DB_TYPE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">SENHUB_PROBE_DB_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db.internal</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">SENHUB_PROBE_DB_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">SENHUB_PROBE_DB_PASSWORD_FILE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/run/secrets/db_password</span>
 </code></pre></div>
-<p>The applications must share the credentials, the subscription and the
-resource group, since those are one variable each. An application in
-another subscription or another resource group belongs to another
-collector. Spaces around a name are absorbed, a name given twice is
-declared once, and a name that is not a Container App name stops the
-container.</p>
-<p>The credentials, and so the collector, are what this list is bounded
-by, not a limit of the probe. How many applications one agent can
-follow before the Azure control plane refuses its scans is measured
-under <a href="../probes/azure_container_apps/#requirements">Requirements</a>.</p>
-<p><code>SENHUB_AZURE_APP</code> and <code>SENHUB_PROBES</code> write two different files and
-are <strong>not merged</strong>. An application named in both is declared twice, and
-every line of it is read twice, counted twice by whatever ingests it.
-The entrypoint says so on
-startup when both variables are set; name each application in one place
-only.</p>
-<p>The role behind the app registration needs four actions, and <code>Reader</code>
-is not enough. See <a href="../probes/azure_container_apps/">Azure Container Apps</a>.</p>
+<p>The whole rule, with the precedence over <code>SENHUB_PROBES</code> and the files, is
+on <a href="../configuration/#configuring-probes-from-environment-variables">Configuration</a>.
+Reading Azure Container Apps takes the same form, see
+<a href="../probes/azure_container_apps/#from-environment-variables">Azure Container Apps</a>.</p>
 <h2 id="bringing-your-own-configuration">Bringing your own configuration<a class="headerlink" href="#bringing-your-own-configuration" title="Permanent link">&para;</a></h2>
 <p>Mount a directory on <code>/etc/senhub-agent</code> and the entrypoint writes
 nothing: your files win and every <code>SENHUB_*</code> variable is ignored. The
