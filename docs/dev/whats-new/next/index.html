@@ -4581,7 +4581,12 @@
 </ul>
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>SENHUB_AZURE_APP</code> is removed from the container image.</strong> The image no longer reads <code>SENHUB_AZURE_APP</code> or the <code>SENHUB_AZURE_*</code> variables that went with it, and a container that still sets <code>SENHUB_AZURE_APP</code> on its first start <strong>stops</strong> with a message naming the replacement, rather than starting a collector that reads no log. A container that already has its configuration on a volume keeps running on the file the old variable wrote, until that file is removed.</li>
+<li>
+<p><strong>The host's name is now one value everywhere.</strong> A host whose <code>global_tags</code> set <code>host.name</code> already carried it on its metrics and logs, but its host entity (the node in the topology graph), the entities of its systemd units and the records the OTLP receiver stamps with the host kept the machine's own name. All of them now use the override, so on such a host the graph node's <code>host.name</code> changes once, to the value its logs already carry (a dashed <code>preprod-...-shop</code> becomes <code>preprod.sensorfactory.shop</code>). The <code>host.id</code> is unchanged, so the node is the same node. A host with no override keeps its name, except the <code>host.name</code> on its systemd unit entities, which was the raw OS name and is now the lower-case name the host entity carries. A record about another machine (a syslog sender, a relayed OTLP stream) keeps its own origin name; it is never replaced.</p>
+</li>
+<li>
+<p><strong><code>SENHUB_AZURE_APP</code> is removed from the container image.</strong> The image no longer reads <code>SENHUB_AZURE_APP</code> or the <code>SENHUB_AZURE_*</code> variables that went with it, and a container that still sets <code>SENHUB_AZURE_APP</code> on its first start <strong>stops</strong> with a message naming the replacement, rather than starting a collector that reads no log. A container that already has its configuration on a volume keeps running on the file the old variable wrote, until that file is removed.</p>
+</li>
 </ul>
 <p>Declare the probe with the agent's own <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> variables instead. The probe name is yours (letters and digits only); the application name goes in <code>APP</code>, so a name with a hyphen is a value, not a variable. The credentials, one value each before, are repeated for each probe.</p>
 <table>
