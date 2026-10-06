@@ -73,6 +73,30 @@
          <lastmod>2026-10-06</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/deploying/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/deploying/cloud-init/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/deploying/docker-compose/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/deploying/helm/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/deploying/podman/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/deploying/windows-intune-gpo/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/license/</loc>
          <lastmod>2026-10-06</lastmod>
     </url>
