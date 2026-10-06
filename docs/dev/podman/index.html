@@ -4840,11 +4840,11 @@ lines ship commented out. The variables name a path, not a value, so
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
 </code></pre></div>
 <ul>
-<li>The Azure client secret of the Container Apps shorthand is the
-  exception: it is read as an environment variable
-  (<code>SENHUB_AZURE_CLIENT_SECRET</code>), so a <code>type=env</code> secret keeps it out of
-  the unit but not out of <code>podman inspect</code>. Use a <code>probes.d</code> file with a
-  <code>${file:...}</code> reference where that matters.</li>
+<li>The Azure client secret of a Container Apps probe declared from
+  environment variables (<code>SENHUB_PROBE_&lt;NAME&gt;_CLIENT_SECRET</code>) is the
+  exception: it is read as an environment variable, so a <code>type=env</code> secret
+  keeps it out of the unit but not out of <code>podman inspect</code>. Use a
+  <code>probes.d</code> file with a <code>${file:...}</code> reference where that matters.</li>
 </ul>
 <h3 id="stopping">Stopping<a class="headerlink" href="#stopping" title="Permanent link">&para;</a></h3>
 <p>The unit gives the agent thirty seconds to stop (<code>--stop-timeout=30</code>;
