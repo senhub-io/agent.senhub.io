@@ -4555,7 +4555,7 @@ ones to change.</p>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">      </span><span class="no">#!/bin/sh</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">      </span><span class="no">set -eu</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="no">SENHUB_VERSION="${SENHUB_VERSION:-0.6.2~beta.1}"  # exact package version: the pin</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="no">SENHUB_VERSION="${SENHUB_VERSION:-0.6.2~beta.3}"  # exact package version: the pin; latest on https://packages.senhub.io/releases/beta/latest.json</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">      </span><span class="no">SENHUB_EDITION="${SENHUB_EDITION:-senhub-agent-oss}"  # or senhub-agent</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">      </span><span class="no">SENHUB_CHANNEL="${SENHUB_CHANNEL:-beta}"       # stable once 0.6.2 is published</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">      </span><span class="no">FINGERPRINT="B9987A2D4623796E19D3B185CA56F750354530AF"</span>
@@ -4639,7 +4639,7 @@ ones to change.</p>
 agent runs that default, which pushes nowhere: nothing the check refuses
 ever runs.</p>
 <h2 id="pinning">Pinning<a class="headerlink" href="#pinning" title="Permanent link">&para;</a></h2>
-<p><code>SENHUB_VERSION</code> is the pin, in the package's spelling. The script installs <code>0.6.2~beta.1</code> exactly and holds
+<p><code>SENHUB_VERSION</code> is the pin, in the package's spelling. The script installs the version you set (<code>0.6.2~beta.3</code> in the example) exactly and holds
 the package (<code>apt-mark hold</code>), so <code>apt upgrade</code> and unattended upgrades do
 not move it. On RHEL, add the versionlock plugin to get the same effect:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-dnf-plugin-versionlock
@@ -4649,7 +4649,7 @@ not move it. On RHEL, add the versionlock plugin to get the same effect:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>apt-cache<span class="w"> </span>madison<span class="w"> </span>senhub-agent-oss<span class="w">     </span><span class="c1"># Debian, Ubuntu</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>--showduplicates<span class="w"> </span>list<span class="w"> </span>senhub-agent-oss<span class="w">   </span><span class="c1"># RHEL family</span>
 </code></pre></div>
-<p>A beta is spelled <code>0.6.2~beta.1</code> in the packages and <code>0.6.2-beta.1</code> as a
+<p>A beta is spelled <code>0.6.2~beta.3</code> in the packages and <code>0.6.2-beta.3</code> as a
 release tag. The example defaults to the beta channel because the stable
 channel is not published yet (its repository answers 404 until the
 0.6.2 release); it comes with the 0.6.2 release, and then
@@ -4709,7 +4709,7 @@ the package manager, on purpose:</p>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--allow-downgrades<span class="w"> </span><span class="s2">"senhub-agent-oss=0.6.2*"</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>apt-mark<span class="w"> </span>hold<span class="w"> </span>senhub-agent-oss
 </code></pre></div>
-<p>or <code>sudo dnf install -y senhub-agent-oss-0.6.2</code> (for a beta, the tilde form, <code>senhub-agent-oss-0.6.2~beta.2</code>) after
+<p>or <code>sudo dnf install -y senhub-agent-oss-0.6.2</code> (for a beta, the tilde form, <code>senhub-agent-oss-0.6.2~beta.3</code>) after
 <code>dnf versionlock delete senhub-agent-oss</code>. The package keeps
 <code>/etc/senhub-agent</code>, the agent key and the licence, and restarts the
 service. For a fleet, drive this with Ansible (the
@@ -4741,7 +4741,7 @@ template with a new <code>SENHUB_VERSION</code>.</p>
 and add the second only if you installed the versionlock plugin (see
 Pinning); without it, dnf answers "No such command: versionlock":</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>rpm<span class="w"> </span>-q<span class="w"> </span>senhub-agent-oss
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>rpm<span class="w"> </span>-q<span class="w"> </span>python3-dnf-plugin-versionlock<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>versionlock<span class="w"> </span>list
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">if</span><span class="w"> </span>rpm<span class="w"> </span>-q<span class="w"> </span>python3-dnf-plugin-versionlock<span class="w"> </span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>versionlock<span class="w"> </span>list<span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 </code></pre></div>
 <p>Expected: <code>status: done</code>, the service <code>active</code>, the pinned version, the hold
 listed, <code>config check</code> exit <code>0</code>, the two <code>50-cloud-init.*</code> fragments present,
