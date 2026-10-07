@@ -3909,6 +3909,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#footprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Footprint
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4543,6 +4554,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#footprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Footprint
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4721,6 +4743,44 @@ Breaking Changes or Changes below.</p>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>A per-module debug level now writes debug lines.</strong> Raising one module
+  (for example <code>probe.ibmi</code>) to <code>debug</code> through the log-level API or the
+  console answered <code>200</code> but wrote nothing, because the production logger
+  kept a global <code>info</code> floor. The module now logs at debug while every other
+  module stays at <code>info</code>. The setting is kept in memory: it survives a
+  configuration reload and is lost on an agent restart (see
+  <a href="../../troubleshooting/">Troubleshooting</a>).</li>
+<li><strong>Oracle 23ai: login with a password longer than 30 characters.</strong> The
+  <code>oracle</code> probe could not log in to Oracle Database 23ai with a password of
+  more than 30 characters: every cycle reported <code>senhub.db.up = 0</code> with
+  <code>ORA-01017</code>, while SQL*Plus accepted the same credentials. The driver does
+  not announce long password support, which 23ai requires; the probe now does.
+  Passwords of 30 characters or fewer were never affected.</li>
+<li><strong>Zabbix links the host probes of each platform by default.</strong> <code>zabbix setup</code> linked five templates whatever the platform, so a Windows host collecting its services or its event log counter got no item for them. The probes marked <code>universal</code> in their definition (on Windows, <code>winservices</code> and <code>windows_eventlog</code> join the five) are linked per platform, <code>--all-probes</code> links every template, and a guard fails the build if a registered probe emits metrics and no template declares them (ent#109).</li>
+<li><strong>Zabbix templates ship graphs and dashboards.</strong> The CPU, memory, logical disk and network templates carry graph prototypes (utilization, load, throughput, operations, queue, errors, per instance) declared in the probe definitions under <code>graphs:</code>, and a dashboard of their own graphs per template, listed under the host's Dashboards menu (7.0 export; the 6.0 export keeps the graphs only) (ent#110).</li>
+<li><strong>Windows services are discovered in Zabbix, with an "automatic service not running" trigger.</strong> The <code>winservices</code> probe now reports each service's start type (<code>windows.service.start_type</code>); the template creates the state, status and start type of every service by discovery and raises a problem when a service set to start automatically has not been running for <code>{$SENHUB.WINSERVICES.GRACE}</code> (5 minutes). Discovery is filtered by <code>{$SENHUB.WINSERVICES.MATCHES}</code> and <code>{$SENHUB.WINSERVICES.NOT_MATCHES}</code>. The probe's own heartbeat is no longer declared once per service (ent#114).</li>
+<li><strong>Zabbix triggers cover more of a host.</strong> Processor queue (Windows) and load (Linux), paging, disk queue and busy time, inodes, interface errors and discards, and a restart (new <code>system.uptime</code> from the <code>cpu</code> probe) join the usage and state triggers, each limit a <code>{$SENHUB.*}</code> macro with a documented default. Triggers are declared in the probe definitions under <code>triggers:</code> (ent#115).</li>
+</ul>
+<h2 id="footprint">Footprint<a class="headerlink" href="#footprint" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Less resident memory at rest.</strong> The agent parsed all 85 embedded probe
+  definitions and the seven console pages at start whatever was configured.
+  A definition is now parsed when its probe type first needs it, and a
+  console page when it is first opened. On the default configuration (four
+  host probes, HTTP and Zabbix outputs) the anonymous resident memory fell
+  from 17.5 to 11.8 MiB after half an hour. The rest of the resident size
+  is the executable's own pages, shared with the page cache.</li>
+<li><strong>Five recurring lines moved from <code>INFO</code> to <code>DEBUG</code>.</strong> Each fired on
+  every cycle of a healthy agent: <code>kubernetes: event cycle complete</code>,
+  <code>Successfully synced events</code> and <code>Server confirmed receipt of events</code>
+  (event output), <code>No update required</code> and <code>Auto-update skipped: expected
+  version is not newer than current</code> (auto-update). Start, stop,
+  configuration change and error lines are unchanged. Run with <code>--verbose</code>
+  or raise the module level to see them again.</li>
+<li><strong>Idle timers.</strong> The probe start retry no longer ticks every two minutes
+  while every probe is running; it arms a timer only while one is waiting
+  to be retried. The agent's instance id file is no longer replaced when it
+  already holds the id.</li>
 <li><strong><code>config check</code> and the loader now agree on a configuration with no storage strategy.</strong> <code>config check</code> reported "No storage strategies configured" as a warning (exit <code>1</code>) while the agent refuses to load such a file ("at least one storage strategy is required"). It is now an error (exit <code>2</code>), as is a storage entry with no name. A script that applies a configuration after <code>config check</code> (Ansible, the MSI) no longer lets one through that the agent then rejects.</li>
 <li><strong>A per-module debug level now writes debug lines.</strong> Raising one module (for example <code>probe.ibmi</code>) to <code>debug</code> through the log-level API or the console answered <code>200</code> but wrote nothing, because the production logger kept a global <code>info</code> floor. The module now logs at debug while every other module stays at <code>info</code>. The setting is kept in memory: it survives a configuration reload and is lost on an agent restart (see <a href="../../troubleshooting/">Troubleshooting</a>).</li>
 <li><strong>Oracle 23ai: login with a password longer than 30 characters.</strong> The <code>oracle</code> probe could not log in to Oracle Database 23ai with a password of more than 30 characters: every cycle reported <code>senhub.db.up = 0</code> with <code>ORA-01017</code>, while SQL*Plus accepted the same credentials. The driver does not announce long password support, which 23ai requires; the probe now does. Passwords of 30 characters or fewer were never affected.</li>
