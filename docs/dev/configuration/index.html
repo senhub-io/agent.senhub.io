@@ -5851,7 +5851,7 @@ publishes that as a stream any output may consume.</p>
 <tr>
 <td><code>depends_on.debounce</code></td>
 <td><code>3</code></td>
-<td>How many consecutive scrapes a peer must persist before it counts as a dependency rather than a passing connection. The delay before one appears is <code>debounce × interval</code></td>
+<td>How many scrapes must have seen a peer before it counts as a dependency rather than a passing connection. The scrapes need not be consecutive: a peer keeps its progress across up to 15 scrapes without being seen (or <code>debounce</code>, if larger). The delay before one appears is at least <code>debounce × interval</code></td>
 </tr>
 <tr>
 <td><code>depends_on.exclude_cidrs</code></td>
@@ -5860,7 +5860,7 @@ publishes that as a stream any output may consume.</p>
 </tr>
 </tbody>
 </table>
-<p>A loopback peer on an OS dynamic port (the client side of a one-shot local exchange) is never mapped as a dependency, whatever these settings say.</p>
+<p>A loopback peer on an OS dynamic port (the client side of a one-shot local exchange) is never mapped as a dependency, whatever these settings say (since 0.6.2).</p>
 <p><strong>Why this is not under an output.</strong> What a host <em>is</em> does not depend on
 where the description is shipped. The detector feeds a channel that
 several outputs can read at once, so the decision to describe the host
@@ -5869,6 +5869,7 @@ is made once, here, rather than inherited from one output's settings.</p>
 to whatever an OTLP output declares under <code>signals.entities</code>, which is
 where this setting used to live — so an existing install keeps behaving
 exactly as it did. An agent with neither produces nothing.</p>
+<p><strong>Precedence of the <code>depends_on</code> settings.</strong> <code>enabled</code>, <code>debounce</code>, <code>exclude_cidrs</code> and the interval are read from this block whenever it exists, and only from it. The OTLP keys <code>signals.entities.depends_on_enabled</code>, <code>depends_on_debounce</code>, <code>depends_on_exclude_cidrs</code> and <code>interval</code> are a fallback, read only when there is no <code>entities:</code> block at all. A block that is present masks them, even with <code>enabled: false</code>: the OTLP keys are then ignored. The interval is <code>5m</code> unless the block names one.</p>
 <p><strong>It has a cost</strong>, which is why it is not on for everyone: every source
 is polled each interval, and the dependency scanner reads the host's
 sockets. An agent that does not want it pays none of it.</p>
