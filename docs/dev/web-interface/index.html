@@ -5047,8 +5047,13 @@ without anyone touching its configuration:</p>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">bind_address</span><span class="p">:</span><span class="w"> </span><span class="s">"127.0.0.1"</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"prometheus"</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:agent.admin_key}"</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:http.admin_key}"</span>
 </code></pre></div>
+<p>The agent mints the key at first start and seals it in the operating
+system's secret store under the name <code>http.admin_key</code>; the <code>http</code>
+fragment holds only the reference shown above. If you set your own key,
+any secret name works. For instance, <code>senhub-agent secret set
+http.admin_key</code>, then <code>admin_key: "${secret:http.admin_key}"</code>.</p>
 <h2 id="the-key-that-reads-and-the-key-that-changes">The key that reads and the key that changes<a class="headerlink" href="#the-key-that-reads-and-the-key-that-changes" title="Permanent link">&para;</a></h2>
 <p>The agent key is what you give a monitoring tool to read this agent —
 PRTG, Nagios, a Prometheus scrape. It travels in the URL, so it ends up
@@ -5069,6 +5074,7 @@ carries the old key. Take a fresh one from the shortcut or from
 404 rather than asking for a key nobody has. An agent installed to feed
 PRTG or Nagios therefore exposes nothing that can change it. Your
 pollers are unaffected either way. If the key is added while the agent runs, the agent serves the console from the next configuration reload.</p>
+<p><strong>Rotating or removing the key.</strong> After a configuration reload, the new key is served at once, with no restart: the old key now answers 401. If you remove <code>admin_key</code> and reload, the administration routes are no longer served and answer 404, exactly as on an agent that never had a key. Readers holding the agent key are unaffected in both cases.</p>
 <p>The header of every page shows the host name, the agent's state, its version and its uptime, so you can see that the agent runs without leaving the page you are on. The menu has five entries: Overview, Probes, Outputs, Settings and Docs. Docs opens this documentation on <a href="https://agent.senhub.io/docs">agent.senhub.io</a>; the API reference embedded in the agent remains available at <code>/web/{admin-key}/docs</code>.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Overview is the landing page.</p>
