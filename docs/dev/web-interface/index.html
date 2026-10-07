@@ -5173,6 +5173,7 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <li><strong>Licence</strong> shows the tier, the scope and the expiry of the active licence, uploads the licence file you received, or takes the pasted token. A customer licence is valid across the whole fleet, so the same file activates every agent; a licence issued for one specific agent is checked against that agent's key. The card shows how many Pro probe types are locked and links to the catalogue.</li>
 <li><strong>Connection</strong> changes the port and bind address of the HTTP output, the same values the Outputs page edits. Changing the port moves the console to the new address; the page tells you where to reconnect. The change is applied live, with no restart.</li>
 <li><strong>HTTPS</strong> shows whether the console and the endpoints are served over TLS, the certificate and key files, the certificate's subject and expiry read from the file, and the minimum TLS version. <strong>Configure HTTPS</strong> opens the TLS section of the HTTP output, where TLS is switched on and the files are set.</li>
+<li><strong>Governance</strong> describes the host the agent runs on: owning team and contact, criticality, lifecycle, location and free labels, with the same fields and values as the "Governance and tags" section of a probe. It is written to the top-level <code>governance:</code> block of <code>agent.yaml</code>, stamped on the entities the agent reports and inherited by what runs on the host; a probe's own governance wins over it. A refused value (a criticality outside <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, an unknown key) is marked on its field and nothing is written. The running agent follows a saved change without a restart. When a value is a <code>${env:...}</code> or <code>${file:...}</code> reference the card is read-only and says so: change the variable where the agent is started. The block can also be read and written with <code>GET</code> and <code>PUT /api/{key}/config/governance</code>.</li>
 </ul>
 <p>These changes are written to the multi-file configuration and picked up by the running agent, exactly as the <code>senhub-agent config set</code> command does.</p>
 <h2 id="monitoring-system-integration">Monitoring system integration<a class="headerlink" href="#monitoring-system-integration" title="Permanent link">&para;</a></h2>
@@ -5317,6 +5318,11 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <td><code>GET /api/{key}/config/settings</code>, <code>POST</code></td>
 <td>admin</td>
 <td>Port, bind address, licence; the GET also returns the instance ID and the TLS state (certificate subject and expiry)</td>
+</tr>
+<tr>
+<td><code>GET /api/{key}/config/governance</code>, <code>PUT</code></td>
+<td>admin</td>
+<td>The agent-level governance block; the PUT refuses an invalid value with the field named (400) and a block set from references with 409</td>
 </tr>
 <tr>
 <td><code>POST /api/{key}/admin/cache/clear</code></td>
