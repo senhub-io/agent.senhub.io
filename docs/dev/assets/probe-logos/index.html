@@ -4337,10 +4337,16 @@ no partnership, endorsement or certification. Sources are icon sets that
 redistribute brand marks for identification: Simple Icons, the Iconify
 <code>logos</code> and <code>devicon</code> collections, and Material Design Icons for the
 generic ones.</p>
+<p>Where a project or vendor publishes its own SVG (ActiveMQ, ZooKeeper,
+NetScaler, Varnish), that file is used in preference to an icon set.
+Two logos (<code>redfish.svg</code>, <code>modbus.svg</code>) exist only as official rasters; they are
+downscaled to 128 px high and embedded in an SVG wrapper, so the one-SVG-per-page
+convention holds. <code>SOURCES.md</code> lists the source, the owner and the origin of every logo, and
+names the probes that keep a generic glyph because no vector mark exists.</p>
 <p>Two are worth knowing about. <code>exchange_online.svg</code> carries the Microsoft
 corporate mark because no Exchange product mark exists in any of those
-sets. <code>swarm.svg</code> exists for the catalogue card on the probes index; the
-Swarm page itself carries no header logo.</p>
+sets. <code>swarm.svg</code> is the Docker mark, shown on the Swarm page and on its
+catalogue card.</p>
 <h2 id="replacing-one">Replacing one<a class="headerlink" href="#replacing-one" title="Permanent link">&para;</a></h2>
 <p>Drop the new file in with the same name. Keep the class on the <code>&lt;img&gt;</code>
 as it is: <code>probe-page-logo-si</code> and <code>-wm</code> are lightened on the dark theme
