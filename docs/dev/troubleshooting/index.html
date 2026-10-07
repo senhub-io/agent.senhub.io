@@ -3819,6 +3819,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#where-debug-lines-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Debug Lines Go
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#runtime-debug-no-restart-required" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4754,6 +4765,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#where-debug-lines-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Debug Lines Go
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#runtime-debug-no-restart-required" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5126,6 +5148,58 @@ setting says.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>grep<span class="w"> </span><span class="s1">'module=probe.citrix'</span><span class="w"> </span>/var/log/senhub-agent/senhubagent.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-20
 </code></pre></div>
 <h2 id="enabling-debug-logging">Enabling Debug Logging<a class="headerlink" href="#enabling-debug-logging" title="Permanent link">&para;</a></h2>
+<h3 id="where-debug-lines-go">Where Debug Lines Go<a class="headerlink" href="#where-debug-lines-go" title="Permanent link">&para;</a></h3>
+<p>Debug lines go to the same places as every other line. Neither <code>--verbose</code>,
+<code>--filter</code> nor the runtime per-module level opens a separate channel; they
+only decide which lines are let through. What changes with how the agent is
+started is where you read them.</p>
+<table>
+<thead>
+<tr>
+<th>How the agent runs</th>
+<th>Where the lines are written</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux service (systemd)</td>
+<td>The log file <code>/var/log/senhub-agent/senhubagent.log</code>, and the journal (<code>journalctl -u senhub-agent</code>)</td>
+</tr>
+<tr>
+<td>Windows service</td>
+<td>The log file <code>C:\ProgramData\SenHub\logs\senhubagent.log</code> only</td>
+</tr>
+<tr>
+<td>Interactive <code>run</code> (Linux, Windows)</td>
+<td>The console (standard error) and a log file of its own, <code>senhubagent-console.log</code>, in the same directory as the service file</td>
+</tr>
+<tr>
+<td>Container (<code>run</code>, the image default)</td>
+<td>The container's standard error (<code>docker logs</code>, <code>kubectl logs</code>), and the <code>-console</code> log file when the log directory is writable by the container user</td>
+</tr>
+</tbody>
+</table>
+<p>Details worth knowing:</p>
+<ul>
+<li>An interactive run never shares the service's file, so reading
+  <code>senhubagent.log</code> while you run <code>senhub-agent run --filter ...</code> in a
+  terminal shows nothing new. Read the console, or <code>senhubagent-console.log</code>.</li>
+<li>An agent started with another <code>--config-path</code> than the installed one
+  writes to its own file, <code>senhubagent-&lt;8 hex digits&gt;.log</code>, in the same
+  directory.</li>
+<li>If the log directory cannot be written, the file is created next to the
+  agent binary instead (the agent says which path it uses when it starts).</li>
+<li><code>--verbose</code> without <code>--filter</code> lets every module's debug lines through;
+  <code>--filter probe.citrix</code> lets through only the modules whose name starts
+  with that prefix. Both apply from the start of the process. The runtime
+  per-module level (next section) needs no restart and applies to the
+  running agent, whichever way it was started.</li>
+<li>To make a service write debug lines from its start, install it with the
+  flag (<code>senhub-agent install --filter probe.citrix</code>); otherwise raise the level
+  at runtime.</li>
+<li>The file is text by default, and debug lines read <code>DBG</code>. With
+  <code>--log-format json</code> they carry <code>"level":"debug"</code> instead.</li>
+</ul>
 <h3 id="runtime-debug-no-restart-required">Runtime Debug (No Restart Required)<a class="headerlink" href="#runtime-debug-no-restart-required" title="Permanent link">&para;</a></h3>
 <p>You can enable debug logging for specific modules at runtime via the API. This is the recommended approach as it does not require restarting the service.</p>
 <p>The <code>debug/logs</code> and <code>admin/cache/clear</code> routes belong to the administration surface: they answer only the administration key, written <code>{admin-key}</code> below, and refuse the agent key PRTG or Nagios read with. The administration key is the segment after <code>/web/</code> in the address <code>sudo /usr/local/bin/senhub-agent console --print</code> prints (on Windows, <code>senhub-agent.exe console --print</code> from an elevated prompt).</p>
@@ -5169,9 +5243,11 @@ while every other module stays at <code>info</code>. Take IBM i as the example:<
 </code></pre></div>
 <p>Then read only that module's debug lines from the log file (see
 <a href="#viewing-logs">Viewing Logs</a> for its location):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>grep<span class="w"> </span><span class="s1">'"level":"debug"'</span><span class="w"> </span>/var/log/senhub-agent/senhubagent.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'probe.ibmi'</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>grep<span class="w"> </span><span class="s1">' DBG '</span><span class="w"> </span>/var/log/senhub-agent/senhubagent.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'module=probe.ibmi'</span>
 </code></pre></div>
-<p>Each line carries <code>module=probe.ibmi</code> (<code>"module":"probe.ibmi"</code> in JSON). The
+<p>Each line carries <code>module=probe.ibmi</code> (<code>"module":"probe.ibmi"</code> in JSON, where
+the level is <code>"level":"debug"</code> instead of <code>DBG</code>). Where the lines land
+depends on how the agent runs: see <a href="#where-debug-lines-go">Where Debug Lines Go</a>. The
 debug lines appear from the next collection cycle; nothing needs restarting.</p>
 <p>The setting lives in the agent's memory only:</p>
 <ul>
