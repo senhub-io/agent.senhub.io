@@ -5651,9 +5651,14 @@ both paths under one PromQL query is straightforward.</p>
 strategies; the logs path is <strong>additive</strong>.</p>
 <h3 id="logs-survive-an-outage">Logs survive an outage<a class="headerlink" href="#logs-survive-an-outage" title="Permanent link">&para;</a></h3>
 <p>When the collector cannot take a batch of event logs, the agent keeps it
-on disk and sends it again: at boot, when the collector answers again, and
-on its own retry clock while it waits. This is on by default on every
-install; nothing to set.</p>
+on disk and sends it again. A batch is deleted from disk only after the
+collector has acknowledged it, so a failed or interrupted attempt never
+removes anything. This is on by default on every install; nothing to set.</p>
+<p>While the collector is known to be down, new batches go straight to disk
+and the agent does not try the network for each one. It probes the
+collector on a retry clock of 5, 10, 20, 40, 80 and 160 seconds, then every 5
+minutes; the clock starts again at 5 seconds after the next outage. As soon as
+one export succeeds it sends the backlog, oldest first, stopping at the first batch the collector does not acknowledge.</p>
 <table>
 <thead>
 <tr>
@@ -5666,24 +5671,41 @@ install; nothing to set.</p>
 <tbody>
 <tr>
 <td>Collector down, agent running</td>
-<td>Kept on disk, sent on recovery</td>
+<td>Kept on disk, sent in order once the collector answers</td>
 <td>Re-sent at the next heartbeat</td>
 <td>Last value of each series kept in memory</td>
 </tr>
 <tr>
-<td>Collector down, agent restarted</td>
-<td>Kept on disk, sent at boot</td>
+<td>Agent stopped normally (restart, upgrade) during an outage</td>
+<td>The records still in memory are written to disk in the first second of the stop, without trying a collector that is down, then sent at the next boot with the rest</td>
 <td>Re-sent at the next heartbeat</td>
 <td>Lost unless <code>persistence.path</code> is set</td>
 </tr>
 <tr>
-<td>Agent killed while records sit in its memory batch</td>
-<td>Those records are lost</td>
+<td>Agent restarted, collector still down</td>
+<td>Kept on disk, probed on the retry clock</td>
+<td>Re-sent at the next heartbeat</td>
+<td>Lost unless <code>persistence.path</code> is set</td>
+</tr>
+<tr>
+<td>Agent killed or host crashed (kill -9, power cut)</td>
+<td>Batches already on disk are kept; records not yet on disk are lost: at most the batch interval (5 s by default) plus one export timeout (4 s), so under 10 s of logs</td>
+<td>Re-sent</td>
+<td>Same as above</td>
+</tr>
+<tr>
+<td>Outage longer than 24 hours or past 128 MiB</td>
+<td>The oldest batches are dropped and counted</td>
 <td>Re-sent</td>
 <td>Same as above</td>
 </tr>
 </tbody>
 </table>
+<p>Delivery is at-least-once: if the collector received a batch but its
+acknowledgement was lost, the batch is sent again, so a record can arrive
+twice. Records replayed after an outage can also arrive after newer ones;
+they keep their original timestamp, so order by the record timestamp and
+deduplicate on timestamp, body and attributes if duplicates matter.</p>
 <p>Where the queue lives:</p>
 <table>
 <thead>
