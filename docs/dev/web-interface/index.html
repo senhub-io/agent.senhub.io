@@ -5068,7 +5068,7 @@ carries the old key. Take a fresh one from the shortcut or from
 <p><strong>Without <code>admin_key</code>, the console is not served</strong> — its addresses answer
 404 rather than asking for a key nobody has. An agent installed to feed
 PRTG or Nagios therefore exposes nothing that can change it. Your
-pollers are unaffected either way.</p>
+pollers are unaffected either way. If the key is added while the agent runs, the agent serves the console from the next configuration reload.</p>
 <p>The header of every page shows the host name, the agent's state, its version and its uptime, so you can see that the agent runs without leaving the page you are on. The menu has five entries: Overview, Probes, Outputs, Settings and Docs. Docs opens this documentation on <a href="https://agent.senhub.io/docs">agent.senhub.io</a>; the API reference embedded in the agent remains available at <code>/web/{admin-key}/docs</code>.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Overview is the landing page.</p>
