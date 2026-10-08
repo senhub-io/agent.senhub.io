@@ -4746,6 +4746,9 @@ Breaking Changes or Changes below.</p>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
+<p><strong>Files left by a manual update are removed at the next start, with auto-update off too.</strong> The hidden <code>.&lt;exe&gt;.old</code> and <code>.&lt;exe&gt;.new</code> files that <code>senhub-agent update</code> leaves next to the binary on Windows were cleaned only when auto-update was enabled; the agent now removes them at every start.</p>
+</li>
+<li>
 <p><strong>Loopback connections on OS dynamic ports no longer create <code>depends_on</code> endpoints.</strong> A host talking to itself through a port the OS picks per request (for example <code>127.0.0.1:497xx</code> on Windows) produced one one-shot endpoint per connection. A loopback peer whose port is in the OS dynamic range (49152-65535 on Windows and macOS, the kernel <code>ip_local_port_range</code> on Linux, 32768-60999 by default) is now ignored; loopback services on fixed ports and all non-loopback peers are unchanged.</p>
 </li>
 <li>
