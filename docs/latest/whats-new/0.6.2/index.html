@@ -1,0 +1,5014 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The OpenTelemetry-native infrastructure agent — documentation: installation, configuration, probes, outputs (PRTG, Nagios, Zabbix, Prometheus, OTLP) and release notes.">
+      
+      
+      
+        <link rel="canonical" href="https://agent.senhub.io/docs/latest/whats-new/0.6.2/">
+      
+      
+        <link rel="prev" href="../next/">
+      
+      
+        <link rel="next" href="../0.6.1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>0.6.2 - SenHub Agent</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#062-2026-10-08" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-header__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SenHub Agent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0.6.2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/senhub-io/senhub-agent" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    senhub-io/senhub-agent
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://agent.senhub.io/" title="SenHub Agent" class="md-nav__button md-logo" aria-label="SenHub Agent" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    SenHub Agent
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/senhub-io/senhub-agent" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    senhub-io/senhub-agent
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../presentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downloading and verifying releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploying at scale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deploying at scale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/windows-intune-gpo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows: Intune, GPO, SCCM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/cloud-init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    cloud-init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes-helm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes (Helm) reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/helm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helm runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../podman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Podman reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deploying/podman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Podman runbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../secret-store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secret store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../http-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP / HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nagios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nagios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../web-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web console
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    License
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/agreement-fr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contrat de licence (français, fait foi)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/agreement-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License agreement (English translation)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/third-party/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus / VictoriaMetrics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Prometheus / VictoriaMetrics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prometheus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prometheus/metrics-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../otlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP / OpenTelemetry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Probes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/logicaldisk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logical disk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/linux-logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/windows-eventlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Event Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/filetail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File tail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/systemd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systemd Units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/windows-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/chrony/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chrony (NTP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ntp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NTP (direct)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/os-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OS Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/smart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S.M.A.R.T. Disk Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ipmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IPMI / BMC Sensors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nvidia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA GPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/modbus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modbus TCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/icmp-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ICMP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/http-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/tcp-dial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCP dial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/dns-latency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS latency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/snmp-poll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP poll
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/snmp-trap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP trap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/otlp-receiver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTLP receiver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/prometheus-scrape/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prometheus scrape
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/citrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Citrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/netscaler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NetScaler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/redfish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redfish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/powerstore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dell PowerStore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ibmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBM i / AS400
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server AlwaysOn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle_enterprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database (Enterprise)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/vsphere_ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VMware vSphere HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ad_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure AD Connect Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/exchange_online/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange Online
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_container_apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_container_app_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/syslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syslog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/event/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ping-webapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ping WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/load-webapp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load WebApp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ping-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ping gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/wifi-signal-strength/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WiFi signal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/veeam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veeam Backup & Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mysql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL / MariaDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mssql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/oracle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/redis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis / Valkey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/cassandra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Cassandra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/couchdb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CouchDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/clickhouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ClickHouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/elasticsearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elasticsearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenSearch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/solr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Solr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/influxdb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    InfluxDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/memcached/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memcached
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/apache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache HTTP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/haproxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HAProxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/envoy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoy Proxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/php-fpm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PHP-FPM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/varnish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Varnish Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/tomcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Tomcat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/wildfly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WildFly / JBoss
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RabbitMQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/activemq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache ActiveMQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/nats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NATS Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/pulsar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache Pulsar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/swarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Swarm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox VE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/hyperv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hyper-V
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/ceph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ceph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/consul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consul
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/zookeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache ZooKeeper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/jenkins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/unifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UniFi Controller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What's new
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    What's new
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages-and-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Packages and repositories
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-and-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command line and status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Footprint
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.6.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.5.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.4.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.4.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.3.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages-and-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Packages and repositories
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-and-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command line and status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Footprint
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/whats-new/0.6.2.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="062-2026-10-08">0.6.2 — 2026-10-08<a class="headerlink" href="#062-2026-10-08" title="Permanent link">&para;</a></h1>
+<p>0.6.2 adds Linux packages and signed package repositories, three ways to
+deploy the agent at scale (an Ansible collection, a Helm chart and a Podman
+Quadlet unit), probes declared from environment variables, and a manifest
+for every release. It also changes the exit codes of the command line,
+keeps failed log batches on disk by default, and removes
+<code>SENHUB_AZURE_APP</code> from the container image.</p>
+<div class="rn-filter"></div>
+
+<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
+<p>Actions for an installation running 0.6.1. Each one is detailed under
+Breaking Changes or Changes below.</p>
+<ol>
+<li><strong>Containers that set <code>SENHUB_AZURE_APP</code>.</strong> The image no longer reads
+   it and a first start with it set stops. Declare the probe with
+   <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> variables first.</li>
+<li><strong>Scripts that compare an exit code with <code>1</code>.</strong> Failures now exit <code>2</code>.
+   A script that tests for any non-zero code is unaffected.</li>
+<li><strong>Zabbix.</strong> Re-run <code>zabbix setup</code> to refresh the templates: counter
+   items become rates, and the host templates gain graphs, dashboards,
+   triggers and discovery. Rewrite the triggers and calculated items you
+   wrote against counter items.</li>
+<li><strong>Topology backends.</strong> The <code>unifi</code>, <code>kubernetes</code> and <code>systemd</code>
+   entities are replaced once under a new identity.</li>
+<li><strong>Disk use during a collector outage.</strong> The OTLP output now keeps
+   failed log batches on disk by default, up to 128 MiB in the state
+   directory.</li>
+<li><strong>Probes whose connection is a URI with credentials.</strong> Upgrade, delete
+   or rotate the old agent log files, and change that account's password
+   (see Security below).</li>
+<li><strong>PRTG bit-rate channels.</strong> Delete and recreate the bit-rate channels
+   (or the sensor) created by agents 0.4.0 to 0.6.1.</li>
+</ol>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Credentials in a connection URI are masked in the agent log.</strong> A
+  credential embedded in a probe's connection URI
+  (<code>scheme://user:password@host</code>, for example MongoDB, Redis, PostgreSQL
+  or AMQP URIs) was written in clear to the agent log when the probe
+  started and on every configuration reload, in 0.6.1 and earlier. 0.6.2
+  masks it. If you used such URIs: upgrade, delete or rotate the old agent
+  log files, and change that account's password.</li>
+</ul>
+<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>The host's name is now one value everywhere.</strong> A host whose <code>global_tags</code> set <code>host.name</code> already carried it on its metrics and logs, but its host entity (the node in the topology graph), the entities of its systemd units and the records the OTLP receiver stamps with the host kept the machine's own name. All of them now use the override, so on such a host the graph node's <code>host.name</code> changes once, to the value its logs already carry (a dashed <code>preprod-...-shop</code> becomes <code>preprod.sensorfactory.shop</code>). The <code>host.id</code> is unchanged, so the node is the same node. A host with no override keeps its name, except the <code>host.name</code> on its systemd unit entities, which was the raw OS name and is now the lower-case name the host entity carries. A record about another machine (a syslog sender, a relayed OTLP stream) keeps its own origin name; it is never replaced.</p>
+</li>
+<li>
+<p><strong><code>SENHUB_AZURE_APP</code> is removed from the container image.</strong> The image no longer reads <code>SENHUB_AZURE_APP</code> or the <code>SENHUB_AZURE_*</code> variables that went with it, and a container that still sets <code>SENHUB_AZURE_APP</code> on its first start <strong>stops</strong> with a message naming the replacement, rather than starting a collector that reads no log. A container that already has its configuration on a volume keeps running on the file the old variable wrote, until that file is removed.</p>
+</li>
+</ul>
+<p>Declare the probe with the agent's own <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> variables instead. The probe name is yours (letters and digits only); the application name goes in <code>APP</code>, so a name with a hyphen is a value, not a variable. The credentials, one value each before, are repeated for each probe.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SENHUB_AZURE_APP=oltp,billing</code></td>
+<td>one probe per application, <code>SENHUB_PROBE_OLTP_TYPE=azure_container_apps</code> and <code>SENHUB_PROBE_OLTP_APP=oltp</code>, then the same for <code>BILLING</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_TENANT_ID</code></td>
+<td><code>SENHUB_PROBE_&lt;NAME&gt;_TENANT_ID</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_ID</code></td>
+<td><code>SENHUB_PROBE_&lt;NAME&gt;_CLIENT_ID</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_SECRET</code></td>
+<td><code>SENHUB_PROBE_&lt;NAME&gt;_CLIENT_SECRET</code>, or <code>SENHUB_PROBE_&lt;NAME&gt;_CLIENT_SECRET_FILE=/run/secrets/...</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_SUBSCRIPTION_ID</code></td>
+<td><code>SENHUB_PROBE_&lt;NAME&gt;_SUBSCRIPTION_ID</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_RESOURCE_GROUP</code></td>
+<td><code>SENHUB_PROBE_&lt;NAME&gt;_RESOURCE_GROUP</code></td>
+</tr>
+<tr>
+<td>bookmark in the state directory, written for you</td>
+<td><code>SENHUB_PROBE_&lt;NAME&gt;_BOOKMARK_PATH=/var/lib/senhub-agent/&lt;app&gt;.bookmark</code>, one distinct file per probe</td>
+</tr>
+</tbody>
+</table>
+<p>List mode, <code>SENHUB_AZURE_APP=oltp,billing</code> becomes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">SENHUB_PROBE_OLTP_TYPE</span><span class="o">=</span>azure_container_apps
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">SENHUB_PROBE_OLTP_APP</span><span class="o">=</span>oltp
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">SENHUB_PROBE_OLTP_TENANT_ID</span><span class="o">=</span>...
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">SENHUB_PROBE_OLTP_CLIENT_ID</span><span class="o">=</span>...
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nv">SENHUB_PROBE_OLTP_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/aca_client_secret
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">SENHUB_PROBE_OLTP_SUBSCRIPTION_ID</span><span class="o">=</span>...
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nv">SENHUB_PROBE_OLTP_RESOURCE_GROUP</span><span class="o">=</span>rg-squash
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">SENHUB_PROBE_OLTP_BOOKMARK_PATH</span><span class="o">=</span>/var/lib/senhub-agent/oltp.bookmark
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># and the same eight lines with BILLING, APP=billing and billing.bookmark</span>
+</code></pre></div>
+<p>Discovery mode, which the old variable could not express (one probe for the whole subscription, no <code>APP</code> and no <code>RESOURCE_GROUP</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">SENHUB_PROBE_ACA_TYPE</span><span class="o">=</span>azure_container_apps
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">SENHUB_PROBE_ACA_TENANT_ID</span><span class="o">=</span>...
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">SENHUB_PROBE_ACA_CLIENT_ID</span><span class="o">=</span>...
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">SENHUB_PROBE_ACA_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/aca_client_secret
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">SENHUB_PROBE_ACA_SUBSCRIPTION_ID</span><span class="o">=</span>...
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">SENHUB_PROBE_ACA_DISCOVERY__INTERVAL</span><span class="o">=</span><span class="m">300</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nv">SENHUB_PROBE_ACA_BOOKMARK_PATH</span><span class="o">=</span>/var/lib/senhub-agent/aca.bookmark
+</code></pre></div>
+<p>The old variable named the bookmark <code>&lt;application&gt;.bookmark</code> in the state directory: give <code>BOOKMARK_PATH</code> the same file and the probe resumes where it stopped instead of re-reading its recent lines. The old probe was named after the application; a name with a hyphen cannot be written in a variable, so such a probe changes name (<code>squash-tm</code> becomes, say, <code>squashtm</code>) and its series change <code>probe_name</code> with it. <code>SENHUB_PROBES</code> is unchanged.</p>
+<ul>
+<li><strong>Exit codes of the command line are a contract.</strong> <code>0</code> done, <code>1</code> warning, <code>2</code> failure, <code>3</code> unchanged. Failures that exited <code>1</code> now exit <code>2</code>. <code>config check</code> exits <code>1</code> when it found warnings only (running without a licence is the free tier, reported as information), and <code>status</code> exits <code>1</code> when the service is stopped, the agent does not answer, it reports itself unhealthy or a probe is in error. A script that tests for any non-zero code is unaffected; one that compares with <code>1</code> must follow. The container image and the Windows installer are updated to match. See <a href="../../cli/#exit-codes">Exit codes</a>.</li>
+<li><strong>Three entity identities change once.</strong> The <code>unifi</code>, <code>kubernetes</code> and <code>systemd</code> probes no longer key their entities on an address or a hostname. A UniFi controller is identified by the UUID it reports about itself (or <code>unifi@&lt;host.id&gt;</code> when it runs on the agent's host); a controller that is remote and whose UUID the account cannot read has no entity. A Kubernetes cluster is identified by its <code>kube-system</code> namespace UID alone, so a cluster whose UID is unreadable has no cluster entity. A systemd unit is <code>systemd://&lt;host.id&gt;/&lt;unit&gt;</code>. The old entities are retired once: a consumer sees one disappearance, then the new identity.</li>
+<li><strong>Zabbix counter items become rates.</strong> In the generated templates, every item built from a cumulative counter (network bytes and packets, disk I/O, CPU time, request totals) now carries the Change per second preprocessing step and a per-second unit (<code>Bps</code>, <code>/s</code>, <code>s/s</code>). The items keep their keys, so after you re-run <code>zabbix setup</code> and the templates are updated, the same item switches from a total to a rate: its history from before the upgrade holds totals and the new values are rates, so a graph spanning the upgrade shows a step. Rewrite the triggers and calculated items you wrote against these items to compare a rate.</li>
+</ul>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h3 id="packages-and-repositories">Packages and repositories<a class="headerlink" href="#packages-and-repositories" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linux packages.</strong> <code>.deb</code> and <code>.rpm</code> packages for amd64 and arm64, in two editions (<code>senhub-agent-oss</code> and <code>senhub-agent</code>, which replace each other in one install command), install the agent as a systemd service from the distribution's package manager. They are tested on Debian 12, Ubuntu 22.04 and 24.04, Rocky Linux 9 and openSUSE Leap 15.6. See <a href="../../installation/#install-from-packages">Install from packages</a>.</li>
+<li><strong>Signed package repositories.</strong> APT and YUM/DNF/Zypper repositories at <code>packages.senhub.io</code>, with a <code>stable</code> and a <code>beta</code> channel. See <a href="../../installation/#install-from-the-package-repositories">Install from the package repositories</a>.</li>
+<li><strong>A manifest per release, at a stable address.</strong> <code>packages.senhub.io/releases/stable/latest.json</code> (and <code>beta/latest.json</code>) name the newest release of a channel; <code>releases/&lt;version&gt;/manifest.json</code> lists every file with its checksum, size, signature and the container images, so a script finds and verifies the right build without reading the GitHub page. A stable image is now also tagged with its minor line (<code>ghcr.io/senhub-io/senhub-agent:0.6</code>). See <a href="../../releases/">Downloading and verifying releases</a>.</li>
+</ul>
+<h3 id="deployment-tools">Deployment tools<a class="headerlink" href="#deployment-tools" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Deploying at scale.</strong> A documentation section with one page per tool, each with a runnable example and the same points: version pinning, licence, secrets, validation before apply, upgrade and removal. Pages for Intune, GPO and SCCM, cloud-init, Docker Compose, Helm and Podman, and an overview that maps each estate to a tool. See <a href="../../deploying/">Deploying at scale</a>.</li>
+<li><strong>Ansible collection.</strong> <code>senhub.agent</code> is an Ansible collection with one role, <code>senhub.agent.agent</code>, that installs the agent from the signed package repositories (Linux) or the release MSI checked against its manifest (Windows), writes <code>probes.d</code> and <code>strategies.d</code> from variables, and runs <code>config check --json</code> on the result before it replaces the live files; a second run changes nothing. See <a href="../../ansible/">Deploying with Ansible</a>.</li>
+<li><strong>Helm chart.</strong> <code>charts/senhub-agent</code> runs the agent in a Kubernetes cluster, by default one agent per node (a DaemonSet) with an identity of its own, monitoring the node it runs on and, on request, the cluster through the <code>kubernetes</code> probe. The chart is published to <code>oci://ghcr.io/senhub-io/charts</code>. See <a href="../../kubernetes-helm/">Kubernetes (Helm)</a>.</li>
+<li><strong>Podman and Quadlet.</strong> A Quadlet unit runs the container image as a systemd service under Podman, monitoring the host, with the bearer token and the licence as Podman secrets. It follows the <code>0.6</code> line tag, so auto-update delivers patch releases. See <a href="../../podman/">Running the agent with Podman</a>.</li>
+</ul>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Probes from environment variables.</strong> <code>SENHUB_PROBE_&lt;NAME&gt;_TYPE=&lt;type&gt;</code> declares a probe and <code>SENHUB_PROBE_&lt;NAME&gt;_&lt;PARAM&gt;=value</code> sets its parameters, typed from the probe's schema, with <code>__</code> for nested keys and <code>_FILE</code> to read a secret from a file. The agent reads them itself, so containers, systemd units, Helm and Podman share one rule, and they adjust the probes of a mounted configuration too (the environment wins, key by key). A mistake stops the load and names the variable. <code>config show</code> lists the variables the probes were read from, and never prints a secret read from the environment. See <a href="../../configuration/#configuring-probes-from-environment-variables">Configuring probes from environment variables</a>.</li>
+<li><strong>Agent governance in the console.</strong> The Settings page edits the governance of the host (owner, criticality, lifecycle, location, labels) with the same fields as a probe, and writes it to the top-level <code>governance:</code> block of <code>agent.yaml</code>; the running agent follows the change without a restart, and <code>config check</code> validates the block. A block set from <code>${env:}</code> or <code>${file:}</code> references is shown read-only. See <a href="../../web-interface/#settings">Settings</a>.</li>
+<li><strong>Probe SDK: the state directory.</strong> <code>probesdk/state</code> gives a probe the directory where the agent keeps what must survive a restart (<code>state.Dir()</code>, <code>state.Path(name)</code>), so a probe that keeps a bookmark can default it beside the agent's identity.</li>
+</ul>
+<h3 id="command-line-and-status">Command line and status<a class="headerlink" href="#command-line-and-status" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><code>doctor</code> diagnoses an install in one pass.</strong> It aggregates the service state, the systemd unit and binary comparison, <code>config check</code>, the secret store, the licence expiry, the HTTP port, the connection test of every output, the probes' last cycle and the disk, prints a <code>fix</code> for each problem, and exits <code>1</code> on a warning and <code>2</code> on a failure. It needs no root and works with the service stopped. <code>--json</code> prints <code>senhub.cli.doctor/v1</code>. See <a href="../../cli/#doctor">Doctor</a>.</li>
+<li><strong><code>--json</code> output.</strong> <code>version</code>, <code>status</code>, <code>config check</code>, <code>config show</code>, <code>config set</code>, <code>config init</code> and <code>secret status</code> print one JSON object with a <code>senhub.cli.&lt;command&gt;/v1</code> schema identifier. Failures are JSON objects too. See <a href="../../cli/#json-output">JSON output</a>.</li>
+<li><strong>Idempotent provisioning commands.</strong> <code>config init</code>, <code>config set</code> and <code>install</code> run again on a machine already in the requested state write nothing and exit <code>3</code>. <code>config init --ok-if-unchanged</code> exits <code>0</code> in that case, for installers that treat any other code as a failure. <code>install</code> also repairs a drifted unit or a disabled service in place (exit <code>0</code>, no restart) and takes <code>--json</code> with a <code>changed</code> field.</li>
+<li><strong><code>status</code> works on every install.</strong> The agent answers <code>senhub-agent status</code> on a local channel (a Unix socket in its state directory, readable by the service account and root only; a named pipe restricted to administrators on Windows), whether or not the HTTP output is enabled. <code>status</code> asks the local channel first and falls back to the HTTP output. The channel is read-only. It reports probe health and failed outputs but not the per-probe metric counts, which only the HTTP cache holds.</li>
+<li><strong>Two agents on one host no longer describe each other twice.</strong> Each agent writes its own <code>service.instance.id</code> to <code>instance.id</code> in its state directory (<code>/var/lib/senhub-agent</code>, <code>C:\ProgramData\SenHub</code>), readable by other accounts only when the agent key is a random UUID, and by its owner alone otherwise. An agent that finds another agent's process listening on the host reuses that id instead of creating a second <code>service.instance</code>. When the file cannot be read, the previous behaviour applies.</li>
+</ul>
+<h3 id="probes">Probes<a class="headerlink" href="#probes" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Linux disk I/O.</strong> The <code>logicaldisk</code> probe reports, per whole block device, the bytes and operations read and written and the time spent on I/O (<code>system.disk.io</code>, <code>system.disk.operations</code>, <code>system.disk.io_time</code>), as cumulative counters, until now a Windows-only measurement. Partitions and <code>loop</code>, <code>ram</code>, <code>zram</code>, <code>fd</code> and <code>sr</code> devices are left out. They reach Prometheus, OTLP and Zabbix, which discovers one set of items per device.</li>
+<li><strong>Host clock.</strong> The <code>cpu</code> probe reports the host's time (<code>senhub.system.time</code>, seconds since the Unix epoch) on Linux and Windows, so a monitoring server can check clock drift: <code>time() - senhub_system_time_seconds</code> in Prometheus, and in Zabbix a <code>fuzzytime()</code> trigger whose tolerance is <code>{$SENHUB.CLOCK.DRIFT.MAX}</code> (60 seconds by default).</li>
+<li><strong>Linux host security signals in the <code>process</code> probe.</strong> <code>senhub.system.kernel.open_files</code> (file handles allocated, from <code>/proc/sys/fs/file-nr</code>, to read against <code>senhub.system.kernel.max_files</code>), <code>senhub.system.passwd.checksum</code> (CRC32 of <code>/etc/passwd</code>, a number that changes when the file changes) and <code>senhub.system.passwd.modified_timestamp</code> (its modification time). The generated Zabbix template carries a warning trigger on a checksum change; re-run <code>zabbix setup</code> to refresh it. Other platforms emit nothing new.</li>
+<li><strong>filetail reports where each tail stands.</strong> For every file followed, <code>senhub.filetail.read_offset</code> and <code>senhub.filetail.file_size</code> (Prometheus <code>senhub_filetail_read_offset_bytes</code> and <code>senhub_filetail_file_size_bytes</code>, attribute <code>log.file.path</code>) let a rule detect a frozen tail: the file grew and the offset did not move.</li>
+<li><strong>Redis.</strong> The probe reports the last RDB save, AOF rewrite and AOF write outcomes, the replication backlog (active, size, history), pub/sub channels and patterns, and, on a Sentinel, the status, replica count and sentinel count of each monitored master.</li>
+<li><strong>IPMI.</strong> Sensors that share a name (a Dell lists every CPU temperature as <code>Temp</code>) are no longer merged into one series; they read <code>Temp (CPU 1)</code>, <code>Temp (CPU 2)</code>. Power (<code>hw.power</code>, watts) and current (<code>senhub.hardware.current</code>, amperes) readings are reported, and a power supply's presence and redundancy ("Presence detected", "Fully Redundant", "Redundancy Lost") give its status.</li>
+<li><strong>IBM i: QHST, QSYSOPR and audit events reach the logs backend.</strong> The history log, message queue and audit journal collectors send each event as an OpenTelemetry log record (message text as body, the partition's own time as timestamp, IBM i severity 0-99 mapped to <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>ERROR3</code> or <code>FATAL</code>, attributes under <code>ibmi.*</code>). <code>history_log_min_severity</code> is the volume lever.</li>
+<li><strong>Redfish: the whole probe reaches Prometheus and OTLP.</strong> 100 of the 139 metrics the probe can emit had no definition and were dropped by those outputs (processors, memory modules, network, power, firmware, event-log counters, vendor storage readings). They are now declared with OTel names, units and types, and a test fails when the probe starts to emit a name that has none. PRTG channel names are unchanged. Memory modules, adapters, ports and cache levels also become separate series on the pull sinks instead of overwriting each other.</li>
+</ul>
+<h2 id="changes">Changes<a class="headerlink" href="#changes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>The <code>event</code> probe is free.</strong> It was listed with the Pro probes although its code ships in the open core and is registered in every build. It now runs without a licence, like <code>otlp_receiver</code>.</li>
+<li><strong>Failed log batches are kept on disk by default.</strong> The OTLP output's on-disk queue for event logs the collector could not take used to run only when <code>persistence.path</code> was set. It is now on for every install (package, MSI, container), in the state directory (<code>otlp-queue/</code>), and replays at boot and when the collector answers again. During an outage the agent can use up to 128 MiB of disk there (<code>logs_queue_max_bytes</code>). New <code>logs_queue_max_age</code> (24 hours) drops older batches at boot and every 10 minutes, counted as <code>dropped_by_age</code>. <code>persistence.enabled: false</code> or <code>SENHUB_LOG_QUEUE=false</code> turns the queue off; <code>SENHUB_LOG_QUEUE_RETENTION</code> and <code>SENHUB_LOG_QUEUE_MAX_BYTES</code> tune it. An unwritable state directory logs one warning and the agent runs without the queue. In a container, mount a persistent volume on the state directory for the queue to outlive a restart. An explicit <code>persistence.path</code> keeps working unchanged. See <a href="../../otlp/#logs-survive-an-outage">Logs survive an outage</a>.</li>
+<li><strong>SNMP: a polled device's routes link to their gateway.</strong> Routes read from a device's routing table reach the gateway's address with <code>next_hop_via</code>, as host routes already do, when the gateway is a public address, so a router's default route resolves to the same address node as a host's. Private (RFC1918, CGNAT, ULA), loopback, link-local and multicast gateways stay unlinked, because unrelated switches behind one private gateway would otherwise merge.</li>
+<li><strong>Redfish: <code>collections</code> is validated and says what it turns off.</strong> The list still replaces the default set, but an unknown name or an empty list now stops the probe at load with the accepted values, and the start-up log names the default subsystems the list disabled. A configuration that lists the six defaults is unchanged.</li>
+<li><strong>Redfish: names keep the BMC's own text.</strong> <code>hw.name</code> and the other name attributes in OTLP, Prometheus and Zabbix are no longer stripped of <code>, ; ( ) [ ] { } &lt; &gt; | \ " '</code> # &amp; ? =`. PRTG channel names and URL filters keep their cleaned form.</li>
+<li><strong>Zabbix links the host probes of each platform by default.</strong> <code>zabbix setup</code> linked five templates whatever the platform, so a Windows host collecting its services or its event log counter got no item for them. The probes marked <code>universal</code> in their definition (on Windows, <code>winservices</code> and <code>windows_eventlog</code> join the five) are linked per platform, <code>--all-probes</code> links every template, and a guard fails the build if a registered probe emits metrics and no template declares them.</li>
+<li><strong>Zabbix templates ship graphs and dashboards.</strong> The CPU, memory, logical disk and network templates carry graph prototypes (utilization, load, throughput, operations, queue, errors, per instance) declared in the probe definitions under <code>graphs:</code>, and a dashboard of their own graphs per template, listed under the host's Dashboards menu (7.0 export; the 6.0 export keeps the graphs only).</li>
+<li><strong>Windows services are discovered in Zabbix, with an "automatic service not running" trigger.</strong> The <code>winservices</code> probe reports each service's start type (<code>windows.service.start_type</code>); the template creates the state, status and start type of every service by discovery and raises a problem when a service set to start automatically has not been running for <code>{$SENHUB.WINSERVICES.GRACE}</code> (5 minutes). Discovery is filtered by <code>{$SENHUB.WINSERVICES.MATCHES}</code> and <code>{$SENHUB.WINSERVICES.NOT_MATCHES}</code>. The probe's own heartbeat is no longer declared once per service.</li>
+<li><strong>Zabbix triggers cover more of a host.</strong> Processor queue (Windows) and load (Linux), paging, disk queue and busy time, inodes, interface errors and discards, and a restart (new <code>system.uptime</code> from the <code>cpu</code> probe) join the usage and state triggers, each limit a <code>{$SENHUB.*}</code> macro with a documented default. Triggers are declared in the probe definitions under <code>triggers:</code>.</li>
+</ul>
+<h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Files left by a manual update are removed at the next start, with auto-update off too.</strong> The hidden <code>.&lt;exe&gt;.old</code> and <code>.&lt;exe&gt;.new</code> files that <code>senhub-agent update</code> leaves next to the binary on Windows were cleaned only when auto-update was enabled; the agent now removes them at every start.</p>
+</li>
+<li>
+<p><strong>Loopback connections on OS dynamic ports no longer create <code>depends_on</code> endpoints.</strong> A host talking to itself through a port the OS picks per request (for example <code>127.0.0.1:497xx</code> on Windows) produced one one-shot endpoint per connection. A loopback peer whose port is in the OS dynamic range (49152-65535 on Windows and macOS, the kernel <code>ip_local_port_range</code> on Linux, 32768-60999 by default) is now ignored; loopback services on fixed ports and all non-loopback peers are unchanged.</p>
+</li>
+<li>
+<p><strong>A monolithic install gets its administration key on the first start, and a key added while the agent runs is served.</strong> The key was minted before the monolithic <code>storage:</code> list was split into <code>strategies.d/</code>, so the http output came out without one; and the console routes were registered only at start, so a key added by a reload answered 404 until a restart. The split now runs first, a reload that adds the key rebuilds the routes, and <code>senhub-agent console</code> tells you to restart the service once when the running agent does not serve the console.</p>
+</li>
+<li>
+<p><strong>OTLP event logs are no longer lost when the collector is down and the agent restarts.</strong> The on-disk queue handed a queued batch back to the in-memory log pipeline and deleted its file at once, without waiting for the collector's answer: with the collector down a batch went from disk to memory and back in milliseconds, and what was in memory at shutdown was lost (1575 of 3833 lines in a measured outage with a restart). A queued batch is now sent directly and its file is removed only after the collector acknowledged it; while the collector is down new batches go straight to disk and the agent probes it on a retry clock of 5 seconds doubling to 5 minutes; and a normal stop writes the records still held in memory to the queue. Delivery is at-least-once (a record can arrive twice, and replayed records can arrive after newer ones). See <a href="../../otlp/#logs-survive-an-outage">Logs survive an outage</a>.</p>
+</li>
+<li>
+<p><strong>A per-module debug level now writes debug lines.</strong> Raising one module
+  (for example <code>probe.ibmi</code>) to <code>debug</code> through the log-level API or the
+  console answered <code>200</code> but wrote nothing, because the production logger
+  kept a global <code>info</code> floor. The module now logs at debug while every other
+  module stays at <code>info</code>. The setting is kept in memory: it survives a
+  configuration reload and is lost on an agent restart (see
+  <a href="../../troubleshooting/">Troubleshooting</a>).</p>
+</li>
+<li><strong>Oracle 23ai: login with a password longer than 30 characters.</strong> The
+  <code>oracle</code> probe could not log in to Oracle Database 23ai with a password of
+  more than 30 characters: every cycle reported <code>senhub.db.up = 0</code> with
+  <code>ORA-01017</code>, while SQL*Plus accepted the same credentials. The driver does
+  not announce long password support, which 23ai requires; the probe now does.
+  Passwords of 30 characters or fewer were never affected.</li>
+<li><strong>Zabbix links the host probes of each platform by default.</strong> <code>zabbix setup</code> linked five templates whatever the platform, so a Windows host collecting its services or its event log counter got no item for them. The probes marked <code>universal</code> in their definition (on Windows, <code>winservices</code> and <code>windows_eventlog</code> join the five) are linked per platform, <code>--all-probes</code> links every template, and a guard fails the build if a registered probe emits metrics and no template declares them (ent#109).</li>
+<li><strong>Zabbix templates ship graphs and dashboards.</strong> The CPU, memory, logical disk and network templates carry graph prototypes (utilization, load, throughput, operations, queue, errors, per instance) declared in the probe definitions under <code>graphs:</code>, and a dashboard of their own graphs per template, listed under the host's Dashboards menu (7.0 export; the 6.0 export keeps the graphs only) (ent#110).</li>
+<li><strong>Windows services are discovered in Zabbix, with an "automatic service not running" trigger.</strong> The <code>winservices</code> probe now reports each service's start type (<code>windows.service.start_type</code>); the template creates the state, status and start type of every service by discovery and raises a problem when a service set to start automatically has not been running for <code>{$SENHUB.WINSERVICES.GRACE}</code> (5 minutes). Discovery is filtered by <code>{$SENHUB.WINSERVICES.MATCHES}</code> and <code>{$SENHUB.WINSERVICES.NOT_MATCHES}</code>. The probe's own heartbeat is no longer declared once per service (ent#114).</li>
+<li><strong>Zabbix triggers cover more of a host.</strong> Processor queue (Windows) and load (Linux), paging, disk queue and busy time, inodes, interface errors and discards, and a restart (new <code>system.uptime</code> from the <code>cpu</code> probe) join the usage and state triggers, each limit a <code>{$SENHUB.*}</code> macro with a documented default. Triggers are declared in the probe definitions under <code>triggers:</code> (ent#115).</li>
+<li><strong>Windows: host identity is no longer re-read on every collection.</strong> The host information call, which walks every process on Windows, ran on each host-probe collection and each entity reconcile. It is now cached for 60 seconds, so a hostname change is still picked up within a minute (ent#578).</li>
+<li><strong>A <code>governance</code> change on a probe now reaches its entities on reload.</strong> Editing only the <code>governance</code> block of a probe was skipped as "already running", so its entities kept the old owner, criticality and location until an agent restart. The running probe now takes the new block at the next configuration reload and the next entity emission carries it, without restarting the probe (ent#577).</li>
+<li><strong>A restart with the OTLP collector down no longer warns about the last metrics.</strong> The stop logged a warning, "metric exporter shutdown: context deadline exceeded", for a final export the agent had no chance to deliver. When the last pushes already failed (or none was acknowledged for three intervals) the agent skips that export and logs one information line, "final metrics point not delivered: collector unreachable". A deadline or failure while the collector was healthy is still a warning.</li>
+<li><strong><code>version</code>, the status API and the console show the open-core commit.</strong> A build that compiles the open core from another checkout (the commercial edition) reported only its own commit, so the core source behind a binary could not be told. A new <code>Core commit</code> line in <code>senhub-agent version</code> (and <code>core_commit</code> in its JSON, <code>/info/system</code> and <code>status</code>) and a row in the console Agent card name it (ent#579).</li>
+<li><strong><code>filetail</code> keeps the lines a writer appends to a rotated file, and its self-metrics survive a bad path.</strong> After a rename-and-create rotation the probe left the old file at once, so lines the application still wrote to it until logrotate told it to reopen were lost. On Linux and macOS the probe now reads the old file to its end before switching, and keeps reading it for 30 seconds, each line once. On Windows it does not: holding the old file open could make the application's own rotation fail, so the old file is released at once and late writes to it are not read there, as in 0.6.1. A configured path that cannot be read no longer hides <code>senhub.filetail.records_emitted</code> and the offsets of the healthy files for the whole time the error lasts (ent#537).</li>
+<li><strong><code>filetail</code> notices a file emptied and refilled beyond what it had read.</strong> A log truncated and written past the read offset between two checks looked like an append, so its new start was skipped. The probe now compares the fingerprint of the file's first bytes with the one it recorded, and restarts from the first byte when they differ (ent#537).</li>
+<li><strong>Windows: an uninstall removes the install folder.</strong> <code>C:\Program Files\SenHub Agent</code> stayed behind when it held a file the agent had written after the installer laid its own, typically the hidden previous executable a self-update sets aside. The uninstall now removes the folder, and the agent deletes that leftover at its next start. <code>%ProgramData%\SenHub</code> follows its own rule, unchanged. The folder is removed only when it recorded a path containing <code>SenHub</code>, so an install placed by hand in a shared directory does not take that directory with it (ent#125).</li>
+<li><strong>PRTG: per-second counts keep their noun.</strong> A rate that is neither a byte nor a bit rate (requests, responses, transactions, packets) showed the unit <code>/s</code>, where 0.1.x showed <code>req/s</code>, <code>resp/s</code>, <code>tx/s</code> and <code>Pkts/s</code>. The label now comes from the OTel annotation when it names the thing counted, else from the display unit of the probe definition, and only then falls back to <code>/s</code>. The native PRTG speed units for byte and bit rates are unchanged (ent#571).</li>
+<li><strong><code>doctor</code> and <code>status</code> show the data a probe delivered.</strong> Read through the local status channel (the default since 0.6.2), every probe reported zero metrics and no last cycle, so <code>doctor</code> warned "enabled but no data collected yet" on probes that were collecting, such as <code>filetail</code> after a log rotation. The channel now carries the datapoints and the time of each probe's last delivery.</li>
+<li><strong>PRTG: bit rates are shown at the right scale again.</strong> Since 0.4.0 the agent sent bit-based rates as <code>SpeedNet</code> with a <code>speedsize</code>, but PRTG ignores <code>speedsize</code> and reads every <code>SpeedNet</code> value as bytes per second, so bit rates showed at the wrong scale (1588 Mbit/s displayed as 0.01 Mbit/s). The default is now a custom unit (<code>Gbit/s</code>, <code>Mbit/s</code>, <code>kbit/s</code>, <code>bit/s</code>) carrying the value unchanged, and <code>?speed=native</code> gives PRTG's native speed unit with the value converted to bytes per second. PRTG freezes a channel's unit when the sensor is created: delete and recreate the bit-rate channels (or the sensor) created by agents 0.4.0 to 0.6.1 to get the correct display. Sensors created by agents 0.1.x to 0.3.x are unaffected. See <a href="../../http-https/#prtg-speed-units">PRTG speed units</a>.</li>
+<li><strong>Linux: the agent no longer reports its own sandbox mounts as filesystems.</strong> Under the hardened systemd unit, the mounts the sandbox creates for the agent appeared as separate filesystems beside the real ones. The <code>logicaldisk</code> probe now reports one entry per device, so a host reports fewer <code>logicaldisk</code> series: the same devices, without the duplicate mount points.</li>
+</ul>
+<h2 id="footprint">Footprint<a class="headerlink" href="#footprint" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Less resident memory at rest.</strong> The agent parsed all 85 embedded probe
+  definitions and the seven console pages at start whatever was configured.
+  A definition is now parsed when its probe type first needs it, and a
+  console page when it is first opened. On the default configuration (four
+  host probes, HTTP and Zabbix outputs) the anonymous resident memory fell
+  from 17.5 to 11.8 MiB after half an hour. The rest of the resident size
+  is the executable's own pages, shared with the page cache.</li>
+<li><strong>Five recurring lines moved from <code>INFO</code> to <code>DEBUG</code>.</strong> Each fired on
+  every cycle of a healthy agent: <code>kubernetes: event cycle complete</code>,
+  <code>Successfully synced events</code> and <code>Server confirmed receipt of events</code>
+  (event output), <code>No update required</code> and <code>Auto-update skipped: expected
+  version is not newer than current</code> (auto-update). Start, stop,
+  configuration change and error lines are unchanged. Run with <code>--verbose</code>
+  or raise the module level to see them again.</li>
+<li><strong>Idle timers.</strong> The probe start retry no longer ticks every two minutes
+  while every probe is running; it arms a timer only while one is waiting
+  to be retried. The agent's instance id file is no longer replaced when it
+  already holds the id.</li>
+<li><strong><code>config check</code> and the loader now agree on a configuration with no storage strategy.</strong> <code>config check</code> reported "No storage strategies configured" as a warning (exit <code>1</code>) while the agent refuses to load such a file ("at least one storage strategy is required"). It is now an error (exit <code>2</code>), as is a storage entry with no name. A script that applies a configuration after <code>config check</code> (Ansible, the MSI) no longer lets one through that the agent then rejects.</li>
+<li><strong>A per-module debug level now writes debug lines.</strong> Raising one module (for example <code>probe.ibmi</code>) to <code>debug</code> through the log-level API or the console answered <code>200</code> but wrote nothing, because the production logger kept a global <code>info</code> floor. The module now logs at debug while every other module stays at <code>info</code>. The setting is kept in memory: it survives a configuration reload and is lost on an agent restart (see <a href="../../troubleshooting/">Troubleshooting</a>).</li>
+<li><strong>Oracle 23ai: login with a password longer than 30 characters.</strong> The <code>oracle</code> probe could not log in to Oracle Database 23ai with a password of more than 30 characters: every cycle reported <code>senhub.db.up = 0</code> with <code>ORA-01017</code>, while SQL*Plus accepted the same credentials. The driver does not announce long password support, which 23ai requires; the probe now does. Passwords of 30 characters or fewer were never affected.</li>
+<li><strong>IBM i: age gauges no longer read below zero.</strong> The scheduled-job and other age gauges stay at zero when the partition clock runs ahead of the reference.</li>
+<li><strong>Measured resource use.</strong> On the test bench with an OTLP output, the Linux agent uses about 1.05 s of CPU per hour (0.6.1: 1.28 s), sends about 1.1 MB per hour upstream, and the entity rail about 20 KB per hour. On Windows the CPU is about 3.3 s per hour (0.6.1: 1.7 s); this is under investigation (ent#578).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../next/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Next (unreleased)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Next (unreleased)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../0.6.1/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.6.1">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0.6.1
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 SenHub Agent contributors · Apache 2.0 · Built by Sensor Factory
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/senhub-io/senhub-agent" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://senhub.io" target="_blank" rel="noopener" title="senhub.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/rn-filter.js"></script>
+      
+        <script src="../../javascripts/dev-banner.js"></script>
+      
+    
+  </body>
+</html>
