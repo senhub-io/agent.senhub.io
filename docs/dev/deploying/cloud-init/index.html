@@ -3897,6 +3897,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.6.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.6.1/" class="md-nav__link">
         
   
@@ -4555,9 +4583,9 @@ ones to change.</p>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">      </span><span class="no">#!/bin/sh</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">      </span><span class="no">set -eu</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="no">SENHUB_VERSION="${SENHUB_VERSION:-0.6.2~beta.3}"  # exact package version: the pin; latest on https://packages.senhub.io/releases/beta/latest.json</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="no">SENHUB_VERSION="${SENHUB_VERSION:-0.6.2}"  # exact package version: the pin; latest on https://packages.senhub.io/releases/stable/latest.json</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">      </span><span class="no">SENHUB_EDITION="${SENHUB_EDITION:-senhub-agent-oss}"  # or senhub-agent</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">      </span><span class="no">SENHUB_CHANNEL="${SENHUB_CHANNEL:-beta}"       # stable once 0.6.2 is published</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">      </span><span class="no">SENHUB_CHANNEL="${SENHUB_CHANNEL:-stable}"     # or beta</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">      </span><span class="no">FINGERPRINT="B9987A2D4623796E19D3B185CA56F750354530AF"</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">      </span><span class="no">SRC=/var/lib/cloud/senhub</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">      </span><span class="no">CFG=/etc/senhub-agent</span>
@@ -4639,7 +4667,7 @@ ones to change.</p>
 agent runs that default, which pushes nowhere: nothing the check refuses
 ever runs.</p>
 <h2 id="pinning">Pinning<a class="headerlink" href="#pinning" title="Permanent link">&para;</a></h2>
-<p><code>SENHUB_VERSION</code> is the pin, in the package's spelling. The script installs the version you set (<code>0.6.2~beta.3</code> in the example) exactly and holds
+<p><code>SENHUB_VERSION</code> is the pin, in the package's spelling. The script installs the version you set (<code>0.6.2</code> in the example) exactly and holds
 the package (<code>apt-mark hold</code>), so <code>apt upgrade</code> and unattended upgrades do
 not move it. On RHEL, add the versionlock plugin to get the same effect:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-dnf-plugin-versionlock
@@ -4650,10 +4678,8 @@ not move it. On RHEL, add the versionlock plugin to get the same effect:</p>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>--showduplicates<span class="w"> </span>list<span class="w"> </span>senhub-agent-oss<span class="w">   </span><span class="c1"># RHEL family</span>
 </code></pre></div>
 <p>A beta is spelled <code>0.6.2~beta.3</code> in the packages and <code>0.6.2-beta.3</code> as a
-release tag. The example defaults to the beta channel because the stable
-channel is not published yet (its repository answers 404 until the
-0.6.2 release); it comes with the 0.6.2 release, and then
-<code>SENHUB_CHANNEL=stable</code> and <code>SENHUB_VERSION=0.6.2</code> apply.</p>
+release tag. The example uses the <code>stable</code> channel; set
+<code>SENHUB_CHANNEL=beta</code> and a beta version to try a beta.</p>
 <h2 id="licence">Licence<a class="headerlink" href="#licence" title="Permanent link">&para;</a></h2>
 <p>The free tier needs none: delete the <code>license.jwt</code> entry of <code>write_files</code>.
 For a licence, the token is a secret and <strong>user-data is not a safe place for
