@@ -5934,7 +5934,10 @@ in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):<
 <p><strong>Windows (ZIP install):</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">stop</span>
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">uninstall</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="nb">cd </span><span class="p">\</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span>
 </code></pre></div></p>
+<p><code>uninstall</code> does not delete the folder the ZIP was extracted to: the running binary cannot remove itself. Delete it by hand once the service is gone, as above.</p>
 <p><strong>Linux:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>stop
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>uninstall
