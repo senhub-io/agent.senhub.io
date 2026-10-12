@@ -5203,6 +5203,13 @@ series' tags.</p>
 <td>#</td>
 <td>Reads left in the subscription's Azure Resource Manager budget, as ARM reports it; a fleet of instances shows here how close it is to being throttled</td>
 </tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.read.failures</code></td>
+<td><code>azure_container_app_jobs_read_failures</code></td>
+<td reason="reason">Read Failures</td>
+<td>#</td>
+<td>Cumulative reads of the job's executions, replicas or output Azure refused, by cause: denied, not_found, throttled, refused, timeout, unreachable, no_replica. denied is almost always a role without Microsoft.App/jobs/*/read</td>
+</tr>
 </tbody>
 </table>
 <!-- schema:metrics:end -->
