@@ -4442,7 +4442,7 @@
 <h1 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h1>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:061d51983d3979e26288ba278b1cdf157c64fb706358f8e629cdd501f1976335 -->
+<!-- sha256:594aa2781c62f1c4a058e376decf87f8d97bd1fa6b3ba1921b42a0a1ea40c2cb -->
 
 <table>
 <thead>
@@ -4456,27 +4456,33 @@
 <tbody>
 <tr>
 <td><code>tenant_id</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Entra ID tenant (directory) ID</td>
+<td>Entra ID tenant (directory) ID; required unless SENHUB_AZURE_TENANT_ID is set for every Azure probe of the agent</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Application (client) ID of the app registration</td>
+<td>Application (client) ID of the app registration; required unless SENHUB_AZURE_CLIENT_ID is set for every Azure probe of the agent</td>
 </tr>
 <tr>
 <td><code>client_secret</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Client secret of the app registration. A secret: reference it with <code>${secret:…}</code>, <code>${env:…}</code> or <code>${file:…}</code> rather than writing it in the file</td>
+<td>Client secret of the app registration; one of client_secret, client_secret_file, SENHUB_AZURE_CLIENT_SECRET or SENHUB_AZURE_CLIENT_SECRET_FILE is required, in that order of precedence. A secret: reference it with <code>${secret:…}</code>, <code>${env:…}</code> or <code>${file:…}</code> rather than writing it in the file</td>
+</tr>
+<tr>
+<td><code>client_secret_file</code></td>
+<td>No</td>
+<td>-</td>
+<td>File holding the client secret (a mounted secret, for example); read when the probe is configured. Used when client_secret is not set</td>
 </tr>
 <tr>
 <td><code>subscription_id</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Subscription that holds the Container App</td>
+<td>Subscription that holds the Container App; required unless SENHUB_AZURE_SUBSCRIPTION_ID is set for every Azure probe of the agent</td>
 </tr>
 <tr>
 <td><code>resource_group</code></td>
@@ -4831,6 +4837,84 @@ ten minutes: that is normal.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/prtg/metrics/ca"</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8080/api/{agentkey}/nagios/metrics/ca"</span>
 </code></pre></div>
+<h2 id="shared-credentials">Shared credentials<a class="headerlink" href="#shared-credentials" title="Permanent link">&para;</a></h2>
+<p>To avoid repeating the identity of the app registration in every entry, set it once in the agent's environment. It serves both Azure probes (<code>azure_container_apps</code> and <code>azure_container_app_jobs</code>). A probe that sets a key itself keeps its own value for that key.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Replaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SENHUB_AZURE_TENANT_ID</code></td>
+<td><code>tenant_id</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_ID</code></td>
+<td><code>client_id</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_SECRET</code></td>
+<td><code>client_secret</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_SECRET_FILE</code></td>
+<td>path of a file holding the secret (a mounted secret, for example)</td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_SUBSCRIPTION_ID</code></td>
+<td><code>subscription_id</code></td>
+</tr>
+</tbody>
+</table>
+<p>The secret is taken from the first of these that is set: <code>client_secret</code>, <code>client_secret_file</code> (a probe key naming a file), <code>SENHUB_AZURE_CLIENT_SECRET</code>, <code>SENHUB_AZURE_CLIENT_SECRET_FILE</code>. A secret file that cannot be read is an error, not a fallback. The variables are read when the probe is configured, so changing them needs a restart.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">ca</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_apps</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">discovery</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">caj</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_app_jobs</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">discovery</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+</code></pre></div>
+<h2 id="checking-the-setup">Checking the setup<a class="headerlink" href="#checking-the-setup" title="Permanent link">&para;</a></h2>
+<p><code>senhub-agent check azure</code> verifies, without changing anything, that the credentials of the configured Azure probes (<code>azure_container_apps</code> and <code>azure_container_app_jobs</code>) can do what the probes need. It prints one verdict per line and never prints a secret.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>senhub-agent<span class="w"> </span>check<span class="w"> </span>azure<span class="w">               </span><span class="c1"># every enabled Azure probe in the installed configuration</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>senhub-agent<span class="w"> </span>check<span class="w"> </span>azure<span class="w"> </span>--probe<span class="w"> </span>caj<span class="w">   </span><span class="c1"># one probe, by name</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>senhub-agent<span class="w"> </span>check<span class="w"> </span>azure<span class="w"> </span>/path/to/agent.yaml
+</code></pre></div>
+<p>For each probe it checks, in order:</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>What it verifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>token</code></td>
+<td>Entra ID issues a token for the tenant, client ID and secret of the probe</td>
+</tr>
+<tr>
+<td><code>subscription</code></td>
+<td>The subscription can be read. A <code>WARN</code> here is normal when the role is scoped to a resource group</td>
+</tr>
+<tr>
+<td><code>apps</code> / <code>jobs</code></td>
+<td>The application (or, with <code>discovery</code>, every application) and the job are found, grouped by resource group</td>
+</tr>
+<tr>
+<td><code>permission</code></td>
+<td>Each action the probe needs is granted at its scope, from the effective permissions Azure reports for the credential</td>
+</tr>
+</tbody>
+</table>
+<p>The actions checked are <code>Microsoft.App/containerApps/read</code>, <code>.../revisions/read</code>, <code>.../revisions/replicas/read</code> and <code>.../getAuthtoken/action</code> for applications, and <code>Microsoft.App/jobs/read</code>, <code>Microsoft.App/jobs/*/read</code> and <code>Microsoft.App/jobs/getAuthtoken/action</code> for jobs. A role that only grants <code>jobs/executions/read</code> is reported as missing <code>jobs/*/read</code>: the verdicts would look right while no log line ever arrived.</p>
+<p>The command exits with <code>0</code> when every required item passes and <code>1</code> when one fails (or when no Azure probe is configured), so it can gate a deployment script. Like the other commands, it runs as root or administrator.</p>
+<h2 id="dashboards">Dashboards<a class="headerlink" href="#dashboards" title="Permanent link">&para;</a></h2>
+<p>A ready-made Grafana dashboard for this probe, <code>azure-container-apps.json</code>, is provided in <a href="https://github.com/senhub-io/senhub-agent/tree/master/docs/grafana"><code>docs/grafana/</code></a> (see its README for the data path it expects). It covers coverage (applications followed out of found), per-application health, scan failures by reason, record volume and logs filtered by application and severity.</p>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
 OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
@@ -4948,6 +5032,41 @@ series' tags.</p>
 <td reason="reason">Scan Failures</td>
 <td>#</td>
 <td>Cumulative replica scans Azure refused, by cause: denied, not_found, throttled, refused, timeout, unreachable. Reachability alone reads the same for a wrong secret, a deleted application and a control plane pushing back</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_apps.discovery.found</code></td>
+<td><code>azure_container_apps_discovery_found</code></td>
+<td>Applications Found</td>
+<td>#</td>
+<td>Applications the last successful subscription listing returned; found = followed + left out</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_apps.discovery.followed</code></td>
+<td><code>azure_container_apps_discovery_followed</code></td>
+<td>Applications Followed</td>
+<td>#</td>
+<td>Applications this instance follows after the filters and the max_apps cap</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_apps.discovery.left_out</code></td>
+<td><code>azure_container_apps_discovery_left_out</code></td>
+<td reason="reason">Applications Left Out</td>
+<td>#</td>
+<td>Applications found but not followed, by cause: filter (include, exclude, resource_groups) or max_apps</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_apps.discovery.last_age</code></td>
+<td><code>azure_container_apps_discovery_last_age</code></td>
+<td>Since Last Discovery</td>
+<td>s</td>
+<td>Seconds since the last successful subscription listing; climbs while discovery fails</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_apps.discovery.failures</code></td>
+<td><code>azure_container_apps_discovery_failures</code></td>
+<td reason="reason">Discovery Failures</td>
+<td>#</td>
+<td>Cumulative subscription listings Azure refused, by cause: denied, not_found, throttled, refused, timeout, unreachable</td>
 </tr>
 </tbody>
 </table>

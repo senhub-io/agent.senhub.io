@@ -3794,6 +3794,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fixes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4351,6 +4362,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fixes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4390,6 +4412,14 @@
 <p>Changes land here as they are merged. The 0.6.3 corrective release collects them.</p>
 <div class="rn-filter"></div>
 
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Official Grafana dashboards for Azure Container Apps and Container App Jobs.</strong> <code>azure-container-apps.json</code> (coverage, per-application health, scan failures by reason, volume, logs) and <code>azure-container-app-jobs.json</code> (executions by status, duration, last run, logs) in <code>docs/grafana/</code>. They read the per-application metrics, not log counts.</li>
+<li><strong><code>senhub-agent check azure</code>.</strong> A read-only command that checks, with the credentials of the configured Azure probes, the token, the subscription, the applications and jobs found, and each permission the probes need, one verdict per line; it exits non-zero when a required item fails.</li>
+<li><strong>Container Apps discovery reports its coverage.</strong> <code>discovery.found</code>, <code>discovery.followed</code> and <code>discovery.left_out</code> (by <code>filter</code> or <code>max_apps</code>) read "26 of 26" from metrics; <code>discovery.last_age</code> and <code>discovery.failures</code> show a listing that stopped working. Under discovery, the volume counters and scan failures are given per application, and an application never read no longer reports zero replicas.</li>
+<li><strong>Container App Jobs discovery.</strong> A <code>discovery:</code> block on <code>azure_container_app_jobs</code> follows every job of a subscription (resource groups, include and exclude patterns, cap), each with its own executions file; jobs that appear or disappear are picked up at the next enumeration. When executions come back without replicas, the log names the missing <code>Microsoft.App/jobs/*/read</code> permission once per job.</li>
+<li><strong>Shared Azure credentials.</strong> <code>SENHUB_AZURE_TENANT_ID</code>, <code>SENHUB_AZURE_CLIENT_ID</code>, <code>SENHUB_AZURE_CLIENT_SECRET</code> (or <code>_FILE</code>) and <code>SENHUB_AZURE_SUBSCRIPTION_ID</code> give the identity once for every Azure probe; a probe's own value still wins key by key.</li>
+</ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>doctor resolves <code>${env:}</code> with the service's environment.</strong> It reads <code>Environment=</code> and <code>EnvironmentFile=</code> from the systemd unit and its drop-ins (as root). A reference it cannot resolve outside the service is a warning that names the variable, never a failure.</li>
@@ -4401,7 +4431,7 @@
 <li><strong><code>logicaldisk</code> stops warning about <code>/run/user/*</code> every cycle.</strong> A per-user runtime directory the service account cannot read is skipped quietly; any other mount it cannot read is named once.</li>
 <li><strong>A Redis TLS failure names the handshake.</strong> The <code>redis</code> probe runs the TLS handshake right after connecting and reports <code>TLS handshake with &lt;host&gt;:&lt;port&gt; failed: ...</code> instead of an <code>AUTH send failed</code> that hid the cause.</li>
 <li><strong>Container and Azure pages corrected.</strong> Image tags move to 0.6.3; the container page explains <code>SENHUB_HOST_ID</code> and the upgrade trap of an existing <code>agent.yaml</code>; the Container Apps page states that <code>discovery</code> excludes <code>app</code> and <code>resource_group</code>; both Azure pages use the probe names <code>CA</code> and <code>CAJ</code>, the jobs page gains a "From environment variables" section, and the configuration page documents that <code>${env:}</code> inside a <code>SENHUB_PROBE_*</code> value is not expanded and that the variables win key by key.</li>
-<li><strong>Jobs probe docs.</strong> <code>bookmark_path</code> defaults to <code>&lt;probe name&gt;.executions</code> in the state directory, and an entry without <code>app</code> or with <code>discovery:</code> is refused.</li>
+<li><strong>Jobs probe docs.</strong> <code>bookmark_path</code> defaults to <code>&lt;probe name&gt;.executions</code> in the state directory, and an entry without <code>app</code> or <code>discovery:</code> is refused.</li>
 <li><strong>One <code>host.name</code> on every signal.</strong> Metrics, the OTLP resource, the host entity, the systemd unit entities and the info endpoint all use the same canonical host name.</li>
 <li><strong>Every log record carries an OTel severity number.</strong> Whatever level word a source writes, the number is derived (the text stays as written); a journald entry without a priority is informational instead of an emergency.</li>
 <li><strong>Relative paths follow the configuration directory.</strong> <code>bookmark_path</code> and the <code>*_file</code> parameters (CA, certificate, key, password files), and <code>config/nagios.yaml</code>, are resolved against the directory of the configuration, not the working directory; <code>config check</code> from another directory no longer reports a false permission error.</li>
