@@ -4407,6 +4407,7 @@
 <li><strong>Relative paths follow the configuration directory.</strong> <code>bookmark_path</code> and the <code>*_file</code> parameters (CA, certificate, key, password files), and <code>config/nagios.yaml</code>, are resolved against the directory of the configuration, not the working directory; <code>config check</code> from another directory no longer reports a false permission error.</li>
 <li><strong>doctor flags a stale <code>senhub-agent</code> on the PATH.</strong> When another binary on the PATH reports a version different from the running service, doctor warns, naming both paths and versions and pointing to the unit's binary.</li>
 <li><strong>Identity re-keys are announced once, not at every start.</strong> The retirement of the legacy database and service identities (0.5.4 re-key) was repeated during the first cycles of every agent start, which a topology backend read as the producer reporting the node gone. A marker file in the state directory now records that it was announced; if the directory is not writable the announcement repeats and one warning is logged.</li>
+<li><strong>host.id is always lowercase.</strong> The <code>/etc/machine-id</code> fallback was not lowercased; the same id in two cases would be two hosts downstream (no host in production was affected).</li>
 </ul>
 
 
