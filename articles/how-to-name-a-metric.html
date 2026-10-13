@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to name a metric so tools read it right — SenHub Agent</title>
+    <meta name="description" content="The naming rules Prometheus and OpenTelemetry share, what a wrong name does downstream, and how we keep the agent from drifting away from them." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://agent.senhub.io/articles/how-to-name-a-metric.html" />
+    <meta property="og:title" content="How to name a metric so tools read it right" />
+    <meta property="og:description" content="The naming rules Prometheus and OpenTelemetry share, what a wrong name does downstream, and how we keep the agent from drifting away from them." />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SenHub Agent" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://agent.senhub.io/articles/how-to-name-a-metric.html" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to name a metric so tools read it right" />
+    <meta name="twitter:description" content="The naming rules Prometheus and OpenTelemetry share, and what a wrong name does downstream." />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
+    <style>
+      :root {
+        --bg: #fbfbfd; --panel: #ffffff; --panel-2: #f5f6fa;
+        --ink: #212529; --muted: #5b6472;
+        --accent: #fcbe36; --accent-dark: #f0ad17; --accent-ink: #212529;
+        --cyan: #00caf6; --cyan-dark: #0091bd; --line: #e7e9ef;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
+          --ink: #eceef3; --muted: #99a2b1;
+          --accent-dark: #ffd066; --accent-ink: #1a1c21;
+          --cyan-dark: #53d9f7; --line: #2c313a;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
+        --ink: #eceef3; --muted: #99a2b1;
+        --accent-dark: #ffd066; --accent-ink: #1a1c21;
+        --cyan-dark: #53d9f7; --line: #2c313a;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--bg); color: var(--ink);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 780px; margin: 0 auto; padding-inline: 24px; }
+      .col { max-width: 660px; }
+      a { color: var(--cyan-dark); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      a:focus-visible { outline: 2px solid var(--cyan-dark); outline-offset: 3px; border-radius: 3px; }
+      h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+      .nav { border-bottom: 1px solid var(--line); background: var(--panel); }
+      .nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 14px; }
+      .brand {
+        display: flex; align-items: center; gap: 10px;
+        font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
+      }
+      .brand:hover { text-decoration: none; }
+      .brand .mark { width: 30px; height: 30px; flex: none; display: block; }
+      .brand .bt span { color: var(--muted); font-weight: 500; }
+      .nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+      .nav .links .on { color: var(--ink); font-weight: 650; }
+
+      article { padding-block: 48px 20px; }
+      .crumb { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+      article h1 {
+        font-size: clamp(28px, 4.4vw, 38px); font-weight: 800;
+        letter-spacing: -0.022em; line-height: 1.15;
+      }
+      .meta {
+        margin-top: 14px; font-size: 13.5px; color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+      }
+      .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+      .standfirst {
+        margin: 26px 0 0; font-size: 20px; line-height: 1.55; color: var(--muted);
+      }
+      article p { margin: 22px 0 0; }
+      article h2 {
+        margin: 46px 0 0; font-size: 21px; font-weight: 750; letter-spacing: -0.012em;
+      }
+      article h2 + p { margin-top: 12px; }
+      strong { font-weight: 680; }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.87em; background: var(--panel-2); padding: 1px 5px;
+        border-radius: 4px; border: 1px solid var(--line);
+      }
+
+      .shell {
+        margin-top: 26px; border: 1px solid var(--line); border-radius: 10px;
+        background: var(--panel-2); overflow: hidden;
+      }
+      .shell-bar {
+        font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em;
+        text-transform: uppercase; color: var(--muted);
+        padding: 9px 16px; background: var(--panel);
+        border-bottom: 1px solid var(--line);
+      }
+      .shell pre {
+        margin: 0; padding: 14px 16px; overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px; line-height: 1.65; color: var(--ink);
+      }
+      .shell .p { color: var(--accent-dark); font-weight: 700; }
+      .shell .k { color: var(--cyan-dark); }
+      .shell .c { color: var(--muted); }
+      .shell .bad { color: #c2410c; }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .shell .bad { color: #fb923c; }
+      }
+      :root[data-theme="dark"] .shell .bad { color: #fb923c; }
+      .cap { margin: 10px 0 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+      .shell .cap {
+        margin: 0; padding: 11px 16px 13px;
+        border-top: 1px solid var(--line); background: var(--panel);
+      }
+
+      .tbl-wrap { margin-top: 26px; overflow-x: auto; }
+      table {
+        border-collapse: collapse; width: 100%; font-size: 12.5px;
+        table-layout: fixed;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      th, td {
+        text-align: left; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--line);
+        overflow-wrap: anywhere; vertical-align: top;
+      }
+      th {
+        font-family: system-ui, sans-serif; font-size: 11.5px; font-weight: 800;
+        letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+      }
+      td.was { color: var(--muted); }
+      td.job {
+        font-family: system-ui, sans-serif; font-size: 13.5px; color: var(--muted);
+        width: 23%;
+      }
+      .after {
+        margin-top: 50px; padding-top: 22px; border-top: 1px solid var(--line);
+        font-size: 15px; color: var(--muted);
+      }
+      footer { border-top: 1px solid var(--line); padding-block: 24px 40px; margin-top: 40px; }
+      footer p { margin: 0; font-size: 14px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="rbt" viewBox="0 0 120 120">
+    <rect x="57" y="20" width="6" height="20" rx="3" fill="#4a4a4a"/>
+    <circle cx="60" cy="18" r="9" fill="#00caf6"/>
+    <rect x="14" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="90" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="24" y="40" width="72" height="64" rx="16" fill="#4a4a4a"/>
+    <rect x="33" y="49" width="54" height="46" rx="9" fill="#ededed"/>
+    <circle cx="49" cy="66" r="7" fill="#fcbe36"/>
+    <circle cx="71" cy="66" r="7" fill="#fcbe36"/>
+    <rect x="42" y="80" width="36" height="11" rx="2" fill="none" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="51" y1="80" x2="51" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="60" y1="80" x2="60" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="69" y1="80" x2="69" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+  </symbol>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>
+      <span class="bt">SenHub <span>Agent</span></span>
+    </a>
+    <div class="links">
+      <a href="/docs/latest/">Docs</a>
+      <a class="on" href="/articles.html">Articles</a>
+      <a href="/news.html">Releases</a>
+      <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <article class="col">
+    <div class="crumb"><a href="/articles.html">Articles</a></div>
+    <h1>How to name a metric so tools read it right</h1>
+    <div class="meta">
+      <span>13 October 2026</span><span class="dot"></span>
+      <span>Conventions</span>
+    </div>
+
+    <p class="standfirst">
+      Nobody reads a metric name except machines. When one is wrong they do not fail.
+      They answer, and the number is wrong.
+    </p>
+
+    <p>
+      <code>rate()</code> decides what to do by looking at a suffix. A dashboard divides
+      by a thousand because of a word. A Zabbix item key is built from the name and then
+      collects history under it for months. Nothing in that chain validates the name, so
+      a name that lies produces a graph instead of an error.
+    </p>
+
+    <p>
+      Prometheus and OpenTelemetry ask for the same things here. We got them wrong in
+      0.6.0 and fixed them in 0.6.1, which is where the examples below come from.
+    </p>
+
+    <h2>Base units</h2>
+
+    <p>
+      Seconds and bytes. The linter carries the table, and it is short:
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">every token that must be a base unit</div>
+<pre><span class="k">amperes bytes celsius grams joules kelvin meters metres seconds volts</span>
+
+<span class="c">// and the ones that are not, with what they must become</span>
+minutes <span class="p">→</span> seconds    hours <span class="p">→</span> seconds    days <span class="p">→</span> seconds
+weeks   <span class="p">→</span> seconds    bits  <span class="p">→</span> bytes      calories <span class="p">→</span> joules
+fahrenheit <span class="p">→</span> celsius
+
+<span class="c">// each one again behind every SI and IEC prefix, so milliseconds,</span>
+<span class="c">// microseconds, nanoseconds and kibibytes are caught too</span>
+pico nano micro milli centi deci deca hecto
+kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
+    </div>
+
+    <p>
+      The unit is implicit in the name, so it ends up in every threshold and every panel
+      division written against it. When it varies between exporters, the conversion moves
+      into other people's queries. An alert ported from an exporter that works in seconds
+      onto one that works in milliseconds is wrong by a factor of a thousand and looks
+      fine.
+    </p>
+
+    <p>
+      A certificate expiry in days is the case that survives review, because it reads
+      well. The machine does not read it.
+    </p>
+
+    <h2><code>_total</code> declares a type</h2>
+
+    <p>
+      Prometheus reserves <code>_total</code> for counters, the monotonic series you take
+      a <code>rate()</code> of. A gauge carrying that suffix is read as a counter by
+      everything downstream.
+    </p>
+
+    <p>
+      A gauge counting jobs, named <code>..._total</code>, reads 12, then 9, then 14.
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">what rate() does with a gauge it believes is a counter</div>
+<pre>12  <span class="p">→</span>  9  <span class="p">→</span>  14
+
+<span class="c"># a counter cannot go down, so the drop to 9 is read as a</span>
+<span class="c"># reset, and the 12 counted before it is added back in</span>
+
+<span class="bad">reported increase:  (14 - 12) + 12  =  14</span>
+<span class="c">actual change:                        +2 jobs</span></pre>
+      <p class="cap">
+        Nothing errors. The query returns, the panel draws, the alert evaluates.
+      </p>
+    </div>
+
+    <p>
+      Our own audit turned up something we had not expected. <code>.total</code> was
+      standing for three different things at once, so the work was not renaming, it was
+      deciding what each one meant:
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>what it meant</th><th>was</th><th>is</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="job">how many exist</td>
+            <td class="was">rabbitmq.queues.total</td>
+            <td>rabbitmq.queue.count</td>
+          </tr>
+          <tr>
+            <td class="job">how much there can be</td>
+            <td class="was">proxmox.node.memory.total</td>
+            <td>proxmox.node.memory.limit</td>
+          </tr>
+          <tr>
+            <td class="job">how big it is</td>
+            <td class="was">oracle.sga.total</td>
+            <td>oracle.sga.size</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      None of them looked wrong next to the code that produced it.
+    </p>
+
+    <h2>The unit once, spelled out</h2>
+
+    <p>
+      Abbreviations are rejected on sight: <code>s</code>, <code>ms</code>,
+      <code>us</code>, <code>ns</code>, <code>sec</code>, <code>kb</code>,
+      <code>mb</code>. And a generated name that already carries its unit gets the
+      canonical one appended on top of it.
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">names that grew one commit at a time</div>
+<pre><span class="bad">senhub_redis_cmd_usec_microseconds_total</span>
+<span class="c">  an abbreviation, a non-base unit, and a counter suffix on a gauge</span>
+
+<span class="bad">senhub_redis_ops_per_sec_per_second</span>
+<span class="c">  the source name already said per_sec; the generator added the rest</span></pre>
+    </div>
+
+    <h2>Where the rules collide</h2>
+
+    <p>
+      OpenTelemetry names a gauge that counts objects <code>&lt;object&gt;.count</code>.
+      Prometheus reserves <code>_count</code> for histograms and summaries. We keep the
+      OpenTelemetry spelling and exempt it, rather than invent a third name that neither
+      ecosystem uses.
+    </p>
+
+    <p>
+      A linter works on words, so it will be wrong about some of yours. In
+      <code>senhub_netscaler_ns_throughput_bytes_per_second</code>, <code>ns</code> is
+      NetScaler's own word for the appliance, not nanoseconds. The exemption is written
+      where the rule is applied:
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">an exemption that names itself</div>
+<pre><span class="c">// promlintExemptAbbreviation lists names where promtool reads a</span>
+<span class="c">// token as an abbreviated unit but the token is a vendor word:</span>
+<span class="c">// `ns` is NetScaler's own name for the appliance-wide scope,</span>
+<span class="c">// not nanoseconds.</span>
+<span class="k">func</span> promlintExemptAbbreviation(name, token <span class="k">string</span>) <span class="k">bool</span> {
+    <span class="k">return</span> token == <span class="p">"ns"</span> &amp;&amp; strings.HasPrefix(name, <span class="p">"senhub_netscaler_ns_"</span>)
+}</pre>
+      <p class="cap">
+        One name, one reason. Switching the check off for a package, or for the whole
+        abbreviation class, is how a convention stops being applied.
+      </p>
+    </div>
+
+    <h2>Checking it</h2>
+
+    <p>
+      Prometheus ships the linter and it reads an exposition on standard input.
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">the one command</div>
+<pre><span class="p">$</span> curl -s localhost:9100/metrics | promtool check metrics</pre>
+    </div>
+
+    <p>
+      Run it. If your exporter is more than a year old it will find something.
+    </p>
+
+    <p>
+      An audit fixes the names once. Nobody chose the drift in the first place, so it
+      comes back. We turned the lint into a test that walks every probe definition and
+      the agent's own metrics, derives the Prometheus name each one will be exposed
+      under, and applies the rules to it:
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">what the guard says when a name drifts</div>
+<pre><span class="bad">--- FAIL: TestExposedNamesPassPromlint</span>
+    veeam/jobs: senhub_veeam_jobs_total: a gauge ends in _total,
+      which is reserved for counters
+    redis/cmd_usec: senhub_redis_cmd_usec_microseconds_total:
+      unit microseconds is not the base unit seconds
+    redis/ops: senhub_redis_ops_per_sec_per_second:
+      the rate unit appears twice</pre>
+    </div>
+
+    <p>
+      A second test feeds that guard one name of each broken class and fails if they get
+      through. A naming guard is a handful of string comparisons, and it will go on
+      passing quietly the day one of them stops matching.
+    </p>
+
+    <h2>If you have to rename</h2>
+
+    <p>
+      We did not export both names for a transition period. It doubles the series count
+      for everyone, and nobody migrates while the old name still works.
+    </p>
+
+    <p>
+      An alert left on an old name does not go red. The series it reads no longer exists,
+      so nothing is evaluated and nothing is signalled. The check is arithmetic: compare
+      the number of series a rule reads before and after.
+    </p>
+
+    <p>
+      A fleet runs both versions during a rollout, so the bridging query needs its
+      aggregation.
+    </p>
+
+    <div class="shell">
+      <div class="shell-bar">reading both forms during an upgrade</div>
+<pre>min by (httpcheck_target) (
+  senhub_httpcheck_tls_expiry_seconds / 86400
+  <span class="k">or</span> senhub_httpcheck_tls_expiry_days
+) &lt; 14</pre>
+      <p class="cap">
+        The <code>or</code> takes whichever form exists. For a few minutes after a
+        restart both are current for the same target, and without the
+        <code>min by</code> every target fires twice.
+      </p>
+    </div>
+
+    <div class="after">
+      These rules landed in the agent in 0.6.1, which renamed a list of series and
+      converted their units. The full table, probe by probe, and what it means for
+      Prometheus, Zabbix, PRTG and Nagios, is in the
+      <a href="/docs/latest/whats-new/0.6.1/">0.6.1 release note</a>.
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><a href="/articles.html">All articles</a> · <a href="/news.html">Releases</a> · <a href="/docs/latest/">Documentation</a></p>
+  </div>
+</footer>
+
+  </body>
+</html>
