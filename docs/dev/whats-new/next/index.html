@@ -4419,6 +4419,7 @@
 <li><strong>Container Apps discovery reports its coverage.</strong> <code>discovery.found</code>, <code>discovery.followed</code> and <code>discovery.left_out</code> (by <code>filter</code> or <code>max_apps</code>) read "26 of 26" from metrics; <code>discovery.last_age</code> and <code>discovery.failures</code> show a listing that stopped working. Under discovery, the volume counters and scan failures are given per application, and an application never read no longer reports zero replicas.</li>
 <li><strong>Container App Jobs discovery.</strong> A <code>discovery:</code> block on <code>azure_container_app_jobs</code> follows every job of a subscription (resource groups, include and exclude patterns, cap), each with its own executions file; jobs that appear or disappear are picked up at the next enumeration. When executions come back without replicas, the log names the missing <code>Microsoft.App/jobs/*/read</code> permission once per job.</li>
 <li><strong>Shared Azure credentials.</strong> <code>SENHUB_AZURE_TENANT_ID</code>, <code>SENHUB_AZURE_CLIENT_ID</code>, <code>SENHUB_AZURE_CLIENT_SECRET</code> (or <code>_FILE</code>) and <code>SENHUB_AZURE_SUBSCRIPTION_ID</code> give the identity once for every Azure probe; a probe's own value still wins key by key.</li>
+<li><strong>Log volume per Container App.</strong> <code>senhub.azure_container_apps.records.volume</code> counts the bytes of published log bodies per application, so the volume compares with what Log Analytics bills; the official dashboard shows it per second and over the range.</li>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4442,6 +4443,7 @@
 <li><strong>A stalled update download is abandoned.</strong> An archive download that receives no byte for 60 seconds is cancelled and retried like a cut stream, instead of waiting indefinitely.</li>
 <li><strong>No false alarms when the configuration is split.</strong> The first start of a monolithic <code>agent.yaml</code> no longer logs the "Legacy monolithic config" warning just before splitting it, and the <code>*.install-default</code> files set aside by the split are no longer reported as "Files not loaded".</li>
 <li><strong>host.id is always lowercase.</strong> The <code>/etc/machine-id</code> fallback was not lowercased; the same id in two cases would be two hosts downstream (no host in production was affected).</li>
+<li><strong>The agent's own CPU time is what it used.</strong> <code>senhub.agent.process.cpu.time</code> read the CPU available to the process (GOMAXPROCS over its lifetime), so an idle agent in a 2-CPU container showed 2 CPUs busy; it now reads user plus system time from the OS.</li>
 </ul>
 
 
