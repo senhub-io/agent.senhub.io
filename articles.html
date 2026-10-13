@@ -145,16 +145,16 @@
 <div class="wrap">
   <div class="list">
 
-    <a class="post" href="/articles/metric-names-are-an-api.html">
+    <a class="post" href="/articles/how-to-name-a-metric.html">
       <div class="meta">
         <span>13 October 2026</span><span class="dot"></span><span>Conventions</span>
       </div>
-      <h2>Metric names are an API</h2>
+      <h2>How to name a metric so tools read it right</h2>
       <p>
-        We ran <code>promtool check metrics</code> against our own output and it failed:
-        durations in microseconds, throughputs in bits per second, and gauges wearing a
-        counter's suffix. Fixing it meant renaming series our users had already built
-        dashboards on — without a transition period, and here is why.
+        Nobody reads a metric name except machines, and a wrong one does not make them
+        fail — it makes them answer confidently with a number nobody measured. The
+        three rules Prometheus and OpenTelemetry agree on, what breaking each one does
+        downstream, and how to keep a codebase from drifting back.
       </p>
       <div class="go">Read →</div>
     </a>
