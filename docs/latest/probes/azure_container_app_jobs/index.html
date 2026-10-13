@@ -2431,6 +2431,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#from-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discovering-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovering jobs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2499,6 +2521,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared credentials
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-the-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking the setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3903,6 +3958,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.6.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.6.2/" class="md-nav__link">
         
   
@@ -4445,6 +4528,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#from-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From environment variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discovering-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovering jobs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4517,6 +4622,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#shared-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared credentials
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-the-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking the setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#metric-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4566,7 +4704,7 @@
 </ul>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># probes.d/41-azure-container-app-jobs.yaml</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nightly-import</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">caj</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_app_jobs</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">tenant_id</span><span class="p">:</span><span class="w"> </span><span class="s">"00000000-0000-0000-0000-000000000000"</span>
@@ -4575,14 +4713,55 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">subscription_id</span><span class="p">:</span><span class="w"> </span><span class="s">"00000000-0000-0000-0000-000000000000"</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">resource_group</span><span class="p">:</span><span class="w"> </span><span class="s">"rg-production"</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="s">"nightly-import"</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">bookmark_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/var/lib/senhub/nightly-import.executions"</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">bookmark_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/var/lib/senhub-agent/caj.executions"</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 </code></pre></div>
 <p><code>app</code> is the name of the job. It is called <code>app</code> because the two probes share their configuration shape; a job goes in the same field an application would.</p>
+<h2 id="from-environment-variables">From environment variables<a class="headerlink" href="#from-environment-variables" title="Permanent link">&para;</a></h2>
+<p>Where placing a file is harder than setting a variable (a container platform, a Helm chart), the probe is declared by the agent's <a href="../../configuration/#configuring-probes-from-environment-variables">environment rule</a>. The probe name is yours; the examples call it <code>CAJ</code> (Container App Job), as the applications page calls its probe <code>CA</code>. The job name goes in <code>APP</code>, one probe per job, and a name with a hyphen (<code>nightly-import</code>) is a value there, not part of a variable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">SENHUB_PROBE_CAJ_TYPE</span><span class="o">=</span>azure_container_app_jobs
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">SENHUB_PROBE_CAJ_APP</span><span class="o">=</span>nightly-import
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">SENHUB_PROBE_CAJ_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">SENHUB_PROBE_CAJ_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">SENHUB_PROBE_CAJ_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/az_client_secret
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nv">SENHUB_PROBE_CAJ_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nv">SENHUB_PROBE_CAJ_RESOURCE_GROUP</span><span class="o">=</span>rg-production
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nv">SENHUB_PROBE_CAJ_BOOKMARK_PATH</span><span class="o">=</span>/var/lib/senhub-agent/caj.executions
+</code></pre></div>
+<p>A second job is a second probe with its own name (<code>CAJ2</code>) and its own <code>APP</code>; the <a href="#shared-credentials">shared credentials</a> save repeating the identity, and <a href="#discovering-jobs">discovery</a> follows every job with one probe.</p>
+<div class="admonition note">
+<p class="admonition-title">One entry per job, or discovery</p>
+<p>An entry follows one job named by <code>app</code>, or every job of the subscription with a <a href="#discovering-jobs"><code>discovery:</code> block</a>. An entry with neither is refused.</p>
+</div>
+<ul>
+<li><strong>One bookmark per job.</strong> The file holds the names of the executions already published; two jobs sharing one overwrite each other and republish runs after a restart. <code>bookmark_path</code> defaults to <code>&lt;probe name&gt;.executions</code> in the agent's state directory, which should be a volume, so each probe name gets its own file without setting anything. Name it explicitly only to keep a bookmark you had before.</li>
+<li><strong><code>${env:}</code> inside a value is not expanded.</strong> <code>SENHUB_PROBE_CAJ_CLIENT_SECRET=${env:AZ_SECRET}</code> would reach the probe as that literal text. To share the credential between several jobs, point each probe's <code>CLIENT_SECRET_FILE</code> at the same mounted secret (<code>/run/secrets/az_client_secret</code> above, repeated for <code>CAJ2</code>), or declare the probes in <code>SENHUB_PROBES</code> (or a <code>probes.d</code> file), where <code>"${env:AZ_CLIENT_SECRET}"</code> is resolved at every start. See <a href="../../configuration/#no-env-inside-a-value">the environment rule</a>.</li>
+<li><strong>Precedence.</strong> The variables overlay the probes of the files and of <code>SENHUB_PROBES</code>, key by key, and the variable wins.</li>
+</ul>
+<h2 id="discovering-jobs">Discovering jobs<a class="headerlink" href="#discovering-jobs" title="Permanent link">&para;</a></h2>
+<p>Instead of one entry per job, a <code>discovery:</code> block follows every job the subscription holds. It takes the same keys as the applications probe; <code>max_apps</code> caps the number of jobs followed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">caj</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_app_jobs</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">subscription_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">00000000-0000-0000-0000-000000000000</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">discovery</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="nt">resource_groups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">rg-batch</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">rg-etl</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"etl-*"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"report"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"*-tmp"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">max_apps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">        </span><span class="c1"># cap on followed jobs</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span><span class="w">       </span><span class="c1"># seconds between two enumerations</span>
+</code></pre></div>
+<p>With the <a href="#shared-credentials">shared credentials</a> in the environment, the same probe can be declared from the environment alone:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">SENHUB_PROBE_CAJ_TYPE</span><span class="o">=</span>azure_container_app_jobs
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">SENHUB_PROBE_CAJ_DISCOVERY__RESOURCE_GROUPS</span><span class="o">=</span>rg-batch,rg-etl
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">SENHUB_PROBE_CAJ_DISCOVERY__EXCLUDE</span><span class="o">=</span>*-tmp
+</code></pre></div>
+<p>Each discovered job is followed exactly like a configured one. Its metrics carry the <code>azure_job</code> label, and the executions already published are remembered in <code>&lt;probe name&gt;.&lt;job&gt;.executions</code> in the agent state directory (<code>caj.etl-daily.executions</code>). A job that disappears is dropped at the next enumeration, and one that appears is picked up; a failed enumeration keeps the jobs already followed. <code>app</code>, <code>resource_group</code> and <code>bookmark_path</code> cannot be combined with <code>discovery</code>. The credential needs <code>Microsoft.App/jobs/read</code> on the subscription, or on each resource group listed in <code>resource_groups</code>.</p>
+<p>If executions come back with no replica and no log arrives, the log names the missing <code>Microsoft.App/jobs/*/read</code> permission once per job.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:d1a6aba39d901183a8fc6d679f75d132fb14ffe408766e80b2e15805e7081464 -->
+<!-- sha256:3994de8591dff2c663778e7f93549200936e23abffba1b3ee3ff42d26186a192 -->
 
 <table>
 <thead>
@@ -4596,39 +4775,81 @@
 <tbody>
 <tr>
 <td><code>tenant_id</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Entra ID tenant (directory) ID</td>
+<td>Entra ID tenant (directory) ID; required unless SENHUB_AZURE_TENANT_ID is set for every Azure probe of the agent</td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Application (client) ID of the app registration</td>
+<td>Application (client) ID of the app registration; required unless SENHUB_AZURE_CLIENT_ID is set for every Azure probe of the agent</td>
 </tr>
 <tr>
 <td><code>client_secret</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Client secret of the app registration. A secret: reference it with <code>${secret:…}</code>, <code>${env:…}</code> or <code>${file:…}</code> rather than writing it in the file</td>
+<td>Client secret of the app registration; one of client_secret, client_secret_file, SENHUB_AZURE_CLIENT_SECRET or SENHUB_AZURE_CLIENT_SECRET_FILE is required, in that order of precedence. A secret: reference it with <code>${secret:…}</code>, <code>${env:…}</code> or <code>${file:…}</code> rather than writing it in the file</td>
+</tr>
+<tr>
+<td><code>client_secret_file</code></td>
+<td>No</td>
+<td>-</td>
+<td>File holding the client secret (a mounted secret, for example); read when the probe is configured. Used when client_secret is not set</td>
 </tr>
 <tr>
 <td><code>subscription_id</code></td>
-<td>Yes</td>
+<td>In practice</td>
 <td>-</td>
-<td>Subscription that holds the job</td>
+<td>Subscription that holds the job; required unless SENHUB_AZURE_SUBSCRIPTION_ID is set for every Azure probe of the agent</td>
 </tr>
 <tr>
 <td><code>resource_group</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>-</td>
-<td>Resource group of the job</td>
+<td>Resource group of the job; required unless 'discovery' is set, which finds it</td>
 </tr>
 <tr>
 <td><code>app</code></td>
-<td>Yes</td>
+<td>No</td>
 <td>-</td>
-<td>Name of the Container Apps job</td>
+<td>Name of the Container Apps job; required unless 'discovery' is set, which finds them</td>
+</tr>
+<tr>
+<td><code>discovery</code></td>
+<td>No</td>
+<td>-</td>
+<td>Follow every job the subscription holds instead of naming one; exclusive with 'app', 'resource_group' and 'bookmark_path'. Each job is followed as if it had its own entry</td>
+</tr>
+<tr>
+<td><code>discovery.interval</code></td>
+<td>No</td>
+<td><code>300</code></td>
+<td>Seconds between two enumerations of the subscription; a job that left is dropped and a new one picked up at the next one</td>
+</tr>
+<tr>
+<td><code>discovery.max_apps</code></td>
+<td>No</td>
+<td><code>100</code></td>
+<td>Hard cap on how many jobs one instance follows (the key is shared with the applications probe); what is left out is named in the log</td>
+</tr>
+<tr>
+<td><code>discovery.resource_groups</code></td>
+<td>No</td>
+<td>-</td>
+<td>Bound the search to these resource groups; empty means every group the credential can read</td>
+</tr>
+<tr>
+<td><code>discovery.include</code></td>
+<td>No</td>
+<td>-</td>
+<td>Follow only the names matching one of these; '*' is the only wildcard</td>
+</tr>
+<tr>
+<td><code>discovery.exclude</code></td>
+<td>No</td>
+<td>-</td>
+<td>Never follow a name matching one of these; wins over include</td>
 </tr>
 <tr>
 <td><code>containers</code></td>
@@ -4652,7 +4873,7 @@
 <td><code>bookmark_path</code></td>
 <td>No</td>
 <td>-</td>
-<td>File remembering the executions already published, so a restart does not publish a run's output twice. Without it, a restart republishes the window Azure still holds</td>
+<td>File remembering the executions already published, so a restart does not publish a run's output twice. Defaults to <probe name>.executions in the agent state directory (<probe name>.<job>.executions per job under discovery, where this key is refused)</td>
 </tr>
 <tr>
 <td><code>parser</code></td>
@@ -4835,6 +5056,84 @@ was already collecting, the job reads were refused with
 <code>AuthorizationFailed</code> naming <code>Microsoft.App/jobs/read</code>. The two probes
 share a credential only if its role covers both; a credential already
 carrying the four application actions needs these three added to it.</p>
+<h2 id="shared-credentials">Shared credentials<a class="headerlink" href="#shared-credentials" title="Permanent link">&para;</a></h2>
+<p>To avoid repeating the identity of the app registration in every entry, set it once in the agent's environment. It serves both Azure probes (<code>azure_container_apps</code> and <code>azure_container_app_jobs</code>). A probe that sets a key itself keeps its own value for that key.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Replaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SENHUB_AZURE_TENANT_ID</code></td>
+<td><code>tenant_id</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_ID</code></td>
+<td><code>client_id</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_SECRET</code></td>
+<td><code>client_secret</code></td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_CLIENT_SECRET_FILE</code></td>
+<td>path of a file holding the secret (a mounted secret, for example)</td>
+</tr>
+<tr>
+<td><code>SENHUB_AZURE_SUBSCRIPTION_ID</code></td>
+<td><code>subscription_id</code></td>
+</tr>
+</tbody>
+</table>
+<p>The secret is taken from the first of these that is set: <code>client_secret</code>, <code>client_secret_file</code> (a probe key naming a file), <code>SENHUB_AZURE_CLIENT_SECRET</code>, <code>SENHUB_AZURE_CLIENT_SECRET_FILE</code>. A secret file that cannot be read is an error, not a fallback. The variables are read when the probe is configured, so changing them needs a restart.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">probes</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">ca</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_apps</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">discovery</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">caj</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure_container_app_jobs</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">discovery</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+</code></pre></div>
+<h2 id="checking-the-setup">Checking the setup<a class="headerlink" href="#checking-the-setup" title="Permanent link">&para;</a></h2>
+<p><code>senhub-agent check azure</code> verifies, without changing anything, that the credentials of the configured Azure probes (<code>azure_container_apps</code> and <code>azure_container_app_jobs</code>) can do what the probes need. It prints one verdict per line and never prints a secret.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>senhub-agent<span class="w"> </span>check<span class="w"> </span>azure<span class="w">               </span><span class="c1"># every enabled Azure probe in the installed configuration</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>senhub-agent<span class="w"> </span>check<span class="w"> </span>azure<span class="w"> </span>--probe<span class="w"> </span>caj<span class="w">   </span><span class="c1"># one probe, by name</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>senhub-agent<span class="w"> </span>check<span class="w"> </span>azure<span class="w"> </span>/path/to/agent.yaml
+</code></pre></div>
+<p>For each probe it checks, in order:</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>What it verifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>token</code></td>
+<td>Entra ID issues a token for the tenant, client ID and secret of the probe</td>
+</tr>
+<tr>
+<td><code>subscription</code></td>
+<td>The subscription can be read. A <code>WARN</code> here is normal when the role is scoped to a resource group</td>
+</tr>
+<tr>
+<td><code>apps</code> / <code>jobs</code></td>
+<td>The application (or, with <code>discovery</code>, every application) and the job are found, grouped by resource group</td>
+</tr>
+<tr>
+<td><code>permission</code></td>
+<td>Each action the probe needs is granted at its scope, from the effective permissions Azure reports for the credential</td>
+</tr>
+</tbody>
+</table>
+<p>The actions checked are <code>Microsoft.App/containerApps/read</code>, <code>.../revisions/read</code>, <code>.../revisions/replicas/read</code> and <code>.../getAuthtoken/action</code> for applications, and <code>Microsoft.App/jobs/read</code>, <code>Microsoft.App/jobs/*/read</code> and <code>Microsoft.App/jobs/getAuthtoken/action</code> for jobs. A role that only grants <code>jobs/executions/read</code> is reported as missing <code>jobs/*/read</code>: the verdicts would look right while no log line ever arrived.</p>
+<p>The command exits with <code>0</code> when every required item passes and <code>1</code> when one fails (or when no Azure probe is configured), so it can gate a deployment script. Like the other commands, it runs as root or administrator.</p>
+<h2 id="dashboards">Dashboards<a class="headerlink" href="#dashboards" title="Permanent link">&para;</a></h2>
+<p>A ready-made Grafana dashboard for this probe, <code>azure-container-app-jobs.json</code>, is provided in <a href="https://github.com/senhub-io/senhub-agent/tree/master/docs/grafana"><code>docs/grafana/</code></a> (see its README for the data path it expects). It covers executions by status per job, duration, time since last success, failures and logs filtered by job and severity.</p>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
 OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
@@ -4931,6 +5230,13 @@ series' tags.</p>
 <td>ARM Reads Remaining</td>
 <td>#</td>
 <td>Reads left in the subscription's Azure Resource Manager budget, as ARM reports it; a fleet of instances shows here how close it is to being throttled</td>
+</tr>
+<tr>
+<td><code>senhub.azure_container_app_jobs.read.failures</code></td>
+<td><code>azure_container_app_jobs_read_failures</code></td>
+<td reason="reason">Read Failures</td>
+<td>#</td>
+<td>Cumulative reads of the job's executions, replicas or output Azure refused, by cause: denied, not_found, throttled, refused, timeout, unreachable, no_replica. denied is almost always a role without Microsoft.App/jobs/*/read</td>
 </tr>
 </tbody>
 </table>

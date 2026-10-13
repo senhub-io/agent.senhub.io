@@ -1348,6 +1348,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#no-env-inside-a-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No ${env:} inside a value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#secrets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4482,6 +4493,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../whats-new/0.6.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../whats-new/0.6.2/" class="md-nav__link">
         
   
@@ -5582,6 +5621,17 @@
     <span class="md-ellipsis">
       
         Typed from the probe's schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-env-inside-a-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No ${env:} inside a value
       
     </span>
   </a>
@@ -6728,7 +6778,7 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <h3 id="how-a-name-is-read">How a name is read<a class="headerlink" href="#how-a-name-is-read" title="Permanent link">&para;</a></h3>
 <ul>
 <li>After <code>SENHUB_PROBE_</code>, the <strong>first underscore ends the name</strong>. The name holds letters and digits only and is lowercased: <code>SENHUB_PROBE_PG_HOST</code> is the parameter <code>host</code> of the probe <code>pg</code>. A name with a hyphen cannot be written in a variable; to tune a probe called <code>smtp-prod</code> from the environment, write <code>SENHUB_PROBE_SMTPPROD_...</code>: hyphens and underscores are ignored when the name is matched against the probes of the files. A probe declared only by the environment takes the name as written, lowercased.</li>
-<li>Everything after the name is the field. A <strong>double underscore nests</strong>, a single underscore stays part of the key: <code>SENHUB_PROBE_PG_MAX_REPLICATION_LAG_SECONDS</code> is <code>max_replication_lag_seconds</code>, and <code>SENHUB_PROBE_ACA_DISCOVERY__MAX_APPS</code> is <code>discovery.max_apps</code>.</li>
+<li>Everything after the name is the field. A <strong>double underscore nests</strong>, a single underscore stays part of the key: <code>SENHUB_PROBE_PG_MAX_REPLICATION_LAG_SECONDS</code> is <code>max_replication_lag_seconds</code>, and <code>SENHUB_PROBE_CA_DISCOVERY__MAX_APPS</code> is <code>discovery.max_apps</code>.</li>
 <li>Parameter names are matched to the probe's schema without regard to case, and an alternative spelling the probe accepts resolves to its canonical key.</li>
 <li>A variable that is empty counts as unset.</li>
 </ul>
@@ -6810,15 +6860,17 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 </tbody>
 </table>
 <p>A probe type unknown to this build, a parameter its schema does not declare, a value that does not fit its type or its list of accepted values, or a required parameter left out, <strong>stops the agent at load</strong> and the message names the variable. A probe type that has no schema (a few commercial probes) accepts string values only, with a warning in the log, and nothing is checked.</p>
+<h3 id="no-env-inside-a-value">No <code>${env:}</code> inside a value<a class="headerlink" href="#no-env-inside-a-value" title="Permanent link">&para;</a></h3>
+<p>A value taken from a <code>SENHUB_PROBE_*</code> variable is used as written: a <code>${env:OTHER}</code> inside it is <strong>not</strong> expanded, and the text reaches the probe as is. A secret is the only value that is turned into a reference, and only to its own variable or file. To give several probes the same credential, point each one's <code>_FILE</code> variable at the same mounted secret (<code>SENHUB_PROBE_CAJ_CLIENT_SECRET_FILE=/run/secrets/az_secret</code>, repeated for each probe), or declare the probes in <code>SENHUB_PROBES</code> (or a <code>probes.d</code> file), where <code>"${env:AZ_CLIENT_SECRET}"</code> is resolved at every start.</p>
 <h3 id="secrets">Secrets<a class="headerlink" href="#secrets" title="Permanent link">&para;</a></h3>
 <p>A parameter the schema marks secret, or whose name looks like one (<code>password</code>, <code>token</code>, <code>secret</code>, <code>api_key</code>, <code>dsn</code>, <code>community</code>), is never written into the loaded configuration: it holds a reference to the variable, and <code>config show</code> prints that reference with <code>--raw</code> and <code>***</code> by default. For a secret that lives in a file, which is how Docker, Kubernetes and Podman deliver them, add <code>_FILE</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>SENHUB_PROBE_PG_PASSWORD_FILE=/run/secrets/pg_password
 </code></pre></div>
 <p>The file is read at every start and its content trimmed. Giving both <code>SENHUB_PROBE_PG_PASSWORD</code> and <code>SENHUB_PROBE_PG_PASSWORD_FILE</code> is refused. When the schema owns a key that itself ends in <code>_file</code> (<code>tls.ca_file</code>), the exact name wins: <code>SENHUB_PROBE_PG_TLS__CA_FILE</code> is that key, and reading it from a file takes <code>SENHUB_PROBE_PG_TLS__CA_FILE_FILE</code>.</p>
 <h3 id="precedence">Precedence<a class="headerlink" href="#precedence" title="Permanent link">&para;</a></h3>
-<p>The variables are applied on top of the files (<code>agent.yaml</code>, <code>probes.d/</code>, and in a container the fragment of <code>SENHUB_PROBES</code>), once they are merged:</p>
+<p><code>SENHUB_PROBE_*</code> overlays the files (<code>agent.yaml</code>, <code>probes.d/</code>) and, in a container, the fragment written from <code>SENHUB_PROBES</code>, once they are merged. It is applied key by key, and <strong>the environment wins</strong>:</p>
 <ul>
-<li>A probe of the same name in a file keeps what the file says, <strong>except for the parameters the environment sets, which win</strong> (as in Grafana). Blocks are merged key by key; a list is replaced whole.</li>
+<li>A probe of the same name in a file or in <code>SENHUB_PROBES</code> keeps what it says, <strong>except for the parameters the environment sets, which win</strong> (as in Grafana). Blocks are merged key by key; a list is replaced whole.</li>
 <li>A name found in no file creates the probe, and <code>SENHUB_PROBE_&lt;NAME&gt;_TYPE</code> is then required.</li>
 <li>A <code>TYPE</code> that differs from the type of the probe in the file is refused.</li>
 </ul>
@@ -6838,23 +6890,23 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nv">SENHUB_PROBE_WEB_ENABLED</span><span class="o">=</span><span class="nb">false</span>
 </code></pre></div>
 <p>Azure Container Apps, <a href="../probes/azure_container_apps/">list mode</a>, one probe per application, sharing the credentials (the probe name is yours, the application name goes in <code>APP</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">SENHUB_PROBE_OLTP_TYPE</span><span class="o">=</span>azure_container_apps
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nv">SENHUB_PROBE_OLTP_APP</span><span class="o">=</span>oltp
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nv">SENHUB_PROBE_OLTP_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="nv">SENHUB_PROBE_OLTP_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="nv">SENHUB_PROBE_OLTP_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/aca_client_secret
-<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="nv">SENHUB_PROBE_OLTP_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
-<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="nv">SENHUB_PROBE_OLTP_RESOURCE_GROUP</span><span class="o">=</span>rg-squash
-<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="c1"># the same eight lines under SENHUB_PROBE_BILLING_ for a second application</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nv">SENHUB_PROBE_CA_TYPE</span><span class="o">=</span>azure_container_apps
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nv">SENHUB_PROBE_CA_APP</span><span class="o">=</span>oltp
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nv">SENHUB_PROBE_CA_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="nv">SENHUB_PROBE_CA_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="nv">SENHUB_PROBE_CA_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/az_client_secret
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="nv">SENHUB_PROBE_CA_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="nv">SENHUB_PROBE_CA_RESOURCE_GROUP</span><span class="o">=</span>rg-squash
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="c1"># the same seven lines under SENHUB_PROBE_CA2_ for a second application</span>
 </code></pre></div>
 <p>Azure Container Apps, discovery mode, one probe for the whole subscription:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nv">SENHUB_PROBE_ACA_TYPE</span><span class="o">=</span>azure_container_apps
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nv">SENHUB_PROBE_ACA_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nv">SENHUB_PROBE_ACA_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="nv">SENHUB_PROBE_ACA_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/aca_client_secret
-<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="nv">SENHUB_PROBE_ACA_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
-<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="nv">SENHUB_PROBE_ACA_DISCOVERY__INTERVAL</span><span class="o">=</span><span class="m">300</span>
-<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="nv">SENHUB_PROBE_ACA_DISCOVERY__EXCLUDE</span><span class="o">=</span>*-preview
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nv">SENHUB_PROBE_CA_TYPE</span><span class="o">=</span>azure_container_apps
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nv">SENHUB_PROBE_CA_TENANT_ID</span><span class="o">=</span><span class="m">00000000</span>-0000-0000-0000-000000000000
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="nv">SENHUB_PROBE_CA_CLIENT_ID</span><span class="o">=</span><span class="m">11111111</span>-1111-1111-1111-111111111111
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="nv">SENHUB_PROBE_CA_CLIENT_SECRET_FILE</span><span class="o">=</span>/run/secrets/az_client_secret
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="nv">SENHUB_PROBE_CA_SUBSCRIPTION_ID</span><span class="o">=</span><span class="m">22222222</span>-2222-2222-2222-222222222222
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="nv">SENHUB_PROBE_CA_DISCOVERY__INTERVAL</span><span class="o">=</span><span class="m">300</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="nv">SENHUB_PROBE_CA_DISCOVERY__EXCLUDE</span><span class="o">=</span>*-preview
 </code></pre></div>
 <h2 id="inspecting-the-merged-configuration">Inspecting the merged configuration<a class="headerlink" href="#inspecting-the-merged-configuration" title="Permanent link">&para;</a></h2>
 <p>The <code>agent config show</code> command prints the final, merged configuration as YAML with map keys sorted alphabetically:</p>

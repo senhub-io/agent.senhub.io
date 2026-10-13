@@ -442,6 +442,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="The one mount that matters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-files-smb-or-nfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Files: SMB or NFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -532,6 +549,17 @@
     <span class="md-ellipsis">
       
         What the container does not do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network flows
       
     </span>
   </a>
@@ -3923,6 +3951,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../whats-new/0.6.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../whats-new/0.6.2/" class="md-nav__link">
         
   
@@ -4462,6 +4518,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="The one mount that matters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-files-smb-or-nfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Files: SMB or NFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4559,6 +4632,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#network-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network flows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#health" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4601,7 +4685,7 @@ else is a parameter.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.0
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.3
 </code></pre></div>
 <p>That is the whole of it for a first run: one variable, one mount.</p>
 <p>Podman runs the same image with the same command; see
@@ -4656,6 +4740,12 @@ Compose file).</p>
 <p>Nothing else needs a mount. The configuration lives inside the container
 unless you choose otherwise, and the log file is written to
 <code>/var/log/senhub-agent</code> inside it.</p>
+<h3 id="azure-files-smb-or-nfs">Azure Files: SMB or NFS<a class="headerlink" href="#azure-files-smb-or-nfs" title="Permanent link">&para;</a></h3>
+<p>From 0.6.3 the agent is tested with the state directory (<code>/var/lib/senhub-agent</code>) and the configuration directory (<code>/etc/senhub-agent</code>) on an Azure Files SMB share mounted by Container Apps. An SMB share sets file modes and owners from its mount options and refuses <code>chmod</code> and <code>chown</code>; the agent skips a refused <code>chmod</code>/<code>chown</code>, seals secrets, keeps its identity (agent key, instance id), the logs queue, and the probe bookmarks in the state directory, and places its local status socket in a private directory under the temp directory because SMB has no Unix sockets.</p>
+<p>Use SMB. It is the default Azure Files protocol on Container Apps and the tested one. NFS shares on Azure Files require a premium storage account and a virtual network; they are not tested with the agent.</p>
+<p>Size the share from the logs queue: it is capped by <code>SENHUB_LOG_QUEUE_MAX_BYTES</code> (default 128 MiB) with a 24 h retention. Plan the share accordingly, a few hundred MiB per collector. A queued line takes about 290 bytes on disk: the default 128 MiB holds a 3-hour backend outage up to about 43 lines per second (measured: 3 hours at 20 lines per second, no line lost or duplicated, the backlog drained in about two minutes after recovery). For a busier collector, raise <code>SENHUB_LOG_QUEUE_MAX_BYTES</code> to rate × outage × 300 bytes; the <code>records.volume</code> metric of the Container Apps probe gives the rate.</p>
+<p>Use one collector per share directory. Two agents must not share the same state directory.</p>
+<p>Setting <code>uid</code>/<code>gid</code> in the share mount options so files belong to the agent's account is not tested yet.</p>
 <h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
 <p>None is strictly required. <code>OTLP_BEARER_TOKEN</code> is what a first run
 needs to export to SenHub; the rest have defaults or are only read when
@@ -4775,7 +4865,7 @@ reads them, so they apply with a configuration of your own too (see
 <td><code>SENHUB_HOST_ID</code></td>
 <td>No</td>
 <td>kept in the state directory</td>
-<td>Host identity, 32 hexadecimal characters, dashes optional. One value per instance: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code></td>
+<td>Gives the host a stable identity across the re-creation of its container, so a new container is the same host in the graph and not a new one. 32 hexadecimal characters, dashes optional. One value per host: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code></td>
 </tr>
 <tr>
 <td><code>SENHUB_AGENT_KEY</code></td>
@@ -4797,6 +4887,17 @@ reads them, so they apply with a configuration of your own too (see
 </tr>
 </tbody>
 </table>
+<div class="admonition warning">
+<p class="admonition-title">Upgrading: an <code>agent.yaml</code> that is already there wins</p>
+<p>The variables above are read only when no <code>agent.yaml</code> exists in
+<code>SENHUB_CONFIG_DIR</code>. A configuration directory kept on a volume since an
+earlier run holds one, so a new container started with other values
+(another token, endpoint or tag) ignores every <code>SENHUB_*</code> variable of the
+table and keeps the old file; the entrypoint says so on startup. To apply
+them, remove <code>agent.yaml</code> from the volume before the new container
+starts, or edit it. <code>SENHUB_PROBE_&lt;NAME&gt;_*</code> is the exception: the agent
+reads it itself at every start.</p>
+</div>
 <p>Without <code>SENHUB_AGENT_KEY</code> the agent generates its own key on first
 start, and the entrypoint keeps it in the state directory so the next
 container reuses it. That is why the mount matters.</p>
@@ -4832,8 +4933,9 @@ entrypoint still writes <code>agent.yaml</code> and the output from the variable
 so you keep the one-variable start and add only what the platform can
 mount.</p>
 <h3 id="a-whole-mounted-configuration">A whole mounted configuration<a class="headerlink" href="#a-whole-mounted-configuration" title="Permanent link">&para;</a></h3>
-<p>Mount <code>/etc/senhub-agent</code> whole. Nothing is written and every variable
-is ignored, which the entrypoint says on startup. This door has a trap
+<p>Mount <code>/etc/senhub-agent</code> whole. Nothing is written and the variables of
+the table are ignored, which the entrypoint says on startup;
+<code>SENHUB_PROBE_&lt;NAME&gt;_*</code> still applies, the agent reading it itself. This door has a trap
 of its own when the same directory serves several instances: see
 <a href="#bringing-your-own-configuration">Bringing your own configuration</a>.</p>
 <p>Whichever you choose, the configuration is checked before the agent
@@ -4852,19 +4954,21 @@ and Kubernetes deliver them.</p>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">SENHUB_PROBE_DB_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">SENHUB_PROBE_DB_PASSWORD_FILE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/run/secrets/db_password</span>
 </code></pre></div>
-<p>The whole rule, with the precedence over <code>SENHUB_PROBES</code> and the files, is
+<p><code>SENHUB_PROBE_&lt;NAME&gt;_*</code> overlays the probes of the files and of <code>SENHUB_PROBES</code>,
+key by key, and the variable wins. The whole rule is
 on <a href="../configuration/#configuring-probes-from-environment-variables">Configuration</a>.
 Reading Azure Container Apps takes the same form, see
 <a href="../probes/azure_container_apps/#from-environment-variables">Azure Container Apps</a>.</p>
 <h2 id="bringing-your-own-configuration">Bringing your own configuration<a class="headerlink" href="#bringing-your-own-configuration" title="Permanent link">&para;</a></h2>
 <p>Mount a directory on <code>/etc/senhub-agent</code> and the entrypoint writes
-nothing: your files win and every <code>SENHUB_*</code> variable is ignored. The
-entrypoint says which of the two it did on startup, so a container that
-ignores your variables tells you why.</p>
+nothing: your files win and the <code>SENHUB_*</code> variables of the table are
+ignored (<code>SENHUB_PROBE_&lt;NAME&gt;_*</code> is not: the agent reads it itself and it
+overlays your probes). The entrypoint says which of the two it did on
+startup, so a container that ignores your variables tells you why.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-v<span class="w"> </span>/srv/senhub/conf:/etc/senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.0
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.3
 </code></pre></div>
 <p>Your configuration wins completely, and that includes the agent key
 under <code>agent: key:</code>. The entrypoint does not touch it, so a
@@ -4898,6 +5002,46 @@ the container stops at start.</p>
 <li><strong>No auto-update.</strong> Updating means pulling a new image tag. Under
   Podman, see <a href="../podman/#updates">Updates</a>.</li>
 </ul>
+<h2 id="network-flows">Network flows<a class="headerlink" href="#network-flows" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Port / protocol</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SENHUB_OTLP_ENDPOINT</code></td>
+<td><code>SENHUB_OTLP_PROTOCOL</code> (<code>grpc</code> or <code>http</code>), usually 4317 for gRPC or 4318 for HTTP, HTTPS/TLS as configured</td>
+<td>OTLP export</td>
+</tr>
+<tr>
+<td><code>login.microsoftonline.com</code> (or the <code>authority_host</code> parameter)</td>
+<td>443/HTTPS</td>
+<td>Entra ID token for Azure Container Apps and jobs probes</td>
+</tr>
+<tr>
+<td><code>management.azure.com</code> (or the <code>management_host</code> parameter)</td>
+<td>443/HTTPS</td>
+<td>Azure Resource Manager for Azure Container Apps and jobs probes</td>
+</tr>
+<tr>
+<td><code>*.azurecontainerapps.dev</code></td>
+<td>443/HTTPS</td>
+<td>Log stream endpoint of each Container Apps environment</td>
+</tr>
+<tr>
+<td><code>eu-west-1.intake.senhub.io</code></td>
+<td>443/HTTPS</td>
+<td>Release check when auto-update is enabled. Normal container updates change the image tag; the platform pulls the new image from <code>ghcr.io</code></td>
+</tr>
+</tbody>
+</table>
+<p>All hostnames above require DNS resolution.</p>
+<p>Permissions for the Azure probes are documented in <a href="../probes/azure_container_apps/">Azure Container Apps</a> and <a href="../probes/azure_container_app_jobs/">Azure Container Apps jobs</a>.</p>
+<p>Nothing listens inbound except the optional console/HTTP port and the OTLP receiver when enabled.</p>
 <h2 id="health">Health<a class="headerlink" href="#health" title="Permanent link">&para;</a></h2>
 <p>The image declares a health check against the console's <code>/health</code>. It
 answers as soon as the HTTP output is listening, which is what tells a
