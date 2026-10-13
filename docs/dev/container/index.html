@@ -442,6 +442,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="The one mount that matters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-files-smb-or-nfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Files: SMB or NFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -532,6 +549,17 @@
     <span class="md-ellipsis">
       
         What the container does not do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network flows
       
     </span>
   </a>
@@ -4462,6 +4490,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="The one mount that matters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azure-files-smb-or-nfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Azure Files: SMB or NFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4552,6 +4597,17 @@
     <span class="md-ellipsis">
       
         What the container does not do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network flows
       
     </span>
   </a>
@@ -4656,6 +4712,12 @@ Compose file).</p>
 <p>Nothing else needs a mount. The configuration lives inside the container
 unless you choose otherwise, and the log file is written to
 <code>/var/log/senhub-agent</code> inside it.</p>
+<h3 id="azure-files-smb-or-nfs">Azure Files: SMB or NFS<a class="headerlink" href="#azure-files-smb-or-nfs" title="Permanent link">&para;</a></h3>
+<p>From 0.6.3 the agent is tested with the state directory (<code>/var/lib/senhub-agent</code>) and the configuration directory (<code>/etc/senhub-agent</code>) on an Azure Files SMB share mounted by Container Apps. An SMB share sets file modes and owners from its mount options and refuses <code>chmod</code> and <code>chown</code>; the agent skips a refused <code>chmod</code>/<code>chown</code>, seals secrets, keeps its identity (agent key, instance id), the logs queue, and the probe bookmarks in the state directory, and places its local status socket in a private directory under the temp directory because SMB has no Unix sockets.</p>
+<p>Use SMB. It is the default Azure Files protocol on Container Apps and the tested one. NFS shares on Azure Files require a premium storage account and a virtual network; they are not tested with the agent.</p>
+<p>Size the share from the logs queue: it is capped by <code>SENHUB_LOG_QUEUE_MAX_BYTES</code> (default 128 MiB) with a 24 h retention. Plan the share accordingly, a few hundred MiB per collector.</p>
+<p>Use one collector per share directory. Two agents must not share the same state directory.</p>
+<p>Setting <code>uid</code>/<code>gid</code> in the share mount options so files belong to the agent's account is not tested yet.</p>
 <h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
 <p>None is strictly required. <code>OTLP_BEARER_TOKEN</code> is what a first run
 needs to export to SenHub; the rest have defaults or are only read when
@@ -4912,6 +4974,46 @@ the container stops at start.</p>
 <li><strong>No auto-update.</strong> Updating means pulling a new image tag. Under
   Podman, see <a href="../podman/#updates">Updates</a>.</li>
 </ul>
+<h2 id="network-flows">Network flows<a class="headerlink" href="#network-flows" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th>Port / protocol</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SENHUB_OTLP_ENDPOINT</code></td>
+<td><code>SENHUB_OTLP_PROTOCOL</code> (<code>grpc</code> or <code>http</code>), usually 4317 for gRPC or 4318 for HTTP, HTTPS/TLS as configured</td>
+<td>OTLP export</td>
+</tr>
+<tr>
+<td><code>login.microsoftonline.com</code> (or the <code>authority_host</code> parameter)</td>
+<td>443/HTTPS</td>
+<td>Entra ID token for Azure Container Apps and jobs probes</td>
+</tr>
+<tr>
+<td><code>management.azure.com</code> (or the <code>management_host</code> parameter)</td>
+<td>443/HTTPS</td>
+<td>Azure Resource Manager for Azure Container Apps and jobs probes</td>
+</tr>
+<tr>
+<td><code>*.azurecontainerapps.dev</code></td>
+<td>443/HTTPS</td>
+<td>Log stream endpoint of each Container Apps environment</td>
+</tr>
+<tr>
+<td><code>eu-west-1.intake.senhub.io</code></td>
+<td>443/HTTPS</td>
+<td>Release check when auto-update is enabled. Normal container updates change the image tag; the platform pulls the new image from <code>ghcr.io</code></td>
+</tr>
+</tbody>
+</table>
+<p>All hostnames above require DNS resolution.</p>
+<p>Permissions for the Azure probes are documented in <a href="../probes/azure_container_apps/">Azure Container Apps</a> and <a href="../probes/azure_container_app_jobs/">Azure Container Apps jobs</a>.</p>
+<p>Nothing listens inbound except the optional console/HTTP port and the OTLP receiver when enabled.</p>
 <h2 id="health">Health<a class="headerlink" href="#health" title="Permanent link">&para;</a></h2>
 <p>The image declares a health check against the console's <code>/health</code>. It
 answers as soon as the HTTP output is listening, which is what tells a
