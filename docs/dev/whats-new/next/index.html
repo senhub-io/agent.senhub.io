@@ -16,7 +16,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../0.6.2/">
+        <link rel="next" href="../0.6.3/">
       
       
         
@@ -3743,24 +3743,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Next (unreleased)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -3778,47 +3760,34 @@
 
       </a>
       
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="../0.6.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
   
+    0.6.3
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Features
-      
-    </span>
-  </a>
+
+    
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fixes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fixes
-      
-    </span>
-  </a>
   
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -4355,36 +4324,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Features
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fixes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fixes
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -4409,42 +4348,8 @@
 
 
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
-<p>Changes land here as they are merged. The 0.6.3 corrective release collects them.</p>
+<p>Nothing released yet since 0.6.3. Changes land here as they are merged.</p>
 <div class="rn-filter"></div>
-
-<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Official Grafana dashboards for Azure Container Apps and Container App Jobs.</strong> <code>azure-container-apps.json</code> (coverage, per-application health, scan failures by reason, volume, logs) and <code>azure-container-app-jobs.json</code> (executions by status, duration, last run, logs) in <code>docs/grafana/</code>. They read the per-application metrics, not log counts.</li>
-<li><strong><code>senhub-agent check azure</code>.</strong> A read-only command that checks, with the credentials of the configured Azure probes, the token, the subscription, the applications and jobs found, and each permission the probes need, one verdict per line; it exits non-zero when a required item fails.</li>
-<li><strong>Container Apps discovery reports its coverage.</strong> <code>discovery.found</code>, <code>discovery.followed</code> and <code>discovery.left_out</code> (by <code>filter</code> or <code>max_apps</code>) read "26 of 26" from metrics; <code>discovery.last_age</code> and <code>discovery.failures</code> show a listing that stopped working. Under discovery, the volume counters and scan failures are given per application, and an application never read no longer reports zero replicas.</li>
-<li><strong>Container App Jobs discovery.</strong> A <code>discovery:</code> block on <code>azure_container_app_jobs</code> follows every job of a subscription (resource groups, include and exclude patterns, cap), each with its own executions file; jobs that appear or disappear are picked up at the next enumeration. When executions come back without replicas, the log names the missing <code>Microsoft.App/jobs/*/read</code> permission once per job.</li>
-<li><strong>Shared Azure credentials.</strong> <code>SENHUB_AZURE_TENANT_ID</code>, <code>SENHUB_AZURE_CLIENT_ID</code>, <code>SENHUB_AZURE_CLIENT_SECRET</code> (or <code>_FILE</code>) and <code>SENHUB_AZURE_SUBSCRIPTION_ID</code> give the identity once for every Azure probe; a probe's own value still wins key by key.</li>
-<li><strong>Log volume per Container App.</strong> <code>senhub.azure_container_apps.records.volume</code> counts the bytes of published log bodies per application, so the volume compares with what Log Analytics bills; the official dashboard shows it per second and over the range.</li>
-</ul>
-<h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>doctor resolves <code>${env:}</code> with the service's environment.</strong> It reads <code>Environment=</code> and <code>EnvironmentFile=</code> from the systemd unit and its drop-ins (as root), and on Windows the service's <code>Environment</code> value in the registry (<code>HKLM\SYSTEM\CurrentControlSet\Services\senhub-agent</code>). A reference it cannot resolve outside the service is a warning that names the variable, never a failure.</li>
-<li><strong>A monolithic <code>agent.yaml</code> beside the files <code>install</code> created is split.</strong> The default <code>probes.d/00-host.yaml</code> and <code>strategies.d/00-http.yaml</code> are set aside as <code>*.install-default</code>; if the directories hold your own files, one message names them. The split failure and the legacy notice are logged once per start, and no seal failure is reported when the split was refused.</li>
-<li><strong>The OTLP logs queue announces itself at start.</strong> One Info line gives its path, size cap and retention, so a healthy queue is no longer indistinguishable from a disabled one.</li>
-<li><strong>A cut update download is retried.</strong> When the stream breaks midway, the whole request is repeated up to three more times with a growing pause, with a <code>senhub-agent/&lt;version&gt;</code> User-Agent and no transparent compression of the archive.</li>
-<li><strong>The OTLP receiver coverage counters start at zero.</strong> <code>senhub.agent.otlp_receiver.received</code> and <code>.received.without_host_id</code> exist from the start for each enabled signal, so "nothing received yet" is no longer indistinguishable from a dead receiver.</li>
-<li><strong>No error when the journal reader is stopped with the agent.</strong> <code>linux_logs</code> no longer logs <code>journalctl subprocess died unexpectedly</code> when systemd terminates journalctl as part of stopping the service.</li>
-<li><strong><code>logicaldisk</code> stops warning about <code>/run/user/*</code> every cycle.</strong> A per-user runtime directory the service account cannot read is skipped quietly; any other mount it cannot read is named once.</li>
-<li><strong>A Redis TLS failure names the handshake.</strong> The <code>redis</code> probe runs the TLS handshake right after connecting and reports <code>TLS handshake with &lt;host&gt;:&lt;port&gt; failed: ...</code> instead of an <code>AUTH send failed</code> that hid the cause.</li>
-<li><strong>Container and Azure pages corrected.</strong> Image tags move to 0.6.3; the container page explains <code>SENHUB_HOST_ID</code> and the upgrade trap of an existing <code>agent.yaml</code>; the Container Apps page states that <code>discovery</code> excludes <code>app</code> and <code>resource_group</code>; both Azure pages use the probe names <code>CA</code> and <code>CAJ</code>, the jobs page gains a "From environment variables" section, and the configuration page documents that <code>${env:}</code> inside a <code>SENHUB_PROBE_*</code> value is not expanded and that the variables win key by key.</li>
-<li><strong>Jobs probe docs.</strong> <code>bookmark_path</code> defaults to <code>&lt;probe name&gt;.executions</code> in the state directory, and an entry without <code>app</code> or <code>discovery:</code> is refused.</li>
-<li><strong>One <code>host.name</code> on every signal.</strong> Metrics, the OTLP resource, the host entity, the systemd unit entities and the info endpoint all use the same canonical host name.</li>
-<li><strong>Every log record carries an OTel severity number.</strong> Whatever level word a source writes, the number is derived (the text stays as written), including a <code>level=notice</code> pair or a lower-case word after the timestamp (<code>2026-10-12T14:00:00Z warn ...</code>) on a line read without a parser; a journald entry without a priority is informational instead of an emergency.</li>
-<li><strong>Relative paths follow the configuration directory.</strong> <code>bookmark_path</code> and the <code>*_file</code> parameters (CA, certificate, key, password files), and <code>config/nagios.yaml</code>, are resolved against the directory of the configuration, not the working directory; <code>config check</code> from another directory no longer reports a false permission error.</li>
-<li><strong>doctor flags a stale <code>senhub-agent</code> on the PATH.</strong> When another binary on the PATH reports a version different from the running service, doctor warns, naming both paths and versions and pointing to the unit's binary.</li>
-<li><strong>Identity re-keys are announced once, not at every start.</strong> The retirement of the legacy database and service identities (0.5.4 re-key) was repeated during the first cycles of every agent start, which a topology backend read as the producer reporting the node gone. A marker file in the state directory now records that it was announced; if the directory is not writable the announcement repeats and one warning is logged.</li>
-<li><strong>Identity re-keys are really announced once.</strong> The marker was consulted after the probes had already published their first announcements, so every restart still repeated them; the marker is now active before any probe starts.</li>
-<li><strong>Relayed OTLP logs keep a severity number.</strong> A record received with a severity text (<code>WARNING</code>, <code>CRITICAL</code>) and no number is exported with the matching number; a number set by the sender and the text are left as written.</li>
-<li><strong>A stalled update download is abandoned.</strong> An archive download that receives no byte for 60 seconds is cancelled and retried like a cut stream, instead of waiting indefinitely.</li>
-<li><strong>No false alarms when the configuration is split.</strong> The first start of a monolithic <code>agent.yaml</code> no longer logs the "Legacy monolithic config" warning just before splitting it, and the <code>*.install-default</code> files set aside by the split are no longer reported as "Files not loaded".</li>
-<li><strong>host.id is always lowercase.</strong> The <code>/etc/machine-id</code> fallback was not lowercased; the same id in two cases would be two hosts downstream (no host in production was affected).</li>
-<li><strong>The agent's own CPU time is what it used.</strong> <code>senhub.agent.process.cpu.time</code> read the CPU available to the process (GOMAXPROCS over its lifetime), so an idle agent in a 2-CPU container showed 2 CPUs busy; it now reads user plus system time from the OS.</li>
-</ul>
 
 
 
@@ -4497,13 +4402,13 @@
         
         
           
-          <a href="../0.6.2/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.6.2">
+          <a href="../0.6.3/" class="md-footer__link md-footer__link--next" aria-label="Next: 0.6.3">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                0.6.2
+                0.6.3
               </div>
             </div>
             <div class="md-footer__button md-icon">
