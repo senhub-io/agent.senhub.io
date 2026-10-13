@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>How to name a metric so tools read it right — SenHub Agent</title>
-    <meta name="description" content="Three naming rules Prometheus and OpenTelemetry agree on, what breaking each one does downstream, and how to keep a codebase from drifting back." />
+    <meta name="description" content="The naming rules Prometheus and OpenTelemetry share, what a wrong name does downstream, and how we keep the agent from drifting away from them." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/articles/how-to-name-a-metric.html" />
     <meta property="og:title" content="How to name a metric so tools read it right" />
-    <meta property="og:description" content="Three naming rules Prometheus and OpenTelemetry agree on, what breaking each one does downstream, and how to keep a codebase from drifting back." />
+    <meta property="og:description" content="The naming rules Prometheus and OpenTelemetry share, what a wrong name does downstream, and how we keep the agent from drifting away from them." />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
@@ -16,7 +16,7 @@
     <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="How to name a metric so tools read it right" />
-    <meta name="twitter:description" content="Three naming rules, what breaking each one does downstream, and how to keep a codebase from drifting back." />
+    <meta name="twitter:description" content="The naming rules Prometheus and OpenTelemetry share, and what a wrong name does downstream." />
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
     <style>
       :root {
@@ -84,10 +84,6 @@
       article h2 {
         margin: 46px 0 0; font-size: 21px; font-weight: 750; letter-spacing: -0.012em;
       }
-      article h2 .n {
-        display: block; font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em;
-        text-transform: uppercase; color: var(--accent-dark); margin-bottom: 5px;
-      }
       article h2 + p { margin-top: 12px; }
       strong { font-weight: 680; }
       code {
@@ -125,11 +121,6 @@
         border-top: 1px solid var(--line); background: var(--panel);
       }
 
-      .pull {
-        margin: 34px 0 0; padding: 18px 22px;
-        border-left: 3px solid var(--accent); background: var(--panel-2);
-        border-radius: 0 8px 8px 0; font-size: 18.5px; line-height: 1.5;
-      }
       .tbl-wrap { margin-top: 26px; overflow-x: auto; }
       table {
         border-collapse: collapse; width: 100%; font-size: 12.5px;
@@ -201,29 +192,26 @@
     </div>
 
     <p class="standfirst">
-      Nobody reads a metric name except machines. When one is wrong they do not fail —
-      they answer, confidently, with a number that is not the one you asked for.
+      Nobody reads a metric name except machines. When one is wrong they do not fail.
+      They answer, and the number is wrong.
     </p>
 
     <p>
-      A metric name looks like documentation and behaves like code. <code>rate()</code>
-      decides what to do by looking at a suffix. A dashboard multiplies by a thousand, or
-      doesn't, because of a word. A Zabbix item key is built from the name and then
-      collects history under it for months. Nothing in that chain validates anything, and
-      that is the whole problem: a name that lies produces a graph, not an error.
+      <code>rate()</code> decides what to do by looking at a suffix. A dashboard divides
+      by a thousand because of a word. A Zabbix item key is built from the name and then
+      collects history under it for months. Nothing in that chain validates the name, so
+      a name that lies produces a graph instead of an error.
     </p>
 
     <p>
-      Prometheus and OpenTelemetry agree on three rules about this. They are short, they
-      are mechanical, and a codebase drifts away from them one reasonable commit at a
-      time.
+      Prometheus and OpenTelemetry ask for the same things here. We got them wrong in
+      0.6.0 and fixed them in 0.6.1, which is where the examples below come from.
     </p>
 
-    <h2><span class="n">Rule one</span>Base units, always</h2>
+    <h2>Base units</h2>
 
     <p>
-      Seconds and bytes. Not milliseconds, not days, not bits per second. The linter
-      carries the table, and it is shorter than people expect:
+      Seconds and bytes. The linter carries the table, and it is short:
     </p>
 
     <div class="shell">
@@ -242,33 +230,28 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </div>
 
     <p>
-      The reason is not tidiness. The unit is implicit in the name, so it lives in every
-      constant written against it — every threshold, every panel's division. When the
-      unit varies between exporters, the conversion moves into other people's queries,
-      silently, one copy at a time. An alert ported from an exporter that works in
-      seconds onto one that works in milliseconds is off by a factor of a thousand and
-      looks perfectly reasonable.
+      The unit is implicit in the name, so it ends up in every threshold and every panel
+      division written against it. When it varies between exporters, the conversion moves
+      into other people's queries. An alert ported from an exporter that works in seconds
+      onto one that works in milliseconds is wrong by a factor of a thousand and looks
+      fine.
     </p>
 
     <p>
-      The case that slips through review is the one that reads well in English. A
-      certificate expiry in days is immediately legible to a human, which is exactly why
-      nobody questions it, and it is wrong for the same reason everything else here is
-      wrong: the machine never sees the English.
+      A certificate expiry in days is the case that survives review, because it reads
+      well. The machine does not read it.
     </p>
 
-    <h2><span class="n">Rule two</span><code>_total</code> is a type declaration</h2>
+    <h2><code>_total</code> declares a type</h2>
 
     <p>
-      Prometheus reserves the <code>_total</code> suffix for counters — monotonic series
-      you take a <code>rate()</code> of. It is not an adjective meaning "the whole
-      thing". A gauge wearing it is not mislabelled; it is misdeclared, and every tool
-      downstream acts on the declaration.
+      Prometheus reserves <code>_total</code> for counters, the monotonic series you take
+      a <code>rate()</code> of. A gauge carrying that suffix is read as a counter by
+      everything downstream.
     </p>
 
     <p>
-      Take a gauge counting jobs that exist, named <code>..._total</code>. It reads 12,
-      then 9, then 14.
+      A gauge counting jobs, named <code>..._total</code>, reads 12, then 9, then 14.
     </p>
 
     <div class="shell">
@@ -281,20 +264,14 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
 <span class="bad">reported increase:  (14 - 12) + 12  =  14</span>
 <span class="c">actual change:                        +2 jobs</span></pre>
       <p class="cap">
-        Nothing errors. The query returns, the panel draws, the alert evaluates against a
-        number that was never measured.
+        Nothing errors. The query returns, the panel draws, the alert evaluates.
       </p>
     </div>
 
-    <div class="pull">
-      A name that is wrong is not a cosmetic problem. It is a tool reading your data
-      backwards and telling you nothing is wrong.
-    </div>
-
     <p>
-      When we audited our own agent against this rule, the interesting part was not the
-      renaming. It was discovering what <code>.total</code> had been standing in for.
-      Three different questions, one word:
+      Our own audit turned up something we had not expected. <code>.total</code> was
+      standing for three different things at once, so the work was not renaming, it was
+      deciding what each one meant:
     </p>
 
     <div class="tbl-wrap">
@@ -321,19 +298,16 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </div>
 
     <p>
-      A count, a capacity and a size are three different questions about a system, and
-      each one had been given the same answer-shaped word. None of them looked wrong next
-      to the code that produced it. They only looked wrong next to each other.
+      None of them looked wrong next to the code that produced it.
     </p>
 
-    <h2><span class="n">Rule three</span>The unit appears once, spelled out</h2>
+    <h2>The unit once, spelled out</h2>
 
     <p>
-      Abbreviations are rejected on sight — <code>s</code>, <code>ms</code>,
+      Abbreviations are rejected on sight: <code>s</code>, <code>ms</code>,
       <code>us</code>, <code>ns</code>, <code>sec</code>, <code>kb</code>,
-      <code>mb</code>. And once a pipeline generates names rather than writing them, a
-      second failure appears: a name that already carries its unit, meeting a generator
-      that appends the canonical one.
+      <code>mb</code>. And a generated name that already carries its unit gets the
+      canonical one appended on top of it.
     </p>
 
     <div class="shell">
@@ -345,26 +319,20 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
 <span class="c">  the source name already said per_sec; the generator added the rest</span></pre>
     </div>
 
-    <h2>Where the two conventions collide</h2>
+    <h2>Where the rules collide</h2>
 
     <p>
-      This is the part worth knowing before you turn a linter on in CI, because it is
-      where the rules stop being rules and become a judgement.
+      OpenTelemetry names a gauge that counts objects <code>&lt;object&gt;.count</code>.
+      Prometheus reserves <code>_count</code> for histograms and summaries. We keep the
+      OpenTelemetry spelling and exempt it, rather than invent a third name that neither
+      ecosystem uses.
     </p>
 
     <p>
-      <strong>OpenTelemetry names a gauge that counts objects <code>&lt;object&gt;.count</code>.
-      Prometheus reserves <code>_count</code> for histograms and summaries.</strong> Both
-      conventions are right and they do not agree. We keep the OpenTelemetry spelling and
-      exempt it explicitly, rather than invent a third name that neither ecosystem uses.
-    </p>
-
-    <p>
-      <strong>And a linter is a heuristic over words, so it will occasionally be wrong
-      about yours.</strong> In <code>senhub_netscaler_ns_throughput_bytes_per_second</code>,
-      <code>ns</code> is NetScaler's own word for the appliance-wide scope. The linter
-      reads nanoseconds. There is no way for it to know, so the exemption is written
-      down, narrowly, where it is enforced:
+      A linter works on words, so it will be wrong about some of yours. In
+      <code>senhub_netscaler_ns_throughput_bytes_per_second</code>, <code>ns</code> is
+      NetScaler's own word for the appliance, not nanoseconds. The exemption is written
+      where the rule is applied:
     </p>
 
     <div class="shell">
@@ -377,17 +345,15 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     <span class="k">return</span> token == <span class="p">"ns"</span> &amp;&amp; strings.HasPrefix(name, <span class="p">"senhub_netscaler_ns_"</span>)
 }</pre>
       <p class="cap">
-        One name, one reason, in the file that enforces the rule. The alternative —
-        switching the check off for a package, or for the abbreviation class — is how a
-        convention quietly stops being enforced.
+        One name, one reason. Switching the check off for a package, or for the whole
+        abbreviation class, is how a convention stops being applied.
       </p>
     </div>
 
-    <h2>Checking it, once and then forever</h2>
+    <h2>Checking it</h2>
 
     <p>
-      Prometheus ships the linter. It reads an exposition on standard input, so pointing
-      it at yourself costs one line:
+      Prometheus ships the linter and it reads an exposition on standard input.
     </p>
 
     <div class="shell">
@@ -396,16 +362,14 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </div>
 
     <p>
-      Run it today. It is worth the minute, and if your exporter is more than a year old
-      it will find something. But a one-off audit fixes the names once, and the drift
-      comes back, because no one ever chose the drift: each name was reasonable when it
-      was written.
+      Run it. If your exporter is more than a year old it will find something.
     </p>
 
     <p>
-      So the version worth having is not a command, it is a test. Ours walks every probe
-      definition and the agent's own self-metrics, derives the Prometheus name each one
-      will be exposed under, and applies the lint to it:
+      An audit fixes the names once. Nobody chose the drift in the first place, so it
+      comes back. We turned the lint into a test that walks every probe definition and
+      the agent's own metrics, derives the Prometheus name each one will be exposed
+      under, and applies the rules to it:
     </p>
 
     <div class="shell">
@@ -420,39 +384,27 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </div>
 
     <p>
-      And beside it, a second test whose only job is to feed the guard one name of each
-      broken class and fail if the guard lets them through. It looks redundant until you
-      remember what a naming guard is: a few string comparisons that will keep passing
-      quietly on the day one of them stops matching. A check that cannot fail is worse
-      than no check, because it is also a reason not to look.
+      A second test feeds that guard one name of each broken class and fails if they get
+      through. A naming guard is a handful of string comparisons, and it will go on
+      passing quietly the day one of them stops matching.
     </p>
 
     <h2>If you have to rename</h2>
 
     <p>
-      Two things are worth knowing, and we learned the second one by writing the upgrade
-      notes.
+      We did not export both names for a transition period. It doubles the series count
+      for everyone, and nobody migrates while the old name still works.
     </p>
 
     <p>
-      <strong>A transition period is a trap.</strong> Exporting both names for a while is
-      the humane-looking option. It doubles the series count for everyone, doubles the
-      surface you have to keep correct, and — watching other projects do it — nobody
-      migrates while the old name still works. It converts a one-off cost into a
-      permanent one.
+      An alert left on an old name does not go red. The series it reads no longer exists,
+      so nothing is evaluated and nothing is signalled. The check is arithmetic: compare
+      the number of series a rule reads before and after.
     </p>
 
     <p>
-      <strong>The failure mode of a rename is silence.</strong> An alert left on an old
-      name does not go red. The series it reads no longer exists, so nothing is
-      evaluated and nothing signals it: the rule goes quiet, and quiet is what you were
-      hoping for. The check is not visual, it is arithmetic — compare the number of
-      series a rule reads before and after.
-    </p>
-
-    <p>
-      And during a rollout a fleet runs both versions at once, so the bridging query
-      needs more care than it looks:
+      A fleet runs both versions during a rollout, so the bridging query needs its
+      aggregation.
     </p>
 
     <div class="shell">
@@ -462,24 +414,15 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
   <span class="k">or</span> senhub_httpcheck_tls_expiry_days
 ) &lt; 14</pre>
       <p class="cap">
-        The <code>or</code> takes whichever form exists. The aggregation is the part
-        people drop: for a few minutes after a restart both forms are current for the
-        same target, and without it every target fires twice.
+        The <code>or</code> takes whichever form exists. For a few minutes after a
+        restart both are current for the same target, and without the
+        <code>min by</code> every target fires twice.
       </p>
     </div>
 
-    <h2>The short version</h2>
-
-    <p>
-      Seconds and bytes. <code>_total</code> only on a counter. The unit once, spelled
-      out. Exemptions named one by one, in code, with their reason. And a test, because
-      the rules are not hard — remembering them in eighteen months, in a file nobody is
-      reviewing for naming, is the hard part.
-    </p>
-
     <div class="after">
       These rules landed in the agent in 0.6.1, which renamed a list of series and
-      converted their units. The complete table, probe by probe, and what it means for
+      converted their units. The full table, probe by probe, and what it means for
       Prometheus, Zabbix, PRTG and Nagios, is in the
       <a href="/docs/latest/whats-new/0.6.1/">0.6.1 release note</a>.
     </div>

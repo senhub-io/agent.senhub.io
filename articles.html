@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Articles — SenHub Agent</title>
-    <meta name="description" content="Notes from building SenHub Agent: what we measured, what we got wrong, and what the conventions actually ask for." />
+    <meta name="description" content="Notes from building SenHub Agent: the decisions behind the releases, and what we had to work out to get there." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/articles.html" />
     <meta property="og:title" content="SenHub Agent articles" />
-    <meta property="og:description" content="Notes from building SenHub Agent: what we measured, what we got wrong, and what the conventions actually ask for." />
+    <meta property="og:description" content="Notes from building SenHub Agent: the decisions behind the releases, and what we had to work out to get there." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
@@ -16,7 +16,7 @@
     <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SenHub Agent articles" />
-    <meta name="twitter:description" content="Notes from building SenHub Agent: what we measured, what we got wrong, and what the conventions actually ask for." />
+    <meta name="twitter:description" content="Notes from building SenHub Agent: the decisions behind the releases, and what we had to work out to get there." />
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
     <style>
       :root {
@@ -136,8 +136,8 @@
   <div class="wrap">
     <h1>Articles</h1>
     <p>
-      Notes from building the agent: what we measured, what we got wrong, and what the
-      conventions actually ask for. Release notes say what changed — these say why.
+      Notes from building the agent. Release notes say what changed in a version. These
+      pages are for the things that took longer to work out than they took to ship.
     </p>
   </div>
 </header>
@@ -151,10 +151,10 @@
       </div>
       <h2>How to name a metric so tools read it right</h2>
       <p>
-        Nobody reads a metric name except machines, and a wrong one does not make them
-        fail — it makes them answer confidently with a number nobody measured. The
-        three rules Prometheus and OpenTelemetry agree on, what breaking each one does
-        downstream, and how to keep a codebase from drifting back.
+        Nobody reads a metric name except machines. When one is wrong they do not fail,
+        they answer with a number nobody measured. The rules Prometheus and
+        OpenTelemetry share, and what we found when we checked our own output against
+        them.
       </p>
       <div class="go">Read →</div>
     </a>
