@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Metric names are an API — SenHub Agent</title>
+    <meta name="description" content="We ran promtool check metrics against our own output. It failed. Here is what it found, and why we renamed the series rather than keep the old names." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://agent.senhub.io/articles/metric-names-are-an-api.html" />
+    <meta property="og:title" content="Metric names are an API" />
+    <meta property="og:description" content="We ran promtool check metrics against our own output. It failed. Here is what it found, and why we renamed the series rather than keep the old names." />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SenHub Agent" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://agent.senhub.io/articles/metric-names-are-an-api.html" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Metric names are an API" />
+    <meta name="twitter:description" content="We ran promtool check metrics against our own output. It failed." />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
+    <style>
+      :root {
+        --bg: #fbfbfd; --panel: #ffffff; --panel-2: #f5f6fa;
+        --ink: #212529; --muted: #5b6472;
+        --accent: #fcbe36; --accent-dark: #f0ad17; --accent-ink: #212529;
+        --cyan: #00caf6; --cyan-dark: #0091bd; --line: #e7e9ef;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
+          --ink: #eceef3; --muted: #99a2b1;
+          --accent-dark: #ffd066; --accent-ink: #1a1c21;
+          --cyan-dark: #53d9f7; --line: #2c313a;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
+        --ink: #eceef3; --muted: #99a2b1;
+        --accent-dark: #ffd066; --accent-ink: #1a1c21;
+        --cyan-dark: #53d9f7; --line: #2c313a;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--bg); color: var(--ink);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 780px; margin: 0 auto; padding-inline: 24px; }
+      .col { max-width: 640px; }
+      a { color: var(--cyan-dark); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      a:focus-visible { outline: 2px solid var(--cyan-dark); outline-offset: 3px; border-radius: 3px; }
+      h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+      .nav { border-bottom: 1px solid var(--line); background: var(--panel); }
+      .nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 14px; }
+      .brand {
+        display: flex; align-items: center; gap: 10px;
+        font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
+      }
+      .brand:hover { text-decoration: none; }
+      .brand .mark { width: 30px; height: 30px; flex: none; display: block; }
+      .brand .bt span { color: var(--muted); font-weight: 500; }
+      .nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+      .nav .links .on { color: var(--ink); font-weight: 650; }
+
+      article { padding-block: 48px 20px; }
+      .crumb { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+      article h1 {
+        font-size: clamp(28px, 4.4vw, 38px); font-weight: 800;
+        letter-spacing: -0.022em; line-height: 1.15;
+      }
+      .meta {
+        margin-top: 14px; font-size: 13.5px; color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+      }
+      .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+      .standfirst {
+        margin: 26px 0 0; font-size: 20px; line-height: 1.55; color: var(--muted);
+      }
+      article p { margin: 22px 0 0; }
+      article h2 {
+        margin: 42px 0 0; font-size: 21px; font-weight: 750; letter-spacing: -0.012em;
+      }
+      article h2 + p { margin-top: 12px; }
+      strong { font-weight: 680; }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.87em; background: var(--panel-2); padding: 1px 5px;
+        border-radius: 4px; border: 1px solid var(--line);
+      }
+      .pull {
+        margin: 32px 0 0; padding: 18px 22px;
+        border-left: 3px solid var(--accent); background: var(--panel-2);
+        border-radius: 0 8px 8px 0; font-size: 18.5px; line-height: 1.5;
+      }
+      .tbl-wrap { margin-top: 24px; overflow-x: auto; }
+      table {
+        border-collapse: collapse; width: 100%; font-size: 14.5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); }
+      th {
+        font-family: system-ui, sans-serif; font-size: 11.5px; font-weight: 800;
+        letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+      }
+      td.was { color: var(--muted); }
+      .after {
+        margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line);
+        font-size: 15px; color: var(--muted);
+      }
+      footer { border-top: 1px solid var(--line); padding-block: 24px 40px; margin-top: 40px; }
+      footer p { margin: 0; font-size: 14px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="rbt" viewBox="0 0 120 120">
+    <rect x="57" y="20" width="6" height="20" rx="3" fill="#4a4a4a"/>
+    <circle cx="60" cy="18" r="9" fill="#00caf6"/>
+    <rect x="14" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="90" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="24" y="40" width="72" height="64" rx="16" fill="#4a4a4a"/>
+    <rect x="33" y="49" width="54" height="46" rx="9" fill="#ededed"/>
+    <circle cx="49" cy="66" r="7" fill="#fcbe36"/>
+    <circle cx="71" cy="66" r="7" fill="#fcbe36"/>
+    <rect x="42" y="80" width="36" height="11" rx="2" fill="none" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="51" y1="80" x2="51" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="60" y1="80" x2="60" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="69" y1="80" x2="69" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+  </symbol>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>
+      <span class="bt">SenHub <span>Agent</span></span>
+    </a>
+    <div class="links">
+      <a href="/docs/latest/">Docs</a>
+      <a class="on" href="/articles.html">Articles</a>
+      <a href="/news.html">Releases</a>
+      <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <article class="col">
+    <div class="crumb"><a href="/articles.html">Articles</a></div>
+    <h1>Metric names are an API</h1>
+    <div class="meta">
+      <span>13 October 2026</span><span class="dot"></span>
+      <span>Shipped in 0.6.1</span>
+    </div>
+
+    <p class="standfirst">
+      We ran <code>promtool check metrics</code> against our own output. It failed.
+      Fixing it meant renaming series our users had already built dashboards on — and
+      doing it without a transition period.
+    </p>
+
+    <p>
+      A metric name is not a label. Once it is exported, it is in somebody's dashboard,
+      somebody's alert rule, somebody's recording rule, and — if they poll us with
+      Zabbix — in the key of an item that has been collecting history for months. It
+      behaves like a published interface, which means it has the one property interfaces
+      have: changing it costs other people work.
+    </p>
+
+    <p>
+      That is a good reason to get it right early, and a bad reason never to fix it.
+    </p>
+
+    <h2>What the linter found</h2>
+
+    <p>
+      Prometheus ships <code>promtool check metrics</code>, which reads an exposition
+      and complains about names and units that break the convention. We pointed it at
+      0.6.0, the release we had just shipped. Three families of problem came back.
+    </p>
+
+    <p>
+      <strong>Units that were not base units.</strong> Durations were exported in
+      milliseconds, microseconds, nanoseconds, hours — and, for the HTTP check's
+      certificate expiry, in days. Throughputs were exported in bits per second.
+      Prometheus and OpenTelemetry both ask for seconds and bytes, and for a good
+      reason: when the unit is implicit in the name, a dashboard built against one
+      exporter transfers to another. When it is not, every panel carries its own
+      invisible multiplication.
+    </p>
+
+    <p>
+      <strong>Gauges wearing a counter's suffix.</strong> Prometheus reserves the
+      <code>.total</code> suffix for counters — monotonic series you take a
+      <code>rate()</code> of. We had gauges ending in it. The clearest case:
+      <code>senhub_veeam_jobs_total</code> was the number of jobs that exist, a value
+      that goes up and down, and <strong>every tool in the chain read it as a
+      counter</strong>. A <code>rate()</code> over it is not approximately right; it is
+      meaningless.
+    </p>
+
+    <p>
+      <strong>Names that said the unit twice, or wrongly.</strong>
+      <code>senhub_redis_cmd_usec_microseconds_total</code> is the kind of thing that
+      happens when a name grows one commit at a time.
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>0.6.0</th><th>0.6.1</th></tr></thead>
+        <tbody>
+          <tr><td class="was">senhub.veeam.jobs.total</td><td>senhub.veeam.job.count</td></tr>
+          <tr><td class="was">senhub.citrix.machines.total</td><td>senhub.citrix.machine.count</td></tr>
+          <tr><td class="was">ceph.osd.total</td><td>ceph.osd.count</td></tr>
+          <tr><td class="was">senhub_redis_cmd_usec_microseconds_total</td><td>senhub_redis_cmd_time_seconds_total</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>No transition period</h2>
+
+    <p>
+      The tempting answer is to export both names for a while. We decided against it,
+      and the reason is worth stating plainly: a dual-name period doubles the series
+      count for everyone, doubles the surface we have to keep correct, and — in our
+      experience of watching other projects do it — nobody migrates until the old name
+      disappears. It converts a one-off cost into a permanent one.
+    </p>
+
+    <p>
+      So 0.6.1 renames, and the upgrade asks for work: dashboards, alerts and recording
+      rules built on the old names have to be updated. The release note carries the full
+      table rather than a summary, because a partial list is worse than none.
+    </p>
+
+    <div class="pull">
+      A name that is wrong is not a cosmetic problem. It is a tool reading your data
+      backwards and telling you nothing is wrong.
+    </div>
+
+    <h2>What it did not touch</h2>
+
+    <p>
+      <strong>PRTG and Nagios are unaffected.</strong> They keep their channel names and
+      the probe's display unit, because those are presentation surfaces where the unit
+      is shown next to the value rather than carried by the name. The convention we were
+      failing is a Prometheus and OpenTelemetry convention; applying it where it does not
+      belong would have been its own kind of wrong.
+    </p>
+
+    <p>
+      <strong>Zabbix sits in between.</strong> Its item keys are built from the metric
+      names and its values from these units, so the keys changed with them. Re-running
+      <code>senhub-agent zabbix setup</code> after the upgrade refreshes the templates.
+      The old items do not vanish — they keep their history and stop receiving, which is
+      the failure mode worth knowing about: nothing errors, the curves simply stop.
+    </p>
+
+    <h2>The part that generalises</h2>
+
+    <p>
+      Running the ecosystem's own linter against your own output is cheap, and we had not
+      done it. It took one command to find a year of accumulated drift, and the drift was
+      invisible from the inside: every name looked reasonable next to the code that
+      produced it. It only looked wrong next to the convention.
+    </p>
+
+    <p>
+      If you export metrics, point <code>promtool check metrics</code> at yourself before
+      your users do.
+    </p>
+
+    <div class="after">
+      Everything above is in the <a href="/docs/latest/whats-new/0.6.1/">0.6.1 release
+      note</a>, including the complete table of renamed series and the units that
+      changed, probe by probe.
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><a href="/articles.html">All articles</a> · <a href="/news.html">Releases</a> · <a href="/docs/latest/">Documentation</a></p>
+  </div>
+</footer>
+
+  </body>
+</html>
