@@ -222,11 +222,68 @@
 
     <div class="entry current">
       <div class="side">
+        <div class="ver">0.6.3</div>
+        <div class="date">2026-10-13</div>
+      </div>
+      <div class="body">
+        <div class="tags"><span class="tag now">Latest</span><span class="tag">New</span></div>
+        <h2>The Azure Container Apps collector, finished</h2>
+        <ul class="pts">
+          <li><b>Discovery that reports its own coverage.</b> Every application of a
+             subscription is found and followed, and the probe publishes how many it
+             found, followed and left out — so "26 of 26" is a metric, not a hope.</li>
+          <li><b>Container App Jobs are discovered too</b>, each with its own execution
+             history, and <b>one Azure identity is shared</b> by every Azure probe
+             instead of being repeated per probe.</li>
+          <li><b><code>senhub-agent check azure</code></b> — a read-only command that
+             verifies the token, the subscription, what is visible and each permission,
+             before anything is deployed.</li>
+          <li><b>Log volume per application</b>, counted in bytes of published bodies,
+             so it compares with what Log Analytics bills. Plus two official Grafana
+             dashboards.</li>
+          <li><b>Configuration, secrets and identity on an Azure Files share</b>, and
+             the on-disk queue carried a three-hour backend outage with no log lost.</li>
+        </ul>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.3/">Full release note →</a></p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="side">
+        <div class="ver">0.6.2</div>
+        <div class="date">2026-10-08</div>
+      </div>
+      <div class="body">
+        <div class="tags"><span class="tag sec">Security</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
+        <h2>Linux packages, fleet deployment, and a credential leak closed</h2>
+        <ul class="pts">
+          <li><b>Signed Linux packages and repositories</b>, plus three ways to deploy
+             at scale: an Ansible collection, a Helm chart and a Podman Quadlet unit.
+             Probes can also be declared from environment variables.</li>
+          <li><b>Security — act on this one.</b> A credential embedded in a probe's
+             connection URI (<code>scheme://user:password@host</code>: MongoDB, Redis,
+             PostgreSQL, AMQP) was written in clear to the agent log in 0.6.1 and
+             earlier. 0.6.2 masks it. If you used such URIs: upgrade, delete or rotate
+             the old log files, and change that account's password.</li>
+          <li><b>Breaking:</b> a host's name is now one value everywhere — a
+             <code>host.name</code> override that only reached metrics and logs now
+             also names the host entity and its systemd units. The <code>host.id</code>
+             is unchanged, so the topology node is the same node.</li>
+          <li><b>Lighter at rest.</b> Probe definitions and console pages are parsed
+             when first needed rather than all at start, and five lines that fired on
+             every healthy cycle moved from INFO to DEBUG.</li>
+        </ul>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.2/">Full release note →</a></p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="side">
         <div class="ver">0.6.1</div>
         <div class="date">2026-09-30</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">Fixed</span></div>
+        <div class="tags"><span class="tag brk">Breaking</span><span class="tag">Fixed</span></div>
         <h2>Metric names and units follow the conventions</h2>
         <p>
           A corrective release, but one that renames series. <code>promtool check
