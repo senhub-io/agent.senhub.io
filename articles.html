@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Articles — SenHub Agent</title>
+    <meta name="description" content="Notes from building SenHub Agent: what we measured, what we got wrong, and what the conventions actually ask for." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://agent.senhub.io/articles.html" />
+    <meta property="og:title" content="SenHub Agent articles" />
+    <meta property="og:description" content="Notes from building SenHub Agent: what we measured, what we got wrong, and what the conventions actually ask for." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SenHub Agent" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://agent.senhub.io/articles.html" />
+    <meta property="og:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SenHub Agent articles" />
+    <meta name="twitter:description" content="Notes from building SenHub Agent: what we measured, what we got wrong, and what the conventions actually ask for." />
+    <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
+    <style>
+      :root {
+        --bg: #fbfbfd; --panel: #ffffff; --panel-2: #f5f6fa;
+        --ink: #212529; --muted: #5b6472;
+        --accent: #fcbe36; --accent-dark: #f0ad17; --accent-ink: #212529;
+        --cyan: #00caf6; --cyan-dark: #0091bd; --line: #e7e9ef;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
+          --ink: #eceef3; --muted: #99a2b1;
+          --accent-dark: #ffd066; --accent-ink: #1a1c21;
+          --cyan-dark: #53d9f7; --line: #2c313a;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
+        --ink: #eceef3; --muted: #99a2b1;
+        --accent-dark: #ffd066; --accent-ink: #1a1c21;
+        --cyan-dark: #53d9f7; --line: #2c313a;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--bg); color: var(--ink);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 780px; margin: 0 auto; padding-inline: 24px; }
+      a { color: var(--cyan-dark); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      a:focus-visible { outline: 2px solid var(--cyan-dark); outline-offset: 3px; border-radius: 3px; }
+      h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+      .nav { border-bottom: 1px solid var(--line); background: var(--panel); }
+      .nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 14px; }
+      .brand {
+        display: flex; align-items: center; gap: 10px;
+        font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
+      }
+      .brand:hover { text-decoration: none; }
+      .brand .mark { width: 30px; height: 30px; flex: none; display: block; }
+      .brand .bt span { color: var(--muted); font-weight: 500; }
+      .nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+      .nav .links .on { color: var(--ink); font-weight: 650; }
+
+      header.top { padding-block: 52px 10px; }
+      header.top h1 {
+        font-size: clamp(28px, 4.6vw, 38px); font-weight: 800;
+        letter-spacing: -0.02em; line-height: 1.15;
+      }
+      header.top p { color: var(--muted); max-width: 60ch; margin: 14px 0 0; }
+
+      .list { padding-block: 30px 70px; }
+      .post {
+        display: block; padding: 24px 0; border-top: 1px solid var(--line);
+        color: inherit;
+      }
+      .post:last-of-type { border-bottom: 1px solid var(--line); }
+      .post:hover { text-decoration: none; }
+      .post:hover h2 { color: var(--cyan-dark); }
+      .post .meta {
+        font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums;
+        display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
+        margin-bottom: 7px;
+      }
+      .post .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+      .post h2 { font-size: 21px; font-weight: 750; letter-spacing: -0.012em; }
+      .post p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; max-width: 64ch; }
+      .post .go { margin-top: 10px; font-size: 14.5px; color: var(--cyan-dark); font-weight: 650; }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.87em; background: var(--panel-2); padding: 1px 5px;
+        border-radius: 4px; border: 1px solid var(--line);
+      }
+
+      footer { border-top: 1px solid var(--line); padding-block: 24px 40px; }
+      footer p { margin: 0; font-size: 14px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="rbt" viewBox="0 0 120 120">
+    <rect x="57" y="20" width="6" height="20" rx="3" fill="#4a4a4a"/>
+    <circle cx="60" cy="18" r="9" fill="#00caf6"/>
+    <rect x="14" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="90" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+    <rect x="24" y="40" width="72" height="64" rx="16" fill="#4a4a4a"/>
+    <rect x="33" y="49" width="54" height="46" rx="9" fill="#ededed"/>
+    <circle cx="49" cy="66" r="7" fill="#fcbe36"/>
+    <circle cx="71" cy="66" r="7" fill="#fcbe36"/>
+    <rect x="42" y="80" width="36" height="11" rx="2" fill="none" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="51" y1="80" x2="51" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="60" y1="80" x2="60" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+    <line x1="69" y1="80" x2="69" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+  </symbol>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>
+      <span class="bt">SenHub <span>Agent</span></span>
+    </a>
+    <div class="links">
+      <a href="/docs/latest/">Docs</a>
+      <a class="on" href="/articles.html">Articles</a>
+      <a href="/news.html">Releases</a>
+      <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Articles</h1>
+    <p>
+      Notes from building the agent: what we measured, what we got wrong, and what the
+      conventions actually ask for. Release notes say what changed — these say why.
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="list">
+
+    <a class="post" href="/articles/metric-names-are-an-api.html">
+      <div class="meta">
+        <span>13 October 2026</span><span class="dot"></span><span>Conventions</span>
+      </div>
+      <h2>Metric names are an API</h2>
+      <p>
+        We ran <code>promtool check metrics</code> against our own output and it failed:
+        durations in microseconds, throughputs in bits per second, and gauges wearing a
+        counter's suffix. Fixing it meant renaming series our users had already built
+        dashboards on — without a transition period, and here is why.
+      </p>
+      <div class="go">Read →</div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><a href="/news.html">Releases</a> · <a href="/docs/latest/">Documentation</a> · <a href="https://github.com/senhub-io/senhub-agent">GitHub</a></p>
+  </div>
+</footer>
+
+  </body>
+</html>
