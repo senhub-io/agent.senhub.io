@@ -4865,7 +4865,7 @@ reads them, so they apply with a configuration of your own too (see
 <td><code>SENHUB_HOST_ID</code></td>
 <td>No</td>
 <td>kept in the state directory</td>
-<td>Gives the host a stable identity across the re-creation of its container, so a new container is the same host in the graph and not a new one. 32 hexadecimal characters, dashes optional. One value per host: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code></td>
+<td>Gives the host a stable identity across the re-creation of its container, so a new container is the same host in the graph and not a new one. 32 hexadecimal characters, dashes optional. One value per host: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code>. The agent itself reads it, so it also applies to the binary run outside this image (several containers on one VM would otherwise all report the VM's DMI identity); a value it cannot use is named in the log at start</td>
 </tr>
 <tr>
 <td><code>SENHUB_AGENT_KEY</code></td>
