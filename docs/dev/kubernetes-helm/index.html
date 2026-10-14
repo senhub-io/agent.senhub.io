@@ -677,6 +677,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pod-and-container-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pod and container resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pod-logs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3614,6 +3625,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../probes/kubelet_stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubelet stats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../probes/swarm/" class="md-nav__link">
         
   
@@ -4561,6 +4600,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pod-and-container-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pod and container resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pod-logs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4813,6 +4863,17 @@ two together). Install a second release for it:
 <code>--set hostMonitoring.enabled=false --set kubernetesProbe.enabled=true --set rbac.kubernetesProbe.enabled=true</code>
 (a Deployment). The same goes for a <code>ServiceMonitor</code> and for a whole
 <code>config.agent</code>, which carry one key for every agent.</p>
+<h2 id="pod-and-container-resources">Pod and container resources<a class="headerlink" href="#pod-and-container-resources" title="Permanent link">&para;</a></h2>
+<p>In the DaemonSet, each agent also reads its node's kubelet through the
+<a href="../probes/kubelet_stats/"><code>kubelet_stats</code></a> probe: CPU, memory,
+filesystem and network used by the node, each pod and each container.
+The chart binds a ClusterRole with <code>get</code> on <code>nodes/stats</code> to the
+service account, mounts its token, and gives the agent the node IP
+(<code>status.hostIP</code>). Turn it off with <code>--set kubeletStats.enabled=false</code>.</p>
+<p>Most kubelets serve a self-signed certificate that the cluster CA does
+not sign, so the chart sets <code>kubeletStats.insecureSkipVerify: true</code>. Set
+it to <code>false</code> once the kubelet serving certificates are signed by the
+cluster CA (<code>serverTLSBootstrap</code>).</p>
 <h2 id="pod-logs">Pod logs<a class="headerlink" href="#pod-logs" title="Permanent link">&para;</a></h2>
 <p>In the DaemonSet, each agent also ships the stdout and stderr of every
 pod of its node, through the <a href="../probes/kubernetes_logs/"><code>kubernetes_logs</code></a>
