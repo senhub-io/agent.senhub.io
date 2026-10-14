@@ -3743,6 +3743,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -3759,6 +3777,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -4324,6 +4372,25 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -4350,6 +4417,13 @@
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
 <p>Nothing released yet since 0.6.3. Changes land here as they are merged.</p>
 <div class="rn-filter"></div>
+
+<h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Redis 8 key-size lines are no longer read as databases.</strong> Channels such as <code>DB 0_distrib_strings_sizes Keys</code> disappear; only <code>dbN</code> lines of the keyspace make a database.</li>
+<li><strong>An empty Redis keeps its db0 channels.</strong> Redis prints no keyspace line for a database without keys; the probe now reports <code>DB 0 Keys</code>, <code>DB 0 Expiring Keys</code> and <code>DB 0 Average TTL</code> at 0, so an alert on the key count keeps working when the instance is emptied. A Sentinel, which has no keyspace, gets none.</li>
+<li><strong>The Redis replication role reads "Sentinel or unknown" at -1.</strong> The PRTG lookup said "Unknown" with a warning on every Sentinel; the Redis page now gives the three values and how to install the lookups.</li>
+</ul>
 
 
 
