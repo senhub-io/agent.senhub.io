@@ -4567,6 +4567,8 @@ attributes listed below.</p>
 <code>/var/log/pods</code> directory mounted read-only. Auto-discovery is the
 primary mode: there is no static target list. Inclusion and exclusion
 globs are available to narrow the set of pods and namespaces.</p>
+<p>The probe runs on Linux nodes only: it follows a rotated log file by its
+inode, which Windows does not expose.</p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <p>Mount the node pod log directory and provide the agent's identity
 through the Kubernetes downward API. A minimal <code>DaemonSet</code> probe entry
