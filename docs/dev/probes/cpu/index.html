@@ -6003,6 +6003,27 @@ series' tags.</p>
 <td>s</td>
 <td>Time since the host booted, in seconds</td>
 </tr>
+<tr>
+<td><code>senhub.system.clock.synchronized</code></td>
+<td><code>system_clock_synchronized</code></td>
+<td>Host Clock Synchronized</td>
+<td>#</td>
+<td>1 when the clock is synchronised (Linux: adjtimex; Windows: the Windows Time service has at least one time source), else 0</td>
+</tr>
+<tr>
+<td><code>senhub.system.clock.offset</code></td>
+<td><code>system_clock_offset</code></td>
+<td>Host Clock Offset</td>
+<td>s</td>
+<td>Estimated error of the host clock in seconds (Linux: adjtimex esterror; Windows: Windows Time Service Computed Time Offset); absent while unsynchronised</td>
+</tr>
+<tr>
+<td><code>senhub.system.clock.max_error</code></td>
+<td><code>system_clock_max_error</code></td>
+<td>Host Clock Maximum Error</td>
+<td>s</td>
+<td>Maximum error of the host clock in seconds, from adjtimex maxerror; Linux only</td>
+</tr>
 </tbody>
 </table>
 <!-- schema:metrics:end -->
