@@ -5997,8 +5997,31 @@ publishes that as a stream any output may consume.</p>
 <td><code>false</code></td>
 <td>Also report the hosts and devices this host sees in its ARP/NDP table, as <code>network.neighbor</code> entities (identity: this host and the neighbour MAC address, <code>AA-BB-CC-DD-EE-FF</code>), each linked to the local interface it was seen on. Neighbours seen only on link-local addresses or on the default Docker/Podman bridge ranges are left out. Off by default: the receiving Toise must know the <code>network.neighbor</code> type, or it rejects these entities</td>
 </tr>
+<tr>
+<td><code>neighbors.resolves_to</code></td>
+<td><code>false</code></td>
+<td>Also link a neighbour to the interface that owns its MAC (<code>resolves_to</code>, with a <code>basis</code> of <code>arp</code>, <code>ndp</code> or <code>fdb</code> and a <code>confidence</code>), only when this agent observed both ends: the host's gateway neighbour to the router interface its own <code>snmp_poll</code> read, and the host's own MAC learned on a switch port to the host's interface. Another host's MAC is never resolved. This is what lets a path descend from a host to its switch port. Off by default: the receiving Toise must accept the relation's attributes</td>
+</tr>
+<tr>
+<td><code>aggregation.enabled</code></td>
+<td><code>false</code></td>
+<td>Link each member port of an Ethernet aggregate (LAG / LACP port-channel, Linux bond or team) to its aggregate interface (<code>aggregated_into</code>), on the host and on SNMP devices. The aggregate carries <code>senhub.interface.aggregation.mode</code> (<code>lacp</code>, <code>active-backup</code>, <code>static</code>); a member carries <code>senhub.interface.aggregation.state</code> (<code>active</code>, <code>standby</code>) only where the aggregate has a backup notion (LACP, active-backup). Addresses and routes sit on the aggregate while LLDP and switch tables see the members: without this link a path stops at every aggregate. Off by default: the receiving Toise must register the relation</td>
+</tr>
 </tbody>
 </table>
+<p>The host's routing table is always part of entity detection: every route of
+the main table, IPv4 and IPv6 (on Linux through netlink, so each next hop of a
+multipath route is its own route; on Windows from the forwarding table), with
+<code>route.type</code>, <code>route.protocol</code>, <code>network.route.protocol.code</code>, the egress
+<code>network.interface.name</code> and the metric, as described for devices in
+<a href="../probes/snmp-poll/#routes">SNMP Poll → Routes</a>. At most 500 routes are
+published per host; the host entity carries <code>senhub.routes.limit</code> and
+<code>senhub.routes.omitted</code>. The host entity also carries <code>senhub.host.ip_forwarding.ipv4</code> and
+<code>senhub.host.ip_forwarding.ipv6</code>, true when the host routes packets of that
+family between its interfaces (kernel switches on Linux, IP helper API on
+Windows), each absent when it could not be read: a path crosses a host only
+when it routes the path's address family, so a multi-homed server is not drawn
+as a gateway.</p>
 <p>A loopback peer on an OS dynamic port (the client side of a one-shot local exchange) is never mapped as a dependency, whatever these settings say (since 0.6.2).</p>
 <p><strong>Why this is not under an output.</strong> What a host <em>is</em> does not depend on
 where the description is shipped. The detector feeds a channel that
