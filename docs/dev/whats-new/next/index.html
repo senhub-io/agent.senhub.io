@@ -4498,6 +4498,7 @@
 
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Series metering (Enterprise).</strong> <code>senhub.agent.series.active</code>, <code>.created</code> and <code>.untracked</code> count, per output and probe, the series the agent exports over OTLP, the figure a time-series backend bills on. See <a href="../../otlp/#series-metering-enterprise">Series metering</a>.</li>
 <li><strong>Ethernet aggregates on the map (opt-in).</strong> LAG / LACP port-channels on switches and bonds or teams on Linux hosts and hypervisors: each member port is linked to its aggregate, with the aggregate's mode and, where it exists, each member's LACP or active-backup state, so a path no longer stops at an aggregate. <code>entities.aggregation.enabled</code>, off until the receiving Toise registers the relation.</li>
 <li>
 <p><strong>Hosts say whether they route.</strong> <code>senhub.host.ip_forwarding.ipv4</code> and <code>.ipv6</code> on the host entity, so a multi-homed server is not drawn as a gateway.</p>

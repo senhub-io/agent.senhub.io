@@ -1552,6 +1552,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#series-metering-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Series metering (Enterprise)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#what-time-a-point-carries" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5142,6 +5153,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#series-metering-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Series metering (Enterprise)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#what-time-a-point-carries" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6172,6 +6194,47 @@ budget in your strategy YAML:</p>
 under runaway-cardinality conditions. Raise them only when you know
 what's generating the series, otherwise the agent will happily eat
 RAM tracking churning timeseries.</p>
+<h3 id="series-metering-enterprise">Series metering (Enterprise)<a class="headerlink" href="#series-metering-enterprise" title="Permanent link">&para;</a></h3>
+<p>A time-series backend such as VictoriaMetrics sizes and bills on active
+series: a metric name with one set of point attributes, which received a
+sample within the last hour. The Enterprise edition counts them on the
+agent, as it exports, so you know what a host, a container or a pod
+costs before you size the backend:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Type</th>
+<th>Labels</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.agent.series.active</code></td>
+<td>gauge</td>
+<td><code>output</code>, <code>probe</code></td>
+<td>Series this output exported within the last hour</td>
+</tr>
+<tr>
+<td><code>senhub.agent.series.created</code></td>
+<td>counter</td>
+<td><code>output</code>, <code>probe</code></td>
+<td>Series exported for the first time since the agent started; a steady climb is churn the backend stores as new series</td>
+</tr>
+<tr>
+<td><code>senhub.agent.series.untracked</code></td>
+<td>counter</td>
+<td>–</td>
+<td>New series not counted because the agent reached its 500,000-series memory bound; above 0, the active counts are a floor</td>
+</tr>
+</tbody>
+</table>
+<p>The agent's own metrics are counted under <code>probe="__agent__"</code>. Global
+tags ride on the resource and do not multiply the count. The figures
+describe the exports up to the previous push. Metering needs an
+Enterprise licence; without it the agent counts nothing and emits none
+of these metrics.</p>
 <h3 id="what-time-a-point-carries">What time a point carries<a class="headerlink" href="#what-time-a-point-carries" title="Permanent link">&para;</a></h3>
 <p>Every push re-exports the last value of every stored series, so the time
 stamped on a point decides what a consumer sees between two runs of a
