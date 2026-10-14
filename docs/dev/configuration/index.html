@@ -5992,6 +5992,11 @@ publishes that as a stream any output may consume.</p>
 <td>none</td>
 <td>Peer ranges to leave out entirely</td>
 </tr>
+<tr>
+<td><code>neighbors.enabled</code></td>
+<td><code>false</code></td>
+<td>Also report the hosts and devices this host sees in its ARP/NDP table, as <code>network.neighbor</code> entities (identity: this host and the neighbour MAC address, <code>AA-BB-CC-DD-EE-FF</code>), each linked to the local interface it was seen on. Neighbours seen only on link-local addresses or on the default Docker/Podman bridge ranges are left out. Off by default: the receiving Toise must know the <code>network.neighbor</code> type, or it rejects these entities</td>
+</tr>
 </tbody>
 </table>
 <p>A loopback peer on an OS dynamic port (the client side of a one-shot local exchange) is never mapped as a dependency, whatever these settings say (since 0.6.2).</p>
