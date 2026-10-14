@@ -3850,6 +3850,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#features" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4446,6 +4457,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#features" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4493,30 +4515,51 @@
 
 
 <h1 id="next-unreleased">Next (unreleased)<a class="headerlink" href="#next-unreleased" title="Permanent link">&para;</a></h1>
-<p>Nothing released yet since 0.6.3. Changes land here as they are merged.</p>
+<p>0.6.4 puts the network on the map from the agent’s host: full routing tables, SNMP discovery, Ethernet aggregates and ARP/NDP neighbours, with Kubernetes resource and pod log collection from a DaemonSet, severity derived from more log formats, Redis Sentinel and ACL support, clock synchronisation reporting, and an opt-in self-log rail. It also fixes identity handling, SNMP series labels, Redis empty databases, heartbeat jitter, export counters, and other issues.</p>
 <div class="rn-filter"></div>
 
+<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Leaner host defaults, each restorable.</strong> The <code>network</code> probe no longer collects container and virtualisation interfaces (<code>veth</code>, <code>docker</code>, <code>br-</code>, <code>cni</code>, <code>flannel</code>, <code>cali</code>, <code>cilium</code>, <code>vxlan</code>, …; Hyper-V <code>vEthernet</code> adapters are kept) nor the <code>ip</code> label on interface series; <code>include_virtual_interfaces: true</code> and <code>address_label: true</code> restore them. On Windows the <code>cpu</code> probe keeps per-core usage and the full total, and <code>per_core_details: true</code> restores the per-core user, privileged, interrupt and DPC series. The PRTG channels of the dropped series disappear unless the option is set.</li>
+<li><strong>Kubernetes containers have one producer.</strong> On a Kubernetes node the <code>docker</code> probe no longer publishes containers carrying <code>io.kubernetes.pod.uid</code>; the <code>kubernetes</code> cluster probe describes them.</li>
+<li><strong>SNMP topology is swept every minute by default.</strong> <code>topology_interval</code> of <code>snmp_poll</code> (and so the discovery crawl) goes from 10 minutes to 1 minute, so a link going down is on the map within a minute. Polled devices answer a few more SNMP walks per minute; set <code>topology_interval</code> back to <code>10m</code> on a device that should be queried less often. Devices no longer carry <code>mgmt.ip</code>, which depended on the agent polling them; their addresses are <code>network.address</code> entities.</li>
+<li><strong>Metric series no longer carry the agent version.</strong> <code>service.version</code> is left off the metrics resource and the metric scope carries no version, so <code>service_version</code> and <code>otel_scope_version</code> labels disappear from every series in a Prometheus-like backend. Upgrading to 0.6.4 recreates the series once more; later upgrades no longer do. The version stays on logs, traces and <code>senhub.agent.build.info</code>.</li>
+<li><strong><code>SENHUB_HOST_ID</code> is now read by the agent binary itself.</strong> Previously only the container entrypoint used it; the agent now honours a valid value directly (lowercase, dashed machine-id). Hosts run outside the official image that set <code>SENHUB_HOST_ID</code> will change identity; an invalid value is logged and ignored.</li>
+<li><strong>Hosts and SNMP devices now publish full routing tables.</strong> Each route appears as an entity with <code>route.type</code>, <code>route.protocol</code>, the egress interface and metric, capped at 500 per host or device; <code>senhub.routes.omitted</code> reports how many were left out. Topology consumers will receive these new entities and attributes.</li>
+<li><strong>SNMP device and interface metrics are born with their keys.</strong> <code>network.device.id</code> and <code>network.interface.name</code> are present from the first data point; previously a series could be emitted without them and later gain labels, creating a keyless orphan series.</li>
+<li><strong>An empty Redis database now reports db0 at zero.</strong> When Redis omits the keyspace line for an empty db, the probe publishes <code>DB 0 Keys</code>, <code>DB 0 Expiring Keys</code> and <code>DB 0 Average TTL</code> at 0 (except on Sentinel). Alerts that relied on the absence of these channels will see them appear.</li>
+<li><strong>The Redis replication role at -1 now reads “Sentinel or unknown”.</strong> It no longer says “Unknown” with a warning on every Sentinel.</li>
+</ul>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Series metering (Enterprise).</strong> <code>senhub.agent.series.active</code>, <code>.created</code> and <code>.untracked</code> count, per output and probe, the series the agent exports over OTLP, the figure a time-series backend bills on. See <a href="../../otlp/#series-metering-enterprise">Series metering</a>.</li>
+<li><strong>Kubernetes nodes as their own entity.</strong> The <code>kubernetes</code> probe publishes each node as <code>k8s.node</code> (its role in the cluster: kubelet version, runtime, schedulable, Ready and pressure conditions), joined by <code>same_as</code> to the host it runs on, which keeps the machine facts.</li>
+<li><strong>Select all / Clear in the URL builder.</strong> Each tag filter of the console's sensor URL builder starts with "Select all" and "Clear".</li>
+<li><strong>Kubernetes Grafana dashboards.</strong> <code>kubernetes-workloads.json</code> (node, pod and container resources from <code>kubelet_stats</code>) and <code>kubernetes-logs.json</code> (pod logs and their volume) in <code>docs/grafana/</code>.</li>
 <li><strong>Ethernet aggregates on the map (opt-in).</strong> LAG / LACP port-channels on switches and bonds or teams on Linux hosts and hypervisors: each member port is linked to its aggregate, with the aggregate's mode and, where it exists, each member's LACP or active-backup state, so a path no longer stops at an aggregate. <code>entities.aggregation.enabled</code>, off until the receiving Toise registers the relation.</li>
-<li>
-<p><strong>Hosts say whether they route.</strong> <code>senhub.host.ip_forwarding.ipv4</code> and <code>.ipv6</code> on the host entity, so a multi-homed server is not drawn as a gateway.</p>
-</li>
-<li>
-<p><strong>Full routing tables on the map.</strong> Hosts and SNMP devices publish every route with its type (connected, remote, reject, blackhole), its origin (static, OSPF, BGP… in the IANA vocabulary), its egress interface and metric; each next hop of a multipath route is its own route, IPv6 included. Connected routes give the last hop of a path. A bound of 500 routes per host or device, with <code>senhub.routes.omitted</code> saying how many were left out. See <a href="../../probes/snmp-poll/#routes">SNMP Poll → Routes</a>.</p>
-</li>
-<li>
-<p><strong>SNMP discovery maps the network from the agent's host.</strong> The <code>discovery</code> block of <code>snmp_poll</code> now runs: from its seeds it follows LLDP neighbours, within bounds, and puts every device found on the map with its interfaces, addresses, routes and links. Without <code>seeds</code> it starts from the host's default gateways, and without <code>allowed_cidrs</code> it stays inside the host's private networks, so a profile with the community is enough. <code>senhub.snmp.discovery.*</code> metrics report devices, runs, duration, failures and seeds.</p>
-</li>
+<li><strong>Hosts say whether they route.</strong> <code>senhub.host.ip_forwarding.ipv4</code> and <code>.ipv6</code> on the host entity, so a multi-homed server is not drawn as a gateway.</li>
+<li><strong>Full routing tables on the map.</strong> Hosts and SNMP devices publish every route with its type (connected, remote, reject, blackhole), its origin (static, OSPF, BGP… in the IANA vocabulary), its egress interface and metric; each next hop of a multipath route is its own route, IPv6 included. Connected routes give the last hop of a path. A bound of 500 routes per host or device, with <code>senhub.routes.omitted</code> saying how many were left out. See <a href="../../probes/snmp-poll/#routes">SNMP Poll → Routes</a>.</li>
+<li><strong>SNMP discovery maps the network from the agent's host.</strong> The <code>discovery</code> block of <code>snmp_poll</code> now runs: from its seeds it follows LLDP neighbours, within bounds, and puts every device found on the map with its interfaces, addresses, routes and links. Without <code>seeds</code> it starts from the host's default gateways, and without <code>allowed_cidrs</code> it stays inside the host's private networks, so a profile with the community is enough. <code>senhub.snmp.discovery.*</code> metrics report devices, runs, duration, failures and seeds.</li>
+<li><strong>ARP and NDP neighbours on the map (opt-in).</strong> Each neighbour in the host table becomes a <code>network.neighbor</code> entity identified by <code>{host.id, mac}</code>, carries its addresses and the interface it was seen on, with a <code>neighbor_of</code> relation to that interface. <code>entities.neighbors.enabled</code> turns it on; <code>entities.neighbors.resolves_to</code> adds a <code>resolves_to</code> edge to the interface that owns the MAC when this agent observed both ends (basis <code>arp</code>, <code>ndp</code> or <code>fdb</code>). Both are off by default: the receiving Toise must know the <code>network.neighbor</code> type, and register <code>resolves_to</code> before that edge is turned on.</li>
+<li><strong>Kubernetes resource metrics from the kubelet.</strong> The Helm DaemonSet enables <code>kubelet_stats</code> by default; the probe reads the kubelet Summary API for CPU, memory, filesystem and network of the node, pods and containers, named after the OTel k8s conventions, with namespace globs to narrow pods. The chart binds the required ClusterRole, mounts the token and passes the node IP; <code>insecureSkipVerify</code> defaults to <code>true</code> because kubelet certificates are often self-signed.</li>
+<li><strong>Kubernetes pod logs from the DaemonSet.</strong> Helm enables <code>podLogs</code> by default, writing a <code>kubernetes_logs</code> probe that follows <code>/var/log/pods</code> on each Linux node. Every pod is discovered (the agent's own excluded), CRI partial chunks are reassembled, offsets survive rotation by inode, and records carry the OTel k8s attributes; include/exclude globs and optional multiline stack-trace folding are available.</li>
+<li><strong>Host clock synchronisation.</strong> The <code>cpu</code> probe reports <code>system.clock.synchronized</code>, estimated and maximum error, and the detected time source on Linux via <code>adjtimex</code>; on Windows it reads the Windows Time Service counters. <code>system_clock_max_error</code> is omitted when the platform cannot provide it instead of reading 0.</li>
+<li><strong>Redis Sentinel and ACL support.</strong> <code>redis</code> adds Sentinel quorum, failover state and peer Sentinels per master, with the master address as a tag, and accepts an optional ACL username (<code>AUTH &lt;user&gt; &lt;password&gt;</code>). The page gains a TLS and Sentinel example and the channels a failover moves.</li>
+<li><strong>Severity from more log formats.</strong> The parser derives severity from HTTP status codes in nginx and Apache access logs (5xx ERROR, 4xx WARN, else INFO), and from klog, abbreviated, java.util.logging, PostgreSQL, MySQL, Apache and JSON level keys; prose without a level stays unclassified.</li>
+<li><strong>Self-log rail (opt-in).</strong> <code>SENHUB_SELF_LOGS=warn</code> or <code>error</code> publishes the agent's own warnings and errors as log records from the <code>senhub-agent</code> producer, with <code>senhub.agent.module</code> and other attributes. Unset, <code>off</code> or any other value sends nothing; a token bucket bounds the volume and published/dropped are self-metrics.</li>
+<li><strong>Every probe says what it checks and why a check failed.</strong> Each series of a database, application or platform probe carries the identity of the entity it describes (<code>db.instance.id</code>, <code>service.instance.id</code>, <code>container.id</code>, <code>k8s.node.uid</code>…), exactly as the entity carries it, so a dashboard can show the health of each service. A new series, <code>senhub.probe.check.result</code>, tells apart a target that is down (1) from a check that could not run: refused credentials (2), timeout (3), TLS error (4), configuration error (5), unreadable reply (6) or missing permission (7). Active checks (<code>http_check</code>, <code>tcp_dial</code>, <code>icmp_check</code>, <code>ntp</code>, <code>dns_latency</code>) now put their targets on the map, with a result per target. Existing PRTG channels are unchanged; a "Check Result" channel is added.</li>
+<li><strong>Series metering (Enterprise).</strong> <code>senhub.agent.series.active</code>, <code>.created</code> and <code>.untracked</code> count, per output and probe, the series the agent exports over OTLP, the figure a time-series backend bills on. See <a href="../../otlp/#series-metering-enterprise">Series metering</a>.</li>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>A cut link leaves the map, and a silent device leaves as unmonitored.</strong> <code>snmp_poll</code> no longer reports a link while either of its ports reads down, even when the far switch still lists the neighbour. A device that stops answering is no longer replayed after three topology intervals and leaves with the reason "unmonitored", not as gone; a device answering nothing at all no longer appears under an address-only identity. The local interface of a link whose far end was not read recently carries <code>senhub.link.peer_state</code> (<code>unread</code>, <code>stale</code>, <code>unreachable</code>).</li>
 <li><strong>A neighbour the ARP cache forgot is not reported as ended.</strong> When an ARP or NDP entry ages out, on the host or in a device's tables read over SNMP, its <code>network.neighbor</code> now leaves with the reason "aged_out" instead of "terminated".</li>
+<li><strong>Router-to-router routes reach the next router.</strong> A route whose private next hop is an address the agent sees on a device it polls now carries its <code>next_hop_via</code>, so a path no longer stops at every router.</li>
 <li><strong>Redis 8 key-size lines are no longer read as databases.</strong> Channels such as <code>DB 0_distrib_strings_sizes Keys</code> disappear; only <code>dbN</code> lines of the keyspace make a database.</li>
-<li><strong>An empty Redis keeps its db0 channels.</strong> Redis prints no keyspace line for a database without keys; the probe now reports <code>DB 0 Keys</code>, <code>DB 0 Expiring Keys</code> and <code>DB 0 Average TTL</code> at 0, so an alert on the key count keeps working when the instance is emptied. A Sentinel, which has no keyspace, gets none.</li>
-<li><strong>The Redis replication role reads "Sentinel or unknown" at -1.</strong> The PRTG lookup said "Unknown" with a warning on every Sentinel; the Redis page now gives the three values and how to install the lookups.</li>
+<li><strong>The agent image upgrades its base packages at build time.</strong> The 0.6.4 image no longer ships a zlib version with a known CVE that container scanners flag.</li>
+<li><strong>Entity heartbeats publish on a fixed grid.</strong> Unchanged entities are re-published on a shared cadence with tolerance, so a ticker firing a few milliseconds early no longer produces alternating 120 s and 180 s gaps.</li>
+<li><strong>Export failure counters are declared at zero from the start.</strong> <code>senhub.agent.export.send.failed</code> is emitted per strategy and reason at start, so alerts reading it do not go silent after a restart.</li>
+<li><strong>The 0.5.x install split now completes.</strong> The 0.5.x <code>00-http.yaml</code> template is recognised, so the monolithic <code>agent.yaml</code> split is no longer refused and the legacy notice does not repeat at every start.</li>
+<li><strong>A log file truncated in place is no longer duplicated.</strong> When a file is emptied and refilled past the old offset, the tail restarts once and does not deliver the first lines a second time.</li>
 </ul>
 
 
