@@ -249,6 +249,10 @@
          <lastmod>2026-10-14</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/kubernetes_logs/</loc>
+         <lastmod>2026-10-14</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/linux-logs/</loc>
          <lastmod>2026-10-14</lastmod>
     </url>
