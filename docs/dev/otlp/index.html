@@ -1397,6 +1397,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#the-agents-own-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent's own warnings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#logs-survive-an-outage" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4920,6 +4931,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#the-agents-own-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent's own warnings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#logs-survive-an-outage" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5712,6 +5734,21 @@ both paths under one PromQL query is straightforward.</p>
 </ul>
 <p>Probes still emit DataPoints to the existing PRTG/Nagios/event
 strategies; the logs path is <strong>additive</strong>.</p>
+<h3 id="the-agents-own-warnings">The agent's own warnings<a class="headerlink" href="#the-agents-own-warnings" title="Permanent link">&para;</a></h3>
+<p>On request, the agent also sends its own warnings and errors as log
+records, so an
+operator who reads only the logs backend sees, for example, a probe
+reporting a missing cloud permission. Records come from the producer
+<code>senhub-agent</code> (type <code>agent</code>) with severity WARN, ERROR or FATAL, the
+message as body (<code>error=...</code> appended when the event carries one), the
+agent module in <code>senhub.agent.module</code>, and the other fields of the event
+as attributes, secrets masked as in the agent's own log file. Messages
+of the log pipeline itself are never sent back into it.</p>
+<p>At most 20 records a second are sent, with bursts up to 100; the rest
+are dropped and counted in <code>senhub.agent.self_logs.dropped</code>
+(<code>senhub.agent.self_logs.published</code> counts the others). The environment
+variable <code>SENHUB_SELF_LOGS</code> turns it on: <code>warn</code> sends warnings and above, <code>error</code>
+errors and above. Unset (or <code>off</code>), nothing is sent.</p>
 <h3 id="logs-survive-an-outage">Logs survive an outage<a class="headerlink" href="#logs-survive-an-outage" title="Permanent link">&para;</a></h3>
 <p>When the collector cannot take a batch of event logs, the agent keeps it
 on disk and sends it again. A batch is deleted from disk only after the
