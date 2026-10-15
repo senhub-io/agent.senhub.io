@@ -4577,7 +4577,7 @@ tagged with <code>systemd.unit</code>.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:35a81450ce5ec571e785b556be8331759d0f090940e238a3a730b5e5fe4da2cf -->
+<!-- sha256:f1322500755306ed87f18c15c14a849719467e5de67d40e490d609f2990eac9f -->
 
 <table>
 <thead>
@@ -4593,13 +4593,19 @@ tagged with <code>systemd.unit</code>.</p>
 <td><code>units</code></td>
 <td>No</td>
 <td>-</td>
-<td>Unit names or shell globs to watch; empty watches every unit of the included types. Example: <code>nginx.service, ssh*.service</code></td>
+<td>Unit names or shell globs to watch; empty watches enabled units of the included types. Example: <code>nginx.service, ssh*.service</code></td>
 </tr>
 <tr>
 <td><code>include_types</code></td>
 <td>No</td>
 <td><code>[service socket timer mount]</code></td>
 <td>Unit type suffixes to include. Example: <code>service, timer</code></td>
+</tr>
+<tr>
+<td><code>detail</code></td>
+<td>No</td>
+<td><code>state</code></td>
+<td>Metrics detail: state emits only active_state per unit; full emits all systemd families</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
@@ -4648,6 +4654,8 @@ series per cycle.</p>
 </table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
+<li>When <code>units</code> is empty, only the units systemd is supposed to start by itself are watched: <code>UnitFileState</code> enabled or enabled-runtime, among the included types. Name a static, disabled or masked unit in <code>units</code> to watch it.</li>
+<li><code>detail: state</code> (the default) emits <code>systemd.unit.active_state</code> alone, one series per watched unit; <code>detail: full</code> adds <code>load_state</code>, <code>sub_state</code> and the restart counter. The probe is installed on every host, so its default stays at one series per unit.</li>
 <li>Without <code>units</code>, the probe watches every loaded unit of the included
   types, except the units systemd creates for each user login and removes
   at logout (<code>run-user-*.mount</code>, <code>user@*.service</code>,
