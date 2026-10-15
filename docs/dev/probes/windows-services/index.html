@@ -4578,7 +4578,7 @@ restrict to a subset.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:bbd70d969aadcd3e95a5789062ca61c7d63aa9cefae3a0eae290ce6a45adfbd1 -->
+<!-- sha256:40df3e35dbc4aaca3727731a44b80223853b71376950d4a8cf6a68bc5e786a2a -->
 
 <table>
 <thead>
@@ -4594,7 +4594,13 @@ restrict to a subset.</p>
 <td><code>services</code></td>
 <td>No</td>
 <td>-</td>
-<td>Service short names to monitor; empty means every service. Example: <code>wuauserv, Spooler</code></td>
+<td>Service short names to monitor; empty means services configured for automatic start. Example: <code>wuauserv, Spooler</code></td>
+</tr>
+<tr>
+<td><code>detail</code></td>
+<td>No</td>
+<td><code>state</code></td>
+<td>Metrics detail: state emits only windows.service.state per service; full emits all winservices families</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
@@ -4644,7 +4650,8 @@ than failing the whole collection.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The agent must run with sufficient privileges to query the SCM. Administrator or LocalSystem is required for full enumeration.</li>
-<li>When <code>services</code> is empty, every service the SCM enumerates is reported — this can generate a large number of PRTG channels on busy servers. Restrict with an explicit list for PRTG deployments.</li>
+<li>When <code>services</code> is empty, only the services Windows is supposed to start by itself are watched: start type Automatic, delayed included. Name a demand-start or disabled service in <code>services</code> to watch it.</li>
+<li><code>detail: state</code> (the default) emits one state series per watched service; <code>detail: full</code> adds the raw status and the start type. The probe is installed on every host, so its default stays at one series per service.</li>
 <li>Service names are the short internal names used by <code>sc query</code> and <code>Get-Service</code>, not display names (e.g. <code>wuauserv</code> not "Windows Update").</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
