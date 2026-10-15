@@ -4598,7 +4598,7 @@ outputs.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:4f9a7547433c14c9a6d8d729cd2d7cb16915218818a9822ac4575a517b397d12 -->
+<!-- sha256:dd1862660c09214f02daaa36e3dd6d062fcde84118208e401bf61a56fa6cac50 -->
 
 <table>
 <thead>
@@ -4638,7 +4638,13 @@ outputs.</p>
 <td><code>filter.top_n</code></td>
 <td>No</td>
 <td><code>0</code></td>
-<td>Keep only the N processes with the highest CPU usage; 0 keeps all. A positive value also turns on the per-process detail, because it bounds how many processes carry it</td>
+<td>Keep only the N processes ranking highest on top_by; 0 keeps all. A positive value also turns on the per-process detail, because it bounds how many processes carry it</td>
+</tr>
+<tr>
+<td><code>filter.top_by</code></td>
+<td>No</td>
+<td><code>cpu</code></td>
+<td>What top_n ranks on: cpu, or memory (resident set, the working set on Windows). Example: <code>memory</code></td>
 </tr>
 <tr>
 <td><code>aggregate</code></td>
@@ -4771,7 +4777,7 @@ outputs.</p>
   monitoring is, and the filter is what bounds it: only the programs
   you named can produce those series. An unfiltered view reports the
   roll-up alone for that reason.</li>
-<li><code>filter.top_n</code> is applied after all other filters. It is useful for "monitor the 5 most CPU-hungry processes" scenarios, and it turns on the per-process detail because it bounds how many processes can carry it.</li>
+<li><code>filter.top_n</code> is applied after all other filters. It is useful for "monitor the 5 most CPU-hungry processes" scenarios, and it turns on the per-process detail because it bounds how many processes can carry it. Set <code>filter.top_by: memory</code> to rank on resident memory instead (the working set on Windows): it names the process behind a low-memory condition.</li>
 <li>The processes you name with <code>by_name</code> or <code>by_user</code> also become entities on the topology graph, with an edge to their host. A <code>top_n</code> or unfiltered view does not, because its membership changes every cycle.</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
