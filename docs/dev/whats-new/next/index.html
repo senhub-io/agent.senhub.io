@@ -4555,6 +4555,7 @@
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong><code>winservices</code> reports protected services.</strong> It asked the Service Control Manager for full access, which Windows refuses on protected services (WinDefend, BFE, RpcSs, DcomLaunch, mpssvc…) even to LocalSystem, so they were left out silently. It now opens services read-only.</li>
 <li><strong>The Zabbix rule for an automatic Windows service that is not running fires again.</strong> It also required <code>windows.service.start_type</code>, which the default <code>detail: state</code> no longer emits; the probe already watches only automatic services by default, so the rule now reads the state alone.</li>
 <li><strong><code>senhub-agent update</code> follows <code>include_beta</code>.</strong> Without <code>--config-path</code> the command read <code>./agent-config.yaml</code> and so never saw the beta channel the daemon announced; it now reads the same agent.yaml as the agent.</li>
 <li><strong><code>senhub-agent update</code> leaves package installs to the package manager.</strong> On a host installed from the .deb or .rpm, the command now refuses and says to use apt or dnf, instead of replacing the binary behind the package manager, which then recorded a version that no longer ran.</li>
