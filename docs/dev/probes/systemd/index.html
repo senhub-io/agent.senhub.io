@@ -4655,7 +4655,8 @@ series per cycle.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When <code>units</code> is empty, only the units systemd is supposed to start by itself are watched: <code>UnitFileState</code> enabled or enabled-runtime, among the included types. Name a static, disabled or masked unit in <code>units</code> to watch it.</li>
-<li><code>detail: state</code> (the default) emits <code>systemd.unit.active_state</code> alone, one series per watched unit; <code>detail: full</code> adds <code>load_state</code>, <code>sub_state</code> and the restart counter. The probe is installed on every host, so its default stays at one series per unit.</li>
+<li>Each watched unit is a <code>host.service</code> entity on the topology graph (identity <code>host.id</code> + <code>host.service.name</code>, the full unit name, so <code>nginx.service</code> and <code>nginx.socket</code> are two entities), linked to its host by <code>runs_on</code>, with <code>host.service.manager</code> (<code>systemd</code>) and <code>host.service.start_mode</code>. Whether it runs is a measurement, not a graph fact: <code>host.service.running</code> gives it as 1 or 0, the same series for systemd and Windows, with the same <code>host.id</code> and <code>host.service.name</code>. Agents before 0.6.4 published units as <code>service.instance</code>; the first start retires those with the reason <code>rekeyed</code> and links each new entity to its old one.</li>
+<li><code>detail: state</code> (the default) emits <code>host.service.running</code> alone, one series per watched unit; <code>detail: full</code> adds <code>systemd.unit.active_state</code>, <code>load_state</code>, <code>sub_state</code> and the restart counter. The probe is installed on every host, so its default stays at one series per unit.</li>
 <li>Without <code>units</code>, the probe watches every loaded unit of the included
   types, except the units systemd creates for each user login and removes
   at logout (<code>run-user-*.mount</code>, <code>user@*.service</code>,
@@ -4686,6 +4687,13 @@ series' tags.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>host.service.running</code></td>
+<td><code>host.service.running</code></td>
+<td>Service {systemd.unit} Running</td>
+<td>#</td>
+<td>1 when the service runs, 0 when it does not (stopped, failed, starting, stopping or paused), the same series for systemd and Windows</td>
+</tr>
 <tr>
 <td><code>systemd.unit.active_state</code></td>
 <td><code>systemd.unit.active_state</code></td>
