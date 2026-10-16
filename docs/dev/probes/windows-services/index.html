@@ -4651,7 +4651,8 @@ than failing the whole collection.</p>
 <ul>
 <li>The agent must run with sufficient privileges to query the SCM. Administrator or LocalSystem is required for full enumeration.</li>
 <li>When <code>services</code> is empty, only the services Windows is supposed to start by itself are watched: start type Automatic, delayed included. Name a demand-start or disabled service in <code>services</code> to watch it.</li>
-<li><code>detail: state</code> (the default) emits one state series per watched service; <code>detail: full</code> adds the raw status and the start type. The probe is installed on every host, so its default stays at one series per service.</li>
+<li>Each watched service is a <code>host.service</code> entity on the topology graph (identity <code>host.id</code> + <code>host.service.name</code>, the service short name), linked to its host by <code>runs_on</code>, with <code>host.service.manager</code> (<code>windows_scm</code>), <code>host.service.start_mode</code>, <code>host.service.start_delayed</code> and <code>host.service.trigger_start</code>. Whether it runs is a measurement, not a graph fact: <code>host.service.running</code> gives it as 1 or 0, the same series for systemd and Windows, with the same <code>host.id</code> and <code>host.service.name</code>. A service started by a trigger (<code>host.service.trigger_start: true</code>) stops normally once its job is done: an alert on "automatic and not running" should leave those out. The <code>host.service.running</code> series carries <code>host.service.trigger_start</code> too, for alert engines that read series only and cannot join the graph; the entity attribute is the reference, and the label a copy that can lag it by one collection after someone reconfigures the service.</li>
+<li><code>detail: state</code> (the default) emits <code>host.service.running</code> alone, one series per watched service; <code>detail: full</code> adds <code>windows.service.state</code>, the raw status and the start type. The probe is installed on every host, so its default stays at one series per service.</li>
 <li>Service names are the short internal names used by <code>sc query</code> and <code>Get-Service</code>, not display names (e.g. <code>wuauserv</code> not "Windows Update").</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
@@ -4674,6 +4675,13 @@ series' tags.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>host.service.running</code></td>
+<td><code>host.service.running</code></td>
+<td>Service {windows.service.name} Running</td>
+<td>#</td>
+<td>1 when the service runs, 0 when it does not (stopped, failed, starting, stopping or paused), the same series for systemd and Windows</td>
+</tr>
 <tr>
 <td><code>senhub.winservices.up</code></td>
 <td><code>senhub.winservices.up</code></td>
