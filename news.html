@@ -138,6 +138,12 @@
     width: 5px; height: 5px; border-radius: 50%; background: var(--cyan);
   }
   ul.pts li b { color: var(--ink); font-weight: 650; }
+  .sub {
+    margin-top: 18px; font-size: 11.5px; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .sub.brk { color: var(--break); }
+  .sub + ul.pts { margin-top: 7px; }
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 13px; background: var(--panel-2); padding: 1px 5px;
@@ -223,11 +229,92 @@
 
     <div class="entry current">
       <div class="side">
+        <div class="ver">0.6.4</div>
+        <div class="date">2026-10-28</div>
+      </div>
+      <div class="body">
+        <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
+        <h2>The network on the map, and Kubernetes from the node</h2>
+        <p>
+          The agent now draws the network it sits on: routing tables, SNMP discovery
+          over LLDP, and the machines it finds along the way. It also renames the
+          series that say whether a service is running, so read the first half of this
+          entry before upgrading a fleet.
+        </p>
+
+        <div class="sub brk">Before you upgrade</div>
+        <ul class="pts">
+          <li><b>Service state is one series on both systems.</b>
+             <code>host.service.running</code> replaces
+             <code>systemd.unit.active_state</code> and
+             <code>windows.service.state</code>, keyed the same way on Linux and
+             Windows. An alert or a panel still reading an old name returns nothing at
+             all. <code>detail: full</code> keeps the old families.</li>
+          <li><b><code>systemd</code> and <code>winservices</code> watch fewer
+             services.</b> With no list configured they watch what the supervisor
+             starts by itself, enabled units and automatic services, instead of every
+             unit. A configuration that names its own keeps them.</li>
+          <li><b>Both probes are now added by default</b>, as
+             <code>probes.d/05-services.yaml</code>, with a Swarm probe where a Docker
+             socket exists. Renaming a file to <code>*.disabled</code> is the supported
+             opt-out, and <code>SENHUB_DEFAULT_PROBES=off</code> stops the agent adding
+             either.</li>
+          <li><b>The agent version leaves the metrics.</b> <code>service_version</code>
+             and <code>otel_scope_version</code> disappear from every series, which a
+             Prometheus-like backend recreates once on upgrade. The version stays on
+             logs, traces and <code>senhub.agent.build.info</code>.</li>
+          <li><b>Leaner host defaults, each restorable.</b> The <code>network</code>
+             probe drops container and virtualisation interfaces and the
+             <code>ip</code> label; on Windows the <code>cpu</code> probe drops the
+             per-core detail. The matching PRTG channels disappear unless the option is
+             set.</li>
+          <li><b>SNMP topology is swept every minute</b> instead of every ten, so a
+             link that goes down is on the map within the minute and polled devices
+             answer a few more walks. Devices no longer carry <code>mgmt.ip</code>;
+             their addresses are entities.</li>
+        </ul>
+
+        <div class="sub">New</div>
+        <ul class="pts">
+          <li><b>SNMP discovery maps the network from the agent's host.</b> From its
+             seeds, or from the host's own default gateways, it follows LLDP neighbours
+             inside the host's private networks and puts every device it finds on the
+             map with its interfaces, addresses, routes and links. A profile with the
+             community is enough to start.</li>
+          <li><b>Full routing tables.</b> Hosts and SNMP devices publish every route
+             with its type, its origin in the IANA vocabulary, its egress interface and
+             its metric, each next hop of a multipath route on its own. Capped at 500,
+             with <code>senhub.routes.omitted</code> saying how many were left out.</li>
+          <li><b>Kubernetes from the node.</b> Each node becomes a
+             <code>k8s.node</code> entity joined to the host it runs on; the DaemonSet
+             reads kubelet CPU, memory, filesystem and network for the node, its pods
+             and their containers, and follows pod logs from
+             <code>/var/log/pods</code>. Two Grafana dashboards ship with it.</li>
+          <li><b>Every probe says what it checks, and why a check failed.</b> Each
+             series carries the identity of the entity it describes, and
+             <code>senhub.probe.check.result</code> tells a target that is down from a
+             check that could not run: refused credentials, timeout, TLS error,
+             configuration error, unreadable reply, missing permission.</li>
+          <li><b>Windows events carry their message.</b>
+             <code>windows_eventlog</code> sends what Windows renders, not only the
+             provider, the event id and the insertion strings. A low-virtual-memory
+             warning now names the processes that consumed it.</li>
+          <li><b>Also</b>: Redis Sentinel and ACL support, host clock synchronisation,
+             severity derived from nginx and Apache status codes and from more log
+             formats, an opt-in rail for the agent's own warnings, and series metering
+             for Enterprise.</li>
+        </ul>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.4/">Full release note &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="side">
         <div class="ver">0.6.3</div>
         <div class="date">2026-10-13</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag now">Latest</span><span class="tag">New</span></div>
+        <div class="tags"><span class="tag">New</span></div>
         <h2>The Azure Container Apps collector, finished</h2>
         <ul class="pts">
           <li><b>Discovery that reports its own coverage.</b> Every application of a
