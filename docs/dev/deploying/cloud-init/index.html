@@ -3980,6 +3980,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.6.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.6.3/" class="md-nav__link">
         
   
@@ -4694,7 +4722,7 @@ ones to change.</p>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">      </span><span class="no">#!/bin/sh</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">      </span><span class="no">set -eu</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="no">SENHUB_VERSION="${SENHUB_VERSION:-0.6.3}"  # exact package version: the pin; latest on https://packages.senhub.io/releases/stable/latest.json</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="no">SENHUB_VERSION="${SENHUB_VERSION:-0.6.4}"  # exact package version: the pin; latest on https://packages.senhub.io/releases/stable/latest.json</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">      </span><span class="no">SENHUB_EDITION="${SENHUB_EDITION:-senhub-agent-oss}"  # or senhub-agent</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">      </span><span class="no">SENHUB_CHANNEL="${SENHUB_CHANNEL:-stable}"     # or beta</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">      </span><span class="no">FINGERPRINT="B9987A2D4623796E19D3B185CA56F750354530AF"</span>
@@ -4778,7 +4806,7 @@ ones to change.</p>
 agent runs that default, which pushes nowhere: nothing the check refuses
 ever runs.</p>
 <h2 id="pinning">Pinning<a class="headerlink" href="#pinning" title="Permanent link">&para;</a></h2>
-<p><code>SENHUB_VERSION</code> is the pin, in the package's spelling. The script installs the version you set (<code>0.6.3</code> in the example) exactly and holds
+<p><code>SENHUB_VERSION</code> is the pin, in the package's spelling. The script installs the version you set (<code>0.6.4</code> in the example) exactly and holds
 the package (<code>apt-mark hold</code>), so <code>apt upgrade</code> and unattended upgrades do
 not move it. On RHEL, add the versionlock plugin to get the same effect:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-dnf-plugin-versionlock
