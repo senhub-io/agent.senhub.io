@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://agent.senhub.io/sitemap.xml
+Sitemap: https://agent.senhub.io/docs/latest/sitemap.xml
