@@ -4034,6 +4034,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../whats-new/0.6.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../whats-new/0.6.3/" class="md-nav__link">
         
   
@@ -4768,7 +4796,7 @@ else is a parameter.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.3
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.4
 </code></pre></div>
 <p>That is the whole of it for a first run: one variable, one mount.</p>
 <p>Podman runs the same image with the same command; see
@@ -5051,7 +5079,7 @@ startup, so a container that ignores your variables tells you why.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-v<span class="w"> </span>/srv/senhub/conf:/etc/senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.3
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.4
 </code></pre></div>
 <p>Your configuration wins completely, and that includes the agent key
 under <code>agent: key:</code>. The entrypoint does not touch it, so a
