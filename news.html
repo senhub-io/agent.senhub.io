@@ -213,7 +213,7 @@
     <h1>Releases</h1>
     <p>
       What changed in each version, why, and what breaks. Every release ships with a
-      written note — this page is the short form; each entry links to the full one.
+      written note. This page is the short form; each entry links to the full one.
     </p>
   </div>
 </header>
@@ -232,11 +232,11 @@
         <ul class="pts">
           <li><b>Discovery that reports its own coverage.</b> Every application of a
              subscription is found and followed, and the probe publishes how many it
-             found, followed and left out — so "26 of 26" is a metric, not a hope.</li>
+             found, followed and left out, so "26 of 26" is a metric, not a hope.</li>
           <li><b>Container App Jobs are discovered too</b>, each with its own execution
              history, and <b>one Azure identity is shared</b> by every Azure probe
              instead of being repeated per probe.</li>
-          <li><b><code>senhub-agent check azure</code></b> — a read-only command that
+          <li><b><code>senhub-agent check azure</code></b>, a read-only command that
              verifies the token, the subscription, what is visible and each permission,
              before anything is deployed.</li>
           <li><b>Log volume per application</b>, counted in bytes of published bodies,
@@ -261,12 +261,12 @@
           <li><b>Signed Linux packages and repositories</b>, plus three ways to deploy
              at scale: an Ansible collection, a Helm chart and a Podman Quadlet unit.
              Probes can also be declared from environment variables.</li>
-          <li><b>Security — act on this one.</b> A credential embedded in a probe's
+          <li><b>Security, act on this one.</b> A credential embedded in a probe's
              connection URI (<code>scheme://user:password@host</code>: MongoDB, Redis,
              PostgreSQL, AMQP) was written in clear to the agent log in 0.6.1 and
              earlier. 0.6.2 masks it. If you used such URIs: upgrade, delete or rotate
              the old log files, and change that account's password.</li>
-          <li><b>Breaking:</b> a host's name is now one value everywhere — a
+          <li><b>Breaking:</b> a host's name is now one value everywhere: a
              <code>host.name</code> override that only reached metrics and logs now
              also names the host entity and its systemd units. The <code>host.id</code>
              is unchanged, so the topology node is the same node.</li>
@@ -295,12 +295,12 @@
         <ul class="pts">
           <li><b>Durations are now in seconds, throughputs in bytes per second</b>, and
             a list of gauges loses its <code>.total</code> suffix. Dashboards, alerts
-            and recording rules on the old names need updating — the note carries the
+            and recording rules on the old names need updating, and the note carries the
             full table.</li>
           <li><b>Zabbix item keys follow the metric names.</b> Re-run
             <code>zabbix setup</code> to refresh the templates; items under the old
             keys stop receiving data and keep their history.</li>
-          <li><b>The Zabbix server is set at install time</b> — <code>ZABBIX_SERVER</code>
+          <li><b>The Zabbix server is set at install time</b>: <code>ZABBIX_SERVER</code>
             for the MSI, <code>--zabbix-server</code> for <code>config init</code>, an
             environment variable for the container. A new host registers and fills in
             by itself.</li>
@@ -310,7 +310,7 @@
           <li><b>The console reports measured values.</b> Resident memory and CPU are
             now the real figures, with the Go heap shown beside them.</li>
           <li><b>Watch out on Linux:</b> <code>senhub-agent update</code> run <i>by
-            0.6.0</i> installs the new binary without restarting the service — finish
+            0.6.0</i> installs the new binary without restarting the service, so finish
             with <code>sudo systemctl restart senhub-agent</code>.</li>
         </ul>
         <p class="more"><a href="/docs/latest/whats-new/0.6.1/">Full release note, with the renamed metrics table →</a></p>
@@ -333,11 +333,11 @@
           <li><b>Zabbix, both directions.</b> An active agent that registers itself and
             pushes on <code>:10051</code>, a passive one that answers polls on
             <code>:10050</code>, TLS and pre-shared keys, and
-            <b>templates generated from the probe definitions</b> — imported for you by
+            <b>templates generated from the probe definitions</b>, imported for you by
             <code>senhub-agent zabbix setup</code>. Zabbix 6.0, 7.0 and 8.0.</li>
           <li><b>A separate administration key.</b> The console and the configuration
             API no longer answer to the agent key. A bookmarked console address now
-            returns 401 — open it with <code>senhub-agent console</code>, or get the
+            returns 401: open it with <code>senhub-agent console</code>, or get the
             address with <code>console --print</code>.</li>
           <li><b>Entities by default in the container</b>, the agent shows its
             instance id (<code>senhub-agent key instance-id</code>), and logs and
@@ -348,7 +348,7 @@
             says which protected objects get no job status. And every probe page
             lists every metric it produces.</li>
           <li><b>Watch out:</b> <code>service.instance.id</code> becomes a UUID and
-            changes once — series keyed on it restart. An unfiltered
+            changes once, so series keyed on it restart. An unfiltered
             <code>process</code> probe keeps only its per-name roll-up. A Nagios value
             equal to the threshold is now OK. ActiveMQ and Redfish metrics are
             renamed, and SNMP interface series move to
@@ -389,7 +389,7 @@
           <li><b>Operational fixes.</b> <code>agent config check</code> now reads the
             values, <code>uninstall</code> cleans up even with no unit present, and the
             agent keeps going when inotify is saturated.</li>
-          <li>Three breaking changes on tag and channel names — see the note.</li>
+          <li>Three breaking changes on tag and channel names, see the note.</li>
         </ul>
         <p class="more"><a href="/docs/latest/whats-new/0.5.5/">Full release note →</a></p>
       </div>
@@ -406,7 +406,7 @@
         <ul class="pts">
           <li><b>Container networking.</b> Counters read from the container's own network
             namespace rather than its cgroup, plus restart count, names, images, labels
-            and state — so containers are no longer identified by id alone.</li>
+            and state, so containers are no longer identified by id alone.</li>
           <li><b>Hardened unit.</b> <code>/var/lib/senhub-agent</code> is marked
             non-executable; the unit and the binary now move together.</li>
         </ul>
@@ -426,7 +426,7 @@
           <li><b>OTLP receiver</b> accepts logs and traces, not just metrics; a
             <code>signals</code> list chooses what it takes.</li>
           <li><b>Licence in its own file.</b> <code>license.jwt</code> sits next to
-            <code>agent.yaml</code> — hand a customer one file to drop in place.</li>
+            <code>agent.yaml</code>: hand a customer one file to drop in place.</li>
           <li><b>OS Updates probe</b> (free, <code>type: os_updates</code>): pending
             updates, pending security updates, reboot-required status.</li>
           <li><b>Multi-tenant export.</b> A <code>tenant</code> field stamps
@@ -446,7 +446,7 @@
         <h2>Dell PowerStore</h2>
         <p>
           A PowerStore probe (commercial) monitors storage arrays over the PowerStore
-          REST API — cluster state, hardware faults and capacity.
+          REST API: cluster state, hardware faults and capacity.
         </p>
         <p class="more"><a href="/docs/latest/whats-new/0.5.1/">Full release note →</a></p>
       </div>
@@ -465,7 +465,7 @@
             load time, so passwords and tokens never sit in plaintext on disk.</li>
           <li><b>OS-native backends</b> chosen per platform: age-keyfile on Linux,
             systemd-creds as the hardened option.</li>
-          <li><b>CLI.</b> <code>agent secret set/get/list/rm/status</code> — a value is
+          <li><b>CLI.</b> <code>agent secret set/get/list/rm/status</code>: a value is
             never accepted as a command-line argument.</li>
           <li><b>Migration.</b> <code>config_version 3</code> seals inline plaintext
             secrets into the store on boot and rewrites the file.</li>
