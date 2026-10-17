@@ -699,6 +699,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sample-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample dashboards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#monitoring-the-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1416,6 +1427,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -1430,10 +1468,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1451,8 +1489,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3924,10 +3962,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3945,8 +3983,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4622,6 +4660,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sample-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample dashboards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#monitoring-the-cluster" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4888,6 +4937,31 @@ supplementary group to read them.</p>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">exclude_namespaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">kube-system</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>Turn it off with <code>--set podLogs.enabled=false</code>.</p>
+<h2 id="sample-dashboards">Sample dashboards<a class="headerlink" href="#sample-dashboards" title="Permanent link">&para;</a></h2>
+<p>Two sample Grafana dashboards are in
+<a href="https://github.com/senhub-io/senhub-agent/tree/master/docs/grafana"><code>docs/grafana/</code></a>,
+for metrics and logs stored in a Prometheus-compatible backend and a
+VictoriaLogs backend fed through <a href="../otlp/">OTLP</a>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kubernetes-workloads.json</code></td>
+<td>Node, pod and container CPU, memory, filesystem and network from <code>kubelet_stats</code>; the probe's own scrape errors</td>
+</tr>
+<tr>
+<td><code>kubernetes-logs.json</code></td>
+<td>Pod logs by namespace, pod, container and severity; log volume; files and pods followed, truncated records and read errors from <code>kubernetes_logs</code></td>
+</tr>
+</tbody>
+</table>
+<p>They are a starting point, not a supported product: adjust the
+datasource variables at the top of each dashboard to your setup.</p>
 <h2 id="monitoring-the-cluster">Monitoring the cluster<a class="headerlink" href="#monitoring-the-cluster" title="Permanent link">&para;</a></h2>
 <p>Two values turn it on: one adds the probe, the other the read-only
 permissions it needs. It lives in its own release, a Deployment, next to

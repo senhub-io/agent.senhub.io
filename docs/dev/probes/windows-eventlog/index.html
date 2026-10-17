@@ -1211,6 +1211,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1229,10 +1256,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1250,8 +1277,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3825,10 +3852,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3846,8 +3873,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4667,6 +4694,14 @@ case; a pattern without a wildcard is an exact match. Without
 <p>Each event becomes one OTel log record: channel, provider, EventID,
 level (mapped to OTel severity), task, keywords, the rendered
 message as the body, and the EventData fields as attributes.</p>
+<p>The body is the message Windows renders for the event, the one
+<code>Get-WinEvent</code> shows, built from the provider's message template. When the
+provider's message file is not installed on the host, the body falls back
+to <code>&lt;provider&gt; event &lt;id&gt;: key=value, ...</code> built from the event data, which
+is enough to triage.</p>
+<p>Event data comes from <code>EventData</code>, and also from <code>UserData</code>, the element
+many providers use instead. The direct children of the first <code>UserData</code>
+element become attributes; an <code>EventData</code> field of the same name wins.</p>
 <p>The machine name from the event XML is emitted as <code>winlog.computer</code>,
 the uppercase spelling Windows uses. The host a record belongs to is
 the FQDN on the resource — the same value the metrics carry — so the

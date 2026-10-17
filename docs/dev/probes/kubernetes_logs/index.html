@@ -1211,6 +1211,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1229,10 +1256,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1250,8 +1277,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3478,6 +3505,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-files-are-followed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How files are followed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#attributes-on-records" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3825,10 +3863,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3846,8 +3884,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4501,6 +4539,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-files-are-followed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How files are followed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#attributes-on-records" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4736,102 +4785,28 @@ looks like this:</p>
 </table>
 <!-- schema:params:end -->
 
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Must set</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>root</code></td>
-<td>No</td>
-<td><code>/var/log/pods</code></td>
-<td>Root directory containing the pod log directory structure</td>
-</tr>
-<tr>
-<td><code>include_namespaces</code></td>
-<td>No</td>
-<td>-</td>
-<td>Follow only pods in namespaces matching one of these glob patterns</td>
-</tr>
-<tr>
-<td><code>exclude_namespaces</code></td>
-<td>No</td>
-<td>-</td>
-<td>Never follow pods in namespaces matching one of these glob patterns</td>
-</tr>
-<tr>
-<td><code>include_pods</code></td>
-<td>No</td>
-<td>-</td>
-<td>Follow only pods whose name matches one of these glob patterns</td>
-</tr>
-<tr>
-<td><code>exclude_pods</code></td>
-<td>No</td>
-<td>-</td>
-<td>Never follow pods whose name matches one of these glob patterns</td>
-</tr>
-<tr>
-<td><code>scan_interval</code></td>
-<td>No</td>
-<td><code>5s</code></td>
-<td>How often the node log directory is rescanned; minimum <code>1s</code></td>
-</tr>
-<tr>
-<td><code>from_beginning</code></td>
-<td>No</td>
-<td><code>false</code></td>
-<td>Read existing content the first time a file is seen</td>
-</tr>
-<tr>
-<td><code>max_line_bytes</code></td>
-<td>No</td>
-<td><code>262144</code></td>
-<td>Cap on one CRI message after partial reassembly, in bytes</td>
-</tr>
-<tr>
-<td><code>bookmark_path</code></td>
-<td>No</td>
-<td><code>&lt;agent state&gt;/&lt;probe name&gt;.bookmarks.json</code></td>
-<td>File persisting read offsets across restarts</td>
-</tr>
-<tr>
-<td><code>parser</code></td>
-<td>No</td>
-<td>-</td>
-<td>Structured parsing of each CRI message</td>
-</tr>
-<tr>
-<td><code>parser.type</code></td>
-<td>No</td>
-<td><code>raw</code></td>
-<td>Message format. One of <code>raw</code>, <code>regex</code>, <code>json</code>, <code>logfmt</code></td>
-</tr>
-<tr>
-<td><code>parser.pattern</code></td>
-<td>No</td>
-<td>-</td>
-<td>Regular expression with named groups; required for <code>regex</code></td>
-</tr>
-<tr>
-<td><code>parser.timestamp_field</code></td>
-<td>No</td>
-<td>-</td>
-<td>Field carrying the message timestamp</td>
-</tr>
-<tr>
-<td><code>parser.timestamp_format</code></td>
-<td>No</td>
-<td>-</td>
-<td>Go reference-time layout of that field</td>
-</tr>
-</tbody>
-</table>
+<h2 id="how-files-are-followed">How files are followed<a class="headerlink" href="#how-files-are-followed" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Discovery.</strong> The probe rescans <code>root</code> every <code>scan_interval</code> and
+  follows every container log file of every pod on the node, so a new pod
+  is picked up without a restart. The <code>include_*</code> and <code>exclude_*</code> lists
+  are glob patterns; the agent's own pod is always left out.</li>
+<li><strong>CRI partial lines.</strong> The runtime splits a long line into chunks.
+  The probe joins them back into one message before it is sent, up to
+  <code>max_line_bytes</code>. A longer message is cut there and counted in
+  <code>senhub.kubernetes_logs.records_truncated</code>.</li>
+<li><strong>Rotation.</strong> Offsets are kept per file and tied to its inode. When the
+  runtime rotates a file, the probe finishes the old one and starts the
+  new one, and after a restart it resumes from the saved offset
+  (<code>bookmark_path</code>) instead of re-reading or skipping lines. Compressed
+  rotated files are not read.</li>
+<li><strong>Multiline.</strong> With <code>multiline</code> set, continuation lines such as a stack
+  trace are folded into the record that opened them. Folding is done
+  separately for the stdout and stderr stream of each container, so the
+  two never mix.</li>
+<li><strong>Severity.</strong> Derived from the message as described in
+  <a href="../filetail/#severity">File tail</a>.</li>
+</ul>
 <h2 id="attributes-on-records">Attributes on records<a class="headerlink" href="#attributes-on-records" title="Permanent link">&para;</a></h2>
 <p>Every emitted log record carries these attributes:</p>
 <table>

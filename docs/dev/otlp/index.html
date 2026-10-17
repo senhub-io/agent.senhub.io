@@ -16,7 +16,7 @@
         <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../probes/">
+        <link rel="next" href="../topology/">
       
       
         
@@ -1686,6 +1686,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -1700,10 +1727,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1721,8 +1748,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4194,10 +4221,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -4215,8 +4242,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -5587,7 +5614,9 @@ app trace is slow → show the infra telemetry of the same tenant".</p>
 <h3 id="signalsentities"><code>signals.entities</code><a class="headerlink" href="#signalsentities" title="Permanent link">&para;</a></h3>
 <p>Entity events (the infrastructure graph: hosts, interfaces, services and
 their relationships) ride the OTLP <strong>log</strong> signal, so this signal has no
-endpoint or batch knobs of its own — it reuses the log transport.</p>
+endpoint or batch knobs of its own — it reuses the log transport. What the
+agent reports, what is off by default and how a consumer reads a deletion
+are on the <a href="../topology/">Topology</a> page.</p>
 <p>When <code>entities.enabled</code> is off, the output logs one warning at start,
 <code>entity emission is off on this OTLP output</code>, so an empty topology can be
 traced to its cause from the agent log.</p>
@@ -6373,13 +6402,13 @@ does not close it.</p>
         
         
           
-          <a href="../probes/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="../topology/" class="md-footer__link md-footer__link--next" aria-label="Next: Topology">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                Topology
               </div>
             </div>
             <div class="md-footer__button md-icon">
