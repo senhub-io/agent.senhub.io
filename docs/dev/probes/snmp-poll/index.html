@@ -1211,6 +1211,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1229,10 +1256,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1250,8 +1277,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3903,10 +3930,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3924,8 +3951,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4739,6 +4766,8 @@ carries <code>senhub.link.peer_state</code>: <code>unread</code> (the far device
 <code>unreachable</code> (it stopped answering). The attribute is absent when both ends
 were read. A device that stops answering is no longer reported after three
 topology intervals; it leaves the map as unmonitored, not as gone.</p>
+<p>Topology is off until the <code>entities</code> block is enabled, and only the
+<a href="../../otlp/">OTLP output</a> carries it, see <a href="../../topology/">Topology</a>.</p>
 <p>One probe instance polls one device for its metrics. With a <code>discovery</code>
 block it also crawls the network outward from seed devices (by default the
 host's gateways) and puts every device it finds on the map, with its interfaces and links (see
@@ -5184,7 +5213,7 @@ error, never a silent gap. With <code>index_label</code>, the OID is walked as a
 table and the row index becomes that tag.</p>
 <h3 id="discovery">Discovery<a class="headerlink" href="#discovery" title="Permanent link">&para;</a></h3>
 <p>A <code>discovery</code> block makes the probe crawl outward from seed devices
-through their LLDP neighbor tables, bounded by CIDR ranges and depth and
+through their LLDP neighbor tables (CDP is not read), bounded by CIDR ranges and depth and
 device caps, and report every device found on the entity rail: the
 device, its interfaces and addresses, its routes and its LLDP links.
 Discovered devices give topology only, no metrics: metrics stay with
