@@ -230,7 +230,7 @@
     <div class="entry current">
       <div class="side">
         <div class="ver">0.6.4</div>
-        <div class="date">2026-10-28</div>
+        <div class="date">2026-10-18</div>
       </div>
       <div class="body">
         <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
@@ -259,6 +259,15 @@
              socket exists. Renaming a file to <code>*.disabled</code> is the supported
              opt-out, and <code>SENHUB_DEFAULT_PROBES=off</code> stops the agent adding
              either.</li>
+          <li><b>PRTG sensors built on these probes change.</b> A
+             <code>winservices</code> or <code>systemd</code> sensor keeps one channel
+             per watched service and gains a Check Result channel; the per-service
+             Status channels go, along with the services the supervisor does not start
+             by itself. A Windows <code>cpu</code> sensor loses its per-core detail
+             channels and gains two Host Clock channels. PRTG keeps the channels the
+             agent stops sending, without data: delete them from the sensor, or delete
+             the sensor and add it again. Memory, network and disk sensors are
+             unchanged.</li>
           <li><b>The agent version leaves the metrics.</b> <code>service_version</code>
              and <code>otel_scope_version</code> disappear from every series, which a
              Prometheus-like backend recreates once on upgrade. The version stays on
@@ -266,12 +275,15 @@
           <li><b>Leaner host defaults, each restorable.</b> The <code>network</code>
              probe drops container and virtualisation interfaces and the
              <code>ip</code> label; on Windows the <code>cpu</code> probe drops the
-             per-core detail. The matching PRTG channels disappear unless the option is
-             set.</li>
+             per-core detail. Each one comes back with its option.</li>
           <li><b>SNMP topology is swept every minute</b> instead of every ten, so a
              link that goes down is on the map within the minute and polled devices
              answer a few more walks. Devices no longer carry <code>mgmt.ip</code>;
              their addresses are entities.</li>
+          <li><b><code>SENHUB_HOST_ID</code> is read by the agent itself</b>, where
+             only the container entrypoint used to read it. A host that sets it outside
+             the official image changes identity on upgrade; an invalid value is logged
+             and ignored.</li>
         </ul>
 
         <div class="sub">New</div>
