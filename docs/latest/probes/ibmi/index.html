@@ -1211,6 +1211,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1229,10 +1256,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1250,8 +1277,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3406,6 +3433,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../kubernetes_logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes pod logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubelet_stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubelet stats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../swarm/" class="md-nav__link">
         
   
@@ -3677,10 +3760,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3698,8 +3781,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3752,6 +3835,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.4
   
 
     
@@ -5161,7 +5272,7 @@ message remains visible there through the jobs-by-status count.</p>
 <td><code>senhub.ibmi.user_profile.by_class</code></td>
 <td><code>{user}</code></td>
 <td><code>ibmi.user.class</code></td>
-<td>User profiles by class (<em>SECOFR, </em>USER, …)</td>
+<td>User profiles by class (*SECOFR, *USER, …)</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_profile.failed_signons</code></td>
@@ -6444,7 +6555,7 @@ series' tags.</p>
 <td><code>ibmi.user_profile.privileged_status</code></td>
 <td user_name="user_name">Privileged User —</td>
 <td>#</td>
-<td>1 when this profile holds <em>ALLOBJ, </em>SECADM, <em>SECOFR or </em>AUDIT and is enabled, 0 when disabled, -1 for any other status</td>
+<td>1 when this profile holds *ALLOBJ, *SECADM, *SECOFR or *AUDIT and is enabled, 0 when disabled, -1 for any other status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.security_level</code></td>
@@ -6465,7 +6576,7 @@ series' tags.</p>
 <td><code>ibmi.sysval.max_signon_attempts</code></td>
 <td>System Value QMAXSIGN</td>
 <td>#</td>
-<td>Setting of system value QMAXSIGN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QMAXSIGN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.password_expiration</code></td>
@@ -6479,98 +6590,98 @@ series' tags.</p>
 <td><code>ibmi.sysval.password_min_length</code></td>
 <td>System Value QPWDMINLEN</td>
 <td>#</td>
-<td>Setting of system value QPWDMINLEN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QPWDMINLEN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.password_max_length</code></td>
 <td><code>ibmi.sysval.password_max_length</code></td>
 <td>System Value QPWDMAXLEN</td>
 <td>#</td>
-<td>Setting of system value QPWDMAXLEN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QPWDMAXLEN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.password_level</code></td>
 <td><code>ibmi.sysval.password_level</code></td>
 <td>System Value QPWDLVL</td>
 <td>#</td>
-<td>Setting of system value QPWDLVL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QPWDLVL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.password_required_difference</code></td>
 <td><code>ibmi.sysval.password_required_difference</code></td>
 <td>System Value QPWDRQDDIF</td>
 <td>#</td>
-<td>Setting of system value QPWDRQDDIF. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QPWDRQDDIF. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.limit_security_officer</code></td>
 <td><code>ibmi.sysval.limit_security_officer</code></td>
 <td>System Value QLMTSECOFR</td>
 <td>#</td>
-<td>Setting of system value QLMTSECOFR. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QLMTSECOFR. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.limit_device_sessions</code></td>
 <td><code>ibmi.sysval.limit_device_sessions</code></td>
 <td>System Value QLMTDEVSSN</td>
 <td>#</td>
-<td>Setting of system value QLMTDEVSSN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QLMTDEVSSN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.auto_config</code></td>
 <td><code>ibmi.sysval.auto_config</code></td>
 <td>System Value QAUTOCFG</td>
 <td>#</td>
-<td>Setting of system value QAUTOCFG. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QAUTOCFG. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.auto_virtual_devices</code></td>
 <td><code>ibmi.sysval.auto_virtual_devices</code></td>
 <td>System Value QAUTOVRT</td>
 <td>#</td>
-<td>Setting of system value QAUTOVRT. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QAUTOVRT. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.create_default_auth</code></td>
 <td><code>ibmi.sysval.create_default_auth</code></td>
 <td>System Value QCRTAUT</td>
 <td>#</td>
-<td>Setting of system value QCRTAUT. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QCRTAUT. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.display_signon_info</code></td>
 <td><code>ibmi.sysval.display_signon_info</code></td>
 <td>System Value QDSPSGNINF</td>
 <td>#</td>
-<td>Setting of system value QDSPSGNINF. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QDSPSGNINF. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.remote_signon</code></td>
 <td><code>ibmi.sysval.remote_signon</code></td>
 <td>System Value QRMTSIGN</td>
 <td>#</td>
-<td>Setting of system value QRMTSIGN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QRMTSIGN. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.shared_memory_control</code></td>
 <td><code>ibmi.sysval.shared_memory_control</code></td>
 <td>System Value QSHRMEMCTL</td>
 <td>#</td>
-<td>Setting of system value QSHRMEMCTL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QSHRMEMCTL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.retain_server_security</code></td>
 <td><code>ibmi.sysval.retain_server_security</code></td>
 <td>System Value QRETSVRSEC</td>
 <td>#</td>
-<td>Setting of system value QRETSVRSEC. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QRETSVRSEC. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.sysval.audit_control</code></td>
 <td><code>ibmi.sysval.audit_control</code></td>
 <td>System Value QAUDCTL</td>
 <td>#</td>
-<td>Setting of system value QAUDCTL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (<em>YES, </em>NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
+<td>Setting of system value QAUDCTL. A configuration value, not a measurement: the sample is the number when the setting is numeric and a small code for a symbolic setting (*YES, *NO, *NONE), and the exact setting travels in the ibmi.sysval.raw_value attribute</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.library_list.position</code></td>

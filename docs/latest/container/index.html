@@ -1404,6 +1404,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -1418,10 +1445,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1439,8 +1466,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3585,6 +3612,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../probes/kubernetes_logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes pod logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/kubelet_stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubelet stats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../probes/swarm/" class="md-nav__link">
         
   
@@ -3856,10 +3939,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3877,8 +3960,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3931,6 +4014,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.6.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.4
   
 
     
@@ -4685,7 +4796,7 @@ else is a parameter.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">OTLP_BEARER_TOKEN</span><span class="o">=</span>&lt;your<span class="w"> </span>token&gt;<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.3
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.4
 </code></pre></div>
 <p>That is the whole of it for a first run: one variable, one mount.</p>
 <p>Podman runs the same image with the same command; see
@@ -4865,7 +4976,7 @@ reads them, so they apply with a configuration of your own too (see
 <td><code>SENHUB_HOST_ID</code></td>
 <td>No</td>
 <td>kept in the state directory</td>
-<td>Gives the host a stable identity across the re-creation of its container, so a new container is the same host in the graph and not a new one. 32 hexadecimal characters, dashes optional. One value per host: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code></td>
+<td>Gives the host a stable identity across the re-creation of its container, so a new container is the same host in the graph and not a new one. 32 hexadecimal characters, dashes optional. One value per host: an example or blank value (all zeros, <code>01234567-89ab-cdef-…</code>) is refused at start, and the host entity is marked <code>senhub.host.id.source=configuration</code>. The agent itself reads it, so it also applies to the binary run outside this image (several containers on one VM would otherwise all report the VM's DMI identity); a value it cannot use is named in the log at start</td>
 </tr>
 <tr>
 <td><code>SENHUB_AGENT_KEY</code></td>
@@ -4968,7 +5079,7 @@ startup, so a container that ignores your variables tells you why.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-v<span class="w"> </span>/srv/senhub/conf:/etc/senhub-agent<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-v<span class="w"> </span>senhub-state:/var/lib/senhub-agent<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.3
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6.4
 </code></pre></div>
 <p>Your configuration wins completely, and that includes the agent key
 under <code>agent: key:</code>. The entrypoint does not touch it, so a

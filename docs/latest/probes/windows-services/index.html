@@ -1211,6 +1211,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../topology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Topology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1229,10 +1256,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
         
           
-          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="">
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
             
   
   
@@ -1250,8 +1277,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_17">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_18">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3498,6 +3525,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../kubernetes_logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes pod logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubelet_stats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubelet stats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../swarm/" class="md-nav__link">
         
   
@@ -3769,10 +3852,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -3790,8 +3873,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3844,6 +3927,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.4
   
 
     
@@ -4522,7 +4633,7 @@ restrict to a subset.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:bbd70d969aadcd3e95a5789062ca61c7d63aa9cefae3a0eae290ce6a45adfbd1 -->
+<!-- sha256:4b36c29d31400f667e97d3b1b590c75a017d8f80f2286f22b886e6ffad033fbd -->
 
 <table>
 <thead>
@@ -4538,7 +4649,13 @@ restrict to a subset.</p>
 <td><code>services</code></td>
 <td>No</td>
 <td>-</td>
-<td>Service short names to monitor; empty means every service. Example: <code>wuauserv, Spooler</code></td>
+<td>Service short names to monitor; empty means services configured for automatic start. Example: <code>wuauserv, Spooler</code></td>
+</tr>
+<tr>
+<td><code>detail</code></td>
+<td>No</td>
+<td><code>state</code></td>
+<td>Metrics detail: state emits only host.service.running per service; full adds windows.service.state, status and start type</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
@@ -4588,7 +4705,9 @@ than failing the whole collection.</p>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The agent must run with sufficient privileges to query the SCM. Administrator or LocalSystem is required for full enumeration.</li>
-<li>When <code>services</code> is empty, every service the SCM enumerates is reported — this can generate a large number of PRTG channels on busy servers. Restrict with an explicit list for PRTG deployments.</li>
+<li>When <code>services</code> is empty, only the services Windows is supposed to start by itself are watched: start type Automatic, delayed included. Name a demand-start or disabled service in <code>services</code> to watch it.</li>
+<li>Each watched service is a <code>host.service</code> entity on the topology graph (identity <code>host.id</code> + <code>host.service.name</code>, the service short name), linked to its host by <code>runs_on</code>, with <code>host.service.manager</code> (<code>windows_scm</code>), <code>host.service.start_mode</code>, <code>host.service.start_delayed</code> and <code>host.service.trigger_start</code>. Whether it runs is a measurement, not a graph fact: <code>host.service.running</code> gives it as 1 or 0, the same series for systemd and Windows, with the same <code>host.id</code> and <code>host.service.name</code>. A service started by a trigger (<code>host.service.trigger_start: true</code>) stops normally once its job is done: an alert on "automatic and not running" should leave those out. The <code>host.service.running</code> series carries <code>host.service.trigger_start</code> too, for alert engines that read series only and cannot join the graph; the entity attribute is the reference, and the label a copy that can lag it by one collection after someone reconfigures the service.</li>
+<li><code>detail: state</code> (the default) emits <code>host.service.running</code> alone, one series per watched service; <code>detail: full</code> adds <code>windows.service.state</code>, the raw status and the start type. The probe is installed on every host, so its default stays at one series per service.</li>
 <li>Service names are the short internal names used by <code>sc query</code> and <code>Get-Service</code>, not display names (e.g. <code>wuauserv</code> not "Windows Update").</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
@@ -4611,6 +4730,13 @@ series' tags.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>host.service.running</code></td>
+<td><code>host.service.running</code></td>
+<td>Service {windows.service.name} Running</td>
+<td>#</td>
+<td>1 when the service runs, 0 when it does not (stopped, failed, starting, stopping or paused), the same series for systemd and Windows</td>
+</tr>
 <tr>
 <td><code>senhub.winservices.up</code></td>
 <td><code>senhub.winservices.up</code></td>
@@ -4638,6 +4764,13 @@ series' tags.</p>
 <td>Service {windows.service.name} Start Type</td>
 <td>#</td>
 <td>How the service is configured to start: 0=boot 1=system 2=automatic 3=manual 4=disabled 5=automatic (delayed start)</td>
+</tr>
+<tr>
+<td><code>senhub.probe.check.result</code></td>
+<td><code>senhub.probe.check.result</code></td>
+<td>Check Result</td>
+<td>#</td>
+<td>Why the last check failed: 0 ok, 1 target down, 2 auth denied, 3 timeout, 4 TLS error, 5 config error, 6 protocol error, 7 permission denied</td>
 </tr>
 </tbody>
 </table>
