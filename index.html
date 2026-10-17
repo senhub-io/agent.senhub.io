@@ -419,7 +419,7 @@
     <div class="shell">
       <div class="shell-bar">point it at a collector</div>
 <pre><span class="p">$</span> senhub-agent config init --otlp-endpoint otel-collector.internal:4317</pre>
-      <div class="shell-bar mid">then add a probe — one file per probe</div>
+      <div class="shell-bar mid">then add a probe, one file per probe</div>
 <pre><span class="c"># /etc/senhub-agent/probes.d/10-postgresql.yaml</span>
 - <span class="k">name</span>: postgresql
   <span class="k">type</span>: postgresql
@@ -430,7 +430,7 @@
     <span class="k">password</span>: ${secret:postgres.password}</pre>
     </div>
     <p class="shell-note">
-      PRTG, Nagios and Prometheus need no configuration at all — they are served from
+      PRTG, Nagios and Prometheus need no configuration at all: they are served from
       the built-in HTTP output. Secrets are stored with
       <code>senhub-agent secret set</code>, read from standard input, never from the
       command line.
@@ -450,7 +450,7 @@
     <img src="/assets/console-overview.webp" width="1400" height="1197"
          alt="The SenHub Agent console: seven probes with their state and metric counts, two outputs, and the agent's own version, uptime and licence tier." />
     <figcaption>
-      Every agent carries its own console — what it collects, where it sends it, and
+      Every agent carries its own console: what it collects, where it sends it, and
       what is failing right now. No server to stand up first.
     </figcaption>
   </figure>
@@ -461,7 +461,7 @@
     <h2>What it watches</h2>
     <p>
       One integration is one thing watched: a service, a device, an endpoint. You
-      enable it in a file, or from the console. Eighty-three in the catalogue — some
+      enable it in a file, or from the console. Eighty-three in the catalogue, some
       specific to Windows or to Linux, so a given host offers fewer.
     </p>
   </div>
@@ -525,8 +525,8 @@
     <h2>Zabbix support</h2>
     <p>
       The agent speaks the Zabbix protocol in both directions, and
-      <strong>generates the Zabbix templates from its own probe definitions</strong>
-      — the part a third-party agent normally leaves you to model by hand in the
+      <strong>generates the Zabbix templates from its own probe definitions</strong>,
+      the part a third-party agent normally leaves you to model by hand in the
       front end. Give it the server address at install time and a new host registers
       and fills in on its own.
     </p>
@@ -534,7 +534,7 @@
       <div class="card">
         <h3>Active</h3>
         <p>The agent connects out, asks the server which items it wants for this
-           host, and pushes values in batches — encrypted with a pre-shared key or a
+           host, and pushes values in batches, encrypted with a pre-shared key or a
            certificate. An unknown host triggers autoregistration, so a whole fleet
            appears in Zabbix without anyone creating hosts by hand. Proxy groups are
            followed to the member holding the host.<span class="port">→ server :10051</span></p>
@@ -542,14 +542,14 @@
       <div class="card">
         <h3>Passive</h3>
         <p>The agent listens and answers the server's polls over TLS, with an
-           allow-list of permitted addresses, in both dialects — the raw key before
+           allow-list of permitted addresses, in both dialects: the raw key before
            Zabbix 7.0, the framed request from 7.0 on. A plaintext poll, a wrong key
            or a wrong identity is refused.<span class="port">← agent :10050</span></p>
       </div>
       <div class="card">
         <h3>Templates you didn't write</h3>
         <p>One template per probe type and platform, generated from the agent's own metric
-           definitions rather than maintained by hand — with low-level discovery for
+           definitions rather than maintained by hand, with low-level discovery for
            anything that comes in varying numbers: filesystems, interfaces,
            instances. Enable a probe, its template is already there.</p>
       </div>
@@ -571,14 +571,14 @@
     <p style="margin-top:18px">
       Pushing values into Zabbix is something several agents do. This one also
       <strong>answers the server's own polls</strong>, and <strong>hands you the
-      templates</strong> — generated from its probe definitions and imported for you,
+      templates</strong>, generated from its probe definitions and imported for you,
       so the items are not modelled by hand. PRTG and Nagios are served natively from
       the same process.
     </p>
     <p>
       And it holds on a locked-down site. A pre-shared key is the <em>only</em>
-      encryption Zabbix offers for autoregistration — it will not take a certificate
-      for that step — so without PSK a fleet cannot enrol itself where that step is
+      encryption Zabbix offers for autoregistration, and it will not take a certificate
+      for that step, so without PSK a fleet cannot enrol itself where that step is
       encrypted. SenHub Agent speaks it, which is what keeps the zero-click setup
       true there too.
     </p>
@@ -596,7 +596,7 @@
       Owner, criticality, site and lifecycle are declared once in the agent's
       configuration and ride with every metric and log the agent emits. They are
       OpenTelemetry resource attributes, so they survive the trip into any backend
-      that understands them — and <strong>hosts, containers and services</strong>
+      that understands them, and <strong>hosts, containers and services</strong>
       carry them into the entity graph, where you can filter on them.
     </p>
     <div class="yaml">
@@ -612,7 +612,7 @@
       <div>
         <h3>Across every output</h3>
         <p>The same labels ride with the signal whether it leaves over OTLP or
-           answers a Zabbix poll — no mapping table to keep in sync.</p>
+           answers a Zabbix poll, with no mapping table to keep in sync.</p>
       </div>
       <div>
         <h3>On the alert</h3>
@@ -686,9 +686,9 @@
     <h2>Entities and relations</h2>
     <p>
       Collecting a metric means identifying what produced it. So alongside the
-      measurements, the agent can emit the things themselves — hosts, services,
-      containers, network interfaces and the relations between them — as
-      OpenTelemetry entity events.
+      measurements, the agent can emit the things themselves as OpenTelemetry
+      entity events: hosts, services, containers, network interfaces and the
+      relations between them.
     </p>
     <p>
       That output feeds <a href="https://github.com/senhub-io">Toise</a>, our map of
@@ -707,14 +707,14 @@
   <div class="wrap">
     <h2>Open core</h2>
     <p>
-      The agent, every output and 65 of the 83 integrations are Apache-2.0 — that is
+      The agent, every output and 65 of the 83 integrations are Apache-2.0, which is
       the whole product for most people, with nothing to sign and nothing to expire.
       <strong>No output and no protocol is ever behind a licence.</strong>
     </p>
     <p>
-      The 18 vendor integrations that took weeks of protocol work each — Citrix,
-      NetScaler, Veeam, VMware HA, Oracle Enterprise, PowerStore, the Azure and
-      Microsoft 365 ones — are the commercial layer. They fund the rest.
+      The 18 vendor integrations that took weeks of protocol work each are the
+      commercial layer: Citrix, NetScaler, Veeam, VMware HA, Oracle Enterprise,
+      PowerStore, the Azure and Microsoft 365 ones. They fund the rest.
     </p>
     <div class="buttons">
       <a class="btn btn-primary" href="/docs/latest/installation/">Install</a>
