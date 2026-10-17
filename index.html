@@ -396,7 +396,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Open source · 0.6.3</div>
+    <div class="eyebrow">Open source · 0.6.4</div>
     <h1>OpenTelemetry-native agent for <em>hosts and infrastructure</em>.</h1>
     <p class="lede">
       Free and Apache-2.0. Collects host, network, container and vendor metrics
@@ -648,7 +648,18 @@
     </p>
     <div class="news">
       <div class="item now">
-        <div class="ver">0.6.3<small>current</small></div>
+        <div class="ver">0.6.4<small>current</small></div>
+        <div>
+          <h3>The network on the map, and Kubernetes from the node</h3>
+          <p>Routing tables, SNMP discovery over LLDP, Kubernetes nodes with kubelet
+             metrics and pod logs, and a check result that tells a target that is down
+             from a check that could not run. <b>It renames the series that say whether
+             a service is running</b>, so read the release note before upgrading a
+             fleet.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ver">0.6.3</div>
         <div>
           <h3>The Azure Container Apps collector, finished</h3>
           <p>Every application of a subscription discovered and followed with its
@@ -664,17 +675,8 @@
           <p>Signed packages and repositories, an Ansible collection, a Helm chart and
              a Podman Quadlet unit. Probes can be declared from environment variables.
              <b>Credentials in a probe's connection URI are no longer written to the
-             log</b> — upgrade, then rotate anything that was exposed.</p>
+             log</b>: upgrade, then rotate anything that was exposed.</p>
         </div>
-      <div class="item">
-        <div class="ver">0.6.1</div>
-        <div>
-          <h3>Metric names and units follow the conventions</h3>
-          <p>Durations in seconds, throughputs in bytes per second, gauges without
-             their <code>.total</code> suffix. Dashboards, alerts and Zabbix templates
-             on the old names need updating.</p>
-        </div>
-      </div>
       </div>
     </div>
     <p class="news-more"><a href="/news.html">All releases →</a></p>
