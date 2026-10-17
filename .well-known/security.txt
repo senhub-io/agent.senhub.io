@@ -5,4 +5,4 @@ Contact: mailto:security@senhub.io
 Expires: 2027-10-17T00:00:00.000Z
 Preferred-Languages: fr, en
 Canonical: https://agent.senhub.io/.well-known/security.txt
-Policy: https://github.com/senhub-io/senhub-agent/blob/main/SECURITY.md
+Policy: https://github.com/senhub-io/senhub-agent/security/policy
