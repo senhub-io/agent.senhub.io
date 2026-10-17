@@ -1,0 +1,8 @@
+# Security contact for the SenHub Agent website and the agent itself.
+# https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:security@sensorfactory.fr
+Expires: 2027-10-17T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://agent.senhub.io/.well-known/security.txt
+Policy: https://github.com/senhub-io/senhub-agent/blob/main/SECURITY.md
