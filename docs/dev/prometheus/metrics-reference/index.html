@@ -5745,6 +5745,12 @@ the OTLP receiver counters once that probe has received traffic.</p>
 <td><code>probe</code>, <code>reason</code></td>
 </tr>
 <tr>
+<td><code>senhub_agent_logs_redacted_total</code></td>
+<td>counter</td>
+<td>Secrets masked in log records since start, per probe and masking rule (<code>credential_param</code>, <code>authorization_header</code> or a rule of <code>logs.redact.rules</code>); emitted once something has been masked</td>
+<td><code>probe</code>, <code>rule</code></td>
+</tr>
+<tr>
 <td><code>senhub_agent_transformer_fallback_total</code></td>
 <td>counter</td>
 <td>Datapoints processed without a transformer definition (no unit injection or corrections)</td>
