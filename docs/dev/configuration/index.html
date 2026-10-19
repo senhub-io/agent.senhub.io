@@ -6420,7 +6420,7 @@ is refused by the web console.</p>
 <tr>
 <td><code>prtg.check_result_channel</code></td>
 <td><code>false</code></td>
-<td>Adds the Check Result channel (<code>senhub.probe.check.result</code>) to PRTG sensors. Leave it off unless the SenHub lookup files are installed on the PRTG core: a channel naming a lookup the core does not have turns the whole sensor Warning (PE272). See <a href="../web-interface/#installing-prtg-value-lookups">Installing PRTG value lookups</a></td>
+<td>Adds the Check Result channel (<code>senhub.probe.check.result</code>) and the unresolved-target channel (<code>senhub.probe.check.target.unresolved</code>) to PRTG sensors, and shows service channels (<code>host.service.running</code>) through their lookup instead of a plain 0/1 value with an error limit. Leave it off unless the SenHub lookup files are installed on the PRTG core: a channel naming a lookup the core does not have turns the whole sensor Warning (PE272). See <a href="../web-interface/#installing-prtg-value-lookups">Installing PRTG value lookups</a></td>
 </tr>
 </tbody>
 </table>
