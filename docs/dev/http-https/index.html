@@ -5156,7 +5156,7 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"prometheus"</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"..."</span>
 </code></pre></div>
-<p>Without <code>--enable-https</code>, the installer binds to loopback. With <code>--enable-https</code>, it writes <code>bind_address: "0.0.0.0"</code> and the HTTPS port. A remote poller on a plain HTTP installation needs an explicit <code>bind_address: "0.0.0.0"</code> or an interface IP.</p>
+<p>The installer binds to loopback, with or without <code>--enable-https</code>; <code>--enable-https</code> only switches on TLS and the HTTPS port. A remote poller needs an explicit <code>bind_address: "0.0.0.0"</code> or an interface IP.</p>
 <p>An installation that still uses the legacy monolithic <code>agent-config.yaml</code> holds the same parameters under <code>storage:</code>, in the <code>params</code> of the entry named <code>http</code>.</p>
 <h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
 <table>
