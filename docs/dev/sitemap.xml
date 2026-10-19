@@ -149,6 +149,14 @@
          <lastmod>2026-10-19</lastmod>
     </url>
     <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/azure_log_query/</loc>
+         <lastmod>2026-10-19</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/azure_monitor/</loc>
+         <lastmod>2026-10-19</lastmod>
+    </url>
+    <url>
          <loc>https://agent.senhub.io/docs/dev/probes/cassandra/</loc>
          <lastmod>2026-10-19</lastmod>
     </url>
@@ -190,6 +198,10 @@
     </url>
     <url>
          <loc>https://agent.senhub.io/docs/dev/probes/elasticsearch/</loc>
+         <lastmod>2026-10-19</lastmod>
+    </url>
+    <url>
+         <loc>https://agent.senhub.io/docs/dev/probes/entra_id/</loc>
          <lastmod>2026-10-19</lastmod>
     </url>
     <url>

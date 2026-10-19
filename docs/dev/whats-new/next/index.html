@@ -2440,6 +2440,90 @@
   
   
     <li class="md-nav__item">
+      <a href="../../probes/azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../probes/syslog/" class="md-nav__link">
         
   
@@ -4585,7 +4669,14 @@
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Console: a page per probe, and series on the Overview.</strong> <code>probes?view=&lt;name&gt;</code> shows one probe's state and full failure reason, current series, read-only configuration and recent events, and every probe or output row on the Overview and the Probes list now opens its page. The Overview adds a "Series exported" card (per output, top probes, created since start) when the build meters series, backed by the new <code>GET /api/{key}/info/self-records</code>. See <a href="../../web-interface/">Web console</a>.</li>
-<li><strong>Proxmox VE: disk health, ZFS, backup and task series.</strong> The <code>proxmox</code> probe now reports physical disk SMART state and SSD life remaining (<code>hw.physical_disk.status</code>, <code>hw.physical_disk.endurance_utilization</code>), ZFS pool state, size, usage and fragmentation (<code>hw.logical_disk.*</code>, <code>proxmox.zfs.pool.fragmentation</code>), the age and outcome of each guest's last backup, the number of guests covered by no backup job and of enabled jobs, storage availability, the count of failed tasks, each failure also published as an ERROR log record, the state of HA-managed guests and cluster quorum (<code>proxmox.ha.resource.status</code>, <code>proxmox.ha.quorum.status</code>), and the status and last-sync age of storage replication jobs (<code>proxmox.replication.job.status</code>, <code>proxmox.replication.job.age</code>). Status series carry one point per state (1 for the current state, 0 for the others).</li>
+<li>
+<p><strong>Proxmox VE: disk health, ZFS, backup and task series.</strong> The <code>proxmox</code> probe now reports physical disk SMART state and SSD life remaining (<code>hw.physical_disk.status</code>, <code>hw.physical_disk.endurance_utilization</code>), ZFS pool state, size, usage and fragmentation (<code>hw.logical_disk.*</code>, <code>proxmox.zfs.pool.fragmentation</code>), the age and outcome of each guest's last backup, the number of guests covered by no backup job and of enabled jobs, storage availability, the count of failed tasks, each failure also published as an ERROR log record, the state of HA-managed guests and cluster quorum (<code>proxmox.ha.resource.status</code>, <code>proxmox.ha.quorum.status</code>), and the status and last-sync age of storage replication jobs (<code>proxmox.replication.job.status</code>, <code>proxmox.replication.job.age</code>). Status series carry one point per state (1 for the current state, 0 for the others).</p>
+</li>
+<li>
+<p><strong>Azure Monitor probe (Pro).</strong> The new <code>azure_monitor</code> probe discovers the resources of one or more subscriptions through Azure Resource Graph, filtered by type, resource group and tag, and publishes their platform metrics, their provisioning and product state, and optional Service Bus, App Service Plan and VM disk figures. Entity emission is off by default.</p>
+</li>
+<li><strong>Azure Log Query probe (Pro).</strong> The new <code>azure_log_query</code> probe runs one KQL query on a Log Analytics workspace each cycle and publishes every row (<code>channel</code>, <code>value</code>, <code>unit</code>) as a gauge named <code>azure.log_query.&lt;channel&gt;</code>.</li>
+<li><strong>Microsoft Entra ID probe (Pro).</strong> The new <code>entra_id</code> probe reads one tenant through Microsoft Graph in 13 modules: secret and certificate expiry, directory synchronisation, users, licences, groups, applications, devices, service health, authentication methods, privileged access and security posture. Each module needs its own Application permission with admin consent.</li>
 </ul>
 
 
