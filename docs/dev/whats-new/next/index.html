@@ -4558,7 +4558,7 @@
 
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>PRTG sensors no longer carry the Check Result channel by default.</strong> 0.6.4 added it to every database, application and active-check probe, referencing the <code>senhub.probe.check.result</code> lookup; on a PRTG core without the SenHub lookup files the sensor turned Warning (PE272). The channel is now off unless <code>prtg.check_result_channel: true</code> is set in the <code>http</code> output, and then it keeps the same lookup name and values. PRTG keeps a channel that stops receiving data: if you installed the lookups and want to keep the channel, set the option before upgrading; otherwise delete the channel or re-add the sensor. See <a href="../../web-interface/#installing-prtg-value-lookups">Installing PRTG value lookups</a>.</li>
+<li><strong>PRTG sensors no longer carry the Check Result channel by default.</strong> 0.6.4 added it to every database, application and active-check probe, referencing the <code>senhub.probe.check.result</code> lookup; on a PRTG core without the SenHub lookup files the sensor turned Warning (PE272). The channel is now off unless <code>prtg.check_result_channel: true</code> is set in the <code>http</code> output, and then it keeps the same lookup name and values. PRTG keeps a channel that stops receiving data: if you installed the lookups and want to keep the channel, set the option before upgrading (0.6.4 runs with it and ignores it; only its <code>config check</code> reports it as unread); otherwise delete the channel or re-add the sensor. See <a href="../../web-interface/#installing-prtg-value-lookups">Installing PRTG value lookups</a>.</li>
 </ul>
 
 
