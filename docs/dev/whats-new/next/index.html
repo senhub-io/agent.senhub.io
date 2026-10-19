@@ -3914,6 +3914,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4527,6 +4538,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4559,6 +4581,10 @@
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>PRTG sensors no longer carry the Check Result channel by default.</strong> 0.6.4 added it to every database, application and active-check probe, referencing the <code>senhub.probe.check.result</code> lookup; on a PRTG core without the SenHub lookup files the sensor turned Warning (PE272). The channel is now off unless <code>prtg.check_result_channel: true</code> is set in the <code>http</code> output, and then it keeps the same lookup name and values. PRTG keeps a channel that stops receiving data: if you installed the lookups and want to keep the channel, set the option before upgrading (0.6.4 runs with it and ignores it; only its <code>config check</code> reports it as unread); otherwise delete the channel or re-add the sensor. See <a href="../../web-interface/#installing-prtg-value-lookups">Installing PRTG value lookups</a>.</li>
+</ul>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Proxmox VE: disk health, ZFS, backup and task series.</strong> The <code>proxmox</code> probe now reports physical disk SMART state and SSD life remaining (<code>hw.physical_disk.status</code>, <code>hw.physical_disk.endurance_utilization</code>), ZFS pool state, size, usage and fragmentation (<code>hw.logical_disk.*</code>, <code>proxmox.zfs.pool.fragmentation</code>), the age and outcome of each guest's last backup, the number of guests covered by no backup job and of enabled jobs, storage availability, the count of failed tasks, each failure also published as an ERROR log record, the state of HA-managed guests and cluster quorum (<code>proxmox.ha.resource.status</code>, <code>proxmox.ha.quorum.status</code>), and the status and last-sync age of storage replication jobs (<code>proxmox.replication.job.status</code>, <code>proxmox.replication.job.age</code>). Status series carry one point per state (1 for the current state, 0 for the others).</li>
 </ul>
 
 
