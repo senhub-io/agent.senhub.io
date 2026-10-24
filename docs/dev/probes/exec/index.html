@@ -4884,6 +4884,7 @@ output contracts are supported:</p>
 
 <p><code>env</code> entries are added on top of the agent's own environment, which the
 program inherits.</p>
+<p>A command still running when the agent stops is ended the same way as on a timeout, with all its children (a job object on Windows). On Windows the job also ends any process the command leaves running after it exits: a monitoring command must not leave a daemon behind. Start a long-running process as a service of its own, not from <code>exec</code>. Known limit: on Windows, a process the command starts within the first instant, before the command is placed in its job, is not tracked and can survive.</p>
 <h2 id="nagios-contract">Nagios contract<a class="headerlink" href="#nagios-contract" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ ./check_queue
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>WARN - queue depth high | depth=42;10;50 'wait time'=230ms
