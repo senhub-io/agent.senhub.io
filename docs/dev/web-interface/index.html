@@ -1119,6 +1119,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#right-after-the-agent-restarts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Right after the agent restarts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installing-prtg-value-lookups" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5160,6 +5171,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#right-after-the-agent-restarts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Right after the agent restarts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installing-prtg-value-lookups" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5532,6 +5554,8 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>http://agent-server:8080/api/{key}/prtg/metrics/{probe}?tags=vserver_name:vs_web
 </code></pre></div>
 <p>This returns only the metrics for the virtual server named <code>vs_web</code>. The Sensor URLs tab builds this filter from the tags the probe reports.</p>
+<h4 id="right-after-the-agent-restarts">Right after the agent restarts<a class="headerlink" href="#right-after-the-agent-restarts" title="Permanent link">&para;</a></h4>
+<p>Until a probe has completed its first collection, its sensor URL answers with no channel. PRTG shows that one reading as "The returned JSON does not match the expected structure (No channel found). (code: PE231)", and the sensor is back to normal at the next reading. The first collection follows the start within the probe's own collection time; no action is needed.</p>
 <h4 id="installing-prtg-value-lookups">Installing PRTG value lookups<a class="headerlink" href="#installing-prtg-value-lookups" title="Permanent link">&para;</a></h4>
 <p>SenHub Agent provides custom PRTG lookup files that translate numeric status values into meaningful text (for instance "Up" instead of "1"):</p>
 <ol>
