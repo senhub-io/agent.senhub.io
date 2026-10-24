@@ -6057,6 +6057,7 @@
 - License validity and agent binding
 - Probe types against the registry
 - Required probe parameters (endpoint, credentials)
+- Keys nothing reads, each a warning (exit <code>1</code>) because the agent starts and ignores them: a key of a probe entry outside <code>params</code>, a key inside <code>params</code>, a key of a storage strategy, and a key inside the <code>prtg</code>, <code>prometheus</code> or <code>tls</code> block of the <code>http</code> output
 - Storage strategy names</p>
 <p>Fragments under <code>probes.d/</code> and <code>strategies.d/</code> are covered when a multi-file layout is present.</p>
 <p><img alt="senhub-agent config check output" src="../images/cli/config-check.webp" title="Terminal output of senhub-agent config check on a valid configuration" /></p>
