@@ -2859,6 +2859,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#bind-address-not-yet-assigned-at-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bind Address Not Yet Assigned at Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#windows-firewall-blocking" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5479,6 +5490,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#bind-address-not-yet-assigned-at-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bind Address Not Yet Assigned at Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#windows-firewall-blocking" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6184,6 +6206,11 @@ set removes file capabilities, and an update replaces the file. See
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>*.*<span class="w"> </span>@syslog-server:1514<span class="w">  </span><span class="c1"># UDP</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>*.*<span class="w"> </span>@@syslog-server:1514<span class="w"> </span><span class="c1"># TCP</span>
 </code></pre></div></p>
+<h3 id="bind-address-not-yet-assigned-at-boot">Bind Address Not Yet Assigned at Boot<a class="headerlink" href="#bind-address-not-yet-assigned-at-boot" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> With <code>bind_address</code> set to a specific interface address, the probe is shown as failed after a reboot and the log has an error with <code>retry_in</code>.</p>
+<p><strong>Cause:</strong> The address is assigned by DHCP and does not exist yet when the agent starts, so the bind fails.</p>
+<p><strong>Behaviour:</strong> The agent does not give up. A probe that cannot start is logged at error level with <code>retry_in</code>, shown as failed, and started again on a timer. Once the address appears, the probe starts and logs <code>Probe started after a failed start</code>. Events sent before that moment are not received.</p>
+<p><strong>Avoiding the dependency:</strong> Bind to <code>0.0.0.0</code> (or <code>::</code> for IPv6) and restrict who can reach the port with a firewall rule on the host. The listener then does not depend on any single address being present.</p>
 <h3 id="windows-firewall-blocking">Windows: Firewall Blocking<a class="headerlink" href="#windows-firewall-blocking" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Events not received from remote sources</p>
 <p><strong>Solution:</strong>
