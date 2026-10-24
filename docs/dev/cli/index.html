@@ -5558,6 +5558,12 @@
 <td>any error</td>
 <td>service installed and enabled, unit as <code>install</code> writes it, configuration present, binary current</td>
 </tr>
+<tr>
+<td><code>update</code></td>
+<td>the binary is installed and the service restarted, but the systemd unit could not be refreshed</td>
+<td>the binary could not be installed, or the service does not run it</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <p>Any other command exits <code>0</code> on success and <code>2</code> on failure. Before this contract, failures exited <code>1</code>; a script that tests only for a non-zero code is unaffected, one that compares with <code>1</code> must now compare with <code>2</code>.</p>
@@ -6203,7 +6209,7 @@
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--dry-run
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--registry-url<span class="w"> </span>https://releases.example.com
 </code></pre></div>
-<p>Downloads and installs the specified version. On Linux, when the systemd service is running, it is then restarted and the command checks that the new process runs the binary just installed, printing the version it runs; if it does not, the command fails. Updating replaces the binary and needs the same privileges as the service commands. On Windows, the MSI restarts the service itself.</p>
+<p>Downloads and installs the specified version. On Linux, when the unit was written by <code>install</code>, the new binary then brings it up to date (as <code>refresh-unit --yes</code> would, keeping the <code>User=</code>, <code>ExecStart</code> and your drop-ins under <code>senhub-agent.service.d/</code>) and systemd is reloaded. A unit owned by the <code>.deb</code>/<code>.rpm</code> package is left to the package. If the refresh fails, the update goes on, the service restarts on its current unit, and the command exits <code>1</code> with the reason. When the systemd service is running, it is then restarted and the command checks that the new process runs the binary just installed, printing the version it runs; if it does not, the command fails. Updating replaces the binary and needs the same privileges as the service commands. On Windows, the MSI restarts the service itself.</p>
 <table>
 <thead>
 <tr>
@@ -6223,6 +6229,10 @@
 <tr>
 <td><code>--no-restart</code></td>
 <td>Install the binary and leave the running service as it is, for a script that restarts it itself. Until the service restarts it keeps running the previous version, whatever <code>senhub-agent version</code> says: that command reads the file on disk</td>
+</tr>
+<tr>
+<td><code>--no-refresh-unit</code></td>
+<td>Leave the systemd unit as it is, for an operator who manages it with their own tooling (Ansible or other). Run <code>refresh-unit</code> yourself, or ship the unit, when a version changes it</td>
 </tr>
 <tr>
 <td><code>--verbose</code>, <code>-v</code></td>
