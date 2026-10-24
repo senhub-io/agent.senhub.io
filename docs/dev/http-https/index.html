@@ -5641,6 +5641,7 @@ invitation:</p>
 </tbody>
 </table>
 <h3 id="web-interface">Web Interface<a class="headerlink" href="#web-interface" title="Permanent link">&para;</a></h3>
+<p>The administration routes accept the key as <code>Authorization: Bearer &lt;admin key&gt;</code> with <code>_</code> in the key position of the path (<code>/api/_/config/probes</code>), or through the console cookie set when <code>/web/{admin-key}/</code> is opened; the key in the path still works. See <a href="../web-interface/">Web interface</a>.</p>
 <p>The console answers the administration key only, and is served when both the <code>web</code> endpoint and <code>admin_key</code> are set.</p>
 <table>
 <thead>
