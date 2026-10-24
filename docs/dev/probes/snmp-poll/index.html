@@ -5313,9 +5313,17 @@ Configuration errors are accumulated and reported together at
 startup, not one at a time.</p>
 <p><code>retries</code> matters on a congested link: UDP loses packets, and each
 attempt costs one <code>timeout</code> before the device counts as unanswered.
-<code>topology_interval</code> is a slower rail, independent of <code>interval</code>, so a
-dense topology sweep never delays the traffic counters. <code>mib_paths</code> is
-read locally; the probe never fetches a MIB over the network.</p>
+<code>topology_interval</code> is a slower rail, independent of <code>interval</code>: the
+topology is swept at most once per <code>topology_interval</code>, inside a poll
+cycle. A sweep stops its walks once it has run for <code>interval</code> (30
+seconds at least) and still reads the device identity. It stops at its
+first read that times out when the device has answered nothing yet, so
+an unreachable device costs one <code>timeout</code> and its retries per attempt;
+a poll cycle stops its walks the same way.
+After a failed sweep the next attempt comes at the next cycle, then twice
+as late each time, up to five minutes, until the device answers.
+<code>mib_paths</code> is read locally; the probe never fetches a MIB over the
+network.</p>
 <h3 id="snmpv3-usm">SNMPv3 (USM)<a class="headerlink" href="#snmpv3-usm" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">params</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
