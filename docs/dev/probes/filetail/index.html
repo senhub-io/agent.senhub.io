@@ -4957,6 +4957,7 @@ mount that comes up after the agent), is picked up by the rescan once it
 appears. Such a file is read from its first line, whatever
 <code>from_beginning</code> says, since all of it was written after the probe
 started watching for it.</p>
+<p>Reading an old file from its first line sends its records with the time written in each line, when the parser finds one. A log backend refuses records older than its retention, without the agent being told: VictoriaLogs, for example, drops them and counts them in its own <code>too_small_timestamp</code> metric. Lines older than the backend's retention therefore never appear there, while the agent reports them as sent.</p>
 <h3 id="multiline-folding">Multiline folding<a class="headerlink" href="#multiline-folding" title="Permanent link">&para;</a></h3>
 <p>Java stacktraces, Python tracebacks and pretty-printed payloads span
 several physical lines. The <code>multiline</code> block folds them into one
