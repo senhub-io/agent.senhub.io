@@ -4091,6 +4091,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../whats-new/0.6.4/" class="md-nav__link">
         
   
@@ -4882,7 +4910,6 @@ output contracts are supported:</p>
 </table>
 <!-- schema:params:end -->
 
-<p><code>timeout</code> bounds one run of the command. The probe-level <code>collect_timeout</code> (see <a href="../../configuration/">Configuration</a>) bounds the whole collection; the shorter of the two ends the command and all its children.</p>
 <p><code>env</code> entries are added on top of the agent's own environment, which the
 program inherits.</p>
 <p>A command still running when the agent stops is ended the same way as on a timeout, with all its children (a job object on Windows). On Windows the job also ends any process the command leaves running after it exits: a monitoring command must not leave a daemon behind. Start a long-running process as a service of its own, not from <code>exec</code>. Known limit: on Windows, a process the command starts within the first instant, before the command is placed in its job, is not tracked and can survive.</p>
