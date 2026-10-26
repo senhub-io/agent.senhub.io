@@ -6148,7 +6148,7 @@ distributing a version 3 (sealed) configuration.</p>
 <tr>
 <td><code>key</code></td>
 <td>Yes</td>
-<td>Agent key (UUID format), generated on the machine by <code>install</code>, <code>config init</code> or the MSI. It identifies the agent and is the key PRTG, Nagios and a Prometheus scrape read with. It must not be empty. It does not open the web console, which answers only the administration key (<code>admin_key</code> of the <code>http</code> output)</td>
+<td>Agent key (UUID format), generated on the machine by <code>install</code>, <code>config init</code> or the MSI. It identifies the agent and is the key PRTG, Nagios and a Prometheus scrape read with. It must not be empty, and it is never copied to another machine (see <a href="#license">License</a>). It does not open the web console, which answers only the administration key (<code>admin_key</code> of the <code>http</code> output)</td>
 </tr>
 <tr>
 <td><code>license</code></td>
@@ -6287,11 +6287,6 @@ sockets. An agent that does not want it pays none of it.</p>
 <td><code>governance</code></td>
 <td>No</td>
 <td>Who owns what this probe observes, how critical it is, where it is, and which application chain it belongs to. Stamped on this probe's entities, metrics and logs. See <a href="#governance-per-probe">Governance per probe</a>.</td>
-</tr>
-<tr>
-<td><code>collect_timeout</code></td>
-<td>No</td>
-<td>Deadline of one collection, as a duration (<code>90s</code>) or a number of seconds. Replaces the default, shorter or longer. The default is the probe's <code>interval</code> or five minutes, whichever is longer, so a collection longer than its interval is not cut. A probe slower than its interval delivers its data at its own pace: the agent never runs two collections of one probe at once, and each late collection is counted in <code>senhub.agent.collect.overruns</code>. That counter is the signal to raise the <code>interval</code> or lower the work of the probe. <code>0</code> means unset; the empty string <code>""</code>, a negative value or an unreadable value is refused by <code>agent config check</code> and the probe does not start. For <code>exec</code>, the probe's own <code>timeout</code> (10 seconds by default) still applies and the shorter of the two wins. A collection cut at its deadline is logged with the deadline and the setting that sets it.</td>
 </tr>
 <tr>
 <td><code>enabled</code></td>
@@ -6872,6 +6867,16 @@ is issued for this agent (or for your organisation), and writes <code>license.jw
 shell history; it is also accepted as the argument.</p>
 <p>Either way, <strong>the license takes effect after restarting the agent</strong> — a license
 change is not picked up while the agent is running.</p>
+<div class="admonition warning">
+<p class="admonition-title">Never copy an agent key to another machine</p>
+<p>A licence bound to one agent key is valid on that agent only. To license
+another agent, ask support for a licence for that agent or for your
+organisation. Do not copy <code>key</code> from one <code>agent.yaml</code> to another: the
+agent's identity in every output is derived from it (its
+<code>service.instance.id</code>, the address PRTG and Nagios read), so two agents
+sharing a key report as one. Their own metrics mix, and in a topology
+graph each overwrites the other's entities, so one host appears detached.</p>
+</div>
 <h3 id="verifying-license-status">Verifying License Status<a class="headerlink" href="#verifying-license-status" title="Permanent link">&para;</a></h3>
 <p>You can check the license status at any time:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>show
