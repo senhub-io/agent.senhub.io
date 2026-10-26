@@ -4850,7 +4850,7 @@ mode so the producing application is never blocked.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:d874161f4070f3751bfe0bed7380330677b173bcb843e68572f888646936ccaa -->
+<!-- sha256:55b3f8e9c14d020d239ae8ba0377911c6aabf4bf6bae2256dbbcc3de68d3910c -->
 
 <table>
 <thead>
@@ -4909,6 +4909,12 @@ mode so the producing application is never blocked.</p>
 <td>No</td>
 <td><code>after</code></td>
 <td>Whether a matching line starts a record or flushes the previous one. One of <code>after</code>, <code>before</code></td>
+</tr>
+<tr>
+<td><code>multiline.flush_timeout</code></td>
+<td>No</td>
+<td><code>5s</code></td>
+<td>Send a record in progress once no line has come for this long; 0 waits for the next record</td>
 </tr>
 <tr>
 <td><code>parser</code></td>
@@ -4977,15 +4983,36 @@ continuation lines; here the same record is written with <code>negate: false</co
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
 </code></pre></div>
 <p>Copied as is from Filebeat, <code>negate: true</code> takes every stack-trace line
-for the start of a new record.</p>
+for the start of a new record, and folds every timestamped line that
+follows into it, until the next line without a timestamp: a busy log
+then sends nothing for hours or days. <code>config check</code> and the probe's
+start warn on that combination (<code>negate: true</code>, <code>match: after</code>, a
+pattern anchored with <code>^</code>).</p>
+<p>A record in progress is sent once no line has come for
+<code>flush_timeout</code> (5 seconds by default), so the last message of a quiet
+file goes out without waiting for the next one. When a writer pauses
+longer than that in the middle of a message, the message is split in
+two: what came before the pause is sent when the timeout passes, and
+the lines after the pause, which carry no timestamp of their own, fold
+together into a second record. That record is sent when the next
+message starts, or once no line has come for <code>flush_timeout</code> again;
+its time is that of its first line. Raise the timeout for a writer
+that pauses, or set <code>0</code> to wait for the next message as before:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span><span class="nt">multiline</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^\d{4}-\d{2}-\d{2}</span><span class="nv"> </span><span class="s">'</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">flush_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span><span class="w">   </span><span class="c1"># a duration, or a number of seconds; 0 turns it off</span>
+</code></pre></div>
+<p>A record that would pass <code>max_bytes_per_line</code> is sent as it stands and
+the line that did not fit starts the next one; no line is dropped.</p>
 <h3 id="structured-parsing">Structured parsing<a class="headerlink" href="#structured-parsing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
 </code></pre></div>
 <p>With <code>regex</code>, each named capture group becomes a log attribute. With
 <code>json</code> and <code>logfmt</code>, every key becomes a log attribute. With <code>raw</code>, the
@@ -5079,12 +5106,12 @@ one of them is never read, and <code>ReadOnlyPaths=</code> cannot bring it back:
 <code>ProtectHome=true</code> the directories are inaccessible, not read-only. At
 construction the probe logs a warning that names the directory.</p>
 <p>Override the setting with a drop-in, which survives package upgrades:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>senhub-agent
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>senhub-agent
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[Service]</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="na">ProtectHome</span><span class="o">=</span><span class="s">read-only</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[Service]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="na">ProtectHome</span><span class="o">=</span><span class="s">read-only</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
 </code></pre></div>
 <p><code>read-only</code> exposes the three directories for reading, which is all the
 probe needs. The <code>senhub</code> account must also have the Unix permission to
@@ -5108,9 +5135,9 @@ sized, only the offset is reported.</p>
 <p>In Prometheus the metrics are <code>senhub_filetail_read_offset_bytes</code> and
 <code>senhub_filetail_file_size_bytes</code>. This expression
 fires when, over 15 minutes, the file grew and the offset did not move:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">changes</span><span class="o">(</span><span class="nv">senhub_filetail_read_offset_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="ow">and</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="p">,</span><span class="w"> </span><span class="nv">probe_name</span><span class="p">,</span><span class="w"> </span><span class="nv">log_file_path</span><span class="o">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kr">delta</span><span class="o">(</span><span class="nv">senhub_filetail_file_size_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">changes</span><span class="o">(</span><span class="nv">senhub_filetail_read_offset_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="ow">and</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="p">,</span><span class="w"> </span><span class="nv">probe_name</span><span class="p">,</span><span class="w"> </span><span class="nv">log_file_path</span><span class="o">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kr">delta</span><span class="o">(</span><span class="nv">senhub_filetail_file_size_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
 <p>The labels on each series are <code>log_file_path</code>, <code>probe_name</code> and
 <code>probe_type</code>; <code>instance</code> is added by your Prometheus when it scrapes the
