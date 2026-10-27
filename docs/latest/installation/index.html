@@ -803,6 +803,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reaching-the-web-console-on-a-headless-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reaching the web console on a headless server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updating-the-agent" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5372,6 +5383,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reaching-the-web-console-on-a-headless-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reaching the web console on a headless server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updating-the-agent" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5489,19 +5511,25 @@
 recipe, you need the URL rather than a browser. Two sources serve the
 same artifacts:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># GitHub — public, and the one to prefer for a container build</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>https://github.com/senhub-io/senhub-agent/releases/download/0.6.0/senhub-agent-linux-amd64.zip
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>https://github.com/senhub-io/senhub-agent/releases/latest/download/senhub-agent-linux-amd64.zip
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># SenHub release server</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>https://eu-west-1.intake.senhub.io/download/0.6.0/senhub-agent-linux-amd64.zip
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>https://eu-west-1.intake.senhub.io/download/latest/senhub-agent-linux-amd64.zip
+</code></pre></div>
+<p>These <code>latest</code> URLs always serve the current release — the GitHub one by
+redirect, the SenHub one directly — so a copied command cannot go stale.
+Prefer them for a first install. For a build you need to reproduce
+later, pin the version instead:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://github.com/senhub-io/senhub-agent/releases/download/0.6.4/senhub-agent-linux-amd64.zip
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Release tags carry no <code>v</code> prefix</p>
-<p>The tag is <code>0.6.0</code>, not <code>v0.6.0</code>. A URL built with the <code>v</code> returns
-404, which reads like a missing file rather than a wrong name — this
-is the single most common reason a direct download fails.</p>
+<p>The tag is <code>0.6.4</code>, not <code>v0.6.4</code>. A pinned URL built with the <code>v</code>
+returns 404, which reads like a missing file rather than a wrong
+name — this is the single most common reason a direct download fails.</p>
 </div>
 <p>Substitute the version you want. To discover what is published:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>https://eu-west-1.intake.senhub.io/releases/releases.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>https://eu-west-1.intake.senhub.io/releases/releases.json
 </code></pre></div>
 <p>That endpoint lists every stable version, newest first; <code>latest</code> is an
 alias for the newest. Beta versions are at
@@ -5519,13 +5547,13 @@ tells you what to write instead.</p>
 <p>Every artifact is published with a <a href="https://jedisct1.github.io/minisign/">minisign</a>
 signature next to it. Verify before you run it, especially in an
 automated build:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.6.0
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">BASE</span><span class="o">=</span>https://github.com/senhub-io/senhub-agent/releases/download/<span class="nv">$VERSION</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip"</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip.minisig"</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>minisign<span class="w"> </span>-Vm<span class="w"> </span>senhub-agent-linux-amd64.zip<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span>-P<span class="w"> </span>RWRlfkyeLpjI0MjTSfuvT/bDNHHaVJhRirQN8Z8LTAM+n4LKVbpjrlRh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.6.4
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">BASE</span><span class="o">=</span>https://github.com/senhub-io/senhub-agent/releases/download/<span class="nv">$VERSION</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip"</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip.minisig"</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>minisign<span class="w"> </span>-Vm<span class="w"> </span>senhub-agent-linux-amd64.zip<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>-P<span class="w"> </span>RWRlfkyeLpjI0MjTSfuvT/bDNHHaVJhRirQN8Z8LTAM+n4LKVbpjrlRh
 </code></pre></div>
 <p>That public key is the one the agent itself embeds to verify its own
 auto-updates. There is no <code>SHA256SUMS</code> file: minisign is the
@@ -5633,14 +5661,14 @@ for the newest release of each channel; see
 </table>
 <p>Properties are consumed only on first install; they do not overwrite an existing <code>agent.yaml</code>.</p>
 <p>The guided install (double-click) asks for the licence file, the port, the desktop shortcut and whether to open the web console at the end, all on one page. The console address carries the administration key, generated on the machine and kept sealed, so the wizard does not print it: the desktop shortcut and <code>senhub-agent console</code> open it, and <code>senhub-agent console --print</code> (as administrator) prints it. The administration key is not the agent key given to PRTG, Nagios or a Prometheus scrape, which only reads metrics.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>msiexec /i senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn <span class="se">^</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="se"> </span> LICENSE_KEY=eyJhbGciOi... <span class="se">^</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="se"> </span> TAGS=site=paris,env=prod <span class="se">^</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="se"> </span> OTLP_ENDPOINT=collector.company.com:4317 <span class="se">^</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="se"> </span> /l* <span class="nv">%TEMP%</span>\senhub-agent-install.log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>msiexec /i senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn <span class="se">^</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="se"> </span> LICENSE_KEY=eyJhbGciOi... <span class="se">^</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="se"> </span> TAGS=site=paris,env=prod <span class="se">^</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="se"> </span> OTLP_ENDPOINT=collector.company.com:4317 <span class="se">^</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="se"> </span> /l* <span class="nv">%TEMP%</span>\senhub-agent-install.log
 </code></pre></div>
 <p>Free tier, no provisioning:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>msiexec /i senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>msiexec /i senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">The license key is a secret</p>
@@ -5649,7 +5677,7 @@ for the newest release of each channel; see
 <p>For GPO, SCCM and Intune deployment (including the MST transform GPO needs to pass properties), see <a href="../deploying/windows-intune-gpo/">Windows: Intune, GPO and SCCM</a>. Other tools (Ansible, cloud-init, Docker Compose, Helm, Podman) are in <a href="../deploying/">Deploying at scale</a>.</p>
 <h4 id="adopting-an-existing-agent">Adopting an existing agent<a class="headerlink" href="#adopting-an-existing-agent" title="Permanent link">&para;</a></h4>
 <p>If the machine already runs an agent installed <strong>outside</strong> the MSI (a <code>senhub-agent install</code>, ZIP or auto-update deploy), the installer detects the foreign service and, by default, stops with a clear message rather than colliding on service creation. Pass <code>ADOPT=1</code> to take it over:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>msiexec /i senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn ADOPT=1 /l* <span class="nv">%TEMP%</span>\senhub-adopt.log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>msiexec /i senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn ADOPT=1 /l* <span class="nv">%TEMP%</span>\senhub-adopt.log
 </code></pre></div>
 <p><code>ADOPT=1</code> stops and deletes the existing service, then installs the MSI-managed one. Configuration under <code>%ProgramData%\SenHub\</code> is preserved, so migrating a fleet from a script or auto-update install to MSI management is a single <code>ADOPT=1</code> install. An MSI installed by this MSI upgrades cleanly on its own — <code>ADOPT</code> is only for foreign installs.</p>
 <div class="admonition note">
@@ -5660,85 +5688,97 @@ for the newest release of each channel; see
 <p>For a quick local setup you can install from the ZIP and register the service by hand.</p>
 <h4 id="1-prepare-the-binary">1. Prepare the binary<a class="headerlink" href="#1-prepare-the-binary" title="Permanent link">&para;</a></h4>
 <p>Download <code>senhub-agent-windows-amd64.zip</code>, then extract it to your installation directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">mkdir</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Expand-Archive</span> <span class="p">.\</span><span class="n">senhub-agent-windows-amd64</span><span class="p">.</span><span class="n">zip</span> <span class="n">-DestinationPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span><span class="p">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">mkdir</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">Expand-Archive</span> <span class="p">.\</span><span class="n">senhub-agent-windows-amd64</span><span class="p">.</span><span class="n">zip</span> <span class="n">-DestinationPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span><span class="p">\</span>
 </code></pre></div>
 <p>The ZIP contains <code>senhub-agent.exe</code>, already correctly named.</p>
 <h4 id="2-install-the-service">2. Install the service<a class="headerlink" href="#2-install-the-service" title="Permanent link">&para;</a></h4>
 <p>Open a <strong>PowerShell terminal as Administrator</strong> and run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd </span><span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span><span class="p">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">install</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">cd </span><span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span><span class="p">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">install</span>
 </code></pre></div>
 <p>This registers <code>SenHub Agent</code> as a Windows Service with automatic restart on failure. A UUID agent key is generated automatically and saved to the configuration file.</p>
 <p>To install with HTTPS enabled on the local API:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">install</span> <span class="p">-</span><span class="n">-enable-https</span> <span class="p">-</span><span class="n">-https-port</span> <span class="n">8443</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">install</span> <span class="p">-</span><span class="n">-enable-https</span> <span class="p">-</span><span class="n">-https-port</span> <span class="n">8443</span>
 </code></pre></div>
 <h4 id="3-start-the-service">3. Start the service<a class="headerlink" href="#3-start-the-service" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="nb">start</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="nb">start</span>
 </code></pre></div>
 <h4 id="4-verify-the-installation">4. Verify the installation<a class="headerlink" href="#4-verify-the-installation" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">status</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">status</span>
 </code></pre></div>
 <p>You can also check the health endpoint:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">"http://localhost:8080/health"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">"http://localhost:8080/health"</span>
 </code></pre></div>
 <p>Expected response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ok"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0.6.0"</span><span class="p">,</span><span class="nt">"uptime"</span><span class="p">:</span><span class="s2">"1m30s"</span><span class="p">,</span><span class="nt">"probes_active"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ok"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0.6.4"</span><span class="p">,</span><span class="nt">"uptime"</span><span class="p">:</span><span class="s2">"1m30s"</span><span class="p">,</span><span class="nt">"probes_active"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
 </code></pre></div></p>
 <p><img alt="Windows service running" src="../images/installation/windows-service-running.webp" title="Services.msc showing SenHub Agent in Running state" /></p>
 <h3 id="log-file-location">Log file location<a class="headerlink" href="#log-file-location" title="Permanent link">&para;</a></h3>
 <p>Windows logs are stored at:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>%ProgramData%\SenHub\logs\senhubagent.log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>%ProgramData%\SenHub\logs\senhubagent.log
 </code></pre></div></p>
 <p>Typically: <code>C:\ProgramData\SenHub\logs\senhubagent.log</code></p>
 <p>Log rotation: 10 MB max per file, 5 backup files, 30-day retention, compressed.</p>
 <h2 id="linux-installation">Linux Installation<a class="headerlink" href="#linux-installation" title="Permanent link">&para;</a></h2>
 <h3 id="1-prepare-the-binary_1">1. Prepare the binary<a class="headerlink" href="#1-prepare-the-binary_1" title="Permanent link">&para;</a></h3>
+<p>The ZIP is extracted with <code>unzip</code>, which several Linux images do not
+carry by default, a clean Ubuntu Server 24.04 among them. Install it
+first, or the extract step below fails with <code>unzip: command not found</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Debian, Ubuntu</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>unzip
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># RHEL, Rocky Linux, AlmaLinux</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>unzip
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># openSUSE, SLES</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>unzip
+</code></pre></div>
 <p>Download the ZIP for your architecture (<code>senhub-agent-linux-amd64.zip</code> or <code>senhub-agent-linux-arm64.zip</code>), then extract it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/senhub/bin
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>unzip<span class="w"> </span>senhub-agent-linux-amd64.zip<span class="w"> </span>-d<span class="w"> </span>/opt/senhub/bin/
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/opt/senhub/bin/senhub-agent
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/senhub/bin
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>unzip<span class="w"> </span>senhub-agent-linux-amd64.zip<span class="w"> </span>-d<span class="w"> </span>/opt/senhub/bin/
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/opt/senhub/bin/senhub-agent
 </code></pre></div>
 <p>The ZIP contains <code>senhub-agent</code>, already correctly named.</p>
 <h3 id="2-install-the-service_1">2. Install the service<a class="headerlink" href="#2-install-the-service_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>install
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>install
 </code></pre></div>
 <p>This creates and registers a hardened systemd service (<code>senhub-agent.service</code>) that runs the agent as a dedicated unprivileged system user (<code>senhub</code>, created during install if missing) with all Linux capabilities dropped — the same unit the <code>.deb</code>/<code>.rpm</code> packages ship. A UUID agent key is generated automatically and saved to the configuration file, and the configuration and log directories are handed to the <code>senhub</code> user.</p>
 <p><code>install</code> copies the binary to <code>/usr/local/bin/senhub-agent</code> and the service runs that copy; the one you extracted is no longer used, and you may delete <code>/opt/senhub/bin</code> once the install has succeeded. Every later command that touches the service, the secret store or the binary runs as root and calls the installed binary by its full path, <code>sudo /usr/local/bin/senhub-agent ...</code>. On RHEL, AlmaLinux and Rocky Linux, <code>sudo</code> leaves <code>/usr/local/bin</code> out of its search path, so <code>sudo senhub-agent status</code> answers "command not found" there while <code>sudo /usr/local/bin/senhub-agent status</code> works.</p>
 <p>To send to Zabbix, give the agent its server once the service is
 installed; the running agent picks the output up and the host registers
 in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--zabbix-server<span class="w"> </span>zabbix.example.com:10051
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>--zabbix-server<span class="w"> </span>zabbix.example.com:10051
 </code></pre></div>
 <p>If a probe needs a privilege the default unit does not grant (for example <code>snmp_trap</code> on UDP/162 or ICMP raw sockets), grant the single capability with a unit drop-in — see <a href="https://github.com/senhub-io/senhub-agent/blob/dev/docs/admin-guide/LEAST-PRIVILEGE.md">Running the agent least-privilege</a>. To keep the previous behavior of running the service as root:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>root
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>root
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Upgrading from an earlier version</p>
 <p><code>install</code> never touches an existing <code>senhub-agent.service</code> unit; it fails with "Init already exists", and existing installs keep running as before. To move an existing install to the hardened unit, refresh the unit in place:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>refresh-unit
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>refresh-unit
 </code></pre></div>
 <p><code>refresh-unit</code> compares the installed unit with the one embedded in the binary, prints the difference, asks for confirmation (<code>--yes</code> skips it), then rewrites <code>/etc/systemd/system/senhub-agent.service</code> and reloads systemd. It keeps the <code>User=</code> / <code>Group=</code> the unit already runs as and its <code>ExecStart</code> line while that binary still exists, and creates the service user if it is missing. Restart the service afterwards. Before moving a root install to the <code>senhub</code> user, review any probe that relied on root (privileged ports, raw sockets) against the per-probe privilege map in the least-privilege guide.</p>
 <p>Do not use <code>uninstall</code> followed by <code>install</code> for this: <code>uninstall</code> deletes the configuration directory, including the sealed secret store and the agent key. Keep that sequence for a host being re-provisioned from scratch.</p>
 </div>
 <p>To install with HTTPS enabled and a custom certificate hostname:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>--enable-https<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>--https-hosts<span class="w"> </span><span class="s2">"agent.company.com,192.168.1.100"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span>--https-port<span class="w"> </span><span class="m">8443</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>/opt/senhub/bin/senhub-agent<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span>--enable-https<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span>--https-hosts<span class="w"> </span><span class="s2">"agent.company.com,192.168.1.100"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span>--https-port<span class="w"> </span><span class="m">8443</span>
 </code></pre></div>
 <h3 id="3-start-the-service_1">3. Start the service<a class="headerlink" href="#3-start-the-service_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>start
 </code></pre></div>
 <h3 id="4-verify-the-installation_1">4. Verify the installation<a class="headerlink" href="#4-verify-the-installation_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>status
 </code></pre></div>
 <p>Or check the health endpoint:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>http://localhost:8080/health
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>curl<span class="w"> </span>http://localhost:8080/health
 </code></pre></div>
 <h3 id="log-file-location_1">Log file location<a class="headerlink" href="#log-file-location_1" title="Permanent link">&para;</a></h3>
 <p>Linux logs are stored at:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>/var/log/senhub-agent/senhubagent.log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>/var/log/senhub-agent/senhubagent.log
 </code></pre></div></p>
 <p>If this directory is not writable, logs fall back to the binary directory.</p>
 <p>Log rotation: 10 MB max per file, 5 backup files, 30-day retention, compressed.</p>
@@ -5766,22 +5806,22 @@ in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):<
 </tbody>
 </table>
 <p>Both editions install the same files and the same service, so only one can be installed at a time.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Debian, Ubuntu</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./senhub-agent-oss_&lt;version&gt;-1_amd64.deb
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># RHEL, Rocky Linux, AlmaLinux</span>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>./senhub-agent-oss-&lt;version&gt;-1.x86_64.rpm
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="c1"># openSUSE, SLES</span>
-<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>--allow-unsigned-rpm<span class="w"> </span>./senhub-agent-oss-&lt;version&gt;-1.x86_64.rpm
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Debian, Ubuntu</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./senhub-agent-oss_&lt;version&gt;-1_amd64.deb
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1"># RHEL, Rocky Linux, AlmaLinux</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>./senhub-agent-oss-&lt;version&gt;-1.x86_64.rpm
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="c1"># openSUSE, SLES</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>--allow-unsigned-rpm<span class="w"> </span>./senhub-agent-oss-&lt;version&gt;-1.x86_64.rpm
 </code></pre></div>
 <p>For the full edition, use the <code>senhub-agent</code> file in the same commands. A beta carries its number after a tilde, for example <code>senhub-agent-oss_0.6.2~beta.1-1_amd64.deb</code>: the package manager sorts <code>0.6.2~beta.1</code> and <code>0.6.2~beta.2</code> before the final <code>0.6.2</code>, so the release replaces its betas as an ordinary upgrade.</p>
 <h4 id="switching-edition">Switching edition<a class="headerlink" href="#switching-edition" title="Permanent link">&para;</a></h4>
 <p>Install the other edition in place of the installed one. The service restarts on the new package, and your configuration, agent key, secrets and data are kept. Switching in either direction works the same way. On Debian and Ubuntu one install command does it; on the rpm distributions the two editions conflict, so the switch is an explicit swap.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># from the open source edition to the full edition</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./senhub-agent_&lt;version&gt;-1_amd64.deb<span class="w">                          </span><span class="c1"># Debian, Ubuntu</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>swap<span class="w"> </span>senhub-agent-oss<span class="w"> </span>./senhub-agent-&lt;version&gt;-1.x86_64.rpm<span class="w">            </span><span class="c1"># RHEL, Rocky Linux, AlmaLinux</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>--force-resolution<span class="w"> </span>./senhub-agent-&lt;version&gt;-1.x86_64.rpm<span class="w">    </span><span class="c1"># openSUSE, SLES</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># from the open source edition to the full edition</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./senhub-agent_&lt;version&gt;-1_amd64.deb<span class="w">                          </span><span class="c1"># Debian, Ubuntu</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>swap<span class="w"> </span>senhub-agent-oss<span class="w"> </span>./senhub-agent-&lt;version&gt;-1.x86_64.rpm<span class="w">            </span><span class="c1"># RHEL, Rocky Linux, AlmaLinux</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>--force-resolution<span class="w"> </span>./senhub-agent-&lt;version&gt;-1.x86_64.rpm<span class="w">    </span><span class="c1"># openSUSE, SLES</span>
 </code></pre></div>
 <p>From the package repositories, use the package name instead of the file: <code>sudo dnf swap senhub-agent-oss senhub-agent</code> or <code>sudo zypper install --force-resolution senhub-agent</code>. Going back uses the same commands with the names exchanged.</p>
 <p>The package creates the <code>senhub</code> service user, installs the binary at <code>/usr/bin/senhub-agent</code> and the hardened <code>senhub-agent.service</code> unit, writes the default configuration to <code>/etc/senhub-agent/</code> with a key of its own for this host, and starts the service. It does not run <code>senhub-agent install</code>; do not run both.</p>
@@ -5799,21 +5839,21 @@ in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):<
 <p>Signed APT and YUM/DNF/Zypper repositories are served at <code>https://packages.senhub.io</code>. They go live with the first published beta: until then, install from the downloaded file as above. Two channels exist, <code>stable</code> (final releases) and <code>beta</code> (pre-releases, <code>X.Y.Z~beta.N</code>); pick one per machine, and replace <code>beta</code> by <code>stable</code> in the commands below to follow final releases. The same page, <a href="https://packages.senhub.io">https://packages.senhub.io</a>, carries these commands for both channels. The package names are the ones of the table above: <code>senhub-agent-oss</code> (open source edition) and <code>senhub-agent</code> (full edition).</p>
 <p>The signing key is served at <code>https://packages.senhub.io/gpg.key</code>; its fingerprint is printed on the repository page. The repository metadata and every package are signed with it, and the clients check both.</p>
 <p>Debian, Ubuntu:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>-m<span class="w"> </span><span class="m">0755</span><span class="w"> </span>/etc/apt/keyrings
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://packages.senhub.io/gpg.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>--yes<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/senhub.gpg
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/senhub.gpg] https://packages.senhub.io/apt beta main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/senhub.list
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>senhub-agent-oss
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>install<span class="w"> </span>-d<span class="w"> </span>-m<span class="w"> </span><span class="m">0755</span><span class="w"> </span>/etc/apt/keyrings
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://packages.senhub.io/gpg.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>--yes<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/senhub.gpg
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/senhub.gpg] https://packages.senhub.io/apt beta main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/senhub.list
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>senhub-agent-oss
 </code></pre></div>
 <p>RHEL, Rocky Linux, AlmaLinux, Fedora:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>sudo<span class="w"> </span>curl<span class="w"> </span>-fsSLo<span class="w"> </span>/etc/yum.repos.d/senhub.repo<span class="w"> </span>https://packages.senhub.io/rpm/beta/senhub.repo
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>senhub-agent-oss
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>sudo<span class="w"> </span>curl<span class="w"> </span>-fsSLo<span class="w"> </span>/etc/yum.repos.d/senhub.repo<span class="w"> </span>https://packages.senhub.io/rpm/beta/senhub.repo
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>senhub-agent-oss
 </code></pre></div>
 <p>openSUSE, SLES:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>rpm<span class="w"> </span>--import<span class="w"> </span>https://packages.senhub.io/gpg.key
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>sudo<span class="w"> </span>curl<span class="w"> </span>-fsSLo<span class="w"> </span>/etc/zypp/repos.d/senhub.repo<span class="w"> </span>https://packages.senhub.io/rpm/beta/senhub-zypper.repo
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>refresh
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>senhub-agent-oss
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>rpm<span class="w"> </span>--import<span class="w"> </span>https://packages.senhub.io/gpg.key
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>sudo<span class="w"> </span>curl<span class="w"> </span>-fsSLo<span class="w"> </span>/etc/zypp/repos.d/senhub.repo<span class="w"> </span>https://packages.senhub.io/rpm/beta/senhub-zypper.repo
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>refresh
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>senhub-agent-oss
 </code></pre></div>
 <p>For the full edition, install <code>senhub-agent</code> instead. Updates then arrive with the system's own updates (<code>apt upgrade</code>, <code>dnf upgrade</code>, <code>zypper update</code>).</p>
 <h2 id="installation-options">Installation Options<a class="headerlink" href="#installation-options" title="Permanent link">&para;</a></h2>
@@ -5958,7 +5998,7 @@ in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):<
 <p>Add additional probes by creating new fragment files under <code>probes.d/</code> (e.g. <code>10-mysql.yaml</code> — files load alphabetically). Add another strategy by creating a new file under <code>strategies.d/</code> with exactly one top-level key (the strategy name). Disable any fragment by renaming it to <code>*.disabled</code> — no deletion required. The agent watches both directories with fsnotify, so add/modify/remove reloads automatically without a restart.</p>
 <h3 id="migrating-an-existing-monolithic-install">Migrating an existing monolithic install<a class="headerlink" href="#migrating-an-existing-monolithic-install" title="Permanent link">&para;</a></h3>
 <p>If you upgraded from a pre-0.2.x agent that used the single-file <code>agent-config.yaml</code> layout, the agent keeps loading it transparently — no immediate action required. To move to the multi-file layout cleanly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>migrate<span class="w"> </span>/etc/senhub-agent/agent-config.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>config<span class="w"> </span>migrate<span class="w"> </span>/etc/senhub-agent/agent-config.yaml
 </code></pre></div>
 <p>The command takes a timestamped backup of the original, splits globals into <code>agent.yaml</code>, probes into <code>probes.d/00-host.yaml</code>, and strategies into per-strategy files under <code>strategies.d/</code>. It then verifies the post-split data matches the original (and restores the backup on any mismatch). Comments from the monolithic file are NOT carried into the fragments — they live in the backup for reference. The command is idempotent: running it on an already-multi-file install reports "nothing to do" and exits 0.</p>
 <h2 id="service-management-commands">Service Management Commands<a class="headerlink" href="#service-management-commands" title="Permanent link">&para;</a></h2>
@@ -6031,19 +6071,45 @@ in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):<
 </table>
 <h3 id="console-mode">Console Mode<a class="headerlink" href="#console-mode" title="Permanent link">&para;</a></h3>
 <p>The <code>run</code> command starts the agent interactively in the foreground (not as a service). This is useful for debugging:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run<span class="w"> </span>--verbose
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.veeam
 </code></pre></div>
 <p>All logs are printed to the console. Press Ctrl+C to stop.</p>
 <p>Use <code>--filter</code> to limit debug output to specific modules (see <a href="../cli/">CLI Reference</a>).</p>
+<h3 id="reaching-the-web-console-on-a-headless-server">Reaching the web console on a headless server<a class="headerlink" href="#reaching-the-web-console-on-a-headless-server" title="Permanent link">&para;</a></h3>
+<p><code>senhub-agent console --print</code> prints the console address, of the form
+<code>http://localhost:8080/web/{admin-key}/dashboard</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>console<span class="w"> </span>--print
+</code></pre></div>
+<p>The agent binds that HTTP endpoint to 127.0.0.1:8080 on its own host, so
+on a server without a desktop the printed address opens nothing. Forward
+the port over SSH from the workstation you browse from:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">8080</span>:127.0.0.1:8080<span class="w"> </span>user@agent-host
+</code></pre></div>
+<p>With the tunnel open, paste the printed address into your own browser
+unchanged. If port 8080 is already taken on your workstation, forward
+any free local port and change the port in the address to match.</p>
+<div class="admonition warning">
+<p class="admonition-title">The address carries the administration key</p>
+<p>The printed URL embeds the administration key, which grants access to
+the console — treat it as a credential rather than a bookmark to pass
+around.</p>
+</div>
 <h3 id="updating-the-agent">Updating the Agent<a class="headerlink" href="#updating-the-agent" title="Permanent link">&para;</a></h3>
 <p>Check for available updates:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span>--list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span>--list
 </code></pre></div>
-<p>Install a specific version:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0
+<p>Install a specific version, named as <code>update --list</code> prints it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span>&lt;version&gt;
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">A version named by hand can go backwards</p>
+<p><code>update</code> installs the version you name, older ones included. Copying
+a version number out of a document downgrades an agent that is
+already ahead of it, so take the number from <code>update --list</code> on the
+host you are updating.</p>
+</div>
 <p>On an MSI-managed Windows install, auto-update applies a new signed MSI rather than swapping the binary in place — see the note under <a href="#msi-installer-recommended">MSI installer</a>.</p>
 <h2 id="post-installation-checklist">Post-Installation Checklist<a class="headerlink" href="#post-installation-checklist" title="Permanent link">&para;</a></h2>
 <p>After installing and starting the agent, verify the following:</p>
@@ -6064,22 +6130,22 @@ in Zabbix at its first contact (see <a href="../zabbix/#deploying">Zabbix</a>):<
 </ol>
 <h2 id="uninstallation">Uninstallation<a class="headerlink" href="#uninstallation" title="Permanent link">&para;</a></h2>
 <p><strong>Windows (MSI install):</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>msiexec /x senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>msiexec /x senhub-agent-<span class="p">&lt;</span>version<span class="p">&gt;</span>-amd64.msi /qn
 </code></pre></div></p>
 <p>Or use <strong>Apps &amp; features</strong> / <strong>Programs and Features</strong> interactively.</p>
 <p>Uninstalling removes the whole <code>%ProgramData%\SenHub\</code> tree — configuration, sealed secret store, license, and the transient <code>logs\</code> and <code>update\</code> folders — so removing the product leaves the machine clean, whether you uninstall from <strong>Apps &amp; features</strong> or with <code>msiexec /x</code>. A later fresh install then starts from the installer's inputs (licence, port) rather than a stale kept configuration.</p>
 <p>This is not recoverable. To move a host to a newer version while keeping its licence and configuration, <strong>upgrade in place</strong> (install the newer MSI over the older one) instead of uninstalling: an in-place major upgrade preserves everything under <code>%ProgramData%\SenHub\</code>.</p>
 <p><code>PURGE_DATA</code> is accepted for backward compatibility but no longer changes anything, since a genuine uninstall already removes the full tree.</p>
 <p><strong>Windows (ZIP install):</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">stop</span>
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">uninstall</span>
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="nb">cd </span><span class="p">\</span>
-<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">stop</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="p">.\</span><span class="n">senhub-agent</span><span class="p">.</span><span class="n">exe</span> <span class="n">uninstall</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="nb">cd </span><span class="p">\</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="nb">Remove-Item</span> <span class="n">-Recurse</span> <span class="n">-Force</span> <span class="n">C</span><span class="p">:\</span><span class="n">SenHub</span>
 </code></pre></div></p>
 <p><code>uninstall</code> does not delete the folder the ZIP was extracted to: the running binary cannot remove itself. Delete it by hand once the service is gone, as above.</p>
 <p><strong>Linux:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>stop
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>uninstall
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>stop
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>uninstall
 </code></pre></div></p>
 <p>The <code>uninstall</code> command asks for confirmation (<code>--yes</code> skips it), stops the service, removes the service registration, and deletes the whole configuration directory: <code>agent.yaml</code>, <code>probes.d/</code>, <code>strategies.d/</code>, <code>certs/</code>, the logs and the sealed secret store, which holds the agent key and every credential the agent sealed.</p>
 <div class="admonition warning">
