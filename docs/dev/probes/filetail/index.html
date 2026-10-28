@@ -5141,7 +5141,8 @@ mistake.</p>
 <code>/home</code>, <code>/root</code> and <code>/run/user</code> appear empty to the service. A path under
 one of them is never read, and <code>ReadOnlyPaths=</code> cannot bring it back: with
 <code>ProtectHome=true</code> the directories are inaccessible, not read-only. At
-construction the probe logs a warning that names the directory.</p>
+construction the probe logs a warning that names the directory, and
+<code>agent config check</code> prints the same warning with the fix.</p>
 <p>Override the setting with a drop-in, which survives package upgrades:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>senhub-agent
 </code></pre></div>
@@ -5152,7 +5153,10 @@ construction the probe logs a warning that names the directory.</p>
 </code></pre></div>
 <p><code>read-only</code> exposes the three directories for reading, which is all the
 probe needs. The <code>senhub</code> account must also have the Unix permission to
-read the file and to traverse its parent directories. To expose a single
+read the file and to traverse its parent directories. The unit keeps
+<code>ProtectHome=true</code> by default: <code>read-only</code> lets a compromised agent read
+whatever the <code>senhub</code> account may read under <code>/home</code>, so it is an opt-in for
+hosts that need it. To expose a single
 directory instead, use <code>ProtectHome=tmpfs</code> together with
 <code>BindReadOnlyPaths=/home/&lt;path&gt;</code>.</p>
 <h2 id="detecting-a-tail-that-no-longer-reads">Detecting a tail that no longer reads<a class="headerlink" href="#detecting-a-tail-that-no-longer-reads" title="Permanent link">&para;</a></h2>
