@@ -4774,15 +4774,17 @@ usage.</p>
 <div class="admonition warning">
 <p class="admonition-title">Validated on a single node</p>
 <p>This probe is validated on a single Proxmox VE node (QEMU guests, LXC
-containers, ZFS and directory storages). Ceph and Proxmox Backup Server (PBS)
-support are in preview: they are not validated in a real environment, they are
-off by default, and each is enabled explicitly (<code>enable_ceph</code>, <code>enable_pbs</code>). A
-part left disabled makes no API call and produces no series.</p>
+containers, ZFS and directory storages). Cluster quorum, high availability,
+replication, Ceph and Proxmox Backup Server (PBS) support are in preview: they
+are not validated in a real environment, they are off by default, and each is
+enabled explicitly (<code>enable_cluster</code>, <code>enable_ha</code>, <code>enable_replication</code>,
+<code>enable_ceph</code>, <code>enable_pbs</code>). A part left disabled makes no API call and
+produces no series.</p>
 </div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:80c06a441eb47908e2f6645354678d7b29c0f049c6da3f247c17fbc90495dc0b -->
+<!-- sha256:fc4b7daddd3ad3a932004320c4a9aa3cb1c2ff784c2fbdd119cabc7652b28d16 -->
 
 <table>
 <thead>
@@ -4835,6 +4837,24 @@ part left disabled makes no API call and produces no series.</p>
 <td>No</td>
 <td><code>false</code></td>
 <td>Preview, not validated in a real environment: include Ceph-backed storages (rbd, cephfs)</td>
+</tr>
+<tr>
+<td><code>enable_cluster</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: report cluster quorum</td>
+</tr>
+<tr>
+<td><code>enable_ha</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: report the state of HA-managed guests</td>
+</tr>
+<tr>
+<td><code>enable_replication</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: report storage replication jobs</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
@@ -5031,7 +5051,7 @@ part left disabled makes no API call and produces no series.</p>
 <li>The <code>endpoint</code> must use <code>https://</code>. The API certificate is verified by default; a self-signed Proxmox certificate needs <code>verify_tls: false</code>, or better, a proper certificate for production.</li>
 <li>Both QEMU VMs and LXC containers are monitored; they are distinguished by the <code>proxmox.vmid</code> tag.</li>
 <li>Disk, ZFS, backup and task series need <code>Sys.Audit</code> on <code>/nodes/&lt;node&gt;</code> (<code>PVEAuditor</code> on <code>/</code> covers it); a token without it simply contributes nothing for that endpoint. Backup job coverage reads <code>/cluster/backup</code>: a job with <code>all</code> covers every guest except its exclude list, otherwise its VM list and pool members, and a disabled job covers nothing.</li>
-<li>HA series read <code>/cluster/ha/status/current</code> and need <code>Sys.Audit</code> on <code>/</code>; replication series read <code>/nodes/&lt;node&gt;/replication</code> and need <code>Sys.Audit</code> on <code>/nodes/&lt;node&gt;</code> (both covered by <code>PVEAuditor</code> on <code>/</code>). A cluster without HA resources or replication jobs emits no HA resource or replication series and logs no warning. An HA resource in a state PVE does not document is skipped.</li>
+<li>Preview, off by default: quorum series need <code>enable_cluster</code>, HA resource series <code>enable_ha</code>, replication series <code>enable_replication</code>. HA series read <code>/cluster/ha/status/current</code> and need <code>Sys.Audit</code> on <code>/</code>; replication series read <code>/nodes/&lt;node&gt;/replication</code> and need <code>Sys.Audit</code> on <code>/nodes/&lt;node&gt;</code> (both covered by <code>PVEAuditor</code> on <code>/</code>). A cluster without HA resources or replication jobs emits no HA resource or replication series and logs no warning. An HA resource in a state PVE does not document is skipped.</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the

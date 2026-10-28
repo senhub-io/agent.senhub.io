@@ -3988,6 +3988,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#process-probe-top_n-reports-a-per-name-roll-up" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4629,6 +4640,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-you-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you upgrade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#process-probe-top_n-reports-a-per-name-roll-up" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4668,6 +4690,10 @@
 <p>Nothing released yet since 0.6.5. Changes land here as they are merged.</p>
 <div class="rn-filter"></div>
 
+<h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>proxmox</code>: Ceph, PBS, quorum, HA and replication are preview and off by default.</strong> The probe is validated on a single Proxmox VE node (QEMU guests, LXC containers, ZFS and directory storages). Cluster quorum, high availability, storage replication, Ceph-backed storages and Proxmox Backup Server storages are in preview: not validated in a real environment, and each is switched on explicitly with <code>enable_cluster</code>, <code>enable_ha</code>, <code>enable_replication</code>, <code>enable_ceph</code> and <code>enable_pbs</code>. Left off, a part makes no API call and produces no series, so the <code>rbd</code>, <code>cephfs</code> and <code>pbs</code> storages and the HA, quorum and replication series seen with earlier builds disappear until you enable them. See <a href="../../probes/proxmox/">Proxmox VE</a>.</li>
+</ul>
 <h2 id="process-probe-top_n-reports-a-per-name-roll-up">Process probe: <code>top_n</code> reports a per-name roll-up<a class="headerlink" href="#process-probe-top_n-reports-a-per-name-roll-up" title="Permanent link">&para;</a></h2>
 <p>With <code>filter.top_n</code>, the <code>process</code> probe now ranks process names and reports the per-name roll-up of the top, without <code>process.pid</code> and <code>process.creation.time</code> on the series. Short-lived processes no longer create new series each time they enter the top. Per-process series under <code>top_n</code> remain available with <code>detail.per_pid: true</code>, which <code>agent config check</code> flags with a cardinality warning.</p>
 
