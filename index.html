@@ -396,7 +396,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Open source · 0.6.4</div>
+    <div class="eyebrow">Open source · 0.6.5</div>
     <h1>OpenTelemetry-native agent for <em>hosts and infrastructure</em>.</h1>
     <p class="lede">
       Free and Apache-2.0. Collects host, network, container and vendor metrics
@@ -648,7 +648,18 @@
     </p>
     <div class="news">
       <div class="item now">
-        <div class="ver">0.6.4<small>current</small></div>
+        <div class="ver">0.6.5<small>current</small></div>
+        <div>
+          <h3>Secrets masked in logs, and Proxmox VE health</h3>
+          <p>Passwords, tokens and keys written in clear in log records are masked
+             before they leave the agent. Proxmox VE disk, ZFS and backup health, a
+             console page per probe, and SNMP interface selection. <b>PRTG sensors lose
+             the Check Result channel by default</b>, so read the release note before
+             upgrading a fleet.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ver">0.6.4</div>
         <div>
           <h3>The network on the map, and Kubernetes from the node</h3>
           <p>Routing tables, SNMP discovery over LLDP, Kubernetes nodes with kubelet
@@ -666,16 +677,6 @@
              coverage measured, jobs discovered too, one Azure identity shared across
              probes, <code>senhub-agent check azure</code> to verify permissions, and
              official Grafana dashboards.</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ver">0.6.2</div>
-        <div>
-          <h3>Linux packages and fleet deployment</h3>
-          <p>Signed packages and repositories, an Ansible collection, a Helm chart and
-             a Podman Quadlet unit. Probes can be declared from environment variables.
-             <b>Credentials in a probe's connection URI are no longer written to the
-             log</b>: upgrade, then rotate anything that was exposed.</p>
         </div>
       </div>
     </div>
