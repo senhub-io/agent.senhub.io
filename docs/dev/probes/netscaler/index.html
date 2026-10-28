@@ -5209,6 +5209,56 @@ outside <code>params</code>. Values must be strings.</p>
 <p><strong>Or start agent with verbose logging:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>senhub-agent<span class="w"> </span>run<span class="w"> </span>--filter<span class="w"> </span>probe.netscaler
 </code></pre></div></p>
+<h2 id="capturing-raw-nitro-statistics">Capturing raw NITRO statistics<a class="headerlink" href="#capturing-raw-nitro-statistics" title="Permanent link">&para;</a></h2>
+<p>When a metric reads 0 or looks wrong, the raw NITRO response shows what the
+appliance really returns. The agent can capture it with the credential of the
+configured probe, so the account does not have to be handed out:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>senhub-agent<span class="w"> </span>probe<span class="w"> </span>dump<span class="w"> </span>netscaler<span class="w"> </span>--out<span class="w"> </span>./nitro-capture<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span>--resources<span class="w"> </span>ns,protocolip,system
+</code></pre></div>
+<p>The command reads the configured <code>netscaler</code> probe and its credential through
+the normal configuration resolver (including <code>${secret:...}</code> references),
+queries each statistics resource once with a <code>GET /nitro/v1/stat/&lt;resource&gt;</code>
+and writes one file per resource, <code>./nitro-capture/&lt;resource&gt;.json</code>. It changes
+nothing on the appliance or in the configuration, and the running service is
+not restarted.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out &lt;dir&gt;</code></td>
+<td>Output directory, created if needed (required)</td>
+</tr>
+<tr>
+<td><code>--resources &lt;list&gt;</code></td>
+<td>Comma-separated statistics resources (default <code>ns,protocolip,system</code>)</td>
+</tr>
+<tr>
+<td><code>--probe &lt;name&gt;</code></td>
+<td>Probe to use when several <code>netscaler</code> probes are configured</td>
+</tr>
+<tr>
+<td><code>--node secondary</code></td>
+<td>Query <code>secondary_url</code> instead of <code>base_url</code></td>
+</tr>
+<tr>
+<td><code>--config-path &lt;path&gt;</code></td>
+<td>Configuration file (default: the installed one)</td>
+</tr>
+</tbody>
+</table>
+<p>Credentials are sent as per-request NITRO headers: there is no session cookie,
+and the output files and the command output never contain the password, an API
+key or a header. A response that contains the configured password or API key is
+refused instead of written. Files are created readable by their owner only.
+The captures hold the appliance's counters and state names, so review them
+before sharing. Exit code 0 on success, 1 when a query fails, 2 on a usage or
+configuration error.</p>
 <h2 id="license-requirements">License Requirements<a class="headerlink" href="#license-requirements" title="Permanent link">&para;</a></h2>
 <p>The NetScaler probe requires a <strong>Pro</strong> or <strong>Enterprise</strong> license.</p>
 <table>
