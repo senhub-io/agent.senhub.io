@@ -2032,6 +2032,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interface-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-mappings" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4785,6 +4796,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interface-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-mappings" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4954,7 +4976,7 @@ one series per interface (<code>if_index</code> tag).</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:9901d7c60779d5bf53036864a394918c2f131825e011491d96f1633ae337ed18 -->
+<!-- sha256:b4fbb9f846ae713a13bb88cab2d269c0dfb0787fdab70519100fbedd0c08a8a2 -->
 
 <table>
 <thead>
@@ -5061,6 +5083,48 @@ one series per interface (<code>if_index</code> tag).</p>
 <td>In practice</td>
 <td>-</td>
 <td>Built-in MIB modules to poll; this or custom_mappings is required. One of <code>mib-2</code>, <code>if-mib</code></td>
+</tr>
+<tr>
+<td><code>interfaces</code></td>
+<td>No</td>
+<td>-</td>
+<td>Selects which interfaces get per-interface metric series (if-mib); topology entities always keep every interface</td>
+</tr>
+<tr>
+<td><code>interfaces.include</code></td>
+<td>No</td>
+<td>-</td>
+<td>Regular expressions; an interface is kept when its ifName or ifDescr matches one. Default: all</td>
+</tr>
+<tr>
+<td><code>interfaces.exclude</code></td>
+<td>No</td>
+<td>-</td>
+<td>Regular expressions; an interface whose ifName or ifDescr matches one is dropped</td>
+</tr>
+<tr>
+<td><code>interfaces.types</code></td>
+<td>No</td>
+<td>-</td>
+<td>ifType allow-list, by name (ethernetCsmacd, ieee8023adLag, l2vlan...) or IANAifType number</td>
+</tr>
+<tr>
+<td><code>interfaces.admin_up_only</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Keep only interfaces whose ifAdminStatus is up; re-read at each topology sweep</td>
+</tr>
+<tr>
+<td><code>interfaces.oper_up_only</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Keep only interfaces whose ifOperStatus is up; re-read at each topology sweep</td>
+</tr>
+<tr>
+<td><code>interfaces.max_interfaces</code></td>
+<td>No</td>
+<td>-</td>
+<td>Cap on the interfaces kept, lowest ifIndex first; a warning is logged when it cuts</td>
 </tr>
 <tr>
 <td><code>mib_paths</code></td>
@@ -5368,18 +5432,58 @@ network.</p>
 from which protocols are set — there is no separate field to
 contradict it. Unknown protocol names are startup errors, never a
 silent downgrade. The discovery crawl profile remains v2c-only.</p>
+<h3 id="interface-selection">Interface selection<a class="headerlink" href="#interface-selection" title="Permanent link">&para;</a></h3>
+<p>With <code>mibs: [if-mib]</code> the probe emits nine series per row of the interface
+table. A chassis switch with VLAN interfaces and unused ports can expose
+hundreds of rows. The <code>interfaces</code> block keeps the series of the interfaces
+you select and drops the others:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.0.2.10</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">interfaces</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'^(Gi|Te)'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'^Po'</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'^Vlan'</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ethernetCsmacd</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">ieee8023adLag</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">admin_up_only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">max_interfaces</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">48</span>
+</code></pre></div>
+<p>An interface is kept when it passes every criterion that is set: it matches
+one <code>include</code> expression (or none is set), matches no <code>exclude</code> expression,
+has one of the listed <code>types</code>, and is up where <code>admin_up_only</code> or
+<code>oper_up_only</code> ask for it. Expressions are matched against <code>ifName</code> and
+<code>ifDescr</code>. <code>types</code> takes an IANAifType name (<code>ethernetCsmacd</code>,
+<code>ieee8023adLag</code>, <code>l2vlan</code>, <code>propVirtual</code>, <code>softwareLoopback</code>, <code>tunnel</code>...) or
+its number. <code>max_interfaces</code> keeps the interfaces with the lowest <code>ifIndex</code>
+and logs a warning with the number matched and kept when it cuts.</p>
+<ul>
+<li>The selection is read again at each topology sweep (<code>topology_interval</code>),
+  not at each metric poll. An interface that comes up or goes down enters or
+  leaves the series at that cadence.</li>
+<li><code>oper_up_only</code> stops the series of an interface that goes down, so its
+  <code>oper_status</code> can no longer report the fault: use <code>admin_up_only</code> for the
+  ports you want to alert on.</li>
+<li>A state the device does not answer for (<code>ifAdminStatus</code>, <code>ifDescr</code>) counts
+  as not matching. Before the first sweep nothing is selected, so no
+  interface series is emitted until the interfaces are known.</li>
+<li>A sweep that could not read every interface column keeps the previous
+  selection, so a timed-out walk does not retract the series.</li>
+<li>The selection narrows what is published, not what is read: the interface
+  table is still walked at each <code>interval</code>. It also applies to a
+  <code>custom_mappings</code> entry whose <code>index_label</code> is <code>if_index</code>.</li>
+<li>Topology is not narrowed: every interface stays an entity, with its links.</li>
+</ul>
 <h3 id="custom-mappings">Custom mappings<a class="headerlink" href="#custom-mappings" title="Permanent link">&para;</a></h3>
 <p>Map any OID — scalar or table column — to a named metric:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.20</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">custom_mappings</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">oid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.1.3.6.1.4.1.318.1.1.1.2.2.1</span><span class="w">     </span><span class="c1"># APC UPS battery capacity</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp.ups.battery_capacity</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gauge</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">oid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.1.3.6.1.2.1.2.2.1.10</span><span class="w">            </span><span class="c1"># ifInOctets (table walk)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp.interface.in_octets</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">counter</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">index_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">if_index</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.20</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">custom_mappings</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">oid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.1.3.6.1.4.1.318.1.1.1.2.2.1</span><span class="w">     </span><span class="c1"># APC UPS battery capacity</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp.ups.battery_capacity</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gauge</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">oid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.1.3.6.1.2.1.2.2.1.10</span><span class="w">            </span><span class="c1"># ifInOctets (table walk)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp.interface.in_octets</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">counter</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">index_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">if_index</span>
 </code></pre></div>
 <p><code>metric</code> may be omitted only when <code>mib_paths</code> is set: the name is then
 resolved from your MIB files at startup (for example
@@ -5399,28 +5503,28 @@ without <code>allowed_cidrs</code>, it stays inside the host's own private netwo
 (a network wider than /16 is narrowed to the /16 around the host's
 address). Both are read again at every run, so a gateway change is
 followed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">discovery</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">profile</span><span class="p">:</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:snmp.community}"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">discovery</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">profile</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">"${secret:snmp.community}"</span>
 </code></pre></div>
 <p>The gateway's address is reported as the same <code>network.address</code> node the
 host's default route points to, so the host and its network meet on the
 map without further configuration.</p>
 <p>Give <code>seeds</code> and <code>allowed_cidrs</code> to crawl elsewhere or wider. With
 <code>seed_from_host: false</code> only the listed seeds are used:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">discovery</span><span class="p">:</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">seeds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.1.10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">192.168.1.11</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">profile</span><span class="p">:</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2c</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">"${env:SNMP_COMMUNITY}"</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.0.0/16</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">max_devices</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="nt">max_hops</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.10</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">mibs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">mib-2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">if-mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">discovery</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">seeds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.1.10</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">192.168.1.11</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">profile</span><span class="p">:</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2c</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="nt">community</span><span class="p">:</span><span class="w"> </span><span class="s">"${env:SNMP_COMMUNITY}"</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">192.168.0.0/16</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">max_devices</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">max_hops</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
 </code></pre></div>
 <p><code>max_devices</code> is a hard cap on discovered devices and <code>max_hops</code> bounds
 the crawl depth from the seeds. Only neighbors inside <code>allowed_cidrs</code> are
@@ -5493,23 +5597,23 @@ member owns it, never the port-channel.</p>
 location cannot be written per device. <code>governance_rules</code> states them by
 match instead: the first rule whose conditions all hold stamps its
 <code>governance</code> block on the device's entity.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">discovery</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">seeds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.0.0.1"</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.0.0.0/16"</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">governance_rules</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="nt">cidr</span><span class="p">:</span><span class="w"> </span><span class="s">"10.0.10.0/24"</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">governance</span><span class="p">:</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="nt">criticality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="nt">owner</span><span class="p">:</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">          </span><span class="nt">team</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">network</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="nt">location</span><span class="p">:</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">          </span><span class="nt">site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="nt">vendor</span><span class="p">:</span><span class="w"> </span><span class="s">"cisco"</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="nt">sysname</span><span class="p">:</span><span class="w"> </span><span class="s">"^edge-"</span><span class="w">      </span><span class="c1"># regular expression</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">      </span><span class="nt">governance</span><span class="p">:</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">        </span><span class="nt">criticality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">high</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">discovery</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">seeds</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.0.0.1"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">allowed_cidrs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"10.0.0.0/16"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">governance_rules</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">cidr</span><span class="p">:</span><span class="w"> </span><span class="s">"10.0.10.0/24"</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">governance</span><span class="p">:</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nt">criticality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">        </span><span class="nt">owner</span><span class="p">:</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">          </span><span class="nt">team</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">network</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="nt">location</span><span class="p">:</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">          </span><span class="nt">site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paris</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span><span class="nt">vendor</span><span class="p">:</span><span class="w"> </span><span class="s">"cisco"</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="nt">sysname</span><span class="p">:</span><span class="w"> </span><span class="s">"^edge-"</span><span class="w">      </span><span class="c1"># regular expression</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">      </span><span class="nt">governance</span><span class="p">:</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span><span class="nt">criticality</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">high</span>
 </code></pre></div>
 <p><code>match</code> accepts <code>cidr</code>, <code>vendor</code> and <code>sysname</code> — all optional, all must hold
 for the rule to apply, and a rule with no <code>match</code> applies to every device.

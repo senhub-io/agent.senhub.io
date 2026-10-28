@@ -4736,6 +4736,7 @@
 </li>
 <li><strong>Azure Log Query probe (Pro).</strong> The new <code>azure_log_query</code> probe runs one KQL query on a Log Analytics workspace each cycle and publishes every row (<code>channel</code>, <code>value</code>, <code>unit</code>) as a gauge named <code>azure.log_query.&lt;channel&gt;</code>.</li>
 <li><strong>Microsoft Entra ID probe (Pro).</strong> The new <code>entra_id</code> probe reads one tenant through Microsoft Graph in 13 modules: secret and certificate expiry, directory synchronisation, users, licences, groups, applications, devices, service health, authentication methods, privileged access and security posture. Each module needs its own Application permission with admin consent.</li>
+<li><strong>SNMP Poll: choose which interfaces get metric series.</strong> The new <code>interfaces</code> block of <code>snmp_poll</code> keeps the nine per-interface series for the interfaces you select only: <code>include</code> and <code>exclude</code> regular expressions on <code>ifName</code> or <code>ifDescr</code>, a <code>types</code> allow-list (<code>ethernetCsmacd</code>, <code>ieee8023adLag</code>, or an IANAifType number), <code>admin_up_only</code>, <code>oper_up_only</code>, and a <code>max_interfaces</code> cap that logs a warning when it cuts. Without the block nothing changes. Topology entities keep every interface. See <a href="../../probes/snmp-poll/#interface-selection">SNMP Poll</a>.</li>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>

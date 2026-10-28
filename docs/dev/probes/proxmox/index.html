@@ -4771,10 +4771,18 @@ usage.</p>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">token_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor@pve!agent</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">token_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:proxmox.token_secret}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Validated on a single node</p>
+<p>This probe is validated on a single Proxmox VE node (QEMU guests, LXC
+containers, ZFS and directory storages). Ceph and Proxmox Backup Server (PBS)
+support are in preview: they are not validated in a real environment, they are
+off by default, and each is enabled explicitly (<code>enable_ceph</code>, <code>enable_pbs</code>). A
+part left disabled makes no API call and produces no series.</p>
+</div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:ab29f8261ab0433230e24ee32a418dca0590d9edcc788f1231254cb1c561d9ca -->
+<!-- sha256:80c06a441eb47908e2f6645354678d7b29c0f049c6da3f247c17fbc90495dc0b -->
 
 <table>
 <thead>
@@ -4815,6 +4823,18 @@ usage.</p>
 <td>No</td>
 <td>-</td>
 <td>Only this node is collected; empty means every node of the cluster</td>
+</tr>
+<tr>
+<td><code>enable_pbs</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: include Proxmox Backup Server storages (usage, state, backup archives)</td>
+</tr>
+<tr>
+<td><code>enable_ceph</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: include Ceph-backed storages (rbd, cephfs)</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
