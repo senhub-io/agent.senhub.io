@@ -4766,7 +4766,7 @@ Processes" sensor.</p>
 <p class="admonition-title">Name what you want to watch</p>
 <p>Without a <code>filter</code>, the probe reports the <strong>roll-up only</strong>: the count, the
 CPU and the memory of each process name. The per-process detail appears
-when you narrow the scope with <code>by_name</code>, <code>by_user</code> or <code>top_n</code>.</p>
+when you narrow the scope with <code>by_name</code> or <code>by_user</code>. <code>top_n</code> ranks process names and reports the roll-up of the top.</p>
 <p>That is deliberate. A process id is part of the identity of a per-process
 series, so an unfiltered view creates a new set of series every time any
 program starts, and they are never fed again. Measured on a machine with
@@ -4792,7 +4792,7 @@ outputs.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:dd1862660c09214f02daaa36e3dd6d062fcde84118208e401bf61a56fa6cac50 -->
+<!-- sha256:aca4f5c0e800c6d65ce68f6ea65c17dea029f1806a775802159cf4bbb2126a50 -->
 
 <table>
 <thead>
@@ -4814,7 +4814,7 @@ outputs.</p>
 <td><code>filter</code></td>
 <td>No</td>
 <td>-</td>
-<td>Narrows the process table and turns on the per-process detail; empty reports the per-name roll-up over every process</td>
+<td>Narrows the process table; by_name and by_user turn on the per-process detail unless top_n is also set; empty reports the per-name roll-up over every process</td>
 </tr>
 <tr>
 <td><code>filter.by_name</code></td>
@@ -4832,13 +4832,25 @@ outputs.</p>
 <td><code>filter.top_n</code></td>
 <td>No</td>
 <td><code>0</code></td>
-<td>Keep only the N processes ranking highest on top_by; 0 keeps all. A positive value also turns on the per-process detail, because it bounds how many processes carry it</td>
+<td>Keep only the N processes ranking highest on top_by; 0 keeps all. Ranks process names, summing the measure over processes sharing a name, and reports the per-name roll-up of the N highest; per-process series need detail.per_pid</td>
 </tr>
 <tr>
 <td><code>filter.top_by</code></td>
 <td>No</td>
 <td><code>cpu</code></td>
 <td>What top_n ranks on: cpu, or memory (resident set, the working set on Windows). Example: <code>memory</code></td>
+</tr>
+<tr>
+<td><code>detail</code></td>
+<td>No</td>
+<td>-</td>
+<td>Per-process series under top_n</td>
+</tr>
+<tr>
+<td><code>detail.per_pid</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Under top_n, emit per-process series tagged with the process id and creation time. The series set grows with every process that enters the top: only for short observations</td>
 </tr>
 <tr>
 <td><code>aggregate</code></td>
@@ -4971,7 +4983,8 @@ outputs.</p>
   monitoring is, and the filter is what bounds it: only the programs
   you named can produce those series. An unfiltered view reports the
   roll-up alone for that reason.</li>
-<li><code>filter.top_n</code> is applied after all other filters. It is useful for "monitor the 5 most CPU-hungry processes" scenarios, and it turns on the per-process detail because it bounds how many processes can carry it. Set <code>filter.top_by: memory</code> to rank on resident memory instead (the working set on Windows): it names the process behind a low-memory condition.</li>
+<li><code>filter.top_n</code> is applied after all other filters. It ranks process names, summing <code>top_by</code> over the processes that share a name, and reports the per-name roll-up (<code>process.count</code>, <code>process.group.*</code>) of the N highest. The kept names change from cycle to cycle, but each series is identified by its name alone, so the series count stays bounded. Set <code>filter.top_by: memory</code> to rank on resident memory instead (the working set on Windows): it names the process behind a low-memory condition.</li>
+<li><code>detail.per_pid: true</code> restores per-process series under <code>top_n</code>, tagged with <code>process.pid</code> and <code>process.creation.time</code>. Leave it off for anything that runs for long: every process entering the top creates series that are never reused. On a Windows host following about 24 processes, about 125 series were active at any instant while about 65 000 distinct series accumulated over 7 days. <code>agent config check</code> warns when the two are combined. The same applies to <code>top_n</code> combined with <code>by_name</code> or <code>by_user</code>: the top is reported as the roll-up, and <code>aggregate.enabled: false</code> does not suppress it.</li>
 <li>The processes you name with <code>by_name</code> or <code>by_user</code> also become entities on the topology graph, with an edge to their host. A <code>top_n</code> or unfiltered view does not, because its membership changes every cycle.</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
