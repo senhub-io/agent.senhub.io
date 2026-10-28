@@ -4009,6 +4009,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#otlp-logs-oversized-exports-are-split-size-refusals-are-not-queued" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTLP logs: oversized exports are split, size refusals are not queued
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4661,6 +4672,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#otlp-logs-oversized-exports-are-split-size-refusals-are-not-queued" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTLP logs: oversized exports are split, size refusals are not queued
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4696,6 +4718,8 @@
 </ul>
 <h2 id="process-probe-top_n-reports-a-per-name-roll-up">Process probe: <code>top_n</code> reports a per-name roll-up<a class="headerlink" href="#process-probe-top_n-reports-a-per-name-roll-up" title="Permanent link">&para;</a></h2>
 <p>With <code>filter.top_n</code>, the <code>process</code> probe now ranks process names and reports the per-name roll-up of the top, without <code>process.pid</code> and <code>process.creation.time</code> on the series. Short-lived processes no longer create new series each time they enter the top. Per-process series under <code>top_n</code> remain available with <code>detail.per_pid: true</code>, which <code>agent config check</code> flags with a cardinality warning.</p>
+<h2 id="otlp-logs-oversized-exports-are-split-size-refusals-are-not-queued">OTLP logs: oversized exports are split, size refusals are not queued<a class="headerlink" href="#otlp-logs-oversized-exports-are-split-size-refusals-are-not-queued" title="Permanent link">&para;</a></h2>
+<p>Entity events and logs are now exported in parts no larger than <code>signals.logs.max_export_bytes</code> (3 MiB by default, below the 4 MiB message limit of common receivers). Parts are cut between records, so an entity always keeps its complete relationships. A gRPC <code>RESOURCE_EXHAUSTED</code> answer without a retry hint, like an HTTP 413, is now treated as a permanent refusal: the batch is counted and logged once instead of being queued and replayed forever. With a retry hint it is still retried.</p>
 
 
 
