@@ -4779,12 +4779,13 @@ replication, Ceph and Proxmox Backup Server (PBS) support are in preview: they
 are not validated in a real environment, they are off by default, and each is
 enabled explicitly (<code>enable_cluster</code>, <code>enable_ha</code>, <code>enable_replication</code>,
 <code>enable_ceph</code>, <code>enable_pbs</code>). A part left disabled makes no API call and
-produces no series.</p>
+produces no series of its own. The usage and capacity of every storage,
+Ceph and PBS included, are published whatever the flags.</p>
 </div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:fc4b7daddd3ad3a932004320c4a9aa3cb1c2ff784c2fbdd119cabc7652b28d16 -->
+<!-- sha256:330640f1f8be23556c31eac3ee644b95f0766b65ae8256a086f30884b08e9007 -->
 
 <table>
 <thead>
@@ -4830,13 +4831,13 @@ produces no series.</p>
 <td><code>enable_pbs</code></td>
 <td>No</td>
 <td><code>false</code></td>
-<td>Preview, not validated in a real environment: include Proxmox Backup Server storages (usage, state, backup archives)</td>
+<td>Preview, not validated in a real environment: state and backup archives of Proxmox Backup Server storages (their usage and capacity are always published)</td>
 </tr>
 <tr>
 <td><code>enable_ceph</code></td>
 <td>No</td>
 <td><code>false</code></td>
-<td>Preview, not validated in a real environment: include Ceph-backed storages (rbd, cephfs)</td>
+<td>Preview, not validated in a real environment: state of Ceph-backed storages (rbd, cephfs; their usage and capacity are always published)</td>
 </tr>
 <tr>
 <td><code>enable_cluster</code></td>
