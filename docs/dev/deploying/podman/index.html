@@ -4908,15 +4908,15 @@ reads them at every start, so a change to them needs only a restart. See
 <a href="../../configuration/#configuring-probes-from-environment-variables">Probes from environment variables</a>.</p>
 <h2 id="pinning">Pinning<a class="headerlink" href="#pinning" title="Permanent link">&para;</a></h2>
 <p>The <code>Image=</code> line is the pin:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="na">Image</span><span class="o">=</span><span class="s">ghcr.io/senhub-io/senhub-agent:0.6.4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="na">Image</span><span class="o">=</span><span class="s">ghcr.io/senhub-io/senhub-agent:0.6.5</span>
 </code></pre></div>
 <p>Only exact version tags are published, there is no <code>latest</code>. The shipped
 unit carries <code>AutoUpdate=registry</code>, which pulls the same tag again and
 restarts the unit only if the registry serves a different image under it;
 it never moves to a new version. To pin what is run to a build you have
 reviewed, use the digest and delete the <code>AutoUpdate=</code> line:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>podman<span class="w"> </span>pull<span class="w"> </span>ghcr.io/senhub-io/senhub-agent:0.6.4
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>podman<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>ghcr.io/senhub-io/senhub-agent:0.6.4<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{.Digest}}'</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>podman<span class="w"> </span>pull<span class="w"> </span>ghcr.io/senhub-io/senhub-agent:0.6.5
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>podman<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>ghcr.io/senhub-io/senhub-agent:0.6.5<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{.Digest}}'</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="na">Image</span><span class="o">=</span><span class="s">ghcr.io/senhub-io/senhub-agent@sha256:&lt;digest&gt;</span>
 </code></pre></div>

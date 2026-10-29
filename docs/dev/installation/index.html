@@ -5715,11 +5715,11 @@ same artifacts:</p>
 redirect, the SenHub one directly — so a copied command cannot go stale.
 Prefer them for a first install. For a build you need to reproduce
 later, pin the version instead:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://github.com/senhub-io/senhub-agent/releases/download/0.6.4/senhub-agent-linux-amd64.zip
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://github.com/senhub-io/senhub-agent/releases/download/0.6.5/senhub-agent-linux-amd64.zip
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Release tags carry no <code>v</code> prefix</p>
-<p>The tag is <code>0.6.4</code>, not <code>v0.6.4</code>. A pinned URL built with the <code>v</code>
+<p>The tag is <code>0.6.5</code>, not <code>v0.6.5</code>. A pinned URL built with the <code>v</code>
 returns 404, which reads like a missing file rather than a wrong
 name — this is the single most common reason a direct download fails.</p>
 </div>
@@ -5742,7 +5742,7 @@ tells you what to write instead.</p>
 <p>Every artifact is published with a <a href="https://jedisct1.github.io/minisign/">minisign</a>
 signature next to it. Verify before you run it, especially in an
 automated build:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.6.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.6.5
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">BASE</span><span class="o">=</span>https://github.com/senhub-io/senhub-agent/releases/download/<span class="nv">$VERSION</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip"</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip.minisig"</span>
@@ -5916,7 +5916,7 @@ for the newest release of each channel; see
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">"http://localhost:8080/health"</span>
 </code></pre></div>
 <p>Expected response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ok"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0.6.4"</span><span class="p">,</span><span class="nt">"uptime"</span><span class="p">:</span><span class="s2">"1m30s"</span><span class="p">,</span><span class="nt">"probes_active"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ok"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0.6.5"</span><span class="p">,</span><span class="nt">"uptime"</span><span class="p">:</span><span class="s2">"1m30s"</span><span class="p">,</span><span class="nt">"probes_active"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
 </code></pre></div></p>
 <p><img alt="Windows service running" src="../images/installation/windows-service-running.webp" title="Services.msc showing SenHub Agent in Running state" /></p>
 <h3 id="log-file-location">Log file location<a class="headerlink" href="#log-file-location" title="Permanent link">&para;</a></h3>

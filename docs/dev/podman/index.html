@@ -4941,7 +4941,7 @@ is one edit away. The plain <code>podman run</code> below is a container scope.<
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span>ghcr.io/senhub-io/senhub-agent:0.6
 </code></pre></div>
-<p>Use the full image name. A short name such as <code>senhub-agent:0.6.4</code>
+<p>Use the full image name. A short name such as <code>senhub-agent:0.6.5</code>
 makes Podman search its configured registries, or ask which one to use.</p>
 <p>Three things behave differently from Docker.</p>
 <p><strong>Rootless ports and networking.</strong> Run as an ordinary user, Podman
@@ -5185,7 +5185,7 @@ new image.</p>
   it again and restarts the unit when a new 0.6.x is published, with the
   agent key and data kept on the state volume. Moving to 0.7 is an edit
   of the <code>Image=</code> line.</li>
-<li><strong>An exact version with <code>AutoUpdate=registry</code>.</strong> <code>:0.6.4</code> never moves
+<li><strong>An exact version with <code>AutoUpdate=registry</code>.</strong> <code>:0.6.5</code> never moves
   to another version: auto-update only picks up a republished build of
   that same version. Moving on is an edit of the <code>Image=</code> line, then
   <code>systemctl daemon-reload</code> and <code>systemctl restart senhub-agent</code>.</li>
