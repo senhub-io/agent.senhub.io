@@ -4795,7 +4795,8 @@
 </ul>
 <h2 id="known-limits">Known limits<a class="headerlink" href="#known-limits" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>SNMP Poll: a device first read with a failing ENTITY-MIB and sysName can briefly appear twice.</strong> A device whose very first sweep could read neither its ENTITY-MIB nor its sysName is published under the id that sweep resolved; once it reads in full, that first entry expires after the entity liveness interval instead of being retired. A device that stops answering its identity reads after it was identified keeps its id, and leaves the map with the reason <code>unmonitored</code> if the reads keep failing for three topology intervals.</li>
+<li><strong>SNMP Poll: a device first read with a failing ENTITY-MIB and sysName can briefly appear twice.</strong> A device whose very first sweep could read neither its ENTITY-MIB nor its sysName is published under the id that sweep resolved; once it reads in full, that first entry expires after the entity liveness interval instead of being retired. A device that stops answering its identity reads after it was identified keeps its id, and leaves the map with the reason <code>unmonitored</code> if the reads keep failing for three topology intervals; it is then resolved again from what it answers, and returns under its full id once it reads in full.</li>
+<li><strong>SNMP Poll: an identity read that fails for more than three topology intervals rewrites the device twice.</strong> When the reads stop failing, the subtree published under the id resolved during the failure is retired and published again under the full id: a device whose ENTITY-MIB reads keep failing and recovering on that time scale churns its topology. The device leaving with the reason <code>unmonitored</code> and reappearing under the id resolved from its partial answers are not linked: a reader sees one device leave and another one appear.</li>
 </ul>
 
 
