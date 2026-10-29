@@ -275,6 +275,17 @@
              LLDP chassis MAC</b>, before the engine id, which configurations copy from
              switch to switch. Those devices get a new id at their first sweep; the old
              one and everything under it leave with the reason <code>rekeyed</code>.</li>
+          <li><b>SNMP system routes are left out of the topology</b>: reject and
+             blackhole routes, multicast, loopback and link-local destinations, and
+             local host and broadcast routes. Those an earlier version published leave
+             with the reason <code>excluded_by_config</code> at each device's first
+             complete sweep. <code>include_system_routes: true</code> publishes them
+             again.</li>
+          <li><b>Collectors declared with <code>SENHUB_PROBE_*</code> variables and a
+             Container Apps discovery start following its jobs</b>, with series,
+             entities and console lines. Set <code>SENHUB_PROBE_JOBS_TYPE=none</code>
+             before upgrading to keep the previous behaviour. Configurations written in
+             files are unchanged.</li>
           <li><b>Also</b>: <code>config migrate</code> writes one file per probe, IBM i
              hosts coming from 0.6.1 or earlier publish about a fifth more series, the
              Proxmox cluster, HA, replication, Ceph and PBS parts are preview and off by
