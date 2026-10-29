@@ -2077,6 +2077,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#learned-neighbours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learned neighbours
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#link-aggregation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4841,6 +4852,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#learned-neighbours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learned neighbours
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#link-aggregation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4976,7 +4998,7 @@ one series per interface (<code>if_index</code> tag).</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:b4fbb9f846ae713a13bb88cab2d269c0dfb0787fdab70519100fbedd0c08a8a2 -->
+<!-- sha256:9664d8eb2593e60f0aeb5513bbf7bd05c48c6e42ddebfed01ab4ae5db95cecf7 -->
 
 <table>
 <thead>
@@ -5059,6 +5081,18 @@ one series per interface (<code>if_index</code> tag).</p>
 <td>No</td>
 <td><code>500</code></td>
 <td>Maximum number of route entities emitted per device</td>
+</tr>
+<tr>
+<td><code>neighbors</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Publish every MAC a device learned (bridge forwarding and ARP tables) as a network.neighbor entity, linked to its port and, when known, to the interface that owns it</td>
+</tr>
+<tr>
+<td><code>max_neighbors</code></td>
+<td>No</td>
+<td><code>1000</code></td>
+<td>Maximum number of network.neighbor entities emitted per device when neighbors is on</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
@@ -5584,6 +5618,60 @@ entity carries <code>senhub.routes.limit</code> and <code>senhub.routes.omitted<
 of routes it listed and that were not published, so a table cut by the bound
 is never mistaken for a complete one. A device carrying a full Internet table
 is not meant to be inventoried route by route.</p>
+<h4 id="learned-neighbours">Learned neighbours<a class="headerlink" href="#learned-neighbours" title="Permanent link">&para;</a></h4>
+<p>With <code>neighbors: true</code>, the bridge forwarding table (<code>dot1qTpFdbTable</code>, or
+<code>dot1dTpFdbTable</code> on older bridges) and the ARP table
+(<code>ipNetToPhysicalTable</code>, or <code>ipNetToMediaTable</code>) of the polled device and of
+every discovered device are published as <code>network.neighbor</code> entities, one
+per MAC address the device learned. It is off by default: a core switch can
+learn thousands of addresses. A neighbour is identified by the device that
+saw it and the MAC address (<code>AA-BB-CC-DD-EE-FF</code>): two switches that learned
+the same machine hold two neighbours, joined later by the receiving graph
+rather than merged.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>network.neighbor.addresses</code></td>
+<td>The IP addresses the ARP table maps to this MAC; absent for a MAC seen only in the forwarding table. Link-local addresses are left out</td>
+</tr>
+</tbody>
+</table>
+<p>A neighbour is linked with <code>neighbor_of</code> to every port of the device it was
+learned on: the bridge port for a forwarding entry, the interface of the ARP
+entry (often a VLAN interface). It is also linked with <code>resolves_to</code> to the
+interface that owns the MAC when this agent knows it, one of this host's own
+interfaces or an interface of another device this agent polls, without
+setting <code>entities.neighbors.resolves_to</code>. The relation carries a <code>basis</code> of
+<code>fdb</code> or <code>arp</code>. A neighbour found in the forwarding table rides the
+<code>senhub-agent/snmp-fdb</code> instrumentation scope, one known only from the ARP
+table <code>senhub-agent/snmp-arp</code>.</p>
+<p>A MAC owned by the observing device itself, multicast and broadcast
+addresses, entries the device marks as its own and entries it has not learned
+are not published. A neighbour leaves, as <code>aged_out</code>, when a successful read
+of the tables no longer lists it; a read that fails keeps the neighbours of
+the previous one.</p>
+<p>At most <code>max_neighbors</code> neighbours are published per device (1000 by
+default). Above the bound, the neighbours resolved to an interface are kept
+first, then those with an IP address, then the others by MAC address. The
+device entity carries <code>senhub.neighbors.limit</code> and
+<code>senhub.neighbors.omitted</code>, so a cut table is never mistaken for a complete
+one, and the agent logs <code>neighbor table bound: some neighbors omitted</code> at
+Info once per cut. A neighbour the bound leaves out after it was published
+is not retired explicitly: it leaves the topology when its liveness interval
+expires. VLAN membership (<code>dot1qVlanStaticTable</code>) is not published yet.</p>
+<p>Publishing neighbours costs CPU in proportion to their number. On a test
+switch with 4,000 forwarding-table and 4,000 ARP entries, the sweep time did
+not change (about 2 s), and the agent used 1.29 s of CPU over 270 s instead
+of 0.65 s without <code>neighbors</code>.</p>
+<p>Without <code>neighbors</code>, the tables are read only with
+<code>entities.neighbors.resolves_to</code>, and a neighbour is published only for a MAC
+of this host's own interfaces, linked to the switch port it is plugged into.</p>
 <h4 id="link-aggregation">Link aggregation<a class="headerlink" href="#link-aggregation" title="Permanent link">&para;</a></h4>
 <p>With <code>entities.aggregation.enabled</code>, the probe reads <code>ifStackTable</code> (IF-MIB)
 and the IEEE 802.3ad LAG MIB on the polled and discovered devices: each member

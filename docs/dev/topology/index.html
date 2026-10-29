@@ -4894,6 +4894,11 @@ and governance must be in <code>agent.yaml</code> (governance as a top-level
 <td><code>neighbor_of</code> the interface it was seen on; <code>resolves_to</code> the interface that owns the MAC (opt-in)</td>
 </tr>
 <tr>
+<td>Neighbours learned by an SNMP device (opt-in, <code>snmp_poll</code> <code>neighbors</code>)</td>
+<td><code>network.neighbor</code>, identified by the polled device and the MAC address (see <a href="../probes/snmp-poll/#learned-neighbours">SNMP Poll</a>)</td>
+<td><code>neighbor_of</code> the device port it was learned on; <code>resolves_to</code> the interface that owns the MAC, when known</td>
+</tr>
+<tr>
 <td>Ethernet aggregates (opt-in)</td>
 <td></td>
 <td><code>aggregated_into</code> from a member port to its aggregate</td>
