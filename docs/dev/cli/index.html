@@ -6158,7 +6158,7 @@
 </tr>
 <tr>
 <td><code>secret rm &lt;name&gt;</code></td>
-<td>Delete a secret (prompts to confirm; <code>--yes</code> or <code>-y</code> to skip). A piped <code>y</code> is accepted (<code>echo y | senhub-agent secret rm &lt;name&gt;</code>). When the answer is not <code>y</code>, or there is no input at all, nothing is removed and the command prints a message on stderr and exits non-zero</td>
+<td>Delete a secret (prompts to confirm; <code>--yes</code> or <code>-y</code> to skip). A piped <code>y</code> is accepted (<code>echo y \| senhub-agent secret rm &lt;name&gt;</code>). When the answer is not <code>y</code>, or there is no input at all, nothing is removed and the command prints a message on stderr and exits non-zero. In a Windows scheduled task started without redirected input, Windows provides a hidden console and the prompt waits: pass <code>--yes</code></td>
 </tr>
 <tr>
 <td><code>secret status</code></td>
