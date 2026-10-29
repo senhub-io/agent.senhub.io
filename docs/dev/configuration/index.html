@@ -7007,7 +7007,7 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>Configuration is valid.
 </code></pre></div></p>
 <h2 id="multi-file-configuration-layout">Multi-File Configuration Layout<a class="headerlink" href="#multi-file-configuration-layout" title="Permanent link">&para;</a></h2>
-<p>The multi-file layout is what <code>install</code>, <code>config init</code> and the Windows MSI generate. An existing monolithic <code>agent-config.yaml</code> continues to work unchanged, and <code>senhub-agent config migrate</code> converts it.</p>
+<p>The multi-file layout is what <code>install</code>, <code>config init</code> and the Windows MSI generate. An existing monolithic <code>agent-config.yaml</code> is converted by the agent itself at its next start (see <a href="#backward-compatibility">Backward compatibility</a>); <code>senhub-agent config migrate</code> does the same conversion on demand.</p>
 <h3 id="per-os-default-paths">Per-OS default paths<a class="headerlink" href="#per-os-default-paths" title="Permanent link">&para;</a></h3>
 <p>The agent looks for the multi-file layout in the <strong>same directory as <code>agent.yaml</code></strong> (or <code>agent-config.yaml</code>). The defaults match how the installer lays things out per OS:</p>
 <table>
@@ -7086,11 +7086,16 @@ Free tier — the whole universal collection tier, abbreviated above; see the
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">prtg</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">nagios</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">prometheus</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">web</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <h3 id="backward-compatibility">Backward compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h3>
-<p>If <code>agent.yaml</code> (or <code>agent-config.yaml</code>) contains a top-level <code>probes:</code> or <code>storage:</code> block, the agent uses the <strong>legacy monolithic</strong> path and <strong>ignores</strong> <code>probes.d/</code> and <code>strategies.d/</code>. A WARN log surfaces the situation so you can migrate at your own pace:</p>
+<p>At each start, a main file that contains a top-level <code>probes:</code> or <code>storage:</code> block is split into the multi-file layout before it is loaded, by the same engine as <code>senhub-agent config migrate</code>. The globals stay in the main file, each strategy goes to its own <code>strategies.d/</code> file, and each probe to its own <code>probes.d/NN-&lt;name&gt;.yaml</code>, numbered from 10 in the original order (from 0.6.5; 0.6.2 to 0.6.4 put every probe in <code>probes.d/00-host.yaml</code>). Fragments the installer laid down and that were never edited (an empty file, or the default <code>probes.d/00-host.yaml</code>, <code>probes.d/05-services.yaml</code>, <code>probes.d/06-swarm.yaml</code> or <code>strategies.d/00-http.yaml</code>) are set aside with the suffix <code>.install-default</code> rather than blocking the split (from 0.6.4; earlier versions refused to split beside them). A fragment you wrote yourself still blocks it, since the split would start what the monolithic file had been ignoring. The agent checks that the split layout resolves to the same configuration as the original file, and restores the original otherwise. Inline secrets are then sealed into the secret store, as at any start. The log says which happened:</p>
+<blockquote>
+<p>Harmonised monolithic config to multi-file layout</p>
+<p>Monolithic config not split; continuing with the current layout</p>
+</blockquote>
+<p>When the split does not happen, for instance when the file is newer than the agent understands or the check above fails, the agent uses the <strong>legacy monolithic</strong> path and <strong>ignores</strong> <code>probes.d/</code> and <code>strategies.d/</code>:</p>
 <blockquote>
 <p>Legacy monolithic config detected (top-level probes:/storage: present) — *.d/ directories are IGNORED. Migrate by trimming probes and storage out of the top file.</p>
 </blockquote>
-<p>To migrate: remove the inline <code>probes:</code> and <code>storage:</code> blocks from <code>agent.yaml</code>, redistribute their entries across <code>probes.d/</code> and <code>strategies.d/</code>, restart the agent.</p>
+<p>A tool that writes the monolithic file (Ansible, a deployment script) sees it rewritten at the next start. Point the tool at the multi-file layout, or run <code>senhub-agent config migrate</code> once and manage the fragments from then on.</p>
 <h2 id="environment-and-file-substitution">Environment and File Substitution<a class="headerlink" href="#environment-and-file-substitution" title="Permanent link">&para;</a></h2>
 <p>String values in any configuration file can reference environment variables or file contents:</p>
 <table>
