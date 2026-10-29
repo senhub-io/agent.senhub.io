@@ -2493,6 +2493,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="From environment variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#followed-by-default-with-a-discovery-of-the-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Followed by default with a discovery of the applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4786,6 +4803,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="From environment variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#followed-by-default-with-a-discovery-of-the-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Followed by default with a discovery of the applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4988,6 +5022,8 @@
 <li><strong><code>${env:}</code> inside a value is not expanded.</strong> <code>SENHUB_PROBE_CAJ_CLIENT_SECRET=${env:AZ_SECRET}</code> would reach the probe as that literal text. To share the credential between several jobs, point each probe's <code>CLIENT_SECRET_FILE</code> at the same mounted secret (<code>/run/secrets/az_client_secret</code> above, repeated for <code>CAJ2</code>), or declare the probes in <code>SENHUB_PROBES</code> (or a <code>probes.d</code> file), where <code>"${env:AZ_CLIENT_SECRET}"</code> is resolved at every start. See <a href="../../configuration/#no-env-inside-a-value">the environment rule</a>.</li>
 <li><strong>Precedence.</strong> The variables overlay the probes of the files and of <code>SENHUB_PROBES</code>, key by key, and the variable wins.</li>
 </ul>
+<h3 id="followed-by-default-with-a-discovery-of-the-applications">Followed by default with a discovery of the applications<a class="headerlink" href="#followed-by-default-with-a-discovery-of-the-applications" title="Permanent link">&para;</a></h3>
+<p>When the applications are discovered from the environment (one <code>SENHUB_PROBE_&lt;NAME&gt;_TYPE=azure_container_apps</code> probe with a <code>DISCOVERY__*</code> variable), the agent also follows the jobs of the same subscription, without a variable of its own: it adds a probe named <code>jobs</code> (type <code>azure_container_app_jobs</code>) with the same identity (<code>TENANT_ID</code>, <code>CLIENT_ID</code>, <code>CLIENT_SECRET</code> or <code>CLIENT_SECRET_FILE</code>, <code>SUBSCRIPTION_ID</code>, and the sovereign-cloud hosts), the same <code>DISCOVERY__RESOURCE_GROUPS</code> and the same <code>DISCOVERY__INTERVAL</code>; the applications' <code>INCLUDE</code> and <code>EXCLUDE</code> filters are not carried over. The job probe reads the Azure Resource Manager API and the jobs' console stream, never Log Analytics. <code>SENHUB_PROBE_JOBS_TYPE=none</code> turns it off. Any other <code>SENHUB_PROBE_JOBS_*</code> variable, a probe named <code>jobs</code> in a file or in <code>SENHUB_PROBES</code>, or several applications discoveries declared from the environment leave the configuration as it is. A configuration written in files is never extended this way. When the identity may not list jobs, the agent warns once and keeps following the applications.</p>
 <h2 id="discovering-jobs">Discovering jobs<a class="headerlink" href="#discovering-jobs" title="Permanent link">&para;</a></h2>
 <p>Instead of one entry per job, a <code>discovery:</code> block follows every job the subscription holds. It takes the same keys as the applications probe; <code>max_apps</code> caps the number of jobs followed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">probes</span><span class="p">:</span>

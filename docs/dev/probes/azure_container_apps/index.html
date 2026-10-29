@@ -4716,6 +4716,7 @@
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nv">SENHUB_PROBE_CA_BOOKMARK_PATH</span><span class="o">=</span>/var/lib/senhub-agent/ca.bookmark
 </code></pre></div>
 <p>Each instance keeps its own <code>bookmark_path</code>, under the agent's state directory, which should be a volume.</p>
+<p>The jobs of the same subscription are then followed too, by an added <code>jobs</code> probe on the same identity and resource groups; <code>SENHUB_PROBE_JOBS_TYPE=none</code> turns it off. See <a href="../azure_container_app_jobs/#followed-by-default-with-a-discovery-of-the-applications">Azure Container App Jobs</a>.</p>
 <p>A <code>${env:...}</code> written inside one of these values is not expanded, and <code>SENHUB_PROBE_CA_CLIENT_SECRET=${env:AZ_SECRET}</code> would reach the probe as that literal text. To share one credential between probes, give each the same <code>..._CLIENT_SECRET_FILE</code>, or declare the probes in <code>SENHUB_PROBES</code>, where <code>${env:AZ_SECRET}</code> is resolved; see <a href="../../configuration/#no-env-inside-a-value">the environment rule</a>. The variables overlay the probes of the files and of <code>SENHUB_PROBES</code>, key by key, and win.</p>
 <h1 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h1>
 <!-- schema:params:start -->
