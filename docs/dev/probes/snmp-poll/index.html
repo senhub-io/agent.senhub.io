@@ -4998,7 +4998,7 @@ one series per interface (<code>if_index</code> tag).</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:9664d8eb2593e60f0aeb5513bbf7bd05c48c6e42ddebfed01ab4ae5db95cecf7 -->
+<!-- sha256:7b1c00e87d44d02a5f7a81d108dbaab416d68739b4ae589b629b6b29d9eae904 -->
 
 <table>
 <thead>
@@ -5081,6 +5081,12 @@ one series per interface (<code>if_index</code> tag).</p>
 <td>No</td>
 <td><code>500</code></td>
 <td>Maximum number of route entities emitted per device</td>
+</tr>
+<tr>
+<td><code>include_system_routes</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Also publish the routes left out by default: reject, blackhole, multicast, loopback, link-local, local routes to the device's published addresses and to subnet broadcast addresses</td>
 </tr>
 <tr>
 <td><code>neighbors</code></td>
@@ -5612,11 +5618,28 @@ or a backup route) are two routes. Each route carries:</p>
 <p>A route without a next hop (<code>local</code>, <code>reject</code>, <code>blackhole</code>) carries <code>0.0.0.0</code>
 (<code>::</code> in IPv6) as next hop, the encoding the MIB itself uses. A connected
 route is what lets a path reach a destination on the device's own networks.</p>
-<p>At most <code>max_routes</code> routes are published per device (500 by default).
-Connected, default, reject and blackhole routes are always kept. The device
-entity carries <code>senhub.routes.limit</code> and <code>senhub.routes.omitted</code>, the number
-of routes it listed and that were not published, so a table cut by the bound
-is never mistaken for a complete one. A device carrying a full Internet table
+<p>System routes are left out by default: reject and blackhole routes,
+destinations in multicast (<code>224.0.0.0/4</code>, <code>ff00::/8</code>), loopback (<code>127.0.0.0/8</code>,
+<code>::1</code>) and link-local (<code>169.254.0.0/16</code>, <code>fe80::/10</code>) ranges, <code>0.0.0.0/32</code> and
+<code>255.255.255.255/32</code>, a local host route (<code>/32</code>, <code>/128</code>) to an address the same
+sweep publishes as a <code>network.address</code>, and a local route to the broadcast
+address of a connected IPv4 prefix. A local host route to an address the sweep
+does not publish is kept: only the IPv4 address table is read, so IPv6 host
+routes are kept. <code>include_system_routes: true</code> publishes them all. A route the
+running agent published and then leaves out (for instance when
+<code>include_system_routes</code> is switched off) leaves the topology with the reason
+<code>excluded_by_config</code>. At the first complete sweep of each device, the agent
+also retires with that reason the routes an agent without the filter would
+have published from the same read and that it no longer publishes, so the
+routes an earlier version left in the topology go at the upgrade. A route still
+published is never retired. <code>senhub.routes.filtered</code> gives the number left out
+at any time.</p>
+<p>The filter runs first, then at most <code>max_routes</code> routes are published per
+device (500 by default). Connected and default routes are always kept, outside
+the bound. The device entity carries <code>senhub.routes.filtered</code> (routes the
+filter left out), <code>senhub.routes.limit</code> and <code>senhub.routes.omitted</code> (routes the
+bound left out), so a table cut by the bound is never mistaken for a complete
+one. A device carrying a full Internet table
 is not meant to be inventoried route by route.</p>
 <h4 id="learned-neighbours">Learned neighbours<a class="headerlink" href="#learned-neighbours" title="Permanent link">&para;</a></h4>
 <p>With <code>neighbors: true</code>, the bridge forwarding table (<code>dot1qTpFdbTable</code>, or
