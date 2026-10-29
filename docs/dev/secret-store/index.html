@@ -4872,7 +4872,7 @@ age files are removed.</p>
 </tr>
 <tr>
 <td><code>secret rm &lt;name&gt;</code></td>
-<td>Delete a secret.</td>
+<td>Delete a secret. Prompts <code>[y/N]</code>; <code>--yes</code> (or <code>-y</code>) skips the prompt, for scripts and scheduled tasks. A piped <code>y</code> is accepted too. If the answer is not <code>y</code>, or stdin is empty and <code>--yes</code> is absent, the secret is kept, a message goes to stderr and the exit code is non-zero.</td>
 </tr>
 <tr>
 <td><code>secret migrate</code></td>
