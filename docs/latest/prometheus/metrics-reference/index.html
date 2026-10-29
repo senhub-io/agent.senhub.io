@@ -16,7 +16,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../cli/">
+        <link rel="next" href="../../packs/">
       
       
         
@@ -1742,6 +1742,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert rules and dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         
   
@@ -1836,10 +1863,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
         
           
-          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
             
   
   
@@ -1857,8 +1884,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_18">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2975,6 +3002,90 @@
     
   
     Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probes/entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
   
 
     
@@ -4330,10 +4441,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
         
           
-          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
             
   
   
@@ -4351,8 +4462,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_20">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4405,6 +4516,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
   
 
     
@@ -5634,6 +5773,12 @@ the OTLP receiver counters once that probe has received traffic.</p>
 <td><code>probe</code>, <code>reason</code></td>
 </tr>
 <tr>
+<td><code>senhub_agent_logs_redacted_total</code></td>
+<td>counter</td>
+<td>Secrets masked in log records since start, per probe and masking rule (<code>credential_param</code>, <code>authorization_header</code> or a rule of <code>logs.redact.rules</code>); emitted once something has been masked</td>
+<td><code>probe</code>, <code>rule</code></td>
+</tr>
+<tr>
 <td><code>senhub_agent_transformer_fallback_total</code></td>
 <td>counter</td>
 <td>Datapoints processed without a transformer definition (no unit injection or corrections)</td>
@@ -5733,6 +5878,11 @@ lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
 <td><code>senhub_agent_otlp_dropped_span_batches_total</code></td>
 <td>counter</td>
 <td>Cumulative count of received span batches dropped due to backpressure on the agent span channel (the trace relay could not keep up).</td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_dropped_total</code></td>
+<td>counter</td>
+<td>Records dropped before or during an OTLP export, by <code>reason</code>: <code>store_cap</code>, <code>probe_cardinality</code>, <code>memory_soft_limit</code>, <code>memory_hard_limit</code>, <code>staleness</code> (metrics); <code>logs_queue_full</code>, <code>dropped_by_age</code> (logs queue limits); <code>receiver_rejected</code> (the receiver refused the records on their merits); <code>record_too_large</code> (a single log record larger than the receiver accepts). Every reason is emitted from start at 0.</td>
 </tr>
 <tr>
 <td><code>senhub_agent_otlp_endpoint_switches_total</code></td>
@@ -7197,13 +7347,13 @@ least one cycle:</p>
         
         
           
-          <a href="../../cli/" class="md-footer__link md-footer__link--next" aria-label="Next: CLI reference">
+          <a href="../../packs/" class="md-footer__link md-footer__link--next" aria-label="Next: Alert rules and dashboards">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                CLI reference
+                Alert rules and dashboards
               </div>
             </div>
             <div class="md-footer__button md-icon">

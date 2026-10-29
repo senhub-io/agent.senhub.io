@@ -1160,6 +1160,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert rules and dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         
   
@@ -1256,10 +1283,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
         
           
-          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
             
   
   
@@ -1277,8 +1304,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_18">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1616,6 +1643,17 @@
     <span class="md-ellipsis">
       
         Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-under-home-root-or-runuser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files under /home, /root or /run/user
       
     </span>
   </a>
@@ -2536,6 +2574,90 @@
     
   
     Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
   
 
     
@@ -3891,10 +4013,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
         
           
-          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
             
   
   
@@ -3912,8 +4034,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_20">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3966,6 +4088,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
   
 
     
@@ -4645,6 +4795,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#files-under-home-root-or-runuser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files under /home, /root or /run/user
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#detecting-a-tail-that-no-longer-reads" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4717,7 +4878,7 @@ mode so the producing application is never blocked.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:d874161f4070f3751bfe0bed7380330677b173bcb843e68572f888646936ccaa -->
+<!-- sha256:55b3f8e9c14d020d239ae8ba0377911c6aabf4bf6bae2256dbbcc3de68d3910c -->
 
 <table>
 <thead>
@@ -4778,6 +4939,12 @@ mode so the producing application is never blocked.</p>
 <td>Whether a matching line starts a record or flushes the previous one. One of <code>after</code>, <code>before</code></td>
 </tr>
 <tr>
+<td><code>multiline.flush_timeout</code></td>
+<td>No</td>
+<td><code>5s</code></td>
+<td>Send a record in progress once no line has come for this long; 0 waits for the next record</td>
+</tr>
+<tr>
 <td><code>parser</code></td>
 <td>No</td>
 <td>-</td>
@@ -4818,6 +4985,7 @@ mount that comes up after the agent), is picked up by the rescan once it
 appears. Such a file is read from its first line, whatever
 <code>from_beginning</code> says, since all of it was written after the probe
 started watching for it.</p>
+<p>Reading an old file from its first line sends its records with the time written in each line, when the parser finds one. A log backend refuses records older than its retention, without the agent being told: VictoriaLogs, for example, drops them and counts them in its own <code>too_small_timestamp</code> metric. Lines older than the backend's retention therefore never appear there, while the agent reports them as sent.</p>
 <h3 id="multiline-folding">Multiline folding<a class="headerlink" href="#multiline-folding" title="Permanent link">&para;</a></h3>
 <p>Java stacktraces, Python tracebacks and pretty-printed payloads span
 several physical lines. The <code>multiline</code> block folds them into one
@@ -4844,15 +5012,36 @@ continuation lines; here the same record is written with <code>negate: false</co
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
 </code></pre></div>
 <p>Copied as is from Filebeat, <code>negate: true</code> takes every stack-trace line
-for the start of a new record.</p>
+for the start of a new record, and folds every timestamped line that
+follows into it, until the next line without a timestamp: a busy log
+then sends nothing for hours or days. <code>config check</code> and the probe's
+start warn on that combination (<code>negate: true</code>, <code>match: after</code>, a
+pattern anchored with <code>^</code>).</p>
+<p>A record in progress is sent once no line has come for
+<code>flush_timeout</code> (5 seconds by default), so the last message of a quiet
+file goes out without waiting for the next one. When a writer pauses
+longer than that in the middle of a message, the message is split in
+two: what came before the pause is sent when the timeout passes, and
+the lines after the pause, which carry no timestamp of their own, fold
+together into a second record. That record is sent when the next
+message starts, or once no line has come for <code>flush_timeout</code> again;
+its time is that of its first line. Raise the timeout for a writer
+that pauses, or set <code>0</code> to wait for the next message as before:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span><span class="nt">multiline</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^\d{4}-\d{2}-\d{2}</span><span class="nv"> </span><span class="s">'</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">after</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">flush_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span><span class="w">   </span><span class="c1"># a duration, or a number of seconds; 0 turns it off</span>
+</code></pre></div>
+<p>A record that would pass <code>max_bytes_per_line</code> is sent as it stands and
+the line that did not fit starts the next one; no line is dropped.</p>
 <h3 id="structured-parsing">Structured parsing<a class="headerlink" href="#structured-parsing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">/var/log/nginx/access.log</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">parser</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">regex</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^(?P&lt;remote_addr&gt;\S+)</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\S+</span><span class="nv"> </span><span class="s">\[(?P&lt;time_local&gt;[^\]]+)\]</span><span class="nv"> </span><span class="s">"(?P&lt;request&gt;[^"]*)"</span><span class="nv"> </span><span class="s">(?P&lt;status&gt;\d+)'</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">timestamp_field</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_local</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">timestamp_format</span><span class="p">:</span><span class="w"> </span><span class="s">"02/Jan/2006:15:04:05</span><span class="nv"> </span><span class="s">-0700"</span>
 </code></pre></div>
 <p>With <code>regex</code>, each named capture group becomes a log attribute. With
 <code>json</code> and <code>logfmt</code>, every key becomes a log attribute. With <code>raw</code>, the
@@ -4929,9 +5118,19 @@ mistake.</p>
   bytes), so copytruncate, daily rotation and file replacement are
   detected and the probe restarts from offset 0 of the new file —
   no silent gaps, no duplicates.</li>
+<li><strong>Rotated files on Windows.</strong> The end of a rotated file is read for up
+  to one second (less once it stops growing), then the file is released,
+  so the writer's rotation is never refused for long. A writer that
+  rotates onto the same backup name within a second of the previous
+  rotation (<code>app.log</code> renamed over <code>app.log.old</code> twice in a second) can
+  have that rename refused by Windows until the file is released, at
+  most one second later.</li>
+<li><strong>Very fast rotation on Windows.</strong> A rotation is noticed within about two seconds. A file renamed away again before that, by a writer that rotates more than once every couple of seconds, can have its whole content missed. Rotations of an ordinary application log, by the hour, the day or a size of several megabytes, are far slower than that.</li>
 <li><strong>At-least-once delivery.</strong> Bookmarks are flushed every 2 seconds;
-  after a crash, up to 2 seconds of records may be re-read. Plan
-  deduplication downstream if exact-once matters.</li>
+  after a crash, up to 2 seconds of records may be re-read. A multiline
+  record still being assembled is not part of the saved position: after
+  a crash it is read again, not lost. Plan deduplication downstream if
+  exact-once matters.</li>
 <li><strong>Event-driven.</strong> No polling cycle: records ship as lines are
   written.</li>
 <li><strong>Start position.</strong> Default is tail-from-now. Set
@@ -4939,6 +5138,29 @@ mistake.</p>
   first ingestion (combine with <code>bookmark_path</code> so it only happens
   once).</li>
 </ul>
+<h2 id="files-under-home-root-or-runuser">Files under /home, /root or /run/user<a class="headerlink" href="#files-under-home-root-or-runuser" title="Permanent link">&para;</a></h2>
+<p>On Linux, the systemd unit of the agent sets <code>ProtectHome=true</code>, which makes
+<code>/home</code>, <code>/root</code> and <code>/run/user</code> appear empty to the service. A path under
+one of them is never read, and <code>ReadOnlyPaths=</code> cannot bring it back: with
+<code>ProtectHome=true</code> the directories are inaccessible, not read-only. At
+construction the probe logs a warning that names the directory, and
+<code>agent config check</code> prints the same warning with the fix.</p>
+<p>Override the setting with a drop-in, which survives package upgrades:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>edit<span class="w"> </span>senhub-agent
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[Service]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="na">ProtectHome</span><span class="o">=</span><span class="s">read-only</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>senhub-agent
+</code></pre></div>
+<p><code>read-only</code> exposes the three directories for reading, which is all the
+probe needs. The <code>senhub</code> account must also have the Unix permission to
+read the file and to traverse its parent directories. The unit keeps
+<code>ProtectHome=true</code> by default: <code>read-only</code> lets a compromised agent read
+whatever the <code>senhub</code> account may read under <code>/home</code>, so it is an opt-in for
+hosts that need it. To expose a single
+directory instead, use <code>ProtectHome=tmpfs</code> together with
+<code>BindReadOnlyPaths=/home/&lt;path&gt;</code>.</p>
 <h2 id="detecting-a-tail-that-no-longer-reads">Detecting a tail that no longer reads<a class="headerlink" href="#detecting-a-tail-that-no-longer-reads" title="Permanent link">&para;</a></h2>
 <p>For every file it follows, the probe reports two gauges carrying the
 file's absolute path in the <code>log.file.path</code> attribute (<code>log_file_path</code>
@@ -4956,9 +5178,9 @@ sized, only the offset is reported.</p>
 <p>In Prometheus the metrics are <code>senhub_filetail_read_offset_bytes</code> and
 <code>senhub_filetail_file_size_bytes</code>. This expression
 fires when, over 15 minutes, the file grew and the offset did not move:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">changes</span><span class="o">(</span><span class="nv">senhub_filetail_read_offset_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="ow">and</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="p">,</span><span class="w"> </span><span class="nv">probe_name</span><span class="p">,</span><span class="w"> </span><span class="nv">log_file_path</span><span class="o">)</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kr">delta</span><span class="o">(</span><span class="nv">senhub_filetail_file_size_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">changes</span><span class="o">(</span><span class="nv">senhub_filetail_read_offset_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="ow">and</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">(</span><span class="nv">instance</span><span class="p">,</span><span class="w"> </span><span class="nv">probe_name</span><span class="p">,</span><span class="w"> </span><span class="nv">log_file_path</span><span class="o">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kr">delta</span><span class="o">(</span><span class="nv">senhub_filetail_file_size_bytes</span><span class="p">[</span><span class="s">15m</span><span class="p">]</span><span class="o">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
 <p>The labels on each series are <code>log_file_path</code>, <code>probe_name</code> and
 <code>probe_type</code>; <code>instance</code> is added by your Prometheus when it scrapes the
@@ -5004,6 +5226,13 @@ series' tags.</p>
 <td>File Tail Records Emitted</td>
 <td>#</td>
 <td>Cumulative count of log records this file-tail probe has published to the log rail</td>
+</tr>
+<tr>
+<td><code>senhub.filetail.file_records_emitted</code></td>
+<td><code>senhub.filetail.file_records_emitted</code></td>
+<td log.file.path="log.file.path">File Tail Records Emitted</td>
+<td>#</td>
+<td>Cumulative count of log records published from one followed file; a file that stays flat while its size grows sends nothing</td>
 </tr>
 <tr>
 <td><code>senhub.filetail.read_offset</code></td>

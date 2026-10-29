@@ -1160,6 +1160,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert rules and dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/" class="md-nav__link">
         
   
@@ -1256,10 +1283,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
         
           
-          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
             
   
   
@@ -1277,8 +1304,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_18">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2395,6 +2422,90 @@
     
   
     Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
   
 
     
@@ -3852,10 +3963,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
         
           
-          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
             
   
   
@@ -3873,8 +3984,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_20">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3927,6 +4038,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
   
 
     
@@ -4632,10 +4771,21 @@ usage.</p>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">token_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitor@pve!agent</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">token_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${secret:proxmox.token_secret}</span><span class="w">   </span><span class="c1"># OS secret store; inline plaintext is auto-sealed on install</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Validated on a single node</p>
+<p>This probe is validated on a single Proxmox VE node (QEMU guests, LXC
+containers, ZFS and directory storages). Cluster quorum, high availability,
+replication, Ceph and Proxmox Backup Server (PBS) support are in preview: they
+are not validated in a real environment, they are off by default, and each is
+enabled explicitly (<code>enable_cluster</code>, <code>enable_ha</code>, <code>enable_replication</code>,
+<code>enable_ceph</code>, <code>enable_pbs</code>). A part left disabled makes no API call and
+produces no series of its own. The usage and capacity of every storage,
+Ceph and PBS included, are published whatever the flags.</p>
+</div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:ab29f8261ab0433230e24ee32a418dca0590d9edcc788f1231254cb1c561d9ca -->
+<!-- sha256:330640f1f8be23556c31eac3ee644b95f0766b65ae8256a086f30884b08e9007 -->
 
 <table>
 <thead>
@@ -4676,6 +4826,36 @@ usage.</p>
 <td>No</td>
 <td>-</td>
 <td>Only this node is collected; empty means every node of the cluster</td>
+</tr>
+<tr>
+<td><code>enable_pbs</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: state and backup archives of Proxmox Backup Server storages (their usage and capacity are always published)</td>
+</tr>
+<tr>
+<td><code>enable_ceph</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: state of Ceph-backed storages (rbd, cephfs; their usage and capacity are always published)</td>
+</tr>
+<tr>
+<td><code>enable_cluster</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: report cluster quorum</td>
+</tr>
+<tr>
+<td><code>enable_ha</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: report the state of HA-managed guests</td>
+</tr>
+<tr>
+<td><code>enable_replication</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Preview, not validated in a real environment: report storage replication jobs</td>
 </tr>
 <tr>
 <td><code>interval</code></td>
@@ -4779,6 +4959,91 @@ usage.</p>
 <td>By</td>
 <td>Storage pool total capacity</td>
 </tr>
+<tr>
+<td><code>proxmox.storage.status</code></td>
+<td>1</td>
+<td>Storage availability, one series per <code>proxmox.storage.state</code> (<code>active</code>, <code>inactive</code>): 1 for the current state, 0 for the other</td>
+</tr>
+<tr>
+<td><code>hw.physical_disk.status</code></td>
+<td>1</td>
+<td>SMART state of a physical disk, one series per <code>hw.state</code> (<code>ok</code>, <code>degraded</code>, <code>failed</code>, <code>predicted_failure</code>): 1 for the current state, 0 for the others. <code>hw.id</code> is the serial number (device path when there is none)</td>
+</tr>
+<tr>
+<td><code>hw.physical_disk.endurance_utilization</code></td>
+<td>1</td>
+<td>SSD life remaining as a ratio (the PVE wearout percentage divided by 100, <code>hw.physical_disk.state</code> = <code>remaining</code>)</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.status</code></td>
+<td>1</td>
+<td>ZFS pool state, one series per <code>hw.state</code> (<code>ok</code>, <code>degraded</code>, <code>failed</code>). ONLINE is <code>ok</code>, DEGRADED <code>degraded</code>; FAULTED, UNAVAIL, REMOVED, SUSPENDED and OFFLINE are <code>failed</code></td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.limit</code></td>
+<td>By</td>
+<td>ZFS pool size, <code>hw.id</code> = pool name</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.usage</code></td>
+<td>By</td>
+<td>ZFS pool bytes, <code>hw.logical_disk.state</code> = <code>used</code> or <code>free</code></td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.utilization</code></td>
+<td>1</td>
+<td>ZFS pool used over size (0–1)</td>
+</tr>
+<tr>
+<td><code>proxmox.zfs.pool.fragmentation</code></td>
+<td>1</td>
+<td>ZFS pool fragmentation as a ratio (0–1)</td>
+</tr>
+<tr>
+<td><code>proxmox.vm.backup.age</code></td>
+<td>s</td>
+<td>Seconds since the last successful backup of a guest</td>
+</tr>
+<tr>
+<td><code>proxmox.vm.backup.status</code></td>
+<td>1</td>
+<td>Outcome of the last backup task naming the guest, one series per <code>proxmox.vm.backup.state</code> (<code>ok</code>, <code>failed</code>)</td>
+</tr>
+<tr>
+<td><code>proxmox.vm.backup.unprotected.count</code></td>
+<td>{vm}</td>
+<td>Guests covered by no enabled backup job</td>
+</tr>
+<tr>
+<td><code>proxmox.backup.job.count</code></td>
+<td>{job}</td>
+<td>Enabled backup jobs</td>
+</tr>
+<tr>
+<td><code>proxmox.ha.resource.status</code></td>
+<td>1</td>
+<td>State of an HA-managed guest (<code>proxmox.ha.resource</code> = service id such as <code>vm:100</code>, plus <code>proxmox.vmid</code>), one series per <code>proxmox.ha.resource.state</code> (<code>started</code>, <code>stopped</code>, <code>disabled</code>, <code>ignored</code>, <code>error</code>, <code>fence</code>, <code>freeze</code>, <code>migrate</code>, <code>relocate</code>, <code>recovery</code>, <code>request_stop</code>): 1 for the current state, 0 for the others</td>
+</tr>
+<tr>
+<td><code>proxmox.ha.quorum.status</code></td>
+<td>1</td>
+<td>Cluster quorum, one series per <code>proxmox.ha.quorum.state</code> (<code>ok</code>, <code>lost</code>)</td>
+</tr>
+<tr>
+<td><code>proxmox.replication.job.status</code></td>
+<td>1</td>
+<td>Storage replication job (<code>proxmox.replication.job</code>, <code>proxmox.vmid</code>, <code>proxmox.replication.target</code>), one series per <code>proxmox.replication.job.state</code> (<code>ok</code>, <code>failed</code>); failed when the job has a non-zero fail count or an error</td>
+</tr>
+<tr>
+<td><code>proxmox.replication.job.age</code></td>
+<td>s</td>
+<td>Seconds since the last successful synchronisation of a replication job; absent when it never synced</td>
+</tr>
+<tr>
+<td><code>proxmox.task.count</code></td>
+<td>{task}</td>
+<td>Tasks that failed since the previous collection, per node and <code>proxmox.task.type</code> (<code>proxmox.task.state</code> = <code>failed</code>); each also becomes an ERROR log record</td>
+</tr>
 </tbody>
 </table>
 <h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
@@ -4786,6 +5051,8 @@ usage.</p>
 <li>Create an API token in Proxmox at <strong>Datacenter → Permissions → API Tokens</strong>. Grant it <code>PVEAuditor</code> role on <code>/</code> for read-only cluster-wide monitoring.</li>
 <li>The <code>endpoint</code> must use <code>https://</code>. The API certificate is verified by default; a self-signed Proxmox certificate needs <code>verify_tls: false</code>, or better, a proper certificate for production.</li>
 <li>Both QEMU VMs and LXC containers are monitored; they are distinguished by the <code>proxmox.vmid</code> tag.</li>
+<li>Disk, ZFS, backup and task series need <code>Sys.Audit</code> on <code>/nodes/&lt;node&gt;</code> (<code>PVEAuditor</code> on <code>/</code> covers it); a token without it simply contributes nothing for that endpoint. Backup job coverage reads <code>/cluster/backup</code>: a job with <code>all</code> covers every guest except its exclude list, otherwise its VM list and pool members, and a disabled job covers nothing.</li>
+<li>Preview, off by default: quorum series need <code>enable_cluster</code>, HA resource series <code>enable_ha</code>, replication series <code>enable_replication</code>. HA series read <code>/cluster/ha/status/current</code> and need <code>Sys.Audit</code> on <code>/</code>; replication series read <code>/nodes/&lt;node&gt;/replication</code> and need <code>Sys.Audit</code> on <code>/nodes/&lt;node&gt;</code> (both covered by <code>PVEAuditor</code> on <code>/</code>). A cluster without HA resources or replication jobs emits no HA resource or replication series and logs no warning. An HA resource in a state PVE does not document is skipped.</li>
 </ul>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
@@ -4911,6 +5178,125 @@ series' tags.</p>
 <td>Proxmox Storage {proxmox.storage} Total</td>
 <td>B</td>
 <td>Total capacity of the Proxmox storage pool</td>
+</tr>
+<tr>
+<td><code>hw.physical_disk.status</code></td>
+<td><code>hw.physical_disk.status</code></td>
+<td>Proxmox Disk {hw.name} Status {hw.state}</td>
+<td>#</td>
+<td>SMART state of the physical disk, one series per hw.state (ok, degraded, failed, predicted_failure): 1 for the current state, 0 for the others. PVE PASSED or OK maps to ok, FAILED to failed; a disk with no SMART verdict emits nothing. hw.id is the disk serial number, or the device path when PVE reports no serial</td>
+</tr>
+<tr>
+<td><code>hw.physical_disk.endurance_utilization</code></td>
+<td><code>hw.physical_disk.endurance_utilization</code></td>
+<td>Proxmox Disk {hw.name} Life Remaining</td>
+<td>#</td>
+<td>Fraction of the SSD life remaining (1 new, 0 worn out), the PVE wearout percentage divided by 100 and not inverted; absent when PVE reports N/A</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.status</code></td>
+<td><code>hw.logical_disk.status</code></td>
+<td>Proxmox ZFS Pool {hw.id} Status {hw.state}</td>
+<td>#</td>
+<td>State of the ZFS pool, one series per hw.state (ok, degraded, failed): 1 for the current state, 0 for the others. ONLINE maps to ok, DEGRADED to degraded, and FAULTED, UNAVAIL, REMOVED, SUSPENDED and OFFLINE to failed</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.limit</code></td>
+<td><code>hw.logical_disk.limit</code></td>
+<td>Proxmox ZFS Pool {hw.id} Size</td>
+<td>B</td>
+<td>Total size of the ZFS pool</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.usage</code></td>
+<td><code>hw.logical_disk.usage</code></td>
+<td>Proxmox ZFS Pool {hw.id} Bytes {hw.logical_disk.state}</td>
+<td>B</td>
+<td>Bytes of the ZFS pool allocated (used) and free</td>
+</tr>
+<tr>
+<td><code>hw.logical_disk.utilization</code></td>
+<td><code>hw.logical_disk.utilization</code></td>
+<td>Proxmox ZFS Pool {hw.id} Utilization</td>
+<td>#</td>
+<td>Fraction of the ZFS pool allocated (used over size, 0 to 1)</td>
+</tr>
+<tr>
+<td><code>proxmox.zfs.pool.fragmentation</code></td>
+<td><code>proxmox.zfs.pool.fragmentation</code></td>
+<td>Proxmox ZFS Pool {hw.id} Fragmentation</td>
+<td>#</td>
+<td>Fragmentation of the ZFS pool free space as a ratio (0 to 1), the PVE percentage divided by 100</td>
+</tr>
+<tr>
+<td><code>proxmox.vm.backup.age</code></td>
+<td><code>proxmox.vm.backup.age</code></td>
+<td>Proxmox VM {proxmox.vm.name} ({proxmox.vmid}) Last Backup Age</td>
+<td>s</td>
+<td>Seconds since the last successful backup of the VM or container, from the newest of its vzdump task history and the backup archives listed on the node storages; absent when no backup is known</td>
+</tr>
+<tr>
+<td><code>proxmox.vm.backup.status</code></td>
+<td><code>proxmox.vm.backup.status</code></td>
+<td>Proxmox VM {proxmox.vm.name} ({proxmox.vmid}) Last Backup {proxmox.vm.backup.state}</td>
+<td>#</td>
+<td>Outcome of the last finished vzdump task naming this guest, one series per proxmox.vm.backup.state (ok, failed): 1 for the current state, 0 for the other. Warnings count as ok; absent when no such task is in the history (a scheduled job covering several guests names none)</td>
+</tr>
+<tr>
+<td><code>proxmox.storage.status</code></td>
+<td><code>proxmox.storage.status</code></td>
+<td>Proxmox Storage {proxmox.storage} {proxmox.storage.state}</td>
+<td>#</td>
+<td>Availability of the storage from the node, one series per proxmox.storage.state (active, inactive): 1 for the current state, 0 for the other. An unreachable PBS or NFS storage is inactive</td>
+</tr>
+<tr>
+<td><code>proxmox.vm.backup.unprotected.count</code></td>
+<td><code>proxmox.vm.backup.unprotected.count</code></td>
+<td>Proxmox Guests Without Backup</td>
+<td>#</td>
+<td>Guests covered by no enabled backup job of /cluster/backup: a job with all set covers every guest except its exclude list, otherwise its vmid list and its pool members; a disabled job covers nothing</td>
+</tr>
+<tr>
+<td><code>proxmox.backup.job.count</code></td>
+<td><code>proxmox.backup.job.count</code></td>
+<td>Proxmox Backup Jobs</td>
+<td>#</td>
+<td>Number of enabled backup jobs in /cluster/backup</td>
+</tr>
+<tr>
+<td><code>proxmox.task.count</code></td>
+<td><code>proxmox.task.count</code></td>
+<td proxmox.task.type="proxmox.task.type">Proxmox Failed Tasks</td>
+<td>#</td>
+<td>Tasks of this type that ended with a status other than OK since the previous collection (the first cycle counts the last interval only), per node; each one is also published as an ERROR log record carrying the tail of its task log</td>
+</tr>
+<tr>
+<td><code>proxmox.ha.resource.status</code></td>
+<td><code>proxmox.ha.resource.status</code></td>
+<td>Proxmox HA Resource {proxmox.ha.resource} {proxmox.ha.resource.state}</td>
+<td>#</td>
+<td>State of an HA-managed guest from /cluster/ha/status/current, one series per proxmox.ha.resource.state (started, stopped, disabled, ignored, error, fence, freeze, migrate, relocate, recovery, request_stop): 1 for the current state, 0 for the others. A resource in a state PVE does not document produces nothing; absent when HA is not configured</td>
+</tr>
+<tr>
+<td><code>proxmox.ha.quorum.status</code></td>
+<td><code>proxmox.ha.quorum.status</code></td>
+<td proxmox.ha.quorum.state="proxmox.ha.quorum.state">Proxmox HA Quorum</td>
+<td>#</td>
+<td>Cluster quorum as reported by /cluster/ha/status/current, one series per proxmox.ha.quorum.state (ok, lost): 1 for the current state, 0 for the other</td>
+</tr>
+<tr>
+<td><code>proxmox.replication.job.status</code></td>
+<td><code>proxmox.replication.job.status</code></td>
+<td>Proxmox Replication Job {proxmox.replication.job} {proxmox.replication.job.state}</td>
+<td>#</td>
+<td>Outcome of a storage replication job of the node, one series per proxmox.replication.job.state (ok, failed): failed when the job has a non-zero fail count or an error, 1 for the current state, 0 for the other. Absent when no replication is configured</td>
+</tr>
+<tr>
+<td><code>proxmox.replication.job.age</code></td>
+<td><code>proxmox.replication.job.age</code></td>
+<td>Proxmox Replication Job {proxmox.replication.job} Last Sync Age</td>
+<td>s</td>
+<td>Seconds since the last successful synchronisation of the replication job; absent when the job has never synced</td>
 </tr>
 <tr>
 <td><code>senhub.probe.check.result</code></td>

@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://agent.senhub.io/docs/latest/cli/">
       
       
-        <link rel="prev" href="../prometheus/metrics-reference/">
+        <link rel="prev" href="../packs/">
       
       
         <link rel="next" href="../otlp/">
@@ -1157,6 +1157,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert rules and dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1734,10 +1761,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
         
           
-          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
             
   
   
@@ -1755,8 +1782,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_18">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2873,6 +2900,90 @@
     
   
     Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
   
 
     
@@ -4228,10 +4339,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
         
           
-          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
             
   
   
@@ -4249,8 +4360,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_20">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4303,6 +4414,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
   
 
     
@@ -5447,11 +5586,17 @@
 <td>any error</td>
 <td>service installed and enabled, unit as <code>install</code> writes it, configuration present, binary current</td>
 </tr>
+<tr>
+<td><code>update</code></td>
+<td>the binary is installed and the service restarted, but the systemd unit could not be refreshed</td>
+<td>the binary could not be installed, or the service does not run it</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <p>Any other command exits <code>0</code> on success and <code>2</code> on failure. Before this contract, failures exited <code>1</code>; a script that tests only for a non-zero code is unaffected, one that compares with <code>1</code> must now compare with <code>2</code>.</p>
 <p><code>install</code> also takes <code>--json</code> (<code>status</code>, <code>exit_code</code>, <code>changed</code>, <code>config_path</code>, <code>written</code>); its progress text then goes to stderr. A service that is installed but whose unit drifted, or that no longer starts at boot, is not "unchanged": <code>install</code> rewrites the unit and enables the service, exits <code>0</code>, and restarts nothing (restart the service to apply a changed unit). A unit owned by the <code>.deb</code>/<code>.rpm</code> package is never rewritten; the package manager updates it. On Windows the service registration and the single binary are the state.</p>
-<p>A command that exits <code>3</code> has written nothing: no file is rewritten, and its modification time is unchanged. A script that provisions a machine can run <code>config init</code>, <code>config set</code> and <code>install</code> again and treat <code>0</code> and <code>3</code> as success.</p>
+<p>A command that exits <code>3</code> has written nothing: no file is rewritten, and its modification time is unchanged. A script that provisions a machine can run <code>config init</code>, <code>config set</code> and <code>install</code> again and treat <code>0</code> and <code>3</code> as success. For a tool that reads any code other than <code>0</code> as a failure (a GPO startup script, an SCCM or Intune script), <code>config init</code> and <code>install</code> take <code>--ok-if-unchanged</code>: they exit <code>0</code> instead of <code>3</code>, still write nothing and still print that there was nothing to do. A real conflict keeps its own code: <code>install</code> exits <code>2</code> when a <code>senhub-agent</code> service from the MSI or from another folder is already registered.</p>
 <h2 id="json-output">JSON output<a class="headerlink" href="#json-output" title="Permanent link">&para;</a></h2>
 <p><code>version</code>, <code>status</code>, <code>doctor</code>, <code>config check</code>, <code>config show</code>, <code>config set</code>, <code>config init</code> and <code>secret status</code> accept <code>--json</code>. The command then prints a single JSON object on stdout and nothing else there; diagnostics still go to stderr. Without the flag the output is the text described below.</p>
 <p>Every object starts with the same fields:</p>
@@ -5551,6 +5696,10 @@
 <tr>
 <td><code>install</code></td>
 <td>Install as system service. On a machine where the service is already installed, the configuration is present and (Linux) the system binary is the one running, it changes nothing and exits <code>3</code></td>
+</tr>
+<tr>
+<td><code>install --ok-if-unchanged</code></td>
+<td>Same, but exits <code>0</code> instead of <code>3</code> when there is nothing to do</td>
 </tr>
 <tr>
 <td><code>uninstall</code></td>
@@ -5936,6 +6085,7 @@
 - License validity and agent binding
 - Probe types against the registry
 - Required probe parameters (endpoint, credentials)
+- Keys nothing reads, each a warning (exit <code>1</code>) because the agent starts and ignores them: a key of a probe entry outside <code>params</code>, a key inside <code>params</code>, a key of a storage strategy, and a key inside the <code>prtg</code>, <code>prometheus</code> or <code>tls</code> block of the <code>http</code> output
 - Storage strategy names</p>
 <p>Fragments under <code>probes.d/</code> and <code>strategies.d/</code> are covered when a multi-file layout is present.</p>
 <p><img alt="senhub-agent config check output" src="../images/cli/config-check.webp" title="Terminal output of senhub-agent config check on a valid configuration" /></p>
@@ -6008,7 +6158,7 @@
 </tr>
 <tr>
 <td><code>secret rm &lt;name&gt;</code></td>
-<td>Delete a secret (prompts to confirm; <code>--yes</code> to skip)</td>
+<td>Delete a secret (prompts to confirm; <code>--yes</code> or <code>-y</code> to skip). A piped <code>y</code> is accepted (<code>echo y \| senhub-agent secret rm &lt;name&gt;</code>). When the answer is not <code>y</code>, or there is no input at all, nothing is removed and the command prints a message on stderr and exits non-zero. In a Windows scheduled task started without redirected input, Windows provides a hidden console and the prompt waits: pass <code>--yes</code></td>
 </tr>
 <tr>
 <td><code>secret status</code></td>
@@ -6088,7 +6238,7 @@
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--dry-run
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--registry-url<span class="w"> </span>https://releases.example.com
 </code></pre></div>
-<p>Downloads and installs the specified version. On Linux, when the systemd service is running, it is then restarted and the command checks that the new process runs the binary just installed, printing the version it runs; if it does not, the command fails. Updating replaces the binary and needs the same privileges as the service commands. On Windows, the MSI restarts the service itself.</p>
+<p>Downloads and installs the specified version. On Linux, when the unit was written by <code>install</code>, the new binary then brings it up to date (as <code>refresh-unit --yes</code> would, keeping the <code>User=</code>, <code>ExecStart</code> and your drop-ins under <code>senhub-agent.service.d/</code>) and systemd is reloaded. A unit owned by the <code>.deb</code>/<code>.rpm</code> package is left to the package. If the refresh fails, the update goes on, the service restarts on its current unit, and the command exits <code>1</code> with the reason. When the systemd service is running, it is then restarted and the command checks that the new process runs the binary just installed, printing the version it runs; if it does not, the command fails. Updating replaces the binary and needs the same privileges as the service commands. On Windows, the MSI restarts the service itself.</p>
 <table>
 <thead>
 <tr>
@@ -6108,6 +6258,10 @@
 <tr>
 <td><code>--no-restart</code></td>
 <td>Install the binary and leave the running service as it is, for a script that restarts it itself. Until the service restarts it keeps running the previous version, whatever <code>senhub-agent version</code> says: that command reads the file on disk</td>
+</tr>
+<tr>
+<td><code>--no-refresh-unit</code></td>
+<td>Leave the systemd unit as it is, for an operator who manages it with their own tooling (Ansible or other). Run <code>refresh-unit</code> yourself, or ship the unit, when a version changes it</td>
 </tr>
 <tr>
 <td><code>--verbose</code>, <code>-v</code></td>
@@ -6322,7 +6476,7 @@ no CLI needed.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../prometheus/metrics-reference/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Metrics reference">
+          <a href="../packs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Alert rules and dashboards">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6332,7 +6486,7 @@ no CLI needed.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Metrics reference
+                Alert rules and dashboards
               </div>
             </div>
           </a>

@@ -1528,6 +1528,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert rules and dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cli/" class="md-nav__link">
         
   
@@ -1622,10 +1649,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
         
           
-          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
             
   
   
@@ -1643,8 +1670,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_18">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2761,6 +2788,90 @@
     
   
     Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
   
 
     
@@ -4116,10 +4227,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
         
           
-          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
             
   
   
@@ -4137,8 +4248,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_20">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4191,6 +4302,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
   
 
     
@@ -5156,7 +5295,7 @@
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"prtg"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"web"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"nagios"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"prometheus"</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">admin_key</span><span class="p">:</span><span class="w"> </span><span class="s">"..."</span>
 </code></pre></div>
-<p>Without <code>--enable-https</code>, the installer binds to loopback. With <code>--enable-https</code>, it writes <code>bind_address: "0.0.0.0"</code> and the HTTPS port. A remote poller on a plain HTTP installation needs an explicit <code>bind_address: "0.0.0.0"</code> or an interface IP.</p>
+<p>The installer binds to loopback, with or without <code>--enable-https</code>; <code>--enable-https</code> only switches on TLS and the HTTPS port. A remote poller needs an explicit <code>bind_address: "0.0.0.0"</code> or an interface IP.</p>
 <p>An installation that still uses the legacy monolithic <code>agent-config.yaml</code> holds the same parameters under <code>storage:</code>, in the <code>params</code> of the entry named <code>http</code>.</p>
 <h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
 <table>
@@ -5530,6 +5669,7 @@ invitation:</p>
 </tbody>
 </table>
 <h3 id="web-interface">Web Interface<a class="headerlink" href="#web-interface" title="Permanent link">&para;</a></h3>
+<p>The administration routes accept the key as <code>Authorization: Bearer &lt;admin key&gt;</code> with <code>_</code> in the key position of the path (<code>/api/_/config/probes</code>), or through the console cookie set when <code>/web/{admin-key}/</code> is opened; the key in the path still works. See <a href="../web-interface/">Web interface</a>.</p>
 <p>The console answers the administration key only, and is served when both the <code>web</code> endpoint and <code>admin_key</code> are set.</p>
 <table>
 <thead>

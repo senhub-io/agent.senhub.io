@@ -1160,6 +1160,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../packs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alert rules and dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cli/" class="md-nav__link">
         
   
@@ -1362,10 +1389,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
         
           
-          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="">
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
             
   
   
@@ -1383,8 +1410,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_18">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2501,6 +2528,90 @@
     
   
     Azure Container App Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/azure_log_query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Log Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../probes/entra_id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microsoft Entra ID
   
 
     
@@ -3856,10 +3967,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
         
           
-          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
             
   
   
@@ -3877,8 +3988,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_20">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3931,6 +4042,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.6.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.6.5
   
 
     
@@ -4755,6 +4894,11 @@ and governance must be in <code>agent.yaml</code> (governance as a top-level
 <td><code>neighbor_of</code> the interface it was seen on; <code>resolves_to</code> the interface that owns the MAC (opt-in)</td>
 </tr>
 <tr>
+<td>Neighbours learned by an SNMP device (opt-in, <code>snmp_poll</code> <code>neighbors</code>)</td>
+<td><code>network.neighbor</code>, identified by the polled device and the MAC address (see <a href="../probes/snmp-poll/#learned-neighbours">SNMP Poll</a>)</td>
+<td><code>neighbor_of</code> the device port it was learned on; <code>resolves_to</code> the interface that owns the MAC, when known</td>
+</tr>
+<tr>
 <td>Ethernet aggregates (opt-in)</td>
 <td></td>
 <td><code>aggregated_into</code> from a member port to its aggregate</td>
@@ -4871,13 +5015,18 @@ anything about the resource.</p>
 </tr>
 <tr>
 <td><code>rekeyed</code></td>
-<td>The resource is the same, the agent now identifies it differently, as when <code>systemd</code> units moved from <code>service.instance</code> to <code>host.service</code></td>
+<td>The resource is the same, the agent now identifies it differently, as when <code>systemd</code> units moved from <code>service.instance</code> to <code>host.service</code>, or when an SNMP device's id changes while it stays the same device (a stack whose chassis MAC follows a new master)</td>
 <td>Nothing happened</td>
 </tr>
 <tr>
 <td><code>aged_out</code></td>
 <td>A cache the source reads forgot the entry, such as an ARP entry</td>
 <td>Nothing was seen leaving</td>
+</tr>
+<tr>
+<td><code>excluded_by_config</code></td>
+<td>The agent's configuration stops reporting it, as when <code>snmp_poll</code> leaves system routes out</td>
+<td>Nothing happened</td>
 </tr>
 </tbody>
 </table>
