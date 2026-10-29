@@ -5759,6 +5759,20 @@ series' tags.</p>
 <td>Devices the crawl could not use since the agent started, by reason: unreachable (no SNMP answer) or identity (no device id resolvable)</td>
 </tr>
 <tr>
+<td><code>senhub.snmp.identity.collisions</code></td>
+<td><code>snmp_poll_identity_collisions</code></td>
+<td>SNMP {instance} Identity Collisions</td>
+<td>#</td>
+<td>Sweeps since the agent started in which this target resolved to a device id another target of the same agent holds for a different device (other sysName or chassis MAC)</td>
+</tr>
+<tr>
+<td><code>senhub.snmp.engine_id.mac_mismatch</code></td>
+<td><code>snmp_poll_engine_id_mac_mismatch</code></td>
+<td>SNMP {instance} Engine ID MAC Mismatch</td>
+<td>#</td>
+<td>1 when the last topology sweep read an snmpEngineID that embeds a MAC other than the LLDP chassis MAC (engine id set by configuration or kept across a stack master change), 0 otherwise or when either is unreadable</td>
+</tr>
+<tr>
 <td><code>senhub.snmp.discovery.seeds</code></td>
 <td><code>snmp_poll_discovery_seeds</code></td>
 <td>SNMP {instance} Discovery Seeds {source}</td>

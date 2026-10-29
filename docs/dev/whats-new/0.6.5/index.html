@@ -4048,6 +4048,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#known-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known limits
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4683,6 +4694,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#known-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known limits
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4723,6 +4745,7 @@
 <li><strong>The PRTG licence key, private keys, tokens and AWS keys are masked in log records by default.</strong> PRTG writes its licence key and system id in clear in <code>Core.log</code> and <code>CoreActivationLog.log</code> each time its core starts, so a <code>filetail</code> probe on those files shipped them. The log redaction preset now also masks the PRTG licence key (<code>licensed for "&lt;name&gt;" (***)</code>) and system id (<code>SYSTEMID-***</code>), the body of PEM private key blocks (also when each line of the key is a separate record of the same source), JSON Web Tokens, AWS access key ids and the value of <code>aws_secret_access_key</code>, in every log record whatever probe read it. They are counted in <code>senhub.agent.logs.redacted</code> under the rules <code>prtg_license_key</code>, <code>prtg_system_id</code>, <code>private_key</code>, <code>jwt</code>, <code>aws_access_key_id</code> and <code>aws_secret_access_key</code>, names a custom rule can no longer take. See <a href="../../configuration/#logs-section">Logs Section</a>.</li>
 <li><strong>Log masking also covers URL passwords, query-string keys and bearer tokens, and can be turned off per probe.</strong> The preset now masks the password of <code>scheme://user:password@host</code> URLs (<code>url_userinfo</code>), the value of <code>?key=</code>, <code>&amp;sig=</code>, <code>&amp;signature=</code>, <code>&amp;access_key=</code> and similar query parameters (<code>url_query_secret</code>), a <code>Bearer</code> credential written outside an <code>Authorization</code> header (<code>bearer_token</code>), and the values of <code>refresh_token</code>, <code>id_token</code> and <code>client_secret</code>. Logs received by the OTLP receiver are masked on the verbatim copy as well as on the flat one. <code>log_redact: false</code> on a probe entry leaves that probe's records unmasked. The two parameter rules were rewritten as a single linear pass: a 200-byte access-log line carrying a <code>passhash=</code> is masked in about 1.5 microseconds instead of 130. Measured on a host, masking costs about one point of one CPU core at 2,000 lines per second (2.4 % to 3.5 %). See <a href="../../configuration/#logs-section">Logs Section</a>.</li>
 <li><strong><code>proxmox</code>: Ceph, PBS, quorum, HA and replication are preview and off by default.</strong> The probe is validated on a single Proxmox VE node (QEMU guests, ZFS and directory storages). Cluster quorum, high availability, storage replication, Ceph-backed storages and Proxmox Backup Server storages are in preview: not validated in a real environment, and each is switched on explicitly with <code>enable_cluster</code>, <code>enable_ha</code>, <code>enable_replication</code>, <code>enable_ceph</code> and <code>enable_pbs</code>. Left off, a part makes no API call and produces no series of its own. The usage and capacity of every storage, <code>rbd</code>, <code>cephfs</code> and <code>pbs</code> included, are still published as before; their state series and the backup archives they hold need the flag. The HA, quorum and replication series seen with earlier builds disappear until you enable them. See <a href="../../probes/proxmox/">Proxmox VE</a>.</li>
+<li><strong>SNMP Poll: a device without a usable chassis serial is identified by its LLDP chassis MAC, before its engine id.</strong> The <code>network.device.id</code> precedence is now <code>serial:</code> &gt; <code>mac:</code> &gt; <code>engine:</code> &gt; <code>name:</code> &gt; <code>mgmt:</code>. The snmpEngineID can be set by configuration, and two switches carrying the same value became one device whose attributes alternated between the two. A device with no single chassis serial whose LLDP chassis id is a MAC address (a stack, or a switch that keeps its serial on a board) moves from <code>engine:</code> to <code>mac:</code> at its first sweep after the upgrade: its entity is replaced by a new one and its topology history starts again. The agent retires the old device and every entity under it (interfaces, routes, neighbours) with the reason <code>rekeyed</code>, so the change does not read as an outage; an agent stopped across the change leaves them to expire instead. Devices identified by <code>serial:</code>, and devices without LLDP or with a chassis id that is not a MAC, keep their id. When two targets of one agent still resolve to one id while their sysName or chassis MAC differ, the agent logs "two SNMP targets resolve to the same device id" once per pair and counts it in <code>senhub.snmp.identity.collisions</code>. A stack identified by its chassis MAC changes id when the MAC follows a new master, unless the stack keeps its bridge MAC (on Comware, <code>irf mac-address persistent always</code>); the old id and its subtree are then retired with the reason <code>rekeyed</code>, as is a replacement switch that keeps the name of the one it replaces. The device also carries its raw identity parts: <code>hw.serial_number</code>, <code>senhub.chassis.serial_numbers</code> (every stack member's serial), <code>senhub.lldp.chassis_mac</code> and <code>senhub.snmp.engine_id</code>; when the engine id embeds a MAC other than the chassis MAC, the agent logs "snmpEngineID does not embed the chassis MAC" and sets <code>senhub.snmp.engine_id.mac_mismatch</code>.</li>
 <li><strong><code>process</code> with <code>top_n</code> reports a per-name roll-up.</strong> With <code>filter.top_n</code>, the probe now ranks process names and reports the roll-up of each name in the top, without <code>process.pid</code> and <code>process.creation.time</code> on the series. Short-lived processes no longer create new series each time they enter the top, so dashboards built on per-process series under <code>top_n</code> change shape. Per-process series remain available with <code>detail.per_pid: true</code>, which <code>agent config check</code> flags with a cardinality warning.</li>
 <li><strong><code>config migrate</code> writes one file per probe.</strong> Migrating a monolithic <code>agent-config.yaml</code> now writes each probe to its own <code>probes.d/NN-&lt;name&gt;.yaml</code> (numbered from 10, in the original order) instead of putting every probe in <code>probes.d/00-host.yaml</code>. The resolved configuration is unchanged, and running the migration again changes nothing. <code>config init</code> still writes <code>00-host.yaml</code>.</li>
 <li><strong>Going back from an MSI install takes an uninstall or the older ZIP.</strong> The MSI refuses to install an older version over a newer one (code 1603), so a Windows host upgraded by MSI cannot be returned to 0.6.4 with the 0.6.4 MSI. Before upgrading, copy <code>%ProgramData%\SenHub\</code>: an uninstall deletes it, agent key included. The two ways back are in <a href="../../installation/#going-back-to-an-earlier-version-on-windows">Going back to an earlier version on Windows</a>.</li>
@@ -4768,6 +4791,10 @@
 <li><strong>ping_gateway and ping_webapp: 100 % loss is reported as 100 % (Pro).</strong> On macOS the <code>100.0% packet loss</code> line was read as 0 % and the probe ended in an error. Total loss is now reported as <code>packetLoss</code> 100 on Linux, macOS and Windows, including localised Windows output and a target on the agent's own subnet that is down, whose "Destination host unreachable" replies from the local address Windows counts as received.</li>
 <li><strong>Windows: stopping the agent no longer waits on the local status channel.</strong> Closing the named pipe of the local status channel can hang in the pipe library; the agent's shutdown now waits for it 5 seconds at most.</li>
 <li><strong><code>config check</code> names the ProtectHome fix for a filetail path under /home.</strong> On Linux, <code>agent config check</code> now warns, like the probe at start, when a <code>filetail</code> path is under <code>/home</code>, <code>/root</code> or <code>/run/user</code>, and gives the drop-in that makes it readable.</li>
+</ul>
+<h2 id="known-limits">Known limits<a class="headerlink" href="#known-limits" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>SNMP Poll: a device first read with a failing ENTITY-MIB and sysName can briefly appear twice.</strong> A device whose very first sweep could read neither its ENTITY-MIB nor its sysName is published under the id that sweep resolved; once it reads in full, that first entry expires after the entity liveness interval instead of being retired. A device that stops answering its identity reads after it was identified keeps its id, and leaves the map with the reason <code>unmonitored</code> if the reads keep failing for three topology intervals.</li>
 </ul>
 
 
