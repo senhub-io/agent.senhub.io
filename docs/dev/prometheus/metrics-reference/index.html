@@ -5880,6 +5880,11 @@ lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
 <td>Cumulative count of received span batches dropped due to backpressure on the agent span channel (the trace relay could not keep up).</td>
 </tr>
 <tr>
+<td><code>senhub_agent_otlp_dropped_total</code></td>
+<td>counter</td>
+<td>Records dropped before or during an OTLP export, by <code>reason</code>: <code>store_cap</code>, <code>probe_cardinality</code>, <code>memory_soft_limit</code>, <code>memory_hard_limit</code>, <code>staleness</code> (metrics); <code>logs_queue_full</code>, <code>dropped_by_age</code> (logs queue limits); <code>receiver_rejected</code> (the receiver refused the records on their merits); <code>record_too_large</code> (a single log record larger than the receiver accepts). Every reason is emitted from start at 0.</td>
+</tr>
+<tr>
 <td><code>senhub_agent_otlp_endpoint_switches_total</code></td>
 <td>counter</td>
 <td>Cumulative endpoint failover switches (the active OTLP endpoint changed). Rising means the primary is flapping.</td>
