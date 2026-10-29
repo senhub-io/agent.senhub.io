@@ -229,11 +229,120 @@
 
     <div class="entry current">
       <div class="side">
+        <div class="ver">0.6.5</div>
+        <div class="date">2026-10-29</div>
+      </div>
+      <div class="body">
+        <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
+        <h2>Secrets masked in logs, and Proxmox VE health</h2>
+        <p>
+          Every log record now goes through a masking step before it leaves the agent,
+          so passwords, tokens and keys that applications write in clear no longer reach
+          the backend. The Proxmox VE probe reads disk, ZFS and backup health, and the
+          console gets a page per probe.
+        </p>
+
+        <div class="sub brk">Before you upgrade</div>
+        <ul class="pts">
+          <li><b>Secrets are masked in log records by default.</b> Password, token and
+             key parameters, <code>Authorization</code> headers, URL passwords, bearer
+             tokens, private keys, JSON Web Tokens, AWS keys and the PRTG licence key
+             become <code>***</code>, whatever probe read the record. Masked occurrences
+             are counted in <code>senhub.agent.logs.redacted</code>;
+             <code>logs.redact.preset: false</code> turns the built-in rules off and
+             <code>log_redact: false</code> leaves one probe's records unmasked.</li>
+          <li><b><code>config check</code> warns on keys nothing reads</b>, so a
+             configuration that exited <code>0</code> may exit <code>1</code>. The agent
+             itself starts and ignores these keys, as before.</li>
+          <li><b>PRTG sensors lose the Check Result channel by default.</b> It turned
+             sensors Warning on a PRTG core without the SenHub lookup files.
+             <code>prtg.check_result_channel: true</code> brings it back. Service
+             channels of <code>systemd</code> and <code>winservices</code> show a plain
+             0/1 value. PRTG keeps the channels the agent stops sending: delete them, or
+             set the option before upgrading.</li>
+          <li><b><code>filetail</code> sends a multiline record after 5 seconds of
+             quiet</b> instead of waiting for the next message. A writer that pauses
+             longer mid-message needs a longer <code>multiline.flush_timeout</code>.</li>
+          <li><b><code>process</code> with <code>top_n</code> reports one series per
+             process name</b>, without the PID, so short-lived processes stop creating
+             new series. <code>detail.per_pid: true</code> keeps the per-process
+             series.</li>
+          <li><b>Linux hosts installed with <code>senhub-agent install</code> from 0.6.3
+             or earlier</b>: run <code>refresh-unit</code> once after the upgrade, or the
+             clock synchronisation metrics stay off. Packages replace their unit
+             themselves.</li>
+          <li><b>SNMP devices without a single chassis serial are identified by their
+             LLDP chassis MAC</b>, before the engine id, which configurations copy from
+             switch to switch. Those devices get a new id at their first sweep; the old
+             one and everything under it leave with the reason <code>rekeyed</code>.</li>
+          <li><b>SNMP system routes are left out of the topology</b>: reject and
+             blackhole routes, multicast, loopback and link-local destinations, and
+             local host and broadcast routes. Those an earlier version published leave
+             with the reason <code>excluded_by_config</code> at each device's first
+             complete sweep. <code>include_system_routes: true</code> publishes them
+             again.</li>
+          <li><b>Collectors declared with <code>SENHUB_PROBE_*</code> variables and a
+             Container Apps discovery start following its jobs</b>, with series,
+             entities and console lines. Set <code>SENHUB_PROBE_JOBS_TYPE=none</code>
+             before upgrading to keep the previous behaviour. Configurations written in
+             files are unchanged.</li>
+          <li><b>Also</b>: <code>config migrate</code> writes one file per probe, IBM i
+             hosts coming from 0.6.1 or earlier publish about a fifth more series, the
+             Proxmox cluster, HA, replication, Ceph and PBS parts are preview and off by
+             default, and an MSI install goes back only through an uninstall or the
+             older ZIP.</li>
+        </ul>
+
+        <div class="sub">New</div>
+        <ul class="pts">
+          <li><b>Proxmox VE health.</b> Physical disk SMART state and SSD wear, ZFS pool
+             state, usage and fragmentation, the age and outcome of each guest's last
+             backup, guests no backup job covers, and failed tasks, each also sent as an
+             error log record.</li>
+          <li><b>A console page per probe.</b> State and full failure reason, current
+             series, read-only configuration and recent events. The console no longer
+             keeps the administration key in its address.</li>
+          <li><b>SNMP neighbours, on request.</b> With <code>neighbors: true</code>,
+             every MAC a switch learned is published as a neighbour, linked to its
+             port and to the interface that owns it when it is known.</li>
+          <li><b>SNMP interface selection.</b> An <code>interfaces</code> block keeps
+             metric series for the interfaces you choose, by name, type or state, with
+             a cap. The topology keeps every interface.</li>
+          <li><b>Azure Monitor, Azure Log Query and Microsoft Entra ID probes</b>
+             (Pro).</li>
+        </ul>
+
+        <div class="sub">Fixed</div>
+        <ul class="pts">
+          <li><b>Windows data folder restricted</b> to SYSTEM and Administrators: it
+             holds the administration key, the secret store and the licence.</li>
+          <li><b><code>filetail</code> on Windows</b> no longer loses the last lines
+             before a rotation, and picks up the new file within seconds.</li>
+          <li><b><code>exec</code></b> ends a running command and its children when the
+             agent stops.</li>
+          <li><b>An unreachable SNMP device</b> no longer stalls its probe for
+             minutes.</li>
+          <li><b>OTLP relay</b>: relayed agents keep their own identity, and the
+             receiver accepts gzip over HTTP.</li>
+          <li><b>OTLP log exports refused for their size</b> are split down to single
+             records, so a collector with a 1 MiB limit receives every record.</li>
+          <li><b>Private keys written line by line</b> are masked to their END line,
+             also across an agent restart.</li>
+          <li><b><code>ping_gateway</code> and <code>ping_webapp</code></b> report a
+             target that does not answer as 100 % loss on every platform.</li>
+          <li><b><code>secret rm</code></b> exits non-zero when it removes nothing.</li>
+        </ul>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.5/">Full release note &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="side">
         <div class="ver">0.6.4</div>
         <div class="date">2026-10-18</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
+        <div class="tags"><span class="tag brk">Breaking</span><span class="tag">New</span></div>
         <h2>The network on the map, and Kubernetes from the node</h2>
         <p>
           The agent now draws the network it sits on: routing tables, SNMP discovery
