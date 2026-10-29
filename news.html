@@ -271,6 +271,10 @@
              or earlier</b>: run <code>refresh-unit</code> once after the upgrade, or the
              clock synchronisation metrics stay off. Packages replace their unit
              themselves.</li>
+          <li><b>SNMP devices without a single chassis serial are identified by their
+             LLDP chassis MAC</b>, before the engine id, which configurations copy from
+             switch to switch. Those devices get a new id at their first sweep; the old
+             one and everything under it leave with the reason <code>rekeyed</code>.</li>
           <li><b>Also</b>: <code>config migrate</code> writes one file per probe, IBM i
              hosts coming from 0.6.1 or earlier publish about a fifth more series, the
              Proxmox cluster, HA, replication, Ceph and PBS parts are preview and off by
@@ -287,6 +291,9 @@
           <li><b>A console page per probe.</b> State and full failure reason, current
              series, read-only configuration and recent events. The console no longer
              keeps the administration key in its address.</li>
+          <li><b>SNMP neighbours, on request.</b> With <code>neighbors: true</code>,
+             every MAC a switch learned is published as a neighbour, linked to its
+             port and to the interface that owns it when it is known.</li>
           <li><b>SNMP interface selection.</b> An <code>interfaces</code> block keeps
              metric series for the interfaces you choose, by name, type or state, with
              a cap. The topology keeps every interface.</li>
@@ -306,6 +313,13 @@
              minutes.</li>
           <li><b>OTLP relay</b>: relayed agents keep their own identity, and the
              receiver accepts gzip over HTTP.</li>
+          <li><b>OTLP log exports refused for their size</b> are split down to single
+             records, so a collector with a 1 MiB limit receives every record.</li>
+          <li><b>Private keys written line by line</b> are masked to their END line,
+             also across an agent restart.</li>
+          <li><b><code>ping_gateway</code> and <code>ping_webapp</code></b> report a
+             target that does not answer as 100 % loss on every platform.</li>
+          <li><b><code>secret rm</code></b> exits non-zero when it removes nothing.</li>
         </ul>
         <p class="more"><a href="/docs/latest/whats-new/0.6.5/">Full release note &rarr;</a></p>
       </div>
