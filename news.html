@@ -286,7 +286,7 @@
              entities and console lines. Set <code>SENHUB_PROBE_JOBS_TYPE=none</code>
              before upgrading to keep the previous behaviour. Configurations written in
              files are unchanged.</li>
-          <li><b>Also</b>: <code>config migrate</code> writes one file per probe, IBM i
+          <li><b>Also</b>: a monolithic configuration is split into one file per probe, at start or by <code>config migrate</code>; IBM i
              hosts coming from 0.6.1 or earlier publish about a fifth more series, the
              Proxmox cluster, HA, replication, Ceph and PBS parts are preview and off by
              default, and an MSI install goes back only through an uninstall or the
