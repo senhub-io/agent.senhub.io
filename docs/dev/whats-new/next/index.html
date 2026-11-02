@@ -1241,6 +1241,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../opamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpAMP remote management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../topology/" class="md-nav__link">
         
   
@@ -1281,10 +1308,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -1302,8 +1329,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3861,10 +3888,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" checked>
         
           
-          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="">
             
   
   
@@ -3882,8 +3909,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_21">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_22">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4727,6 +4754,7 @@
 </ul>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Remote management through OpAMP (Enterprise).</strong> The agent can report its description, health and effective configuration, secrets masked, to an OpAMP server, and apply a signed overlay from it: switch local probes on or off, change their interval and the log level, and with the v2 overlay run whole probes defined by the server and pause the agent's own update check. Every overlay is verified against pinned keys, applied by a reload, confirmed when its probes start and otherwise reverted; the local files are never modified. <code>exec</code> probes can only be managed if <code>agent.yaml</code> allows them. See <a href="../../opamp/">OpAMP remote management</a>.</li>
 <li><strong>The console no longer keeps the administration key in its address.</strong> Opening <code>/web/{admin-key}/</code> sets a session cookie and redirects to <code>/web/_/...</code>; scripts can send <code>Authorization: Bearer &lt;admin key&gt;</code> to <code>/api/_/...</code>. The key in the path keeps working; in an <code>/api/</code> path it is deprecated and logs a warning once. PRTG, Nagios and Prometheus URLs are unchanged. See <a href="../../web-interface/">Web interface</a>.</li>
 <li><strong>Probes no longer start one after the other, and each runs at its own offset.</strong> Every probe makes its first collection at once; its next collections then follow a fixed offset inside its interval, up to 30 seconds, derived from the probe's identity: it is the same after every restart, and probes of the same interval no longer fire together on every cycle. A slow or unreachable target holds only its own probe, not the ones after it. The first data of a probe can therefore arrive up to 30 seconds after the start. Each collection of a probe that can be cancelled also runs under a deadline: five minutes, or the probe's interval when that is longer, or the probe's <code>collect_timeout</code> when it sets one. A collection that runs past its interval is counted and never run twice, but it is not cut before its deadline. Four new self-metrics describe the scheduling: <code>senhub.agent.collect.in_flight</code>, <code>senhub.agent.collect.lag</code> (maximum start delay since the previous read by the same reader, Prometheus or OTLP), <code>senhub.agent.collect.overruns</code> (collections that ran past their interval) and <code>senhub.agent.probe.first_collection.delay</code>; the last three carry <code>probe_name</code> and <code>probe_type</code>, so two probes of the same type are two series. See <a href="../../prometheus/metrics-reference/">Prometheus metrics reference</a>.</li>
 <li><strong><code>collect_timeout</code> per probe.</strong> A probe entry accepts <code>collect_timeout</code>, a duration (<code>90s</code>) or a number of seconds, which replaces the default deadline of one collection, shorter or longer. Without it a collection is never cut before five minutes or its interval, whichever is longer. A probe slower than its interval delivers its data at its own pace, never two collections at once, and each late collection counts in <code>senhub.agent.collect.overruns</code>: that is the signal to raise the interval or lower the work. <code>0</code> means unset, while the empty string is refused. The <code>exec</code> probe now stops its command, with its whole process group, when this deadline ends; its own <code>timeout</code> still applies and the shorter of the two wins. A collection cut at its deadline is logged with the deadline and the name of the setting. See <a href="../../configuration/">Configuration</a>.</li>
