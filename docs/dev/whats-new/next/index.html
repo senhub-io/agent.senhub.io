@@ -4769,6 +4769,7 @@
 </li>
 <li><strong>Azure Log Query probe (Pro).</strong> The new <code>azure_log_query</code> probe runs one KQL query on a Log Analytics workspace each cycle and publishes every row (<code>channel</code>, <code>value</code>, <code>unit</code>) as a gauge named <code>azure.log_query.&lt;channel&gt;</code>.</li>
 <li><strong>Microsoft Entra ID probe (Pro).</strong> The new <code>entra_id</code> probe reads one tenant through Microsoft Graph in 13 modules: secret and certificate expiry, directory synchronisation, users, licences, groups, applications, devices, service health, authentication methods, privileged access and security posture. Each module needs its own Application permission with admin consent.</li>
+<li><strong>Licences signed by a delegated platform key.</strong> Besides licences signed by the root key, the agent accepts licences signed with EdDSA by a platform key that the root key has delegated for a month and for a set of customers; the delegation travels inside the licence. A delegated licence must name a customer inside that set, and expires at the latest with its delegation, followed by the usual 7-day grace period with a warning. Existing licences are unaffected.</li>
 </ul>
 <h2 id="fixes">Fixes<a class="headerlink" href="#fixes" title="Permanent link">&para;</a></h2>
 <ul>
