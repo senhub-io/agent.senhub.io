@@ -4792,7 +4792,7 @@ outputs.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:aca4f5c0e800c6d65ce68f6ea65c17dea029f1806a775802159cf4bbb2126a50 -->
+<!-- sha256:9cf918fa650b5d67358c3073fad6a7fc64097e3f27ba8315049ed8725933aebb -->
 
 <table>
 <thead>
@@ -4809,6 +4809,12 @@ outputs.</p>
 <td>No</td>
 <td><code>30</code></td>
 <td>Seconds between collections</td>
+</tr>
+<tr>
+<td><code>include_kernel_threads</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Report Linux kernel threads (kworker, ksoftirqd, scsi_eh_N…) as processes. Off by default: one name per CPU, disk and interrupt line.</td>
 </tr>
 <tr>
 <td><code>filter</code></td>
