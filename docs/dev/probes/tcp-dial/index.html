@@ -1999,6 +1999,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#targets-on-the-agents-own-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Targets on the agent's own host
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4719,6 +4736,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#targets-on-the-agents-own-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Targets on the agent's own host
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4774,7 +4808,7 @@ dependable than an HTTP round trip.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:dea337311944aa3f5b7d916fc1366d454d2237c770e16485438cc69ceb628cee -->
+<!-- sha256:17381de966be9fd9a3970c024a535c969748e6dcef8957a8a090695c0fe7cb0d -->
 
 <table>
 <thead>
@@ -4804,6 +4838,12 @@ dependable than an HTTP round trip.</p>
 <td><code>60</code></td>
 <td>Seconds between cycles</td>
 </tr>
+<tr>
+<td><code>mode</code></td>
+<td>No</td>
+<td><code>auto</code></td>
+<td>auto: read the TCP table for a target on this host and dial a remote one; dial: always connect; local: always read the TCP table</td>
+</tr>
 </tbody>
 </table>
 <!-- schema:params:end -->
@@ -4832,6 +4872,45 @@ dependable than an HTTP round trip.</p>
 </table>
 <p>A refused or timed out target is a measurement (<code>up = 0</code>), never a
 probe failure.</p>
+<h3 id="targets-on-the-agents-own-host">Targets on the agent's own host<a class="headerlink" href="#targets-on-the-agents-own-host" title="Permanent link">&para;</a></h3>
+<p>A connect-and-close has side effects on the service it checks: on one
+host, a dial every minute against a local port produced about 1,440
+"unexpected eof" lines a day in that service's log. When a target
+resolves to a loopback address or to one of the host's own addresses,
+<code>mode: auto</code> (the default) reads the TCP table instead of connecting,
+and emits per port:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>senhub.tcp.listener.up</code></td>
+<td>bool</td>
+<td>A socket is in LISTEN on the port; <code>process.executable.name</code> names its process when the agent can read it</td>
+</tr>
+<tr>
+<td><code>senhub.tcp.listener.connections</code></td>
+<td>{connection}</td>
+<td>ESTABLISHED sockets on the port</td>
+</tr>
+<tr>
+<td><code>senhub.tcp.listener.peers</code></td>
+<td>{peer}</td>
+<td>Distinct remote addresses among them</td>
+</tr>
+</tbody>
+</table>
+<p><code>senhub.tcpdial.up</code>, <code>senhub.tcpdial.duration</code> and the check result are
+not emitted for such a target, since nothing was dialed. A port in
+LISTEN proves that a process holds it, not that the service answers: a
+protocol check (<code>http_check</code> or the service's own probe) remains the
+proof. <code>mode: dial</code> keeps connecting to every target, <code>mode: local</code>
+reads the table for every target.</p>
 <h2 id="metric-reference">Metric reference<a class="headerlink" href="#metric-reference" title="Permanent link">&para;</a></h2>
 <p>Every metric this probe can emit. <strong>Metric</strong> is the OpenTelemetry name the
 OTLP, Prometheus and Zabbix outputs derive theirs from. <strong>Name</strong> is what a
@@ -4879,6 +4958,27 @@ series' tags.</p>
 <td>Check Target Unresolved</td>
 <td>#</td>
 <td>1 when a local target is not listening and the check failed with connection refused</td>
+</tr>
+<tr>
+<td><code>senhub.tcp.listener.up</code></td>
+<td><code>senhub.tcp.listener.up</code></td>
+<td>TCP {target} Listener Up</td>
+<td>#</td>
+<td>1 when a socket is in LISTEN on the local port, read from the TCP table</td>
+</tr>
+<tr>
+<td><code>senhub.tcp.listener.connections</code></td>
+<td><code>senhub.tcp.listener.connections</code></td>
+<td>TCP {target} Listener Connections</td>
+<td>{connection}</td>
+<td>ESTABLISHED sockets on the local port, read from the TCP table</td>
+</tr>
+<tr>
+<td><code>senhub.tcp.listener.peers</code></td>
+<td><code>senhub.tcp.listener.peers</code></td>
+<td>TCP {target} Listener Peers</td>
+<td>{peer}</td>
+<td>Distinct remote IPs with an ESTABLISHED socket on the local port</td>
 </tr>
 </tbody>
 </table>
