@@ -6368,7 +6368,9 @@ around.</p>
 <p><code>update</code> installs the version you name, older ones included. Copying
 a version number out of a document downgrades an agent that is
 already ahead of it, so take the number from <code>update --list</code> on the
-host you are updating.</p>
+host you are updating. An MSI-managed Windows install cannot go
+backwards in place, so <code>update</code> refuses an older version there and
+says so; uninstall the agent, then install the older MSI.</p>
 </div>
 <p>On an MSI-managed Windows install, auto-update applies a new signed MSI rather than swapping the binary in place — see the note under <a href="#msi-installer-recommended">MSI installer</a>.</p>
 <h4 id="upgrading-from-the-zip">Upgrading from the ZIP<a class="headerlink" href="#upgrading-from-the-zip" title="Permanent link">&para;</a></h4>
