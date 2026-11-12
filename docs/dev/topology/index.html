@@ -4872,7 +4872,7 @@ descriptions, sent by many agents, into one graph.</p>
 <tr>
 <td><code>depends_on.enabled</code></td>
 <td><code>false</code></td>
-<td>Maps the outbound connections of the host. Needs root, see <a href="../otlp/#signalsentities">OTLP</a></td>
+<td>Maps the outbound connections of the host. Runs as root, or as the service user when the unit grants <code>CAP_SYS_PTRACE</code> and <code>CAP_DAC_READ_SEARCH</code>; see <a href="../otlp/#signalsentities">OTLP</a></td>
 </tr>
 <tr>
 <td><code>neighbors.enabled</code></td>

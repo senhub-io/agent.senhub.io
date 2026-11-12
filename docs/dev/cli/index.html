@@ -5758,7 +5758,7 @@
 </tr>
 <tr>
 <td><code>uninstall</code></td>
-<td>Remove the system service and delete the configuration directory, including the sealed secret store and the agent key. Irreversible; prompts first</td>
+<td>Remove the system service and delete the configuration directory, including the sealed secret store and the agent key. Irreversible; prompts first. Without a terminal and without <code>--yes</code>, it removes nothing, prints <code>confirmation required: rerun with --yes</code> and exits <code>2</code></td>
 </tr>
 <tr>
 <td><code>uninstall --yes</code></td>
@@ -6290,10 +6290,11 @@
 <p><img alt="senhub-agent update --list output" src="../images/cli/update-list.webp" title="Terminal output of senhub-agent update --list showing available versions" /></p>
 <h3 id="install-a-specific-version">Install a specific version<a class="headerlink" href="#install-a-specific-version" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--dry-run
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.5<span class="w"> </span>--dry-run
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>update<span class="w"> </span><span class="m">0</span>.6.0<span class="w"> </span>--registry-url<span class="w"> </span>https://releases.example.com
 </code></pre></div>
 <p>Downloads and installs the specified version. On Linux, when the unit was written by <code>install</code>, the new binary then brings it up to date (as <code>refresh-unit --yes</code> would, keeping the <code>User=</code>, <code>ExecStart</code> and your drop-ins under <code>senhub-agent.service.d/</code>) and systemd is reloaded. A unit owned by the <code>.deb</code>/<code>.rpm</code> package is left to the package. If the refresh fails, the update goes on, the service restarts on its current unit, and the command exits <code>1</code> with the reason. When the systemd service is running, it is then restarted and the command checks that the new process runs the binary just installed, printing the version it runs; if it does not, the command fails. Updating replaces the binary and needs the same privileges as the service commands. On Windows, the MSI restarts the service itself; on a ZIP install, a running <code>senhub-agent</code> service is stopped and started again through the service manager, with the same check that it now runs the binary just installed.</p>
+<p><code>update &lt;version&gt;</code> installs the version you name, an older one included; on an MSI-managed Windows install it refuses an older version (<code>&lt;version&gt; is older than the installed &lt;running&gt;; an MSI install cannot be downgraded in place: uninstall it, then install the &lt;version&gt; MSI</code>). Only an exact version can go backwards: <code>update latest</code> and a constraint such as <code>&gt;=0.6</code> never install an older release. <code>update latest</code> resolves on the channel <code>auto_update.include_beta</code> sets. The command exits <code>2</code> with a message, and installs nothing, when the version is not one (<code>not a valid version: &lt;version&gt;</code>), when the update registry does not have it (<code>version &lt;version&gt; not found in the update registry &lt;url&gt;</code>), or when the registry cannot be reached (<code>cannot reach the update registry &lt;url&gt;: &lt;reason&gt;</code>). <code>Already up to date.</code> and exit <code>0</code> mean the version asked for is the running one. With <code>--dry-run</code> the command prints <code>Dry run: would install &lt;version&gt; over &lt;running&gt;; no change made.</code> or <code>Dry run: nothing to install over &lt;running&gt;; no change made.</code>, and exits <code>0</code>.</p>
 <table>
 <thead>
 <tr>
@@ -6480,7 +6481,7 @@ no CLI needed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>remove
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>sudo<span class="w"> </span>/usr/local/bin/senhub-agent<span class="w"> </span>license<span class="w"> </span>remove<span class="w"> </span>--force
 </code></pre></div>
-<p>Reverts to the free tier: deletes <code>license.jwt</code> and clears any inline license. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs. Restart the agent for the change to take effect.</p>
+<p>Reverts to the free tier: deletes <code>license.jwt</code> and clears any inline license. The command prompts for confirmation before writing; pass <code>--force</code> (<code>-f</code>) to skip the prompt for unattended runs. Without a terminal and without <code>--force</code>, the command removes nothing, prints <code>confirmation required: nothing was removed; rerun with --force</code> and exits <code>2</code>. Restart the agent for the change to take effect.</p>
 <h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
