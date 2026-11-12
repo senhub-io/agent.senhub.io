@@ -4809,7 +4809,7 @@
 <li><strong><code>update latest</code> follows <code>auto_update.include_beta</code>.</strong> Run from the command line, <code>update latest</code> always resolved on the stable channel, while <code>update</code> without argument and <code>update --list</code> honoured <code>include_beta</code>; an agent on the beta channel never received the next beta that way and read "Already up to date.". It now resolves on the channel the configuration sets. The defect dates back to July 2026.</li>
 <li><strong>Console: a probe changed by remote management no longer shows as stopped.</strong> A probe whose interval an OpAMP overlay changed appeared stopped, with the interval of the file, while it collected at the new one. The console now shows its live state and the interval it runs at, marked remote.</li>
 <li><strong>OpAMP (Enterprise): a first start no longer warns that the replay floor was lost.</strong> A newly enrolled agent that had not yet received an overlay logged this warning at every start, since its state file did not exist yet. It now logs one information line; an unreadable state file still warns.</li>
-<li><strong><code>update --list</code> no longer lists the newest beta twice.</strong> The registry names its newest beta under an alias as well, and the list printed both. Aliases are now left out of both lists.</li>
+<li><strong><code>update --list</code> lists each release once, whatever the registry's order.</strong> The registry names its newest release under an alias as well (<code>latest</code>, <code>latest-beta</code>). An entry is now an alias when its name is not a version, and each version keeps the entry named after the release, so the newest beta always appears, once.</li>
 </ul>
 
 
