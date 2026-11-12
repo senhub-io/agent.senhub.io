@@ -229,12 +229,16 @@
 
     <div class="entry current">
       <div class="side">
-        <div class="ver">0.7.0</div>
-        <div class="date">2026-11-12</div>
+        <div class="ver">0.7.1</div>
+        <div class="date"><!-- set on the publication day --></div>
       </div>
       <div class="body">
         <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
         <h2>OpAMP remote management, and probes in parallel with per-probe timeouts</h2>
+        <p>
+          0.7.0 was not released: 0.7.1 replaces it, with one more fix to the masking
+          of the configuration the agent shows and sends to a remote management server.
+        </p>
         <p>
           The agent can now be managed remotely through OpAMP (Enterprise) with signed
           configuration overlays, and its probes start in parallel, each on its own
@@ -249,6 +253,12 @@
              Numbered kernel threads are left out before the roll-up and
              <code>top_n</code>, and the agent logs once how many were skipped. Set
              <code>include_kernel_threads: true</code> to report them as before.</li>
+          <li><b><code>config show --redact</code> masks <code>dsn</code>, <code>uri</code>
+             and <code>Cookie</code> values.</b> The redacted view, and the configuration
+             sent to a remote management server, show <code>***</code> for these
+             parameters and headers. A script that read such a value from
+             <code>config show --redact</code> gets <code>***</code>; read it from the
+             file, or use <code>config show --resolved</code> on the host.</li>
           <li><b>Network interfaces: <code>oper_state</code> takes the seven RFC 2863
              values in snake_case, and the administrative state moves to
              <code>admin_state</code>.</b> <code>lowerLayerDown</code> becomes
@@ -261,7 +271,7 @@
              fingerprint in brackets. Dashboards and alerts filtering on the old value
              need the new one.</li>
           <li><b>Keep the <code>host:port</code> form for OTLP outputs while a rollback is
-             possible.</b> An endpoint written as a URL is accepted from 0.7.0 but not
+             possible.</b> An endpoint written as a URL is accepted from 0.7.1 but not
              understood by 0.6.5 and earlier. Switch to the URL form once going back to
              an earlier version is ruled out.</li>
         </ul>
@@ -318,6 +328,13 @@
              values, URL fragments, whole user parts, authorization header values, JSON
              Web Tokens and cloud access key ids are now masked in every log line, not
              only in probe start lines.</li>
+          <li><b>The configuration sent to a remote management server masks connection
+             strings.</b> With OpAMP enabled, the effective configuration sent to the
+             server showed the value of a <code>dsn</code> or <code>uri</code> parameter,
+             a database connection string with its password for instance, when it was
+             written as <code>${env:...}</code> or left unsealed, and the value of a
+             <code>Cookie</code> header. These values are now masked, as in
+             <code>config show --redact</code>.</li>
           <li><b><code>senhub.agent.license.invalid</code> reads 0 once a licence
              validates.</b> The gauge is published at 0 for each reason as soon as a
              licence validates, so a dashboard can tell a valid licence from an agent
@@ -349,7 +366,7 @@
              longer takes the agent or the licence for removed. Pass <code>--yes</code>
              or <code>--force</code> for an unattended run.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.7.0/">Full release note &rarr;</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.7.1/">Full release note &rarr;</a></p>
       </div>
     </div>
 
