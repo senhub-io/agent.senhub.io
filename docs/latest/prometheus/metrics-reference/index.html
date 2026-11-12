@@ -1823,6 +1823,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../opamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpAMP remote management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../topology/" class="md-nav__link">
         
   
@@ -1863,10 +1890,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -1884,8 +1911,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4441,10 +4468,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" >
         
           
-          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="">
             
   
   
@@ -4462,8 +4489,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_21">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_22">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4516,6 +4543,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.7.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.7.1
   
 
     
@@ -5773,6 +5828,30 @@ the OTLP receiver counters once that probe has received traffic.</p>
 <td><code>probe</code>, <code>reason</code></td>
 </tr>
 <tr>
+<td><code>senhub_agent_collect_in_flight</code></td>
+<td>gauge</td>
+<td>Probe collections running at this instant</td>
+<td>–</td>
+</tr>
+<tr>
+<td><code>senhub_agent_collect_lag_seconds</code></td>
+<td>gauge</td>
+<td>Maximum of the actual start of a collection minus its planned start, over the window since the previous read by the same reader (scrape or push), per probe instance</td>
+<td><code>probe_name</code>, <code>probe_type</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_collect_overruns_total</code></td>
+<td>counter</td>
+<td>A collection that ran past its interval, per probe instance</td>
+<td><code>probe_name</code>, <code>probe_type</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_probe_first_collection_delay_seconds</code></td>
+<td>gauge</td>
+<td>Time from the process start to the end of the probe's first collection, recorded once per process and per probe instance</td>
+<td><code>probe_name</code>, <code>probe_type</code></td>
+</tr>
+<tr>
 <td><code>senhub_agent_logs_redacted_total</code></td>
 <td>counter</td>
 <td>Secrets masked in log records since start, per probe and masking rule (<code>credential_param</code>, <code>authorization_header</code> or a rule of <code>logs.redact.rules</code>); emitted once something has been masked</td>
@@ -5806,6 +5885,12 @@ the OTLP receiver counters once that probe has received traffic.</p>
 <td><code>senhub_agent_otlp_receiver_dropped_total</code></td>
 <td>counter</td>
 <td>Items the OTLP receiver discarded, by signal and reason (<code>no_sink</code>, <code>unmapped</code>)</td>
+<td><code>signal</code>, <code>reason</code></td>
+</tr>
+<tr>
+<td><code>senhub_agent_otlp_receiver_refused_total</code></td>
+<td>counter</td>
+<td>OTLP/HTTP requests the receiver refused, by signal and reason (<code>bad_body</code>, <code>too_large</code>, <code>media_type</code>, <code>encoding</code>, <code>rate_limited</code>, <code>method</code>, <code>unauthorized</code>, <code>forbidden</code>)</td>
 <td><code>signal</code>, <code>reason</code></td>
 </tr>
 <tr>
@@ -6097,7 +6182,7 @@ lifetime total: <code>sum(senhub_agent_collect_errors_total)</code>.</p>
 <td><code>senhub_system_memory_usage_bytes</code></td>
 <td>updowncounter</td>
 <td>By</td>
-<td buffers_="buffers," cached_="cached," committed_="committed," free_="free," modified_="modified," nonpaged_pool_="nonpaged_pool," paged_pool="paged_pool" used_="used,"><code>system_memory_state</code> ∈</td>
+<td buffers_ cached_ committed_ free_ modified_ nonpaged_pool_ paged_pool used_><code>system_memory_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_system_memory_utilization_ratio</code></td>
@@ -6731,7 +6816,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td><code>senhub_hw_logical_disk_usage_bytes</code></td>
 <td>updowncounter</td>
 <td>By</td>
-<td free="free" used_="used,">with <code>hw_logical_disk_state</code> ∈</td>
+<td free used_>with <code>hw_logical_disk_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_hw_logical_disk_utilization_ratio</code></td>
@@ -6743,7 +6828,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td><code>senhub_hardware_logical_disk_io_operations_total</code></td>
 <td>counter</td>
 <td>{operation}</td>
-<td read_="read," write="write"><code>disk_io_direction</code> ∈</td>
+<td read_ write><code>disk_io_direction</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_logical_disk_io_bytes_total</code></td>
@@ -6761,13 +6846,13 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <td><code>senhub_hardware_storage_pool_usage_bytes</code></td>
 <td>updowncounter</td>
 <td>By</td>
-<td allocated_="allocated," used="used"><code>senhub_hardware_storage_pool_state</code> ∈</td>
+<td allocated_ used><code>senhub_hardware_storage_pool_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_storage_pool_utilization_ratio</code></td>
 <td>gauge</td>
 <td>1</td>
-<td free_="free," used="used"><code>senhub_hardware_storage_pool_state</code> ∈</td>
+<td free_ used><code>senhub_hardware_storage_pool_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_storage_pool_io_operations_total</code></td>
@@ -6826,12 +6911,12 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_hardware_system_power_state_ratio</code></td>
 <td>updowncounter</td>
-<td off_="off," on_="on," powering_off_="powering_off," powering_on_="powering_on," unknown="unknown">strict-OTel expand: <code>senhub_hardware_system_power_state_value</code> ∈</td>
+<td off_ on_ powering_off_ powering_on_ unknown>strict-OTel expand: <code>senhub_hardware_system_power_state_value</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_eventservice_status</code></td>
 <td>updowncounter</td>
-<td degraded_="degraded," failed_="failed," ok_="ok," unknown="unknown">with <code>senhub_hardware_eventservice_state</code> ∈</td>
+<td degraded_ failed_ ok_ unknown>with <code>senhub_hardware_eventservice_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_hardware_redundancy_status</code></td>
@@ -6841,7 +6926,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_hardware_redundancy_controllers_count</code></td>
 <td>updowncounter</td>
-<td active_="active," max="max" min_="min,">with <code>senhub_hardware_redundancy_bound</code> ∈</td>
+<td active_ max min_>with <code>senhub_hardware_redundancy_bound</code> ∈</td>
 </tr>
 </tbody>
 </table>
@@ -6865,12 +6950,12 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_jobs_by_last_result</code></td>
 <td>gauge</td>
-<td failed_="failed," running="running" success_="success," warning_="warning,"><code>senhub_veeam_job_last_result</code> ∈</td>
+<td failed_ running success_ warning_><code>senhub_veeam_job_last_result</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_job_status</code></td>
 <td>updowncounter</td>
-<td failed_="failed," none_="none," running="running" success_="success," warning_="warning,">strict-OTel expand: <code>senhub_veeam_job_state</code> ∈</td>
+<td failed_ none_ running success_ warning_>strict-OTel expand: <code>senhub_veeam_job_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_job_seconds_since_last_run</code></td>
@@ -6885,12 +6970,12 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_job_bottleneck_status</code></td>
 <td>updowncounter</td>
-<td network_="network," none_="none," proxy_="proxy," source_="source," target="target">expand: <code>senhub_veeam_job_bottleneck</code> ∈</td>
+<td network_ none_ proxy_ source_ target>expand: <code>senhub_veeam_job_bottleneck</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_job_last_run_bytes</code></td>
 <td>gauge (By)</td>
-<td processed_="processed," read_="read," transferred="transferred"><code>senhub_veeam_job_data_phase</code> ∈</td>
+<td processed_ read_ transferred><code>senhub_veeam_job_data_phase</code> ∈</td>
 </tr>
 </tbody>
 </table>
@@ -6912,7 +6997,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_repository_usage_bytes</code></td>
 <td>updowncounter</td>
-<td free="free" used_="used,">By + <code>senhub_veeam_repository_state</code> ∈</td>
+<td free used_>By + <code>senhub_veeam_repository_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_repository_utilization_ratio</code></td>
@@ -6934,7 +7019,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_license_status</code></td>
 <td>updowncounter</td>
-<td expired_="expired," invalid="invalid" valid_="valid,">expand: <code>senhub_veeam_license_state</code> ∈</td>
+<td expired_ invalid valid_>expand: <code>senhub_veeam_license_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_license_expiry_seconds</code></td>
@@ -6944,7 +7029,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_license_instances</code></td>
 <td>gauge</td>
-<td remaining="remaining" total_="total," used_="used,"><code>senhub_veeam_license_instances_state</code> ∈</td>
+<td remaining total_ used_><code>senhub_veeam_license_instances_state</code> ∈</td>
 </tr>
 </tbody>
 </table>
@@ -6961,12 +7046,12 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_proxy_status</code></td>
 <td>updowncounter</td>
-<td disabled_="disabled," offline_="offline," online="online">expand: <code>senhub_veeam_proxy_state</code> ∈</td>
+<td disabled_ offline_ online>expand: <code>senhub_veeam_proxy_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_proxies</code></td>
 <td>gauge</td>
-<td disabled="disabled" enabled_="enabled," total_="total,"><code>senhub_veeam_proxies_state</code> ∈</td>
+<td disabled="disabled" enabled_ total_><code>senhub_veeam_proxies_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_object_restore_points</code></td>
@@ -6981,17 +7066,17 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_veeam_objects</code></td>
 <td>gauge</td>
-<td failed="failed" total_="total,"><code>senhub_veeam_objects_state</code> ∈</td>
+<td failed total_><code>senhub_veeam_objects_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_server_status</code></td>
 <td>updowncounter</td>
-<td available="available" unavailable_="unavailable,">expand: <code>senhub_veeam_server_state</code> ∈</td>
+<td available unavailable_>expand: <code>senhub_veeam_server_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_veeam_servers</code></td>
 <td>gauge</td>
-<td available_="available," total_="total," unavailable="unavailable"><code>senhub_veeam_servers_state</code> ∈</td>
+<td available_ total_ unavailable><code>senhub_veeam_servers_state</code> ∈</td>
 </tr>
 </tbody>
 </table>
@@ -7010,7 +7095,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_citrix_sessions_count</code></td>
 <td>gauge</td>
-<td connected_="connected," disconnected="disconnected"><code>senhub_citrix_session_state</code> ∈</td>
+<td connected_ disconnected><code>senhub_citrix_session_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_citrix_machine_count</code></td>
@@ -7020,7 +7105,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_citrix_machines_by_registration_state</code></td>
 <td>gauge</td>
-<td faulty_="faulty," maintenance="maintenance" registered_="registered," unregistered_="unregistered,"><code>senhub_citrix_machine_registration_state</code> ∈</td>
+<td faulty_ maintenance registered_ unregistered_><code>senhub_citrix_machine_registration_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_citrix_machines_overloaded</code></td>
@@ -7035,7 +7120,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_citrix_machines_by_fault_state</code></td>
 <td>gauge</td>
-<td boot_failure_="boot_failure," max_capacity_="max_capacity," stuck_at_boot_="stuck_at_boot," unknown="unknown" unregistered_="unregistered," vm_not_found_="vm_not_found,"><code>senhub_citrix_machine_fault_state</code> ∈</td>
+<td boot_failure_ max_capacity_ stuck_at_boot_ unknown unregistered_ vm_not_found_><code>senhub_citrix_machine_fault_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_citrix_license_sessions_active</code></td>
@@ -7097,7 +7182,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_citrix_logon_phase_duration_seconds</code></td>
 <td>gauge</td>
-<td authentication_="authentication," brokering_="brokering," gpo_="gpo," hdx_="hdx," interactive="interactive" profile_="profile," scripts_="scripts," vm_start_="vm_start,"><code>senhub_citrix_logon_phase</code> ∈</td>
+<td authentication_ brokering_ gpo_ hdx_ interactive profile_ scripts_ vm_start_><code>senhub_citrix_logon_phase</code> ∈</td>
 </tr>
 </tbody>
 </table>
@@ -7119,7 +7204,7 @@ the BMC does not report has every state at <code>0</code>: the convention define
 <tr>
 <td><code>senhub_citrix_connection_failures_by_category</code></td>
 <td>gauge</td>
-<td capacity_unavailable_="capacity_unavailable," client_connection_="client_connection," configuration_="configuration," licenses_unavailable_="licenses_unavailable," machine_="machine," other="other"><code>senhub_citrix_connection_failure_category</code> ∈</td>
+<td capacity_unavailable_ client_connection_ configuration_ licenses_unavailable_ machine_ other><code>senhub_citrix_connection_failure_category</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_citrix_load_index_ratio</code></td>
@@ -7167,39 +7252,39 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 </tr>
 <tr>
 <td><code>senhub_netscaler_gslb_site_status</code></td>
-<td down_="down," up="up"><code>senhub_netscaler_gslb_site_state</code> ∈</td>
+<td down_ up><code>senhub_netscaler_gslb_site_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_gslb_service_status</code></td>
-<td down_="down," up="up"><code>senhub_netscaler_gslb_service_state</code> ∈</td>
+<td down_ up><code>senhub_netscaler_gslb_service_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_aaa_vserver_status</code></td>
-<td down_="down," up="up"><code>senhub_netscaler_aaa_vserver_state</code> ∈</td>
+<td down_ up><code>senhub_netscaler_aaa_vserver_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_vpn_vserver_status</code></td>
-<td down_="down," up="up"><code>senhub_netscaler_vpn_vserver_state</code> ∈</td>
+<td down_ up><code>senhub_netscaler_vpn_vserver_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_interface_status</code></td>
-<td disabled_="disabled," enabled="enabled"><code>senhub_netscaler_interface_state</code> ∈</td>
+<td disabled_ enabled><code>senhub_netscaler_interface_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_ssl_certificate_status</code></td>
-<td invalid_="invalid," valid="valid"><code>senhub_netscaler_ssl_certificate_state</code> ∈</td>
+<td invalid_ valid><code>senhub_netscaler_ssl_certificate_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_ha_role_ratio</code></td>
-<td primary="primary" secondary_="secondary," unknown_="unknown,"><code>senhub_netscaler_ha_role_state</code> ∈</td>
+<td primary secondary_ unknown_><code>senhub_netscaler_ha_role_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_ha_node_status</code></td>
-<td down_="down," up="up"><code>senhub_netscaler_ha_node_state</code> ∈</td>
+<td down_ up><code>senhub_netscaler_ha_node_state</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_ha_sync_status</code></td>
-<td failed_="failed," success="success"><code>senhub_netscaler_ha_sync_state</code> ∈</td>
+<td failed_ success><code>senhub_netscaler_ha_sync_state</code> ∈</td>
 </tr>
 </tbody>
 </table>
@@ -7218,7 +7303,7 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 <td><code>senhub_netscaler_system_cpu_utilization_ratio</code></td>
 <td>gauge</td>
 <td>1</td>
-<td data_="data," management="management"><code>senhub_netscaler_cpu_plane</code> ∈</td>
+<td data_ management><code>senhub_netscaler_cpu_plane</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_system_memory_utilization_ratio</code></td>
@@ -7236,19 +7321,19 @@ the NITRO state enum mapping (1=down, 2=unknown, 3=busy, 4=out_of_service,
 <td><code>senhub_netscaler_system_http_messages_rate_per_second</code></td>
 <td>gauge</td>
 <td>1/s</td>
-<td request_="request," response="response"><code>senhub_netscaler_http_message_type</code> ∈</td>
+<td request_ response><code>senhub_netscaler_http_message_type</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_system_tcp_connections_active</code></td>
 <td>updowncounter</td>
 <td>{connection}</td>
-<td client_="client," server="server"><code>senhub_netscaler_tcp_side</code> ∈</td>
+<td client_ server><code>senhub_netscaler_tcp_side</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_ns_throughput_bytes_per_second</code></td>
 <td>gauge</td>
 <td>By/s</td>
-<td http="http" total_="total,"><code>senhub_netscaler_traffic_type</code> ∈</td>
+<td http total_><code>senhub_netscaler_traffic_type</code> ∈</td>
 </tr>
 <tr>
 <td><code>senhub_netscaler_system_network_packets_rate_per_second</code></td>

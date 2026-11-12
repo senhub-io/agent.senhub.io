@@ -1241,6 +1241,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../opamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpAMP remote management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../topology/" class="md-nav__link">
         
   
@@ -1283,10 +1310,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" checked>
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -1304,8 +1331,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3963,10 +3990,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" >
         
           
-          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="">
             
   
   
@@ -3984,8 +4011,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_21">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_22">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4038,6 +4065,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.7.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.7.1
   
 
     
@@ -4781,7 +4836,7 @@ deployment.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <!-- schema:params:start -->
 <!-- Generated from the probe's schema. Run `make docs-params` after changing it. -->
-<!-- sha256:3640669e5c3ba5ee3fd21ef9e697fc92a743fc7555522b8cc8f09429a4d910e8 -->
+<!-- sha256:391e6f05041b488c8b0aaeb267282a6a8e0244258968564259f3165d68d2c8b9 -->
 
 <table>
 <thead>
@@ -4797,7 +4852,7 @@ deployment.</p>
 <td><code>protocol</code></td>
 <td>In practice</td>
 <td><code>grpc</code></td>
-<td>Listener transport: OTLP/gRPC or OTLP/HTTP protobuf. One of <code>grpc</code>, <code>http</code></td>
+<td>Listener transport: OTLP/gRPC, or OTLP/HTTP with a protobuf or JSON body. One of <code>grpc</code>, <code>http</code></td>
 </tr>
 <tr>
 <td><code>address</code></td>
@@ -5001,6 +5056,16 @@ and gets no host identity.</p>
   no export strategy, <code>unmapped</code> for a metric with an unrecognized data type).
   A rising <code>dropped{reason="no_sink"}</code> means a sender is pushing logs/traces the
   agent has nowhere to relay to.</li>
+<li><strong>Refused requests.</strong> <code>senhub_agent_otlp_receiver_refused_total</code> counts the
+  OTLP/HTTP requests the receiver answered with an error, by <code>signal</code> and
+  <code>reason</code>: <code>bad_body</code> (400), <code>too_large</code> (413), <code>media_type</code> and <code>encoding</code>
+  (415), <code>rate_limited</code> (429), <code>method</code> (405), <code>unauthorized</code> and <code>forbidden</code>.
+  Each refusal is also logged at Warn with its status, reason and the client
+  address, at most once a minute per signal and reason; the next line says how
+  many were left out (<code>suppressed</code>). No body, header or query string is logged.</li>
+<li><strong>Encodings.</strong> OTLP/HTTP accepts <code>application/x-protobuf</code> and
+  <code>application/json</code> (the OTLP JSON encoding), with or without parameters such
+  as <code>; charset=utf-8</code>, and answers in the encoding of the request.</li>
 <li><strong>Join coverage.</strong> <code>senhub_agent_otlp_receiver_received_total</code> counts
   the records relayed and
   <code>senhub_agent_otlp_receiver_received_without_host_id_total</code> those that

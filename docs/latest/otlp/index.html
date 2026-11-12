@@ -16,7 +16,7 @@
         <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../topology/">
+        <link rel="next" href="../opamp/">
       
       
         
@@ -1725,6 +1725,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../opamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpAMP remote management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../topology/" class="md-nav__link">
         
   
@@ -1765,10 +1792,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -1786,8 +1813,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4343,10 +4370,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" >
         
           
-          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="">
             
   
   
@@ -4364,8 +4391,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_21">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_22">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4418,6 +4445,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.7.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.7.1
   
 
     
@@ -5703,13 +5758,17 @@ re-derives it from the authenticated token. <strong>Your agent license does not 
 sending data</strong> — it only governs which paid probes may collect; an unlicensed
 agent can still push over OTLP.</p>
 <h3 id="endpoint-required"><code>endpoint</code> (required)<a class="headerlink" href="#endpoint-required" title="Permanent link">&para;</a></h3>
-<p><code>host:port</code> of the OTLP receiver, without a scheme prefix, for both
-transports. <code>protocol</code> selects the transport: <code>grpc</code> (the default,
-OTLP/gRPC, usual port <strong>4317</strong>) or <code>http</code> (OTLP/HTTP protobuf, usual
-port <strong>4318</strong>). With <code>http</code>, the agent builds the URL itself: <code>https://</code>
-when <code>tls.enabled</code> is true, <code>http://</code> otherwise, then the standard
-<code>/v1/metrics</code>, <code>/v1/logs</code> and <code>/v1/traces</code> paths. There is intentionally <strong>no
-default</strong> for this field — silently shipping data to localhost when
+<p>The endpoint of the OTLP receiver, written either as <code>host:port</code> or as
+<code>http(s)://host:port</code>. Any scheme is stripped before use; when
+<code>tls.enabled</code> is not set, <code>http://</code> disables TLS and <code>https://</code> enables
+it. A scheme that contradicts an explicit <code>tls.enabled</code>, as well as a URL
+path, query, or embedded credentials, is rejected with a configuration
+error. <code>protocol</code> selects the transport: <code>grpc</code> (the default, OTLP/gRPC,
+usual port <strong>4317</strong>) or <code>http</code> (OTLP/HTTP protobuf, usual port <strong>4318</strong>).
+With <code>http</code>, the agent builds the URL itself: <code>https://</code> when
+<code>tls.enabled</code> is true, <code>http://</code> otherwise, then the standard
+<code>/v1/metrics</code>, <code>/v1/logs</code> and <code>/v1/traces</code> paths. There is intentionally
+<strong>no default</strong> for this field — silently shipping data to localhost when
 the operator forgets to set it would be a worse failure mode than
 refusing to start.</p>
 <p>A standby ingress can be listed under <code>fallback_endpoints</code>: the agent prefers
@@ -6662,13 +6721,13 @@ does not close it.</p>
         
         
           
-          <a href="../topology/" class="md-footer__link md-footer__link--next" aria-label="Next: Topology">
+          <a href="../opamp/" class="md-footer__link md-footer__link--next" aria-label="Next: OpAMP remote management">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Topology
+                OpAMP remote management
               </div>
             </div>
             <div class="md-footer__button md-icon">

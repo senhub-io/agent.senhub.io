@@ -1799,6 +1799,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../opamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpAMP remote management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../topology/" class="md-nav__link">
         
   
@@ -1839,10 +1866,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -1860,8 +1887,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4417,10 +4444,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" >
         
           
-          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="">
             
   
   
@@ -4438,8 +4465,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_21">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_22">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4492,6 +4519,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new/0.7.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.7.1
   
 
     
@@ -5715,11 +5770,11 @@ same artifacts:</p>
 redirect, the SenHub one directly — so a copied command cannot go stale.
 Prefer them for a first install. For a build you need to reproduce
 later, pin the version instead:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://github.com/senhub-io/senhub-agent/releases/download/0.6.5/senhub-agent-linux-amd64.zip
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>https://github.com/senhub-io/senhub-agent/releases/download/0.7.1/senhub-agent-linux-amd64.zip
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Release tags carry no <code>v</code> prefix</p>
-<p>The tag is <code>0.6.5</code>, not <code>v0.6.5</code>. A pinned URL built with the <code>v</code>
+<p>The tag is <code>0.7.1</code>, not <code>v0.7.1</code>. A pinned URL built with the <code>v</code>
 returns 404, which reads like a missing file rather than a wrong
 name — this is the single most common reason a direct download fails.</p>
 </div>
@@ -5742,7 +5797,7 @@ tells you what to write instead.</p>
 <p>Every artifact is published with a <a href="https://jedisct1.github.io/minisign/">minisign</a>
 signature next to it. Verify before you run it, especially in an
 automated build:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.6.5
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.7.1
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">BASE</span><span class="o">=</span>https://github.com/senhub-io/senhub-agent/releases/download/<span class="nv">$VERSION</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip"</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$BASE</span><span class="s2">/senhub-agent-linux-amd64.zip.minisig"</span>
@@ -5916,7 +5971,7 @@ for the newest release of each channel; see
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">"http://localhost:8080/health"</span>
 </code></pre></div>
 <p>Expected response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ok"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0.6.5"</span><span class="p">,</span><span class="nt">"uptime"</span><span class="p">:</span><span class="s2">"1m30s"</span><span class="p">,</span><span class="nt">"probes_active"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"ok"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0.7.1"</span><span class="p">,</span><span class="nt">"uptime"</span><span class="p">:</span><span class="s2">"1m30s"</span><span class="p">,</span><span class="nt">"probes_active"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"metrics_cached"</span><span class="p">:</span><span class="mi">12</span><span class="p">}</span>
 </code></pre></div></p>
 <p><img alt="Windows service running" src="../images/installation/windows-service-running.webp" title="Services.msc showing SenHub Agent in Running state" /></p>
 <h3 id="log-file-location">Log file location<a class="headerlink" href="#log-file-location" title="Permanent link">&para;</a></h3>
@@ -6313,7 +6368,9 @@ around.</p>
 <p><code>update</code> installs the version you name, older ones included. Copying
 a version number out of a document downgrades an agent that is
 already ahead of it, so take the number from <code>update --list</code> on the
-host you are updating.</p>
+host you are updating. An MSI-managed Windows install cannot go
+backwards in place, so <code>update</code> refuses an older version there and
+says so; uninstall the agent, then install the older MSI.</p>
 </div>
 <p>On an MSI-managed Windows install, auto-update applies a new signed MSI rather than swapping the binary in place — see the note under <a href="#msi-installer-recommended">MSI installer</a>.</p>
 <h4 id="upgrading-from-the-zip">Upgrading from the ZIP<a class="headerlink" href="#upgrading-from-the-zip" title="Permanent link">&para;</a></h4>

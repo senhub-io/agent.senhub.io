@@ -1241,6 +1241,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../opamp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpAMP remote management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../topology/" class="md-nav__link">
         
   
@@ -1283,10 +1310,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" checked>
         
           
-          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="">
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="">
             
   
   
@@ -1304,8 +1331,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_19">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_20">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3871,10 +3898,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" >
         
           
-          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="">
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="">
             
   
   
@@ -3892,8 +3919,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_21">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_22">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3946,6 +3973,34 @@
     
   
     Next (unreleased)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whats-new/0.7.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.7.1
   
 
     
@@ -5845,7 +5900,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.jobs.by_subsystem</code></td>
 <td><code>ibmi.jobs.count_by_subsystem</code></td>
-<td subsystem="subsystem">Jobs in</td>
+<td subsystem>Jobs in</td>
 <td>#</td>
 <td>Active jobs running in this subsystem</td>
 </tr>
@@ -5859,112 +5914,112 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.job.cpu.utilization</code></td>
 <td><code>ibmi.job.elapsed_cpu_percent</code></td>
-<td job_name="job_name">CPU % —</td>
+<td job_name>CPU % —</td>
 <td>%</td>
 <td>Share of CPU attributed to this job since the previous collection; the statistics are reset on every collection, so this is the collection interval and not the time since the connection opened</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.cpu.elapsed_time</code></td>
 <td><code>ibmi.job.elapsed_cpu_ms</code></td>
-<td job_name="job_name">Elapsed CPU —</td>
+<td job_name>Elapsed CPU —</td>
 <td>ms</td>
 <td>CPU time this job used since the previous collection; same window as elapsed_cpu_percent</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.cpu.cumulative_time</code></td>
 <td><code>ibmi.job.cpu_time_ms</code></td>
-<td job_name="job_name">Cumulative CPU —</td>
+<td job_name>Cumulative CPU —</td>
 <td>ms</td>
 <td>CPU time this job has used since it started — cumulative, not an interval</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.cpu.delta_time</code></td>
 <td><code>ibmi.job.cpu_time_ms_delta</code></td>
-<td job_name="job_name">CPU Delta —</td>
+<td job_name>CPU Delta —</td>
 <td>ms</td>
 <td>CPU time consumed between two collections, derived from cpu_time_ms</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.cpu.rate</code></td>
 <td><code>ibmi.job.cpu_time_ms_rate_per_sec</code></td>
-<td job_name="job_name">CPU Rate —</td>
+<td job_name>CPU Rate —</td>
 <td>ms/s</td>
 <td>CPU milliseconds consumed per wallclock second — dimensionless ratio when divided by 1000</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.temp_storage</code></td>
 <td><code>ibmi.job.temp_storage_mb</code></td>
-<td job_name="job_name">Temp Storage —</td>
+<td job_name>Temp Storage —</td>
 <td>MB</td>
 <td>Temporary storage currently allocated to this job; a job that grows here without end is the usual sign of a leak</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.disk.io</code></td>
 <td><code>ibmi.job.total_disk_io</code></td>
-<td job_name="job_name">Total Disk I/O —</td>
+<td job_name>Total Disk I/O —</td>
 <td>#</td>
 <td>Disk I/O operations this job has performed since it started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.disk.elapsed_io</code></td>
 <td><code>ibmi.job.elapsed_total_disk_io</code></td>
-<td job_name="job_name">Disk I/O (elapsed) —</td>
+<td job_name>Disk I/O (elapsed) —</td>
 <td>#</td>
 <td>Disk I/O since the previous collection; same window as the other elapsed values</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.page_faults</code></td>
 <td><code>ibmi.job.elapsed_page_faults</code></td>
-<td job_name="job_name">Page Faults —</td>
+<td job_name>Page Faults —</td>
 <td>#</td>
 <td>Page faults since the previous collection; sustained faults point at an undersized memory pool</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.threads</code></td>
 <td><code>ibmi.job.thread_count</code></td>
-<td job_name="job_name">Threads —</td>
+<td job_name>Threads —</td>
 <td>#</td>
 <td>Threads this job is running</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job.priority</code></td>
 <td><code>ibmi.job.run_priority</code></td>
-<td job_name="job_name">Run Priority —</td>
+<td job_name>Run Priority —</td>
 <td>#</td>
 <td>Priority at which this job competes for the processor, 1 highest to 99 lowest — lower is more urgent</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job_queue.active</code></td>
 <td><code>ibmi.job_queue.active_jobs</code></td>
-<td queue_name="queue_name">Active Jobs —</td>
+<td queue_name>Active Jobs —</td>
 <td>#</td>
 <td>Jobs of this queue currently running</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job_queue.held</code></td>
 <td><code>ibmi.job_queue.held_jobs</code></td>
-<td queue_name="queue_name">Held Jobs —</td>
+<td queue_name>Held Jobs —</td>
 <td>#</td>
 <td>Jobs held in this queue; held work does not run until released</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job_queue.released</code></td>
 <td><code>ibmi.job_queue.released_jobs</code></td>
-<td queue_name="queue_name">Released Jobs —</td>
+<td queue_name>Released Jobs —</td>
 <td>#</td>
 <td>Jobs released and waiting to be dispatched from this queue</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job_queue.scheduled</code></td>
 <td><code>ibmi.job_queue.scheduled_jobs</code></td>
-<td queue_name="queue_name">Scheduled Jobs —</td>
+<td queue_name>Scheduled Jobs —</td>
 <td>#</td>
 <td>Jobs in this queue waiting for their scheduled time</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.job_queue.depth</code></td>
 <td><code>ibmi.job_queue.jobs_total</code></td>
-<td queue_name="queue_name">Total Jobs —</td>
+<td queue_name>Total Jobs —</td>
 <td>#</td>
 <td>Jobs of every state in this queue — its depth</td>
 </tr>
@@ -6020,126 +6075,126 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.scheduled_job.last_run_age</code></td>
 <td><code>ibmi.scheduled_job.last_run_age_seconds</code></td>
-<td job_name="job_name">Scheduled Last Run Age —</td>
+<td job_name>Scheduled Last Run Age —</td>
 <td>s</td>
 <td>Time since this scheduled job last ran; the metric to alert on, an entry that stops firing keeps a healthy last status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.scheduled_job.by_status</code></td>
 <td><code>ibmi.scheduled_job.count_by_status</code></td>
-<td status="status">Scheduled Jobs</td>
+<td status>Scheduled Jobs</td>
 <td>#</td>
 <td>Scheduled job entries in this status</td>
 </tr>
 <tr>
 <td>-</td>
 <td><code>ibmi.msgw_job.event</code></td>
-<td job_name="job_name">MSGW —</td>
+<td job_name>MSGW —</td>
 <td>s</td>
 <td>Job in message wait; value = seconds stuck</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.subsystem.active_jobs</code></td>
 <td><code>ibmi.subsystem.active_jobs_count</code></td>
-<td subsystem="subsystem">Active Jobs in</td>
+<td subsystem>Active Jobs in</td>
 <td>#</td>
 <td>Active jobs in this subsystem</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.subsystem.max_active_jobs</code></td>
 <td><code>ibmi.subsystem.max_active_jobs</code></td>
-<td subsystem="subsystem">Max Active Jobs in</td>
+<td subsystem>Max Active Jobs in</td>
 <td>#</td>
 <td>Active jobs this subsystem accepts, as configured — not a measurement</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.memory_pool.size</code></td>
 <td><code>ibmi.memory_pool.defined_size_mb</code></td>
-<td pool_name="pool_name">Pool Size —</td>
+<td pool_name>Pool Size —</td>
 <td>MB</td>
 <td>Size configured for this memory pool</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.memory_pool.threads</code></td>
 <td><code>ibmi.memory_pool.current_threads</code></td>
-<td pool_name="pool_name">Pool Threads —</td>
+<td pool_name>Pool Threads —</td>
 <td>#</td>
 <td>Threads currently eligible to run in this pool</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.memory_pool.ineligible_threads</code></td>
 <td><code>ibmi.memory_pool.ineligible_threads</code></td>
-<td pool_name="pool_name">Pool Ineligible —</td>
+<td pool_name>Pool Ineligible —</td>
 <td>#</td>
 <td>Threads waiting for an activation slot in this pool; a rising count means the pool's activity level is too low for the work</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.memory_pool.current_size</code></td>
 <td><code>ibmi.memory_pool.current_size_mb</code></td>
-<td pool_name="pool_name">Pool Current Size —</td>
+<td pool_name>Pool Current Size —</td>
 <td>MB</td>
 <td>Storage this pool holds now</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.memory_pool.reserved_size</code></td>
 <td><code>ibmi.memory_pool.reserved_size_mb</code></td>
-<td pool_name="pool_name">Pool Reserved Size —</td>
+<td pool_name>Pool Reserved Size —</td>
 <td>MB</td>
 <td>Storage of this pool reserved for the system</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.utilization</code></td>
 <td><code>ibmi.disk.percent_busy</code></td>
-<td unit_number="unit_number">Disk Busy — unit</td>
+<td unit_number>Disk Busy — unit</td>
 <td>%</td>
 <td>Share of time this disk unit was busy since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.read</code></td>
 <td><code>ibmi.disk.data_read_bytes</code></td>
-<td unit_number="unit_number">Disk Read — unit</td>
+<td unit_number>Disk Read — unit</td>
 <td>B</td>
 <td>Bytes read from this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.write</code></td>
 <td><code>ibmi.disk.data_written_bytes</code></td>
-<td unit_number="unit_number">Disk Write — unit</td>
+<td unit_number>Disk Write — unit</td>
 <td>B</td>
 <td>Bytes written to this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.operations</code></td>
 <td><code>ibmi.disk.read_requests</code></td>
-<td unit_number="unit_number">Disk Read Requests — unit</td>
+<td unit_number>Disk Read Requests — unit</td>
 <td>#</td>
 <td>Read requests served by this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.operations</code></td>
 <td><code>ibmi.disk.write_requests</code></td>
-<td unit_number="unit_number">Disk Write Requests — unit</td>
+<td unit_number>Disk Write Requests — unit</td>
 <td>#</td>
 <td>Write requests served by this disk unit since the previous collection</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.capacity</code></td>
 <td><code>ibmi.disk.capacity_bytes</code></td>
-<td unit_number="unit_number">Disk Capacity — unit</td>
+<td unit_number>Disk Capacity — unit</td>
 <td>B</td>
 <td>Total capacity of this disk unit</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.available</code></td>
 <td><code>ibmi.disk.available_gb</code></td>
-<td unit_number="unit_number">Disk Available — unit</td>
+<td unit_number>Disk Available — unit</td>
 <td>GB</td>
 <td>Space still available on this disk unit</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.disk.space.utilization</code></td>
 <td><code>ibmi.disk.percent_used</code></td>
-<td unit_number="unit_number">Disk Used — unit</td>
+<td unit_number>Disk Used — unit</td>
 <td>%</td>
 <td>Share of this disk unit in use</td>
 </tr>
@@ -6153,7 +6208,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.output_queue.files</code></td>
 <td><code>ibmi.output_queue.files_count</code></td>
-<td queue_name="queue_name">Spool Files —</td>
+<td queue_name>Spool Files —</td>
 <td>#</td>
 <td>Spooled files waiting in this output queue</td>
 </tr>
@@ -6174,7 +6229,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.output_queue.writers</code></td>
 <td><code>ibmi.output_queue.writers_count</code></td>
-<td queue_name="queue_name">Output Queue Writers —</td>
+<td queue_name>Output Queue Writers —</td>
 <td>#</td>
 <td>Writers started against this output queue</td>
 </tr>
@@ -6195,35 +6250,35 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.spooled_file.by_status</code></td>
 <td><code>ibmi.spooled_file.count_by_status</code></td>
-<td status="status">Spooled Files</td>
+<td status>Spooled Files</td>
 <td>#</td>
 <td>Spooled files in this status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.spooled_file.oldest_age_by_status</code></td>
 <td><code>ibmi.spooled_file.oldest_age_seconds_by_status</code></td>
-<td status="status">Oldest Spooled File —</td>
+<td status>Oldest Spooled File —</td>
 <td>s</td>
 <td>Age of the oldest spooled file in this status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_storage.used</code></td>
 <td><code>ibmi.user_storage.used_kb</code></td>
-<td user="user">User Storage —</td>
+<td user>User Storage —</td>
 <td>KB</td>
 <td>Storage owned by this user profile</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_storage.quota</code></td>
 <td><code>ibmi.user_storage.quota_kb</code></td>
-<td user="user">User Quota —</td>
+<td user>User Quota —</td>
 <td>KB</td>
 <td>Storage limit set on this user profile; 0 means no limit</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_storage.utilization</code></td>
 <td><code>ibmi.user_storage.usage_ratio_percent</code></td>
-<td user="user">User Storage Ratio —</td>
+<td user>User Storage Ratio —</td>
 <td>%</td>
 <td>Share of this user's quota in use; absent when no quota is set</td>
 </tr>
@@ -6286,21 +6341,21 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.table.data_size</code></td>
 <td><code>ibmi.table.data_size_bytes</code></td>
-<td table_name="table_name">Table Data Size —</td>
+<td table_name>Table Data Size —</td>
 <td>B</td>
 <td>Data stored in this table</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.table.inserts</code></td>
 <td><code>ibmi.table.inserts_total</code></td>
-<td table_name="table_name">Table Inserts —</td>
+<td table_name>Table Inserts —</td>
 <td>#</td>
 <td>Rows inserted into this table since the statistics started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.table.deletes</code></td>
 <td><code>ibmi.table.deletes_total</code></td>
-<td table_name="table_name">Table Deletes —</td>
+<td table_name>Table Deletes —</td>
 <td>#</td>
 <td>Rows deleted from this table since the statistics started</td>
 </tr>
@@ -6363,42 +6418,42 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.journal.receivers_size</code></td>
 <td><code>ibmi.journal.receivers_total_size_kb</code></td>
-<td journal="journal">Receivers Size —</td>
+<td journal>Receivers Size —</td>
 <td>KB</td>
 <td>Size of every receiver attached to this journal; receivers that are never detached grow without bound</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal.remote_lag</code></td>
 <td><code>ibmi.journal.remote_lag_estimated_seconds</code></td>
-<td journal="journal">Remote Lag (est) —</td>
+<td journal>Remote Lag (est) —</td>
 <td>s</td>
 <td>Estimated delay of the remote journal behind the local one — an estimate, not a value the system reports</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal.receivers</code></td>
 <td><code>ibmi.journal.receivers_count</code></td>
-<td journal="journal">Journal Receivers —</td>
+<td journal>Journal Receivers —</td>
 <td>#</td>
 <td>Receivers attached to this journal over its life</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal.remote_journals</code></td>
 <td><code>ibmi.journal.remote_journals_count</code></td>
-<td journal="journal">Remote Journals —</td>
+<td journal>Remote Journals —</td>
 <td>#</td>
 <td>Remote journals fed by this journal</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal.remote_lag_maximum</code></td>
 <td><code>ibmi.journal.remote_lag_maximum_seconds</code></td>
-<td journal="journal">Remote Journal Max Lag —</td>
+<td journal>Remote Journal Max Lag —</td>
 <td>s</td>
 <td>Longest time a remote journal of this journal has been behind</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal.by_state</code></td>
 <td><code>ibmi.journal.count_by_state</code></td>
-<td state="state">Journals</td>
+<td state>Journals</td>
 <td>#</td>
 <td>Journals in this state</td>
 </tr>
@@ -6412,7 +6467,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.journal_receiver.size</code></td>
 <td><code>ibmi.journal_receiver.size_kb</code></td>
-<td receiver="receiver">Receiver Size —</td>
+<td receiver>Receiver Size —</td>
 <td>KB</td>
 <td>Size of this journal receiver</td>
 </tr>
@@ -6426,21 +6481,21 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.journal_receiver.threshold</code></td>
 <td><code>ibmi.journal_receiver.threshold_kb</code></td>
-<td receiver="receiver">Receiver Threshold —</td>
+<td receiver>Receiver Threshold —</td>
 <td>KB</td>
 <td>Size at which the system raises the receiver threshold message, as configured — not a measurement</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal_receiver.entries</code></td>
 <td><code>ibmi.journal_receiver.entries_count</code></td>
-<td receiver="receiver">Receiver Entries —</td>
+<td receiver>Receiver Entries —</td>
 <td>#</td>
 <td>Journal entries held by this attached receiver</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.journal_receiver.pending_transactions</code></td>
 <td><code>ibmi.journal_receiver.pending_transactions</code></td>
-<td receiver="receiver">Receiver Pending Transactions —</td>
+<td receiver>Receiver Pending Transactions —</td>
 <td>#</td>
 <td>Transactions still open against this attached receiver</td>
 </tr>
@@ -6517,21 +6572,21 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.netstat.connections_by_state</code></td>
 <td><code>ibmi.netstat.connections_by_state</code></td>
-<td tcp_state="tcp_state">TCP</td>
+<td tcp_state>TCP</td>
 <td>#</td>
 <td>TCP connections in this state; a growing TIME-WAIT or CLOSE-WAIT count is the usual first symptom</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.netstat.listener.up</code></td>
 <td><code>ibmi.netstat.listener_up</code></td>
-<td local_port="local_port">Listener — port</td>
+<td local_port>Listener — port</td>
 <td>#</td>
 <td>1 when something is listening on this port</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.netstat.listener.jobs</code></td>
 <td><code>ibmi.netstat.listener_jobs</code></td>
-<td local_port="local_port">Listener Jobs — port</td>
+<td local_port>Listener Jobs — port</td>
 <td>#</td>
 <td>Jobs listening on this port</td>
 </tr>
@@ -6545,42 +6600,42 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.netstat.interface.up</code></td>
 <td><code>ibmi.netstat.interface_up</code></td>
-<td address="address">Interface —</td>
+<td address>Interface —</td>
 <td>#</td>
 <td>1 when this interface is active</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.netstat.interface.mtu</code></td>
 <td><code>ibmi.netstat.interface_mtu</code></td>
-<td address="address">Interface MTU —</td>
+<td address>Interface MTU —</td>
 <td>B</td>
 <td>MTU configured on this interface</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.netstat.interface.by_status</code></td>
 <td><code>ibmi.netstat.interface_count_by_status</code></td>
-<td status="status">Interfaces</td>
+<td status>Interfaces</td>
 <td>#</td>
 <td>Network interfaces in this status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.http_server.threads.active</code></td>
 <td><code>ibmi.http_server.active_threads</code></td>
-<td server_name="server_name">HTTP Active Threads —</td>
+<td server_name>HTTP Active Threads —</td>
 <td>#</td>
 <td>Threads serving requests on this HTTP server</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.http_server.threads.idle</code></td>
 <td><code>ibmi.http_server.idle_threads</code></td>
-<td server_name="server_name">HTTP Idle Threads —</td>
+<td server_name>HTTP Idle Threads —</td>
 <td>#</td>
 <td>Threads idle on this HTTP server; no idle thread left means requests are queuing</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.http_server.responses</code></td>
 <td><code>ibmi.http_server.total_responses</code></td>
-<td server_name="server_name">HTTP Responses —</td>
+<td server_name>HTTP Responses —</td>
 <td>#</td>
 <td>Responses this HTTP server has sent since it started</td>
 </tr>
@@ -6594,28 +6649,28 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.http_server.connections.normal</code></td>
 <td><code>ibmi.http_server.normal_connections</code></td>
-<td server_name="server_name">HTTP Normal Connections —</td>
+<td server_name>HTTP Normal Connections —</td>
 <td>#</td>
 <td>Plain (non-SSL) connections of this server (SERVER_NORMAL_CONNECTIONS)</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.http_server.connections.ssl</code></td>
 <td><code>ibmi.http_server.ssl_connections</code></td>
-<td server_name="server_name">HTTP SSL Connections —</td>
+<td server_name>HTTP SSL Connections —</td>
 <td>#</td>
 <td>SSL connections of this server (SERVER_SSL_CONNECTIONS)</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.http_server.requests</code></td>
 <td><code>ibmi.http_server.total_requests</code></td>
-<td server_name="server_name">HTTP Requests —</td>
+<td server_name>HTTP Requests —</td>
 <td>#</td>
 <td>Requests this server has received since it started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.http_server.rejected</code></td>
 <td><code>ibmi.http_server.rejected_requests</code></td>
-<td server_name="server_name">HTTP Rejected Requests —</td>
+<td server_name>HTTP Rejected Requests —</td>
 <td>#</td>
 <td>Requests this server has rejected since it started</td>
 </tr>
@@ -6650,14 +6705,14 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.user_profile.by_status</code></td>
 <td><code>ibmi.user_profile.count_by_status</code></td>
-<td status="status">Users —</td>
+<td status>Users —</td>
 <td>#</td>
 <td>User profiles in this status</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_profile.by_class</code></td>
 <td><code>ibmi.user_profile.count_by_class</code></td>
-<td user_class="user_class">Users — class</td>
+<td user_class>Users — class</td>
 <td>#</td>
 <td>User profiles of this class; the count of *SECOFR is the one worth watching</td>
 </tr>
@@ -6685,14 +6740,14 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.user_profile.by_special_authority</code></td>
 <td><code>ibmi.user_profile.count_by_special_auth</code></td>
-<td special_auth="special_auth">Users With</td>
+<td special_auth>Users With</td>
 <td>#</td>
 <td>User profiles holding this special authority; a profile holding several counts once for each</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.user_profile.privileged</code></td>
 <td><code>ibmi.user_profile.privileged_status</code></td>
-<td user_name="user_name">Privileged User —</td>
+<td user_name>Privileged User —</td>
 <td>#</td>
 <td>1 when this profile holds *ALLOBJ, *SECADM, *SECOFR or *AUDIT and is enabled, 0 when disabled, -1 for any other status</td>
 </tr>
@@ -6832,7 +6887,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.library_list.by_type</code></td>
 <td><code>ibmi.library_list.count_by_type</code></td>
-<td type="type">Libraries</td>
+<td type>Libraries</td>
 <td>#</td>
 <td>Libraries of this type in the library list</td>
 </tr>
@@ -6846,14 +6901,14 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.license.licensed_users</code></td>
 <td><code>ibmi.license.licensed_user_count</code></td>
-<td product_id="product_id">Licensed Users —</td>
+<td product_id>Licensed Users —</td>
 <td>#</td>
 <td>Users currently licensed for this product</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.license.usage_limit</code></td>
 <td><code>ibmi.license.usage_limit</code></td>
-<td product_id="product_id">License Usage Limit —</td>
+<td product_id>License Usage Limit —</td>
 <td>#</td>
 <td>Users this product's licence allows</td>
 </tr>
@@ -6881,21 +6936,21 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.ptf_group.installed</code></td>
 <td><code>ibmi.ptf_group.installed</code></td>
-<td group="group">PTF Group —</td>
+<td group>PTF Group —</td>
 <td>#</td>
 <td>1 when this PTF group is installed at the level the system expects</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.ptf_group.level</code></td>
 <td><code>ibmi.ptf_group.level</code></td>
-<td group="group">PTF Group Level —</td>
+<td group>PTF Group Level —</td>
 <td>#</td>
 <td>Level of this PTF group as installed; compare against the level IBM publishes</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.ptf_group.by_status</code></td>
 <td><code>ibmi.ptf_group.count_by_status</code></td>
-<td status="status">PTF Groups</td>
+<td status>PTF Groups</td>
 <td>#</td>
 <td>PTF groups in this status</td>
 </tr>
@@ -6909,7 +6964,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.watch.session_active</code></td>
 <td><code>ibmi.watch.session_active</code></td>
-<td session_id="session_id">Watch Session —</td>
+<td session_id>Watch Session —</td>
 <td>#</td>
 <td>1 when this watch session is running</td>
 </tr>
@@ -6923,7 +6978,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.watch.session_age</code></td>
 <td><code>ibmi.watch.session_age_seconds</code></td>
-<td session_id="session_id">Watch Session Age —</td>
+<td session_id>Watch Session Age —</td>
 <td>s</td>
 <td>Time since this watch session started</td>
 </tr>
@@ -6944,14 +6999,14 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.authority_collection.user_entries</code></td>
 <td><code>ibmi.authority_collection.entries_by_user</code></td>
-<td user="user">Authority Entries —</td>
+<td user>Authority Entries —</td>
 <td>#</td>
 <td>Authority checks recorded for this user (top 200 users)</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.authority_collection.user_failed_checks</code></td>
 <td><code>ibmi.authority_collection.failed_checks_by_user</code></td>
-<td user="user">Authority Failed Checks —</td>
+<td user>Authority Failed Checks —</td>
 <td>#</td>
 <td>Recorded authority checks this user did not pass (top 200 users)</td>
 </tr>
@@ -6965,63 +7020,63 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.jvm.threads</code></td>
 <td><code>ibmi.jvm.thread_count</code></td>
-<td job_name="job_name">JVM Threads —</td>
+<td job_name>JVM Threads —</td>
 <td>#</td>
 <td>Java threads of this JVM</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.gc.cumulative_time</code></td>
 <td><code>ibmi.jvm.gc_time_ms</code></td>
-<td job_name="job_name">JVM GC Time —</td>
+<td job_name>JVM GC Time —</td>
 <td>ms</td>
 <td>Time this JVM has spent in garbage collection since it started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.gc.cycles</code></td>
 <td><code>ibmi.jvm.gc_cycles_total</code></td>
-<td job_name="job_name">JVM GC Cycles —</td>
+<td job_name>JVM GC Cycles —</td>
 <td>#</td>
 <td>Garbage collection cycles this JVM has run since it started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.heap.initial</code></td>
 <td><code>ibmi.jvm.heap_initial_bytes</code></td>
-<td job_name="job_name">JVM Initial Heap —</td>
+<td job_name>JVM Initial Heap —</td>
 <td>B</td>
 <td>Heap size this JVM started with, as configured — not a measurement</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.heap.current</code></td>
 <td><code>ibmi.jvm.heap_current_bytes</code></td>
-<td job_name="job_name">JVM Current Heap —</td>
+<td job_name>JVM Current Heap —</td>
 <td>B</td>
 <td>Heap this JVM currently has allocated</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.heap.used</code></td>
 <td><code>ibmi.jvm.heap_in_use_bytes</code></td>
-<td job_name="job_name">JVM Heap In Use —</td>
+<td job_name>JVM Heap In Use —</td>
 <td>B</td>
 <td>Heap this JVM currently uses</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.heap.max</code></td>
 <td><code>ibmi.jvm.heap_max_bytes</code></td>
-<td job_name="job_name">JVM Max Heap —</td>
+<td job_name>JVM Max Heap —</td>
 <td>B</td>
 <td>Largest heap this JVM may grow to, as configured — not a measurement</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.jvm.malloc</code></td>
 <td><code>ibmi.jvm.malloc_bytes</code></td>
-<td job_name="job_name">JVM Native Memory —</td>
+<td job_name>JVM Native Memory —</td>
 <td>B</td>
 <td>Native memory this JVM has allocated outside its heap</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.media_library.device.up</code></td>
 <td><code>ibmi.media_library.device_up</code></td>
-<td device_name="device_name">Media Device Up —</td>
+<td device_name>Media Device Up —</td>
 <td>#</td>
 <td>1 when this media library device is varied on or active, 0 otherwise</td>
 </tr>
@@ -7035,7 +7090,7 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.ptf.by_status</code></td>
 <td><code>ibmi.ptf.count_by_status</code></td>
-<td status="status">PTFs</td>
+<td status>PTFs</td>
 <td>#</td>
 <td>PTFs in this loaded status</td>
 </tr>
@@ -7056,28 +7111,28 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.query_supervisor.user_active</code></td>
 <td><code>ibmi.query_supervisor.active_by_user</code></td>
-<td user="user">Active Queries —</td>
+<td user>Active Queries —</td>
 <td>#</td>
 <td>Queries this user has among the 20 oldest running now</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.query_supervisor.elapsed</code></td>
 <td><code>ibmi.query_supervisor.elapsed_seconds</code></td>
-<td job_name="job_name">Query Elapsed —</td>
+<td job_name>Query Elapsed —</td>
 <td>s</td>
 <td>Time this query has been open</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.query_supervisor.rows_fetched</code></td>
 <td><code>ibmi.query_supervisor.rows_fetched</code></td>
-<td job_name="job_name">Query Rows Fetched —</td>
+<td job_name>Query Rows Fetched —</td>
 <td>#</td>
 <td>Rows this running query has fetched so far</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.query_supervisor.temp_storage</code></td>
 <td><code>ibmi.query_supervisor.temp_storage_mb</code></td>
-<td job_name="job_name">Query Temp Storage —</td>
+<td job_name>Query Temp Storage —</td>
 <td>MB</td>
 <td>Temporary storage this running query holds</td>
 </tr>
@@ -7133,63 +7188,63 @@ series' tags.</p>
 <tr>
 <td><code>senhub.ibmi.collector.success</code></td>
 <td><code>ibmi.collector.success_total</code></td>
-<td collector="collector">Collector Success —</td>
+<td collector>Collector Success —</td>
 <td>#</td>
 <td>Successful runs of this collector since the agent started</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.failure</code></td>
 <td><code>ibmi.collector.failure_total</code></td>
-<td collector="collector">Collector Failure —</td>
+<td collector>Collector Failure —</td>
 <td>#</td>
 <td>Failed runs of this collector; a collector failing alone leaves its metrics absent while the rest keep reporting</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.last_duration</code></td>
 <td><code>ibmi.collector.last_duration_ms</code></td>
-<td collector="collector">Collector Duration —</td>
+<td collector>Collector Duration —</td>
 <td>ms</td>
 <td>How long this collector's last run took</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.last_success_timestamp</code></td>
 <td><code>ibmi.collector.last_success_timestamp</code></td>
-<td collector="collector">Collector Last Success —</td>
+<td collector>Collector Last Success —</td>
 <td>s</td>
 <td>Unix time of this collector's last successful run</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.window_lag</code></td>
 <td><code>ibmi.collector.window_lag</code></td>
-<td collector="collector">Collector Window Lag —</td>
+<td collector>Collector Window Lag —</td>
 <td>s</td>
 <td>How far the collector's read position trails the partition's clock at the end of the cycle; it grows while the collector cannot keep up</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.read_duration</code></td>
 <td><code>ibmi.collector.read_duration</code></td>
-<td collector="collector">Collector Read Span —</td>
+<td collector>Collector Read Span —</td>
 <td>s</td>
 <td>Seconds of log this cycle covered, from the start of the first window read to the read position at the end of the cycle</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.lost</code></td>
 <td><code>ibmi.collector.lost</code></td>
-<td collector="collector">Collector Lost —</td>
+<td collector>Collector Lost —</td>
 <td>s</td>
 <td>Seconds of backlog skipped because the collector fell more than its maximum window behind the partition's clock; the events logged in them are not collected</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.slices</code></td>
 <td><code>ibmi.collector.slices</code></td>
-<td collector="collector">Collector Queries —</td>
+<td collector>Collector Queries —</td>
 <td>#</td>
 <td>Queries issued by this collector during the last cycle</td>
 </tr>
 <tr>
 <td><code>senhub.ibmi.collector.clock_offset</code></td>
 <td><code>ibmi.collector.clock_offset</code></td>
-<td collector="collector">Collector Clock Offset —</td>
+<td collector>Collector Clock Offset —</td>
 <td>s</td>
 <td>Agent clock minus the partition's clock, after the partition's UTC offset is removed; a clock skew between the two machines, not a time zone</td>
 </tr>
