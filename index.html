@@ -396,7 +396,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Open source · 0.6.5</div>
+    <div class="eyebrow">Open source · 0.7.0</div>
     <h1>OpenTelemetry-native agent for <em>hosts and infrastructure</em>.</h1>
     <p class="lede">
       Free and Apache-2.0. Collects host, network, container and vendor metrics
@@ -648,7 +648,19 @@
     </p>
     <div class="news">
       <div class="item now">
-        <div class="ver">0.6.5<small>current</small></div>
+        <div class="ver">0.7.0<small>current</small></div>
+        <div>
+          <h3>OpAMP remote management, and probes in parallel with per-probe timeouts</h3>
+          <p>Probes start in parallel on their own schedule with a configurable
+             <code>collect_timeout</code>, OpAMP remote management (Enterprise) applies
+             signed overlays, and PRTG/Nagios first readings wait for initial data.
+             <b>Interface <code>oper_state</code> values and the <code>process</code>
+             probe's kernel threads change</b>, so read the release note before
+             upgrading a fleet.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ver">0.6.5</div>
         <div>
           <h3>Secrets masked in logs, and Proxmox VE health</h3>
           <p>Passwords, tokens and keys written in clear in log records are masked
@@ -667,16 +679,6 @@
              from a check that could not run. <b>It renames the series that say whether
              a service is running</b>, so read the release note before upgrading a
              fleet.</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="ver">0.6.3</div>
-        <div>
-          <h3>The Azure Container Apps collector, finished</h3>
-          <p>Every application of a subscription discovered and followed with its
-             coverage measured, jobs discovered too, one Azure identity shared across
-             probes, <code>senhub-agent check azure</code> to verify permissions, and
-             official Grafana dashboards.</p>
         </div>
       </div>
     </div>
