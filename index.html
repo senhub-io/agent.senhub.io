@@ -358,6 +358,13 @@
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
+    /* two hyphens touch in SF Mono and read as a long dash */
+    code, pre { letter-spacing: .03em; }
+    code { overflow-wrap: anywhere; }
+    @media (max-width: 420px) {
+      .nav .wrap { gap: 12px; }
+      .nav .links { gap: 12px; font-size: 14px; }
+    }
   </style>
   </head>
   <body>
