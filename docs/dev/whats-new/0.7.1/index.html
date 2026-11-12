@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://agent.senhub.io/docs/dev/whats-new/0.7.0/">
+        <link rel="canonical" href="https://agent.senhub.io/docs/dev/whats-new/0.7.1/">
       
       
         <link rel="prev" href="../next/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>0.7.0 - SenHub Agent</title>
+        <title>0.7.1 - SenHub Agent</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#070-2026-11-09" class="md-skip">
+        <a href="#071-2026-11-14" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0.7.0
+              0.7.1
             
           </span>
         </div>
@@ -3999,7 +3999,7 @@
   <span class="md-ellipsis">
     
   
-    0.7.0
+    0.7.1
   
 
     
@@ -4017,7 +4017,7 @@
   <span class="md-ellipsis">
     
   
-    0.7.0
+    0.7.1
   
 
     
@@ -4755,7 +4755,7 @@
 
 
   
-    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/whats-new/0.7.0.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/senhub-io/senhub-agent/edit/dev/docs/user-guide/docs/whats-new/0.7.1.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -4763,16 +4763,18 @@
   
 
 
-<h1 id="070-2026-11-09">0.7.0 — 2026-11-09<a class="headerlink" href="#070-2026-11-09" title="Permanent link">&para;</a></h1>
-<p>0.7.0 adds OpAMP remote management (Enterprise) for signed configuration overlays, runs probes in parallel with per-probe scheduling offsets and a configurable <code>collect_timeout</code>, makes the first PRTG/Nagios reading wait for initial data, and accepts licences signed by delegated platform keys. It also masks more credential forms in logs, publishes <code>senhub.agent.license.invalid</code> at 0 on validation, fixes root-owned config and licence file permissions on Linux, restarts the Windows service after <code>update</code>, and accepts OTLP/HTTP JSON with logged refusals. Subcommand help flags, OCI container labels, and <code>http(s)://host:port</code> OTLP output endpoints are also supported.</p>
+<h1 id="071-2026-11-14">0.7.1 — 2026-11-14<a class="headerlink" href="#071-2026-11-14" title="Permanent link">&para;</a></h1>
+<p>0.7.1 adds OpAMP remote management (Enterprise) for signed configuration overlays, runs probes in parallel with per-probe scheduling offsets and a configurable <code>collect_timeout</code>, makes the first PRTG/Nagios reading wait for initial data, and accepts licences signed by delegated platform keys. It also masks more credential forms in logs, publishes <code>senhub.agent.license.invalid</code> at 0 on validation, fixes root-owned config and licence file permissions on Linux, restarts the Windows service after <code>update</code>, and accepts OTLP/HTTP JSON with logged refusals. Subcommand help flags, OCI container labels, and <code>http(s)://host:port</code> OTLP output endpoints are also supported.</p>
+<p>0.7.0 was not released: 0.7.1 replaces it, with one more fix to the masking of the configuration the agent shows and sends to a remote management server.</p>
 <div class="rn-filter"></div>
 
 <h2 id="before-you-upgrade">Before you upgrade<a class="headerlink" href="#before-you-upgrade" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong><code>config show --redact</code> masks <code>dsn</code>, <code>uri</code> and <code>Cookie</code> values.</strong> The redacted view, and the configuration sent to a remote management server, now show <code>***</code> for a parameter named <code>dsn</code> or <code>uri</code> (and other names the secret store already seals, such as <code>api_key</code> or <code>private_key</code>) and for an HTTP header named <code>Cookie</code>. A script that read such a value from <code>config show --redact</code> gets <code>***</code>; read it from the file, or use <code>config show --resolved</code> on the host.</li>
 <li><strong>Linux: the <code>process</code> probe no longer reports kernel threads.</strong> Numbered kernel threads (<code>scsi_eh_N</code>, <code>ksoftirqd/N</code>, <code>irq/N-…</code>, <code>kworker</code>…) each became a process name, so the series count grew with CPUs, disks and interrupt lines: on one measured host, more than half of 191 names. They are now left out before the roll-up and <code>top_n</code>, and the agent logs once how many were skipped. Set <code>include_kernel_threads: true</code> to report them as before.</li>
 <li><strong>Network interfaces: <code>oper_state</code> takes the seven RFC 2863 values in snake_case, and the administrative state has its own attribute.</strong> <code>snmp_poll</code> reported <code>lowerLayerDown</code>; it is now <code>lower_layer_down</code>, and <code>not_present</code> joins the set. The host interfaces kept only <code>up</code> and <code>down</code>, folding <code>dormant</code> and <code>lowerlayerdown</code> into <code>down</code>; they now report the same seven values as <code>snmp_poll</code>. When the operational state is not known (no sysfs, on Windows for instance), <code>oper_state</code> is left out instead of being taken from the interface's administrative flag, which now goes to <code>admin_state</code> (<code>up</code> or <code>down</code>). A filter or an alert on <code>oper_state = lowerLayerDown</code>, or on <code>down</code> for a dormant host interface, needs the new value.</li>
 <li><strong><code>prometheus_scrape</code>: a target URL with a user part or a query string gets a new <code>target</code> value.</strong> The <code>target</code> tag and the log lines carried the URL as written, user part and query values included. Such a target is now shown as its scheme, host and path, the query with each value replaced by <code>***</code>, and a short fingerprint in brackets that keeps two such targets apart, for example <code>https://h:9090/federate?match[]=*** [1a2b3c4d]</code>. Its series start under the new <code>target</code> value; a dashboard or an alert that filters on the old value needs the new one. A target without a user part or a query keeps its value.</li>
-<li><strong>Keep the <code>host:port</code> form for OTLP outputs while a rollback is possible.</strong> An OTLP output endpoint written as a URL (<code>http://…</code> or <code>https://…</code>), accepted from 0.7.0, is not understood by 0.6.5 and earlier: there, <code>config check</code> reports it valid but the OTLP output does not start. Switch to the URL form once going back to an earlier version is ruled out.</li>
+<li><strong>Keep the <code>host:port</code> form for OTLP outputs while a rollback is possible.</strong> An OTLP output endpoint written as a URL (<code>http://…</code> or <code>https://…</code>), accepted from 0.7.1, is not understood by 0.6.5 and earlier: there, <code>config check</code> reports it valid but the OTLP output does not start. Switch to the URL form once going back to an earlier version is ruled out.</li>
 </ul>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4810,6 +4812,7 @@
 <li><strong>Console: a probe changed by remote management no longer shows as stopped.</strong> A probe whose interval an OpAMP overlay changed appeared stopped, with the interval of the file, while it collected at the new one. The console now shows its live state and the interval it runs at, marked remote.</li>
 <li><strong>OpAMP (Enterprise): a first start no longer warns that the replay floor was lost.</strong> A newly enrolled agent that had not yet received an overlay logged this warning at every start, since its state file did not exist yet. It now logs one information line; an unreadable state file still warns.</li>
 <li><strong><code>update --list</code> lists each release once, whatever the registry's order.</strong> The registry names its newest release under an alias as well (<code>latest</code>, <code>latest-beta</code>). An entry is now an alias when its name is not a version, and each version keeps the entry named after the release, so the newest beta always appears, once.</li>
+<li><strong>The configuration sent to a remote management server masks connection strings.</strong> With OpAMP enabled, the effective configuration the agent sends to the server showed the value of a <code>dsn</code> or <code>uri</code> parameter (for example a MongoDB or Oracle connection string with its password) when it was written as <code>${env:...}</code> or left unsealed, and the value of a <code>Cookie</code> header. These values are now masked, as in <code>config show --redact</code>.</li>
 </ul>
 
 
