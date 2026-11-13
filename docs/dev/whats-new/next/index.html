@@ -4656,6 +4656,7 @@
 <p>Nothing released yet since 0.7.1. Changes land here as they are merged.</p>
 <ul>
 <li><strong>Windows MSI: a new install updates itself.</strong> The installer wrote <code>auto_update.enabled: false</code>, so an agent installed from the MSI stayed on its first version, although the MSI path is built to apply each new signed MSI. A new install now turns automatic updates on. Pass <code>AUTO_UPDATE=0</code> to <code>msiexec</code> when Intune, SCCM or another tool manages the version. An existing configuration is not changed: an agent installed before keeps its setting; to turn updates on there, set <code>enabled: true</code> under <code>auto_update</code> in <code>%ProgramData%\SenHub\agent.yaml</code>.</li>
+<li><strong><code>config check</code> reports keys of the <code>agent:</code> block that do nothing.</strong> A key the agent does not read inside <code>agent:</code> was dropped without a word: a misspelt <code>licence:</code>, or settings of older versions such as <code>update_check_interval</code>, <code>mode</code> or <code>generated</code>. <code>config check</code> now names each one in a warning (exit code 1), as it already did for top-level and probe keys. Remove them from <code>agent.yaml</code>; nothing else changes, the update check still runs every hour, at start and on every configuration change.</li>
 </ul>
 <div class="rn-filter"></div>
 
