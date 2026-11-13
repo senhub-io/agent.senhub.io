@@ -5384,6 +5384,7 @@
 </tr>
 </tbody>
 </table>
+<p>| <code>console</code> | <code>read_only: false</code>, <code>allow_exec: true</code> | What the console and its API may change. <code>read_only: true</code> refuses every write; <code>allow_exec: false</code> refuses the exec probe and program paths. Set in the file only: neither the console nor the API can edit this block. See <a href="../web-interface/#locking-the-console">Locking the console</a> |</p>
 <p>To change the port or other parameters, edit <code>strategies.d/00-http.yaml</code>. The change is applied automatically without restarting the service.</p>
 <h2 id="https-mode">HTTPS Mode<a class="headerlink" href="#https-mode" title="Permanent link">&para;</a></h2>
 <p>For production environments, enable HTTPS to encrypt API traffic between the agent and your monitoring system.</p>

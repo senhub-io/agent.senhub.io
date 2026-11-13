@@ -929,6 +929,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#locking-the-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locking the console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5064,6 +5075,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#locking-the-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locking the console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5486,6 +5508,58 @@ pollers are unaffected either way. If the key is added while the agent runs, the
 </code></pre></div>
 <p>The older form with the key in the path (<code>/api/{admin-key}/...</code>) still works, so existing scripts are unaffected; it is the form to avoid, because the key then appears in logs along the way. A state-changing request that is authenticated only by the cookie is refused with 403 unless the browser says it comes from the console's own origin (<code>Sec-Fetch-Site</code> or <code>Origin</code>); requests that use the header need no such check. The agent key in PRTG, Nagios and Prometheus URLs is not affected by any of this.</p>
 <p>The header of every page shows the host name, the agent's state, its version and its uptime, so you can see that the agent runs without leaving the page you are on. The menu has five entries: Overview, Probes, Outputs, Settings and Docs. Docs opens this documentation on <a href="https://agent.senhub.io/docs">agent.senhub.io</a>; the API reference embedded in the agent remains available at <code>/web/{admin-key}/docs</code>.</p>
+<h2 id="locking-the-console">Locking the console<a class="headerlink" href="#locking-the-console" title="Permanent link">&para;</a></h2>
+<p>The administration key can change anything the console can. Where the
+configuration is managed elsewhere (Ansible, a deployment pipeline, a
+fleet manager), you can take that away from the console while keeping it
+for reading. Two settings of the <code>http</code> output do it, in
+<code>strategies.d/00-http.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">console</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">read_only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">    </span><span class="c1"># true: the console and its API change nothing</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">allow_exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">    </span><span class="c1"># false: no write may make the agent run a program</span>
+</code></pre></div>
+<p>Both defaults are the behaviour of earlier versions.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>read_only: true</code></td>
+<td>Every route that changes the agent answers <code>403</code> with the code <code>console_read_only</code>: probe create, update and delete, output create, update and delete, the settings (port, bind address, licence), the governance block, log levels and the cache clear. Reading stays open, and so does checking a configuration against its schema and its parser. A test that connects (the output and probe Test buttons, connectivity validation) is refused as well: it would make the agent reach a destination the caller chose. The pages hide their Save, Add, Enable and Delete controls and show a note saying why.</td>
+</tr>
+<tr>
+<td><code>allow_exec: false</code></td>
+<td>Writes work as usual except those that make the agent run a program: a probe of type <code>exec</code>, and a program path such as <code>smartctl_path</code> of <code>smart</code>, <code>ipmitool_path</code> of <code>ipmi</code>, <code>chronyc_path</code>, <code>varnishstat_path</code> or <code>nvidia_smi_path</code> that differs from its default. A path the file already sets stays in place: you can edit the rest of that probe, not the path. The connectivity and metric tests of such a probe are refused too, because they start it. A refused write answers <code>403</code> and says which setting.</td>
+</tr>
+</tbody>
+</table>
+<p>A read-only console also refuses to start a probe the caller describes,
+since that is how a program path would otherwise be reached.</p>
+<p>In every mode, a stored credential stays with the address it was saved
+with. When a connection test, or a save of an existing probe or output,
+changes the address (endpoint, server, URL, host and the like) from what the
+file holds, the stored secrets are not reused: the request must carry the
+credentials itself, otherwise the output test and both saves answer <code>400</code>
+saying so, and the probe test reports the error. The forms show a hint next
+to the stored credential as soon as an address field is edited. With the
+address unchanged, stored secrets are kept as before.</p>
+<p>The <code>console</code> block can only be set in the file. The console and its API
+refuse to change it: a request that rewrites the <code>http</code> output with a
+different block answers <code>403</code> (<code>console_policy_file_only</code>), and one that
+leaves it out keeps what the file holds. Removing the block from the file
+restores the defaults at the next reload. A block that cannot be read, a
+misspelt key or a value that is not <code>true</code> or <code>false</code>, leaves the console
+read-only until it is corrected, and <code>senhub-agent config check</code> reports it
+as an error.</p>
+<p><code>senhub-agent config check</code> prints the effective mode (<code>Console mode:
+full</code>, <code>no-exec</code> or <code>read-only</code>), and <code>senhub-agent doctor</code> repeats it as
+<code>config.console</code>. The running agent also reports it in <code>console</code> of
+<code>/api/{key}/info/system</code>.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Overview is the landing page.</p>
 <p><img alt="Overview" src="../images/web-interface/overview.webp" title="Overview with the getting-started steps, the probe and output summaries, the agent, the licence and the recent events" /></p>
@@ -5611,35 +5685,35 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 </ol>
 <p><img alt="PRTG HTTP Data Advanced sensor" src="../images/web-interface/prtg-sensor-setup.webp" title="PRTG sensor creation dialog pointing to the agent URL" /></p>
 <p>The agent returns metrics in the PRTG JSON format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"prtg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPU Usage"</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.2</span><span class="p">,</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent"</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="p">},</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Memory Available"</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BytesMemory"</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="p">}</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"prtg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPU Usage"</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">45.2</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent"</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Memory Available"</span><span class="p">,</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">        </span><span class="nt">"float"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BytesMemory"</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="p">}</span>
 </code></pre></div>
 <p>Each channel becomes a separate metric in PRTG with its own graph and alerting thresholds.</p>
 <p>PRTG keeps one value per channel name, so no two channels of one result share a name: when two series would, the agent appends the tag value that tells them apart (a CPU number, a container name), or a number when no tag does. PRTG takes at most 50 channels per sensor; narrow a larger result with a tag or <code>metrics=</code> filter.</p>
 <h4 id="finding-available-probe-names">Finding available probe names<a class="headerlink" href="#finding-available-probe-names" title="Permanent link">&para;</a></h4>
 <p>To see which probe names are available for PRTG sensors:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/prtg/probes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/prtg/probes
 </code></pre></div>
 <p>Or open the Sensor URLs tab of the HTTP output in the console.</p>
 <h4 id="filtering-metrics-by-tags">Filtering metrics by tags<a class="headerlink" href="#filtering-metrics-by-tags" title="Permanent link">&para;</a></h4>
 <p>Some probes (Citrix, NetScaler, SNMP) return metrics for multiple components. You can filter by tags:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>http://agent-server:8080/api/{key}/prtg/metrics/{probe}?tags=vserver_name:vs_web
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>http://agent-server:8080/api/{key}/prtg/metrics/{probe}?tags=vserver_name:vs_web
 </code></pre></div>
 <p>This returns only the metrics for the virtual server named <code>vs_web</code>. The Sensor URLs tab builds this filter from the tags the probe reports.</p>
 <h4 id="right-after-the-agent-restarts">Right after the agent restarts<a class="headerlink" href="#right-after-the-agent-restarts" title="Permanent link">&para;</a></h4>
@@ -5649,14 +5723,14 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <ol>
 <li>
 <p>Download the lookups from the agent API:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-o<span class="w"> </span>senhub-prtg-lookups.zip<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/lookups/prtg
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-o<span class="w"> </span>senhub-prtg-lookups.zip<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/lookups/prtg
 </code></pre></div>
    Or use the download link of the Sensor URLs tab.</p>
 </li>
 <li>
 <p>Extract the ZIP file to the PRTG custom lookups directory on your PRTG server:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Expand-Archive</span> <span class="n">senhub-prtg-lookups</span><span class="p">.</span><span class="n">zip</span> <span class="p">`</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  <span class="n">-DestinationPath</span> <span class="s2">"C:\Program Files (x86)\PRTG Network Monitor\lookups\custom\"</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">Expand-Archive</span> <span class="n">senhub-prtg-lookups</span><span class="p">.</span><span class="n">zip</span> <span class="p">`</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  <span class="n">-DestinationPath</span> <span class="s2">"C:\Program Files (x86)\PRTG Network Monitor\lookups\custom\"</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -5665,36 +5739,36 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 </ol>
 <p>After loading the lookups, PRTG sensors display human-readable status values instead of raw numbers.</p>
 <p>A channel that names a lookup the PRTG core does not have turns the whole sensor Warning (PE272). This is why the Check Result channel, which every database, application and active-check probe can report, and the unresolved-target channel of <code>http_check</code> and <code>tcp_dial</code> are off by default. Service channels (<code>systemd</code>, <code>winservices</code>) never use a lookup: they show 1 when the service runs, 0 when it does not, with an error limit below 1 so a stopped service turns the sensor Error. Up to 0.6.3 the "Service X Running" channel of <code>winservices</code> was a plain number, and PRTG cannot add a lookup to a channel it created that way. Install the lookups first, then turn it on in the <code>http</code> output. With the multi-file layout (the default since 0.1.93, and what the MSI and the packages install), add it in <code>strategies.d/00-http.yaml</code>, at the same level as <code>port</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">http</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">prtg</span><span class="p">:</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">check_result_channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">http</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">prtg</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">check_result_channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p>With a single <code>agent.yaml</code> (legacy layout), it goes under the output's <code>params</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">storage</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="nt">prtg</span><span class="p">:</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="nt">check_result_channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">storage</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">prtg</span><span class="p">:</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="nt">check_result_channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p>Before 0.6.5 the agent ignores the key, so it can be added ahead of an automatic update. Only <code>config check</code> on 0.6.4 or earlier reports it, as a parameter the <code>http</code> output does not read.</p>
 <p>The Check Result channel then references the <code>senhub.probe.check.result</code> lookup, and the unresolved-target channel <code>senhub.probe.check.target.unresolved</code>. PRTG applies a channel's lookup and limits only when it creates the channel: a service channel created by 0.6.4 keeps the <code>host.service.running</code> lookup it was created with and has no error limit. Re-add the sensor to get the limit. The ZIP file contains lookup files in the PRTG <code>.ovl</code> format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>senhub-prtg-lookups.zip
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  netscaler.lbvserver.state.ovl
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  netscaler.service.state.ovl
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  netscaler.ha.node.state.ovl
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  ...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>senhub-prtg-lookups.zip
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  netscaler.lbvserver.state.ovl
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  netscaler.service.state.ovl
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  netscaler.ha.node.state.ovl
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  ...
 </code></pre></div>
 <h3 id="nagios">Nagios<a class="headerlink" href="#nagios" title="Permanent link">&para;</a></h3>
 <p>For Nagios, use the Nagios-formatted endpoints:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>http://agent-server:8080/api/{key}/nagios/metrics/{probe-name}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>http://agent-server:8080/api/{key}/nagios/metrics/{probe-name}
 </code></pre></div>
 <p>The response follows the standard Nagios plugin output format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>OK - Probe cpu healthy - 3 metrics collected | CPU_Total_Usage=12.00 CPU_System=5.00 CPU_User=10.00
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>OK - Probe cpu healthy - 3 metrics collected | CPU_Total_Usage=12.00 CPU_System=5.00 CPU_User=10.00
 </code></pre></div>
 <p>Nagios reads the status from the plugin's exit code, which an HTTP answer does not carry. The <code>check_senhub</code> script in <a href="../nagios/#call-the-agent-from-nagios">Call the agent from Nagios</a> turns the first word of the answer into that exit code, with the matching command and service definitions.</p>
 <p>To list available checks:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/nagios/checks
 </code></pre></div>
 <h3 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h3>
 <p>Prometheus scrapes every probe from one URL, <code>/metrics</code> on the agent's port, with the agent key as bearer token. See <a href="../prometheus/">Prometheus</a>.</p>
@@ -5790,60 +5864,60 @@ the <strong>What will be written</strong> panel shows the reference it will get.
 <p>An update sends only what it changes. A <code>PUT</code> on an output without <code>enabled</code> keeps it in its current state, so a parameter edit never re-enables what an operator disabled. A stored secret the body does not mention is kept, for probes and outputs alike; to drop one, send its key with the value <code>null</code>, inside a block or a list of blocks as well.</p>
 <h2 id="useful-api-queries">Useful API queries<a class="headerlink" href="#useful-api-queries" title="Permanent link">&para;</a></h2>
 <h3 id="check-agent-health">Check agent health<a class="headerlink" href="#check-agent-health" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>http://agent-server:8080/health
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>http://agent-server:8080/health
 </code></pre></div>
 <p>The route is public: it takes no key. Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-29T10:15:00+02:00"</span><span class="p">,</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="nt">"memory_mb"</span><span class="p">:</span><span class="w"> </span><span class="mf">104.8</span><span class="p">,</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6.0"</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-29T10:15:00+02:00"</span><span class="p">,</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nt">"memory_mb"</span><span class="p">:</span><span class="w"> </span><span class="mf">104.8</span><span class="p">,</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6.0"</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">}</span>
 </code></pre></div></p>
 <p><code>memory_mb</code> is the agent's resident memory at the time of the request, as the operating system counts it. <code>version</code> is the agent release.</p>
 <h3 id="list-collected-probes">List collected probes<a class="headerlink" href="#list-collected-probes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/probes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/probes
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">"probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"core-sw-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mysql-prod"</span><span class="p">],</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="nt">"probe_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nt">"core-sw-01"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="nt">"mysql-prod"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span><span class="nt">"total_metrics"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">"probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"core-sw-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mysql-prod"</span><span class="p">],</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">"probe_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="nt">"cpu"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="nt">"core-sw-01"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">    </span><span class="nt">"mysql-prod"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">  </span><span class="nt">"total_metrics"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="p">}</span>
 </code></pre></div></p>
 <h3 id="view-system-information">View system information<a class="headerlink" href="#view-system-information" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/system
 </code></pre></div>
 <p>Returns the host name, version, uptime, memory usage, CPU usage, cache statistics, service health and the outputs that are not running.</p>
 <h3 id="check-licence-status">Check licence status<a class="headerlink" href="#check-licence-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/license/status
 </code></pre></div>
 <p>Response:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">"tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-30T23:59:59Z"</span><span class="p">,</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">  </span><span class="nt">"days_remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="nt">"authorized_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"citrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"netscaler"</span><span class="p">,</span><span class="w"> </span><span class="s2">"redfish"</span><span class="p">],</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="nt">"free_tier_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"logicaldisk"</span><span class="p">,</span><span class="w"> </span><span class="s2">"network"</span><span class="p">]</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="nt">"tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro"</span><span class="p">,</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="nt">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-30T23:59:59Z"</span><span class="p">,</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="nt">"days_remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">  </span><span class="nt">"authorized_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"citrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"netscaler"</span><span class="p">,</span><span class="w"> </span><span class="s2">"redfish"</span><span class="p">],</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">  </span><span class="nt">"free_tier_probes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"cpu"</span><span class="p">,</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w"> </span><span class="s2">"logicaldisk"</span><span class="p">,</span><span class="w"> </span><span class="s2">"network"</span><span class="p">]</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="p">}</span>
 </code></pre></div></p>
 <h3 id="otlp-counters">OTLP counters<a class="headerlink" href="#otlp-counters" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/otlp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/info/otlp
 </code></pre></div>
 <p>Returns the counters of the OTLP pipeline shown on the OTLP output page; see <a href="../otlp/#monitoring-the-otlp-pipeline">Monitoring the OTLP pipeline</a>.</p>
 <h3 id="cache-statistics">Cache statistics<a class="headerlink" href="#cache-statistics" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/stats/cache
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>curl<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>key<span class="o">}</span>/stats/cache
 </code></pre></div>
 <p>Returns the number of cached metrics, memory usage, and the cache's time to live.</p>
 <h3 id="clear-the-cache">Clear the cache<a class="headerlink" href="#clear-the-cache" title="Permanent link">&para;</a></h3>
 <p>If you need to force a fresh collection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/admin/cache/clear
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://agent-server:8080/api/<span class="o">{</span>admin-key<span class="o">}</span>/admin/cache/clear
 </code></pre></div>
 <p>This route answers the administration key only; the agent key gets 401. It clears all cached metrics. The next collection cycle repopulates the cache.</p>
 
