@@ -5906,6 +5906,10 @@ for the newest release of each channel; see
 <td><code>1</code> (default) creates a "SenHub Agent Console" desktop shortcut; <code>0</code> skips it</td>
 </tr>
 <tr>
+<td><code>AUTO_UPDATE</code></td>
+<td><code>1</code> (default) turns automatic updates on: the agent applies each new signed MSI itself. <code>0</code> leaves the version to your management tool (Intune, SCCM)</td>
+</tr>
+<tr>
 <td><code>INSTALLFOLDER</code></td>
 <td>Override the install directory (default <code>%ProgramFiles%\SenHub Agent\</code>)</td>
 </tr>
@@ -5938,7 +5942,7 @@ for the newest release of each channel; see
 <p><code>ADOPT=1</code> stops and deletes the existing service, then installs the MSI-managed one. Configuration under <code>%ProgramData%\SenHub\</code> is preserved, so migrating a fleet from a script or auto-update install to MSI management is a single <code>ADOPT=1</code> install. An MSI installed by this MSI upgrades cleanly on its own — <code>ADOPT</code> is only for foreign installs.</p>
 <div class="admonition note">
 <p class="admonition-title">Auto-update on MSI installs</p>
-<p>An MSI-managed install does <strong>not</strong> self-replace its binary. Auto-update stays automatic but applies a <strong>new signed MSI</strong> instead: when an update is available the agent downloads <code>senhub-agent-&lt;version&gt;-amd64.msi</code>, verifies its signature, and runs <code>msiexec /i /qn</code> (a clean MajorUpgrade that preserves <code>%ProgramData%\SenHub\</code> and restarts the service). The agent detects the MSI registry marker and switches to this path automatically; a non-MSI (ZIP / script) install keeps the binary self-replace flow. To manage updates yourself instead, disable <code>auto_update</code> and push new MSIs through your management tool (Intune / SCCM / WSUS).</p>
+<p>An MSI-managed install does <strong>not</strong> self-replace its binary. Auto-update is on by default (<code>AUTO_UPDATE=1</code>) and applies a <strong>new signed MSI</strong> instead: when an update is available the agent downloads <code>senhub-agent-&lt;version&gt;-amd64.msi</code>, verifies its signature, and runs <code>msiexec /i /qn</code> (a clean MajorUpgrade that preserves <code>%ProgramData%\SenHub\</code> and restarts the service). The agent detects the MSI registry marker and switches to this path automatically; a non-MSI (ZIP / script) install keeps the binary self-replace flow. To manage updates yourself instead, install with <code>AUTO_UPDATE=0</code> (or disable <code>auto_update</code> later) and push new MSIs through your management tool (Intune / SCCM / WSUS).</p>
 </div>
 <h3 id="zip-install">ZIP install<a class="headerlink" href="#zip-install" title="Permanent link">&para;</a></h3>
 <p>For a quick local setup you can install from the ZIP and register the service by hand.</p>
