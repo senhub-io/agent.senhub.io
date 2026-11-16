@@ -5075,7 +5075,7 @@ anything about the resource.</p>
 </tr>
 <tr>
 <td><code>aged_out</code></td>
-<td>A cache the source reads forgot the entry, such as an ARP entry</td>
+<td>A cache the source reads forgot the entry. Not sent for <code>network.neighbor</code> any more: a neighbour is retired by its 24-hour liveness interval instead</td>
 <td>Nothing was seen leaving</td>
 </tr>
 <tr>
