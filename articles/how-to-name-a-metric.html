@@ -97,8 +97,7 @@
         background: var(--panel-2); overflow: hidden;
       }
       .shell-bar {
-        font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em;
-        text-transform: uppercase; color: var(--muted);
+        font-size: 13px; font-weight: 650; color: var(--muted);
         padding: 9px 16px; background: var(--panel);
         border-bottom: 1px solid var(--line);
       }
@@ -132,8 +131,8 @@
         overflow-wrap: anywhere; vertical-align: top;
       }
       th {
-        font-family: system-ui, sans-serif; font-size: 11.5px; font-weight: 800;
-        letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+        font-family: system-ui, sans-serif; font-size: 13px; font-weight: 650;
+        color: var(--muted);
       }
       td.was { color: var(--muted); }
       td.job {
@@ -222,7 +221,7 @@
     </p>
 
     <div class="shell">
-      <div class="shell-bar">every token that must be a base unit</div>
+      <div class="shell-bar">Every token that must be a base unit</div>
 <pre><span class="k">amperes bytes celsius grams joules kelvin meters metres seconds volts</span>
 
 <span class="c">// and the ones that are not, with what they must become</span>
@@ -262,7 +261,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </p>
 
     <div class="shell">
-      <div class="shell-bar">what rate() does with a gauge it believes is a counter</div>
+      <div class="shell-bar">What rate() does with a gauge it believes is a counter</div>
 <pre>12  <span class="p">→</span>  9  <span class="p">→</span>  14
 
 <span class="c"># a counter cannot go down, so the drop to 9 is read as a</span>
@@ -283,7 +282,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
 
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>what it meant</th><th>was</th><th>is</th></tr></thead>
+        <thead><tr><th>What it meant</th><th>Was</th><th>Is</th></tr></thead>
         <tbody>
           <tr>
             <td class="job">how many exist</td>
@@ -318,7 +317,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </p>
 
     <div class="shell">
-      <div class="shell-bar">names that grew one commit at a time</div>
+      <div class="shell-bar">Names that grew one commit at a time</div>
 <pre><span class="bad">senhub_redis_cmd_usec_microseconds_total</span>
 <span class="c">  an abbreviation, a non-base unit, and a counter suffix on a gauge</span>
 
@@ -343,7 +342,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </p>
 
     <div class="shell">
-      <div class="shell-bar">an exemption that names itself</div>
+      <div class="shell-bar">An exemption that names itself</div>
 <pre><span class="c">// promlintExemptAbbreviation lists names where promtool reads a</span>
 <span class="c">// token as an abbreviated unit but the token is a vendor word:</span>
 <span class="c">// `ns` is NetScaler's own name for the appliance-wide scope,</span>
@@ -364,7 +363,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </p>
 
     <div class="shell">
-      <div class="shell-bar">the one command</div>
+      <div class="shell-bar">The one command</div>
 <pre><span class="p">$</span> curl -s localhost:9100/metrics | promtool check metrics</pre>
     </div>
 
@@ -380,7 +379,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </p>
 
     <div class="shell">
-      <div class="shell-bar">what the guard says when a name drifts</div>
+      <div class="shell-bar">What the guard says when a name drifts</div>
 <pre><span class="bad">--- FAIL: TestExposedNamesPassPromlint</span>
     veeam/jobs: senhub_veeam_jobs_total: a gauge ends in _total,
       which is reserved for counters
@@ -415,7 +414,7 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
     </p>
 
     <div class="shell">
-      <div class="shell-bar">reading both forms during an upgrade</div>
+      <div class="shell-bar">Reading both forms during an upgrade</div>
 <pre>min by (httpcheck_target) (
   senhub_httpcheck_tls_expiry_seconds / 86400
   <span class="k">or</span> senhub_httpcheck_tls_expiry_days
