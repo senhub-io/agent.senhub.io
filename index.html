@@ -363,6 +363,76 @@
       .nav .wrap { gap: 12px; }
       .nav .links { gap: 12px; font-size: 14px; }
     }
+  .tagline {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 10px;
+  }
+
+  .feeds {
+    margin-top: 22px;
+  }
+
+  .feeds-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .feeds-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .feeds-list img {
+    height: 26px;
+    width: auto;
+  }
+
+  .feeds-list .logo-light,
+  .feeds-list .logo-dark {
+    height: 26px;
+    width: auto;
+  }
+
+  .feed-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .feeds-more {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .logo-dark {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .logo-light {
+      display: none;
+    }
+    :root:not([data-theme="light"]) .logo-dark {
+      display: inline-block;
+    }
+  }
+
+  :root[data-theme="dark"] .logo-light {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .logo-dark {
+    display: inline-block;
+  }
   </style>
   </head>
   <body>
@@ -402,11 +472,38 @@
 <header class="hero">
   <div class="wrap">
     <h1>OpenTelemetry-native agent for hosts and infrastructure.</h1>
+    <p class="tagline">One agent to feed them all.</p>
     <p class="lede">
       Free and Apache-2.0. Collects host, network, container and vendor metrics
       once, models them on OpenTelemetry semantic conventions, and serves them
       natively to the platforms you already run.
     </p>
+    <div class="feeds">
+      <ul class="feeds-list">
+        <li>
+          <img src="/assets/logos/opentelemetry-icon-color.svg" alt="">
+          <span class="feed-name">OpenTelemetry</span>
+        </li>
+        <li>
+          <img src="/assets/logos/prometheus-icon-color.svg" alt="">
+          <span class="feed-name">Prometheus</span>
+        </li>
+        <li>
+          <img class="logo-light" src="/assets/logos/victoriametrics.webp" alt="VictoriaMetrics" width="223" height="60">
+          <img class="logo-dark" src="/assets/logos/victoriametrics-white.webp" alt="VictoriaMetrics" width="223" height="60">
+        </li>
+        <li>
+          <span class="feed-name">Zabbix</span>
+        </li>
+        <li>
+          <span class="feed-name">PRTG</span>
+        </li>
+        <li>
+          <span class="feed-name">Nagios</span>
+        </li>
+      </ul>
+      <p class="feeds-more">Over OTLP, also Elastic, Graylog, Datadog, Dynatrace and other backends that take OpenTelemetry.</p>
+    </div>
     <div class="buttons">
       <a class="btn btn-primary" href="/docs/latest/installation/">Install</a>
       <a class="btn btn-ghost" href="https://github.com/senhub-io/senhub-agent">Source on GitHub</a>
