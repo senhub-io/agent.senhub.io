@@ -363,6 +363,10 @@
       .nav .wrap { gap: 12px; }
       .nav .links { gap: 12px; font-size: 14px; }
     }
+  .hero > .wrap:first-child { text-align: center; }
+  .hero > .wrap:first-child p.lede { margin-inline: auto; }
+  .hero > .wrap:first-child .buttons { justify-content: center; }
+
   .tagline {
     font-size: 22px;
     font-weight: 600;
@@ -377,8 +381,7 @@
   .feeds-list {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 28px;
+    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -387,7 +390,10 @@
   .feeds-list li {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    flex: 0 0 25%;
+    height: 48px;
   }
 
   .feeds-list img {
@@ -405,9 +411,10 @@
     height: 21px;
   }
 
-  .feeds-list .break {
-    flex-basis: 100%;
-    height: 0;
+  @media (max-width: 600px) {
+    .feeds-list li {
+      flex-basis: 50%;
+    }
   }
 
   .feed-name {
@@ -505,7 +512,6 @@
           <img class="logo-light" src="/assets/logos/elasticsearch.svg" alt="Elasticsearch" width="410" height="90">
           <img class="logo-dark" src="/assets/logos/elasticsearch-white.svg" alt="Elasticsearch" width="410" height="90">
         </li>
-        <li class="break" aria-hidden="true"></li>
         <li>
           <img class="logo-sm" src="/assets/logos/zabbix.svg" alt="Zabbix" width="137" height="36">
         </li>
