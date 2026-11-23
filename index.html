@@ -401,6 +401,10 @@
     width: auto;
   }
 
+  .feeds-list img.logo-sm {
+    height: 21px;
+  }
+
   .feeds-list .break {
     flex-basis: 100%;
     height: 0;
@@ -415,7 +419,7 @@
   .feeds-more {
     font-size: 14px;
     color: var(--muted);
-    margin-top: 10px;
+    margin-top: 16px;
   }
 
   .logo-dark {
@@ -503,13 +507,15 @@
         </li>
         <li class="break" aria-hidden="true"></li>
         <li>
-          <span class="feed-name">Zabbix</span>
+          <img class="logo-sm" src="/assets/logos/zabbix.svg" alt="Zabbix" width="137" height="36">
         </li>
         <li>
-          <span class="feed-name">PRTG</span>
+          <img class="logo-light" src="/assets/logos/prtg.svg" alt="Paessler PRTG" width="988" height="285">
+          <img class="logo-dark" src="/assets/logos/prtg-white.svg" alt="Paessler PRTG" width="988" height="285">
         </li>
         <li>
-          <span class="feed-name">Nagios</span>
+          <img class="logo-light logo-sm" src="/assets/logos/nagios.svg" alt="Nagios" width="200" height="48">
+          <img class="logo-dark logo-sm" src="/assets/logos/nagios-white.svg" alt="Nagios" width="200" height="48">
         </li>
       </ul>
       <p class="feeds-more">Over OTLP, also Splunk, Datadog, Dynatrace, New Relic, Graylog, Azure Monitor and any backend that takes OpenTelemetry.</p>
