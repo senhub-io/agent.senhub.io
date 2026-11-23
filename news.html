@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Releases — SenHub Agent</title>
-    <meta name="description" content="Release notes for SenHub Agent — what changed in each version, why, and what breaks." />
+    <meta name="description" content="A short summary of each SenHub Agent release, with a link to its full release note." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/news.html" />
     <meta property="og:title" content="SenHub Agent releases" />
-    <meta property="og:description" content="Release notes for SenHub Agent — what changed in each version, why, and what breaks." />
+    <meta property="og:description" content="A short summary of each SenHub Agent release, with a link to its full release note." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SenHub Agent" />
     <meta property="og:locale" content="en_US" />
@@ -19,7 +19,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SenHub Agent releases" />
-    <meta name="twitter:description" content="Release notes for SenHub Agent — what changed in each version, why, and what breaks." />
+    <meta name="twitter:description" content="A short summary of each SenHub Agent release, with a link to its full release note." />
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
   <style>
   :root {
@@ -119,31 +119,10 @@
   .entry.current .ver { color: var(--accent-dark); }
   .body h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.012em; }
   .body > p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 9px; }
-  .tag {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-    text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
-    background: var(--panel-2); color: var(--muted); border: 1px solid var(--line);
-  }
-  .tag.brk { background: var(--break-bg); color: var(--break); border-color: transparent; }
-  .tag.sec { background: var(--sec-bg); color: var(--sec); border-color: transparent; }
-  .tag.now { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
-  ul.pts { margin: 12px 0 0; padding: 0; list-style: none; }
-  ul.pts li {
-    position: relative; padding-left: 18px; margin-bottom: 7px;
-    font-size: 15px; color: var(--muted); line-height: 1.55;
-  }
-  ul.pts li::before {
-    content: ""; position: absolute; left: 3px; top: 10px;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--cyan);
-  }
-  ul.pts li b { color: var(--ink); font-weight: 650; }
-  .sub {
-    margin-top: 18px; font-size: 11.5px; font-weight: 800;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
-  }
-  .sub.brk { color: var(--break); }
-  .sub + ul.pts { margin-top: 7px; }
+  ul.pts { margin: 8px 0 0; padding-left: 20px; }
+  ul.pts li { margin-bottom: 6px; font-size: 15px; color: var(--muted); line-height: 1.55; }
+  ul.pts li::marker { color: var(--muted); }
+  .body h3 { margin-top: 16px; font-size: 15px; font-weight: 650; color: var(--ink); }
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 13px; background: var(--panel-2); padding: 1px 5px;
@@ -153,7 +132,7 @@
   .older {
     margin-top: 10px; border-top: 1px solid var(--line); padding-top: 26px;
   }
-  .older h3 { font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .older h3 { font-size: 15px; font-weight: 650; color: var(--ink); }
   .grid-old {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 8px; margin-top: 14px;
@@ -225,8 +204,8 @@
   <div class="wrap">
     <h1>Releases</h1>
     <p>
-      What changed in each version, why, and what breaks. Every release ships with a
-      written note. This page is the short form; each entry links to the full one.
+      A short summary of each SenHub Agent release. The full release note, with
+      every change and the upgrade steps, is in the documentation.
     </p>
   </div>
 </header>
@@ -240,152 +219,16 @@
         <div class="date">2026-11-12</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag now">Latest</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
-        <h2>OpAMP remote management, and probes in parallel with per-probe timeouts</h2>
-        <p>
-          0.7.0 was not released: 0.7.1 replaces it, with one more fix to the masking
-          of the configuration the agent shows and sends to a remote management server.
-        </p>
-        <p>
-          The agent can now be managed remotely through OpAMP (Enterprise) with signed
-          configuration overlays, and its probes start in parallel, each on its own
-          schedule with a configurable <code>collect_timeout</code>. PRTG and Nagios
-          first readings wait for initial data, and licences signed by delegated
-          platform keys are accepted.
-        </p>
-
-        <div class="sub brk">Before you upgrade</div>
+        <h2>OpAMP remote management and parallel probes</h2>
+        <p>0.7.0 was not released: 0.7.1 replaces it, with one more fix to the masking of the configuration shown and sent to a management server. The agent can be managed remotely through OpAMP Enterprise with signed overlays. Probes start in parallel and each accepts a <code>collect_timeout</code>. PRTG and Nagios first readings wait for initial data.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Linux: the <code>process</code> probe no longer reports kernel threads.</b>
-             Numbered kernel threads are left out before the roll-up and
-             <code>top_n</code>, and the agent logs once how many were skipped. Set
-             <code>include_kernel_threads: true</code> to report them as before.</li>
-          <li><b><code>config show --redact</code> masks more values.</b> The redacted
-             view, and the configuration sent to a remote management server, show
-             <code>***</code> for every parameter a probe or output declares secret, and
-             for any parameter whose name contains a word such as <code>pass</code>,
-             <code>token</code>, <code>key</code>, <code>cookie</code>, <code>dsn</code>
-             or <code>uri</code>. A URL in any other value loses its user, password and
-             query values. A script that read such a value from
-             <code>config show --redact</code> gets <code>***</code>; read it from the
-             file, or use <code>config show --resolved</code> on the host.</li>
-          <li><b>Every OTLP output header shows as <code>***</code> in the redacted
-             configuration</b>, including non-secret ones such as
-             <code>X-Scope-OrgID</code>. Header names stay visible.</li>
-          <li><b>Logs and the console mask the same values as
-             <code>config show --redact</code>.</b> A masked value is written as
-             <code>***</code> in full, where the log used to keep its first and last
-             characters. The console no longer displays a few non-secret parameters whose
-             name contains a secret word, such as an SNMP v3 <code>auth_protocol</code>;
-             editing a probe keeps their stored values.</li>
-          <li><b>Network interfaces: <code>oper_state</code> takes the seven RFC 2863
-             values in snake_case, and the administrative state moves to
-             <code>admin_state</code>.</b> <code>lowerLayerDown</code> becomes
-             <code>lower_layer_down</code>, <code>not_present</code> joins the set, and
-             host interfaces report the same seven values as <code>snmp_poll</code>. A
-             filter or an alert on the old values needs the new ones.</li>
-          <li><b><code>prometheus_scrape</code>: a target URL with a user part or a query
-             string gets a new <code>target</code> value.</b> It is now shown as scheme,
-             host and path, the query masked with <code>***</code>, and a short
-             fingerprint in brackets. Dashboards and alerts filtering on the old value
-             need the new one.</li>
-          <li><b>Keep the <code>host:port</code> form for OTLP outputs while a rollback is
-             possible.</b> An endpoint written as a URL is accepted from 0.7.1 but not
-             understood by 0.6.5 and earlier. Switch to the URL form once going back to
-             an earlier version is ruled out.</li>
+          <li>Linux <code>process</code> probe no longer reports kernel threads unless <code>include_kernel_threads: true</code> is set.</li>
+          <li><code>config show --redact</code> and remote management mask more values, including any parameter whose name contains <code>pass</code>, <code>token</code>, <code>key</code>, <code>cookie</code>, <code>dsn</code>, or <code>uri</code>.</li>
+          <li>Network interface <code>oper_state</code> now uses the seven RFC 2863 snake_case values and administrative state moves to <code>admin_state</code>.</li>
+          <li>Keep <code>host:port</code> for OTLP outputs while a rollback to 0.6.5 or earlier is possible.</li>
         </ul>
-
-        <div class="sub">New</div>
-        <ul class="pts">
-          <li><b>Remote management through OpAMP (Enterprise).</b> The agent reports its
-             description, health and effective configuration with secrets masked, and
-             applies a signed overlay: switch probes on or off, change their interval
-             and the log level, and with the v2 overlay run whole probes defined by the
-             server. Every overlay is verified against pinned keys and reverted if it
-             fails; local files are never modified. <code>exec</code> probes can be managed only
-             if <code>agent.yaml</code> allows it.</li>
-          <li><b>Probes start in parallel, each at its own offset.</b> Every probe makes
-             its first collection at once, then follows a fixed offset inside its
-             interval, so probes of the same interval no longer fire together and a slow
-             target holds only its own probe. Four self-metrics describe the
-             scheduling: <code>senhub.agent.collect.in_flight</code>,
-             <code>senhub.agent.collect.lag</code>,
-             <code>senhub.agent.collect.overruns</code> and
-             <code>senhub.agent.probe.first_collection.delay</code>.</li>
-          <li><b><code>collect_timeout</code> per probe.</b> A probe entry accepts a
-             duration such as <code>90s</code> that replaces the default collection
-             deadline, shorter or longer. The <code>exec</code> probe stops its command
-             and its whole process group when the deadline ends.</li>
-          <li><b><code>tcp_dial</code> reads the TCP table for a target on its own
-             host.</b> A target resolving to a loopback or host address is checked from
-             the TCP table, with <code>senhub.tcp.listener.up</code>,
-             <code>senhub.tcp.listener.connections</code> and
-             <code>senhub.tcp.listener.peers</code> per port, no connection opened.
-             <code>mode: dial</code> keeps the previous behaviour.</li>
-          <li><b>PRTG and Nagios: the first reading after a start waits for the probe's
-             first collection.</b> In the two minutes after the agent starts, a request
-             for a probe with no data yet waits up to 10 seconds before answering, so a
-             sensor no longer reads PE231 once after a restart when the probe collects
-             within that time.</li>
-          <li><b>Licences signed by a delegated platform key.</b> Besides licences signed
-             by the root key, the agent accepts EdDSA licences signed by a platform key
-             the root key delegated for a month and a set of customers. Existing
-             licences are unaffected.</li>
-          <li><b>Container images carry OCI labels.</b> The images now set
-             <code>org.opencontainers.image.source</code>, <code>.revision</code>,
-             <code>.version</code> and <code>.title</code>, so a registry or scanner can
-             trace an image to its release.</li>
-        </ul>
-
-        <div class="sub">Fixed</div>
-        <ul class="pts">
-          <li><b>Built with Go 1.26.11.</b> A race in <code>net/http</code>'s
-             <code>MaxBytesReader</code> header handling let a crafted request crash an
-             HTTP/1 server; the agent's own HTTP endpoints are served by that package.
-             Upgrading is the fix.</li>
-          <li><b>More credential forms are masked in the agent's logs.</b> URL query
-             values, URL fragments, whole user parts, authorization header values, JSON
-             Web Tokens and cloud access key ids are now masked in every log line, not
-             only in probe start lines.</li>
-          <li><b>The configuration sent to a remote management server masks every
-             secret.</b> With OpAMP enabled, the effective configuration sent to the
-             server could show a password: a connection string under <code>dsn</code> or
-             <code>uri</code> written as <code>${env:...}</code> or left unsealed, a
-             <code>Cookie</code> or session header, a parameter named like
-             <code>pass</code>, or a password in a URL. These values are now masked, as
-             in <code>config show --redact</code>.</li>
-          <li><b><code>senhub.agent.license.invalid</code> reads 0 once a licence
-             validates.</b> The gauge is published at 0 for each reason as soon as a
-             licence validates, so a dashboard can tell a valid licence from an agent
-             that sends nothing.</li>
-          <li><b>Linux: commands run as root leave files the service can read.</b> A
-             rewrite of <code>agent.yaml</code> by root keeps the owner and mode of the
-             file it replaces, and <code>license activate</code> gives
-             <code>license.jwt</code> the owner, group and mode of
-             <code>agent.yaml</code>, up to <code>0640</code>.</li>
-          <li><b>Windows ZIP install: <code>update</code> restarts the service</b> and
-             checks that it runs the new binary, as on Linux.</li>
-          <li><b>OTLP receiver: refused requests are logged and counted, and OTLP/HTTP
-             JSON is accepted.</b> Each refusal is logged at Warn and counted in
-             <code>senhub_agent_otlp_receiver_refused_total</code>, and
-             <code>application/json</code> is accepted for metrics, logs and traces.</li>
-          <li><b>OTLP output: an endpoint written as a URL is accepted.</b> The scheme is
-             stripped and steers TLS when <code>tls.enabled</code> is unset;
-             <code>host:port</code> keeps working unchanged.</li>
-          <li><b>Console: a series counts once its export succeeded, and a probe changed
-             by remote management shows its live state</b> with the interval it runs at,
-             marked remote.</li>
-          <li><b><code>update</code> handles versions and channels correctly.</b>
-             <code>update &lt;version&gt;</code> installs a named older version, an
-             unresolvable version is an error, <code>update latest</code> follows
-             <code>auto_update.include_beta</code>, and <code>--dry-run</code> says what
-             it would do without changing anything.</li>
-          <li><b><code>uninstall</code> and <code>license remove</code> without a
-             terminal fail</b> with a non-zero code instead of exiting 0, so a script no
-             longer takes the agent or the licence for removed. Pass <code>--yes</code>
-             or <code>--force</code> for an unattended run.</li>
-        </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.7.1/">Full release note &rarr;</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.7.1/">Full release note</a></p>
       </div>
     </div>
 
@@ -395,106 +238,16 @@
         <div class="date">2026-10-29</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag brk">Breaking</span><span class="tag">New</span></div>
-        <h2>Secrets masked in logs, and Proxmox VE health</h2>
-        <p>
-          Every log record now goes through a masking step before it leaves the agent,
-          so passwords, tokens and keys that applications write in clear no longer reach
-          the backend. The Proxmox VE probe reads disk, ZFS and backup health, and the
-          console gets a page per probe.
-        </p>
-
-        <div class="sub brk">Before you upgrade</div>
+        <h2>Secrets masked in log records</h2>
+        <p>Every log record now passes through a masking step before it leaves the agent, so passwords and tokens in clear do not reach the backend. The Proxmox VE probe reads disk, ZFS, and backup health. The console gains a page per probe.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Secrets are masked in log records by default.</b> Password, token and
-             key parameters, <code>Authorization</code> headers, URL passwords, bearer
-             tokens, private keys, JSON Web Tokens, AWS keys and the PRTG licence key
-             become <code>***</code>, whatever probe read the record. Masked occurrences
-             are counted in <code>senhub.agent.logs.redacted</code>;
-             <code>logs.redact.preset: false</code> turns the built-in rules off and
-             <code>log_redact: false</code> leaves one probe's records unmasked.</li>
-          <li><b><code>config check</code> warns on keys nothing reads</b>, so a
-             configuration that exited <code>0</code> may exit <code>1</code>. The agent
-             itself starts and ignores these keys, as before.</li>
-          <li><b>PRTG sensors lose the Check Result channel by default.</b> It turned
-             sensors Warning on a PRTG core without the SenHub lookup files.
-             <code>prtg.check_result_channel: true</code> brings it back. Service
-             channels of <code>systemd</code> and <code>winservices</code> show a plain
-             0/1 value. PRTG keeps the channels the agent stops sending: delete them, or
-             set the option before upgrading.</li>
-          <li><b><code>filetail</code> sends a multiline record after 5 seconds of
-             quiet</b> instead of waiting for the next message. A writer that pauses
-             longer mid-message needs a longer <code>multiline.flush_timeout</code>.</li>
-          <li><b><code>process</code> with <code>top_n</code> reports one series per
-             process name</b>, without the PID, so short-lived processes stop creating
-             new series. <code>detail.per_pid: true</code> keeps the per-process
-             series.</li>
-          <li><b>Linux hosts installed with <code>senhub-agent install</code> from 0.6.3
-             or earlier</b>: run <code>refresh-unit</code> once after the upgrade, or the
-             clock synchronisation metrics stay off. Packages replace their unit
-             themselves.</li>
-          <li><b>SNMP devices without a single chassis serial are identified by their
-             LLDP chassis MAC</b>, before the engine id, which configurations copy from
-             switch to switch. Those devices get a new id at their first sweep; the old
-             one and everything under it leave with the reason <code>rekeyed</code>.</li>
-          <li><b>SNMP system routes are left out of the topology</b>: reject and
-             blackhole routes, multicast, loopback and link-local destinations, and
-             local host and broadcast routes. Those an earlier version published leave
-             with the reason <code>excluded_by_config</code> at each device's first
-             complete sweep. <code>include_system_routes: true</code> publishes them
-             again.</li>
-          <li><b>Collectors declared with <code>SENHUB_PROBE_*</code> variables and a
-             Container Apps discovery start following its jobs</b>, with series,
-             entities and console lines. Set <code>SENHUB_PROBE_JOBS_TYPE=none</code>
-             before upgrading to keep the previous behaviour. Configurations written in
-             files are unchanged.</li>
-          <li><b>Also</b>: a monolithic configuration is split into one file per probe, at start or by <code>config migrate</code>; IBM i
-             hosts coming from 0.6.1 or earlier publish about a fifth more series, the
-             Proxmox cluster, HA, replication, Ceph and PBS parts are preview and off by
-             default, and an MSI install goes back only through an uninstall or the
-             older ZIP.</li>
+          <li>Secrets are masked in log records by default; <code>logs.redact.preset: false</code> turns off built-in rules and <code>log_redact: false</code> leaves one probe unmasked.</li>
+          <li><code>config check</code> warns on keys nothing reads, so a configuration that exited 0 may now exit 1.</li>
+          <li>PRTG sensors lose the Check Result channel by default; set <code>prtg.check_result_channel: true</code> to keep it.</li>
+          <li><code>filetail</code> sends a multiline record after 5 seconds of quiet; adjust <code>multiline.flush_timeout</code> if a writer pauses longer.</li>
         </ul>
-
-        <div class="sub">New</div>
-        <ul class="pts">
-          <li><b>Proxmox VE health.</b> Physical disk SMART state and SSD wear, ZFS pool
-             state, usage and fragmentation, the age and outcome of each guest's last
-             backup, guests no backup job covers, and failed tasks, each also sent as an
-             error log record.</li>
-          <li><b>A console page per probe.</b> State and full failure reason, current
-             series, read-only configuration and recent events. The console no longer
-             keeps the administration key in its address.</li>
-          <li><b>SNMP neighbours, on request.</b> With <code>neighbors: true</code>,
-             every MAC a switch learned is published as a neighbour, linked to its
-             port and to the interface that owns it when it is known.</li>
-          <li><b>SNMP interface selection.</b> An <code>interfaces</code> block keeps
-             metric series for the interfaces you choose, by name, type or state, with
-             a cap. The topology keeps every interface.</li>
-          <li><b>Azure Monitor, Azure Log Query and Microsoft Entra ID probes</b>
-             (Pro).</li>
-        </ul>
-
-        <div class="sub">Fixed</div>
-        <ul class="pts">
-          <li><b>Windows data folder restricted</b> to SYSTEM and Administrators: it
-             holds the administration key, the secret store and the licence.</li>
-          <li><b><code>filetail</code> on Windows</b> no longer loses the last lines
-             before a rotation, and picks up the new file within seconds.</li>
-          <li><b><code>exec</code></b> ends a running command and its children when the
-             agent stops.</li>
-          <li><b>An unreachable SNMP device</b> no longer stalls its probe for
-             minutes.</li>
-          <li><b>OTLP relay</b>: relayed agents keep their own identity, and the
-             receiver accepts gzip over HTTP.</li>
-          <li><b>OTLP log exports refused for their size</b> are split down to single
-             records, so a collector with a 1 MiB limit receives every record.</li>
-          <li><b>Private keys written line by line</b> are masked to their END line,
-             also across an agent restart.</li>
-          <li><b><code>ping_gateway</code> and <code>ping_webapp</code></b> report a
-             target that does not answer as 100 % loss on every platform.</li>
-          <li><b><code>secret rm</code></b> exits non-zero when it removes nothing.</li>
-        </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.6.5/">Full release note &rarr;</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.5/">Full release note</a></p>
       </div>
     </div>
 
@@ -504,90 +257,16 @@
         <div class="date">2026-10-18</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag brk">Breaking</span><span class="tag">New</span></div>
-        <h2>The network on the map, and Kubernetes from the node</h2>
-        <p>
-          The agent now draws the network it sits on: routing tables, SNMP discovery
-          over LLDP, and the machines it finds along the way. It also renames the
-          series that say whether a service is running, so read the first half of this
-          entry before upgrading a fleet.
-        </p>
-
-        <div class="sub brk">Before you upgrade</div>
+        <h2>SNMP discovery and Kubernetes from the node</h2>
+        <p>The agent draws the network it sits on: routing tables, SNMP discovery over LLDP, and machines found along the way. Each Kubernetes node reports its kubelet metrics and pod logs. The series that say whether a service is running are renamed.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Service state is one series on both systems.</b>
-             <code>host.service.running</code> replaces
-             <code>systemd.unit.active_state</code> and
-             <code>windows.service.state</code>, keyed the same way on Linux and
-             Windows. An alert or a panel still reading an old name returns nothing at
-             all. <code>detail: full</code> keeps the old families.</li>
-          <li><b><code>systemd</code> and <code>winservices</code> watch fewer
-             services.</b> With no list configured they watch what the supervisor
-             starts by itself, enabled units and automatic services, instead of every
-             unit. A configuration that names its own keeps them.</li>
-          <li><b>Both probes are now added by default</b>, as
-             <code>probes.d/05-services.yaml</code>, with a Swarm probe where a Docker
-             socket exists. Renaming a file to <code>*.disabled</code> is the supported
-             opt-out, and <code>SENHUB_DEFAULT_PROBES=off</code> stops the agent adding
-             either.</li>
-          <li><b>PRTG sensors built on these probes change.</b> A
-             <code>winservices</code> or <code>systemd</code> sensor keeps one channel
-             per watched service and gains a Check Result channel; the per-service
-             Status channels go, along with the services the supervisor does not start
-             by itself. A Windows <code>cpu</code> sensor loses its per-core detail
-             channels and gains two Host Clock channels. PRTG keeps the channels the
-             agent stops sending, without data: delete them from the sensor, or delete
-             the sensor and add it again. Memory, network and disk sensors are
-             unchanged.</li>
-          <li><b>The agent version leaves the metrics.</b> <code>service_version</code>
-             and <code>otel_scope_version</code> disappear from every series, which a
-             Prometheus-like backend recreates once on upgrade. The version stays on
-             logs, traces and <code>senhub.agent.build.info</code>.</li>
-          <li><b>Leaner host defaults, each restorable.</b> The <code>network</code>
-             probe drops container and virtualisation interfaces and the
-             <code>ip</code> label; on Windows the <code>cpu</code> probe drops the
-             per-core detail. Each one comes back with its option.</li>
-          <li><b>SNMP topology is swept every minute</b> instead of every ten, so a
-             link that goes down is on the map within the minute and polled devices
-             answer a few more walks. Devices no longer carry <code>mgmt.ip</code>;
-             their addresses are entities.</li>
-          <li><b><code>SENHUB_HOST_ID</code> is read by the agent itself</b>, where
-             only the container entrypoint used to read it. A host that sets it outside
-             the official image changes identity on upgrade; an invalid value is logged
-             and ignored.</li>
+          <li><code>host.service.running</code> replaces <code>systemd.unit.active_state</code> and <code>windows.service.state</code>; alerts on old names return nothing.</li>
+          <li>With no list configured, <code>systemd</code> and <code>winservices</code> watch only what the supervisor starts by itself: enabled units and automatic services.</li>
+          <li>Both probes are added by default as <code>probes.d/05-services.yaml</code>; rename to <code>*.disabled</code> to opt out.</li>
+          <li>SNMP topology is swept every minute instead of every ten minutes; devices no longer carry <code>mgmt.ip</code>.</li>
         </ul>
-
-        <div class="sub">New</div>
-        <ul class="pts">
-          <li><b>SNMP discovery maps the network from the agent's host.</b> From its
-             seeds, or from the host's own default gateways, it follows LLDP neighbours
-             inside the host's private networks and puts every device it finds on the
-             map with its interfaces, addresses, routes and links. A profile with the
-             community is enough to start.</li>
-          <li><b>Full routing tables.</b> Hosts and SNMP devices publish every route
-             with its type, its origin in the IANA vocabulary, its egress interface and
-             its metric, each next hop of a multipath route on its own. Capped at 500,
-             with <code>senhub.routes.omitted</code> saying how many were left out.</li>
-          <li><b>Kubernetes from the node.</b> Each node becomes a
-             <code>k8s.node</code> entity joined to the host it runs on; the DaemonSet
-             reads kubelet CPU, memory, filesystem and network for the node, its pods
-             and their containers, and follows pod logs from
-             <code>/var/log/pods</code>. Two Grafana dashboards ship with it.</li>
-          <li><b>Every probe says what it checks, and why a check failed.</b> Each
-             series carries the identity of the entity it describes, and
-             <code>senhub.probe.check.result</code> tells a target that is down from a
-             check that could not run: refused credentials, timeout, TLS error,
-             configuration error, unreadable reply, missing permission.</li>
-          <li><b>Windows events carry their message.</b>
-             <code>windows_eventlog</code> sends what Windows renders, not only the
-             provider, the event id and the insertion strings. A low-virtual-memory
-             warning now names the processes that consumed it.</li>
-          <li><b>Also</b>: Redis Sentinel and ACL support, host clock synchronisation,
-             severity derived from nginx and Apache status codes and from more log
-             formats, an opt-in rail for the agent's own warnings, and series metering
-             for Enterprise.</li>
-        </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.6.4/">Full release note &rarr;</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.4/">Full release note</a></p>
       </div>
     </div>
 
@@ -597,25 +276,9 @@
         <div class="date">2026-10-13</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span></div>
-        <h2>The Azure Container Apps collector, finished</h2>
-        <ul class="pts">
-          <li><b>Discovery that reports its own coverage.</b> Every application of a
-             subscription is found and followed, and the probe publishes how many it
-             found, followed and left out, so "26 of 26" is a metric, not a hope.</li>
-          <li><b>Container App Jobs are discovered too</b>, each with its own execution
-             history, and <b>one Azure identity is shared</b> by every Azure probe
-             instead of being repeated per probe.</li>
-          <li><b><code>senhub-agent check azure</code></b>, a read-only command that
-             verifies the token, the subscription, what is visible and each permission,
-             before anything is deployed.</li>
-          <li><b>Log volume per application</b>, counted in bytes of published bodies,
-             so it compares with what Log Analytics bills. Plus two official Grafana
-             dashboards.</li>
-          <li><b>Configuration, secrets and identity on an Azure Files share</b>, and
-             the on-disk queue carried a three-hour backend outage with no log lost.</li>
-        </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.6.3/">Full release note →</a></p>
+        <h2>Azure Container Apps collector</h2>
+        <p>The Azure Container Apps collector covers applications and jobs, reports its own coverage, and shares one Azure identity. The <code>senhub-agent check azure</code> command verifies access before deployment.</p>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.3/">Full release note</a></p>
       </div>
     </div>
 
@@ -625,26 +288,13 @@
         <div class="date">2026-10-08</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag sec">Security</span><span class="tag brk">Breaking</span><span class="tag">New</span></div>
-        <h2>Linux packages, fleet deployment, and a credential leak closed</h2>
+        <h2>Fleet deployment and Linux packages</h2>
+        <p>Signed Linux packages and repositories, with Ansible, Helm, and Podman Quadlet for large deployments. Probes can be declared from environment variables. The agent log masks a credential embedded in a probe's connection URI.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Signed Linux packages and repositories</b>, plus three ways to deploy
-             at scale: an Ansible collection, a Helm chart and a Podman Quadlet unit.
-             Probes can also be declared from environment variables.</li>
-          <li><b>Security, act on this one.</b> A credential embedded in a probe's
-             connection URI (<code>scheme://user:password@host</code>: MongoDB, Redis,
-             PostgreSQL, AMQP) was written in clear to the agent log in 0.6.1 and
-             earlier. 0.6.2 masks it. If you used such URIs: upgrade, delete or rotate
-             the old log files, and change that account's password.</li>
-          <li><b>Breaking:</b> a host's name is now one value everywhere: a
-             <code>host.name</code> override that only reached metrics and logs now
-             also names the host entity and its systemd units. The <code>host.id</code>
-             is unchanged, so the topology node is the same node.</li>
-          <li><b>Lighter at rest.</b> Probe definitions and console pages are parsed
-             when first needed rather than all at start, and five lines that fired on
-             every healthy cycle moved from INFO to DEBUG.</li>
+          <li>A <code>host.name</code> override that only reached metrics and logs now also names the host entity and its systemd units; <code>host.id</code> is unchanged.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.6.2/">Full release note →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.2/">Full release note</a></p>
       </div>
     </div>
 
@@ -654,36 +304,15 @@
         <div class="date">2026-09-30</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag brk">Breaking</span><span class="tag">Fixed</span></div>
         <h2>Metric names and units follow the conventions</h2>
-        <p>
-          A corrective release, but one that renames series. <code>promtool check
-          metrics</code> flagged 0.6.0: some were exported in milliseconds,
-          microseconds, hours or bits per second, where both the Prometheus and the
-          OpenTelemetry rules ask for seconds and bytes.
-        </p>
+        <p>A corrective release that renames series after <code>promtool check metrics</code> flagged 0.6.0. Durations are now in seconds and throughputs in bytes per second. Dashboards and alerts on old names need updating; the full note includes the table.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Durations are now in seconds, throughputs in bytes per second</b>, and
-            a list of gauges loses its <code>.total</code> suffix. Dashboards, alerts
-            and recording rules on the old names need updating, and the note carries the
-            full table.</li>
-          <li><b>Zabbix item keys follow the metric names.</b> Re-run
-            <code>zabbix setup</code> to refresh the templates; items under the old
-            keys stop receiving data and keep their history.</li>
-          <li><b>The Zabbix server is set at install time</b>: <code>ZABBIX_SERVER</code>
-            for the MSI, <code>--zabbix-server</code> for <code>config init</code>, an
-            environment variable for the container. A new host registers and fills in
-            by itself.</li>
-          <li><b>Topology.</b> A route is identified by its destination and its next
-            hop, interfaces carry their subnets and addresses, Windows hosts publish
-            their routes, and SNMP devices no longer flicker.</li>
-          <li><b>The console reports measured values.</b> Resident memory and CPU are
-            now the real figures, with the Go heap shown beside them.</li>
-          <li><b>Watch out on Linux:</b> <code>senhub-agent update</code> run <i>by
-            0.6.0</i> installs the new binary without restarting the service, so finish
-            with <code>sudo systemctl restart senhub-agent</code>.</li>
+          <li>Durations are in seconds and throughputs in bytes per second; a list of gauges loses its <code>.total</code> suffix.</li>
+          <li>Zabbix item keys follow the metric names; re-run <code>zabbix setup</code> to refresh templates.</li>
+          <li>A <code>senhub-agent update</code> run by 0.6.0 installs the binary without restarting; run <code>sudo systemctl restart senhub-agent</code>.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.6.1/">Full release note, with the renamed metrics table →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.1/">Full release note</a></p>
       </div>
     </div>
 
@@ -693,38 +322,16 @@
         <div class="date">2026-09-29</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span><span class="tag brk">Breaking</span></div>
-        <h2>Native Zabbix, a separate administration key, and entities by default</h2>
-        <p>
-          The largest release so far. Read the upgrade list before you take it: ten
-          points, and two of them change data you may already be querying.
-        </p>
+        <h2>Native Zabbix and a separate administration key</h2>
+        <p>The largest release so far. It adds native Zabbix support in both directions, a separate administration key for the console, and entities by default in the container. Read the upgrade list before installing.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Zabbix, both directions.</b> An active agent that registers itself and
-            pushes on <code>:10051</code>, a passive one that answers polls on
-            <code>:10050</code>, TLS and pre-shared keys, and
-            <b>templates generated from the probe definitions</b>, imported for you by
-            <code>senhub-agent zabbix setup</code>. Zabbix 6.0, 7.0 and 8.0.</li>
-          <li><b>A separate administration key.</b> The console and the configuration
-            API no longer answer to the agent key. A bookmarked console address now
-            returns 401: open it with <code>senhub-agent console</code>, or get the
-            address with <code>console --print</code>.</li>
-          <li><b>Entities by default in the container</b>, the agent shows its
-            instance id (<code>senhub-agent key instance-id</code>), and logs and
-            traces from the machine carry its host identity. <code>config check</code>
-            now warns when an OTLP output would send no entity event at all.</li>
-          <li><b>Probes.</b> The counters a native Zabbix agent reports, on Linux and
-            Windows. A new probe for Azure Container Apps jobs. The Veeam probe now
-            says which protected objects get no job status. And every probe page
-            lists every metric it produces.</li>
-          <li><b>Watch out:</b> <code>service.instance.id</code> becomes a UUID and
-            changes once, so series keyed on it restart. An unfiltered
-            <code>process</code> probe keeps only its per-name roll-up. A Nagios value
-            equal to the threshold is now OK. ActiveMQ and Redfish metrics are
-            renamed, and SNMP interface series move to
-            <code>network_interface_name</code>.</li>
+          <li>The console and configuration API no longer answer to the agent key; use <code>senhub-agent console</code> to open it.</li>
+          <li><code>service.instance.id</code> becomes a UUID and changes once, so series keyed on it restart.</li>
+          <li>An unfiltered <code>process</code> probe keeps only its per-name roll-up.</li>
+          <li>ActiveMQ and Redfish metrics are renamed, and SNMP interface series move to <code>network_interface_name</code>.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.6.0/">Full release note, with the upgrade steps →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.6.0/">Full release note</a></p>
       </div>
     </div>
 
@@ -734,10 +341,9 @@
         <div class="date">2026-09-17</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">Fixed</span></div>
         <h2>Container image corrections</h2>
         <p>Fixes to the official container image first published in 0.5.5.</p>
-        <p class="more"><a href="/docs/latest/whats-new/0.5.6/">Full release note →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.5.6/">Full release note</a></p>
       </div>
     </div>
 
@@ -747,21 +353,13 @@
         <div class="date">2026-09-16</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span><span class="tag brk">Breaking</span></div>
-        <h2>A console on the box, and an official container image</h2>
+        <h2>Web console and official container image</h2>
+        <p>A rebuilt web console with a Probes page and Settings page, self-signed TLS by default, and an official container image at <code>ghcr.io/senhub-io/senhub-agent</code>. Operational fixes include config check reading values and uninstall cleanup.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Rebuilt web console.</b> A Probes page with an editor and a Test button,
-            a Settings page for port, bind address and licence.</li>
-          <li><b>Self-signed TLS</b> when no certificate is supplied, so the console is
-            not served in the clear by accident.</li>
-          <li><b>Official container image</b> at <code>ghcr.io/senhub-io/senhub-agent</code>,
-            alongside an OSS variant.</li>
-          <li><b>Operational fixes.</b> <code>agent config check</code> now reads the
-            values, <code>uninstall</code> cleans up even with no unit present, and the
-            agent keeps going when inotify is saturated.</li>
-          <li>Three breaking changes on tag and channel names, see the note.</li>
+          <li>Three changes to tag and channel names can break an existing configuration; the full note lists them.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.5.5/">Full release note →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.5.5/">Full release note</a></p>
       </div>
     </div>
 
@@ -771,16 +369,13 @@
         <div class="date">2026-08-18</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span><span class="tag brk">Breaking</span><span class="tag sec">Security</span></div>
         <h2>Per-container network counters</h2>
+        <p>Container networking counters are read from the container's own network namespace, and containers include restart count, names, images, labels, and state.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>Container networking.</b> Counters read from the container's own network
-            namespace rather than its cgroup, plus restart count, names, images, labels
-            and state, so containers are no longer identified by id alone.</li>
-          <li><b>Hardened unit.</b> <code>/var/lib/senhub-agent</code> is marked
-            non-executable; the unit and the binary now move together.</li>
+          <li>The service unit now marks <code>/var/lib/senhub-agent</code> non-executable; the unit and binary move together.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.5.4/">Full release note →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.5.4/">Full release note</a></p>
       </div>
     </div>
 
@@ -790,19 +385,13 @@
         <div class="date">2026-08-03</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span><span class="tag brk">Breaking</span><span class="tag sec">Security</span></div>
-        <h2>OTLP receives logs and traces; the licence becomes a file</h2>
+        <h2>OTLP logs and traces receiver</h2>
+        <p>The OTLP receiver now accepts logs and traces, not just metrics, with a <code>signals</code> list to choose. The licence moves to its own <code>license.jwt</code> file next to <code>agent.yaml</code>. A free OS Updates probe reports pending updates and whether a reboot is required.</p>
+        <h3>Before you upgrade</h3>
         <ul class="pts">
-          <li><b>OTLP receiver</b> accepts logs and traces, not just metrics; a
-            <code>signals</code> list chooses what it takes.</li>
-          <li><b>Licence in its own file.</b> <code>license.jwt</code> sits next to
-            <code>agent.yaml</code>: hand a customer one file to drop in place.</li>
-          <li><b>OS Updates probe</b> (free, <code>type: os_updates</code>): pending
-            updates, pending security updates, reboot-required status.</li>
-          <li><b>Multi-tenant export.</b> A <code>tenant</code> field stamps
-            <code>X-Scope-OrgID</code> on every signal.</li>
+          <li>The licence now lives in its own file, <code>license.jwt</code>, next to <code>agent.yaml</code>.</li>
         </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.5.3/">Full release note →</a></p>
+        <p class="more"><a href="/docs/latest/whats-new/0.5.3/">Full release note</a></p>
       </div>
     </div>
 
@@ -812,13 +401,9 @@
         <div class="date">2026-07-06</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span></div>
         <h2>Dell PowerStore</h2>
-        <p>
-          A PowerStore probe (commercial) monitors storage arrays over the PowerStore
-          REST API: cluster state, hardware faults and capacity.
-        </p>
-        <p class="more"><a href="/docs/latest/whats-new/0.5.1/">Full release note →</a></p>
+        <p>A PowerStore probe monitors storage arrays over the PowerStore REST API: cluster state, hardware faults, and capacity.</p>
+        <p class="more"><a href="/docs/latest/whats-new/0.5.1/">Full release note</a></p>
       </div>
     </div>
 
@@ -828,19 +413,9 @@
         <div class="date">2026-07-06</div>
       </div>
       <div class="body">
-        <div class="tags"><span class="tag">New</span><span class="tag sec">Security</span></div>
         <h2>Secrets leave the configuration file</h2>
-        <ul class="pts">
-          <li><b>Secret store.</b> <code>${secret:NAME}</code> references resolve at config
-            load time, so passwords and tokens never sit in plaintext on disk.</li>
-          <li><b>OS-native backends</b> chosen per platform: age-keyfile on Linux,
-            systemd-creds as the hardened option.</li>
-          <li><b>CLI.</b> <code>agent secret set/get/list/rm/status</code>: a value is
-            never accepted as a command-line argument.</li>
-          <li><b>Migration.</b> <code>config_version 3</code> seals inline plaintext
-            secrets into the store on boot and rewrites the file.</li>
-        </ul>
-        <p class="more"><a href="/docs/latest/whats-new/0.5.0/">Full release note →</a></p>
+        <p><code>${secret:NAME}</code> references resolve at config load time, so passwords and tokens do not sit in plaintext on disk. OS-native backends are chosen per platform. The CLI manages secrets without accepting values as arguments.</p>
+        <p class="more"><a href="/docs/latest/whats-new/0.5.0/">Full release note</a></p>
       </div>
     </div>
 
