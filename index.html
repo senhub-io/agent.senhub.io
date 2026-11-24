@@ -389,47 +389,34 @@
 
   .feeds-list li {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    flex: 0 0 25%;
-    height: 48px;
+    gap: 4px;
+    flex: 0 0 20%;
+    height: 72px;
   }
 
   .feeds-list img {
-    height: 26px;
+    display: block;
     width: auto;
-  }
-
-  .feeds-list .logo-light,
-  .feeds-list .logo-dark {
-    height: 26px;
-    width: auto;
-  }
-
-  .feeds-list img.logo-sm {
-    height: 21px;
+    max-width: 90%;
   }
 
   @media (max-width: 600px) {
     .feeds-list li {
-      flex-basis: 50%;
+      flex-basis: 33.333%;
     }
   }
 
   .feed-name {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--ink);
   }
 
-  .feeds-more {
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: 16px;
-  }
-
-  .logo-dark {
+  .logo-dark,
+  .feeds-list .logo-dark {
     display: none;
   }
 
@@ -438,7 +425,7 @@
       display: none;
     }
     :root:not([data-theme="light"]) .logo-dark {
-      display: inline-block;
+      display: block;
     }
   }
 
@@ -447,7 +434,7 @@
   }
 
   :root[data-theme="dark"] .logo-dark {
-    display: inline-block;
+    display: block;
   }
   </style>
   </head>
@@ -497,34 +484,63 @@
     <div class="feeds">
       <ul class="feeds-list">
         <li>
-          <img src="/assets/logos/opentelemetry-icon-color.svg" alt="">
-          <span class="feed-name">OpenTelemetry</span>
+          <img src="/assets/logos/opentelemetry.svg" alt="OpenTelemetry" style="height:40px">
         </li>
         <li>
-          <img src="/assets/logos/prometheus-icon-color.svg" alt="">
+          <img src="/assets/logos/prometheus.svg" alt="" style="height:31px">
           <span class="feed-name">Prometheus</span>
         </li>
         <li>
-          <img class="logo-light" src="/assets/logos/victoriametrics.webp" alt="VictoriaMetrics" width="223" height="60">
-          <img class="logo-dark" src="/assets/logos/victoriametrics-white.webp" alt="VictoriaMetrics" width="223" height="60">
+          <img src="/assets/logos/zabbix.svg" alt="Zabbix" style="height:18px">
         </li>
         <li>
-          <img class="logo-light" src="/assets/logos/elasticsearch.svg" alt="Elasticsearch" width="410" height="90">
-          <img class="logo-dark" src="/assets/logos/elasticsearch-white.svg" alt="Elasticsearch" width="410" height="90">
+          <img class="logo-light" src="/assets/logos/prtg.svg" alt="Paessler PRTG" style="height:25px">
+          <img class="logo-dark" src="/assets/logos/prtg-white.svg" alt="Paessler PRTG" style="height:25px">
         </li>
         <li>
-          <img class="logo-sm" src="/assets/logos/zabbix.svg" alt="Zabbix" width="137" height="36">
+          <img class="logo-light" src="/assets/logos/nagios.svg" alt="Nagios" style="height:19px">
+          <img class="logo-dark" src="/assets/logos/nagios-white.svg" alt="Nagios" style="height:19px">
         </li>
         <li>
-          <img class="logo-light" src="/assets/logos/prtg.svg" alt="Paessler PRTG" width="988" height="285">
-          <img class="logo-dark" src="/assets/logos/prtg-white.svg" alt="Paessler PRTG" width="988" height="285">
+          <img class="logo-light" src="/assets/logos/victoriametrics.svg" alt="VictoriaMetrics" style="height:31px">
+          <img class="logo-dark" src="/assets/logos/victoriametrics-white.svg" alt="VictoriaMetrics" style="height:31px">
         </li>
         <li>
-          <img class="logo-light logo-sm" src="/assets/logos/nagios.svg" alt="Nagios" width="200" height="48">
-          <img class="logo-dark logo-sm" src="/assets/logos/nagios-white.svg" alt="Nagios" width="200" height="48">
+          <img class="logo-light" src="/assets/logos/elasticsearch.svg" alt="Elasticsearch" style="height:23px">
+          <img class="logo-dark" src="/assets/logos/elasticsearch-white.svg" alt="Elasticsearch" style="height:23px">
+        </li>
+        <li>
+          <img class="logo-light" src="/assets/logos/splunk.svg" alt="Splunk" style="height:22px">
+          <img class="logo-dark" src="/assets/logos/splunk-white.svg" alt="Splunk" style="height:22px">
+        </li>
+        <li>
+          <img src="/assets/logos/datadog.png" alt="" style="height:31px">
+          <span class="feed-name">Datadog</span>
+        </li>
+        <li>
+          <img class="logo-light" src="/assets/logos/dynatrace.svg" alt="Dynatrace" style="height:49px">
+          <img class="logo-dark" src="/assets/logos/dynatrace-white.svg" alt="Dynatrace" style="height:49px">
+        </li>
+        <li>
+          <img class="logo-light" src="/assets/logos/grafana.svg" alt="Grafana" style="height:45px">
+          <img class="logo-dark" src="/assets/logos/grafana-white.svg" alt="Grafana" style="height:45px">
+        </li>
+        <li>
+          <img src="/assets/logos/newrelic.svg" alt="" style="height:31px">
+          <span class="feed-name">New Relic</span>
+        </li>
+        <li>
+          <img src="/assets/logos/graylog.svg" alt="Graylog" style="height:20px">
+        </li>
+        <li>
+          <img src="/assets/logos/azuremonitor.svg" alt="" style="height:31px">
+          <span class="feed-name">Azure Monitor</span>
+        </li>
+        <li>
+          <img class="logo-light" src="/assets/logos/centreon.png" alt="Centreon" style="height:18px">
+          <img class="logo-dark" src="/assets/logos/centreon-white.png" alt="Centreon" style="height:18px">
         </li>
       </ul>
-      <p class="feeds-more">Over OTLP, also Splunk, Datadog, Dynatrace, New Relic, Graylog, Azure Monitor and any backend that takes OpenTelemetry.</p>
     </div>
     <div class="buttons">
       <a class="btn btn-primary" href="/docs/latest/installation/">Install</a>

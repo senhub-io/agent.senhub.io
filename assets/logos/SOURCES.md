@@ -1,14 +1,27 @@
 # Platform logos
 
-Shown unmodified on the landing page to say which platforms the agent feeds.
-No endorsement by their owners is implied.
+Shown on the landing page to say which platforms the agent feeds, in the
+order and with the files of the SenHub Agent white paper. No endorsement by
+their owners is implied.
+
+Files whose name ends in `-white` are the dark-background version of the
+same logo: only the dark wordmark (or dark segment) is set in white, the
+drawing and its other colours are unchanged.
 
 | File | Owner | Source | Terms |
 |---|---|---|---|
-| `opentelemetry-icon-color.svg` | The Linux Foundation (CNCF) | https://github.com/cncf/artwork/tree/main/projects/opentelemetry | https://www.linuxfoundation.org/trademark-usage |
-| `prometheus-icon-color.svg` | The Linux Foundation (CNCF) | https://github.com/cncf/artwork/tree/main/projects/prometheus | https://www.linuxfoundation.org/trademark-usage |
-| `victoriametrics.webp`, `victoriametrics-white.webp` | VictoriaMetrics | `docs/victoriametrics/logo.webp` and `logo_white.webp` in https://github.com/VictoriaMetrics/VictoriaMetrics, transparent margin trimmed, proportions kept | "VictoriaMetrics Logo Usage Guidelines" in that repository's README |
-| `elasticsearch.svg`, `elasticsearch-white.svg` | Elasticsearch B.V. | Supplied under the SenHub Elastic partnership; the white file is the reversed version for dark backgrounds (wordmark and dark segment in white) | Elastic partner agreement and https://www.elastic.co/legal/trademarks |
-| `zabbix.svg` | Zabbix LLC | https://assets.zabbix.com/img/logo/zabbix.svg, the logo served by https://www.zabbix.com/logo | SenHub Zabbix partnership; https://www.zabbix.com/trademark |
-| `prtg.svg`, `prtg-white.svg` | Paessler GmbH | PaesslerPRTGLogo.svg from https://www.paessler.com/press/media-kit; the white file is the dark-background version (wordmark and needle in white) | SenHub Paessler partnership; media kit terms |
-| `nagios.svg`, `nagios-white.svg` | Nagios Enterprises | NagiosFullLogo_CoreBlack.svg and NagiosFullLogo_CoreWhite.svg from https://www.nagios.com brand assets, viewBox cropped to the drawing, proportions kept | SenHub Nagios partnership; https://www.nagios.com/legal/trademarks/ |
+| `opentelemetry.svg` | The Linux Foundation (CNCF) | Wikimedia Commons | https://www.linuxfoundation.org/trademark-usage |
+| `prometheus.svg` | The Linux Foundation (CNCF) | Wikimedia Commons | https://www.linuxfoundation.org/trademark-usage |
+| `zabbix.svg` | Zabbix LLC | Wikimedia Commons; same mark as https://www.zabbix.com/logo | SenHub Zabbix partnership; https://www.zabbix.com/trademark |
+| `prtg.svg`, `prtg-white.svg` | Paessler GmbH | PaesslerPRTGLogo.svg, https://www.paessler.com/press/media-kit | SenHub Paessler partnership |
+| `nagios.svg`, `nagios-white.svg` | Nagios Enterprises | Wikimedia Commons; same mark as the Nagios brand assets | SenHub Nagios partnership; https://www.nagios.com/legal/trademarks/ |
+| `victoriametrics.svg`, `victoriametrics-white.svg` | VictoriaMetrics | Wikimedia Commons | "VictoriaMetrics Logo Usage Guidelines", https://github.com/VictoriaMetrics/VictoriaMetrics |
+| `elasticsearch.svg`, `elasticsearch-white.svg` | Elasticsearch B.V. | Supplied under the SenHub Elastic partnership | Elastic partner agreement; https://www.elastic.co/legal/trademarks |
+| `splunk.svg`, `splunk-white.svg` | Splunk LLC (Cisco) | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
+| `datadog.png` | Datadog, Inc. | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
+| `dynatrace.svg`, `dynatrace-white.svg` | Dynatrace LLC | Dynatrace_Logo_PMS_Vert, Dynatrace brand kit | Authorised by SenHub (24/11/2026) |
+| `grafana.svg`, `grafana-white.svg` | Grafana Labs | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
+| `newrelic.svg` | New Relic, Inc. | Current green symbol, Simple Icons | Authorised by SenHub (24/11/2026) |
+| `graylog.svg` | Graylog, Inc. | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
+| `azuremonitor.svg` | Microsoft | Azure Monitor icon, Microsoft Azure icon set | Authorised by SenHub (24/11/2026) |
+| `centreon.png`, `centreon-white.png` | Centreon | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
