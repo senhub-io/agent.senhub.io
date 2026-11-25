@@ -375,6 +375,14 @@
     padding: 3px 10px;
   }
   .copy:hover { border-color: var(--cyan-dark); }
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tabs button {
+    font: inherit; font-size: 13px; font-weight: 650; cursor: pointer;
+    color: var(--muted); background: none; border: 0; border-radius: 6px;
+    padding: 3px 10px;
+  }
+  .tabs button[aria-selected="true"] { color: var(--ink); background: var(--panel-2); }
+  .install pre { white-space: pre-wrap; overflow-wrap: anywhere; }
   .install-alt { margin: 10px auto 0; font-size: 14px; color: var(--muted); max-width: 760px; }
 
   .tagline {
@@ -491,15 +499,21 @@
       serves Prometheus, Zabbix, PRTG, Nagios and the other platforms below at the same time.
     </p>
     <div class="shell install">
-      <div class="shell-bar">Install on Linux<button class="copy" type="button" data-target="install-linux">Copy</button></div>
-<pre id="install-linux">curl -fsSLO https://github.com/senhub-io/senhub-agent/releases/latest/download/senhub-agent-linux-amd64.zip
-sudo unzip -o senhub-agent-linux-amd64.zip -d /opt/senhub/bin
-sudo chmod +x /opt/senhub/bin/senhub-agent
-sudo /opt/senhub/bin/senhub-agent install</pre>
+      <div class="shell-bar">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true" data-tab="install-rpm">RHEL, Rocky, Alma</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="install-deb">Debian, Ubuntu</button>
+        </div>
+        <button class="copy" type="button">Copy</button>
+      </div>
+<pre id="install-rpm" class="tab-panel">sudo curl -fsSLo /etc/yum.repos.d/senhub.repo https://packages.senhub.io/rpm/stable/senhub.repo &amp;&amp; sudo dnf install senhub-agent-oss</pre>
+<pre id="install-deb" class="tab-panel" hidden>curl -fsSL https://packages.senhub.io/gpg.key | sudo gpg --dearmor --yes -o /etc/apt/keyrings/senhub.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/senhub.gpg] https://packages.senhub.io/apt stable main" | sudo tee /etc/apt/sources.list.d/senhub.list
+sudo apt update &amp;&amp; sudo apt install senhub-agent-oss</pre>
     </div>
     <p class="install-alt">
-      Needs <code>unzip</code>. On ARM, replace <code>amd64</code> with <code>arm64</code>.
-      Also for <a href="/docs/latest/installation/">Windows</a>,
+      Signed packages, amd64 and arm64. Also for
+      <a href="/docs/latest/installation/">Windows and other Linux distributions</a>,
       <a href="/docs/latest/container/">Docker</a>,
       <a href="/docs/latest/kubernetes-helm/">Kubernetes</a> and
       <a href="/docs/latest/ansible/">Ansible</a>.
@@ -821,12 +835,23 @@ sudo /opt/senhub/bin/senhub-agent install</pre>
 </footer>
 
   <script>
-document.querySelectorAll('button.copy').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var t = document.getElementById(b.dataset.target).textContent;
-    navigator.clipboard.writeText(t).then(function () {
-      b.textContent = 'Copied';
-      setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+document.querySelectorAll('.install').forEach(function (box) {
+  var tabs = box.querySelectorAll('[role="tab"]');
+  var copy = box.querySelector('button.copy');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', on);
+        document.getElementById(o.dataset.tab).hidden = !on;
+      });
+    });
+  });
+  copy.addEventListener('click', function () {
+    var shown = box.querySelector('.tab-panel:not([hidden])');
+    navigator.clipboard.writeText(shown.textContent).then(function () {
+      copy.textContent = 'Copied';
+      setTimeout(function () { copy.textContent = 'Copy'; }, 1500);
     });
   });
 });
