@@ -175,6 +175,15 @@ h2.center{text-align:center}
   align-items:center;justify-content:center;gap:4px;flex:0 0 auto;
 }
 .feed-name{font-size:13px;font-weight:600;color:var(--text-2)}
+.brand-logo{margin:0 0 10px}
+.brand-logo img{display:block}
+.brand-logo .logo-dark{display:none}
+:root[data-theme="dark"] .brand-logo .logo-light{display:none}
+:root[data-theme="dark"] .brand-logo .logo-dark{display:block}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .brand-logo .logo-light{display:none}
+  :root:not([data-theme="light"]) .brand-logo .logo-dark{display:block}
+}
 .feeds-list li.feed-own{width:100%;height:80px}
 .feeds-list li.feed-own img{max-width:none}
 .compat{display:flex;align-items:center;gap:16px;max-width:860px;margin:0 auto 12px;color:var(--text-2);font-size:14px}
@@ -1201,7 +1210,7 @@ helm install senhub-agent oci://ghcr.io/senhub-io/charts/senhub-agent --version 
     <hr class="rule center">
     <div class="cards cards-1">
       <div class="card">
-        <h3>Toise</h3>
+        <h3 class="brand-logo"><img class="logo-light" src="/assets/logos/toise.svg" alt="Toise" style="height:40px"><img class="logo-dark" src="/assets/logos/toise-white.svg" alt="Toise" style="height:40px"></h3>
         <p>The living, queryable map of your infrastructure, built from the entities and relations the agent emits.</p>
         <a href="https://toise.dev/">Visit toise.dev →</a>
       </div>

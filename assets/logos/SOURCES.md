@@ -47,3 +47,4 @@ drawing and its other colours are unchanged.
 | `checkmk.png` | Checkmk | Wikimedia Commons, "CheckMK logo.svg" | Authorised by SenHub (25/11/2026) |
 | `appdynamics.png` | Cisco (AppDynamics) | Wikimedia Commons, "App Dynamics logo.png" | Authorised by SenHub (25/11/2026) |
 | `cloudwatch.png` | Amazon Web Services | Wikimedia Commons, "AWS Simple Icons Monitoring Amazon CloudWatch.svg" (330 px rendering) | Authorised by SenHub (25/11/2026) |
+| `toise.svg`, `toise-white.svg` | Sensor Factory (Toise) | `logo-full.svg` of github.com/toise-dev/toise-dev.github.io, same file as served on toise.dev; anthracite set to white for dark backgrounds | Own brand |
