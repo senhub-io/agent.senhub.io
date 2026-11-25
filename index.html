@@ -175,6 +175,10 @@ h2.center{text-align:center}
   align-items:center;justify-content:center;gap:4px;flex:0 0 auto;
 }
 .feed-name{font-size:13px;font-weight:600;color:var(--text-2)}
+.feeds-list li.feed-own{width:100%;height:80px}
+.feeds-list li.feed-own img{max-width:none}
+.compat{display:flex;align-items:center;gap:16px;max-width:860px;margin:0 auto 12px;color:var(--text-2);font-size:14px}
+.compat::before,.compat::after{content:"";flex:1;height:1px;background:var(--line)}
 .feeds-list img{display:block;width:auto;max-width:90%}
 .feeds-list .logo-dark{display:none}
 :root[data-theme="dark"] .feeds-list .logo-light{display:none}
@@ -773,7 +777,7 @@ helm install senhub-agent oci://ghcr.io/senhub-io/charts/senhub-agent --version 
     <path id="f5-branch-4" d="M688,421 L776,421" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
     <path id="f5-branch-5" d="M688,491 L776,491" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
     <g id="f5-card-0"><rect class="f5-card" x="776" y="115" width="174" height="52" rx="12" fill="var(--card)" stroke="var(--line)"/><image href="/assets/logos/opentelemetry.svg" x="799" y="124" width="128" height="34" preserveAspectRatio="xMidYMid meet"/></g>
-    <g id="f5-card-1"><rect class="f5-card" x="776" y="185" width="174" height="52" rx="12" fill="var(--card)" stroke="var(--line)"/><image class="f5-light" href="/assets/logos/senhub.svg" x="807" y="196" width="112" height="30" preserveAspectRatio="xMidYMid meet"/><image class="f5-dark" href="/assets/logos/senhub-white.svg" x="807" y="196" width="112" height="30" preserveAspectRatio="xMidYMid meet"/></g>
+    <g id="f5-card-1"><rect class="f5-card" x="776" y="185" width="174" height="52" rx="12" fill="var(--card)" stroke="var(--line)"/><image class="f5-light" href="/assets/logos/senhub-platform-light.svg" x="785" y="191" width="156" height="40" preserveAspectRatio="xMidYMid meet"/><image class="f5-dark" href="/assets/logos/senhub-platform-dark.svg" x="785" y="191" width="156" height="40" preserveAspectRatio="xMidYMid meet"/></g>
     <g id="f5-card-2"><rect class="f5-card" x="776" y="255" width="174" height="52" rx="12" fill="var(--card)" stroke="var(--line)"/><image href="/assets/logos/prometheus.svg" x="805" y="268" width="26" height="26" preserveAspectRatio="xMidYMid meet"/><text class="f5-plat-label" x="839" y="286">Prometheus</text></g>
     <g id="f5-card-3"><rect class="f5-card" x="776" y="325" width="174" height="52" rx="12" fill="var(--card)" stroke="var(--line)"/><image href="/assets/logos/zabbix.svg" x="823" y="340.5" width="80" height="21" preserveAspectRatio="xMidYMid meet"/></g>
     <g id="f5-card-4"><rect class="f5-card" x="776" y="395" width="174" height="52" rx="12" fill="var(--card)" stroke="var(--line)"/><image class="f5-light" href="/assets/logos/prtg.svg" x="817" y="407.5" width="92" height="27" preserveAspectRatio="xMidYMid meet"/><image class="f5-dark" href="/assets/logos/prtg-white.svg" x="817" y="407.5" width="92" height="27" preserveAspectRatio="xMidYMid meet"/></g>
@@ -879,7 +883,7 @@ helm install senhub-agent oci://ghcr.io/senhub-io/charts/senhub-agent --version 
     <path d="M292,454 L306,454" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
     <path d="M292,520 L306,520" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round"/>
     <g id="m5-card-0"><rect class="f5-card" x="306" y="168" width="108" height="44" rx="10" fill="var(--card)" stroke="var(--line)"/><image href="/assets/logos/opentelemetry.svg" x="312" y="176" width="96" height="28" preserveAspectRatio="xMidYMid meet"/></g>
-    <g id="m5-card-1"><rect class="f5-card" x="306" y="234" width="108" height="44" rx="10" fill="var(--card)" stroke="var(--line)"/><image class="f5-light" href="/assets/logos/senhub.svg" x="316" y="244" width="88" height="24" preserveAspectRatio="xMidYMid meet"/><image class="f5-dark" href="/assets/logos/senhub-white.svg" x="316" y="244" width="88" height="24" preserveAspectRatio="xMidYMid meet"/></g>
+    <g id="m5-card-1"><rect class="f5-card" x="306" y="234" width="108" height="44" rx="10" fill="var(--card)" stroke="var(--line)"/><image class="f5-light" href="/assets/logos/senhub-platform-compact-light.svg" x="311" y="242.6" width="98" height="26.9" preserveAspectRatio="xMidYMid meet"/><image class="f5-dark" href="/assets/logos/senhub-platform-compact-dark.svg" x="311" y="242.6" width="98" height="26.9" preserveAspectRatio="xMidYMid meet"/></g>
     <g id="m5-card-2"><rect class="f5-card" x="306" y="300" width="108" height="44" rx="10" fill="var(--card)" stroke="var(--line)"/><image href="/assets/logos/prometheus.svg" x="315.5" y="313" width="18" height="18" preserveAspectRatio="xMidYMid meet"/><text class="m5-plat-label" x="338.5" y="326">Prometheus</text></g>
     <g id="m5-card-3"><rect class="f5-card" x="306" y="366" width="108" height="44" rx="10" fill="var(--card)" stroke="var(--line)"/><image href="/assets/logos/zabbix.svg" x="326" y="379" width="68" height="18" preserveAspectRatio="xMidYMid meet"/></g>
     <g id="m5-card-4"><rect class="f5-card" x="306" y="432" width="108" height="44" rx="10" fill="var(--card)" stroke="var(--line)"/><image class="f5-light" href="/assets/logos/prtg.svg" x="322" y="443" width="76" height="22" preserveAspectRatio="xMidYMid meet"/><image class="f5-dark" href="/assets/logos/prtg-white.svg" x="322" y="443" width="76" height="22" preserveAspectRatio="xMidYMid meet"/></g>
@@ -902,7 +906,12 @@ helm install senhub-agent oci://ghcr.io/senhub-io/charts/senhub-agent --version 
 
 
 
+    <p class="compat"><span>Compatible with</span></p>
     <ul class="feeds-list">
+        <li class="feed-own">
+          <img class="logo-light" src="/assets/logos/senhub-platform-light.svg" alt="SenHub Observability Platform" style="height:40px">
+          <img class="logo-dark" src="/assets/logos/senhub-platform-dark.svg" alt="SenHub Observability Platform" style="height:40px">
+        </li>
         <li>
           <img src="/assets/logos/opentelemetry.svg" alt="OpenTelemetry" style="height:40px">
         </li>
