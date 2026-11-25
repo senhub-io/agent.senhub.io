@@ -38,7 +38,7 @@ drawing and its other colours are unchanged.
 | `clickhouse.png` | ClickHouse | Wikimedia Commons, "ClickHouse Logo.svg" | Authorised by SenHub (25/11/2026) |
 | `opensearch.png` | OpenSearch Software Foundation | `assets/brand/SVG/Logo/opensearch_logo_default.svg` and `_darkmode.svg`, github.com/opensearch-project/project-website | Authorised by SenHub (25/11/2026) |
 | `honeycomb.png` | Honeycomb.io | Wikimedia Commons, "Honeycomb.io logo.svg" (white text; dark text for light backgrounds) | Authorised by SenHub (25/11/2026) |
-| `googlecloud.png` | Google | Google Cloud glyph, Simple Icons (CC0), brand blue | Authorised by SenHub (25/11/2026) |
+| `googlecloud.png` | Google | Wikimedia Commons, "Google Cloud logo full color.png", frame and background removed | Authorised by SenHub (25/11/2026) |
 | `ibm.png` | IBM (shown for Instana) | Wikimedia Commons, "IBM logo.svg" | Authorised by SenHub (25/11/2026) |
 | `sumologic.png` | Sumo Logic | Wikimedia Commons, "Sumo Logic Logo.svg" | Authorised by SenHub (25/11/2026) |
 | `coralogix.png` | Coralogix | `coralogix-logo-2025-ink.svg` and `coralogix-logo-2025.svg`, coralogix.com/assets/brand | Authorised by SenHub (25/11/2026) |
