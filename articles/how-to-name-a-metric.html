@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>How to name a metric so tools read it right — SenHub Agent</title>
+    <title>How to name a metric so tools read it right | SenHub Agent</title>
     <meta name="description" content="The naming rules Prometheus and OpenTelemetry share, what a wrong name does downstream, and how we keep the agent from drifting away from them." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/articles/how-to-name-a-metric.html" />
@@ -18,141 +18,10 @@
     <meta name="twitter:title" content="How to name a metric so tools read it right" />
     <meta name="twitter:description" content="The naming rules Prometheus and OpenTelemetry share, and what a wrong name does downstream." />
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
-    <style>
-      :root {
-        --bg: #fbfbfd; --panel: #ffffff; --panel-2: #f5f6fa;
-        --ink: #212529; --muted: #5b6472;
-        --accent: #fcbe36; --accent-dark: #f0ad17; --accent-ink: #212529;
-        --cyan: #00caf6; --cyan-dark: #0091bd; --line: #e7e9ef;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-          --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
-          --ink: #eceef3; --muted: #99a2b1;
-          --accent-dark: #ffd066; --accent-ink: #1a1c21;
-          --cyan-dark: #53d9f7; --line: #2c313a;
-        }
-      }
-      :root[data-theme="dark"] {
-        --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
-        --ink: #eceef3; --muted: #99a2b1;
-        --accent-dark: #ffd066; --accent-ink: #1a1c21;
-        --cyan-dark: #53d9f7; --line: #2c313a;
-      }
+    <link rel="preload" href="/assets/fonts/roboto-slab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/roboto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/pages.css">
 
-      *, *::before, *::after { box-sizing: border-box; }
-      body {
-        margin: 0; background: var(--bg); color: var(--ink);
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
-      }
-      .wrap { max-width: 780px; margin: 0 auto; padding-inline: 24px; }
-      .col { max-width: 660px; }
-      a { color: var(--cyan-dark); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      a:focus-visible { outline: 2px solid var(--cyan-dark); outline-offset: 3px; border-radius: 3px; }
-      h1, h2, h3 { margin: 0; text-wrap: balance; }
-
-      .nav { border-bottom: 1px solid var(--line); background: var(--panel); }
-      .nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 14px; }
-      .brand {
-        display: flex; align-items: center; gap: 10px;
-        font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
-      }
-      .brand:hover { text-decoration: none; }
-      .brand .mark { width: 30px; height: 30px; flex: none; display: block; }
-      .brand .bt span { color: var(--muted); font-weight: 500; }
-      .nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
-      .nav .links .on { color: var(--ink); font-weight: 650; }
-
-      article { padding-block: 48px 20px; }
-      .crumb { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
-      article h1 {
-        font-size: clamp(28px, 4.4vw, 38px); font-weight: 800;
-        letter-spacing: -0.022em; line-height: 1.15;
-      }
-      .meta {
-        margin-top: 14px; font-size: 13.5px; color: var(--muted);
-        font-variant-numeric: tabular-nums;
-        display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
-      }
-      .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
-      .standfirst {
-        margin: 26px 0 0; font-size: 20px; line-height: 1.55; color: var(--muted);
-      }
-      article p { margin: 22px 0 0; }
-      article h2 {
-        margin: 46px 0 0; font-size: 21px; font-weight: 750; letter-spacing: -0.012em;
-      }
-      article h2 + p { margin-top: 12px; }
-      strong { font-weight: 680; }
-      code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.87em; background: var(--panel-2); padding: 1px 5px;
-        border-radius: 4px; border: 1px solid var(--line);
-      }
-
-      .shell {
-        margin-top: 26px; border: 1px solid var(--line); border-radius: 10px;
-        background: var(--panel-2); overflow: hidden;
-      }
-      .shell-bar {
-        font-size: 13px; font-weight: 650; color: var(--muted);
-        padding: 9px 16px; background: var(--panel);
-        border-bottom: 1px solid var(--line);
-      }
-      .shell pre {
-        margin: 0; padding: 14px 16px; overflow-x: auto;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 13px; line-height: 1.65; color: var(--ink);
-      }
-      .shell .p { color: var(--accent-dark); font-weight: 700; }
-      .shell .k { color: var(--cyan-dark); }
-      .shell .c { color: var(--muted); }
-      .shell .bad { color: #c2410c; }
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) .shell .bad { color: #fb923c; }
-      }
-      :root[data-theme="dark"] .shell .bad { color: #fb923c; }
-      .cap { margin: 10px 0 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
-      .shell .cap {
-        margin: 0; padding: 11px 16px 13px;
-        border-top: 1px solid var(--line); background: var(--panel);
-      }
-
-      .tbl-wrap { margin-top: 26px; overflow-x: auto; }
-      table {
-        border-collapse: collapse; width: 100%; font-size: 12.5px;
-        table-layout: fixed;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      }
-      th, td {
-        text-align: left; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--line);
-        overflow-wrap: anywhere; vertical-align: top;
-      }
-      th {
-        font-family: system-ui, sans-serif; font-size: 13px; font-weight: 650;
-        color: var(--muted);
-      }
-      td.was { color: var(--muted); }
-      td.job {
-        font-family: system-ui, sans-serif; font-size: 13.5px; color: var(--muted);
-        width: 23%;
-      }
-      .after {
-        margin-top: 50px; padding-top: 22px; border-top: 1px solid var(--line);
-        font-size: 15px; color: var(--muted);
-      }
-      footer { border-top: 1px solid var(--line); padding-block: 24px 40px; margin-top: 40px; }
-      footer p { margin: 0; font-size: 14px; color: var(--muted); }
-      /* two hyphens touch in SF Mono and read as a long dash */
-      code, pre { letter-spacing: .03em; }
-      code { overflow-wrap: anywhere; }
-      @media (max-width: 420px) {
-        .nav .wrap { gap: 12px; }
-        .nav .links { gap: 12px; font-size: 14px; }
-      }
-    </style>
   </head>
   <body>
 
@@ -173,15 +42,12 @@
   </symbol>
 </svg>
 
-<nav class="nav">
+<nav class="ink">
   <div class="wrap">
-    <a class="brand" href="/">
-      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>
-      <span class="bt">SenHub <span>Agent</span></span>
-    </a>
+    <a class="brand" href="/"><svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>SenHub Agent</a>
     <div class="links">
       <a href="/docs/latest/">Docs</a>
-      <a class="on" href="/articles.html">Articles</a>
+      <a href="/articles.html" aria-current="page">Articles</a>
       <a href="/news.html">Releases</a>
       <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
     </div>
@@ -435,9 +301,42 @@ kilo kibi mega mibi giga gibi tera tebi peta pebi</pre>
   </article>
 </div>
 
-<footer>
+<footer class="ink">
   <div class="wrap">
-    <p><a href="/articles.html">All articles</a> · <a href="/news.html">Releases</a> · <a href="/docs/latest/">Documentation</a></p>
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>SenHub Agent</a>
+      <p>Apache-2.0, by Sensor Factory.</p>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h3>Agent</h3>
+        <ul>
+          <li><a href="/docs/latest/">Documentation</a></li>
+          <li><a href="/docs/latest/installation/">Installation</a></li>
+          <li><a href="/news.html">Releases</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Read</h3>
+        <ul>
+          <li><a href="/articles.html">Articles</a></li>
+          <li><a href="/docs/latest/whats-new/">What's new</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Source</h3>
+        <ul>
+          <li><a href="https://github.com/senhub-io/senhub-agent">GitHub</a></li>
+          <li><a href="/docs/latest/license/">Licence</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>SenHub</h3>
+        <ul>
+          <li><a href="https://toise.dev/">Toise</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </footer>
 
