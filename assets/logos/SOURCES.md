@@ -26,3 +26,4 @@ drawing and its other colours are unchanged.
 | `azuremonitor.svg` | Microsoft | Azure Monitor icon, Microsoft Azure icon set | Authorised by SenHub (24/11/2026) |
 | `centreon.png`, `centreon-white.png` | Centreon | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
 | `senhub-platform-light.svg`, `senhub-platform-dark.svg` | Sensor Factory (SenHub) | Final SenHub Observability Platform logo, version B "Empilé", chosen by Matthieu on 25/11/2026, finalised by the sh-app session | Own brand |
+| `senhub-platform-icon.svg` | Sensor Factory (SenHub) | Square icon of the same logo, used where the logo would be under 40 px high (phone diagram) | Own brand |
