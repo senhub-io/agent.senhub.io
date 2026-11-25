@@ -457,8 +457,16 @@ h2.reveal.is-visible + .rule { transform: scaleX(1); }
 /* text arrives after the landing */
 .hero h1        { animation-delay: 650ms !important; }
 .hero .tagline  { animation-delay: 800ms !important; }
-.hero .lead     { animation-delay: 950ms !important; }
-.hero .install  { animation-delay: 1100ms !important; }
+.hero .lead     { animation-delay: 1200ms !important; }
+.hero .install  { animation-delay: 1350ms !important; }
+.signals li { opacity: 0; animation: heroUp .5s cubic-bezier(.2,.7,.2,1) forwards; }
+.signals li:nth-child(1) { animation-delay: 900ms; }
+.signals li:nth-child(2) { animation-delay: 980ms; }
+.signals li:nth-child(3) { animation-delay: 1060ms; }
+.signals li:nth-child(4) { animation-delay: 1140ms; }
+@media (prefers-reduced-motion: reduce) {
+  .signals li { animation: none; opacity: 1; transform: none; }
+}
 
 /* everything static and visible when motion is reduced */
 @media (prefers-reduced-motion: reduce) {
@@ -479,14 +487,25 @@ h2.reveal.is-visible + .rule { transform: scaleX(1); }
   .mascot { width: 100px; }
 }
 
+
+/* the four signals */
+.signals{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:18px 0 0;padding:0}
+.signals li{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 15px "Roboto",sans-serif;color:#fff;
+  border:1px solid rgba(252,190,54,.55);border-radius:999px;padding:6px 14px 6px 12px;
+  background:rgba(252,190,54,.08);
+}
+.signals li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
 /* mascot beside the headline on wide screens */
 @media (min-width:1000px){
   .hero .wrap{max-width:1000px;display:grid;grid-template-columns:minmax(0,1fr) 250px;column-gap:48px}
   .hero .wrap > *{grid-column:1 / -1}
   .hero .wrap > h1{grid-column:1;grid-row:1}
   .hero .wrap > .tagline{grid-column:1;grid-row:2}
-  .hero .wrap > .lead{grid-column:1;grid-row:3}
-  .hero .wrap > .mascot{grid-column:2;grid-row:1 / span 3;align-self:center;justify-self:center;width:250px;margin:0}
+  .hero .wrap > .signals{grid-column:1;grid-row:3}
+  .hero .wrap > .lead{grid-column:1;grid-row:4}
+  .hero .wrap > .mascot{grid-column:2;grid-row:1 / span 4;align-self:center;justify-self:center;width:250px;margin:0}
 }
 /* mobile flow */
 .flow-m{display:none;max-width:360px;margin:24px auto 0}
@@ -597,7 +616,13 @@ h2.reveal.is-visible + .rule { transform: scaleX(1); }
 </div>
     <h1>The OpenTelemetry agent that also speaks Zabbix, PRTG and Nagios.</h1>
     <p class="tagline">One agent to feed them all.</p>
-    <p class="lead">Free and Apache-2.0. Metrics, logs and traces from your hosts, collected once and served at the same time to OpenTelemetry, Prometheus, Zabbix, PRTG, Nagios and the other platforms below.</p>
+    <ul class="signals" aria-label="Signals the agent emits">
+      <li>Metrics</li>
+      <li>Logs</li>
+      <li>Traces</li>
+      <li>Entities</li>
+    </ul>
+    <p class="lead">Free and Apache-2.0. Collected once on your hosts, served at the same time to OpenTelemetry, Prometheus, Zabbix, PRTG, Nagios and the other platforms below.</p>
 
     <div class="install">
       <div class="tabs" role="tablist">
