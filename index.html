@@ -478,6 +478,16 @@ h2.reveal.is-visible + .rule { transform: scaleX(1); }
 @media (max-width: 600px) {
   .mascot { width: 100px; }
 }
+
+/* mascot beside the headline on wide screens */
+@media (min-width:1000px){
+  .hero .wrap{max-width:1000px;display:grid;grid-template-columns:minmax(0,1fr) 250px;column-gap:48px}
+  .hero .wrap > *{grid-column:1 / -1}
+  .hero .wrap > h1{grid-column:1;grid-row:1}
+  .hero .wrap > .tagline{grid-column:1;grid-row:2}
+  .hero .wrap > .lead{grid-column:1;grid-row:3}
+  .hero .wrap > .mascot{grid-column:2;grid-row:1 / span 3;align-self:center;justify-self:center;width:250px;margin:0}
+}
 /* mobile flow */
 .flow-m{display:none;max-width:360px;margin:24px auto 0}
 
