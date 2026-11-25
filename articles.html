@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Articles — SenHub Agent</title>
+    <title>Articles | SenHub Agent</title>
     <meta name="description" content="Notes from building SenHub Agent: the decisions behind the releases, and what we had to work out to get there." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://agent.senhub.io/articles.html" />
@@ -18,92 +18,10 @@
     <meta name="twitter:title" content="SenHub Agent articles" />
     <meta name="twitter:description" content="Notes from building SenHub Agent: the decisions behind the releases, and what we had to work out to get there." />
     <meta name="twitter:image" content="https://agent.senhub.io/assets/og-image.png?v=4" />
-    <style>
-      :root {
-        --bg: #fbfbfd; --panel: #ffffff; --panel-2: #f5f6fa;
-        --ink: #212529; --muted: #5b6472;
-        --accent: #fcbe36; --accent-dark: #f0ad17; --accent-ink: #212529;
-        --cyan: #00caf6; --cyan-dark: #0091bd; --line: #e7e9ef;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-          --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
-          --ink: #eceef3; --muted: #99a2b1;
-          --accent-dark: #ffd066; --accent-ink: #1a1c21;
-          --cyan-dark: #53d9f7; --line: #2c313a;
-        }
-      }
-      :root[data-theme="dark"] {
-        --bg: #15171c; --panel: #1d2026; --panel-2: #23262e;
-        --ink: #eceef3; --muted: #99a2b1;
-        --accent-dark: #ffd066; --accent-ink: #1a1c21;
-        --cyan-dark: #53d9f7; --line: #2c313a;
-      }
+    <link rel="preload" href="/assets/fonts/roboto-slab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/roboto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/pages.css">
 
-      *, *::before, *::after { box-sizing: border-box; }
-      body {
-        margin: 0; background: var(--bg); color: var(--ink);
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased;
-      }
-      .wrap { max-width: 780px; margin: 0 auto; padding-inline: 24px; }
-      a { color: var(--cyan-dark); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      a:focus-visible { outline: 2px solid var(--cyan-dark); outline-offset: 3px; border-radius: 3px; }
-      h1, h2, h3 { margin: 0; text-wrap: balance; }
-
-      .nav { border-bottom: 1px solid var(--line); background: var(--panel); }
-      .nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 14px; }
-      .brand {
-        display: flex; align-items: center; gap: 10px;
-        font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
-      }
-      .brand:hover { text-decoration: none; }
-      .brand .mark { width: 30px; height: 30px; flex: none; display: block; }
-      .brand .bt span { color: var(--muted); font-weight: 500; }
-      .nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
-      .nav .links .on { color: var(--ink); font-weight: 650; }
-
-      header.top { padding-block: 52px 10px; }
-      header.top h1 {
-        font-size: clamp(28px, 4.6vw, 38px); font-weight: 800;
-        letter-spacing: -0.02em; line-height: 1.15;
-      }
-      header.top p { color: var(--muted); max-width: 60ch; margin: 14px 0 0; }
-
-      .list { padding-block: 30px 70px; }
-      .post {
-        display: block; padding: 24px 0; border-top: 1px solid var(--line);
-        color: inherit;
-      }
-      .post:last-of-type { border-bottom: 1px solid var(--line); }
-      .post:hover { text-decoration: none; }
-      .post:hover h2 { color: var(--cyan-dark); }
-      .post .meta {
-        font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums;
-        display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center;
-        margin-bottom: 7px;
-      }
-      .post .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
-      .post h2 { font-size: 21px; font-weight: 750; letter-spacing: -0.012em; }
-      .post p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; max-width: 64ch; }
-      .post .go { margin-top: 10px; font-size: 14.5px; color: var(--cyan-dark); font-weight: 650; }
-      code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.87em; background: var(--panel-2); padding: 1px 5px;
-        border-radius: 4px; border: 1px solid var(--line);
-      }
-
-      footer { border-top: 1px solid var(--line); padding-block: 24px 40px; }
-      footer p { margin: 0; font-size: 14px; color: var(--muted); }
-      /* two hyphens touch in SF Mono and read as a long dash */
-      code, pre { letter-spacing: .03em; }
-      code { overflow-wrap: anywhere; }
-      @media (max-width: 420px) {
-        .nav .wrap { gap: 12px; }
-        .nav .links { gap: 12px; font-size: 14px; }
-      }
-    </style>
   </head>
   <body>
 
@@ -124,22 +42,19 @@
   </symbol>
 </svg>
 
-<nav class="nav">
+<nav class="ink">
   <div class="wrap">
-    <a class="brand" href="/">
-      <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>
-      <span class="bt">SenHub <span>Agent</span></span>
-    </a>
+    <a class="brand" href="/"><svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>SenHub Agent</a>
     <div class="links">
       <a href="/docs/latest/">Docs</a>
-      <a class="on" href="/articles.html">Articles</a>
+      <a href="/articles.html" aria-current="page">Articles</a>
       <a href="/news.html">Releases</a>
       <a href="https://github.com/senhub-io/senhub-agent">GitHub</a>
     </div>
   </div>
 </nav>
 
-<header class="top">
+<header class="top ink">
   <div class="wrap">
     <h1>Articles</h1>
     <p>
@@ -169,9 +84,42 @@
   </div>
 </div>
 
-<footer>
+<footer class="ink">
   <div class="wrap">
-    <p><a href="/news.html">Releases</a> · <a href="/docs/latest/">Documentation</a> · <a href="https://github.com/senhub-io/senhub-agent">GitHub</a></p>
+    <div class="fbrand">
+      <a class="brand" href="/"><svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#rbt"/></svg>SenHub Agent</a>
+      <p>Apache-2.0, by Sensor Factory.</p>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h3>Agent</h3>
+        <ul>
+          <li><a href="/docs/latest/">Documentation</a></li>
+          <li><a href="/docs/latest/installation/">Installation</a></li>
+          <li><a href="/news.html">Releases</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Read</h3>
+        <ul>
+          <li><a href="/articles.html">Articles</a></li>
+          <li><a href="/docs/latest/whats-new/">What's new</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Source</h3>
+        <ul>
+          <li><a href="https://github.com/senhub-io/senhub-agent">GitHub</a></li>
+          <li><a href="/docs/latest/license/">Licence</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>SenHub</h3>
+        <ul>
+          <li><a href="https://toise.dev/">Toise</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </footer>
 
