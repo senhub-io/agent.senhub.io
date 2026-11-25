@@ -45,3 +45,5 @@ drawing and its other colours are unchanged.
 | `logzio.png` | Logz.io | Wikimedia Commons, "Logz.io rectangle logo.png", background removed | Authorised by SenHub (25/11/2026) |
 | `icinga.png` | Icinga | Wikimedia Commons, "Icinga logo.svg" | Authorised by SenHub (25/11/2026) |
 | `checkmk.png` | Checkmk | Wikimedia Commons, "CheckMK logo.svg" | Authorised by SenHub (25/11/2026) |
+| `appdynamics.png` | Cisco (AppDynamics) | Wikimedia Commons, "App Dynamics logo.png" | Authorised by SenHub (25/11/2026) |
+| `cloudwatch.png` | Amazon Web Services | Wikimedia Commons, "AWS Simple Icons Monitoring Amazon CloudWatch.svg" (330 px rendering) | Authorised by SenHub (25/11/2026) |
