@@ -25,3 +25,4 @@ drawing and its other colours are unchanged.
 | `graylog.svg` | Graylog, Inc. | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
 | `azuremonitor.svg` | Microsoft | Azure Monitor icon, Microsoft Azure icon set | Authorised by SenHub (24/11/2026) |
 | `centreon.png`, `centreon-white.png` | Centreon | Wikimedia Commons | Authorised by SenHub (24/11/2026) |
+| `senhub.svg`, `senhub-white.svg` | Sensor Factory (SenHub) | `static/brand/senhub-logo-navy.svg` and `senhub-logo-on-dark.svg` of the SenHub brand repository, commit da21e30 | Own brand; shown for SenHub Observability Platform |
