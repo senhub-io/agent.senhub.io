@@ -255,6 +255,267 @@ footer .col a:hover{color:var(--amber)}
   .item{gap:16px}
   .item .ver{flex-basis:70px}
 }
+/* animation */
+/* ---------- flow diagram ---------- */
+.flow { margin: 0 auto; width: 100%; max-width: 960px; }
+.flow svg { display: block; width: 100%; height: auto; }
+.flow .node { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+.flow .btxt { font: 600 15px Roboto, sans-serif; fill: var(--text); }
+.flow .agent-box { fill: var(--ink); stroke: #fcbe36; stroke-width: 2; }
+.flow .agent-title { font: 22px "Roboto Slab", serif; fill: #ffffff; }
+.flow .agent-sub { font: 14px Roboto, sans-serif; fill: #9fb0cb; }
+.flow .wire { fill: none; stroke: var(--line); stroke-width: 1.5; }
+.flow .dot { fill: #fcbe36; }
+.flow .agent-glow {
+  fill: #fcbe36;
+  opacity: .25;
+  filter: blur(14px);
+  animation: glowpulse 3s ease-in-out infinite;
+}
+@keyframes glowpulse {
+  0%, 100% { opacity: .25; }
+  50% { opacity: .6; }
+}
+
+/* ---------- terminal cursor ---------- */
+.terminal .cursor {
+  display: inline-block;
+  width: .6em;
+  height: 1.15em;
+  margin-left: 2px;
+  background: #fcbe36;
+  vertical-align: text-bottom;
+  animation: cursorblink 1s steps(1, end) infinite;
+}
+@keyframes cursorblink {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s cubic-bezier(.2,.7,.2,1),
+              transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- small touches ---------- */
+.card {
+  transition: opacity .6s cubic-bezier(.2,.7,.2,1),
+              transform .2s ease,
+              box-shadow .2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 16, 46, .14);
+}
+.feeds-list li img { display: block; transition: transform .2s ease; }
+.feeds-list li:hover img { transform: scale(1.06); }
+
+/* hero fade up on load */
+.hero h1, .hero .tagline, .hero .lead, .hero .install {
+  opacity: 0;
+  animation: heroUp .7s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.hero h1 { animation-delay: 0s; }
+.hero .tagline { animation-delay: .15s; }
+.hero .lead { animation-delay: .3s; }
+.hero .install { animation-delay: .45s; }
+@keyframes heroUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* amber rule grows when its heading is revealed */
+h2.reveal + .rule {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+h2.reveal.is-visible + .rule { transform: scaleX(1); }
+
+/* ---------- reduced motion: final state at once, no movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1, .hero .tagline, .hero .lead, .hero .install {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .flow .agent-glow { animation: none; opacity: .6; }
+  .flow .dot { display: none; }
+  .terminal .cursor { animation: none; }
+  h2.reveal + .rule { transition: none; transform: scaleX(1); }
+  .card, .feeds-list li img { transition: none; }
+  .card:hover { transition: none; }
+}
+/* mascot */
+.mascot {
+  width: 150px;
+  margin: -20px 0 0 -18px;
+  cursor: pointer;
+  outline: none;
+}
+.mascot:focus-visible .robot {
+  outline: 2px solid #00caf6;
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+.robot { display: block; width: 100%; height: auto; overflow: visible; }
+@media (max-width:600px){ .mascot { width: 110px; margin: -12px 0 0 -12px; } }
+
+/* 1. drop with squash and stretch */
+@keyframes rDrop {
+  0%   { transform: translateY(-160px); animation-timing-function: cubic-bezier(.55,0,1,.45); }
+  62%  { transform: translateY(0) scale(1, 1); animation-timing-function: ease-out; }
+  74%  { transform: translateY(0) scale(1.12, 0.85); }
+  86%  { transform: translateY(0) scale(0.94, 1.06); }
+  100% { transform: none; }
+}
+.r-all {
+  animation: rDrop 0.65s linear 0s both;
+  transform-origin: 60px 104px;
+}
+
+/* 3. tilt around bottom centre of the head */
+@keyframes rTilt {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-8deg); }
+  65%  { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
+}
+.r-tilt {
+  animation: rTilt 0.7s ease-in-out 1.15s both;
+  transform-origin: 60px 104px;
+  transform-box: view-box;
+}
+
+/* 2. bulb lights up, then idles with a soft pulse */
+@keyframes rBulbOn {
+  0%, 55% { filter: none; }
+  75%     { filter: brightness(1.9) drop-shadow(0 0 8px #00caf6); }
+  100%    { filter: brightness(1.35) drop-shadow(0 0 4px #00caf6); }
+}
+@keyframes rBulbPulse {
+  0%, 100% { filter: brightness(1.35) drop-shadow(0 0 4px #00caf6); }
+  50%      { filter: brightness(1.8) drop-shadow(0 0 10px #00caf6); }
+}
+.r-bulb {
+  animation: rBulbOn 0.5s ease-out 0.7s both,
+             rBulbPulse 4s ease-in-out 2s infinite;
+}
+
+/* 2 + 6. signal rings, broadcast style */
+@keyframes rRing {
+  0%   { r: 9;  opacity: 0.9; }
+  100% { r: 34; opacity: 0; }
+}
+.r-ring { opacity: 0; }
+.r-ring1 { animation: rRing 0.9s ease-out 0.7s forwards; }
+.r-ring2 { animation: rRing 0.9s ease-out 0.88s forwards; }
+.r-ring3 { animation: rRing 0.9s ease-out 1.06s forwards; }
+
+/* 4. idle single ring, enabled by JS after the entrance */
+@keyframes rRingIdle {
+  0%   { r: 9;  opacity: 0.7; }
+  100% { r: 24; opacity: 0; }
+}
+.r-ring.live { animation: rRingIdle 2.6s ease-out infinite; }
+
+/* 3. double blink intro */
+@keyframes rBlinkIntro {
+  0%, 15%, 45%, 100% { transform: scaleY(1); }
+  8%, 38%            { transform: scaleY(0.05); }
+}
+.r-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rBlinkIntro 0.5s ease-in-out 1.1s both;
+}
+
+/* 4. one blink, triggered by JS */
+@keyframes rBlinkOnce {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.05); }
+}
+.r-eye.blink { animation: rBlinkOnce 0.18s ease-in-out; }
+
+/* 6. happy jump plus rings again */
+@keyframes rJump {
+  0%, 100% { transform: translateY(0); }
+  40%      { transform: translateY(-14px); }
+  70%      { transform: translateY(0); }
+  85%      { transform: translateY(-4px); }
+}
+.mascot.jump .r-all { animation: rJump 0.45s cubic-bezier(0.3, 0.6, 0.4, 1) both; }
+.mascot.jump .r-ring { animation: rRing 0.9s ease-out both; }
+.mascot.jump .r-ring2 { animation-delay: 0.18s; }
+.mascot.jump .r-ring3 { animation-delay: 0.36s; }
+
+/* text arrives after the landing */
+.hero h1        { animation-delay: 650ms !important; }
+.hero .tagline  { animation-delay: 800ms !important; }
+.hero .lead     { animation-delay: 950ms !important; }
+.hero .install  { animation-delay: 1100ms !important; }
+
+/* everything static and visible when motion is reduced */
+@media (prefers-reduced-motion: reduce) {
+  .r-all, .r-tilt, .r-bulb, .r-ring, .r-eye {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 0;
+  }
+  .r-eye { opacity: 1; }
+  .mascot.jump .r-all { animation: none !important; }
+  .hero h1, .hero .tagline, .hero .lead, .hero .install {
+    animation: none !important;
+    opacity: 1;
+  }
+}
+@media (max-width: 600px) {
+  .mascot { width: 110px; }
+}
+/* mobile flow */
+.flow-m{display:none;max-width:360px;margin:24px auto 0}
+
+.flow-m .wire use{stroke:var(--line)}
+
+.flow-m .chip rect{
+  fill:var(--card);
+  stroke:var(--line);
+}
+.flow-m .chip text{
+  font-family:'Roboto',sans-serif;
+  font-size:15px;
+  font-weight:600;
+  fill:var(--text);
+  text-anchor:middle;
+}
+.flow-m .agent rect{
+  fill:#00102e;
+  stroke:var(--amber,#fcbe36);
+  stroke-width:2;
+}
+.flow-m .agent-title{
+  font-family:'Roboto Slab',serif;
+  font-size:22px;
+  fill:#fff;
+  text-anchor:middle;
+}
+.flow-m .agent-sub{
+  font-family:'Roboto',sans-serif;
+  font-size:14px;
+  fill:#9fb0cb;
+  text-anchor:middle;
+}
+
+@media (max-width:599px){
+  .flow{display:none}
+  .flow-m{display:block}
+}
 </style>
 </head>
 <body>
@@ -289,6 +550,41 @@ footer .col a:hover{color:var(--amber)}
 
 <header class="hero ink">
   <div class="wrap">
+<div class="mascot" role="button" tabindex="0" aria-label="Say hello">
+  <svg class="robot" viewBox="-20 -30 160 160" aria-hidden="true" focusable="false">
+    <circle class="r-ring r-ring1" cx="60" cy="18" r="9" fill="none" stroke="#fcbe36" stroke-width="2"/>
+    <circle class="r-ring r-ring2" cx="60" cy="18" r="9" fill="none" stroke="#fcbe36" stroke-width="2"/>
+    <circle class="r-ring r-ring3" cx="60" cy="18" r="9" fill="none" stroke="#fcbe36" stroke-width="2"/>
+    <g class="r-all">
+      <g class="r-tilt">
+        <g class="r-antenna">
+          <rect x="57" y="20" width="6" height="20" rx="3" fill="#4a4a4a"/>
+          <g class="r-bulb">
+            <circle cx="60" cy="18" r="9" fill="#00caf6"/>
+          </g>
+        </g>
+        <rect x="14" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+        <rect x="90" y="58" width="16" height="28" rx="6" fill="#c9c9c9"/>
+        <rect x="24" y="40" width="72" height="64" rx="16" fill="#4a4a4a"/>
+        <g class="r-face">
+          <rect x="33" y="49" width="54" height="46" rx="9" fill="#ededed"/>
+          <g class="r-eyes">
+            <g class="r-eye">
+              <circle cx="49" cy="66" r="7" fill="#fcbe36"/>
+            </g>
+            <g class="r-eye">
+              <circle cx="71" cy="66" r="7" fill="#fcbe36"/>
+            </g>
+          </g>
+          <rect x="42" y="80" width="36" height="11" rx="2" fill="none" stroke="#4a4a4a" stroke-width="3"/>
+          <line x1="51" y1="80" x2="51" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+          <line x1="60" y1="80" x2="60" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+          <line x1="69" y1="80" x2="69" y2="91" stroke="#4a4a4a" stroke-width="3"/>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
     <h1>Metrics, logs and traces from your hosts, sent to the platforms you already run.</h1>
     <p class="tagline">One agent to feed them all.</p>
     <p class="lead">Free and Apache-2.0. It collects once, models the data on OpenTelemetry, and serves Prometheus, Zabbix, PRTG, Nagios and the other platforms below at the same time.</p>
@@ -330,6 +626,157 @@ sudo apt update &amp;&amp; sudo apt install senhub-agent-oss</pre>
   <div class="wrap">
     <h2 class="center">One agent to feed them all.</h2>
     <hr class="rule center">
+<figure class="flow" aria-label="Data flows from hosts, through SenHub Agent, to the platforms.">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+       viewBox="0 0 960 360" width="100%" role="img">
+    <defs>
+      <path id="fl-in-1" d="M210 52 C 300 52 295 145 380 145"/>
+      <path id="fl-in-2" d="M210 122 C 300 122 295 163 380 163"/>
+      <path id="fl-in-3" d="M210 192 C 300 192 295 180 380 180"/>
+      <path id="fl-in-4" d="M210 262 C 300 262 295 197 380 197"/>
+      <path id="fl-in-5" d="M210 332 C 300 332 295 215 380 215"/>
+      <path id="fl-out-1" d="M580 145 C 665 145 660 52 750 52"/>
+      <path id="fl-out-2" d="M580 163 C 665 163 660 122 750 122"/>
+      <path id="fl-out-3" d="M580 180 C 665 180 660 192 750 192"/>
+      <path id="fl-out-4" d="M580 197 C 665 197 660 262 750 262"/>
+      <path id="fl-out-5" d="M580 215 C 665 215 660 332 750 332"/>
+    </defs>
+
+    <!-- soft amber glow behind the agent box -->
+    <rect class="agent-glow" x="372" y="112" width="216" height="136" rx="20"/>
+
+    <!-- wires -->
+    <use class="wire" xlink:href="#fl-in-1"/>
+    <use class="wire" xlink:href="#fl-in-2"/>
+    <use class="wire" xlink:href="#fl-in-3"/>
+    <use class="wire" xlink:href="#fl-in-4"/>
+    <use class="wire" xlink:href="#fl-in-5"/>
+    <use class="wire" xlink:href="#fl-out-1"/>
+    <use class="wire" xlink:href="#fl-out-2"/>
+    <use class="wire" xlink:href="#fl-out-3"/>
+    <use class="wire" xlink:href="#fl-out-4"/>
+    <use class="wire" xlink:href="#fl-out-5"/>
+
+    <!-- left column -->
+    <rect class="node" x="40" y="30"  width="170" height="44" rx="8"/>
+    <rect class="node" x="40" y="100" width="170" height="44" rx="8"/>
+    <rect class="node" x="40" y="170" width="170" height="44" rx="8"/>
+    <rect class="node" x="40" y="240" width="170" height="44" rx="8"/>
+    <rect class="node" x="40" y="310" width="170" height="44" rx="8"/>
+    <text class="btxt" x="125" y="59"  text-anchor="middle">Linux hosts</text>
+    <text class="btxt" x="125" y="129" text-anchor="middle">Windows servers</text>
+    <text class="btxt" x="125" y="199" text-anchor="middle">Kubernetes</text>
+    <text class="btxt" x="125" y="269" text-anchor="middle">Databases</text>
+    <text class="btxt" x="125" y="339" text-anchor="middle">Network devices</text>
+
+    <!-- centre box -->
+    <rect class="agent-box" x="380" y="120" width="200" height="120" rx="12"/>
+    <text class="agent-title" x="480" y="176" text-anchor="middle">SenHub Agent</text>
+    <text class="agent-sub" x="480" y="200" text-anchor="middle">collects once</text>
+
+    <!-- right column -->
+    <rect class="node" x="750" y="30"  width="170" height="44" rx="8"/>
+    <rect class="node" x="750" y="100" width="170" height="44" rx="8"/>
+    <rect class="node" x="750" y="170" width="170" height="44" rx="8"/>
+    <rect class="node" x="750" y="240" width="170" height="44" rx="8"/>
+    <rect class="node" x="750" y="310" width="170" height="44" rx="8"/>
+    <text class="btxt" x="835" y="59"  text-anchor="middle">OpenTelemetry</text>
+    <text class="btxt" x="835" y="129" text-anchor="middle">Prometheus</text>
+    <text class="btxt" x="835" y="199" text-anchor="middle">Zabbix</text>
+    <text class="btxt" x="835" y="269" text-anchor="middle">PRTG</text>
+    <text class="btxt" x="835" y="339" text-anchor="middle">Nagios</text>
+
+    <!-- inbound dots: arrive at the agent -->
+    <circle class="dot" r="4"><animateMotion dur="2.4s" begin="0s"   repeatCount="indefinite"><mpath href="#fl-in-1" xlink:href="#fl-in-1"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#fl-in-1" xlink:href="#fl-in-1"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.7s" begin="0.4s" repeatCount="indefinite"><mpath href="#fl-in-2" xlink:href="#fl-in-2"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.7s" begin="1.75s" repeatCount="indefinite"><mpath href="#fl-in-2" xlink:href="#fl-in-2"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.0s" begin="0.8s" repeatCount="indefinite"><mpath href="#fl-in-3" xlink:href="#fl-in-3"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.0s" begin="2.3s" repeatCount="indefinite"><mpath href="#fl-in-3" xlink:href="#fl-in-3"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.8s" begin="0.2s" repeatCount="indefinite"><mpath href="#fl-in-4" xlink:href="#fl-in-4"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.8s" begin="1.6s" repeatCount="indefinite"><mpath href="#fl-in-4" xlink:href="#fl-in-4"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.2s" begin="0.6s" repeatCount="indefinite"><mpath href="#fl-in-5" xlink:href="#fl-in-5"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.2s" begin="2.2s" repeatCount="indefinite"><mpath href="#fl-in-5" xlink:href="#fl-in-5"/></animateMotion></circle>
+
+    <!-- outbound dots: leave the agent -->
+    <circle class="dot" r="4"><animateMotion dur="2.6s" begin="0.3s"  repeatCount="indefinite"><mpath href="#fl-out-1" xlink:href="#fl-out-1"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.6s" begin="1.6s"  repeatCount="indefinite"><mpath href="#fl-out-1" xlink:href="#fl-out-1"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.9s" begin="0.7s"  repeatCount="indefinite"><mpath href="#fl-out-2" xlink:href="#fl-out-2"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.9s" begin="2.15s" repeatCount="indefinite"><mpath href="#fl-out-2" xlink:href="#fl-out-2"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.1s" begin="0.1s"  repeatCount="indefinite"><mpath href="#fl-out-3" xlink:href="#fl-out-3"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.1s" begin="1.65s" repeatCount="indefinite"><mpath href="#fl-out-3" xlink:href="#fl-out-3"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.5s" begin="0.5s"  repeatCount="indefinite"><mpath href="#fl-out-4" xlink:href="#fl-out-4"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="2.5s" begin="1.75s" repeatCount="indefinite"><mpath href="#fl-out-4" xlink:href="#fl-out-4"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.0s" begin="0.9s"  repeatCount="indefinite"><mpath href="#fl-out-5" xlink:href="#fl-out-5"/></animateMotion></circle>
+    <circle class="dot" r="4"><animateMotion dur="3.0s" begin="2.4s"  repeatCount="indefinite"><mpath href="#fl-out-5" xlink:href="#fl-out-5"/></animateMotion></circle>
+  </svg>
+</figure>
+<figure class="flow-m" aria-label="Data flows from hosts, through SenHub Agent, to the platforms.">
+  <svg viewBox="0 0 360 560" xmlns="http://www.w3.org/2000/svg" role="img">
+    <defs>
+      <path id="flm-in-1" d="M88,48 C88,130 110,200 130,228"/>
+      <path id="flm-in-2" d="M272,48 C272,130 250,200 230,228"/>
+      <path id="flm-in-3" d="M88,100 C88,170 130,215 155,228"/>
+      <path id="flm-in-4" d="M272,100 C272,170 240,215 215,228"/>
+      <path id="flm-in-5" d="M180,152 C180,190 190,210 192,228"/>
+      <path id="flm-out-1" d="M130,322 C130,370 100,378 88,400"/>
+      <path id="flm-out-2" d="M230,322 C230,370 262,378 272,400"/>
+      <path id="flm-out-3" d="M155,322 C155,370 90,385 88,452"/>
+      <path id="flm-out-4" d="M215,322 C215,370 270,385 272,452"/>
+      <path id="flm-out-5" d="M192,322 C192,380 180,455 180,504"/>
+    </defs>
+
+    <g class="wire" fill="none" stroke-width="1.5">
+      <use href="#flm-in-1"/><use href="#flm-in-2"/><use href="#flm-in-3"/><use href="#flm-in-4"/><use href="#flm-in-5"/>
+      <use href="#flm-out-1"/><use href="#flm-out-2"/><use href="#flm-out-3"/><use href="#flm-out-4"/><use href="#flm-out-5"/>
+    </g>
+
+    <g class="chip">
+      <rect x="8" y="8" width="160" height="40" rx="20"/><text x="88" y="33">Linux hosts</text>
+      <rect x="192" y="8" width="160" height="40" rx="20"/><text x="272" y="33">Windows servers</text>
+      <rect x="8" y="60" width="160" height="40" rx="20"/><text x="88" y="85">Kubernetes</text>
+      <rect x="192" y="60" width="160" height="40" rx="20"/><text x="272" y="85">Databases</text>
+      <rect x="100" y="112" width="160" height="40" rx="20"/><text x="180" y="137">Network devices</text>
+    </g>
+
+    <g class="agent">
+      <rect x="70" y="230" width="220" height="90" rx="10"/>
+      <text class="agent-title" x="180" y="272">SenHub Agent</text>
+      <text class="agent-sub" x="180" y="296">collects once</text>
+    </g>
+
+    <g class="chip">
+      <rect x="8" y="400" width="160" height="40" rx="20"/><text x="88" y="425">OpenTelemetry</text>
+      <rect x="192" y="400" width="160" height="40" rx="20"/><text x="272" y="425">Prometheus</text>
+      <rect x="8" y="452" width="160" height="40" rx="20"/><text x="88" y="477">Zabbix</text>
+      <rect x="192" y="452" width="160" height="40" rx="20"/><text x="272" y="477">PRTG</text>
+      <rect x="100" y="504" width="160" height="40" rx="20"/><text x="180" y="529">Nagios</text>
+    </g>
+
+    <g fill="#fcbe36">
+      <circle r="4"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#flm-in-1"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite"><mpath href="#flm-in-1"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.6s" begin="-0.4s" repeatCount="indefinite"><mpath href="#flm-in-2"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.6s" begin="-1.7s" repeatCount="indefinite"><mpath href="#flm-in-2"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.8s" begin="-0.8s" repeatCount="indefinite"><mpath href="#flm-in-3"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.8s" begin="-2.2s" repeatCount="indefinite"><mpath href="#flm-in-3"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3s" begin="-1.2s" repeatCount="indefinite"><mpath href="#flm-in-4"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3s" begin="-2.7s" repeatCount="indefinite"><mpath href="#flm-in-4"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3.2s" begin="-1.6s" repeatCount="indefinite"><mpath href="#flm-in-5"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3.2s" begin="-3.2s" repeatCount="indefinite"><mpath href="#flm-in-5"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.4s" begin="-0.2s" repeatCount="indefinite"><mpath href="#flm-out-1"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.4s" begin="-1.4s" repeatCount="indefinite"><mpath href="#flm-out-1"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.6s" begin="-0.6s" repeatCount="indefinite"><mpath href="#flm-out-2"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.6s" begin="-1.9s" repeatCount="indefinite"><mpath href="#flm-out-2"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.8s" begin="-1s" repeatCount="indefinite"><mpath href="#flm-out-3"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="2.8s" begin="-2.4s" repeatCount="indefinite"><mpath href="#flm-out-3"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3s" begin="-0.3s" repeatCount="indefinite"><mpath href="#flm-out-4"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3s" begin="-1.8s" repeatCount="indefinite"><mpath href="#flm-out-4"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3.2s" begin="-1.4s" repeatCount="indefinite"><mpath href="#flm-out-5"/></animateMotion></circle>
+      <circle r="4"><animateMotion dur="3.2s" begin="-3s" repeatCount="indefinite"><mpath href="#flm-out-5"/></animateMotion></circle>
+    </g>
+  </svg>
+</figure>
     <ul class="feeds-list">
         <li>
           <img src="/assets/logos/opentelemetry.svg" alt="OpenTelemetry" style="height:40px">
@@ -584,6 +1031,304 @@ document.querySelectorAll('.install').forEach(function (box) {
     });
   });
 });
+</script>
+<script>
+(function () {
+  "use strict";
+
+  var reduced = false;
+  try {
+    reduced = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch (e) { reduced = false; }
+
+  /* stop the SMIL dots under reduced motion */
+  var flowSvg = document.querySelector(".flow svg");
+  if (flowSvg && reduced && typeof flowSvg.pauseAnimations === "function") {
+    flowSvg.pauseAnimations();
+  }
+
+  /* ---------- scroll reveal ---------- */
+  var SEL = "section h2, .card, .cat, .item, .shot, .flow, .feeds-list li, .btns";
+
+  function addVisible(el) {
+    if ((" " + el.className + " ").indexOf(" is-visible ") === -1) {
+      el.className = el.className + " is-visible";
+    }
+    var d = parseInt(el.style.transitionDelay, 10) || 0;
+    setTimeout(function () {
+      try { el.style.transitionDelay = "0ms"; } catch (err) {}
+    }, d + 800);
+  }
+
+  function siblingIndex(el) {
+    var sibs = el.parentNode.querySelectorAll(SEL);
+    var i = Array.prototype.indexOf.call(sibs, el);
+    return i < 0 ? 0 : i;
+  }
+
+  function initReveal() {
+    var els = document.querySelectorAll(SEL);
+    if (!els.length) { return; }
+    Array.prototype.forEach.call(els, function (el) {
+      el.className = el.className + " reveal";
+    });
+    if (reduced || !("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(els, addVisible);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      Array.prototype.forEach.call(entries, function (en) {
+        if (en.isIntersecting) {
+          addVisible(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    Array.prototype.forEach.call(els, function (el) {
+      var delay = Math.min(siblingIndex(el) * 70, 420);
+      if (delay) { el.style.transitionDelay = delay + "ms"; }
+      io.observe(el);
+    });
+  }
+
+  /* ---------- terminal typing ---------- */
+  function toLine(nodes) {
+    var tokens = [];
+    Array.prototype.forEach.call(nodes, function (n) {
+      if (n.nodeType === 3) {
+        var s = n.nodeValue;
+        for (var k = 0; k < s.length; k++) {
+          tokens.push({ ch: s.charAt(k), cls: null });
+        }
+      } else {
+        var cls = (n.getAttribute("class") || "").replace(/^\s+|\s+$/g, "");
+        var t = n.textContent;
+        for (var j = 0; j < t.length; j++) {
+          tokens.push({ ch: t.charAt(j), cls: cls });
+        }
+      }
+    });
+    var first = nodes.length > 0 ? nodes[0] : null;
+    var command = !!(first && first.nodeType === 1 &&
+      (first.getAttribute("class") || "").replace(/^\s+|\s+$/g, "") === "p");
+    return { tokens: tokens, command: command };
+  }
+
+  function extractLines(pre) {
+    var clone = pre.cloneNode(true);
+    var raw = [];
+    var cur = [];
+    function pushLine() { raw.push(cur); cur = []; }
+    Array.prototype.forEach.call(clone.childNodes, function (n) {
+      if (n.nodeType === 3) {
+        var parts = n.nodeValue.split("\n");
+        for (var k = 0; k < parts.length; k++) {
+          if (k > 0) { pushLine(); }
+          if (parts[k]) { cur.push(document.createTextNode(parts[k])); }
+        }
+      } else {
+        cur.push(n);
+      }
+    });
+    pushLine();
+    var lines = [];
+    raw.forEach(function (nodes) {
+      var line = toLine(nodes);
+      if (line.tokens.length > 0) { lines.push(line); }
+    });
+    return lines;
+  }
+
+  function play(pre) {
+    var original = pre.innerHTML;
+    try { playUnsafe(pre); } catch (err) { pre.innerHTML = original; pre.style.minHeight = ""; }
+  }
+  function playUnsafe(pre) {
+    var lines = extractLines(pre);
+    pre.style.minHeight = pre.offsetHeight + "px";
+    pre.innerHTML = "";
+    var cursor = document.createElement("span");
+    cursor.className = "cursor";
+    pre.appendChild(cursor);
+
+    function insertBeforeCursor(n) { pre.insertBefore(n, cursor); }
+
+    function renderLine(line) {
+      var cur = null;
+      var curCls = "\u0000";
+      line.tokens.forEach(function (tk) {
+        if (tk.cls !== curCls) {
+          cur = tk.cls ? document.createElement("span") : document.createTextNode("");
+          if (tk.cls) { cur.className = tk.cls; }
+          insertBeforeCursor(cur);
+          curCls = tk.cls;
+        }
+        cur.textContent = cur.textContent + tk.ch;
+      });
+      insertBeforeCursor(document.createTextNode("\n"));
+    }
+
+    function typeLine(line, done) {
+      var t = 0;
+      var cur = null;
+      var curCls = "\u0000";
+      function step() {
+        if (t >= line.tokens.length) {
+          insertBeforeCursor(document.createTextNode("\n"));
+          setTimeout(done, 350);
+          return;
+        }
+        var tk = line.tokens[t++];
+        if (tk.cls !== curCls) {
+          cur = tk.cls ? document.createElement("span") : document.createTextNode("");
+          if (tk.cls) { cur.className = tk.cls; }
+          insertBeforeCursor(cur);
+          curCls = tk.cls;
+        }
+        cur.textContent = cur.textContent + tk.ch;
+        setTimeout(step, 28);
+      }
+      step();
+    }
+
+    var i = 0;
+    (function next() {
+      if (i >= lines.length) { return; }
+      var line = lines[i++];
+      if (line.command) {
+        typeLine(line, next);
+      } else {
+        renderLine(line);
+        setTimeout(next, 70);
+      }
+    })();
+  }
+
+  function initTerminal() {
+    var pre = document.querySelector(".terminal pre");
+    if (!pre || reduced || !("IntersectionObserver" in window)) { return; }
+    var io = new IntersectionObserver(function (entries) {
+      Array.prototype.forEach.call(entries, function (en) {
+        if (en.isIntersecting) {
+          io.disconnect();
+          play(pre);
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(pre);
+  }
+
+  function init() {
+    initReveal();
+    initTerminal();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+
+  var mascot = document.querySelector(".mascot");
+  if (!mascot) { return; }
+
+  var reduced = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var eyes = document.querySelector(".r-eyes");
+  var eyeEls = document.querySelectorAll(".r-eye");
+  var ring1 = document.querySelector(".r-ring1");
+
+  function blink() {
+    for (var i = 0; i < eyeEls.length; i++) {
+      eyeEls[i].classList.remove("blink");
+    }
+    void mascot.offsetWidth;
+    for (var j = 0; j < eyeEls.length; j++) {
+      eyeEls[j].classList.add("blink");
+    }
+  }
+
+  if (!reduced) {
+    var blinkTimer = null;
+    var blinkCount = 0;
+    function scheduleBlink() {
+      var wait = 4000 + Math.floor(Math.random() * 3001);
+      blinkTimer = setTimeout(function () {
+        if (blinkCount % 3 === 0 && ring1) { ring1.classList.add("live"); }
+        blinkCount++;
+        blink();
+        scheduleBlink();
+      }, wait);
+    }
+    scheduleBlink();
+  }
+
+  if (eyes && !reduced) {
+    var tx = 0, ty = 0, cx = 0, cy = 0, running = false;
+    var fine = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+
+    function tick() {
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      eyes.setAttribute("transform",
+        "translate(" + cx.toFixed(2) + " " + cy.toFixed(2) + ")");
+      if (Math.abs(cx - tx) < 0.01 && Math.abs(cy - ty) < 0.01 && tx === 0 && ty === 0) {
+        running = false;
+        eyes.setAttribute("transform", "translate(0 0)");
+        return;
+      }
+      requestAnimationFrame(tick);
+    }
+    function wake() {
+      if (!running) { running = true; requestAnimationFrame(tick); }
+    }
+    function clamp(v, lo, hi) {
+      return v < lo ? lo : (v > hi ? hi : v);
+    }
+
+    if (fine) {
+      document.addEventListener("mousemove", function (e) {
+        var rect = mascot.getBoundingClientRect();
+        var midX = rect.left + rect.width / 2;
+        var midY = rect.top + rect.height / 2;
+        tx = clamp((e.clientX - midX) / 30, -3, 3);
+        ty = clamp((e.clientY - midY) / 30, -3, 3);
+        wake();
+      }, { passive: true });
+      document.addEventListener("mouseout", function (e) {
+        if (!e.relatedTarget) { tx = 0; ty = 0; wake(); }
+      });
+      window.addEventListener("blur", function () {
+        tx = 0; ty = 0; wake();
+      });
+    }
+  }
+
+  var jumpTimer = null;
+  function hello() {
+    if (reduced) { return; }
+    mascot.classList.remove("jump");
+    void mascot.offsetWidth;
+    mascot.classList.add("jump");
+    clearTimeout(jumpTimer);
+    jumpTimer = setTimeout(function () { mascot.classList.remove("jump"); }, 900);
+  }
+
+  mascot.addEventListener("click", hello);
+  mascot.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      e.preventDefault();
+      hello();
+    }
+  });
+})();
 </script>
 </body>
 </html>
